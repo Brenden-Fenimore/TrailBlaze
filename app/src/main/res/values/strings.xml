@@ -4,4 +4,11 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_map">Map</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_profile">Profile</string>
+    <string name="helloHome">Hello HOME Fragment</string>
+    <string name="helloMap">Hello MAP Fragment</string>
+    <string name="helloFavorites">Hello FAVORITES Fragment</string>
+    <string name="helloProfile">Hello PROFILE Fragment</string>
 </resources>

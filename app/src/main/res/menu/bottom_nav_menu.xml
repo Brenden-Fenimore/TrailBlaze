@@ -9,16 +9,16 @@
     <item
             android:id="@+id/navigation_map"
             android:icon="@drawable/map"
-            android:title="Map"/>
+            android:title="@string/title_map"/>
 
     <item
             android:id="@+id/navigation_favorites"
             android:icon="@drawable/favorite"
-            android:title="Favorites"/>
+            android:title="@string/title_favorites"/>
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/account_circle"
-        android:title="Profile"/>
+        android:title="@string/title_profile"/>
 
 
 </menu>
