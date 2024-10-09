@@ -91,7 +91,7 @@ class RegisterActivity : AppCompatActivity() {
         Toast.makeText(this,"Account created successfully!",Toast.LENGTH_SHORT).show()
 
         //navigate to personalize account
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, PersonalizeActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         finish()
