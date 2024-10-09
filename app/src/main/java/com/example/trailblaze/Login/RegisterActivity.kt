@@ -128,20 +128,50 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Date of birth is required", Toast.LENGTH_LONG).show()
                 false
             }
+            !isValidDate(dateOfBirth) -> {
+                Toast.makeText(this, "Date of birth must be in the format xx/xx/xxxx", Toast.LENGTH_LONG).show()
+                false
+            }
             email.isEmpty() -> {
                 Toast.makeText(this, "Email is required", Toast.LENGTH_LONG).show()
+                false
+            }
+            !isValidEmail(email) -> {
+                Toast.makeText(this, "Please enter a valid email address", Toast.LENGTH_LONG).show()
                 false
             }
             password.isEmpty() -> {
                 Toast.makeText(this, "Password is required", Toast.LENGTH_LONG).show()
                 false
             }
+            password.length < 6 -> {
+                Toast.makeText(this, "Password must be at least 6 characters long", Toast.LENGTH_LONG).show()
+                false
+            }
             confirmPassword.isEmpty()->{
                 Toast.makeText(this, "Confirm password is required", Toast.LENGTH_LONG).show()
+                false
+            }
+            password != confirmPassword -> {
+                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_LONG).show()
                 false
             }
             else-> true
         }
     }
+}
+
+//validate email format
+private fun isValidEmail(email: String): Boolean {
+    // Regular expression for validating an email
+    val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+    return email.matches(emailPattern.toRegex())
+}
+
+//validate date format (xx/xx/xxxx)
+private fun isValidDate(date: String): Boolean {
+    // Regular expression for validating date format xx/xx/xxxx
+    val datePattern = "\\d{2}/\\d{2}/\\d{4}"
+    return date.matches(datePattern.toRegex())
 }
 

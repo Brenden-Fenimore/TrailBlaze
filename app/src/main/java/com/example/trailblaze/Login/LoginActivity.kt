@@ -61,11 +61,11 @@ class LoginActivity : AppCompatActivity() {
 
         //set click listener for login button
         loginBtn.setOnClickListener {
-            val username = emailInput.text.toString()
+            val emailInput = emailInput.text.toString()
             val password = passwordInput.text.toString()
 
             //login logic here
-            if (username.isNotEmpty() && password.isNotEmpty()) {
+            if (isValidEmail(emailInput) && password.isNotEmpty()) {
 
                 //successful login
                 val sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
@@ -81,8 +81,19 @@ class LoginActivity : AppCompatActivity() {
                 finish()
 
             } else {
-                Toast.makeText(this, "Please enter username and password.", Toast.LENGTH_SHORT).show()
+                // Show error message
+                if (!isValidEmail(emailInput)) {
+                    Toast.makeText(this, "Please enter a valid email address.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Please enter your password.", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
 }
+
+private fun isValidEmail(email: String): Boolean {
+    val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+    return email.matches(emailPattern.toRegex())
+}
+
