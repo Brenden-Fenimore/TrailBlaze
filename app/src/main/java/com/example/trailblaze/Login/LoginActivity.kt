@@ -39,6 +39,13 @@ class LoginActivity : AppCompatActivity() {
         forgotPasswordTextView = findViewById(R.id.forgotPassword)
 
 
+        //set click listener for register
+        registertxt.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
+
         //set click listener for login button
         loginBtn.setOnClickListener {
             val username = emailInput.text.toString()
