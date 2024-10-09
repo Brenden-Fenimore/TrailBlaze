@@ -5,8 +5,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.trailblaze.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -32,7 +30,5 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_map, R.id.navigation_favorites, R.id.navigation_profile
             )
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
     }
 }
