@@ -5,10 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.trailblaze.Login.LoginActivity
+import com.example.trailblaze.login.LoginActivity
 import com.example.trailblaze.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {

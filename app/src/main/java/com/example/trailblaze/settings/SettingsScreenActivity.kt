@@ -1,4 +1,4 @@
-package com.example.trailblaze.Settings
+package com.example.trailblaze.settings
 
 import android.os.Bundle
 import android.widget.ImageButton
@@ -24,7 +24,7 @@ class SettingsScreenActivity : AppCompatActivity() {
 
         //set the listener for the back button
         findViewById<ImageButton>(R.id.chevron_left).setOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
         }
     }

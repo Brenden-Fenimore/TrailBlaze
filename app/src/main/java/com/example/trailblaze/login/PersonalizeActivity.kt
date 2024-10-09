@@ -1,16 +1,10 @@
-package com.example.trailblaze.Login
+package com.example.trailblaze.login
 
 import android.os.Bundle
 import android.widget.ImageButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.trailblaze.R
-import com.example.trailblaze.databinding.ActivityPersonalizeBinding
 
 class PersonalizeActivity : AppCompatActivity() {
 
@@ -24,7 +18,7 @@ class PersonalizeActivity : AppCompatActivity() {
 
         //set the listener for the back button
         findViewById<ImageButton>(R.id.chevron_left).setOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 

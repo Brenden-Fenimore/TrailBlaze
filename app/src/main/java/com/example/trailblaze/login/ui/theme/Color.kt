@@ -1,4 +1,4 @@
-package com.example.trailblaze.Login.ui.theme
+package com.example.trailblaze.login.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

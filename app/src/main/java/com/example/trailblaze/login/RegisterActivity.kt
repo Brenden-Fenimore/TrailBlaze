@@ -1,4 +1,4 @@
-package com.example.trailblaze.Login
+package com.example.trailblaze.login
 
 import android.os.Bundle
 import android.widget.Button
@@ -7,8 +7,6 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.trailblaze.R
 import android.content.Intent
 import android.widget.*
@@ -62,10 +60,10 @@ class RegisterActivity : AppCompatActivity() {
         etConfirmPassword.addTextChangedListener { updateCreateAccountButtonState()
         }
 
-        //set click listener for terms
+//set click listener for terms
         termsAndCondtionstxt.setOnClickListener {
             //start terms and conditions activity
-            val intent = Intent(this, TermsAndConditins::class.java)
+            val intent = Intent(this, TermsActivity::class.java)
             startActivity(intent)
         }
 
@@ -83,11 +81,6 @@ class RegisterActivity : AppCompatActivity() {
 
     //navigate to personalize account and reset stack
     private fun createAccount() {
-
-        val username = etUsername.text.toString()
-        val password = etPassword.text.toString()
-        val dateOfBirth = etDateofBirth.text.toString()
-        val email = etEmail.text.toString()
 
         //save loggedIn status to true
         val sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)

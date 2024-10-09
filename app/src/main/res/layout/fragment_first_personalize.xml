@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -32,7 +31,7 @@
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:baselineAligned="false" android:orientation="horizontal"
                     android:paddingEnd="9dp"
                     android:paddingStart="9dp">
                 <LinearLayout
@@ -42,7 +41,7 @@
                         android:gravity="center"
                         android:orientation="vertical">
                     <ImageView
-                            android:src="@drawable/nature"
+                            android:focusable="true" android:src="@drawable/nature"
                             android:layout_width="147dp"
                             android:layout_height="147dp"
                             android:clickable="true"
@@ -51,7 +50,7 @@
                             android:id="@+id/caption1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Nature"
+                            android:text="@string/titleNature"
                             android:gravity="center"
                             android:textSize="16sp"/>
                 </LinearLayout>
@@ -63,7 +62,7 @@
                         android:orientation="vertical">
 
                     <ImageView
-                            android:src="@drawable/breaks"
+                            android:focusable="true" android:src="@drawable/breaks"
                             android:layout_width="149dp"
                             android:layout_height="149dp"
                             android:clickable="true"
@@ -72,7 +71,7 @@
                             android:id="@+id/caption2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Breaks"
+                            android:text="@string/titleBreaks"
                             android:gravity="center"
                             android:textSize="16sp"/>
                 </LinearLayout>
@@ -81,7 +80,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/linearColumnEmail"
-                    android:orientation="horizontal"
+                    android:baselineAligned="false" android:orientation="horizontal"
                     android:paddingEnd="9dp"
                     android:paddingStart="9dp">
                 <LinearLayout
@@ -92,7 +91,7 @@
                         android:orientation="vertical">
 
                     <ImageView
-                            android:src="@drawable/uphill"
+                            android:focusable="true" android:src="@drawable/uphill"
                             android:layout_width="149dp"
                             android:layout_height="120dp"
                             android:clickable="true"
@@ -101,7 +100,7 @@
                             android:id="@+id/caption4"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Uphill"
+                            android:text="@string/titleUphill"
                             android:gravity="center"
                             android:textSize="16sp"/>
                 </LinearLayout>
@@ -113,7 +112,7 @@
                         android:orientation="vertical">
 
                     <ImageView
-                            android:src="@drawable/pace"
+                            android:focusable="true" android:src="@drawable/pace"
                             android:layout_width="149dp"
                             android:layout_height="119dp"
                             android:clickable="true"
@@ -122,7 +121,7 @@
                             android:id="@+id/caption3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Pace"
+                            android:text="@string/pace"
                             android:gravity="center"
                             android:textSize="16sp"/>
                 </LinearLayout>
@@ -131,7 +130,7 @@
     </LinearLayout>
 
     <Button
-            android:text="Continue"
+            android:text="@string/titleContinue"
             android:layout_width="304dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

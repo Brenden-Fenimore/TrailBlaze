@@ -22,7 +22,7 @@
                 android:id="@+id/Personalizehost"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
-                android:text="Let's Personalize your account"
+                android:text="@string/personalize"
                 android:textSize="40sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

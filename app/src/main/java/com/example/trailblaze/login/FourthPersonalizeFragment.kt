@@ -1,4 +1,4 @@
-package com.example.trailblaze.Login
+package com.example.trailblaze.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -64,7 +64,7 @@ class FourthPersonalizeFragment : Fragment() {
             startActivity(intent)
             activity?.finish()
         }
-        //initalize the Spinners
+        //initialize the Spinners
         spinner1 = view.findViewById(R.id.spinner1)
         spinner2 = view.findViewById(R.id.spinner2)
         spinner3 = view.findViewById(R.id.spinner3)

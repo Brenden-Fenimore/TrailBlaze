@@ -1,4 +1,4 @@
-package com.example.trailblaze.Login
+package com.example.trailblaze.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,16 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import androidx.core.widget.addTextChangedListener
-import androidx.navigation.fragment.findNavController
 import com.example.trailblaze.R
 
 class SecondPersonalizeFragment : Fragment() {
 
     //declaration
-    lateinit var city : EditText
-    lateinit var state: EditText
-    lateinit var zip : EditText
+    private lateinit var city : EditText
+    private lateinit var state: EditText
+    private lateinit var zip : EditText
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +34,7 @@ class SecondPersonalizeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //intitalize views
+        //initialize views
         city=view.findViewById(R.id.etCity)
         state=view.findViewById(R.id.etState)
         zip=view.findViewById(R.id.etZip)

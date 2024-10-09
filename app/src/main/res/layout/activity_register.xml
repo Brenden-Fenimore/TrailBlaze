@@ -13,7 +13,7 @@
                 android:id="@+id/Register"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="50dp"
-                android:text="Register"
+                android:text="@string/titleRegister"
                 android:textSize="40sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -27,14 +27,14 @@
             <TextView
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:text="Login"
+                    android:text="@string/titleLogin"
                     android:id="@+id/txtLogin"
                     android:layout_gravity="center"/>
             <TextView
                     android:id="@+id/txtRegister"
                     android:layout_width="71dp"
                     android:layout_height="wrap_content"
-                    android:text="Register"
+                    android:text="@string/titleRegister"
                     android:layout_gravity="center"
                     android:textStyle="bold"
                     android:textColor="@android:color/holo_blue_dark"/>
@@ -65,7 +65,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
-                        android:hint="Username"/>
+                        android:hint="@string/userName"/>
             </LinearLayout>
 
             <LinearLayout
@@ -86,7 +86,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
-                        android:hint="Date of Birth mm/dd/yy"/>
+                        android:hint="@string/dob"/>
             </LinearLayout>
 
             <LinearLayout
@@ -106,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
                         android:id="@+id/etEmail"
-                        android:hint="Email Address"/>
+                        android:hint="@string/titleEmail"/>
             </LinearLayout>
             <LinearLayout
                     android:layout_width="match_parent"
@@ -126,7 +126,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:id="@+id/etpw1"
-                        android:hint="Password"/>
+                        android:hint="@string/passWord"/>
             </LinearLayout>
             <LinearLayout
                     android:layout_width="match_parent"
@@ -146,7 +146,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:id="@+id/etConfirmpw"
-                        android:hint="Confirm Password"/>
+                        android:hint="@string/password2"/>
             </LinearLayout>
             <LinearLayout
                     android:layout_gravity="center_vertical"
@@ -163,9 +163,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
-                        android:text="You agree to our"
+                        android:text="@string/agree"
                         android:textColor="@android:color/darker_gray"
-                        android:textFontWeight="400"
                         android:textStyle="normal"/>
                 <TextView
                         android:ellipsize="end"
@@ -177,11 +176,11 @@
                         android:layout_height="match_parent"
                         android:singleLine="true"
                         android:id="@+id/termsandconditions"
-                        android:text="Terms and Conditions"
+                        android:text="@string/titleTerms"
                         android:textColor="@android:color/holo_blue_dark"/>
             </LinearLayout>
             <Button
-                    android:text="Create Account"
+                    android:text="@string/createAccount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/createAccountBtn"
@@ -198,18 +197,11 @@
             android:layout_height="369dp"
             android:layout_marginTop="0dp">
 
-        <FrameLayout
-                android:id="@+id/frameStackssubtract"
-                android:layout_gravity="bottom|center"
-                android:layout_width="match_parent"
-                android:layout_height="366dp">
-
             <ImageView
                     android:layout_width="880dp"
                     android:layout_height="474dp"
                     android:layout_gravity="center_horizontal"
                     app:srcCompat="@drawable/hikingimage2"
                     android:id="@+id/imageView8"/>
-        </FrameLayout>
     </FrameLayout>
 </LinearLayout>

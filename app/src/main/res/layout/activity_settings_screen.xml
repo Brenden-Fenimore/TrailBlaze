@@ -43,7 +43,7 @@
                     android:layout_width="29dp"
                     android:layout_height="29dp"
                     android:layout_gravity="center"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     app:srcCompat="@drawable/account_circle"
                     android:id="@+id/imageView1"
                     android:layout_weight="1"/>
@@ -79,7 +79,7 @@
             <ImageView
                     android:layout_width="29dp"
                     android:layout_height="29dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     app:srcCompat="@drawable/notification"
                     android:id="@+id/imageView4" android:layout_weight="1"/>
             <TextView
@@ -113,7 +113,7 @@
             <ImageView
                     android:layout_width="29dp"
                     android:layout_height="29dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     app:srcCompat="@drawable/eye" android:id="@+id/imageView3"
                     android:layout_weight="1"/>
             <TextView
@@ -147,7 +147,7 @@
             <ImageView
                     android:layout_width="29dp"
                     android:layout_height="29dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     app:srcCompat="@drawable/lockoutline"
                     android:id="@+id/imageView5" android:layout_weight="1"/>
             <TextView
@@ -183,7 +183,7 @@
             <ImageView
                     android:layout_width="29dp"
                     android:layout_height="29dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     app:srcCompat="@drawable/help" android:id="@+id/imageView"
                     android:layout_weight="1"/>
             <TextView
@@ -217,7 +217,7 @@
             <ImageView
                     android:layout_width="29dp"
                     android:layout_height="29dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     app:srcCompat="@drawable/questionmark"
                     android:id="@+id/imageView6" android:layout_weight="1"/>
             <TextView
@@ -244,7 +244,7 @@
     </LinearLayout>
 
     <Button
-            android:text="Log Out"
+            android:text="@string/titleLogout"
             android:layout_width="304dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

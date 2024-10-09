@@ -1,4 +1,4 @@
-package com.example.trailblaze.Login
+package com.example.trailblaze.login
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
-import androidx.navigation.fragment.findNavController
 import com.example.trailblaze.R
 
 
@@ -17,8 +16,6 @@ import com.example.trailblaze.R
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class FirstPersonalizeFragment : Fragment() {
-
-    lateinit var continueBtn1: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

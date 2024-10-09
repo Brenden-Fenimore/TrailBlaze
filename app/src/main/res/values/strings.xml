@@ -39,7 +39,9 @@
         trail.
     </string>
     <string name="options">Please select your preferences for each of the categories listed below.</string>
-    <string name="privacy_policy1">Your privacy is important to us. It is TrailBlaze policy to respect your privacy regarding any information we may collect from you across our website, and other sites we own and operate.</string>
+    <string name="privacy_policy1">Your privacy is important to us. It is TrailBlaze policy to respect your privacy
+        regarding any information we may collect from you across our website, and other sites we own and operate.
+    </string>
     <string name="privacy_policy2">We only ask for personal information when we truly need it to provide a service to
         you. We collect it by fair and lawful means, with your knowledge and consent. We also let you know why we’re
         collecting it and how it will be used.
@@ -47,6 +49,29 @@
     <string name="privacy_policy3">We only retain collected information for as long as necessary to provide you with
         your requested service.">
     </string>
+<string name="titleForgotPassword">Forgot Password</string>
+    <string name="titleEmail">Email Address</string>
+    <string name="titleResetPw">Reset Password</string>
+    <string name="titleLogin">Login</string>
+    <string name="login1">By signing in you are agreeing to our</string>
+    <string name="titleTerms">Terms and Conditions</string>
+    <string name="titleRegister">Register</string>
+    <string name="passWord">Password</string>
+    <string name="rememberPassword">Remember Password</string>
+    <string name="personalize">Lets Personalize your account</string>
+    <string name="userName">Username</string>
+    <string name="dob">Date of Birth mm/dd/yy</string>
+    <string name="password2">Confirm Password</string>
+    <string name="agree">You agree to our</string>
+    <string name="createAccount">Create Account</string>
+    <string name="titleLogout">Logout</string>
+    <string name="reviewTerms">Review Terms and Conditions</string>
+    <string name="ok">OK</string>
+    <string name="titleNature">Nature</string>
+    <string name="titleBreaks">Breaks</string>
+    <string name="titleUphill">Uphill</string>
+    <string name="pace">Pace</string>
+    <string name="titleContinue">Continue</string>
 
 
 
@@ -82,6 +107,7 @@
     </string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_terms_and_conditions">TermsAndConditions</string>
+    <string name="title_activity_terms">TermsActivity</string>
 
 
 </resources>

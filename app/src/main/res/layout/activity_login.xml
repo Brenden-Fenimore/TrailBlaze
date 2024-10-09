@@ -15,8 +15,8 @@
             android:layout_marginTop="50dp"
             android:layout_gravity="center_horizontal"
             android:singleLine="true"
-            android:text="Login"
-            android:textSize="40dp"
+            android:text="@string/titleLogin"
+            android:textSize="40sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -25,8 +25,8 @@
             android:id="@+id/txtBySigning"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="By signing in you are agreeing to our"
-            android:textSize="16dp"
+            android:text="@string/login1"
+            android:textSize="16sp"
             android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"/>
     <TextView
@@ -34,7 +34,7 @@
             android:id="@+id/termsandconditions"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Terms and Conditions"
+            android:text="@string/titleTerms"
             android:textSize="16sp"
             android:textColor="@android:color/holo_blue_dark"
             android:layout_gravity="center_horizontal"/>
@@ -49,7 +49,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtLogin"
-                android:text="Login"
+                android:text="@string/titleLogin"
                 android:layout_gravity="center"
                 android:textStyle="bold"
                 android:textColor="@android:color/holo_blue_dark"/>
@@ -57,7 +57,7 @@
                 android:layout_width="71dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtRegister"
-                android:text="Register"
+                android:text="@string/titleRegister"
                 android:layout_gravity="center"/>
     </LinearLayout>
     <LinearLayout
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:id="@+id/etEmail"
-                    android:hint="Email Address"/>
+                    android:hint="@string/titleEmail"/>
         </LinearLayout>
         <LinearLayout
                 android:layout_width="match_parent"
@@ -104,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:id="@+id/etPassword"
-                    android:hint="Password"/>
+                    android:hint="@string/passWord"/>
         </LinearLayout>
         <LinearLayout
                 android:layout_gravity="center_vertical"
@@ -121,9 +121,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
-                    android:text="Remember Password"
+                    android:text="@string/rememberPassword"
                     android:textColor="@android:color/darker_gray"
-                    android:textFontWeight="400"
                     android:textStyle="normal"/>
             <TextView
                     android:ellipsize="end"
@@ -134,12 +133,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:singleLine="true"
-                    android:text="Forgot Password"
+                    android:text="@string/titleForgotPassword"
                     android:id="@+id/forgotPassword"
                     android:textColor="@android:color/holo_blue_dark"/>
         </LinearLayout>
         <Button
-                android:text="Login"
+                android:text="@string/titleLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/loginbtn"

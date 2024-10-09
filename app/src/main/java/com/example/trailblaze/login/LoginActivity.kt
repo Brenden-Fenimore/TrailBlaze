@@ -1,4 +1,4 @@
-package com.example.trailblaze.Login
+package com.example.trailblaze.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,24 +6,17 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.addTextChangedListener
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.trailblaze.MainActivity
 import com.example.trailblaze.R
-import com.example.trailblaze.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
 
     //declaration
-    lateinit var emailInput : EditText
-    lateinit var passwordInput : EditText
-    lateinit var loginBtn : Button
-    lateinit var forgotPasswordTextView : TextView
+    private lateinit var emailInput : EditText
+    private lateinit var passwordInput : EditText
+    private lateinit var loginBtn : Button
+    private lateinit var forgotPasswordTextView : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,10 +45,10 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        //set click listener for terms
+//set click listener for terms
         termsAndCondtionstxt.setOnClickListener {
             //start terms and conditions activity
-            val intent = Intent(this, TermsAndConditins::class.java)
+            val intent = Intent(this, TermsActivity::class.java)
             startActivity(intent)
         }
 
