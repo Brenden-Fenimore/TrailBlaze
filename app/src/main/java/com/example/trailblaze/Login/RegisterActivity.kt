@@ -62,6 +62,13 @@ class RegisterActivity : AppCompatActivity() {
         etConfirmPassword.addTextChangedListener { updateCreateAccountButtonState()
         }
 
+        //set click listener for terms
+        termsAndCondtionstxt.setOnClickListener {
+            //start terms and conditions activity
+            val intent = Intent(this, TermsAndConditins::class.java)
+            startActivity(intent)
+        }
+
         //set click listener for create account button
         createAccountButton.setOnClickListener {
             //check if checkbox is not clicked

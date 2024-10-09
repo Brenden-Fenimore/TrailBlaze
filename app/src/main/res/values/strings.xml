@@ -27,14 +27,26 @@
     <string name="forgotpassword1">Enter the Email address accociated with your account.</string>
     <string name="forgotpassword2">We will email you a link to reset your password</string>
     <string name="aspects">What aspect/s of hiking do you like to experience most?</string>
-    <string name="location">TrailBlaze utilizes your location to provide personalized suggestions of nearby trails, please enter your location.</string>
+    <string name="location">TrailBlaze utilizes your location to provide personalized suggestions of nearby trails,
+        please enter your location.
+    </string>
     <string name="distance">How far would you like to receive suggested trails?</string>
     <string name="interact">How would you like to interact with the community></string>
     <string name="interaction1">I would like my account to be found by others.</string>
     <string name="interaction2">I would like my hiking experience shared with others and/or on leaderboards.</string>
     <string name="interaction3">I would like to volunteer for creating and maintaining trails for my community.</string>
-    <string name="interaction4">I would like to be notified if someone is in danger or any potential danger is on a trail.</string>
+    <string name="interaction4">I would like to be notified if someone is in danger or any potential danger is on a
+        trail.
+    </string>
     <string name="options">Please select your preferences for each of the categories listed below.</string>
+    <string name="privacy_policy1">Your privacy is important to us. It is TrailBlaze policy to respect your privacy regarding any information we may collect from you across our website, and other sites we own and operate.</string>
+    <string name="privacy_policy2">We only ask for personal information when we truly need it to provide a service to
+        you. We collect it by fair and lawful means, with your knowledge and consent. We also let you know why we’re
+        collecting it and how it will be used.
+    </string>
+    <string name="privacy_policy3">We only retain collected information for as long as necessary to provide you with
+        your requested service.">
+    </string>
 
 
 
@@ -69,6 +81,7 @@
         dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="title_activity_login">Login</string>
+    <string name="title_activity_terms_and_conditions">TermsAndConditions</string>
 
 
 </resources>

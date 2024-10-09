@@ -52,6 +52,13 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //set click listener for terms
+        termsAndCondtionstxt.setOnClickListener {
+            //start terms and conditions activity
+            val intent = Intent(this, TermsAndConditins::class.java)
+            startActivity(intent)
+        }
+
         //set click listener for login button
         loginBtn.setOnClickListener {
             val username = emailInput.text.toString()
