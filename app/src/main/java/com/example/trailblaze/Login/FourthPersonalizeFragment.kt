@@ -2,10 +2,12 @@ package com.example.trailblaze.Login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
@@ -26,6 +28,33 @@ class FourthPersonalizeFragment : Fragment() {
         //inflate the layout
         val view = inflater.inflate(R.layout.fragment_fourth_personalize, container, false)
 
+        // define map for spinner options with unique ids
+        val optionsSpinner1 = mapOf(
+            "Foot Trails" to 1,
+            "Nature Trails" to 2,
+            "Rock Trails" to 3,
+        )
+
+        val optionsSpinner2 = mapOf(
+            "Low-Intensity" to 1,
+            "Moderate-Intensity" to 2,
+            "High-Intensity" to 3,
+
+        )
+
+        val optionsSpinner3 = mapOf(
+            "Easiest" to 1,
+            "Easy" to 2,
+            "Moderate" to 3,
+            "Difficult" to 4,
+            "Extremely Difficulty" to 5,
+        )
+
+        val optionsSpinner4 = mapOf(
+            "Day Hike" to 1,
+            "Long Distance" to 2,
+            "Peek Bagging" to 3
+        )
         //set up the finished button
         view.findViewById<Button>(R.id.finished).setOnClickListener {
             //navigate to MainActivity
@@ -41,34 +70,29 @@ class FourthPersonalizeFragment : Fragment() {
         spinner3 = view.findViewById(R.id.spinner3)
         spinner4 = view.findViewById(R.id.spinner4)
 
-        //options for spinner 1
-        val optionsSpinner1 = arrayOf("Foot Trails", "Nature Trails", "Rocky Trails")
-        //options for spinner 2
-        val optionsSpinner2 = arrayOf("Low-Intensity", "Moderate-Intensity", "High-Intensity")
-        //options for spinner 3
-        val optionsSpinner3 = arrayOf("Easiest", "Easy", "Moderate", "Difficult", "Exremely Difficult")
-        //options for spinner 4
-        val optionsSpinner4 = arrayOf("Day Hike", "Long Distance", "Peek Bagging")
+       //create function to populate the spinner with options
+        fun populateSpinner(spinner: Spinner, options: Map<String, Int>) {
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, options.keys.toList())
+           adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+           spinner.adapter = adapter
+        }
 
-        //set the adapter for spinner 1
-        val adapter1 = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, optionsSpinner1)
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner1.adapter = adapter1
+        //populate each spinner
+        populateSpinner(spinner1, optionsSpinner1)
+        populateSpinner(spinner2, optionsSpinner2)
+        populateSpinner(spinner3, optionsSpinner3)
+        populateSpinner(spinner4, optionsSpinner4)
 
-        //set the adapter for spinner 2
-        val adapter2 = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, optionsSpinner2)
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner2.adapter = adapter2
+        // Retrieve selected option and its ID
+        spinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                val selectedOption = parent.getItemAtPosition(position) as String
+                val selectedId = optionsSpinner1[selectedOption]
+                Log.d("Selected Option", "Option: $selectedOption, ID: $selectedId")
+            }
 
-        //set the adapter for spinner 2
-        val adapter3 = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, optionsSpinner3)
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner3.adapter = adapter3
-
-        //set the adapter for spinner 2
-        val adapter4 = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, optionsSpinner4)
-        adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner4.adapter = adapter4
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
 
         return view
     }
