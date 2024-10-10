@@ -12,5 +12,12 @@
         android:layout_gravity="center_vertical"
         android:gravity="center_horizontal"
         android:text="@string/helloHome"/>
+    <Button
+            android:text="@string/titleLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/logoutbtn"
+            android:layout_marginTop="20dp">
+    </Button>
 
 </FrameLayout>
