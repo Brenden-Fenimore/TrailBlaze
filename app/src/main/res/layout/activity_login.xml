@@ -152,19 +152,13 @@
             android:layout_height="369dp"
             android:layout_marginTop="0dp">
 
-        <FrameLayout
-                android:id="@+id/frameStackssubtract"
-                android:layout_gravity="bottom|center"
-                android:layout_width="match_parent"
-                android:layout_height="264dp">
-
             <ImageView
                     android:layout_width="821dp"
                     android:layout_height="437dp"
                     android:layout_gravity="center_horizontal"
                     app:srcCompat="@drawable/hikingimage2"
                     android:id="@+id/imageView8"/>
-        </FrameLayout>
+
         <LinearLayout
                 android:id="@+id/linearRowFacebookOne"
                 android:layout_gravity="top|center"
