@@ -16,7 +16,11 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="mapImage">Map</string>
+    <string name="map_image">Map</string>
+    <string name="profile">Profile</string>
+    <string name ="contact_us">Contact Us</string>
+    <string name="favorites">Favorites</string>
+    <string name="help_center">Help Center</string>
 
 
     <string name="lorem_ipsum">
