@@ -1,0 +1,200 @@
+<LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".profile.ProfileScreenActivity"
+            android:background="@color/white">
+
+        <!-- Account Header Section -->
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="16dp">
+
+            <ImageView
+                    android:id="@+id/backArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/chevron_left"
+                    android:layout_alignParentStart="true"
+                    android:contentDescription="Back Arrow"/>
+
+            <TextView
+                    android:id="@+id/accountTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="Account"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+            <ImageView
+                    android:id="@+id/editIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/edit_icon"
+                    android:layout_alignParentEnd="true"
+                    android:contentDescription="Edit Icon" android:scaleX="0.05" android:scaleY="0.05"/>
+        </RelativeLayout>
+
+        <!-- Profile Picture and Username Section -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="16dp">
+
+            <ImageView
+                    android:id="@+id/profileImage"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/account_circle"
+                    android:contentDescription="Profile Picture"/>
+
+            <TextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Username"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/black"/>
+
+            <TextView
+                    android:id="@+id/memberStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Watcher Member"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"/>
+        </LinearLayout>
+
+        <!-- Friends Section -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Friends"
+                android:paddingStart="16dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+            <!-- Placeholder friends' profile pictures -->
+            <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/account_circle"
+                    android:contentDescription="Friend's Profile"/>
+
+            <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/account_circle"
+                    android:contentDescription="Friend's Profile"/>
+
+            <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/account_circle"
+                    android:contentDescription="Friend's Profile"/>
+
+            <!-- Add more friends as needed -->
+        </LinearLayout>
+
+        <!-- Leaderboard Section -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Leaderboard"
+                android:paddingStart="16dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+        <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:padding="8dp"
+                android:layout_gravity="center">
+
+            <!-- Placeholder leaderboard items -->
+            <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/question"
+                    android:contentDescription="Leaderboard Placeholder"/>
+
+            <!-- Add more grid items as needed -->
+
+        </GridLayout>
+
+        <!-- Photos Section -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Photos"
+                android:paddingStart="16dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+        <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:padding="8dp"
+                android:layout_gravity="center">
+
+            <!-- Placeholder photo items -->
+            <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/question"
+                    android:contentDescription="Photo Placeholder"/>
+
+            <!-- Add more grid items as needed -->
+
+        </GridLayout>
+
+        <!-- Favorite Trails Section -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Favorite Trails"
+                android:paddingStart="16dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+        <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:padding="8dp"
+                android:layout_gravity="center">
+
+            <!-- Placeholder favorite trails items -->
+            <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/question"
+                    android:contentDescription="Favorite Trail Placeholder"/>
+
+            <!-- Add more grid items as needed -->
+
+        </GridLayout>
+
+    </LinearLayout>
