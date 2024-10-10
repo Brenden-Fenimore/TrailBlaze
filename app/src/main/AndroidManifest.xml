@@ -13,6 +13,39 @@
             android:theme="@style/Theme.TrailBlaze"
             tools:targetApi="31">
         <activity
+                android:name=".login.TermsActivity"
+                android:exported="false"
+                android:label="@string/title_activity_terms"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
+                android:name=".login.TermsAndConditins"
+                android:exported="false"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
+                android:name=".login.TermsAndConditions"
+                android:exported="false"
+                android:label="@string/title_activity_terms_and_conditions"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
+                android:name=".login.PersonalizeActivity"
+                android:exported="false"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
+                android:name=".login.ForgotPasswordActivity"
+                android:exported="false"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
+                android:name=".login.RegisterActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".login.LoginActivity"
+                android:exported="true"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
+                android:name=".settings.SettingsScreenActivity"
+                android:exported="false"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
                 android:name=".MainActivity"
                 android:exported="true"
                 android:label="@string/app_name">
