@@ -14,4 +14,3 @@ class FriendsProfile : AppCompatActivity() {
         setContentView(R.layout.activity_friends_profile)
         }
     }
-}
