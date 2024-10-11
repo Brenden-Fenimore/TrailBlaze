@@ -1,4 +1,4 @@
-package com.example.trailblaze.ui.map
+package com.example.trailblaze.ui.Map
 
 import android.content.Intent
 import android.os.Bundle
