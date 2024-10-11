@@ -60,7 +60,7 @@ class RegisterActivity : AppCompatActivity() {
         etConfirmPassword.addTextChangedListener { updateCreateAccountButtonState()
         }
 
-//set click listener for terms
+        //set click listener for terms
         termsAndCondtionstxt.setOnClickListener {
             //start terms and conditions activity
             val intent = Intent(this, TermsActivity::class.java)

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trailblaze.databinding.FragmentMapBinding
 import com.example.trailblaze.login.LoginActivity
+import com.example.trailblaze.settings.SettingsScreenActivity
 
 class MapFragment : Fragment() {
 
@@ -23,16 +24,9 @@ class MapFragment : Fragment() {
         _binding = FragmentMapBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.logoutbtn.setOnClickListener {
-            val sharedPreferences = requireActivity().getSharedPreferences("MyAppPrefs", AppCompatActivity.MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
-            editor.putBoolean("isLoggedIn", false)
-            editor.apply()
-
-            // Navigate back to LoginActivity
-            val intent = Intent(requireActivity(), LoginActivity::class.java)
+        binding.settingsbtn.setOnClickListener {
+            val intent = Intent(requireActivity(), SettingsScreenActivity::class.java)
             startActivity(intent)
-            requireActivity().finish() // Close the current activity
         }
         return root
     }

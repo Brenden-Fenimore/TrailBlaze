@@ -15,9 +15,9 @@ class TermsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_terms)
 
-       setContentView(R.layout.activity_terms)
-        
+        //find ok button id
         val okButton = findViewById<Button>(R.id.termsOKbtn)
 
         //set click listener for ok button and close page

@@ -55,6 +55,7 @@ class FourthPersonalizeFragment : Fragment() {
             "Long Distance" to 2,
             "Peek Bagging" to 3
         )
+
         //set up the finished button
         view.findViewById<Button>(R.id.finished).setOnClickListener {
             //navigate to MainActivity

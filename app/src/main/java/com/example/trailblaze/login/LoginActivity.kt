@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-//set click listener for terms
+        //set click listener for terms
         termsAndCondtionstxt.setOnClickListener {
             //start terms and conditions activity
             val intent = Intent(this, TermsActivity::class.java)

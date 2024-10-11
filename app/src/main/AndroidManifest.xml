@@ -13,6 +13,27 @@
             android:theme="@style/Theme.TrailBlaze"
             tools:targetApi="31">
         <activity
+                android:name=".settings.ContactUsActivity"
+                android:exported="false"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
+                android:name=".settings.SupportScreenActivity"
+                android:exported="false"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
+                android:name=".settings.HelpScreenActivity"
+                android:exported="false"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
+                android:name=".settings.HelpFrag"
+                android:exported="false"
+                android:label="@string/title_activity_help_frag"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
+                android:name=".settings.HelpAndSupportActivity"
+                android:exported="false"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
                 android:name=".ui.profile.FriendsProfile"
                 android:exported="false"/>
         <activity
