@@ -34,34 +34,12 @@
                 android:exported="false"
                 android:theme="@style/Theme.TrailBlaze"/>
         <activity
-                android:name=".settings.HelpScreenActivity"
-                android:exported="false"
-                android:theme="@style/Theme.TrailBlaze"/>
-        <activity
-                android:name=".settings.HelpFrag"
-                android:exported="false"
-                android:label="@string/title_activity_help_frag"
-                android:theme="@style/Theme.TrailBlaze"/>
-        <activity
-                android:name=".settings.HelpAndSupportActivity"
-                android:exported="false"
-                android:theme="@style/Theme.TrailBlaze"/>
-        <activity
                 android:name=".ui.profile.FriendsProfile"
                 android:exported="false"/>
         <activity
                 android:name=".login.TermsActivity"
                 android:exported="false"
                 android:label="@string/title_activity_terms"
-                android:theme="@style/Theme.TrailBlaze"/>
-        <activity
-                android:name=".login.TermsAndConditins"
-                android:exported="false"
-                android:theme="@style/Theme.TrailBlaze"/>
-        <activity
-                android:name=".login.TermsAndConditions"
-                android:exported="false"
-                android:label="@string/title_activity_terms_and_conditions"
                 android:theme="@style/Theme.TrailBlaze"/>
         <activity
                 android:name=".login.PersonalizeActivity"
