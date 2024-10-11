@@ -11,4 +11,17 @@
     <string name="helloMap">Hello MAP Fragment</string>
     <string name="helloFavorites">Hello FAVORITES Fragment</string>
     <string name="helloProfile">Hello PROFILE Fragment</string>
+    <string name="photo_placeholder"/>
+    <string name="favorite_trails"/>
+    <string name="leaderboard_placeholder"/>
+    <string name="photos"/>
+    <string name="leaderboard"/>
+    <string name="friend_avatar"/>
+    <string name="friends"/>
+    <string name="watcher_member"/>
+    <string name="username_placeholder"/>
+    <string name="activity_icon"/>
+    <string name="location_icon"/>
+    <string name="profile_image"/>
+    <string name="favorite_trail_placeholder"/>
 </resources>

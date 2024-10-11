@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import com.example.trailblaze.R
 import com.example.trailblaze.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -20,9 +22,12 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
+    
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }
