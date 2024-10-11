@@ -125,6 +125,8 @@
     <string name="title_activity_terms_and_conditions">TermsAndConditions</string>
     <string name="title_activity_terms">TermsActivity</string>
     <string name="title_activity_help_frag">HelpFrag</string>
+    <string name="friend_s_profile">Friend\'s Profile</string>
+    <string name="backarrow">backArrow</string>
 
 
 </resources>

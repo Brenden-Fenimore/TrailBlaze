@@ -39,7 +39,7 @@
                 android:layout_width="287dp"
                 android:layout_height="wrap_content"
                 android:text="@string/contactTitle"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:gravity="center"/>
 
         <LinearLayout
@@ -99,16 +99,12 @@
             android:text="@string/submit"
             android:layout_width="370dp"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/cancel"
-            android:layout_centerHorizontal="true"
             android:id="@+id/submit">
     </Button>
     <Button
             android:text="@string/cancel"
             android:layout_width="370dp"
             android:layout_height="wrap_content"
-            android:layout_above="@id/bottomlayout"
-            android:layout_centerHorizontal="true"
             android:id="@+id/cancel">
     </Button>
     <LinearLayout

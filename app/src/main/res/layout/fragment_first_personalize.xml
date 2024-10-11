@@ -45,7 +45,8 @@
                             android:layout_width="147dp"
                             android:layout_height="147dp"
                             android:clickable="true"
-                            android:id="@+id/nature"/>
+                            android:id="@+id/nature"
+                            android:contentDescription="@string/description"/>
                     <TextView
                             android:id="@+id/caption1"
                             android:layout_width="match_parent"
@@ -66,7 +67,8 @@
                             android:layout_width="149dp"
                             android:layout_height="149dp"
                             android:clickable="true"
-                            android:id="@+id/breaks"/>
+                            android:id="@+id/breaks"
+                            android:contentDescription="@string/description"/>
                     <TextView
                             android:id="@+id/caption2"
                             android:layout_width="match_parent"
@@ -95,7 +97,8 @@
                             android:layout_width="149dp"
                             android:layout_height="120dp"
                             android:clickable="true"
-                            android:id="@+id/uphill"/>
+                            android:id="@+id/uphill"
+                            android:contentDescription="@string/description"/>
                     <TextView
                             android:id="@+id/caption4"
                             android:layout_width="match_parent"
@@ -116,7 +119,8 @@
                             android:layout_width="149dp"
                             android:layout_height="119dp"
                             android:clickable="true"
-                            android:id="@+id/pace"/>
+                            android:id="@+id/pace"
+                            android:contentDescription="@string/description"/>
                     <TextView
                             android:id="@+id/caption3"
                             android:layout_width="match_parent"

@@ -78,7 +78,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     app:srcCompat="@android:drawable/ic_dialog_email"
-                    android:id="@+id/imageView"/>
+                    android:id="@+id/imageView"
+                    android:contentDescription="@string/description"/>
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -98,7 +99,8 @@
                     android:layout_width="36dp"
                     android:layout_height="match_parent"
                     app:srcCompat="@android:drawable/ic_lock_idle_lock"
-                    android:id="@+id/imageView1"/>
+                    android:id="@+id/imageView1"
+                    android:contentDescription="@string/description"/>
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -157,7 +159,8 @@
                     android:layout_height="437dp"
                     android:layout_gravity="center_horizontal"
                     app:srcCompat="@drawable/hikingimage2"
-                    android:id="@+id/imageView8"/>
+                    android:id="@+id/imageView8"
+                    android:contentDescription="@string/description"/>
 
         <LinearLayout
                 android:id="@+id/linearRowFacebookOne"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/chevron_left"
                 android:layout_alignParentStart="true"
-                android:contentDescription="Back Arrow"/>
+                android:contentDescription="@string/backarrow"/>
 
         <ImageButton
                 android:layout_width="37dp"
@@ -29,7 +29,8 @@
                 android:layout_alignParentEnd="true"
                 android:background="@android:color/transparent"
                 app:srcCompat="@drawable/add_circle"
-                android:id="@+id/addFriend"/>
+                android:id="@+id/addFriend"
+                android:contentDescription="@string/description"/>
     </RelativeLayout>
 
     <!-- Profile Picture and Username Section -->
@@ -46,13 +47,14 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/account_circle"
-                android:contentDescription="Profile Picture"/>
+                android:contentDescription="@string/description"
+                />
 
         <TextView
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Username"
+                android:text="@string/userName"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"
@@ -65,20 +67,23 @@
             <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     app:srcCompat="@drawable/xpic"
-                    android:id="@+id/imageView3"/>
+                    android:id="@+id/imageView3"
+                    android:contentDescription="@string/description"/>
             <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     app:srcCompat="@drawable/xpic"
-                    android:id="@+id/imageView4"/>
+                    android:id="@+id/imageView4"
+                    android:contentDescription="@string/description"/>
            <ImageView
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    app:srcCompat="@drawable/xpic"
-                   android:id="@+id/imageView5"/>
+                   android:id="@+id/imageView5"
+                   android:contentDescription="@string/description"/>
 
 
        </LinearLayout>
@@ -106,6 +111,7 @@
             android:layout_height="wrap_content"
             android:text="@string/friendsProfile1"
             android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/black"/>
@@ -113,10 +119,11 @@
     <HorizontalScrollView
             android:layout_width="match_parent"
             android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:layout_height="wrap_content"
             android:fillViewport="true">
         <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center">
@@ -126,50 +133,54 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/account_circle"
-                    android:layout_marginRight="25dp"
-                    android:contentDescription="Friend's Profile"/>
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"
+                    />
 
             <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/account_circle"
-                    android:layout_marginRight="25dp"
-                    android:contentDescription="Friend's Profile"/>
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"
+                    />
 
             <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginRight="25dp"
+                    android:layout_marginEnd="25dp"
                     android:src="@drawable/account_circle"
-                    android:contentDescription="Friend's Profile"/>
+                    android:contentDescription="@string/description"/>
 
             <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginRight="25dp"
+                    android:layout_marginEnd="25dp"
                     android:src="@drawable/account_circle"
-                    android:contentDescription="Friend's Profile"/>
+                    android:contentDescription="@string/description"
+                    />
 
             <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginRight="25dp"
+                    android:layout_marginEnd="25dp"
                     android:src="@drawable/account_circle"
-                    android:contentDescription="Friend's Profile"/>
+                    android:contentDescription="@string/description"
+                    />
 
             <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginRight="25dp"
+                    android:layout_marginEnd="25dp"
                     android:src="@drawable/account_circle"
-                    android:contentDescription="Friend's Profile"/>
+                    android:contentDescription="@string/friend_s_profile"/>
 
             <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginRight="25dp"
+                    android:layout_marginEnd="25dp"
                     android:src="@drawable/account_circle"
-                    android:contentDescription="Friend's Profile"/>
+                    android:contentDescription="@string/friend_s_profile"/>
 
             <!-- Add more friends as needed -->
         </LinearLayout>
@@ -186,6 +197,7 @@
             android:layout_marginTop="25dp"
             android:text="Leaderboard"
             android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/black"/>
@@ -195,7 +207,8 @@
             android:fillViewport="true">
         <LinearLayout
                 android:paddingStart="16dp"
-                android:layout_width="match_parent"
+                android:paddingEnd="16dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center">
@@ -205,31 +218,31 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/question"
-                    android:layout_marginRight="25dp"
-                    android:contentDescription="Leaderboard Placeholder"/>
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
 
             <!-- Add more grid items as needed -->
 
             <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_marginRight="25dp"
+                    android:layout_marginEnd="25dp"
                     android:src="@drawable/question"
-                    android:contentDescription="Leaderboard Placeholder"/>
+                    android:contentDescription="@string/description"/>
 
             <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/question"
-                    android:layout_marginRight="25dp"
-                    android:contentDescription="Leaderboard Placeholder"/>
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
 
             <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/question"
-                    android:layout_marginRight="25dp"
-                    android:contentDescription="Leaderboard Placeholder"/>
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
 
 
 
@@ -247,6 +260,7 @@
             android:layout_marginTop="25dp"
             android:text="Photos"
             android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/black"/>
@@ -257,7 +271,8 @@
             android:fillViewport="true">
         <LinearLayout
                 android:paddingStart="16dp"
-                android:layout_width="match_parent"
+                android:paddingEnd="16dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center">
@@ -267,37 +282,37 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/question"
-                    android:layout_marginRight="25dp"
-                    android:contentDescription="Photo Placeholder"/>
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
 
             <!-- Add more grid items as needed -->
             <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/question"
-                    android:layout_marginRight="25dp"
-                    android:contentDescription="Photo Placeholder"/>
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
 
             <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/question"
-                    android:layout_marginRight="25dp"
-                    android:contentDescription="Photo Placeholder"/>
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
 
             <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/question"
-                    android:layout_marginRight="25dp"
-                    android:contentDescription="Photo Placeholder"/>
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
 
             <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/question"
-                    android:layout_marginRight="25dp"
-                    android:contentDescription="Photo Placeholder"/>
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
 
 
         </LinearLayout>
@@ -314,6 +329,7 @@
             android:layout_height="wrap_content"
             android:text="Favorite Trails"
             android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/black"/>
@@ -324,7 +340,8 @@
             android:fillViewport="true">
         <LinearLayout
                 android:paddingStart="16dp"
-                android:layout_width="match_parent"
+                android:paddingEnd="16dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center">
@@ -334,8 +351,8 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/question"
-                    android:layout_marginRight="25dp"
-                    android:contentDescription="Favorite Trail Placeholder"/>
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
 
             <!-- Add more grid items as needed -->
 
@@ -343,29 +360,29 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/question"
-                    android:layout_marginRight="25dp"
-                    android:contentDescription="Favorite Trail Placeholder"/>
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
 
             <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/question"
-                    android:layout_marginRight="25dp"
-                    android:contentDescription="Favorite Trail Placeholder"/>
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
 
             <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/question"
-                    android:layout_marginRight="25dp"
-                    android:contentDescription="Favorite Trail Placeholder"/>
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
 
             <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/question"
-                    android:layout_marginRight="25dp"
-                    android:contentDescription="Favorite Trail Placeholder"/>
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
 
         </LinearLayout>
     </HorizontalScrollView>

@@ -1,4 +1,4 @@
-package com.example.trailblaze.ui.Map
+package com.example.trailblaze.ui.map
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,9 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import com.example.trailblaze.databinding.FragmentMapBinding
-import com.example.trailblaze.login.LoginActivity
 import com.example.trailblaze.settings.SettingsScreenActivity
 
 class MapFragment : Fragment() {
