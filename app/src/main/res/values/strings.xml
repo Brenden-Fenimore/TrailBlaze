@@ -49,7 +49,7 @@
     <string name="privacy_policy3">We only retain collected information for as long as necessary to provide you with
         your requested service.">
     </string>
-<string name="titleForgotPassword">Forgot Password</string>
+    <string name="titleForgotPassword">Forgot Password</string>
     <string name="titleEmail">Email Address</string>
     <string name="titleResetPw">Reset Password</string>
     <string name="titleLogin">Login</string>
@@ -72,6 +72,8 @@
     <string name="titleUphill">Uphill</string>
     <string name="pace">Pace</string>
     <string name="titleContinue">Continue</string>
+    <string name="friendsProfile1">Friends in Common</string>
+    <string name="friendsAdd">Add as a trusted Contact/Watcher</string>
 
 
 
