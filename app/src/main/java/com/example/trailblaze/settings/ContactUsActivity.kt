@@ -9,7 +9,7 @@ import com.example.trailblaze.R
 class ContactUsActivity : AppCompatActivity() {
 
     //declaration
-    private lateinit var cancleBtn: Button
+    private lateinit var cancelBtn: Button
     private lateinit var submitBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +17,7 @@ class ContactUsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_contact_us)
 
         //find var by id
-        cancleBtn=findViewById(R.id.cancel)
+        cancelBtn=findViewById(R.id.cancel)
         submitBtn=findViewById(R.id.submit)
 
         //set the listener for the back button
@@ -26,7 +26,7 @@ class ContactUsActivity : AppCompatActivity() {
         }
 
         //set the click listener to close the screen
-        cancleBtn.setOnClickListener {
+        cancelBtn.setOnClickListener {
             finish()
         }
 

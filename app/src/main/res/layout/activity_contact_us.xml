@@ -9,6 +9,7 @@
             android:layout_height="39dp"
             app:srcCompat="@drawable/chevron_left"
             android:background="@android:color/transparent"
+            android:contentDescription="@string/description"
             android:id="@+id/chevron_left"/>
 
     <LinearLayout
@@ -39,7 +40,7 @@
                 android:layout_width="287dp"
                 android:layout_height="wrap_content"
                 android:text="@string/contactTitle"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 android:gravity="center"/>
 
         <LinearLayout
@@ -49,7 +50,7 @@
             <TextView
                     android:layout_width="139dp"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
+                    android:textSize="18sp"
                     android:layout_margin="15dp"
                     android:text="@string/contactTitle2"/>
             <EditText
@@ -68,9 +69,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
             <TextView
-                    android:layout_width="139dp"
+                    android:layout_width="187dp"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
+                    android:textSize="18sp"
                     android:layout_margin="15dp"
                     android:text="@string/contactTitle3"/>
             <EditText

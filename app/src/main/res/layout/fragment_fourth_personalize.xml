@@ -55,7 +55,6 @@
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
                     android:layout_gravity="center"
-                    android:inputType="text"
                     android:text="Fitness Level"/>
             <Spinner
                     android:id="@+id/spinner2"
@@ -101,7 +100,6 @@
             <TextView
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
                     android:textSize="15sp"
                     android:layout_gravity="center"
                     android:id="@+id/type"

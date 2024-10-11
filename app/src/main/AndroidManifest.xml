@@ -13,6 +13,19 @@
             android:theme="@style/Theme.TrailBlaze"
             tools:targetApi="31">
         <activity
+                android:name=".settings.AboutActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".settings.PrivacyAndSecurityActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".settings.AppearanceActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".settings.NotificationsActivity"
+                android:exported="false"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
                 android:name=".settings.ContactUsActivity"
                 android:exported="false"
                 android:theme="@style/Theme.TrailBlaze"/>
