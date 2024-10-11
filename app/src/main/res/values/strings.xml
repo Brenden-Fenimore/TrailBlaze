@@ -25,5 +25,9 @@
     <string name="userPhotoPictures">User Photo Picture</string>
     <string name="userFavoriteTrails">Favorite Trails</string>
     <string name="userFavoriteTrailsPictures">User Favorite Trail Picture</string>
+    <string name="userBadge1">User Badge 1</string>
+    <string name="userBadge2">User Badge 2</string>
+    <string name="userBadge3">User Badge 3</string>
+    <string name="editIcon">Edit</string>
 
 </resources>

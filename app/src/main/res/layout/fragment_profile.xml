@@ -9,6 +9,12 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+        <!-- Title Bar with Account and Edit Profile Button -->
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp">
+
         <!-- Account Title -->
         <TextView
                 android:id="@+id/account_title"
@@ -19,6 +25,19 @@
                 android:textStyle="bold"
                 android:gravity="center"
                 android:paddingBottom="16dp" />
+
+            <!-- Edit Profile Button -->
+            <ImageButton
+                    android:id="@+id/edit_profile_button"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/edit_icon"
+                    android:contentDescription="@string/editIcon"/>
+
+        </RelativeLayout>
 
         <!-- User Profile Section with Location and Difficulty -->
         <LinearLayout
@@ -53,13 +72,13 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/strength"
+                    android:src="@drawable/difficulty"
                     android:contentDescription="@string/difficultyIcon"
                     android:layout_marginStart="16dp"/>
 
         </LinearLayout>
 
-        <!-- Username and Watcher -->
+        <!-- Username, Badges, and Watcher -->
         <TextView
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
@@ -70,6 +89,43 @@
                 android:layout_gravity="center"
                 android:paddingTop="8dp" />
 
+        <!-- Badges Layout -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="8dp">
+
+            <!-- Badge 1 -->
+            <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/badge"
+                    android:contentDescription="@string/userBadge1"
+                    android:layout_marginEnd="8dp"/>
+
+            <!-- Badge 2 -->
+            <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/badge"
+                    android:contentDescription="@string/userBadge2"
+                    android:layout_marginEnd="8dp"/>
+
+            <!-- Badge 3 -->
+            <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/badge"
+                    android:contentDescription="@string/userBadge3"/>
+
+        </LinearLayout>
+
+        <!-- Watcher Member -->
         <TextView
                 android:id="@+id/watcher_member"
                 android:layout_width="wrap_content"
@@ -105,31 +161,31 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/account_circle"
+                    android:src="@drawable/userperson"
                     android:contentDescription="@string/friendProfilePicture" />
             <ImageButton
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/account_circle"
+                    android:src="@drawable/userperson"
                     android:contentDescription="@string/friendProfilePicture" />
             <ImageButton
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/account_circle"
+                    android:src="@drawable/userperson"
                     android:contentDescription="@string/friendProfilePicture" />
             <ImageButton
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/account_circle"
+                    android:src="@drawable/userperson"
                     android:contentDescription="@string/friendProfilePicture" />
             <ImageButton
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/account_circle"
+                    android:src="@drawable/userperson"
                     android:contentDescription="@string/friendProfilePicture" />
             <!-- Repeat as necessary for other friends -->
         </LinearLayout>
