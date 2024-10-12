@@ -57,4 +57,25 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus vestibulum. Fusce
         dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="profile">Profile</string>
+    <string name="locationIcon">Location Icon</string>
+    <string name="profilePicture">Profile Picture</string>
+    <string name="difficultyIcon">Difficulty Icon</string>
+    <string name="username">Username</string>
+    <string name="watcherMember">Watcher Member</string>
+    <string name="friends">Friends</string>
+    <string name="friendProfilePicture">Friend Profile Picture</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="leaderboardPicture">Leaderboard Picture</string>
+    <string name="userPhotos">Photos</string>
+    <string name="userPhotoPictures">User Photo Picture</string>
+    <string name="userFavoriteTrails">Favorite Trails</string>
+    <string name="userFavoriteTrailsPictures">User Favorite Trail Picture</string>
+    <string name="userBadge1">User Badge 1</string>
+    <string name="userBadge2">User Badge 2</string>
+    <string name="userBadge3">User Badge 3</string>
+    <string name="editIcon">Edit</string>
+    <string name="editProfile">Edit Profile</string>
+    <string name="backButton">Back Button</string>
+
 </resources>
