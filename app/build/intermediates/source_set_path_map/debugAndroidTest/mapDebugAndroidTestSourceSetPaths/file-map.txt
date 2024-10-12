@@ -1,0 +1,6 @@
+com.example.trailblaze.test.app-annotation-experimental-1.3.0-0 /Users/lipeduh/.gradle/caches/transforms-4/49af506e7d9ce7c95eae9ba506f8b335/transformed/annotation-experimental-1.3.0/res
+com.example.trailblaze.test.app-core-1.5.0-1 /Users/lipeduh/.gradle/caches/transforms-4/56b420832205c0d5c0d77c5849ed737d/transformed/core-1.5.0/res
+com.example.trailblaze.test.app-androidTest-2 /Users/lipeduh/IdeaProjects/TrailBlaze/app/build/generated/res/resValues/androidTest/debug
+com.example.trailblaze.test.app-mergeDebugAndroidTestResources-3 /Users/lipeduh/IdeaProjects/TrailBlaze/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/merged.dir
+com.example.trailblaze.test.app-mergeDebugAndroidTestResources-4 /Users/lipeduh/IdeaProjects/TrailBlaze/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/stripped.dir
+com.example.trailblaze.test.app-debugAndroidTest-5 /Users/lipeduh/IdeaProjects/TrailBlaze/app/build/intermediates/merged_res/debugAndroidTest/mergeDebugAndroidTestResources

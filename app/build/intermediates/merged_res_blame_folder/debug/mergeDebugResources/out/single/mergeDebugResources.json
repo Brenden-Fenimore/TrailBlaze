@@ -1,0 +1,246 @@
+[
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_ic_home_black_24dp.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/ic_home_black_24dp.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_question.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/question.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_uphill.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/uphill.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_map.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/map.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.trailblaze.app-main-50:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.trailblaze.app-main-50:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/layout_activity_menu.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/layout/activity_menu.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_frame444.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/frame444.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_directions_walk.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/directions_walk.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_instagram1.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/instagram1.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_rectangle13.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/rectangle13.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/menu_bottom_nav_menu.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/menu/bottom_nav_menu.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_hike.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/hike.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/layout_content_menu.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/layout/content_menu.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.trailblaze.app-main-50:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.trailblaze.app-main-50:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_watcherslogo.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/watcherslogo.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/navigation_mobile_navigation.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/navigation/mobile_navigation.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_facebook1.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/facebook1.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/navigation_nav_graph.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/navigation/nav_graph.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_rectangle14.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/rectangle14.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_ic_notifications_black_24dp.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/ic_notifications_black_24dp.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_pace.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/pace.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_ic_dashboard_black_24dp.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/ic_dashboard_black_24dp.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.trailblaze.app-main-50:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_favorite.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/favorite.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/layout_fragment_home.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.trailblaze.app-main-50:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.trailblaze.app-main-50:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_linkedin1.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/linkedin1.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_settings_icon.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/settings_icon.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_hikingimage2.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/hikingimage2.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/xml_backup_rules.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_chevron_left.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/chevron_left.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_subtract.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/subtract.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_baseline_settings_24.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/baseline_settings_24.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_breaks.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/breaks.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_baseline_arrow_back_ios_new_24.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/baseline_arrow_back_ios_new_24.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_pinterest1.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/pinterest1.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_userperson.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/userperson.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.trailblaze.app-main-50:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/layout_fragment_favorites.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/layout/fragment_favorites.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_home.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/home.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_image11.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/image11.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.trailblaze.app-main-50:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/layout_activity_main.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/layout_fragment_profile.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_nature.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/nature.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/layout_fragment_map.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/layout/fragment_map.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_baseline_contact_mail_24.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/baseline_contact_mail_24.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_chevron_right.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/chevron_right.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_difficulty.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/difficulty.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_trailblaze_logo.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/trailblaze_logo.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_hikingimage.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/hikingimage.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/drawable_account_circle.png.flat",
+        "source": "com.example.trailblaze.app-main-50:/drawable/account_circle.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-48:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.trailblaze.app-main-50:/mipmap-xhdpi/ic_launcher_round.webp"
+    }
+]

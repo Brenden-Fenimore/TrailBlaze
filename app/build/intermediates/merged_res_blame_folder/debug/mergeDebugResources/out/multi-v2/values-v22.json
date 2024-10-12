@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.example.trailblaze.app-mergeDebugResources-46:/values-v22/values-v22.xml",
+            "map": [
+                {
+                    "source": "/Users/lipeduh/.gradle/caches/transforms-4/fa6ab052ffad4f8cd177f4e7b1e8e0ad/transformed/appcompat-1.6.1/res/values-v22/values-v22.xml",
+                    "from": {
+                        "startLines": "2,3,4,9",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,130,217,487",
+                        "endLines": "2,3,8,13",
+                        "endColumns": "74,86,12,12",
+                        "endOffsets": "125,212,482,764"
+                    }
+                }
+            ]
+        }
+    ]
+}
