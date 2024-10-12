@@ -29,5 +29,6 @@
     <string name="userBadge2">User Badge 2</string>
     <string name="userBadge3">User Badge 3</string>
     <string name="editIcon">Edit</string>
+    <string name="editProfile">Edit Profile</string>
 
 </resources>
