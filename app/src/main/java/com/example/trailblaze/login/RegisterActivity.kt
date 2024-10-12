@@ -12,6 +12,8 @@ import android.content.Intent
 import android.widget.*
 import androidx.core.widget.addTextChangedListener
 import com.example.trailblaze.MainActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -24,11 +26,18 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var etDateofBirth : EditText
     private lateinit var etEmail : EditText
 
+    private lateinit var firestore: FirebaseFirestore
+    private lateinit var auth: FirebaseAuth
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_register)
+
+        //initialize Firestore and FirebaseAuth
+        firestore = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
 
         //initialize views
         val termsAndCondtionstxt = findViewById<TextView>(R.id.termsandconditions)
@@ -75,26 +84,63 @@ class RegisterActivity : AppCompatActivity() {
             }
             else if (validateInputs()){
                 createAccount()
+                saveLoggedInstate()
+                navigateToPersonalizeActivity()
             }
         }
     }
 
-    //navigate to personalize account and reset stack
+    //create account function using firebase
     private fun createAccount() {
+        val username = etUsername.text.toString()
+        val password = etPassword.text.toString()
+        val dateOfBirth = etDateofBirth.text.toString()
+        val email = etEmail.text.toString()
 
+        //create user with Firebase Authentication
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val user = hashMapOf(
+                        "username" to username,
+                        "dateOfBirth" to dateOfBirth,
+                        "email" to email
+                    )
+
+                    //save user information to Firestore
+                    val userId = auth.currentUser?.uid // Get the user's unique ID
+                    firestore.collection("users").document(userId!!)
+                        .set(user)
+                        .addOnCompleteListener { firestoreTask ->
+                            if (firestoreTask.isSuccessful) {
+                                Toast.makeText(this, "Account created successfully!", Toast.LENGTH_SHORT).show()
+                            } else {
+                                Toast.makeText(this, "Failed to create account!", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                } else {
+                    Toast.makeText(this, "Registration failed!", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    //function to navigate to PersonalizeActivity
+    private fun navigateToPersonalizeActivity() {
+        //navigate to personalize account
+        val intent = Intent(this, PersonalizeActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        finish()
+    }
+
+    //function to save loggedIn state
+    private fun saveLoggedInstate(){
         //save loggedIn status to true
         val sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putBoolean("isLoggedIn", true)
         editor.apply()
 
-        Toast.makeText(this,"Account created successfully!",Toast.LENGTH_SHORT).show()
-
-        //navigate to personalize account
-        val intent = Intent(this, PersonalizeActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
-        finish()
     }
 
     //function to update create account button to change its state

@@ -24,7 +24,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="forgotpassword1">Enter the Email address accociated with your account.</string>
+    <string name="forgotpassword1">Enter the Email address associated with your account.</string>
     <string name="forgotpassword2">We will email you a link to reset your password</string>
     <string name="aspects">What aspect/s of hiking do you like to experience most?</string>
     <string name="location">TrailBlaze utilizes your location to provide personalized suggestions of nearby trails,
@@ -60,7 +60,7 @@
     <string name="rememberPassword">Remember Password</string>
     <string name="personalize">Lets Personalize your account</string>
     <string name="userName">Username</string>
-    <string name="dob">Date of Birth mm/dd/yy</string>
+    <string name="dob">Date of Birth mm/dd/yyyy</string>
     <string name="password2">Confirm Password</string>
     <string name="agree">You agree to our</string>
     <string name="createAccount">Create Account</string>
