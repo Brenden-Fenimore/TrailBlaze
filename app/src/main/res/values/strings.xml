@@ -110,18 +110,15 @@
     <string name="title_activity_terms_and_conditions">TermsAndConditions</string>
     <string name="title_activity_terms">TermsActivity</string>
     //User variables
-    <string name="username">Username</string>
     <string name="homepage_welcome_user">Good Afternoon,</string>
     <string name="homepage_searchbar_hint">Search</string>
     <string name="homepage_nearby_trails">Top trails nearby:</string>
     <string name="homepage_browse_by_difficulty">Browse by difficulty:</string>
     <string name="homepage_friends">Hike with friends!</string>
 
-    <string name="profile">Profile</string>
     <string name="locationIcon">Location Icon</string>
     <string name="profilePicture">Profile Picture</string>
     <string name="difficultyIcon">Difficulty Icon</string>
-    <string name="username">Username</string>
     <string name="watcherMember">Watcher Member</string>
     <string name="friends">Friends</string>
     <string name="friendProfilePicture">Friend Profile Picture</string>
