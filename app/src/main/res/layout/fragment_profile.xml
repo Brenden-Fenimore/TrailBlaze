@@ -20,7 +20,7 @@
                 android:id="@+id/account_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/account"
+                android:text="@string/profile"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:gravity="center"

@@ -19,5 +19,15 @@
                     android:textStyle="bold"
                     android:gravity="center"
                     android:paddingBottom="16dp" />
+
+        <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/chevron_left"
+                android:contentDescription="@string/backButton"
+                android:layout_marginEnd="16dp" />
+
     </LinearLayout>
 </ScrollView>

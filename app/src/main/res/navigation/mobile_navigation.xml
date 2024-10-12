@@ -39,4 +39,7 @@
             android:name="com.example.trailblaze.ui.profile.EditProfileFragment"
             android:label="Edit Profile"
             tools:layout="@layout/fragment_edit_profile" />
+    <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/navigation_profile" />
 </navigation>

@@ -11,7 +11,7 @@
     <string name="helloMap">Hello MAP Fragment</string>
     <string name="helloFavorites">Hello FAVORITES Fragment</string>
     <string name="helloProfile">Hello PROFILE Fragment</string>
-    <string name="account">Account</string>
+    <string name="profile">Profile</string>
     <string name="locationIcon">Location Icon</string>
     <string name="profilePicture">Profile Picture</string>
     <string name="difficultyIcon">Difficulty Icon</string>
@@ -30,5 +30,6 @@
     <string name="userBadge3">User Badge 3</string>
     <string name="editIcon">Edit</string>
     <string name="editProfile">Edit Profile</string>
+    <string name="backButton">Back Button</string>
 
 </resources>

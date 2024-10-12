@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.trailblaze.R
 import com.example.trailblaze.databinding.FragmentEditProfileBinding
 
@@ -18,6 +19,11 @@ class EditProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentEditProfileBinding.inflate(inflater, container, false)
+
+        //set the listener for the back button
+        binding.backButton.setOnClickListener {
+            findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
+        }
         return binding.root
     }
 
