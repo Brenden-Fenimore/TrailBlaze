@@ -134,5 +134,34 @@
     <string name="editIcon">Edit</string>
     <string name="editProfile">Edit Profile</string>
     <string name="backButton">Back Button</string>
-
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="activityTitle">Settings</string>
+    <string name="accountTitle">Account</string>
+    <string name="notificationTitle">Notifications</string>
+    <string name="appearanceTitle">Appearance</string>
+    <string name="helpAndSupportTitle">Help and Support</string>
+    <string name="aboutTitle">About</string>
+    <string name="privacyTitle">Privacy and Security</string>
+    <string name="friendsProfile1">Friends in Common</string>
+    <string name="friendsAdd">Add as a trusted Contact/Watcher</string>
+    <string name="titleHelp">Help and Support</string>
+    <string name="contact">Contact Us</string>
+    <string name="troubleshoot">Troubleshooting Guide</string>
+    <string name="bug">Report a Bug</string>
+    <string name="emergency">I am in an emergency! (Dial 911)</string>
+    <string name="contactTitle">If you are experiencing any issues, please let us know. We will try to solve them as
+            soon as possible.
+    </string>
+    <string name="contactTitle2">Title</string>
+    <string name="contactTitle3">Explain the problem</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="inputText">Input Text</string>
+    <string name="description">Enter a description...</string>
+    <string name="contact4">You can also contact us at</string>
+    <string name="supportEmail">customersupport@trailblaze.com</string>
+    <string name="aboutContent">TrailBlaze aims to be the go-to application for all hikers, climbers, and outdoorsy types by offering a fantastic way to view trail options whether traveling or at home. &#10;With customization options, the latest updates on trails, and an expansive community, it is sure to be a standout in the space.</string>
+    <string name="title_activity_help_frag">HelpFrag</string>
+    <string name="friend_s_profile">Friend\'s Profile</string>
+    <string name="backarrow">backArrow</string>
 </resources>
