@@ -9,7 +9,8 @@ import androidx.fragment.app.Fragment
 import com.example.trailblaze.databinding.FragmentHomeBinding
 import com.example.trailblaze.ui.MenuActivity
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment()
+{
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -17,11 +18,8 @@ class HomeFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View
+    {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -29,7 +27,8 @@ class HomeFragment : Fragment() {
 
     }
 
-    override fun onDestroyView() {
+    override fun onDestroyView()
+    {
         super.onDestroyView()
         _binding = null
     }
