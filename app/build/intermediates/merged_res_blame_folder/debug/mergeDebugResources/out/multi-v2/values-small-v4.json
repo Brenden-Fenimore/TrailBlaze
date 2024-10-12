@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.trailblaze.app-mergeDebugResources-46:/values-small-v4/values-small-v4.xml",
+            "outputFile": "com.example.trailblaze.app-mergeDebugResources-3:/values-small-v4/values-small-v4.xml",
             "map": [
                 {
-                    "source": "/Users/lipeduh/.gradle/caches/transforms-4/7712b59d7160699ff6def5f643327e48/transformed/material-1.10.0/res/values-small-v4/values-small-v4.xml",
+                    "source": "C:\\Users\\thebr\\.gradle\\caches\\transforms-4\\67aed5640c008e0c862e1a53a282ae88\\transformed\\material-1.10.0\\res\\values-small-v4\\values-small-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

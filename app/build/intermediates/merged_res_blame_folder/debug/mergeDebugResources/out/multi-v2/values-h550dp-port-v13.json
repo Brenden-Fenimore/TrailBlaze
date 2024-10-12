@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.trailblaze.app-mergeDebugResources-46:/values-h550dp-port-v13/values-h550dp-port-v13.xml",
+            "outputFile": "com.example.trailblaze.app-mergeDebugResources-3:/values-h550dp-port-v13/values-h550dp-port-v13.xml",
             "map": [
                 {
-                    "source": "/Users/lipeduh/.gradle/caches/transforms-4/7712b59d7160699ff6def5f643327e48/transformed/material-1.10.0/res/values-h550dp-port-v13/values-h550dp-port-v13.xml",
+                    "source": "C:\\Users\\thebr\\.gradle\\caches\\transforms-4\\67aed5640c008e0c862e1a53a282ae88\\transformed\\material-1.10.0\\res\\values-h550dp-port-v13\\values-h550dp-port-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
