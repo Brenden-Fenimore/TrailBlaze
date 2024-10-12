@@ -1,13 +1,372 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
->
-    <TextView
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_horizontal"
-            android:text="@string/helloProfile"/>
-</FrameLayout>
+            android:orientation="vertical"
+            android:padding="16dp">
 
+        <!-- Title Bar with Account and Edit Profile Button -->
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp">
+
+        <!-- Account Title -->
+        <TextView
+                android:id="@+id/account_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/profile"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:paddingBottom="16dp" />
+
+            <!-- Edit Profile Button -->
+            <ImageButton
+                    android:id="@+id/edit_profile_button"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/edit_icon"
+                    android:contentDescription="@string/editIcon"/>
+
+        </RelativeLayout>
+
+        <!-- User Profile Section with Location and Difficulty -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="8dp">
+
+            <!-- Location Icon on the Left -->
+            <ImageButton
+                    android:id="@+id/icon_location"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/location"
+                    android:contentDescription="@string/locationIcon"
+                    android:layout_marginEnd="16dp" />
+
+            <!-- Profile Image in the Center -->
+            <ImageButton
+                    android:id="@+id/profile_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/account_circle"
+                    android:contentDescription="@string/profilePicture"
+                    android:layout_gravity="center" />
+
+            <!-- Difficulty Icon on the Right -->
+            <ImageButton
+                    android:id="@+id/icon_difficulty"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/difficulty"
+                    android:contentDescription="@string/difficultyIcon"
+                    android:layout_marginStart="16dp"/>
+
+        </LinearLayout>
+
+        <!-- Username, Badges, and Watcher -->
+        <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/username"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:paddingTop="8dp" />
+
+        <!-- Badges Layout -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="8dp">
+
+            <!-- Badge 1 -->
+            <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/badge"
+                    android:contentDescription="@string/userBadge1"
+                    android:layout_marginEnd="8dp"/>
+
+            <!-- Badge 2 -->
+            <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/badge"
+                    android:contentDescription="@string/userBadge2"
+                    android:layout_marginEnd="8dp"/>
+
+            <!-- Badge 3 -->
+            <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/badge"
+                    android:contentDescription="@string/userBadge3"/>
+
+        </LinearLayout>
+
+        <!-- Watcher Member -->
+        <TextView
+                android:id="@+id/watcher_member"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/watcherMember"
+                android:textSize="16sp"
+                android:textColor="@android:color/holo_blue_dark"
+                android:layout_gravity="center"
+                android:paddingTop="4dp" />
+
+        <!-- Friends Section -->
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/friends"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp" />
+
+        <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="horizontal">
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <!-- Placeholder for friend avatars -->
+            <ImageButton
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/userperson"
+                    android:contentDescription="@string/friendProfilePicture" />
+            <ImageButton
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/userperson"
+                    android:contentDescription="@string/friendProfilePicture" />
+            <ImageButton
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/userperson"
+                    android:contentDescription="@string/friendProfilePicture" />
+            <ImageButton
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/userperson"
+                    android:contentDescription="@string/friendProfilePicture" />
+            <ImageButton
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/userperson"
+                    android:contentDescription="@string/friendProfilePicture" />
+            <!-- Repeat as necessary for other friends -->
+        </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- Leaderboard Section -->
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/leaderboard"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp" />
+
+        <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="horizontal">
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <!-- Placeholder for leaderboard items -->
+            <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/question"
+                    android:contentDescription="@string/leaderboardPicture" />
+            <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/question"
+                    android:contentDescription="@string/leaderboardPicture" />
+            <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/question"
+                    android:contentDescription="@string/leaderboardPicture" />
+            <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/question"
+                    android:contentDescription="@string/leaderboardPicture" />
+            <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/question"
+                    android:contentDescription="@string/leaderboardPicture" />
+            <!-- Add more leaderboard items here -->
+        </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- Photos Section -->
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/userPhotos"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp" />
+
+        <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="horizontal">
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <!-- Placeholder for photos -->
+            <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/question"
+                    android:contentDescription="@string/userPhotoPictures" />
+            <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/question"
+                    android:contentDescription="@string/userPhotoPictures" />
+            <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/question"
+                    android:contentDescription="@string/userPhotoPictures" />
+            <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/question"
+                    android:contentDescription="@string/userPhotoPictures" />
+            <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/question"
+                    android:contentDescription="@string/userPhotoPictures" />
+            <!-- Add more photo placeholders -->
+        </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- Favorite Trails Section -->
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/userFavoriteTrails"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp" />
+
+        <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="horizontal">
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <!-- Placeholder for favorite trails -->
+            <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/question"
+                    android:contentDescription="@string/userFavoriteTrailsPictures" />
+
+            <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/question"
+                    android:contentDescription="@string/userFavoriteTrailsPictures" />
+            <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/question"
+                    android:contentDescription="@string/userFavoriteTrailsPictures" />
+            <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/question"
+                    android:contentDescription="@string/userFavoriteTrailsPictures" />
+            <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/question"
+                    android:contentDescription="@string/userFavoriteTrailsPictures" />
+            <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/question"
+                    android:contentDescription="@string/userFavoriteTrailsPictures" />
+            <!-- Add more favorite trail placeholders -->
+        </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- Spacer to add margin for navigation bar -->
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="75dp" />
+
+    </LinearLayout>
+</ScrollView>
