@@ -167,7 +167,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
     <Button
             android:text="@string/logout"
             android:layout_alignParentBottom="true"
