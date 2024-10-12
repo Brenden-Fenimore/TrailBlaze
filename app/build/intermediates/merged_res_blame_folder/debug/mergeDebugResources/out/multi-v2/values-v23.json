@@ -1,25 +1,25 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.trailblaze.app-mergeDebugResources-46:/values-v23/values-v23.xml",
+            "outputFile": "com.example.trailblaze.app-mergeDebugResources-79:/values-v23/values-v23.xml",
             "map": [
                 {
-                    "source": "/Users/lipeduh/.gradle/caches/transforms-4/f463d4f0ac56cef975573bc0d9ac4587/transformed/cardview-1.0.0/res/values-v23/values-v23.xml",
+                    "source": "/Users/lipeduh/.gradle/caches/transforms-4/67aed5640c008e0c862e1a53a282ae88/transformed/material-1.10.0/res/values-v23/values-v23.xml",
                     "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endLines": "4",
-                        "endColumns": "12",
-                        "endOffsets": "200"
+                        "startLines": "2,5,9,13,16,21,25,28,31,34,39,42,46",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,271,413,574,784,1104,1341,1548,1755,1958,2290,2492,2757",
+                        "endLines": "4,8,12,15,20,24,27,30,33,38,41,45,49",
+                        "endColumns": "10,10,10,10,10,10,10,10,10,10,10,10,10",
+                        "endOffsets": "266,408,569,779,1099,1336,1543,1750,1953,2285,2487,2752,3025"
                     },
                     "to": {
-                        "startLines": "50",
-                        "startColumns": "4",
-                        "startOffsets": "3232",
-                        "endLines": "52",
-                        "endColumns": "12",
-                        "endOffsets": "3377"
+                        "startLines": "59,62,66,70,73,78,82,85,88,91,96,99,103",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "3707,3923,4065,4226,4436,4756,4993,5200,5407,5610,5942,6144,6409",
+                        "endLines": "61,65,69,72,77,81,84,87,90,95,98,102,106",
+                        "endColumns": "10,10,10,10,10,10,10,10,10,10,10,10,10",
+                        "endOffsets": "3918,4060,4221,4431,4751,4988,5195,5402,5605,5937,6139,6404,6677"
                     }
                 },
                 {
@@ -42,26 +42,7 @@
                     }
                 },
                 {
-                    "source": "/Users/lipeduh/.gradle/caches/transforms-4/7712b59d7160699ff6def5f643327e48/transformed/material-1.10.0/res/values-v23/values-v23.xml",
-                    "from": {
-                        "startLines": "2,5,9,13,16,21,25,28,31,34,39,42,46",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,271,413,574,784,1104,1341,1548,1755,1958,2290,2492,2757",
-                        "endLines": "4,8,12,15,20,24,27,30,33,38,41,45,49",
-                        "endColumns": "10,10,10,10,10,10,10,10,10,10,10,10,10",
-                        "endOffsets": "266,408,569,779,1099,1336,1543,1750,1953,2285,2487,2752,3025"
-                    },
-                    "to": {
-                        "startLines": "59,62,66,70,73,78,82,85,88,91,96,99,103",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "3707,3923,4065,4226,4436,4756,4993,5200,5407,5610,5942,6144,6409",
-                        "endLines": "61,65,69,72,77,81,84,87,90,95,98,102,106",
-                        "endColumns": "10,10,10,10,10,10,10,10,10,10,10,10,10",
-                        "endOffsets": "3918,4060,4221,4431,4751,4988,5195,5402,5605,5937,6139,6404,6677"
-                    }
-                },
-                {
-                    "source": "/Users/lipeduh/.gradle/caches/transforms-4/fa6ab052ffad4f8cd177f4e7b1e8e0ad/transformed/appcompat-1.6.1/res/values-v23/values-v23.xml",
+                    "source": "/Users/lipeduh/.gradle/caches/transforms-4/c55065fa3f17c5fb64083c1813194854/transformed/appcompat-1.6.1/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,20,34,35,36,39,43,44,45,46",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -69,6 +50,25 @@
                         "endLines": "2,3,4,5,19,33,34,35,38,42,43,44,45,49",
                         "endColumns": "134,134,74,86,12,12,118,126,12,12,114,106,112,12",
                         "endOffsets": "185,320,395,482,1220,1970,2089,2216,2438,2662,2777,2884,2997,3227"
+                    }
+                },
+                {
+                    "source": "/Users/lipeduh/.gradle/caches/transforms-4/bd176af9be31367db7dccc35b4a04f78/transformed/cardview-1.0.0/res/values-v23/values-v23.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "4",
+                        "endColumns": "12",
+                        "endOffsets": "200"
+                    },
+                    "to": {
+                        "startLines": "50",
+                        "startColumns": "4",
+                        "startOffsets": "3232",
+                        "endLines": "52",
+                        "endColumns": "12",
+                        "endOffsets": "3377"
                     }
                 }
             ]

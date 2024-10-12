@@ -4,25 +4,105 @@ package com.example.trailblaze.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
 import com.example.trailblaze.R;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import java.lang.NullPointerException;
 import java.lang.Override;
+import java.lang.String;
 
 public final class FragmentHomeBinding implements ViewBinding {
   @NonNull
-  private final FrameLayout rootView;
+  private final RelativeLayout rootView;
 
-  private FragmentHomeBinding(@NonNull FrameLayout rootView) {
+  @NonNull
+  public final HorizontalScrollView browsebydifficultyscroll;
+
+  @NonNull
+  public final TextView browsedifficulty;
+
+  @NonNull
+  public final LinearLayout browsedifficultylayout;
+
+  @NonNull
+  public final ImageButton floatingActionButton;
+
+  @NonNull
+  public final ImageButton hamburger;
+
+  @NonNull
+  public final TextView hikewithfriends;
+
+  @NonNull
+  public final TextView homepagegreeting;
+
+  @NonNull
+  public final TextView homepageusername;
+
+  @NonNull
+  public final LinearLayout invitefriendslayout;
+
+  @NonNull
+  public final HorizontalScrollView nearbytrailscroll;
+
+  @NonNull
+  public final LinearLayout nearbytrailslayout;
+
+  @NonNull
+  public final TextInputEditText searchbar;
+
+  @NonNull
+  public final LinearLayout searchbarlayout;
+
+  @NonNull
+  public final TextInputLayout searchbartextfield;
+
+  @NonNull
+  public final TextView toptrails;
+
+  @NonNull
+  public final LinearLayout usernamelayout;
+
+  private FragmentHomeBinding(@NonNull RelativeLayout rootView,
+      @NonNull HorizontalScrollView browsebydifficultyscroll, @NonNull TextView browsedifficulty,
+      @NonNull LinearLayout browsedifficultylayout, @NonNull ImageButton floatingActionButton,
+      @NonNull ImageButton hamburger, @NonNull TextView hikewithfriends,
+      @NonNull TextView homepagegreeting, @NonNull TextView homepageusername,
+      @NonNull LinearLayout invitefriendslayout, @NonNull HorizontalScrollView nearbytrailscroll,
+      @NonNull LinearLayout nearbytrailslayout, @NonNull TextInputEditText searchbar,
+      @NonNull LinearLayout searchbarlayout, @NonNull TextInputLayout searchbartextfield,
+      @NonNull TextView toptrails, @NonNull LinearLayout usernamelayout) {
     this.rootView = rootView;
+    this.browsebydifficultyscroll = browsebydifficultyscroll;
+    this.browsedifficulty = browsedifficulty;
+    this.browsedifficultylayout = browsedifficultylayout;
+    this.floatingActionButton = floatingActionButton;
+    this.hamburger = hamburger;
+    this.hikewithfriends = hikewithfriends;
+    this.homepagegreeting = homepagegreeting;
+    this.homepageusername = homepageusername;
+    this.invitefriendslayout = invitefriendslayout;
+    this.nearbytrailscroll = nearbytrailscroll;
+    this.nearbytrailslayout = nearbytrailslayout;
+    this.searchbar = searchbar;
+    this.searchbarlayout = searchbarlayout;
+    this.searchbartextfield = searchbartextfield;
+    this.toptrails = toptrails;
+    this.usernamelayout = usernamelayout;
   }
 
   @Override
   @NonNull
-  public FrameLayout getRoot() {
+  public RelativeLayout getRoot() {
     return rootView;
   }
 
@@ -43,10 +123,113 @@ public final class FragmentHomeBinding implements ViewBinding {
 
   @NonNull
   public static FragmentHomeBinding bind(@NonNull View rootView) {
-    if (rootView == null) {
-      throw new NullPointerException("rootView");
-    }
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.browsebydifficultyscroll;
+      HorizontalScrollView browsebydifficultyscroll = ViewBindings.findChildViewById(rootView, id);
+      if (browsebydifficultyscroll == null) {
+        break missingId;
+      }
 
-    return new FragmentHomeBinding((FrameLayout) rootView);
+      id = R.id.browsedifficulty;
+      TextView browsedifficulty = ViewBindings.findChildViewById(rootView, id);
+      if (browsedifficulty == null) {
+        break missingId;
+      }
+
+      id = R.id.browsedifficultylayout;
+      LinearLayout browsedifficultylayout = ViewBindings.findChildViewById(rootView, id);
+      if (browsedifficultylayout == null) {
+        break missingId;
+      }
+
+      id = R.id.floatingActionButton;
+      ImageButton floatingActionButton = ViewBindings.findChildViewById(rootView, id);
+      if (floatingActionButton == null) {
+        break missingId;
+      }
+
+      id = R.id.hamburger;
+      ImageButton hamburger = ViewBindings.findChildViewById(rootView, id);
+      if (hamburger == null) {
+        break missingId;
+      }
+
+      id = R.id.hikewithfriends;
+      TextView hikewithfriends = ViewBindings.findChildViewById(rootView, id);
+      if (hikewithfriends == null) {
+        break missingId;
+      }
+
+      id = R.id.homepagegreeting;
+      TextView homepagegreeting = ViewBindings.findChildViewById(rootView, id);
+      if (homepagegreeting == null) {
+        break missingId;
+      }
+
+      id = R.id.homepageusername;
+      TextView homepageusername = ViewBindings.findChildViewById(rootView, id);
+      if (homepageusername == null) {
+        break missingId;
+      }
+
+      id = R.id.invitefriendslayout;
+      LinearLayout invitefriendslayout = ViewBindings.findChildViewById(rootView, id);
+      if (invitefriendslayout == null) {
+        break missingId;
+      }
+
+      id = R.id.nearbytrailscroll;
+      HorizontalScrollView nearbytrailscroll = ViewBindings.findChildViewById(rootView, id);
+      if (nearbytrailscroll == null) {
+        break missingId;
+      }
+
+      id = R.id.nearbytrailslayout;
+      LinearLayout nearbytrailslayout = ViewBindings.findChildViewById(rootView, id);
+      if (nearbytrailslayout == null) {
+        break missingId;
+      }
+
+      id = R.id.searchbar;
+      TextInputEditText searchbar = ViewBindings.findChildViewById(rootView, id);
+      if (searchbar == null) {
+        break missingId;
+      }
+
+      id = R.id.searchbarlayout;
+      LinearLayout searchbarlayout = ViewBindings.findChildViewById(rootView, id);
+      if (searchbarlayout == null) {
+        break missingId;
+      }
+
+      id = R.id.searchbartextfield;
+      TextInputLayout searchbartextfield = ViewBindings.findChildViewById(rootView, id);
+      if (searchbartextfield == null) {
+        break missingId;
+      }
+
+      id = R.id.toptrails;
+      TextView toptrails = ViewBindings.findChildViewById(rootView, id);
+      if (toptrails == null) {
+        break missingId;
+      }
+
+      id = R.id.usernamelayout;
+      LinearLayout usernamelayout = ViewBindings.findChildViewById(rootView, id);
+      if (usernamelayout == null) {
+        break missingId;
+      }
+
+      return new FragmentHomeBinding((RelativeLayout) rootView, browsebydifficultyscroll,
+          browsedifficulty, browsedifficultylayout, floatingActionButton, hamburger,
+          hikewithfriends, homepagegreeting, homepageusername, invitefriendslayout,
+          nearbytrailscroll, nearbytrailslayout, searchbar, searchbarlayout, searchbartextfield,
+          toptrails, usernamelayout);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));
   }
 }
