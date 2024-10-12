@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trailblaze.MainActivity
 import com.example.trailblaze.R
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
 
@@ -18,8 +19,13 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loginBtn : Button
     private lateinit var forgotPasswordTextView : TextView
 
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //initialize FirebaseAuth
+        auth = FirebaseAuth.getInstance()
 
         setContentView(R.layout.activity_login)
 
@@ -45,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-//set click listener for terms
+        //set click listener for terms
         termsAndCondtionstxt.setOnClickListener {
             //start terms and conditions activity
             val intent = Intent(this, TermsActivity::class.java)
@@ -54,32 +60,37 @@ class LoginActivity : AppCompatActivity() {
 
         //set click listener for login button
         loginBtn.setOnClickListener {
-            val emailInput = emailInput.text.toString()
+            val email = emailInput.text.toString()
             val password = passwordInput.text.toString()
 
             //login logic here
-            if (isValidEmail(emailInput) && password.isNotEmpty()) {
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            // Successful login
+                            val sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
+                            val editor = sharedPreferences.edit()
+                            editor.putBoolean("isLoggedIn", true)
+                            editor.apply()
 
-                //successful login
-                val sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
-                val editor = sharedPreferences.edit()
-                editor.putBoolean("isLoggedIn", true)
-                editor.apply()
+                            Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
 
-                Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
+                            //navigate to MainActivity
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            //handle login failure
+                            Toast.makeText(this, "Login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
 
-                //navigate to MainActivity
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-
+                            //redirect to the RegisterActivity if the user does not exist
+                            val intent = Intent(this, RegisterActivity::class.java)
+                            startActivity(intent)
+                        }
+                    }
             } else {
-                // Show error message
-                if (!isValidEmail(emailInput)) {
-                    Toast.makeText(this, "Please enter a valid email address.", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this, "Please enter your password.", Toast.LENGTH_SHORT).show()
-                }
+                Toast.makeText(this, "Please enter email and password.", Toast.LENGTH_SHORT).show()
             }
         }
     }

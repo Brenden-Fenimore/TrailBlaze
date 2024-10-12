@@ -24,7 +24,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="forgotpassword1">Enter the Email address accociated with your account.</string>
+    <string name="forgotpassword1">Enter the Email address associated with your account.</string>
     <string name="forgotpassword2">We will email you a link to reset your password</string>
     <string name="aspects">What aspect/s of hiking do you like to experience most?</string>
     <string name="location">TrailBlaze utilizes your location to provide personalized suggestions of nearby trails,
@@ -49,7 +49,7 @@
     <string name="privacy_policy3">We only retain collected information for as long as necessary to provide you with
         your requested service.">
     </string>
-<string name="titleForgotPassword">Forgot Password</string>
+    <string name="titleForgotPassword">Forgot Password</string>
     <string name="titleEmail">Email Address</string>
     <string name="titleResetPw">Reset Password</string>
     <string name="titleLogin">Login</string>
@@ -60,7 +60,7 @@
     <string name="rememberPassword">Remember Password</string>
     <string name="personalize">Lets Personalize your account</string>
     <string name="userName">Username</string>
-    <string name="dob">Date of Birth mm/dd/yy</string>
+    <string name="dob">Date of Birth mm/dd/yyyy</string>
     <string name="password2">Confirm Password</string>
     <string name="agree">You agree to our</string>
     <string name="createAccount">Create Account</string>
@@ -72,6 +72,25 @@
     <string name="titleUphill">Uphill</string>
     <string name="pace">Pace</string>
     <string name="titleContinue">Continue</string>
+    <string name="friendsProfile1">Friends in Common</string>
+    <string name="friendsAdd">Add as a trusted Contact/Watcher</string>
+    <string name="titleHelp">Help and Support</string>
+    <string name="contact">Contact Us</string>
+    <string name="troubleshoot">Troubleshooting Guide</string>
+    <string name="bug">Report a Bug</string>
+    <string name="emergency">I am in an emergency! (Dial 911)</string>
+    <string name="contactTitle">If you are experiencing any issues, please let us know. We will try to solve them as
+        soon as possible.
+    </string>
+    <string name="contactTitle2">Title</string>
+    <string name="contactTitle3">Explain the problem</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="inputText">Input Text</string>
+    <string name="description">Enter a description...</string>
+    <string name="contact4">You can also contact us at</string>
+    <string name="supportEmail">customersupport@trailblaze.com</string>
+    <string name="aboutContent">TrailBlaze aims to be the go-to application for all hikers, climbers, and outdoorsy types by offering a fantastic way to view trail options whether traveling or at home. &#10;With customization options, the latest updates on trails, and an expansive community, it is sure to be a standout in the space.</string>
 
 
 
@@ -108,6 +127,9 @@
     <string name="title_activity_login">Login</string>
     <string name="title_activity_terms_and_conditions">TermsAndConditions</string>
     <string name="title_activity_terms">TermsActivity</string>
+    <string name="title_activity_help_frag">HelpFrag</string>
+    <string name="friend_s_profile">Friend\'s Profile</string>
+    <string name="backarrow">backArrow</string>
 
 
 </resources>

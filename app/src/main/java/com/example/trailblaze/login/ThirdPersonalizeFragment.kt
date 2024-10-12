@@ -20,7 +20,6 @@ class ThirdPersonalizeFragment : Fragment() {
                 //navigate to ThirdFragment
                 (activity as? PersonalizeActivity)?.loadFragment(FourthPersonalizeFragment())
             }
-
             return view
         }
     }
