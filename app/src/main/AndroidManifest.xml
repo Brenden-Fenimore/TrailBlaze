@@ -13,51 +13,7 @@
             android:theme="@style/Theme.TrailBlaze"
             tools:targetApi="31">
         <activity
-                android:name=".settings.AboutActivity"
-                android:exported="false"/>
-        <activity
-                android:name=".settings.PrivacyAndSecurityActivity"
-                android:exported="false"/>
-        <activity
-                android:name=".settings.AppearanceActivity"
-                android:exported="false"/>
-        <activity
-                android:name=".settings.NotificationsActivity"
-                android:exported="false"
-                android:theme="@style/Theme.TrailBlaze"/>
-        <activity
-                android:name=".settings.ContactUsActivity"
-                android:exported="false"
-                android:theme="@style/Theme.TrailBlaze"/>
-        <activity
-                android:name=".settings.SupportScreenActivity"
-                android:exported="false"
-                android:theme="@style/Theme.TrailBlaze"/>
-        <activity
-                android:name=".ui.profile.FriendsProfile"
-                android:exported="false"/>
-        <activity
-                android:name=".login.TermsActivity"
-                android:exported="false"
-                android:label="@string/title_activity_terms"
-                android:theme="@style/Theme.TrailBlaze"/>
-        <activity
-                android:name=".login.PersonalizeActivity"
-                android:exported="false"
-                android:theme="@style/Theme.TrailBlaze"/>
-        <activity
-                android:name=".login.ForgotPasswordActivity"
-                android:exported="false"
-                android:theme="@style/Theme.TrailBlaze"/>
-        <activity
-                android:name=".login.RegisterActivity"
-                android:exported="false"/>
-        <activity
-                android:name=".login.LoginActivity"
-                android:exported="true"
-                android:theme="@style/Theme.TrailBlaze"/>
-        <activity
-                android:name=".settings.SettingsScreenActivity"
+                android:name=".ui.MenuActivity"
                 android:exported="false"
                 android:theme="@style/Theme.TrailBlaze"/>
         <activity
