@@ -1,0 +1,106 @@
+[
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/activity_register.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/activity_register.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/activity_privacy_and_security.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/activity_privacy_and_security.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/activity_menu.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/activity_menu.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/activity_forgot_password.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/activity_forgot_password.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/activity_about.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/activity_about.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/activity_appearance.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/activity_appearance.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/fragment_edit_profile.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/fragment_edit_profile.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/fragment_first_personalize.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/fragment_first_personalize.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/activity_contact_us.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/activity_contact_us.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/fragment_favorites.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/fragment_favorites.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/activity_settings_screen.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/activity_settings_screen.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/fragment_profile.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/activity_main.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/fragment_second_personalize.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/fragment_second_personalize.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/fragment_fourth_personalize.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/fragment_fourth_personalize.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/activity_terms.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/activity_terms.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/activity_personalize.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/activity_personalize.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/fragment_third_personalize.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/fragment_third_personalize.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/activity_support_screen.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/activity_support_screen.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/content_menu.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/content_menu.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/content_personalize.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/content_personalize.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/activity_login.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/activity_notifications.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/activity_notifications.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/fragment_map.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/fragment_map.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/fragment_home.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-4:/layout/activity_friends_profile.xml",
+        "source": "com.example.trailblaze.app-main-7:/layout/activity_friends_profile.xml"
+    }
+]

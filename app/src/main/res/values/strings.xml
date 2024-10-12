@@ -11,19 +11,20 @@
     <string name="helloMap">Hello MAP Fragment</string>
     <string name="helloFavorites">Hello FAVORITES Fragment</string>
     <string name="helloProfile">Hello PROFILE Fragment</string>
-    <string name="title_activity_settings">SettingsActivity</string>
-    <string name="activityTitle">Settings</string>
-    <string name="accountTitle">Account</string>
-    <string name="notificationTitle">Notifications</string>
-    <string name="appearanceTitle">Appearance</string>
-    <string name="helpAndSupportTitle">Help and Support</string>
-    <string name="aboutTitle">About</string>
-    <string name="privacyTitle">Privacy and Security</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="map_image">Map</string>
+    <string name="profile">Profile</string>
+    <string name ="contact_us">Contact Us</string>
+    <string name="favorites">Favorites</string>
+    <string name="help_center">Help Center</string>
+    <string name="username">Username</string>
+    <string name="logout">Logout</string>
+    <string name="btn_back">Goes back to the previous page</string>
+    <string name="settings">Settings</string>
     <string name="forgotpassword1">Enter the Email address associated with your account.</string>
     <string name="forgotpassword2">We will email you a link to reset your password</string>
     <string name="aspects">What aspect/s of hiking do you like to experience most?</string>
@@ -49,7 +50,7 @@
     <string name="privacy_policy3">We only retain collected information for as long as necessary to provide you with
         your requested service.">
     </string>
-    <string name="titleForgotPassword">Forgot Password</string>
+<string name="titleForgotPassword">Forgot Password</string>
     <string name="titleEmail">Email Address</string>
     <string name="titleResetPw">Reset Password</string>
     <string name="titleLogin">Login</string>
@@ -60,7 +61,7 @@
     <string name="rememberPassword">Remember Password</string>
     <string name="personalize">Lets Personalize your account</string>
     <string name="userName">Username</string>
-    <string name="dob">Date of Birth mm/dd/yyyy</string>
+    <string name="dob">Date of Birth mm/dd/yy</string>
     <string name="password2">Confirm Password</string>
     <string name="agree">You agree to our</string>
     <string name="createAccount">Create Account</string>
@@ -72,25 +73,6 @@
     <string name="titleUphill">Uphill</string>
     <string name="pace">Pace</string>
     <string name="titleContinue">Continue</string>
-    <string name="friendsProfile1">Friends in Common</string>
-    <string name="friendsAdd">Add as a trusted Contact/Watcher</string>
-    <string name="titleHelp">Help and Support</string>
-    <string name="contact">Contact Us</string>
-    <string name="troubleshoot">Troubleshooting Guide</string>
-    <string name="bug">Report a Bug</string>
-    <string name="emergency">I am in an emergency! (Dial 911)</string>
-    <string name="contactTitle">If you are experiencing any issues, please let us know. We will try to solve them as
-        soon as possible.
-    </string>
-    <string name="contactTitle2">Title</string>
-    <string name="contactTitle3">Explain the problem</string>
-    <string name="submit">Submit</string>
-    <string name="cancel">Cancel</string>
-    <string name="inputText">Input Text</string>
-    <string name="description">Enter a description...</string>
-    <string name="contact4">You can also contact us at</string>
-    <string name="supportEmail">customersupport@trailblaze.com</string>
-    <string name="aboutContent">TrailBlaze aims to be the go-to application for all hikers, climbers, and outdoorsy types by offering a fantastic way to view trail options whether traveling or at home. &#10;With customization options, the latest updates on trails, and an expansive community, it is sure to be a standout in the space.</string>
 
 
 
@@ -127,9 +109,59 @@
     <string name="title_activity_login">Login</string>
     <string name="title_activity_terms_and_conditions">TermsAndConditions</string>
     <string name="title_activity_terms">TermsActivity</string>
+    //User variables
+    <string name="homepage_welcome_user">Good Afternoon,</string>
+    <string name="homepage_searchbar_hint">Search</string>
+    <string name="homepage_nearby_trails">Top trails nearby:</string>
+    <string name="homepage_browse_by_difficulty">Browse by difficulty:</string>
+    <string name="homepage_friends">Hike with friends!</string>
+
+    <string name="locationIcon">Location Icon</string>
+    <string name="profilePicture">Profile Picture</string>
+    <string name="difficultyIcon">Difficulty Icon</string>
+    <string name="watcherMember">Watcher Member</string>
+    <string name="friends">Friends</string>
+    <string name="friendProfilePicture">Friend Profile Picture</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="leaderboardPicture">Leaderboard Picture</string>
+    <string name="userPhotos">Photos</string>
+    <string name="userPhotoPictures">User Photo Picture</string>
+    <string name="userFavoriteTrails">Favorite Trails</string>
+    <string name="userFavoriteTrailsPictures">User Favorite Trail Picture</string>
+    <string name="userBadge1">User Badge 1</string>
+    <string name="userBadge2">User Badge 2</string>
+    <string name="userBadge3">User Badge 3</string>
+    <string name="editIcon">Edit</string>
+    <string name="editProfile">Edit Profile</string>
+    <string name="backButton">Back Button</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="activityTitle">Settings</string>
+    <string name="accountTitle">Account</string>
+    <string name="notificationTitle">Notifications</string>
+    <string name="appearanceTitle">Appearance</string>
+    <string name="helpAndSupportTitle">Help and Support</string>
+    <string name="aboutTitle">About</string>
+    <string name="privacyTitle">Privacy and Security</string>
+    <string name="friendsProfile1">Friends in Common</string>
+    <string name="friendsAdd">Add as a trusted Contact/Watcher</string>
+    <string name="titleHelp">Help and Support</string>
+    <string name="contact">Contact Us</string>
+    <string name="troubleshoot">Troubleshooting Guide</string>
+    <string name="bug">Report a Bug</string>
+    <string name="emergency">I am in an emergency! (Dial 911)</string>
+    <string name="contactTitle">If you are experiencing any issues, please let us know. We will try to solve them as
+            soon as possible.
+    </string>
+    <string name="contactTitle2">Title</string>
+    <string name="contactTitle3">Explain the problem</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="inputText">Input Text</string>
+    <string name="description">Enter a description...</string>
+    <string name="contact4">You can also contact us at</string>
+    <string name="supportEmail">customersupport@trailblaze.com</string>
+    <string name="aboutContent">TrailBlaze aims to be the go-to application for all hikers, climbers, and outdoorsy types by offering a fantastic way to view trail options whether traveling or at home. &#10;With customization options, the latest updates on trails, and an expansive community, it is sure to be a standout in the space.</string>
     <string name="title_activity_help_frag">HelpFrag</string>
     <string name="friend_s_profile">Friend\'s Profile</string>
     <string name="backarrow">backArrow</string>
-
-
 </resources>
