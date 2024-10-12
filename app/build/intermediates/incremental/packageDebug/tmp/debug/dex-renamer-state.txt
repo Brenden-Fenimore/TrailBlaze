@@ -1,4 +1,4 @@
-#Sat Oct 12 15:14:57 PDT 2024
+#Sat Oct 12 15:26:01 PDT 2024
 base.0=C\:\\Full Sail\\Project and Portfolio 2\\Trail Blaze\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=C\:\\Full Sail\\Project and Portfolio 2\\Trail Blaze\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.10=C\:\\Full Sail\\Project and Portfolio 2\\Trail Blaze\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
