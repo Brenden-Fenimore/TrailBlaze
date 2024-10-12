@@ -24,7 +24,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="forgotpassword1">Enter the Email address accociated with your account.</string>
+    <string name="forgotpassword1">Enter the Email address associated with your account.</string>
     <string name="forgotpassword2">We will email you a link to reset your password</string>
     <string name="aspects">What aspect/s of hiking do you like to experience most?</string>
     <string name="location">TrailBlaze utilizes your location to provide personalized suggestions of nearby trails,
@@ -108,6 +108,13 @@
     <string name="title_activity_login">Login</string>
     <string name="title_activity_terms_and_conditions">TermsAndConditions</string>
     <string name="title_activity_terms">TermsActivity</string>
+    //User variables
+    <string name="username">Username</string>
+    <string name="homepage_welcome_user">Good Afternoon,</string>
+    <string name="homepage_searchbar_hint">Search</string>
+    <string name="homepage_nearby_trails">Top trails nearby:</string>
+    <string name="homepage_browse_by_difficulty">Browse by difficulty:</string>
+    <string name="homepage_friends">Hike with friends!</string>
 
 
 </resources>
