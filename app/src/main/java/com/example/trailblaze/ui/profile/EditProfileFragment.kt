@@ -22,7 +22,7 @@ class EditProfileFragment : Fragment() {
 
         //set the listener for the back button
         binding.backButton.setOnClickListener {
-            findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
+            findNavController().navigateUp()
         }
         return binding.root
     }

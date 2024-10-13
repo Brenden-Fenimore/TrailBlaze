@@ -27,7 +27,8 @@
                     android:background="@android:color/transparent"
                     android:layout_alignParentEnd="true"
                     app:srcCompat="@drawable/edit2"
-                    android:id="@+id/editbutton"/>
+                    android:id="@+id/editbutton"
+                    android:contentDescription="@string/editIcon"/>
         </RelativeLayout>
 
         <!-- Account Title -->

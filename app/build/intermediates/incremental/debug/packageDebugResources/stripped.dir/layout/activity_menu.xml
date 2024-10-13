@@ -77,7 +77,7 @@
                 <TextView
                         android:text="@string/title_home"
                         android:id="@+id/navigation_home"
-                        android:layout_width="190dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -100,7 +100,7 @@
                 <TextView
                         android:text="@string/exploreTrails"
                         android:id="@+id/navigation_map"
-                        android:layout_width="190dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"

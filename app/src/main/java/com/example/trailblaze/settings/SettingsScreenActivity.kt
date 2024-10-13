@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import com.example.trailblaze.MainActivity
 import com.example.trailblaze.R
 import com.example.trailblaze.login.LoginActivity
 import com.example.trailblaze.ui.profile.EditProfileFragment
@@ -83,9 +84,11 @@ class SettingsScreenActivity : AppCompatActivity() {
         }
 
         toAccount.setOnClickListener {
-            val intent = Intent(this, EditProfileFragment::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("fragment_to_load", "EditProfileFragment")
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
+            finish()
         }
         }
     }
