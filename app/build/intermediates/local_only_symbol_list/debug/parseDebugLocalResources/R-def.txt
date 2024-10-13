@@ -197,11 +197,14 @@ id nearbytrailscroll
 id nearbytrailslayout
 id notification
 id pace
+id parkDescription
+id parkName
 id privacyAndSecurity
 id profileImage
 id profile_image
 id pw
 id pw2
+id recyclerView
 id resetPassword
 id searchbar
 id searchbarlayout
@@ -261,6 +264,7 @@ layout fragment_map
 layout fragment_profile
 layout fragment_second_personalize
 layout fragment_third_personalize
+layout item_park
 menu bottom_nav_menu
 mipmap ic_launcher
 mipmap ic_launcher_round

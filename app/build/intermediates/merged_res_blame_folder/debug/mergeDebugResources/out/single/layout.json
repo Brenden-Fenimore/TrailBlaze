@@ -1,5 +1,9 @@
 [
     {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-80:/layout/item_park.xml",
+        "source": "com.example.trailblaze.app-main-83:/layout/item_park.xml"
+    },
+    {
         "merged": "com.example.trailblaze.app-mergeDebugResources-80:/layout/activity_menu.xml",
         "source": "com.example.trailblaze.app-main-83:/layout/activity_menu.xml"
     },

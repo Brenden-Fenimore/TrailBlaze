@@ -1,6 +1,8 @@
 package com.example.trailblaze
 
-import NPSResponse
+import com.example.trailblaze.ParksAdapter
+import com.example.trailblaze.RetrofitInstance
+import com.example.trailblaze.NPSResponse
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast

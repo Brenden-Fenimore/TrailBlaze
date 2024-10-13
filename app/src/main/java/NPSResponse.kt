@@ -1,3 +1,5 @@
+package com.example.trailblaze
+
 data class NPSResponse(
     val total: String,
     val data: List<Park>

@@ -115,6 +115,15 @@
                             android:fontFamily="@font/amethysta"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:textColor="#000000"/>
+
+                    <!-- RecyclerView for Nearby Trails -->
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/toptrails"
+                            android:scrollbars="vertical" />
+
                 </LinearLayout>
                 <!--        Top Trails Nearby Images-->
                 <HorizontalScrollView

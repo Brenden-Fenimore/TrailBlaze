@@ -8,544 +8,546 @@
 8        android:minSdkVersion="24"
 9        android:targetSdkVersion="34" />
 10
-11    <uses-permission android:name="android.permission.INTERNET" />
-11-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:25:5-67
-11-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:25:22-64
-12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-12-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:26:5-79
-12-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:26:22-76
-13    <uses-permission android:name="android.permission.WAKE_LOCK" />
-13-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:24:5-68
-13-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:24:22-65
-14    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
-14-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:25:5-79
-14-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:25:22-76
-15    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION" />
-15-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:26:5-88
-15-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:26:22-85
-16    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_ID" />
-16-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:27:5-82
-16-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:27:22-79
-17    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
-17-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:26:5-110
-17-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:26:22-107
-18    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-18-->[com.google.android.recaptcha:recaptcha:18.4.0] /Users/lipeduh/.gradle/caches/transforms-4/bf6c315dcd24da2e72a3c9da06cb78e1/transformed/recaptcha-18.4.0/AndroidManifest.xml:9:5-98
-18-->[com.google.android.recaptcha:recaptcha:18.4.0] /Users/lipeduh/.gradle/caches/transforms-4/bf6c315dcd24da2e72a3c9da06cb78e1/transformed/recaptcha-18.4.0/AndroidManifest.xml:9:22-95
-19
-20    <permission
-20-->[androidx.core:core:1.13.0] /Users/lipeduh/.gradle/caches/transforms-4/ba180f2a8120a6c1ec2189d75f0ba086/transformed/core-1.13.0/AndroidManifest.xml:22:5-24:47
-21        android:name="com.example.trailblaze.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-21-->[androidx.core:core:1.13.0] /Users/lipeduh/.gradle/caches/transforms-4/ba180f2a8120a6c1ec2189d75f0ba086/transformed/core-1.13.0/AndroidManifest.xml:23:9-81
-22        android:protectionLevel="signature" />
-22-->[androidx.core:core:1.13.0] /Users/lipeduh/.gradle/caches/transforms-4/ba180f2a8120a6c1ec2189d75f0ba086/transformed/core-1.13.0/AndroidManifest.xml:24:9-44
-23
-24    <uses-permission android:name="com.example.trailblaze.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-24-->[androidx.core:core:1.13.0] /Users/lipeduh/.gradle/caches/transforms-4/ba180f2a8120a6c1ec2189d75f0ba086/transformed/core-1.13.0/AndroidManifest.xml:26:5-97
-24-->[androidx.core:core:1.13.0] /Users/lipeduh/.gradle/caches/transforms-4/ba180f2a8120a6c1ec2189d75f0ba086/transformed/core-1.13.0/AndroidManifest.xml:26:22-94
-25
-26    <application
-26-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:5:5-76:19
-27        android:allowBackup="true"
-27-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:6:13-39
-28        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-28-->[androidx.core:core:1.13.0] /Users/lipeduh/.gradle/caches/transforms-4/ba180f2a8120a6c1ec2189d75f0ba086/transformed/core-1.13.0/AndroidManifest.xml:28:18-86
-29        android:dataExtractionRules="@xml/data_extraction_rules"
-29-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:7:13-69
-30        android:debuggable="true"
-31        android:extractNativeLibs="false"
-32        android:fullBackupContent="@xml/backup_rules"
-32-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:8:13-58
-33        android:icon="@mipmap/ic_launcher"
-33-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:9:13-47
-34        android:label="@string/app_name"
-34-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:10:13-45
-35        android:roundIcon="@mipmap/ic_launcher_round"
-35-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:11:13-58
-36        android:supportsRtl="true"
-36-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:12:13-39
-37        android:theme="@style/Theme.TrailBlaze" >
-37-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:13:13-52
-38        <activity
-38-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:15:9-18:63
-39            android:name="com.example.trailblaze.ui.MenuActivity"
-39-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:16:17-48
-40            android:exported="false"
-40-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:17:17-41
-41            android:theme="@style/Base.Theme.TrailBlaze" />
-41-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:18:17-61
-42        <activity
-42-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:19:9-21:43
-43            android:name="com.example.trailblaze.settings.AboutActivity"
-43-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:20:17-55
-44            android:exported="false" />
-44-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:21:17-41
-45        <activity
-45-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:22:9-24:43
-46            android:name="com.example.trailblaze.settings.PrivacyAndSecurityActivity"
-46-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:23:17-68
-47            android:exported="false" />
-47-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:24:17-41
-48        <activity
-48-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:25:9-27:43
-49            android:name="com.example.trailblaze.settings.AppearanceActivity"
-49-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:26:17-60
-50            android:exported="false" />
-50-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:27:17-41
-51        <activity
-51-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:28:9-31:58
-52            android:name="com.example.trailblaze.settings.NotificationsActivity"
-52-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:29:17-63
-53            android:exported="false"
-53-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:30:17-41
-54            android:theme="@style/Theme.TrailBlaze" />
-54-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:31:17-56
-55        <activity
-55-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:32:9-35:58
-56            android:name="com.example.trailblaze.settings.ContactUsActivity"
-56-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:33:17-59
-57            android:exported="false"
-57-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:34:17-41
-58            android:theme="@style/Theme.TrailBlaze" />
-58-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:35:17-56
-59        <activity
-59-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:36:9-39:58
-60            android:name="com.example.trailblaze.settings.SupportScreenActivity"
-60-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:37:17-63
-61            android:exported="false"
-61-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:38:17-41
-62            android:theme="@style/Theme.TrailBlaze" />
-62-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:39:17-56
-63        <activity
-63-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:40:9-42:43
-64            android:name="com.example.trailblaze.ui.profile.FriendsProfile"
-64-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:41:17-58
-65            android:exported="false" />
-65-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:42:17-41
-66        <activity
-66-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:43:9-47:58
-67            android:name="com.example.trailblaze.login.TermsActivity"
-67-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:44:17-52
-68            android:exported="false"
-68-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:45:17-41
-69            android:label="@string/title_activity_terms"
-69-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:46:17-61
-70            android:theme="@style/Theme.TrailBlaze" />
-70-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:47:17-56
-71        <activity
-71-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:48:9-51:58
-72            android:name="com.example.trailblaze.login.PersonalizeActivity"
-72-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:49:17-58
-73            android:exported="false"
-73-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:50:17-41
-74            android:theme="@style/Theme.TrailBlaze" />
-74-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:51:17-56
-75        <activity
-75-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:52:9-55:58
-76            android:name="com.example.trailblaze.login.ForgotPasswordActivity"
-76-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:53:17-61
-77            android:exported="false"
-77-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:54:17-41
-78            android:theme="@style/Theme.TrailBlaze" />
-78-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:55:17-56
-79        <activity
-79-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:56:9-58:43
-80            android:name="com.example.trailblaze.login.RegisterActivity"
-80-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:57:17-55
-81            android:exported="false" />
-81-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:58:17-41
-82        <activity
-82-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:59:9-62:58
-83            android:name="com.example.trailblaze.login.LoginActivity"
-83-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:60:17-52
-84            android:exported="true"
-84-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:61:17-40
-85            android:theme="@style/Theme.TrailBlaze" />
-85-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:62:17-56
-86        <activity
-86-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:63:9-66:58
-87            android:name="com.example.trailblaze.settings.SettingsScreenActivity"
-87-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:64:17-64
-88            android:exported="false"
-88-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:65:17-41
-89            android:theme="@style/Theme.TrailBlaze" />
-89-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:66:17-56
-90        <activity
-90-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:67:9-75:20
-91            android:name="com.example.trailblaze.MainActivity"
-91-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:68:17-45
-92            android:exported="true" >
-92-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:69:17-40
-93            <intent-filter>
-93-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:70:13-74:29
-94                <action android:name="android.intent.action.MAIN" />
-94-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:71:17-68
-94-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:71:25-66
-95
-96                <category android:name="android.intent.category.LAUNCHER" />
-96-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:73:17-76
-96-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:73:27-74
-97            </intent-filter>
-98        </activity>
-99
-100        <service
-100-->[com.google.firebase:firebase-firestore-ktx:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/fcadb54a5146fb15ad617720a8a2b06f/transformed/firebase-firestore-ktx-25.1.0/AndroidManifest.xml:9:9-15:19
-101            android:name="com.google.firebase.components.ComponentDiscoveryService"
-101-->[com.google.firebase:firebase-firestore-ktx:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/fcadb54a5146fb15ad617720a8a2b06f/transformed/firebase-firestore-ktx-25.1.0/AndroidManifest.xml:10:13-84
-102            android:directBootAware="true"
-102-->[com.google.firebase:firebase-common:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/41fcd24ec5c3c024d4a1f0c6b3039aff/transformed/firebase-common-21.0.0/AndroidManifest.xml:32:13-43
-103            android:exported="false" >
-103-->[com.google.firebase:firebase-firestore-ktx:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/fcadb54a5146fb15ad617720a8a2b06f/transformed/firebase-firestore-ktx-25.1.0/AndroidManifest.xml:11:13-37
-104            <meta-data
-104-->[com.google.firebase:firebase-firestore-ktx:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/fcadb54a5146fb15ad617720a8a2b06f/transformed/firebase-firestore-ktx-25.1.0/AndroidManifest.xml:12:13-14:85
-105                android:name="com.google.firebase.components:com.google.firebase.firestore.ktx.FirebaseFirestoreLegacyRegistrar"
-105-->[com.google.firebase:firebase-firestore-ktx:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/fcadb54a5146fb15ad617720a8a2b06f/transformed/firebase-firestore-ktx-25.1.0/AndroidManifest.xml:13:17-129
-106                android:value="com.google.firebase.components.ComponentRegistrar" />
-106-->[com.google.firebase:firebase-firestore-ktx:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/fcadb54a5146fb15ad617720a8a2b06f/transformed/firebase-firestore-ktx-25.1.0/AndroidManifest.xml:14:17-82
-107            <meta-data
-107-->[com.google.firebase:firebase-auth-ktx:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/4994f814f1fde093d7e39f2c14cd3f0a/transformed/firebase-auth-ktx-23.0.0/AndroidManifest.xml:11:13-13:85
-108                android:name="com.google.firebase.components:com.google.firebase.auth.ktx.FirebaseAuthLegacyRegistrar"
-108-->[com.google.firebase:firebase-auth-ktx:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/4994f814f1fde093d7e39f2c14cd3f0a/transformed/firebase-auth-ktx-23.0.0/AndroidManifest.xml:12:17-119
-109                android:value="com.google.firebase.components.ComponentRegistrar" />
-109-->[com.google.firebase:firebase-auth-ktx:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/4994f814f1fde093d7e39f2c14cd3f0a/transformed/firebase-auth-ktx-23.0.0/AndroidManifest.xml:13:17-82
-110            <meta-data
-110-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:69:13-71:85
-111                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
-111-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:70:17-109
-112                android:value="com.google.firebase.components.ComponentRegistrar" />
-112-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:71:17-82
-113            <meta-data
-113-->[com.google.firebase:firebase-firestore:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:17:13-19:85
-114                android:name="com.google.firebase.components:com.google.firebase.firestore.FirebaseFirestoreKtxRegistrar"
-114-->[com.google.firebase:firebase-firestore:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:18:17-122
-115                android:value="com.google.firebase.components.ComponentRegistrar" />
-115-->[com.google.firebase:firebase-firestore:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:19:17-82
-116            <meta-data
-116-->[com.google.firebase:firebase-firestore:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:20:13-22:85
-117                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
-117-->[com.google.firebase:firebase-firestore:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:21:17-111
-118                android:value="com.google.firebase.components.ComponentRegistrar" />
-118-->[com.google.firebase:firebase-firestore:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:22:17-82
-119            <meta-data
-119-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:37:13-39:85
-120                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
-120-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:38:17-139
-121                android:value="com.google.firebase.components.ComponentRegistrar" />
-121-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:39:17-82
-122            <meta-data
-122-->[com.google.firebase:firebase-installations:18.0.0] /Users/lipeduh/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:15:13-17:85
-123                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar"
-123-->[com.google.firebase:firebase-installations:18.0.0] /Users/lipeduh/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:16:17-130
-124                android:value="com.google.firebase.components.ComponentRegistrar" />
-124-->[com.google.firebase:firebase-installations:18.0.0] /Users/lipeduh/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:17:17-82
-125            <meta-data
-125-->[com.google.firebase:firebase-installations:18.0.0] /Users/lipeduh/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:18:13-20:85
-126                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
-126-->[com.google.firebase:firebase-installations:18.0.0] /Users/lipeduh/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:19:17-127
-127                android:value="com.google.firebase.components.ComponentRegistrar" />
-127-->[com.google.firebase:firebase-installations:18.0.0] /Users/lipeduh/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:20:17-82
-128            <meta-data
-128-->[com.google.firebase:firebase-common-ktx:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/650d565031b7626952d0b0cdf7d482db/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:12:13-14:85
-129                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
-129-->[com.google.firebase:firebase-common-ktx:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/650d565031b7626952d0b0cdf7d482db/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:13:17-116
-130                android:value="com.google.firebase.components.ComponentRegistrar" />
-130-->[com.google.firebase:firebase-common-ktx:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/650d565031b7626952d0b0cdf7d482db/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:14:17-82
-131            <meta-data
-131-->[com.google.firebase:firebase-common:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/41fcd24ec5c3c024d4a1f0c6b3039aff/transformed/firebase-common-21.0.0/AndroidManifest.xml:35:13-37:85
-132                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
-132-->[com.google.firebase:firebase-common:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/41fcd24ec5c3c024d4a1f0c6b3039aff/transformed/firebase-common-21.0.0/AndroidManifest.xml:36:17-109
-133                android:value="com.google.firebase.components.ComponentRegistrar" />
-133-->[com.google.firebase:firebase-common:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/41fcd24ec5c3c024d4a1f0c6b3039aff/transformed/firebase-common-21.0.0/AndroidManifest.xml:37:17-82
-134        </service>
-135
-136        <activity
-136-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:29:9-46:20
-137            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
-137-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:30:13-80
-138            android:excludeFromRecents="true"
-138-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:31:13-46
-139            android:exported="true"
-139-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:32:13-36
-140            android:launchMode="singleTask"
-140-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:33:13-44
-141            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-141-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:34:13-72
-142            <intent-filter>
-142-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:35:13-45:29
-143                <action android:name="android.intent.action.VIEW" />
-143-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:36:17-69
-143-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:36:25-66
-144
-145                <category android:name="android.intent.category.DEFAULT" />
-145-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:38:17-76
-145-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:38:27-73
-146                <category android:name="android.intent.category.BROWSABLE" />
-146-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:39:17-78
-146-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:39:27-75
-147
-148                <data
-148-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:41:17-44:51
-149                    android:host="firebase.auth"
-149-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:42:21-49
-150                    android:path="/"
-150-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:43:21-37
-151                    android:scheme="genericidp" />
-151-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:44:21-48
-152            </intent-filter>
-153        </activity>
-154        <activity
-154-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:47:9-64:20
-155            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
-155-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:48:13-79
-156            android:excludeFromRecents="true"
-156-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:49:13-46
-157            android:exported="true"
-157-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:50:13-36
-158            android:launchMode="singleTask"
-158-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:51:13-44
-159            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-159-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:52:13-72
-160            <intent-filter>
-160-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:53:13-63:29
-161                <action android:name="android.intent.action.VIEW" />
-161-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:36:17-69
-161-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:36:25-66
-162
-163                <category android:name="android.intent.category.DEFAULT" />
-163-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:38:17-76
-163-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:38:27-73
-164                <category android:name="android.intent.category.BROWSABLE" />
-164-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:39:17-78
-164-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:39:27-75
-165
-166                <data
-166-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:41:17-44:51
-167                    android:host="firebase.auth"
-167-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:42:21-49
-168                    android:path="/"
-168-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:43:21-37
-169                    android:scheme="recaptcha" />
-169-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:44:21-48
-170            </intent-filter>
-171        </activity>
-172
-173        <property
-173-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:30:9-32:61
-174            android:name="android.adservices.AD_SERVICES_CONFIG"
-174-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:31:13-65
-175            android:resource="@xml/ga_ad_services_config" />
-175-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:32:13-58
-176
-177        <activity
-177-->[androidx.compose.ui:ui-tooling-android:1.6.6] /Users/lipeduh/.gradle/caches/transforms-4/6f5ea4717bd53d7d0dc1e0124d10a242/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
-178            android:name="androidx.compose.ui.tooling.PreviewActivity"
-178-->[androidx.compose.ui:ui-tooling-android:1.6.6] /Users/lipeduh/.gradle/caches/transforms-4/6f5ea4717bd53d7d0dc1e0124d10a242/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
-179            android:exported="true" />
-179-->[androidx.compose.ui:ui-tooling-android:1.6.6] /Users/lipeduh/.gradle/caches/transforms-4/6f5ea4717bd53d7d0dc1e0124d10a242/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
-180        <activity
-180-->[androidx.compose.ui:ui-test-manifest:1.6.6] /Users/lipeduh/.gradle/caches/transforms-4/47a1e1b047a7354b25ccba681f0098c7/transformed/ui-test-manifest-1.6.6/AndroidManifest.xml:23:9-25:39
-181            android:name="androidx.activity.ComponentActivity"
-181-->[androidx.compose.ui:ui-test-manifest:1.6.6] /Users/lipeduh/.gradle/caches/transforms-4/47a1e1b047a7354b25ccba681f0098c7/transformed/ui-test-manifest-1.6.6/AndroidManifest.xml:24:13-63
-182            android:exported="true" />
-182-->[androidx.compose.ui:ui-test-manifest:1.6.6] /Users/lipeduh/.gradle/caches/transforms-4/47a1e1b047a7354b25ccba681f0098c7/transformed/ui-test-manifest-1.6.6/AndroidManifest.xml:25:13-36
-183
-184        <provider
-184-->[com.google.firebase:firebase-common:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/41fcd24ec5c3c024d4a1f0c6b3039aff/transformed/firebase-common-21.0.0/AndroidManifest.xml:23:9-28:39
-185            android:name="com.google.firebase.provider.FirebaseInitProvider"
-185-->[com.google.firebase:firebase-common:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/41fcd24ec5c3c024d4a1f0c6b3039aff/transformed/firebase-common-21.0.0/AndroidManifest.xml:24:13-77
-186            android:authorities="com.example.trailblaze.firebaseinitprovider"
-186-->[com.google.firebase:firebase-common:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/41fcd24ec5c3c024d4a1f0c6b3039aff/transformed/firebase-common-21.0.0/AndroidManifest.xml:25:13-72
-187            android:directBootAware="true"
-187-->[com.google.firebase:firebase-common:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/41fcd24ec5c3c024d4a1f0c6b3039aff/transformed/firebase-common-21.0.0/AndroidManifest.xml:26:13-43
-188            android:exported="false"
-188-->[com.google.firebase:firebase-common:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/41fcd24ec5c3c024d4a1f0c6b3039aff/transformed/firebase-common-21.0.0/AndroidManifest.xml:27:13-37
-189            android:initOrder="100" />
-189-->[com.google.firebase:firebase-common:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/41fcd24ec5c3c024d4a1f0c6b3039aff/transformed/firebase-common-21.0.0/AndroidManifest.xml:28:13-36
-190
-191        <receiver
-191-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:29:9-33:20
-192            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
-192-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:30:13-85
-193            android:enabled="true"
-193-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:31:13-35
-194            android:exported="false" >
-194-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:32:13-37
-195        </receiver>
-196
-197        <service
-197-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:35:9-38:40
-198            android:name="com.google.android.gms.measurement.AppMeasurementService"
-198-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:36:13-84
-199            android:enabled="true"
-199-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:37:13-35
-200            android:exported="false" />
-200-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:38:13-37
-201        <service
-201-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:39:9-43:72
-202            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
-202-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:40:13-87
-203            android:enabled="true"
-203-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:41:13-35
-204            android:exported="false"
-204-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:42:13-37
-205            android:permission="android.permission.BIND_JOB_SERVICE" />
-205-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:43:13-69
-206        <service
-206-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:24:9-32:19
-207            android:name="androidx.credentials.playservices.CredentialProviderMetadataHolder"
-207-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:25:13-94
-208            android:enabled="true"
-208-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:26:13-35
-209            android:exported="false" >
-209-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:27:13-37
-210            <meta-data
-210-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:29:13-31:104
-211                android:name="androidx.credentials.CREDENTIAL_PROVIDER_KEY"
-211-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:30:17-76
-212                android:value="androidx.credentials.playservices.CredentialProviderPlayServicesImpl" />
-212-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:31:17-101
-213        </service>
-214
-215        <activity
-215-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:34:9-41:20
-216            android:name="androidx.credentials.playservices.HiddenActivity"
-216-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:35:13-76
-217            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
-217-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:36:13-87
-218            android:enabled="true"
-218-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:37:13-35
-219            android:exported="false"
-219-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:38:13-37
-220            android:fitsSystemWindows="true"
-220-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:39:13-45
-221            android:theme="@style/Theme.Hidden" >
-221-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:40:13-48
-222        </activity>
-223        <activity
-223-->[com.google.android.gms:play-services-auth:20.7.0] /Users/lipeduh/.gradle/caches/transforms-4/94e5d271034038172262275e3d5d3ddb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:23:9-27:75
-224            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
-224-->[com.google.android.gms:play-services-auth:20.7.0] /Users/lipeduh/.gradle/caches/transforms-4/94e5d271034038172262275e3d5d3ddb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:24:13-93
-225            android:excludeFromRecents="true"
-225-->[com.google.android.gms:play-services-auth:20.7.0] /Users/lipeduh/.gradle/caches/transforms-4/94e5d271034038172262275e3d5d3ddb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:25:13-46
-226            android:exported="false"
-226-->[com.google.android.gms:play-services-auth:20.7.0] /Users/lipeduh/.gradle/caches/transforms-4/94e5d271034038172262275e3d5d3ddb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:26:13-37
-227            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-227-->[com.google.android.gms:play-services-auth:20.7.0] /Users/lipeduh/.gradle/caches/transforms-4/94e5d271034038172262275e3d5d3ddb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:27:13-72
-228        <!--
-229            Service handling Google Sign-In user revocation. For apps that do not integrate with
-230            Google Sign-In, this service will never be started.
-231        -->
-232        <service
-232-->[com.google.android.gms:play-services-auth:20.7.0] /Users/lipeduh/.gradle/caches/transforms-4/94e5d271034038172262275e3d5d3ddb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:33:9-37:51
-233            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
-233-->[com.google.android.gms:play-services-auth:20.7.0] /Users/lipeduh/.gradle/caches/transforms-4/94e5d271034038172262275e3d5d3ddb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:34:13-89
-234            android:exported="true"
-234-->[com.google.android.gms:play-services-auth:20.7.0] /Users/lipeduh/.gradle/caches/transforms-4/94e5d271034038172262275e3d5d3ddb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:35:13-36
-235            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
-235-->[com.google.android.gms:play-services-auth:20.7.0] /Users/lipeduh/.gradle/caches/transforms-4/94e5d271034038172262275e3d5d3ddb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:36:13-107
-236            android:visibleToInstantApps="true" />
-236-->[com.google.android.gms:play-services-auth:20.7.0] /Users/lipeduh/.gradle/caches/transforms-4/94e5d271034038172262275e3d5d3ddb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:37:13-48
-237
-238        <uses-library
-238-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] /Users/lipeduh/.gradle/caches/transforms-4/0634bdd8665fb7974ea7f88adc6ddefc/transformed/ads-adservices-1.0.0-beta05/AndroidManifest.xml:23:9-25:40
-239            android:name="android.ext.adservices"
-239-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] /Users/lipeduh/.gradle/caches/transforms-4/0634bdd8665fb7974ea7f88adc6ddefc/transformed/ads-adservices-1.0.0-beta05/AndroidManifest.xml:24:13-50
-240            android:required="false" />
-240-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] /Users/lipeduh/.gradle/caches/transforms-4/0634bdd8665fb7974ea7f88adc6ddefc/transformed/ads-adservices-1.0.0-beta05/AndroidManifest.xml:25:13-37
-241        <uses-library
-241-->[androidx.window:window:1.0.0] /Users/lipeduh/.gradle/caches/transforms-4/013ec5d78f344269cc70deb9cbedf1ff/transformed/window-1.0.0/AndroidManifest.xml:25:9-27:40
-242            android:name="androidx.window.extensions"
-242-->[androidx.window:window:1.0.0] /Users/lipeduh/.gradle/caches/transforms-4/013ec5d78f344269cc70deb9cbedf1ff/transformed/window-1.0.0/AndroidManifest.xml:26:13-54
-243            android:required="false" />
-243-->[androidx.window:window:1.0.0] /Users/lipeduh/.gradle/caches/transforms-4/013ec5d78f344269cc70deb9cbedf1ff/transformed/window-1.0.0/AndroidManifest.xml:27:13-37
-244        <uses-library
-244-->[androidx.window:window:1.0.0] /Users/lipeduh/.gradle/caches/transforms-4/013ec5d78f344269cc70deb9cbedf1ff/transformed/window-1.0.0/AndroidManifest.xml:28:9-30:40
-245            android:name="androidx.window.sidecar"
-245-->[androidx.window:window:1.0.0] /Users/lipeduh/.gradle/caches/transforms-4/013ec5d78f344269cc70deb9cbedf1ff/transformed/window-1.0.0/AndroidManifest.xml:29:13-51
-246            android:required="false" />
-246-->[androidx.window:window:1.0.0] /Users/lipeduh/.gradle/caches/transforms-4/013ec5d78f344269cc70deb9cbedf1ff/transformed/window-1.0.0/AndroidManifest.xml:30:13-37
-247
-248        <activity
-248-->[com.google.android.gms:play-services-base:18.5.0] /Users/lipeduh/.gradle/caches/transforms-4/ec8e650d02b3747f476555a6190f55a0/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:9-173
-249            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-249-->[com.google.android.gms:play-services-base:18.5.0] /Users/lipeduh/.gradle/caches/transforms-4/ec8e650d02b3747f476555a6190f55a0/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:19-85
-250            android:exported="false"
-250-->[com.google.android.gms:play-services-base:18.5.0] /Users/lipeduh/.gradle/caches/transforms-4/ec8e650d02b3747f476555a6190f55a0/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:146-170
-251            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-251-->[com.google.android.gms:play-services-base:18.5.0] /Users/lipeduh/.gradle/caches/transforms-4/ec8e650d02b3747f476555a6190f55a0/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:86-145
-252
-253        <provider
-253-->[androidx.emoji2:emoji2:1.3.0] /Users/lipeduh/.gradle/caches/transforms-4/419c4bdeedd0e7747165d371a60f9381/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
-254            android:name="androidx.startup.InitializationProvider"
-254-->[androidx.emoji2:emoji2:1.3.0] /Users/lipeduh/.gradle/caches/transforms-4/419c4bdeedd0e7747165d371a60f9381/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
-255            android:authorities="com.example.trailblaze.androidx-startup"
-255-->[androidx.emoji2:emoji2:1.3.0] /Users/lipeduh/.gradle/caches/transforms-4/419c4bdeedd0e7747165d371a60f9381/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
-256            android:exported="false" >
-256-->[androidx.emoji2:emoji2:1.3.0] /Users/lipeduh/.gradle/caches/transforms-4/419c4bdeedd0e7747165d371a60f9381/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
-257            <meta-data
-257-->[androidx.emoji2:emoji2:1.3.0] /Users/lipeduh/.gradle/caches/transforms-4/419c4bdeedd0e7747165d371a60f9381/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
-258                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-258-->[androidx.emoji2:emoji2:1.3.0] /Users/lipeduh/.gradle/caches/transforms-4/419c4bdeedd0e7747165d371a60f9381/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
-259                android:value="androidx.startup" />
-259-->[androidx.emoji2:emoji2:1.3.0] /Users/lipeduh/.gradle/caches/transforms-4/419c4bdeedd0e7747165d371a60f9381/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
-260            <meta-data
-260-->[androidx.lifecycle:lifecycle-process:2.8.6] /Users/lipeduh/.gradle/caches/transforms-4/4fc32a6f7db92f155ad6a95228014006/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:29:13-31:52
-261                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-261-->[androidx.lifecycle:lifecycle-process:2.8.6] /Users/lipeduh/.gradle/caches/transforms-4/4fc32a6f7db92f155ad6a95228014006/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:30:17-78
-262                android:value="androidx.startup" />
-262-->[androidx.lifecycle:lifecycle-process:2.8.6] /Users/lipeduh/.gradle/caches/transforms-4/4fc32a6f7db92f155ad6a95228014006/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:31:17-49
-263            <meta-data
-263-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
-264                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-264-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
-265                android:value="androidx.startup" />
-265-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
-266        </provider>
-267
-268        <meta-data
-268-->[com.google.android.gms:play-services-basement:18.4.0] /Users/lipeduh/.gradle/caches/transforms-4/3439f9c59d72137724e9b9454df7822f/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:9-122
-269            android:name="com.google.android.gms.version"
-269-->[com.google.android.gms:play-services-basement:18.4.0] /Users/lipeduh/.gradle/caches/transforms-4/3439f9c59d72137724e9b9454df7822f/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:20-65
-270            android:value="@integer/google_play_services_version" />
-270-->[com.google.android.gms:play-services-basement:18.4.0] /Users/lipeduh/.gradle/caches/transforms-4/3439f9c59d72137724e9b9454df7822f/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:66-119
-271
-272        <receiver
-272-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
-273            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-273-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
-274            android:directBootAware="false"
-274-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
-275            android:enabled="true"
-275-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
-276            android:exported="true"
-276-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
-277            android:permission="android.permission.DUMP" >
-277-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
-278            <intent-filter>
-278-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
-279                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-279-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
-279-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
-280            </intent-filter>
-281            <intent-filter>
-281-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
-282                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-282-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
-282-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
-283            </intent-filter>
-284            <intent-filter>
-284-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
-285                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-285-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
-285-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
-286            </intent-filter>
-287            <intent-filter>
-287-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
-288                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-288-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
-288-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
-289            </intent-filter>
-290        </receiver>
-291    </application>
-292
-293</manifest>
+11    <!-- Add internet permission to allow app to connect to the internet. -->
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:6:5-66
+12-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:6:22-64
+13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+13-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:26:5-79
+13-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:26:22-76
+14    <uses-permission android:name="android.permission.WAKE_LOCK" />
+14-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:24:5-68
+14-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:24:22-65
+15    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+15-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:25:5-79
+15-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:25:22-76
+16    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION" />
+16-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:26:5-88
+16-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:26:22-85
+17    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_ID" />
+17-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:27:5-82
+17-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:27:22-79
+18    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+18-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:26:5-110
+18-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:26:22-107
+19    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+19-->[com.google.android.recaptcha:recaptcha:18.4.0] /Users/lipeduh/.gradle/caches/transforms-4/bf6c315dcd24da2e72a3c9da06cb78e1/transformed/recaptcha-18.4.0/AndroidManifest.xml:9:5-98
+19-->[com.google.android.recaptcha:recaptcha:18.4.0] /Users/lipeduh/.gradle/caches/transforms-4/bf6c315dcd24da2e72a3c9da06cb78e1/transformed/recaptcha-18.4.0/AndroidManifest.xml:9:22-95
+20
+21    <permission
+21-->[androidx.core:core:1.13.0] /Users/lipeduh/.gradle/caches/transforms-4/ba180f2a8120a6c1ec2189d75f0ba086/transformed/core-1.13.0/AndroidManifest.xml:22:5-24:47
+22        android:name="com.example.trailblaze.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+22-->[androidx.core:core:1.13.0] /Users/lipeduh/.gradle/caches/transforms-4/ba180f2a8120a6c1ec2189d75f0ba086/transformed/core-1.13.0/AndroidManifest.xml:23:9-81
+23        android:protectionLevel="signature" />
+23-->[androidx.core:core:1.13.0] /Users/lipeduh/.gradle/caches/transforms-4/ba180f2a8120a6c1ec2189d75f0ba086/transformed/core-1.13.0/AndroidManifest.xml:24:9-44
+24
+25    <uses-permission android:name="com.example.trailblaze.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+25-->[androidx.core:core:1.13.0] /Users/lipeduh/.gradle/caches/transforms-4/ba180f2a8120a6c1ec2189d75f0ba086/transformed/core-1.13.0/AndroidManifest.xml:26:5-97
+25-->[androidx.core:core:1.13.0] /Users/lipeduh/.gradle/caches/transforms-4/ba180f2a8120a6c1ec2189d75f0ba086/transformed/core-1.13.0/AndroidManifest.xml:26:22-94
+26
+27    <application
+27-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:8:5-79:19
+28        android:allowBackup="true"
+28-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:9:13-39
+29        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+29-->[androidx.core:core:1.13.0] /Users/lipeduh/.gradle/caches/transforms-4/ba180f2a8120a6c1ec2189d75f0ba086/transformed/core-1.13.0/AndroidManifest.xml:28:18-86
+30        android:dataExtractionRules="@xml/data_extraction_rules"
+30-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:10:13-69
+31        android:debuggable="true"
+32        android:extractNativeLibs="false"
+33        android:fullBackupContent="@xml/backup_rules"
+33-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:11:13-58
+34        android:icon="@mipmap/ic_launcher"
+34-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:12:13-47
+35        android:label="@string/app_name"
+35-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:13:13-45
+36        android:roundIcon="@mipmap/ic_launcher_round"
+36-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:14:13-58
+37        android:supportsRtl="true"
+37-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:15:13-39
+38        android:testOnly="true"
+39        android:theme="@style/Theme.TrailBlaze" >
+39-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:16:13-52
+40        <activity
+40-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:18:9-21:63
+41            android:name="com.example.trailblaze.ui.MenuActivity"
+41-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:19:17-48
+42            android:exported="false"
+42-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:20:17-41
+43            android:theme="@style/Base.Theme.TrailBlaze" />
+43-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:21:17-61
+44        <activity
+44-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:22:9-24:43
+45            android:name="com.example.trailblaze.settings.AboutActivity"
+45-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:23:17-55
+46            android:exported="false" />
+46-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:24:17-41
+47        <activity
+47-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:25:9-27:43
+48            android:name="com.example.trailblaze.settings.PrivacyAndSecurityActivity"
+48-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:26:17-68
+49            android:exported="false" />
+49-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:27:17-41
+50        <activity
+50-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:28:9-30:43
+51            android:name="com.example.trailblaze.settings.AppearanceActivity"
+51-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:29:17-60
+52            android:exported="false" />
+52-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:30:17-41
+53        <activity
+53-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:31:9-34:58
+54            android:name="com.example.trailblaze.settings.NotificationsActivity"
+54-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:32:17-63
+55            android:exported="false"
+55-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:33:17-41
+56            android:theme="@style/Theme.TrailBlaze" />
+56-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:34:17-56
+57        <activity
+57-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:35:9-38:58
+58            android:name="com.example.trailblaze.settings.ContactUsActivity"
+58-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:36:17-59
+59            android:exported="false"
+59-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:37:17-41
+60            android:theme="@style/Theme.TrailBlaze" />
+60-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:38:17-56
+61        <activity
+61-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:39:9-42:58
+62            android:name="com.example.trailblaze.settings.SupportScreenActivity"
+62-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:40:17-63
+63            android:exported="false"
+63-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:41:17-41
+64            android:theme="@style/Theme.TrailBlaze" />
+64-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:42:17-56
+65        <activity
+65-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:43:9-45:43
+66            android:name="com.example.trailblaze.ui.profile.FriendsProfile"
+66-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:44:17-58
+67            android:exported="false" />
+67-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:45:17-41
+68        <activity
+68-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:46:9-50:58
+69            android:name="com.example.trailblaze.login.TermsActivity"
+69-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:47:17-52
+70            android:exported="false"
+70-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:48:17-41
+71            android:label="@string/title_activity_terms"
+71-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:49:17-61
+72            android:theme="@style/Theme.TrailBlaze" />
+72-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:50:17-56
+73        <activity
+73-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:51:9-54:58
+74            android:name="com.example.trailblaze.login.PersonalizeActivity"
+74-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:52:17-58
+75            android:exported="false"
+75-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:53:17-41
+76            android:theme="@style/Theme.TrailBlaze" />
+76-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:54:17-56
+77        <activity
+77-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:55:9-58:58
+78            android:name="com.example.trailblaze.login.ForgotPasswordActivity"
+78-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:56:17-61
+79            android:exported="false"
+79-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:57:17-41
+80            android:theme="@style/Theme.TrailBlaze" />
+80-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:58:17-56
+81        <activity
+81-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:59:9-61:43
+82            android:name="com.example.trailblaze.login.RegisterActivity"
+82-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:60:17-55
+83            android:exported="false" />
+83-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:61:17-41
+84        <activity
+84-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:62:9-65:58
+85            android:name="com.example.trailblaze.login.LoginActivity"
+85-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:63:17-52
+86            android:exported="true"
+86-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:64:17-40
+87            android:theme="@style/Theme.TrailBlaze" />
+87-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:65:17-56
+88        <activity
+88-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:66:9-69:58
+89            android:name="com.example.trailblaze.settings.SettingsScreenActivity"
+89-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:67:17-64
+90            android:exported="false"
+90-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:68:17-41
+91            android:theme="@style/Theme.TrailBlaze" />
+91-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:69:17-56
+92        <activity
+92-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:70:9-78:20
+93            android:name="com.example.trailblaze.MainActivity"
+93-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:71:17-45
+94            android:exported="true" >
+94-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:72:17-40
+95            <intent-filter>
+95-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:73:13-77:29
+96                <action android:name="android.intent.action.MAIN" />
+96-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:74:17-68
+96-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:74:25-66
+97
+98                <category android:name="android.intent.category.LAUNCHER" />
+98-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:76:17-76
+98-->/Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:76:27-74
+99            </intent-filter>
+100        </activity>
+101
+102        <service
+102-->[com.google.firebase:firebase-firestore-ktx:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/fcadb54a5146fb15ad617720a8a2b06f/transformed/firebase-firestore-ktx-25.1.0/AndroidManifest.xml:9:9-15:19
+103            android:name="com.google.firebase.components.ComponentDiscoveryService"
+103-->[com.google.firebase:firebase-firestore-ktx:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/fcadb54a5146fb15ad617720a8a2b06f/transformed/firebase-firestore-ktx-25.1.0/AndroidManifest.xml:10:13-84
+104            android:directBootAware="true"
+104-->[com.google.firebase:firebase-common:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/41fcd24ec5c3c024d4a1f0c6b3039aff/transformed/firebase-common-21.0.0/AndroidManifest.xml:32:13-43
+105            android:exported="false" >
+105-->[com.google.firebase:firebase-firestore-ktx:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/fcadb54a5146fb15ad617720a8a2b06f/transformed/firebase-firestore-ktx-25.1.0/AndroidManifest.xml:11:13-37
+106            <meta-data
+106-->[com.google.firebase:firebase-firestore-ktx:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/fcadb54a5146fb15ad617720a8a2b06f/transformed/firebase-firestore-ktx-25.1.0/AndroidManifest.xml:12:13-14:85
+107                android:name="com.google.firebase.components:com.google.firebase.firestore.ktx.FirebaseFirestoreLegacyRegistrar"
+107-->[com.google.firebase:firebase-firestore-ktx:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/fcadb54a5146fb15ad617720a8a2b06f/transformed/firebase-firestore-ktx-25.1.0/AndroidManifest.xml:13:17-129
+108                android:value="com.google.firebase.components.ComponentRegistrar" />
+108-->[com.google.firebase:firebase-firestore-ktx:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/fcadb54a5146fb15ad617720a8a2b06f/transformed/firebase-firestore-ktx-25.1.0/AndroidManifest.xml:14:17-82
+109            <meta-data
+109-->[com.google.firebase:firebase-auth-ktx:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/4994f814f1fde093d7e39f2c14cd3f0a/transformed/firebase-auth-ktx-23.0.0/AndroidManifest.xml:11:13-13:85
+110                android:name="com.google.firebase.components:com.google.firebase.auth.ktx.FirebaseAuthLegacyRegistrar"
+110-->[com.google.firebase:firebase-auth-ktx:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/4994f814f1fde093d7e39f2c14cd3f0a/transformed/firebase-auth-ktx-23.0.0/AndroidManifest.xml:12:17-119
+111                android:value="com.google.firebase.components.ComponentRegistrar" />
+111-->[com.google.firebase:firebase-auth-ktx:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/4994f814f1fde093d7e39f2c14cd3f0a/transformed/firebase-auth-ktx-23.0.0/AndroidManifest.xml:13:17-82
+112            <meta-data
+112-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:69:13-71:85
+113                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+113-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:70:17-109
+114                android:value="com.google.firebase.components.ComponentRegistrar" />
+114-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:71:17-82
+115            <meta-data
+115-->[com.google.firebase:firebase-firestore:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:17:13-19:85
+116                android:name="com.google.firebase.components:com.google.firebase.firestore.FirebaseFirestoreKtxRegistrar"
+116-->[com.google.firebase:firebase-firestore:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:18:17-122
+117                android:value="com.google.firebase.components.ComponentRegistrar" />
+117-->[com.google.firebase:firebase-firestore:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:19:17-82
+118            <meta-data
+118-->[com.google.firebase:firebase-firestore:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:20:13-22:85
+119                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
+119-->[com.google.firebase:firebase-firestore:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:21:17-111
+120                android:value="com.google.firebase.components.ComponentRegistrar" />
+120-->[com.google.firebase:firebase-firestore:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:22:17-82
+121            <meta-data
+121-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:37:13-39:85
+122                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+122-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:38:17-139
+123                android:value="com.google.firebase.components.ComponentRegistrar" />
+123-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:39:17-82
+124            <meta-data
+124-->[com.google.firebase:firebase-installations:18.0.0] /Users/lipeduh/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:15:13-17:85
+125                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar"
+125-->[com.google.firebase:firebase-installations:18.0.0] /Users/lipeduh/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:16:17-130
+126                android:value="com.google.firebase.components.ComponentRegistrar" />
+126-->[com.google.firebase:firebase-installations:18.0.0] /Users/lipeduh/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:17:17-82
+127            <meta-data
+127-->[com.google.firebase:firebase-installations:18.0.0] /Users/lipeduh/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:18:13-20:85
+128                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+128-->[com.google.firebase:firebase-installations:18.0.0] /Users/lipeduh/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:19:17-127
+129                android:value="com.google.firebase.components.ComponentRegistrar" />
+129-->[com.google.firebase:firebase-installations:18.0.0] /Users/lipeduh/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:20:17-82
+130            <meta-data
+130-->[com.google.firebase:firebase-common-ktx:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/650d565031b7626952d0b0cdf7d482db/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:12:13-14:85
+131                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
+131-->[com.google.firebase:firebase-common-ktx:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/650d565031b7626952d0b0cdf7d482db/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:13:17-116
+132                android:value="com.google.firebase.components.ComponentRegistrar" />
+132-->[com.google.firebase:firebase-common-ktx:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/650d565031b7626952d0b0cdf7d482db/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:14:17-82
+133            <meta-data
+133-->[com.google.firebase:firebase-common:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/41fcd24ec5c3c024d4a1f0c6b3039aff/transformed/firebase-common-21.0.0/AndroidManifest.xml:35:13-37:85
+134                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+134-->[com.google.firebase:firebase-common:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/41fcd24ec5c3c024d4a1f0c6b3039aff/transformed/firebase-common-21.0.0/AndroidManifest.xml:36:17-109
+135                android:value="com.google.firebase.components.ComponentRegistrar" />
+135-->[com.google.firebase:firebase-common:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/41fcd24ec5c3c024d4a1f0c6b3039aff/transformed/firebase-common-21.0.0/AndroidManifest.xml:37:17-82
+136        </service>
+137
+138        <activity
+138-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:29:9-46:20
+139            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
+139-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:30:13-80
+140            android:excludeFromRecents="true"
+140-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:31:13-46
+141            android:exported="true"
+141-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:32:13-36
+142            android:launchMode="singleTask"
+142-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:33:13-44
+143            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+143-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:34:13-72
+144            <intent-filter>
+144-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:35:13-45:29
+145                <action android:name="android.intent.action.VIEW" />
+145-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:36:17-69
+145-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:36:25-66
+146
+147                <category android:name="android.intent.category.DEFAULT" />
+147-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:38:17-76
+147-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:38:27-73
+148                <category android:name="android.intent.category.BROWSABLE" />
+148-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:39:17-78
+148-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:39:27-75
+149
+150                <data
+150-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:41:17-44:51
+151                    android:host="firebase.auth"
+151-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:42:21-49
+152                    android:path="/"
+152-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:43:21-37
+153                    android:scheme="genericidp" />
+153-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:44:21-48
+154            </intent-filter>
+155        </activity>
+156        <activity
+156-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:47:9-64:20
+157            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
+157-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:48:13-79
+158            android:excludeFromRecents="true"
+158-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:49:13-46
+159            android:exported="true"
+159-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:50:13-36
+160            android:launchMode="singleTask"
+160-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:51:13-44
+161            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+161-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:52:13-72
+162            <intent-filter>
+162-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:53:13-63:29
+163                <action android:name="android.intent.action.VIEW" />
+163-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:36:17-69
+163-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:36:25-66
+164
+165                <category android:name="android.intent.category.DEFAULT" />
+165-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:38:17-76
+165-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:38:27-73
+166                <category android:name="android.intent.category.BROWSABLE" />
+166-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:39:17-78
+166-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:39:27-75
+167
+168                <data
+168-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:41:17-44:51
+169                    android:host="firebase.auth"
+169-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:42:21-49
+170                    android:path="/"
+170-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:43:21-37
+171                    android:scheme="recaptcha" />
+171-->[com.google.firebase:firebase-auth:23.0.0] /Users/lipeduh/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:44:21-48
+172            </intent-filter>
+173        </activity>
+174
+175        <property
+175-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:30:9-32:61
+176            android:name="android.adservices.AD_SERVICES_CONFIG"
+176-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:31:13-65
+177            android:resource="@xml/ga_ad_services_config" />
+177-->[com.google.android.gms:play-services-measurement-api:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:32:13-58
+178
+179        <activity
+179-->[androidx.compose.ui:ui-tooling-android:1.6.6] /Users/lipeduh/.gradle/caches/transforms-4/6f5ea4717bd53d7d0dc1e0124d10a242/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
+180            android:name="androidx.compose.ui.tooling.PreviewActivity"
+180-->[androidx.compose.ui:ui-tooling-android:1.6.6] /Users/lipeduh/.gradle/caches/transforms-4/6f5ea4717bd53d7d0dc1e0124d10a242/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
+181            android:exported="true" />
+181-->[androidx.compose.ui:ui-tooling-android:1.6.6] /Users/lipeduh/.gradle/caches/transforms-4/6f5ea4717bd53d7d0dc1e0124d10a242/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
+182        <activity
+182-->[androidx.compose.ui:ui-test-manifest:1.6.6] /Users/lipeduh/.gradle/caches/transforms-4/47a1e1b047a7354b25ccba681f0098c7/transformed/ui-test-manifest-1.6.6/AndroidManifest.xml:23:9-25:39
+183            android:name="androidx.activity.ComponentActivity"
+183-->[androidx.compose.ui:ui-test-manifest:1.6.6] /Users/lipeduh/.gradle/caches/transforms-4/47a1e1b047a7354b25ccba681f0098c7/transformed/ui-test-manifest-1.6.6/AndroidManifest.xml:24:13-63
+184            android:exported="true" />
+184-->[androidx.compose.ui:ui-test-manifest:1.6.6] /Users/lipeduh/.gradle/caches/transforms-4/47a1e1b047a7354b25ccba681f0098c7/transformed/ui-test-manifest-1.6.6/AndroidManifest.xml:25:13-36
+185
+186        <provider
+186-->[com.google.firebase:firebase-common:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/41fcd24ec5c3c024d4a1f0c6b3039aff/transformed/firebase-common-21.0.0/AndroidManifest.xml:23:9-28:39
+187            android:name="com.google.firebase.provider.FirebaseInitProvider"
+187-->[com.google.firebase:firebase-common:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/41fcd24ec5c3c024d4a1f0c6b3039aff/transformed/firebase-common-21.0.0/AndroidManifest.xml:24:13-77
+188            android:authorities="com.example.trailblaze.firebaseinitprovider"
+188-->[com.google.firebase:firebase-common:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/41fcd24ec5c3c024d4a1f0c6b3039aff/transformed/firebase-common-21.0.0/AndroidManifest.xml:25:13-72
+189            android:directBootAware="true"
+189-->[com.google.firebase:firebase-common:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/41fcd24ec5c3c024d4a1f0c6b3039aff/transformed/firebase-common-21.0.0/AndroidManifest.xml:26:13-43
+190            android:exported="false"
+190-->[com.google.firebase:firebase-common:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/41fcd24ec5c3c024d4a1f0c6b3039aff/transformed/firebase-common-21.0.0/AndroidManifest.xml:27:13-37
+191            android:initOrder="100" />
+191-->[com.google.firebase:firebase-common:21.0.0] /Users/lipeduh/.gradle/caches/transforms-4/41fcd24ec5c3c024d4a1f0c6b3039aff/transformed/firebase-common-21.0.0/AndroidManifest.xml:28:13-36
+192
+193        <receiver
+193-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:29:9-33:20
+194            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+194-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:30:13-85
+195            android:enabled="true"
+195-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:31:13-35
+196            android:exported="false" >
+196-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:32:13-37
+197        </receiver>
+198
+199        <service
+199-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:35:9-38:40
+200            android:name="com.google.android.gms.measurement.AppMeasurementService"
+200-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:36:13-84
+201            android:enabled="true"
+201-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:37:13-35
+202            android:exported="false" />
+202-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:38:13-37
+203        <service
+203-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:39:9-43:72
+204            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+204-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:40:13-87
+205            android:enabled="true"
+205-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:41:13-35
+206            android:exported="false"
+206-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:42:13-37
+207            android:permission="android.permission.BIND_JOB_SERVICE" />
+207-->[com.google.android.gms:play-services-measurement:22.1.2] /Users/lipeduh/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:43:13-69
+208        <service
+208-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:24:9-32:19
+209            android:name="androidx.credentials.playservices.CredentialProviderMetadataHolder"
+209-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:25:13-94
+210            android:enabled="true"
+210-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:26:13-35
+211            android:exported="false" >
+211-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:27:13-37
+212            <meta-data
+212-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:29:13-31:104
+213                android:name="androidx.credentials.CREDENTIAL_PROVIDER_KEY"
+213-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:30:17-76
+214                android:value="androidx.credentials.playservices.CredentialProviderPlayServicesImpl" />
+214-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:31:17-101
+215        </service>
+216
+217        <activity
+217-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:34:9-41:20
+218            android:name="androidx.credentials.playservices.HiddenActivity"
+218-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:35:13-76
+219            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+219-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:36:13-87
+220            android:enabled="true"
+220-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:37:13-35
+221            android:exported="false"
+221-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:38:13-37
+222            android:fitsSystemWindows="true"
+222-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:39:13-45
+223            android:theme="@style/Theme.Hidden" >
+223-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lipeduh/.gradle/caches/transforms-4/f2b18eacc8362e5983ebd3c7741665e5/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:40:13-48
+224        </activity>
+225        <activity
+225-->[com.google.android.gms:play-services-auth:20.7.0] /Users/lipeduh/.gradle/caches/transforms-4/94e5d271034038172262275e3d5d3ddb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:23:9-27:75
+226            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+226-->[com.google.android.gms:play-services-auth:20.7.0] /Users/lipeduh/.gradle/caches/transforms-4/94e5d271034038172262275e3d5d3ddb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:24:13-93
+227            android:excludeFromRecents="true"
+227-->[com.google.android.gms:play-services-auth:20.7.0] /Users/lipeduh/.gradle/caches/transforms-4/94e5d271034038172262275e3d5d3ddb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:25:13-46
+228            android:exported="false"
+228-->[com.google.android.gms:play-services-auth:20.7.0] /Users/lipeduh/.gradle/caches/transforms-4/94e5d271034038172262275e3d5d3ddb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:26:13-37
+229            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+229-->[com.google.android.gms:play-services-auth:20.7.0] /Users/lipeduh/.gradle/caches/transforms-4/94e5d271034038172262275e3d5d3ddb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:27:13-72
+230        <!--
+231            Service handling Google Sign-In user revocation. For apps that do not integrate with
+232            Google Sign-In, this service will never be started.
+233        -->
+234        <service
+234-->[com.google.android.gms:play-services-auth:20.7.0] /Users/lipeduh/.gradle/caches/transforms-4/94e5d271034038172262275e3d5d3ddb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:33:9-37:51
+235            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+235-->[com.google.android.gms:play-services-auth:20.7.0] /Users/lipeduh/.gradle/caches/transforms-4/94e5d271034038172262275e3d5d3ddb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:34:13-89
+236            android:exported="true"
+236-->[com.google.android.gms:play-services-auth:20.7.0] /Users/lipeduh/.gradle/caches/transforms-4/94e5d271034038172262275e3d5d3ddb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:35:13-36
+237            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+237-->[com.google.android.gms:play-services-auth:20.7.0] /Users/lipeduh/.gradle/caches/transforms-4/94e5d271034038172262275e3d5d3ddb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:36:13-107
+238            android:visibleToInstantApps="true" />
+238-->[com.google.android.gms:play-services-auth:20.7.0] /Users/lipeduh/.gradle/caches/transforms-4/94e5d271034038172262275e3d5d3ddb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:37:13-48
+239
+240        <uses-library
+240-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] /Users/lipeduh/.gradle/caches/transforms-4/0634bdd8665fb7974ea7f88adc6ddefc/transformed/ads-adservices-1.0.0-beta05/AndroidManifest.xml:23:9-25:40
+241            android:name="android.ext.adservices"
+241-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] /Users/lipeduh/.gradle/caches/transforms-4/0634bdd8665fb7974ea7f88adc6ddefc/transformed/ads-adservices-1.0.0-beta05/AndroidManifest.xml:24:13-50
+242            android:required="false" />
+242-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] /Users/lipeduh/.gradle/caches/transforms-4/0634bdd8665fb7974ea7f88adc6ddefc/transformed/ads-adservices-1.0.0-beta05/AndroidManifest.xml:25:13-37
+243        <uses-library
+243-->[androidx.window:window:1.0.0] /Users/lipeduh/.gradle/caches/transforms-4/013ec5d78f344269cc70deb9cbedf1ff/transformed/window-1.0.0/AndroidManifest.xml:25:9-27:40
+244            android:name="androidx.window.extensions"
+244-->[androidx.window:window:1.0.0] /Users/lipeduh/.gradle/caches/transforms-4/013ec5d78f344269cc70deb9cbedf1ff/transformed/window-1.0.0/AndroidManifest.xml:26:13-54
+245            android:required="false" />
+245-->[androidx.window:window:1.0.0] /Users/lipeduh/.gradle/caches/transforms-4/013ec5d78f344269cc70deb9cbedf1ff/transformed/window-1.0.0/AndroidManifest.xml:27:13-37
+246        <uses-library
+246-->[androidx.window:window:1.0.0] /Users/lipeduh/.gradle/caches/transforms-4/013ec5d78f344269cc70deb9cbedf1ff/transformed/window-1.0.0/AndroidManifest.xml:28:9-30:40
+247            android:name="androidx.window.sidecar"
+247-->[androidx.window:window:1.0.0] /Users/lipeduh/.gradle/caches/transforms-4/013ec5d78f344269cc70deb9cbedf1ff/transformed/window-1.0.0/AndroidManifest.xml:29:13-51
+248            android:required="false" />
+248-->[androidx.window:window:1.0.0] /Users/lipeduh/.gradle/caches/transforms-4/013ec5d78f344269cc70deb9cbedf1ff/transformed/window-1.0.0/AndroidManifest.xml:30:13-37
+249
+250        <activity
+250-->[com.google.android.gms:play-services-base:18.5.0] /Users/lipeduh/.gradle/caches/transforms-4/ec8e650d02b3747f476555a6190f55a0/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:9-173
+251            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+251-->[com.google.android.gms:play-services-base:18.5.0] /Users/lipeduh/.gradle/caches/transforms-4/ec8e650d02b3747f476555a6190f55a0/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:19-85
+252            android:exported="false"
+252-->[com.google.android.gms:play-services-base:18.5.0] /Users/lipeduh/.gradle/caches/transforms-4/ec8e650d02b3747f476555a6190f55a0/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:146-170
+253            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+253-->[com.google.android.gms:play-services-base:18.5.0] /Users/lipeduh/.gradle/caches/transforms-4/ec8e650d02b3747f476555a6190f55a0/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:86-145
+254
+255        <provider
+255-->[androidx.emoji2:emoji2:1.3.0] /Users/lipeduh/.gradle/caches/transforms-4/419c4bdeedd0e7747165d371a60f9381/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+256            android:name="androidx.startup.InitializationProvider"
+256-->[androidx.emoji2:emoji2:1.3.0] /Users/lipeduh/.gradle/caches/transforms-4/419c4bdeedd0e7747165d371a60f9381/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+257            android:authorities="com.example.trailblaze.androidx-startup"
+257-->[androidx.emoji2:emoji2:1.3.0] /Users/lipeduh/.gradle/caches/transforms-4/419c4bdeedd0e7747165d371a60f9381/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+258            android:exported="false" >
+258-->[androidx.emoji2:emoji2:1.3.0] /Users/lipeduh/.gradle/caches/transforms-4/419c4bdeedd0e7747165d371a60f9381/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+259            <meta-data
+259-->[androidx.emoji2:emoji2:1.3.0] /Users/lipeduh/.gradle/caches/transforms-4/419c4bdeedd0e7747165d371a60f9381/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+260                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+260-->[androidx.emoji2:emoji2:1.3.0] /Users/lipeduh/.gradle/caches/transforms-4/419c4bdeedd0e7747165d371a60f9381/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+261                android:value="androidx.startup" />
+261-->[androidx.emoji2:emoji2:1.3.0] /Users/lipeduh/.gradle/caches/transforms-4/419c4bdeedd0e7747165d371a60f9381/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+262            <meta-data
+262-->[androidx.lifecycle:lifecycle-process:2.8.6] /Users/lipeduh/.gradle/caches/transforms-4/4fc32a6f7db92f155ad6a95228014006/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:29:13-31:52
+263                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+263-->[androidx.lifecycle:lifecycle-process:2.8.6] /Users/lipeduh/.gradle/caches/transforms-4/4fc32a6f7db92f155ad6a95228014006/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:30:17-78
+264                android:value="androidx.startup" />
+264-->[androidx.lifecycle:lifecycle-process:2.8.6] /Users/lipeduh/.gradle/caches/transforms-4/4fc32a6f7db92f155ad6a95228014006/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:31:17-49
+265            <meta-data
+265-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+266                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+266-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+267                android:value="androidx.startup" />
+267-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+268        </provider>
+269
+270        <meta-data
+270-->[com.google.android.gms:play-services-basement:18.4.0] /Users/lipeduh/.gradle/caches/transforms-4/3439f9c59d72137724e9b9454df7822f/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:9-122
+271            android:name="com.google.android.gms.version"
+271-->[com.google.android.gms:play-services-basement:18.4.0] /Users/lipeduh/.gradle/caches/transforms-4/3439f9c59d72137724e9b9454df7822f/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:20-65
+272            android:value="@integer/google_play_services_version" />
+272-->[com.google.android.gms:play-services-basement:18.4.0] /Users/lipeduh/.gradle/caches/transforms-4/3439f9c59d72137724e9b9454df7822f/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:66-119
+273
+274        <receiver
+274-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+275            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+275-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+276            android:directBootAware="false"
+276-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+277            android:enabled="true"
+277-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+278            android:exported="true"
+278-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+279            android:permission="android.permission.DUMP" >
+279-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+280            <intent-filter>
+280-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+281                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+281-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+281-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+282            </intent-filter>
+283            <intent-filter>
+283-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+284                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+284-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+284-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+285            </intent-filter>
+286            <intent-filter>
+286-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+287                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+287-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+287-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+288            </intent-filter>
+289            <intent-filter>
+289-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+290                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+290-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+290-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/lipeduh/.gradle/caches/transforms-4/755d32233d5c6ea0c58de4d2c24785eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+291            </intent-filter>
+292        </receiver>
+293    </application>
+294
+295</manifest>

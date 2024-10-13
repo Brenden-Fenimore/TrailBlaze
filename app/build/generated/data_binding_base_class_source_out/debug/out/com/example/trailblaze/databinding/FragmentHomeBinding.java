@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.trailblaze.R;
@@ -58,6 +59,9 @@ public final class FragmentHomeBinding implements ViewBinding {
   public final LinearLayout nearbytrailslayout;
 
   @NonNull
+  public final RecyclerView recyclerView;
+
+  @NonNull
   public final TextInputEditText searchbar;
 
   @NonNull
@@ -78,9 +82,10 @@ public final class FragmentHomeBinding implements ViewBinding {
       @NonNull ImageButton hamburger, @NonNull TextView hikewithfriends,
       @NonNull TextView homepagegreeting, @NonNull TextView homepageusername,
       @NonNull LinearLayout invitefriendslayout, @NonNull HorizontalScrollView nearbytrailscroll,
-      @NonNull LinearLayout nearbytrailslayout, @NonNull TextInputEditText searchbar,
-      @NonNull LinearLayout searchbarlayout, @NonNull TextInputLayout searchbartextfield,
-      @NonNull TextView toptrails, @NonNull LinearLayout usernamelayout) {
+      @NonNull LinearLayout nearbytrailslayout, @NonNull RecyclerView recyclerView,
+      @NonNull TextInputEditText searchbar, @NonNull LinearLayout searchbarlayout,
+      @NonNull TextInputLayout searchbartextfield, @NonNull TextView toptrails,
+      @NonNull LinearLayout usernamelayout) {
     this.rootView = rootView;
     this.browsebydifficultyscroll = browsebydifficultyscroll;
     this.browsedifficulty = browsedifficulty;
@@ -93,6 +98,7 @@ public final class FragmentHomeBinding implements ViewBinding {
     this.invitefriendslayout = invitefriendslayout;
     this.nearbytrailscroll = nearbytrailscroll;
     this.nearbytrailslayout = nearbytrailslayout;
+    this.recyclerView = recyclerView;
     this.searchbar = searchbar;
     this.searchbarlayout = searchbarlayout;
     this.searchbartextfield = searchbartextfield;
@@ -193,6 +199,12 @@ public final class FragmentHomeBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.recyclerView;
+      RecyclerView recyclerView = ViewBindings.findChildViewById(rootView, id);
+      if (recyclerView == null) {
+        break missingId;
+      }
+
       id = R.id.searchbar;
       TextInputEditText searchbar = ViewBindings.findChildViewById(rootView, id);
       if (searchbar == null) {
@@ -226,8 +238,8 @@ public final class FragmentHomeBinding implements ViewBinding {
       return new FragmentHomeBinding((RelativeLayout) rootView, browsebydifficultyscroll,
           browsedifficulty, browsedifficultylayout, floatingActionButton, hamburger,
           hikewithfriends, homepagegreeting, homepageusername, invitefriendslayout,
-          nearbytrailscroll, nearbytrailslayout, searchbar, searchbarlayout, searchbartextfield,
-          toptrails, usernamelayout);
+          nearbytrailscroll, nearbytrailslayout, recyclerView, searchbar, searchbarlayout,
+          searchbartextfield, toptrails, usernamelayout);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

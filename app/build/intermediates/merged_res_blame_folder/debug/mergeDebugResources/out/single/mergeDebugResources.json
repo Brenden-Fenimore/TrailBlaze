@@ -160,6 +160,10 @@
         "source": "com.example.trailblaze.app-main-83:/layout/activity_forgot_password.xml"
     },
     {
+        "merged": "com.example.trailblaze.app-debug-81:/layout_item_park.xml.flat",
+        "source": "com.example.trailblaze.app-main-83:/layout/item_park.xml"
+    },
+    {
         "merged": "com.example.trailblaze.app-debug-81:/drawable_settings_icon.png.flat",
         "source": "com.example.trailblaze.app-main-83:/drawable/settings_icon.png"
     },
