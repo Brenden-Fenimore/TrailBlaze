@@ -42,12 +42,15 @@ public final class FragmentSecondPersonalizeBinding implements ViewBinding {
   public final EditText etZip;
 
   @NonNull
+  public final TextView range;
+
+  @NonNull
   public final SeekBar seekBar;
 
   private FragmentSecondPersonalizeBinding(@NonNull RelativeLayout rootView,
       @NonNull LinearLayout LinearColumnterms, @NonNull TextView aspectsTitle,
       @NonNull Button continuebtn2, @NonNull EditText etCity, @NonNull EditText etState,
-      @NonNull EditText etZip, @NonNull SeekBar seekBar) {
+      @NonNull EditText etZip, @NonNull TextView range, @NonNull SeekBar seekBar) {
     this.rootView = rootView;
     this.LinearColumnterms = LinearColumnterms;
     this.aspectsTitle = aspectsTitle;
@@ -55,6 +58,7 @@ public final class FragmentSecondPersonalizeBinding implements ViewBinding {
     this.etCity = etCity;
     this.etState = etState;
     this.etZip = etZip;
+    this.range = range;
     this.seekBar = seekBar;
   }
 
@@ -121,6 +125,12 @@ public final class FragmentSecondPersonalizeBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.range;
+      TextView range = ViewBindings.findChildViewById(rootView, id);
+      if (range == null) {
+        break missingId;
+      }
+
       id = R.id.seekBar;
       SeekBar seekBar = ViewBindings.findChildViewById(rootView, id);
       if (seekBar == null) {
@@ -128,7 +138,7 @@ public final class FragmentSecondPersonalizeBinding implements ViewBinding {
       }
 
       return new FragmentSecondPersonalizeBinding((RelativeLayout) rootView, LinearColumnterms,
-          aspectsTitle, continuebtn2, etCity, etState, etZip, seekBar);
+          aspectsTitle, continuebtn2, etCity, etState, etZip, range, seekBar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -23,6 +23,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/activityTitle"
                 android:textSize="40sp"
+                android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -37,6 +38,7 @@
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
                 android:orientation="horizontal"
                 android:paddingEnd="9dp"
                 android:paddingStart="9dp">
@@ -53,6 +55,7 @@
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
+                    android:fontFamily="@font/amethysta"
                     android:layout_gravity="center"
                     android:id="@+id/account"
                     android:text="@string/accountTitle"/>
@@ -76,6 +79,7 @@
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
                 android:orientation="horizontal"
                 android:paddingEnd="9dp"
                 android:paddingStart="9dp">
@@ -91,6 +95,7 @@
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
+                    android:fontFamily="@font/amethysta"
                     android:layout_gravity="center"
                     android:id="@+id/notification"
                     android:text="@string/notificationTitle"/>
@@ -113,6 +118,7 @@
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
                 android:orientation="horizontal"
                 android:paddingEnd="9dp"
                 android:paddingStart="9dp">
@@ -127,6 +133,7 @@
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
+                    android:fontFamily="@font/amethysta"
                     android:layout_gravity="center"
                     android:id="@+id/appearance"
                     android:text="@string/appearanceTitle"
@@ -150,6 +157,7 @@
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
                 android:orientation="horizontal"
                 android:paddingEnd="9dp"
                 android:paddingStart="9dp">
@@ -165,6 +173,7 @@
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
+                    android:fontFamily="@font/amethysta"
                     android:layout_gravity="center"
                     android:id="@+id/privacyAndSecurity"
                     android:text="@string/privacyTitle"
@@ -191,6 +200,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:paddingBottom="8dp"
                 android:paddingEnd="9dp"
                 android:paddingStart="9dp">
             <ImageView
@@ -204,6 +214,7 @@
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
+                    android:fontFamily="@font/amethysta"
                     android:layout_gravity="center"
                     android:id="@+id/helpAndSupport"
                     android:text="@string/helpAndSupportTitle"
@@ -228,6 +239,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:paddingBottom="8dp"
                 android:paddingEnd="9dp"
                 android:paddingStart="9dp">
             <ImageView
@@ -241,7 +253,9 @@
             <TextView
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
+
                     android:textSize="20sp"
+                    android:fontFamily="@font/amethysta"
                     android:layout_gravity="center"
                     android:id="@+id/about"
                     android:text="@string/aboutTitle"
@@ -266,6 +280,7 @@
     <Button
             android:text="@string/titleLogout"
             android:layout_width="304dp"
+            android:fontFamily="@font/amethysta"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"

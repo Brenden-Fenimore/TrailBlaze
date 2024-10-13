@@ -18,6 +18,7 @@
                 android:gravity="center"
                 android:text="@string/interact"
                 android:textSize="20sp"
+                android:fontFamily="@font/amethysta"
                 android:layout_width="305dp"
                 android:layout_height="wrap_content"/>
 
@@ -34,6 +35,7 @@
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/amethysta"
                     android:text="@string/interaction1"
                     android:textStyle="normal"/>
         </LinearLayout>
@@ -48,6 +50,7 @@
                     android:id="@+id/interaction2"
                     android:gravity="center"
                     android:layout_width="wrap_content"
+                    android:fontFamily="@font/amethysta"
                     android:layout_height="wrap_content"
                     android:text="@string/interaction2"
                     android:textStyle="normal"/>
@@ -64,6 +67,7 @@
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/amethysta"
                     android:text="@string/interaction3"
                     android:textStyle="normal"/>
         </LinearLayout>
@@ -77,6 +81,7 @@
             <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/interaction4"
                     android:gravity="center"
+                    android:fontFamily="@font/amethysta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/interaction4"
@@ -87,6 +92,7 @@
     <Button
             android:text="@string/titleContinue"
             android:layout_width="304dp"
+            android:fontFamily="@font/amethysta"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"

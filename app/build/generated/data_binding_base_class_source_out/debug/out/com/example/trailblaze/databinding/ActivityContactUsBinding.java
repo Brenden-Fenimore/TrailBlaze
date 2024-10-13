@@ -30,9 +30,6 @@ public final class ActivityContactUsBinding implements ViewBinding {
   public final LinearLayout bottomlayout;
 
   @NonNull
-  public final Button cancel;
-
-  @NonNull
   public final ImageButton chevronLeft;
 
   @NonNull
@@ -51,13 +48,12 @@ public final class ActivityContactUsBinding implements ViewBinding {
   public final LinearLayout titleLayout;
 
   private ActivityContactUsBinding(@NonNull RelativeLayout rootView, @NonNull TextView Settings,
-      @NonNull LinearLayout bottomlayout, @NonNull Button cancel, @NonNull ImageButton chevronLeft,
+      @NonNull LinearLayout bottomlayout, @NonNull ImageButton chevronLeft,
       @NonNull LinearLayout contentLayout, @NonNull EditText editTextDescription,
       @NonNull EditText editTextInput, @NonNull Button submit, @NonNull LinearLayout titleLayout) {
     this.rootView = rootView;
     this.Settings = Settings;
     this.bottomlayout = bottomlayout;
-    this.cancel = cancel;
     this.chevronLeft = chevronLeft;
     this.contentLayout = contentLayout;
     this.editTextDescription = editTextDescription;
@@ -105,12 +101,6 @@ public final class ActivityContactUsBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.cancel;
-      Button cancel = ViewBindings.findChildViewById(rootView, id);
-      if (cancel == null) {
-        break missingId;
-      }
-
       id = R.id.chevron_left;
       ImageButton chevronLeft = ViewBindings.findChildViewById(rootView, id);
       if (chevronLeft == null) {
@@ -147,7 +137,7 @@ public final class ActivityContactUsBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityContactUsBinding((RelativeLayout) rootView, Settings, bottomlayout, cancel,
+      return new ActivityContactUsBinding((RelativeLayout) rootView, Settings, bottomlayout,
           chevronLeft, contentLayout, editTextDescription, editTextInput, submit, titleLayout);
     }
     String missingId = rootView.getResources().getResourceName(id);

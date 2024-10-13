@@ -6,22 +6,36 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 tools:context=".ui.home.HomeFragment">
-
+<RelativeLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/navlayout">
     <!--    Hamburger menu in top left-->
+
+
     <ImageButton
-            android:id="@+id/hamburger"
-            android:src="@drawable/hamburger_menu"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:backgroundTint="#25FFFFFF"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp" android:scaleY="1" android:scaleX="1"/>
+            android:src="@drawable/baseline_settings_24"
+            android:contentDescription="@string/settings"
+            android:layout_width="49dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/settingsbtn"
+            android:background="@android:color/transparent"
+            android:layout_centerVertical="true"/>
+    <ImageButton
+            android:src="@drawable/three_line_menu"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/menuButton"
+            android:contentDescription="@string/menuTitle"/>
+
+</RelativeLayout>
 
     <!--    Good afternoon Greeting-->
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/hamburger"
+            android:layout_below="@id/navlayout"
             android:layout_marginEnd="0dp">
         <TextView
                 android:id="@+id/homepagegreeting"
@@ -29,8 +43,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textSize="35sp"
-                android:text="@string/homepage_welcome_user" android:textColor="#000000"
-                android:fontFamily="@font/amethysta" android:textAlignment="center"/>
+                android:text="@string/homepage_welcome_user"
+                android:textColor="#000000"
+                android:fontFamily="@font/amethysta"
+                android:textAlignment="center"/>
 
         <!--        Username underneath greeting-->
         <LinearLayout

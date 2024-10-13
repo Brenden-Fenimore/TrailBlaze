@@ -3070,6 +3070,8 @@ drawable design_password_eye
 drawable design_snackbar_background
 drawable difficulty
 drawable directions_walk
+drawable edit1
+drawable edit2
 drawable edit_icon
 drawable edittext_background
 drawable eye
@@ -3206,6 +3208,7 @@ drawable strength
 drawable subtract
 drawable subtract_upside
 drawable test_level_drawable
+drawable three_line_menu
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 drawable trailblaze_logo
@@ -3353,7 +3356,6 @@ id buttonPanel
 id cache_measures
 id calendar
 id callMeasure
-id cancel
 id cancel_button
 id caption1
 id caption2
@@ -3444,9 +3446,9 @@ id edge
 id editProfileFragment
 id editTextDescription
 id editTextInput
-id edit_profile_button
 id edit_query
 id edit_text_id
+id editbutton
 id elastic
 id email
 id embed
@@ -3485,6 +3487,7 @@ id floatingActionButton
 id forever
 id forgotPassword
 id fragmentContainer
+id fragment_container
 id fragment_container_view_tag
 id frameStackorConnectw
 id frost
@@ -3497,7 +3500,6 @@ id graph_wrap
 id group_divider
 id grouping
 id groups
-id hamburger
 id header_title
 id helpAndSupport
 id hide_ime_id
@@ -3519,7 +3521,6 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
-id imageButton
 id imageView
 id imageView1
 id imageView2
@@ -3596,6 +3597,8 @@ id material_timepicker_ok_button
 id material_timepicker_view
 id material_value_index
 id matrix
+id menuButton
+id menuTitle
 id message
 id middle
 id mini
@@ -3634,6 +3637,7 @@ id mtrl_picker_title_text
 id mtrl_view_tag_bottom_padding
 id multiply
 id nature
+id navLayout
 id nav_controller_view_tag
 id nav_graph
 id nav_graph10
@@ -3656,11 +3660,14 @@ id navigation_bar_item_icon_view
 id navigation_bar_item_labels_group
 id navigation_bar_item_large_label_view
 id navigation_bar_item_small_label_view
+id navigation_contact
 id navigation_favorites
 id navigation_header_container
+id navigation_help
 id navigation_home
 id navigation_map
 id navigation_profile
+id navlayout
 id nearbytrailscroll
 id nearbytrailslayout
 id never
@@ -3720,6 +3727,7 @@ id progress_horizontal
 id pw
 id pw2
 id radio
+id range
 id ratio
 id rectangles
 id report_drawn
@@ -4239,6 +4247,7 @@ string editProfile
 string emergency
 string error_a11y_label
 string error_icon_content_description
+string exploreTrails
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
@@ -4384,6 +4393,7 @@ string material_timepicker_minute
 string material_timepicker_pm
 string material_timepicker_select_time
 string material_timepicker_text_input_mode_description
+string menuTitle
 string mtrl_badge_numberless_content_description
 string mtrl_checkbox_button_icon_path_checked
 string mtrl_checkbox_button_icon_path_group_name
@@ -4477,6 +4487,7 @@ string range_end
 string range_start
 string rememberPassword
 string reviewTerms
+string safetyTips
 string search_menu_title
 string searchbar_scrolling_view_behavior
 string searchview_clear_text_content_description
@@ -4517,6 +4528,7 @@ string title_notifications
 string title_profile
 string tooltip_description
 string tooltip_label
+string trailChallenges
 string troubleshoot
 string userBadge1
 string userBadge2

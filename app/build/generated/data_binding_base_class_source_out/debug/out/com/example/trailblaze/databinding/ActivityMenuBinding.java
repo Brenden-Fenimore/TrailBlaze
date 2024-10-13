@@ -4,7 +4,9 @@ package com.example.trailblaze.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -21,20 +23,65 @@ public final class ActivityMenuBinding implements ViewBinding {
   private final RelativeLayout rootView;
 
   @NonNull
+  public final TextView Settings;
+
+  @NonNull
   public final ImageButton chevronLeft;
 
   @NonNull
-  public final ImageButton imageButton;
+  public final RelativeLayout fragmentContainer;
 
   @NonNull
-  public final TextView profileImage;
+  public final Button logoutbtn;
 
-  private ActivityMenuBinding(@NonNull RelativeLayout rootView, @NonNull ImageButton chevronLeft,
-      @NonNull ImageButton imageButton, @NonNull TextView profileImage) {
+  @NonNull
+  public final LinearLayout menuTitle;
+
+  @NonNull
+  public final RelativeLayout navLayout;
+
+  @NonNull
+  public final TextView navigationContact;
+
+  @NonNull
+  public final TextView navigationFavorites;
+
+  @NonNull
+  public final TextView navigationHelp;
+
+  @NonNull
+  public final TextView navigationHome;
+
+  @NonNull
+  public final TextView navigationMap;
+
+  @NonNull
+  public final TextView navigationProfile;
+
+  @NonNull
+  public final ImageButton settingsbtn;
+
+  private ActivityMenuBinding(@NonNull RelativeLayout rootView, @NonNull TextView Settings,
+      @NonNull ImageButton chevronLeft, @NonNull RelativeLayout fragmentContainer,
+      @NonNull Button logoutbtn, @NonNull LinearLayout menuTitle, @NonNull RelativeLayout navLayout,
+      @NonNull TextView navigationContact, @NonNull TextView navigationFavorites,
+      @NonNull TextView navigationHelp, @NonNull TextView navigationHome,
+      @NonNull TextView navigationMap, @NonNull TextView navigationProfile,
+      @NonNull ImageButton settingsbtn) {
     this.rootView = rootView;
+    this.Settings = Settings;
     this.chevronLeft = chevronLeft;
-    this.imageButton = imageButton;
-    this.profileImage = profileImage;
+    this.fragmentContainer = fragmentContainer;
+    this.logoutbtn = logoutbtn;
+    this.menuTitle = menuTitle;
+    this.navLayout = navLayout;
+    this.navigationContact = navigationContact;
+    this.navigationFavorites = navigationFavorites;
+    this.navigationHelp = navigationHelp;
+    this.navigationHome = navigationHome;
+    this.navigationMap = navigationMap;
+    this.navigationProfile = navigationProfile;
+    this.settingsbtn = settingsbtn;
   }
 
   @Override
@@ -64,26 +111,84 @@ public final class ActivityMenuBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.Settings;
+      TextView Settings = ViewBindings.findChildViewById(rootView, id);
+      if (Settings == null) {
+        break missingId;
+      }
+
       id = R.id.chevron_left;
       ImageButton chevronLeft = ViewBindings.findChildViewById(rootView, id);
       if (chevronLeft == null) {
         break missingId;
       }
 
-      id = R.id.imageButton;
-      ImageButton imageButton = ViewBindings.findChildViewById(rootView, id);
-      if (imageButton == null) {
+      RelativeLayout fragmentContainer = (RelativeLayout) rootView;
+
+      id = R.id.logoutbtn;
+      Button logoutbtn = ViewBindings.findChildViewById(rootView, id);
+      if (logoutbtn == null) {
         break missingId;
       }
 
-      id = R.id.profile_image;
-      TextView profileImage = ViewBindings.findChildViewById(rootView, id);
-      if (profileImage == null) {
+      id = R.id.menuTitle;
+      LinearLayout menuTitle = ViewBindings.findChildViewById(rootView, id);
+      if (menuTitle == null) {
         break missingId;
       }
 
-      return new ActivityMenuBinding((RelativeLayout) rootView, chevronLeft, imageButton,
-          profileImage);
+      id = R.id.navLayout;
+      RelativeLayout navLayout = ViewBindings.findChildViewById(rootView, id);
+      if (navLayout == null) {
+        break missingId;
+      }
+
+      id = R.id.navigation_contact;
+      TextView navigationContact = ViewBindings.findChildViewById(rootView, id);
+      if (navigationContact == null) {
+        break missingId;
+      }
+
+      id = R.id.navigation_favorites;
+      TextView navigationFavorites = ViewBindings.findChildViewById(rootView, id);
+      if (navigationFavorites == null) {
+        break missingId;
+      }
+
+      id = R.id.navigation_help;
+      TextView navigationHelp = ViewBindings.findChildViewById(rootView, id);
+      if (navigationHelp == null) {
+        break missingId;
+      }
+
+      id = R.id.navigation_home;
+      TextView navigationHome = ViewBindings.findChildViewById(rootView, id);
+      if (navigationHome == null) {
+        break missingId;
+      }
+
+      id = R.id.navigation_map;
+      TextView navigationMap = ViewBindings.findChildViewById(rootView, id);
+      if (navigationMap == null) {
+        break missingId;
+      }
+
+      id = R.id.navigation_profile;
+      TextView navigationProfile = ViewBindings.findChildViewById(rootView, id);
+      if (navigationProfile == null) {
+        break missingId;
+      }
+
+      id = R.id.settingsbtn;
+      ImageButton settingsbtn = ViewBindings.findChildViewById(rootView, id);
+      if (settingsbtn == null) {
+        break missingId;
+      }
+
+      return new ActivityMenuBinding((RelativeLayout) rootView, Settings, chevronLeft,
+          fragmentContainer, logoutbtn, menuTitle, navLayout, navigationContact,
+          navigationFavorites, navigationHelp, navigationHome, navigationMap, navigationProfile,
+          settingsbtn);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

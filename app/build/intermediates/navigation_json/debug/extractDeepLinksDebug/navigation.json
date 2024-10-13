@@ -5,22 +5,17 @@
     "deepLinks": []
   },
   {
-    "name": "nav_graph",
+    "name": "nav_graph7",
+    "navigationXmlIds": [],
+    "deepLinks": []
+  },
+  {
+    "name": "nav_graph6",
     "navigationXmlIds": [],
     "deepLinks": []
   },
   {
     "name": "nav_graph10",
-    "navigationXmlIds": [],
-    "deepLinks": []
-  },
-  {
-    "name": "nav_graph2",
-    "navigationXmlIds": [],
-    "deepLinks": []
-  },
-  {
-    "name": "nav_graph3",
     "navigationXmlIds": [],
     "deepLinks": []
   },
@@ -35,12 +30,17 @@
     "deepLinks": []
   },
   {
-    "name": "nav_graph6",
+    "name": "nav_graph2",
     "navigationXmlIds": [],
     "deepLinks": []
   },
   {
-    "name": "nav_graph7",
+    "name": "nav_graph",
+    "navigationXmlIds": [],
+    "deepLinks": []
+  },
+  {
+    "name": "nav_graph3",
     "navigationXmlIds": [],
     "deepLinks": []
   },

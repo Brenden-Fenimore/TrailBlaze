@@ -15,6 +15,7 @@
                 android:layout_marginTop="50dp"
                 android:text="@string/titleRegister"
                 android:textSize="40sp"
+                android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         <LinearLayout
@@ -29,12 +30,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/titleLogin"
                     android:id="@+id/txtLogin"
+                    android:fontFamily="@font/amethysta"
                     android:layout_gravity="center"/>
             <TextView
                     android:id="@+id/txtRegister"
                     android:layout_width="71dp"
                     android:layout_height="wrap_content"
                     android:text="@string/titleRegister"
+                    android:fontFamily="@font/amethysta"
                     android:layout_gravity="center"
                     android:textStyle="bold"
                     android:textColor="@android:color/holo_blue_dark"/>
@@ -66,6 +69,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
+                        android:fontFamily="@font/amethysta"
                         android:hint="@string/userName"/>
             </LinearLayout>
 
@@ -88,6 +92,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
+                        android:fontFamily="@font/amethysta"
                         android:hint="@string/dob"/>
             </LinearLayout>
 
@@ -109,6 +114,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
                         android:id="@+id/etEmail"
+                        android:fontFamily="@font/amethysta"
                         android:hint="@string/titleEmail"/>
             </LinearLayout>
             <LinearLayout
@@ -130,6 +136,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:id="@+id/etpw1"
+                        android:fontFamily="@font/amethysta"
                         android:hint="@string/passWord"/>
             </LinearLayout>
             <LinearLayout
@@ -151,6 +158,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:id="@+id/etConfirmpw"
+                        android:fontFamily="@font/amethysta"
                         android:hint="@string/password2"/>
             </LinearLayout>
             <LinearLayout
@@ -169,6 +177,7 @@
                         android:layout_height="wrap_content"
                         android:singleLine="true"
                         android:text="@string/agree"
+                        android:fontFamily="@font/amethysta"
                         android:textColor="@android:color/darker_gray"
                         android:textStyle="normal"/>
                 <TextView
@@ -177,6 +186,7 @@
                         android:gravity="center_vertical"
                         android:layout_marginBottom="2dp"
                         android:layout_marginStart="27dp"
+                        android:fontFamily="@font/amethysta"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:singleLine="true"
@@ -191,6 +201,7 @@
                     android:id="@+id/createAccountBtn"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
+                    android:fontFamily="@font/amethysta"
                     android:enabled="false"/>
 
         </LinearLayout>

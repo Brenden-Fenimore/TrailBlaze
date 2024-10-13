@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.trailblaze.databinding.FragmentHomeBinding
+import com.example.trailblaze.settings.SettingsScreenActivity
 import com.example.trailblaze.ui.MenuActivity
 
 class HomeFragment : Fragment()
@@ -22,6 +23,16 @@ class HomeFragment : Fragment()
     {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        binding.menuButton.setOnClickListener {
+            val intent = Intent(context, MenuActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.settingsbtn.setOnClickListener {
+            val intent = Intent(context, SettingsScreenActivity::class.java)
+            startActivity(intent)
+        }
 
         return root
 

@@ -24,7 +24,10 @@ public final class FragmentProfileBinding implements ViewBinding {
   public final TextView accountTitle;
 
   @NonNull
-  public final ImageButton editProfileButton;
+  public final ImageButton chevronLeft;
+
+  @NonNull
+  public final ImageButton editbutton;
 
   @NonNull
   public final ImageButton iconDifficulty;
@@ -42,12 +45,14 @@ public final class FragmentProfileBinding implements ViewBinding {
   public final TextView watcherMember;
 
   private FragmentProfileBinding(@NonNull ScrollView rootView, @NonNull TextView accountTitle,
-      @NonNull ImageButton editProfileButton, @NonNull ImageButton iconDifficulty,
-      @NonNull ImageButton iconLocation, @NonNull ImageButton profileImage,
-      @NonNull TextView username, @NonNull TextView watcherMember) {
+      @NonNull ImageButton chevronLeft, @NonNull ImageButton editbutton,
+      @NonNull ImageButton iconDifficulty, @NonNull ImageButton iconLocation,
+      @NonNull ImageButton profileImage, @NonNull TextView username,
+      @NonNull TextView watcherMember) {
     this.rootView = rootView;
     this.accountTitle = accountTitle;
-    this.editProfileButton = editProfileButton;
+    this.chevronLeft = chevronLeft;
+    this.editbutton = editbutton;
     this.iconDifficulty = iconDifficulty;
     this.iconLocation = iconLocation;
     this.profileImage = profileImage;
@@ -88,9 +93,15 @@ public final class FragmentProfileBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.edit_profile_button;
-      ImageButton editProfileButton = ViewBindings.findChildViewById(rootView, id);
-      if (editProfileButton == null) {
+      id = R.id.chevron_left;
+      ImageButton chevronLeft = ViewBindings.findChildViewById(rootView, id);
+      if (chevronLeft == null) {
+        break missingId;
+      }
+
+      id = R.id.editbutton;
+      ImageButton editbutton = ViewBindings.findChildViewById(rootView, id);
+      if (editbutton == null) {
         break missingId;
       }
 
@@ -124,8 +135,8 @@ public final class FragmentProfileBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentProfileBinding((ScrollView) rootView, accountTitle, editProfileButton,
-          iconDifficulty, iconLocation, profileImage, username, watcherMember);
+      return new FragmentProfileBinding((ScrollView) rootView, accountTitle, chevronLeft,
+          editbutton, iconDifficulty, iconLocation, profileImage, username, watcherMember);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

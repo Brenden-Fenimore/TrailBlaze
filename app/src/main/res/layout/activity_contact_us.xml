@@ -24,6 +24,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/helpAndSupportTitle"
                 android:textSize="40sp"
+                android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -41,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/contactTitle"
                 android:textSize="18sp"
+                android:fontFamily="@font/amethysta"
                 android:gravity="center"/>
 
         <LinearLayout
@@ -51,6 +53,7 @@
                     android:layout_width="139dp"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
+                    android:fontFamily="@font/amethysta"
                     android:layout_margin="15dp"
                     android:text="@string/contactTitle2"/>
             <EditText
@@ -60,6 +63,7 @@
                     android:hint="@string/inputText"
                     android:inputType="text"
                     android:layout_margin="16dp"
+                    android:fontFamily="@font/amethysta"
                     android:background="@drawable/edittext_background"
                     android:padding="12dp" />
 
@@ -72,6 +76,7 @@
                     android:layout_width="187dp"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
+                    android:fontFamily="@font/amethysta"
                     android:layout_margin="15dp"
                     android:text="@string/contactTitle3"/>
             <EditText
@@ -80,6 +85,7 @@
                     android:layout_height="300dp"
                     android:inputType="textMultiLine"
                     android:layout_marginTop="20dp"
+                    android:fontFamily="@font/amethysta"
                     android:hint="@string/description"
                     android:layout_margin="16dp"
                     android:background="@drawable/edittext_background"
@@ -98,16 +104,12 @@
             android:layout_height="wrap_content">
     <Button
             android:text="@string/submit"
+            android:fontFamily="@font/amethysta"
             android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:id="@+id/submit">
     </Button>
-    <Button
-            android:text="@string/cancel"
-            android:layout_width="370dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/cancel">
-    </Button>
+
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -117,11 +119,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/contact4"
+                android:fontFamily="@font/amethysta"
                 android:layout_gravity="center_horizontal"
         />
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/amethysta"
                 android:text="@string/supportEmail"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@android:color/holo_blue_dark"

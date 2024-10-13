@@ -2109,6 +2109,7 @@ With customization options, the latest updates on trails, and an expansive commu
     Error: invalid
   </string>
     <string name="error_icon_content_description">Error</string>
+    <string name="exploreTrails">Explore Trails</string>
     <string name="exposed_dropdown_menu_content_description">Show dropdown menu</string>
     <string name="fab_transformation_scrim_behavior" translatable="false">com.google.android.material.transformation.FabTransformationScrimBehavior</string>
     <string name="fab_transformation_sheet_behavior" translatable="false">com.google.android.material.transformation.FabTransformationSheetBehavior</string>
@@ -2291,6 +2292,7 @@ With customization options, the latest updates on trails, and an expansive commu
     <string description="Suffix for time in 12-hour standard, after noon. [CHAR_LIMIT=2]" name="material_timepicker_pm">PM</string>
     <string description="Title for the dialog with a time picker. [CHAR_LIMIT=32]" name="material_timepicker_select_time">Select time</string>
     <string name="material_timepicker_text_input_mode_description">Switch to text input mode for the time input.</string>
+    <string name="menuTitle">Menu</string>
     <string description="Content description for new notification (no number count) [CHAR_LIMIT=NONE]" name="mtrl_badge_numberless_content_description">New notification</string>
     <string name="mtrl_checkbox_button_icon_path_checked" translatable="false">M14,18.2 11.4,15.6 10,17 14,21 22,13 20.6,11.6z</string>
     <string name="mtrl_checkbox_button_icon_path_group_name" translatable="false">icon</string>
@@ -2397,6 +2399,7 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="range_start">"Range start"</string>
     <string name="rememberPassword">Remember Password</string>
     <string name="reviewTerms">Review Terms and Conditions</string>
+    <string name="safetyTips">Safety Tips</string>
     <string name="search_menu_title">Search</string>
     <string name="searchbar_scrolling_view_behavior" translatable="false">
     com.google.android.material.search.SearchBar$ScrollingViewBehavior
@@ -2439,6 +2442,7 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="title_profile">Profile</string>
     <string name="tooltip_description">tooltip</string>
     <string name="tooltip_label">show tooltip</string>
+    <string name="trailChallenges">Trail Challenges</string>
     <string name="troubleshoot">Troubleshooting Guide</string>
     <string name="userBadge1">User Badge 1</string>
     <string name="userBadge2">User Badge 2</string>

@@ -17,7 +17,6 @@ class ContactUsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_contact_us)
 
         //find var by id
-        cancelBtn=findViewById(R.id.cancel)
         submitBtn=findViewById(R.id.submit)
 
         //set the listener for the back button

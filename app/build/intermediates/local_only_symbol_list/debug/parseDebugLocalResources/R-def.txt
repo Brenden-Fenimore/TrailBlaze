@@ -28,6 +28,8 @@ drawable chevron_left
 drawable chevron_right
 drawable difficulty
 drawable directions_walk
+drawable edit1
+drawable edit2
 drawable edit_icon
 drawable edittext_background
 drawable eye
@@ -67,6 +69,7 @@ drawable settings_icon
 drawable strength
 drawable subtract
 drawable subtract_upside
+drawable three_line_menu
 drawable trailblaze_logo
 drawable uphill
 drawable userperson
@@ -102,7 +105,6 @@ id browsedifficulty
 id browsedifficultylayout
 id bug
 id calendar
-id cancel
 id caption1
 id caption2
 id caption3
@@ -121,7 +123,7 @@ id difficultyLevel
 id editProfileFragment
 id editTextDescription
 id editTextInput
-id edit_profile_button
+id editbutton
 id email
 id emergency
 id etCity
@@ -137,15 +139,14 @@ id finished
 id floatingActionButton
 id forgotPassword
 id fragmentContainer
+id fragment_container
 id frameStackorConnectw
-id hamburger
 id helpAndSupport
 id hikewithfriends
 id homepagegreeting
 id homepageusername
 id icon_difficulty
 id icon_location
-id imageButton
 id imageView
 id imageView1
 id imageView2
@@ -171,10 +172,13 @@ id linearRowFacebookOne
 id linearRowRememberpass
 id loginbtn
 id logoutbtn
+id menuButton
+id menuTitle
 id mobile_navigation
 id msg_termsandco2
 id msg_termsandco3
 id nature
+id navLayout
 id nav_graph
 id nav_graph10
 id nav_graph2
@@ -189,10 +193,13 @@ id nav_host_fragment_activity_main
 id nav_host_fragment_content_menu
 id nav_host_fragment_content_personalize
 id nav_view
+id navigation_contact
 id navigation_favorites
+id navigation_help
 id navigation_home
 id navigation_map
 id navigation_profile
+id navlayout
 id nearbytrailscroll
 id nearbytrailslayout
 id notification
@@ -202,6 +209,7 @@ id profileImage
 id profile_image
 id pw
 id pw2
+id range
 id resetPassword
 id searchbar
 id searchbarlayout
@@ -302,6 +310,7 @@ string dob
 string editIcon
 string editProfile
 string emergency
+string exploreTrails
 string favorites
 string first_fragment_label
 string forgotpassword1
@@ -342,6 +351,7 @@ string login1
 string logout
 string lorem_ipsum
 string map_image
+string menuTitle
 string next
 string notificationTitle
 string ok
@@ -360,6 +370,7 @@ string profilePicture
 string project_id
 string rememberPassword
 string reviewTerms
+string safetyTips
 string second_fragment_label
 string settings
 string submit
@@ -387,6 +398,7 @@ string title_home
 string title_map
 string title_notifications
 string title_profile
+string trailChallenges
 string troubleshoot
 string userBadge1
 string userBadge2

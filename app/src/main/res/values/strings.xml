@@ -73,7 +73,10 @@
     <string name="titleUphill">Uphill</string>
     <string name="pace">Pace</string>
     <string name="titleContinue">Continue</string>
-
+    <string name="menuTitle">Menu</string>
+    <string name="exploreTrails">Explore Trails</string>
+    <string name="trailChallenges">Trail Challenges</string>
+    <string name="safetyTips">Safety Tips</string>
 
 
     <string name="lorem_ipsum">
@@ -157,7 +160,7 @@
     <string name="submit">Submit</string>
     <string name="cancel">Cancel</string>
     <string name="inputText">Input Text</string>
-    <string name="description">Enter a description...</string>
+    <string name="description">Enter a description…</string>
     <string name="contact4">You can also contact us at</string>
     <string name="supportEmail">customersupport@trailblaze.com</string>
     <string name="aboutContent">TrailBlaze aims to be the go-to application for all hikers, climbers, and outdoorsy types by offering a fantastic way to view trail options whether traveling or at home. &#10;With customization options, the latest updates on trails, and an expansive community, it is sure to be a standout in the space.</string>

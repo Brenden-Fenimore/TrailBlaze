@@ -17,6 +17,7 @@
             android:singleLine="true"
             android:text="@string/titleLogin"
             android:textSize="40sp"
+            android:fontFamily="@font/amethysta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -27,6 +28,7 @@
             android:layout_height="wrap_content"
             android:text="@string/login1"
             android:textSize="16sp"
+            android:fontFamily="@font/amethysta"
             android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"/>
     <TextView
@@ -36,6 +38,7 @@
             android:layout_height="wrap_content"
             android:text="@string/titleTerms"
             android:textSize="16sp"
+            android:fontFamily="@font/amethysta"
             android:textColor="@android:color/holo_blue_dark"
             android:layout_gravity="center_horizontal"/>
     <LinearLayout
@@ -52,12 +55,14 @@
                 android:text="@string/titleLogin"
                 android:layout_gravity="center"
                 android:textStyle="bold"
+                android:fontFamily="@font/amethysta"
                 android:textColor="@android:color/holo_blue_dark"/>
         <TextView
                 android:layout_width="71dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtRegister"
                 android:text="@string/titleRegister"
+                android:fontFamily="@font/amethysta"
                 android:layout_gravity="center"/>
     </LinearLayout>
     <LinearLayout
@@ -85,6 +90,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:id="@+id/etEmail"
+                    android:fontFamily="@font/amethysta"
                     android:hint="@string/titleEmail"/>
         </LinearLayout>
         <LinearLayout
@@ -106,6 +112,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:id="@+id/etPassword"
+                    android:fontFamily="@font/amethysta"
                     android:hint="@string/passWord"/>
         </LinearLayout>
         <LinearLayout
@@ -123,6 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
+                    android:fontFamily="@font/amethysta"
                     android:text="@string/rememberPassword"
                     android:textColor="@android:color/darker_gray"
                     android:textStyle="normal"/>
@@ -132,6 +140,7 @@
                     android:gravity="center_vertical"
                     android:layout_marginBottom="2dp"
                     android:layout_marginStart="27dp"
+                    android:fontFamily="@font/amethysta"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:singleLine="true"
@@ -144,6 +153,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/loginbtn"
+                android:fontFamily="@font/amethysta"
                 android:layout_marginTop="20dp">
         </Button>
     </LinearLayout>

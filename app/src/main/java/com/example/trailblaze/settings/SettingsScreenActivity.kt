@@ -7,6 +7,7 @@ import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trailblaze.R
 import com.example.trailblaze.login.LoginActivity
+import com.example.trailblaze.ui.profile.EditProfileFragment
 
 
 class SettingsScreenActivity : AppCompatActivity() {
@@ -77,6 +78,12 @@ class SettingsScreenActivity : AppCompatActivity() {
         //set click listener for appearances
         toAppearance.setOnClickListener {
             val intent = Intent(this, AppearanceActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
+
+        toAccount.setOnClickListener {
+            val intent = Intent(this, EditProfileFragment::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
