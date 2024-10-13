@@ -53,6 +53,13 @@ class SettingsScreenActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //set click listener for User Account
+        toAccount.setOnClickListener {
+            val intent = Intent(this, NotificationsActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
+
         //set click listener for notification
         toNotification.setOnClickListener {
             val intent = Intent(this, NotificationsActivity::class.java)

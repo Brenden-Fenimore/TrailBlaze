@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.trailblaze.test.app-mergeDebugAndroidTestResources-3:/values-v18/values-v18.xml",
+            "outputFile": "com.example.trailblaze.test.app-mergeDebugAndroidTestResources-32:/values-v18/values-v18.xml",
             "map": [
                 {
-                    "source": "/Users/lipeduh/.gradle/caches/transforms-4/56b420832205c0d5c0d77c5849ed737d/transformed/core-1.5.0/res/values-v18/values.xml",
+                    "source": "/Users/lipeduh/.gradle/caches/transforms-4/bd10a8c2c0fe43e13e70d8a04e7f6635/transformed/core-1.5.0/res/values-v18/values.xml",
                     "from": {
                         "startLines": "4,12",
                         "startColumns": "0,0",

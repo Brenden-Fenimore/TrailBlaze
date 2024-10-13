@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:2:1-79:12
-INJECTED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:2:1-79:12
-INJECTED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:2:1-79:12
-INJECTED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:2:1-79:12
+ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:2:1-78:12
+INJECTED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:2:1-78:12
+INJECTED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:2:1-78:12
+INJECTED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:2:1-78:12
 MERGED from [androidx.databinding:viewbinding:8.6.0-alpha07] /Users/lipeduh/.gradle/caches/transforms-4/21152c079908a89caf553a26acf500a1/transformed/viewbinding-8.6.0-alpha07/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.firebase:firebase-firestore-ktx:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/fcadb54a5146fb15ad617720a8a2b06f/transformed/firebase-firestore-ktx-25.1.0/AndroidManifest.xml:2:1-18:12
 MERGED from [androidx.navigation:navigation-common:2.6.0] /Users/lipeduh/.gradle/caches/transforms-4/e4156247928319287f1d1772b09fcd32/transformed/navigation-common-2.6.0/AndroidManifest.xml:17:1-22:12
@@ -137,8 +137,8 @@ MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] /Users/liped
 	xmlns:android
 		ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:2:11-69
 application
-ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:5:5-77:19
-INJECTED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:5:5-77:19
+ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:5:5-76:19
+INJECTED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:5:5-76:19
 MERGED from [com.google.firebase:firebase-firestore-ktx:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/fcadb54a5146fb15ad617720a8a2b06f/transformed/firebase-firestore-ktx-25.1.0/AndroidManifest.xml:8:5-16:19
 MERGED from [com.google.firebase:firebase-firestore-ktx:25.1.0] /Users/lipeduh/.gradle/caches/transforms-4/fcadb54a5146fb15ad617720a8a2b06f/transformed/firebase-firestore-ktx-25.1.0/AndroidManifest.xml:8:5-16:19
 MERGED from [com.google.android.material:material:1.10.0] /Users/lipeduh/.gradle/caches/transforms-4/67aed5640c008e0c862e1a53a282ae88/transformed/material-1.10.0/AndroidManifest.xml:22:5-20
@@ -340,23 +340,21 @@ ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.x
 	android:name
 		ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:64:17-64
 activity#com.example.trailblaze.MainActivity
-ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:67:9-76:20
-	android:label
-		ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:70:17-49
+ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:67:9-75:20
 	android:exported
 		ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:69:17-40
 	android:name
 		ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:68:17-45
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:71:13-75:29
+ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:70:13-74:29
 action#android.intent.action.MAIN
-ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:72:17-68
+ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:71:17-68
 	android:name
-		ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:72:25-66
+		ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:71:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:74:17-76
+ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:73:17-76
 	android:name
-		ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:74:27-74
+		ADDED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml:73:27-74
 uses-sdk
 INJECTED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/lipeduh/IdeaProjects/TrailBlaze/app/src/main/AndroidManifest.xml
