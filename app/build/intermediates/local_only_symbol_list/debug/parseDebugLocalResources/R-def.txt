@@ -201,7 +201,10 @@ id nearbytrailslayout
 id notification
 id pace
 id parkDescription
+id parkLatitude
+id parkLongitude
 id parkName
+id parkTerrain
 id privacyAndSecurity
 id profileButton
 id profileImage
@@ -233,6 +236,7 @@ id toHelpandSupport
 id toNotifications
 id toPrivacy
 id toptrails
+id trailLength
 id troubleshoot
 id txtBySigning
 id txtLogin

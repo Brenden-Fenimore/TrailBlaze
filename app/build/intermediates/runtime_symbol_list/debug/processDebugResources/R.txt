@@ -3705,7 +3705,10 @@ int id parentPanel 0x7f0a01e8
 int id parentRelative 0x7f0a01e9
 int id parent_matrix 0x7f0a01ea
 int id parkDescription 0x7f0a01eb
+int id parkLatitude 0x7f0a02b3
+int id parkLongitude 0x7f0a02b4
 int id parkName 0x7f0a01ec
+int id parkTerrain 0x7f0a02b5
 int id password_toggle 0x7f0a01ed
 int id path 0x7f0a01ee
 int id pathRelative 0x7f0a01ef
@@ -3862,6 +3865,7 @@ int id top 0x7f0a0285
 int id topPanel 0x7f0a0286
 int id toptrails 0x7f0a0287
 int id touch_outside 0x7f0a0288
+int id trailLength 0x7f0a02b6
 int id transitionToEnd 0x7f0a0289
 int id transitionToStart 0x7f0a028a
 int id transition_current_scene 0x7f0a028b

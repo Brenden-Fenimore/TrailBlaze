@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             recyclerView.adapter = parksAdapter                             // Assign adapter to RecyclerView
 
             // Call the API to fetch park data
-            RetrofitInstance.api.getParks(10).enqueue(object : Callback<NPSResponse> {
+            RetrofitInstance.api.getParks(20).enqueue(object : Callback<NPSResponse> {
                 override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
                     if (response.isSuccessful) {
                         // Update the RecyclerView with parks data from the API

@@ -19,4 +19,36 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:layout_marginTop="4dp" />
+
+    <!-- Terrain -->
+    <TextView
+            android:id="@+id/parkTerrain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp" />
+
+    <!-- Latitude -->
+    <TextView
+            android:id="@+id/parkLatitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp" />
+
+    <!-- Longitude -->
+    <TextView
+            android:id="@+id/parkLongitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp" />
+
+    <!-- Trail Length -->
+    <TextView
+            android:id="@+id/trailLength"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp" />
 </LinearLayout>

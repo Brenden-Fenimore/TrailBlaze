@@ -4,12 +4,16 @@
         "source": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/layout/activity_personalize.xml"
     },
     {
-        "merged": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-mergeDebugResources-80:/layout/fragment_second_personalize.xml",
-        "source": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/layout/fragment_second_personalize.xml"
+        "merged": "com.example.trailblaze.app-mergeDebugResources-80:/layout/item_park.xml",
+        "source": "com.example.trailblaze.app-main-83:/layout/item_park.xml"
     },
     {
         "merged": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-mergeDebugResources-80:/layout/content_menu.xml",
         "source": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/layout/content_menu.xml"
+    },
+    {
+        "merged": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-mergeDebugResources-80:/layout/fragment_second_personalize.xml",
+        "source": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/layout/fragment_second_personalize.xml"
     },
     {
         "merged": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-mergeDebugResources-80:/layout/fragment_first_personalize.xml",
@@ -22,10 +26,6 @@
     {
         "merged": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-mergeDebugResources-80:/layout/fragment_fourth_personalize.xml",
         "source": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/layout/fragment_fourth_personalize.xml"
-    },
-    {
-        "merged": "com.example.trailblaze.app-mergeDebugResources-80:/layout/activity_menu.xml",
-        "source": "com.example.trailblaze.app-main-83:/layout/activity_menu.xml"
     },
     {
         "merged": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-mergeDebugResources-80:/layout/activity_appearance.xml",

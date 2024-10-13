@@ -3706,7 +3706,10 @@ id parentPanel
 id parentRelative
 id parent_matrix
 id parkDescription
+id parkLatitude
+id parkLongitude
 id parkName
+id parkTerrain
 id password_toggle
 id path
 id pathRelative
@@ -3863,6 +3866,7 @@ id top
 id topPanel
 id toptrails
 id touch_outside
+id trailLength
 id transitionToEnd
 id transitionToStart
 id transition_current_scene

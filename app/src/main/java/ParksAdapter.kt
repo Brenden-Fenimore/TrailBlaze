@@ -14,6 +14,8 @@ class ParksAdapter(private var parksList: List<Park>) : RecyclerView.Adapter<Par
     class ParkViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nameTextView: TextView = view.findViewById(R.id.parkName)                   // TextView for park name
         val descriptionTextView: TextView = view.findViewById(R.id.parkDescription)    // TextView for park description
+        val latitudeTextView: TextView = view.findViewById(R.id.parkLatitude)
+        val longitudeTextView: TextView = view.findViewById(R.id.parkLongitude)
     }
 
     // Inflate the layout for each RecyclerView item
@@ -27,6 +29,8 @@ class ParksAdapter(private var parksList: List<Park>) : RecyclerView.Adapter<Par
         val park = parksList[position]
         holder.nameTextView.text = park.fullName
         holder.descriptionTextView.text = park.description
+        holder.latitudeTextView.text = "Latitude: ${park.latitude}"
+        holder.longitudeTextView.text = "Longitude: ${park.longitude}"
     }
 
     // Return the size of the dataset

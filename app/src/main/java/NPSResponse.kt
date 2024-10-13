@@ -10,6 +10,6 @@ data class NPSResponse(
 data class Park(
     val fullName: String,           // Full name of the park
     val description: String,        // Description of the park
-    val latitude: String,           // Latitude of the park
-    val longitude: String           // Longitude of the park
+    val latitude: String?,           // Latitude of the park
+    val longitude: String?           // Longitude of the park
 )

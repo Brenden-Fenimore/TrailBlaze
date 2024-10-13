@@ -36,12 +36,12 @@
         "source": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/drawable/add_circle.png"
     },
     {
-        "merged": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-debug-81:/drawable_baseline_closed_caption_24.xml.flat",
-        "source": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/drawable/baseline_closed_caption_24.xml"
-    },
-    {
         "merged": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-debug-81:/layout_fragment_fourth_personalize.xml.flat",
         "source": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/layout/fragment_fourth_personalize.xml"
+    },
+    {
+        "merged": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-debug-81:/drawable_baseline_closed_caption_24.xml.flat",
+        "source": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/drawable/baseline_closed_caption_24.xml"
     },
     {
         "merged": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-debug-81:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
@@ -100,12 +100,12 @@
         "source": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/drawable/settings_icon.png"
     },
     {
-        "merged": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-debug-81:/layout_fragment_map.xml.flat",
-        "source": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/layout/fragment_map.xml"
-    },
-    {
         "merged": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-debug-81:/drawable_subtract.png.flat",
         "source": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/drawable/subtract.png"
+    },
+    {
+        "merged": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-debug-81:/layout_fragment_map.xml.flat",
+        "source": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/layout/fragment_map.xml"
     },
     {
         "merged": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-debug-81:/drawable_baseline_arrow_back_ios_new_24.xml.flat",
@@ -150,6 +150,10 @@
     {
         "merged": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-debug-81:/drawable_userperson.png.flat",
         "source": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/drawable/userperson.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-81:/layout_item_park.xml.flat",
+        "source": "com.example.trailblaze.app-main-83:/layout/item_park.xml"
     },
     {
         "merged": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-debug-81:/navigation_nav_graph5.xml.flat",
@@ -426,10 +430,6 @@
     {
         "merged": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-debug-81:/drawable_baseline_settings_24.xml.flat",
         "source": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/drawable/baseline_settings_24.xml"
-    },
-    {
-        "merged": "com.example.trailblaze.app-debug-81:/layout_activity_menu.xml.flat",
-        "source": "com.example.trailblaze.app-main-83:/layout/activity_menu.xml"
     },
     {
         "merged": "/Users/lipeduh/.gradle/daemon/8.7/com.example.trailblaze.app-debug-81:/navigation_nav_graph6.xml.flat",
