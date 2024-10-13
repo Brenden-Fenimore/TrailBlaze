@@ -42,6 +42,11 @@ class MainActivity : AppCompatActivity() {
             // menu should be considered as top level destinations.
             navView.setupWithNavController(navController)
 
+            // Initialize RecyclerView and adapter
+            recyclerView = findViewById(R.id.recyclerView)
+            parksAdapter = ParksAdapter(emptyList()) // Initialize with an empty list
+            recyclerView.adapter = parksAdapter // Set the adapter
+
             // API Call logic
             RetrofitInstance.api.getParks(10).enqueue(object : Callback<NPSResponse> {
                 override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
