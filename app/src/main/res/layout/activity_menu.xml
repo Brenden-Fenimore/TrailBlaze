@@ -34,6 +34,8 @@
     </RelativeLayout>
 
     <!-- LinearLayout for profile picture and username -->
+
+
     <LinearLayout
             android:orientation="vertical"
             android:gravity="center"
@@ -41,6 +43,7 @@
             android:layout_height="wrap_content">
 
         <!-- Profile picture (ImageView) -->
+
         <ImageView
                 android:layout_width="335dp"
                 android:layout_height="232dp"
@@ -49,14 +52,17 @@
                 android:paddingTop="68dp"
                 android:layout_gravity="center"/>
 
-        <!-- Username TextView -->
+        <!-- Menu Title -->
         <TextView
-                android:id="@+id/profile_image"
+                android:id="@+id/menuTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/username"
-                android:textSize="28sp">
+                android:textSize="40sp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp">
 
+        <!-- Username TextView -->
         </TextView>
 
         <!-- Section containing multiple items (map, profile, favorites, etc.) -->
@@ -71,11 +77,13 @@
                           android:layout_height="wrap_content"
                           android:orientation="horizontal">
 
-                <ImageView
+                <ImageButton
+                        android:id="@+id/mapButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/map"
-                        android:contentDescription="@string/map_image"/>
+                        android:contentDescription="@string/map_image"
+                        android:background="@android:color/transparent"/>
 
                 <TextView
                         android:text="@string/map_image"
@@ -93,11 +101,13 @@
                           android:layout_height="wrap_content"
                           android:orientation="horizontal">
 
-                <ImageView
+                <ImageButton
+                        android:id="@+id/profileButton"
                         android:layout_width="37dp"
                         android:layout_height="match_parent"
                         app:srcCompat="@drawable/account_circle"
-                        android:contentDescription="@string/profile"/>
+                        android:contentDescription="@string/profile"
+                        android:background="@android:color/transparent"/>
 
                 <TextView
                         android:text="@string/profile"
@@ -115,11 +125,12 @@
                           android:layout_height="wrap_content"
                           android:orientation="horizontal">
 
-                <ImageView
+                <ImageButton
                         android:layout_width="37dp"
                         android:layout_height="match_parent"
                         app:srcCompat="@drawable/favorite"
-                        android:contentDescription="@string/favorites"/>
+                        android:contentDescription="@string/favorites"
+                        android:background="@android:color/transparent"/>
 
                 <TextView
                         android:text="@string/favorites"
@@ -137,11 +148,12 @@
                           android:layout_height="wrap_content"
                           android:orientation="horizontal">
 
-                <ImageView
+                <ImageButton
                         android:layout_width="37dp"
                         android:layout_height="match_parent"
                         app:srcCompat="@drawable/question"
-                        android:contentDescription="@string/help_center"/>
+                        android:contentDescription="@string/help_center"
+                        android:background="@android:color/transparent"/>
 
                 <TextView
                         android:text="@string/help_center"
@@ -159,11 +171,12 @@
                           android:layout_height="wrap_content"
                           android:orientation="horizontal">
 
-                <ImageView
+                <ImageButton
                         android:layout_width="37dp"
                         android:layout_height="match_parent"
                         app:srcCompat="@drawable/baseline_contact_mail_24"
-                        android:contentDescription="@string/contact_us"/>
+                        android:contentDescription="@string/contact_us"
+                        android:background="@android:color/transparent"/>
 
                 <TextView
                         android:text="@string/contact_us"
@@ -189,5 +202,12 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true">
     </Button>
+
+    <!-- Fragment container -->
+    <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/menuTitle"/>
 
 </RelativeLayout>

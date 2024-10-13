@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,21 +26,35 @@ public final class ActivityMenuBinding implements ViewBinding {
   public final ImageButton chevronLeft;
 
   @NonNull
+  public final FrameLayout fragmentContainer;
+
+  @NonNull
   public final ImageButton imageButton;
 
   @NonNull
   public final Button logoutbtn;
 
   @NonNull
-  public final TextView profileImage;
+  public final ImageButton mapButton;
+
+  @NonNull
+  public final TextView menuTitle;
+
+  @NonNull
+  public final ImageButton profileButton;
 
   private ActivityMenuBinding(@NonNull RelativeLayout rootView, @NonNull ImageButton chevronLeft,
-      @NonNull ImageButton imageButton, @NonNull Button logoutbtn, @NonNull TextView profileImage) {
+      @NonNull FrameLayout fragmentContainer, @NonNull ImageButton imageButton,
+      @NonNull Button logoutbtn, @NonNull ImageButton mapButton, @NonNull TextView menuTitle,
+      @NonNull ImageButton profileButton) {
     this.rootView = rootView;
     this.chevronLeft = chevronLeft;
+    this.fragmentContainer = fragmentContainer;
     this.imageButton = imageButton;
     this.logoutbtn = logoutbtn;
-    this.profileImage = profileImage;
+    this.mapButton = mapButton;
+    this.menuTitle = menuTitle;
+    this.profileButton = profileButton;
   }
 
   @Override
@@ -75,6 +90,12 @@ public final class ActivityMenuBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.fragment_container;
+      FrameLayout fragmentContainer = ViewBindings.findChildViewById(rootView, id);
+      if (fragmentContainer == null) {
+        break missingId;
+      }
+
       id = R.id.imageButton;
       ImageButton imageButton = ViewBindings.findChildViewById(rootView, id);
       if (imageButton == null) {
@@ -87,14 +108,26 @@ public final class ActivityMenuBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.profile_image;
-      TextView profileImage = ViewBindings.findChildViewById(rootView, id);
-      if (profileImage == null) {
+      id = R.id.mapButton;
+      ImageButton mapButton = ViewBindings.findChildViewById(rootView, id);
+      if (mapButton == null) {
         break missingId;
       }
 
-      return new ActivityMenuBinding((RelativeLayout) rootView, chevronLeft, imageButton, logoutbtn,
-          profileImage);
+      id = R.id.menuTitle;
+      TextView menuTitle = ViewBindings.findChildViewById(rootView, id);
+      if (menuTitle == null) {
+        break missingId;
+      }
+
+      id = R.id.profileButton;
+      ImageButton profileButton = ViewBindings.findChildViewById(rootView, id);
+      if (profileButton == null) {
+        break missingId;
+      }
+
+      return new ActivityMenuBinding((RelativeLayout) rootView, chevronLeft, fragmentContainer,
+          imageButton, logoutbtn, mapButton, menuTitle, profileButton);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

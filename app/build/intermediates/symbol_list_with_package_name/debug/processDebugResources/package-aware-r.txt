@@ -3485,6 +3485,7 @@ id floatingActionButton
 id forever
 id forgotPassword
 id fragmentContainer
+id fragment_container
 id fragment_container_view_tag
 id frameStackorConnectw
 id frost
@@ -3571,6 +3572,7 @@ id loginbtn
 id logoutbtn
 id ltr
 id m3_side_sheet
+id mapButton
 id marquee
 id masked
 id match_constraint
@@ -3596,6 +3598,7 @@ id material_timepicker_ok_button
 id material_timepicker_view
 id material_value_index
 id matrix
+id menuTitle
 id message
 id middle
 id mini
@@ -3715,6 +3718,7 @@ id position
 id postLayout
 id pressed
 id privacyAndSecurity
+id profileButton
 id profileImage
 id profile_image
 id progress_circular

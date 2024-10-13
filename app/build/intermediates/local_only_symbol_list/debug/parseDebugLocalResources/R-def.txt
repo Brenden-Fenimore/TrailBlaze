@@ -137,6 +137,7 @@ id finished
 id floatingActionButton
 id forgotPassword
 id fragmentContainer
+id fragment_container
 id frameStackorConnectw
 id hamburger
 id helpAndSupport
@@ -171,6 +172,8 @@ id linearRowFacebookOne
 id linearRowRememberpass
 id loginbtn
 id logoutbtn
+id mapButton
+id menuTitle
 id mobile_navigation
 id msg_termsandco2
 id msg_termsandco3
@@ -200,6 +203,7 @@ id pace
 id parkDescription
 id parkName
 id privacyAndSecurity
+id profileButton
 id profileImage
 id profile_image
 id pw

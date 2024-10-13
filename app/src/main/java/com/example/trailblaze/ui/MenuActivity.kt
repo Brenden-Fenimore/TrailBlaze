@@ -8,6 +8,8 @@ import com.example.trailblaze.R
 import android.widget.ImageButton
 import com.example.trailblaze.login.LoginActivity
 import com.example.trailblaze.settings.SettingsScreenActivity
+import com.example.trailblaze.ui.Map.MapFragment
+import com.example.trailblaze.ui.profile.ProfileFragment
 
 // Activity for the menu screen
 class MenuActivity : AppCompatActivity() {
@@ -30,6 +32,29 @@ class MenuActivity : AppCompatActivity() {
         logoutButton.setOnClickListener {
             handleLogout()
         }
+
+        // Initialize the mapButton
+        val mapButton = findViewById<ImageButton>(R.id.mapButton)
+
+        // Set the click listener for the mapButton
+        mapButton.setOnClickListener {
+            val fragment = MapFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
+        // Profile button -> Navigate to ProfileFragment
+        val profileButton = findViewById<ImageButton>(R.id.profileButton)
+        profileButton.setOnClickListener {
+            val fragment = ProfileFragment()  // Replace with actual fragment
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
 
     }
 
