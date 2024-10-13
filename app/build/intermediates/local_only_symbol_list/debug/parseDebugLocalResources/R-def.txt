@@ -350,6 +350,7 @@ string login1
 string logout
 string lorem_ipsum
 string map_image
+string menuTitle
 string next
 string notificationTitle
 string ok
