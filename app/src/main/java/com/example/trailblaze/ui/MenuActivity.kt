@@ -2,9 +2,11 @@ package com.example.trailblaze.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trailblaze.R
 import android.widget.ImageButton
+import com.example.trailblaze.login.LoginActivity
 import com.example.trailblaze.settings.SettingsScreenActivity
 
 // Activity for the menu screen
@@ -23,5 +25,24 @@ class MenuActivity : AppCompatActivity() {
             val intent = Intent(this, SettingsScreenActivity::class.java)
             startActivity(intent)
         }
+
+        val logoutButton = findViewById<Button>(R.id.logoutbtn)
+        logoutButton.setOnClickListener {
+            handleLogout()
+        }
+
+    }
+
+    // Helper function to handle logout logic
+    private fun handleLogout() {
+        val sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("isLoggedIn", false)
+        editor.apply()
+
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(intent)
+        finish()
     }
 }

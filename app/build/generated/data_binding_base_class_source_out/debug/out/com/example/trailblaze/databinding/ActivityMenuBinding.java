@@ -4,6 +4,7 @@ package com.example.trailblaze.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -27,13 +28,17 @@ public final class ActivityMenuBinding implements ViewBinding {
   public final ImageButton imageButton;
 
   @NonNull
+  public final Button logoutbtn;
+
+  @NonNull
   public final TextView profileImage;
 
   private ActivityMenuBinding(@NonNull RelativeLayout rootView, @NonNull ImageButton chevronLeft,
-      @NonNull ImageButton imageButton, @NonNull TextView profileImage) {
+      @NonNull ImageButton imageButton, @NonNull Button logoutbtn, @NonNull TextView profileImage) {
     this.rootView = rootView;
     this.chevronLeft = chevronLeft;
     this.imageButton = imageButton;
+    this.logoutbtn = logoutbtn;
     this.profileImage = profileImage;
   }
 
@@ -76,13 +81,19 @@ public final class ActivityMenuBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.logoutbtn;
+      Button logoutbtn = ViewBindings.findChildViewById(rootView, id);
+      if (logoutbtn == null) {
+        break missingId;
+      }
+
       id = R.id.profile_image;
       TextView profileImage = ViewBindings.findChildViewById(rootView, id);
       if (profileImage == null) {
         break missingId;
       }
 
-      return new ActivityMenuBinding((RelativeLayout) rootView, chevronLeft, imageButton,
+      return new ActivityMenuBinding((RelativeLayout) rootView, chevronLeft, imageButton, logoutbtn,
           profileImage);
     }
     String missingId = rootView.getResources().getResourceName(id);

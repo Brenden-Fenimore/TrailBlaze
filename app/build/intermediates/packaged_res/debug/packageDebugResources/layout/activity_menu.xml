@@ -182,10 +182,12 @@
 
     <!-- Logout button at the bottom of the screen -->
     <Button
-            android:text="@string/logout"
+            android:id="@+id/logoutbtn"
+            android:text="@string/titleLogout"
+            android:layout_width="304dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_width="115dp"
-            android:layout_height="65dp" />
+            android:layout_centerHorizontal="true">
+    </Button>
 
 </RelativeLayout>
