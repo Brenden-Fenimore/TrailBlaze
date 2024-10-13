@@ -1,5 +1,6 @@
 package com.example.trailblaze.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import com.example.trailblaze.ParksAdapter
 import com.example.trailblaze.RetrofitInstance
 import com.example.trailblaze.NPSResponse
 import com.example.trailblaze.databinding.FragmentHomeBinding
+import com.example.trailblaze.ui.MenuActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,6 +36,12 @@ class HomeFragment : Fragment() {
         recyclerView.adapter = parksAdapter                                     // Set adapter to RecyclerView
 
         fetchParksData()                                                        // Fetch park data from API
+
+        // Set onClickListener for the hamburger button to navigate to MenuActivity
+        binding.hamburger.setOnClickListener {
+            val intent = Intent(requireContext(), MenuActivity::class.java)
+            startActivity(intent)
+        }
 
         return root
     }

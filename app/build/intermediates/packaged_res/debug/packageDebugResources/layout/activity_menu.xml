@@ -6,9 +6,11 @@
              android:orientation="vertical"
              tools:context=".ui.favorites.FavoritesFragment">
 
+    <!-- Parent RelativeLayout for back and settings buttons -->
     <RelativeLayout android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+        <!-- Back button (left arrow) -->
         <ImageButton
                 app:srcCompat="@drawable/baseline_arrow_back_ios_new_24"
                 android:contentDescription="@string/btn_back"
@@ -18,6 +20,7 @@
                 android:background="@android:color/transparent"
                 android:layout_centerVertical="true"/>
 
+        <!-- Settings button (right side) -->
         <ImageButton
                 android:src="@drawable/baseline_settings_24"
                 android:contentDescription="@string/settings"
@@ -30,12 +33,14 @@
 
     </RelativeLayout>
 
+    <!-- LinearLayout for profile picture and username -->
     <LinearLayout
             android:orientation="vertical"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+        <!-- Profile picture (ImageView) -->
         <ImageView
                 android:layout_width="335dp"
                 android:layout_height="232dp"
@@ -44,6 +49,7 @@
                 android:paddingTop="68dp"
                 android:layout_gravity="center"/>
 
+        <!-- Username TextView -->
         <TextView
                 android:id="@+id/profile_image"
                 android:layout_width="wrap_content"
@@ -53,12 +59,14 @@
 
         </TextView>
 
+        <!-- Section containing multiple items (map, profile, favorites, etc.) -->
         <LinearLayout
                 android:layout_marginTop="40dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+            <!-- Map section with icon and label -->
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:orientation="horizontal">
@@ -80,6 +88,7 @@
 
             </LinearLayout>
 
+            <!-- Profile section -->
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:orientation="horizontal">
@@ -101,6 +110,7 @@
 
             </LinearLayout>
 
+            <!-- Favorites section -->
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:orientation="horizontal">
@@ -122,6 +132,7 @@
 
             </LinearLayout>
 
+            <!-- Help Center section -->
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:orientation="horizontal">
@@ -143,6 +154,7 @@
 
             </LinearLayout>
 
+            <!-- Contact Us section -->
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:orientation="horizontal">
@@ -167,6 +179,8 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <!-- Logout button at the bottom of the screen -->
     <Button
             android:text="@string/logout"
             android:layout_alignParentBottom="true"

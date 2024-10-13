@@ -11,8 +11,8 @@
     <ImageButton
             android:id="@+id/hamburger"
             android:src="@drawable/hamburger_menu"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
+            android:layout_width="51dp"
+            android:layout_height="57dp"
             android:backgroundTint="#25FFFFFF"
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp" android:scaleY="1" android:scaleX="1"/>
