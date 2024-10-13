@@ -19,9 +19,9 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var parksAdapter: ParksAdapter // Adapter to display park data
+    private lateinit var binding: ActivityMainBinding   // ViewBinding for the main layout
+    private lateinit var recyclerView: RecyclerView     // RecyclerView to display parks
+    private lateinit var parksAdapter: ParksAdapter     // Adapter to display park data
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         //hide the ActionBar
         supportActionBar?.hide()
 
+            // Inflate the layout using ViewBinding
             binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(binding.root)
 
@@ -43,14 +44,16 @@ class MainActivity : AppCompatActivity() {
             navView.setupWithNavController(navController)
 
             // Initialize RecyclerView and adapter
-            recyclerView = findViewById(R.id.recyclerView)
-            parksAdapter = ParksAdapter(emptyList()) // Initialize with an empty list
-            recyclerView.adapter = parksAdapter // Set the adapter
+            recyclerView = findViewById(R.id.recyclerView)                  // Manually find RecyclerView and set it up
+            parksAdapter = ParksAdapter(emptyList())                        // Initialize with an empty list
+            recyclerView.layoutManager = LinearLayoutManager(this)  // Set vertical layout for RecyclerView
+            recyclerView.adapter = parksAdapter                             // Assign adapter to RecyclerView
 
-            // API Call logic
+            // Call the API to fetch park data
             RetrofitInstance.api.getParks(10).enqueue(object : Callback<NPSResponse> {
                 override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
                     if (response.isSuccessful) {
+                        // Update the RecyclerView with parks data from the API
                         val parks = response.body()?.data
                         parks?.let {
                             // Pass the park data to the RecyclerView adapter to display it

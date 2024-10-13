@@ -18,32 +18,32 @@ import retrofit2.Response
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding!!      // Safe access to binding when it's non-null
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var parksAdapter: ParksAdapter
+    private lateinit var recyclerView: RecyclerView     // RecyclerView to display parks
+    private lateinit var parksAdapter: ParksAdapter     // Adapter for RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)      // Inflate layout using ViewBinding
         val root: View = binding.root
 
         // Initialize RecyclerView
-        recyclerView = binding.recyclerView // Assuming your FragmentHomeBinding includes recyclerView
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        parksAdapter = ParksAdapter(emptyList())
-        recyclerView.adapter = parksAdapter
+        recyclerView = binding.recyclerView
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())      // Set vertical layout
+        parksAdapter = ParksAdapter(emptyList())                                // Initialize adapter with an empty list
+        recyclerView.adapter = parksAdapter                                     // Set adapter to RecyclerView
 
-        // Fetch data
-        fetchParksData()
+        fetchParksData()                                                        // Fetch park data from API
 
         return root
     }
 
+    // Function to fetch park data using Retrofit
     private fun fetchParksData() {
         RetrofitInstance.api.getParks(10).enqueue(object : Callback<NPSResponse> {
             override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
                 if (response.isSuccessful) {
-                    val parks = response.body()?.data
+                    val parks = response.body()?.data                           // Update the RecyclerView with fetched parks data
                     parks?.let {
                         parksAdapter.updateData(it)
                     }
@@ -51,13 +51,12 @@ class HomeFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
-                // Handle failure
             }
         })
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        _binding = null                                                         // Release binding when view is destroyed
     }
 }

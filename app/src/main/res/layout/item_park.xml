@@ -4,6 +4,7 @@
               android:orientation="vertical"
               android:padding="16dp">
 
+    <!-- TextView for displaying park name -->
     <TextView
             android:id="@+id/parkName"
             android:layout_width="wrap_content"
@@ -11,6 +12,7 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+    <!-- TextView for displaying park description -->
     <TextView
             android:id="@+id/parkDescription"
             android:layout_width="wrap_content"
