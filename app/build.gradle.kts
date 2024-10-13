@@ -77,4 +77,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
     implementation("com.google.firebase:firebase-analytics")
+
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1") // Use the latest version
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1") // Use the latest version
+
+    implementation("com.google.firebase:firebase-storage")
 }

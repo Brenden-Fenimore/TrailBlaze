@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+    <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+                android:id="@+id/aspectsTitle"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="@string/options"
+                android:textSize="20sp"
+                android:fontFamily="@font/amethysta"
+                android:layout_marginBottom="50dp"
+                android:layout_width="305dp"
+                android:layout_height="wrap_content"/>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingEnd="9dp"
+                android:paddingStart="9dp">
+            <TextView
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/amethysta"
+                    android:layout_gravity="center"
+                    android:id="@+id/terrain"
+                    android:text="Terrain"/>
+            <Spinner
+                    android:id="@+id/spinner1"
+                    android:layout_width="195dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"/>
+        </LinearLayout>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearColumnEmail"
+                android:orientation="horizontal"
+                android:paddingEnd="9dp"
+                android:paddingStart="9dp">
+            <TextView
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/amethysta"
+                    android:layout_gravity="center"
+                    android:text="Fitness Level"/>
+            <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="195dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"/>
+        </LinearLayout>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingEnd="9dp"
+                android:paddingStart="9dp">
+            <TextView
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/amethysta"
+                    android:layout_gravity="center"
+                    android:id="@+id/difficultyLevel"
+                    android:text="Difficulty Level"/>
+            <Spinner
+                    android:id="@+id/spinner3"
+                    android:layout_width="195dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"/>
+        </LinearLayout>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingEnd="9dp"
+                android:paddingStart="9dp">
+            <TextView
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/amethysta"
+                    android:layout_gravity="center"
+                    android:id="@+id/type"
+                    android:text="Type of Hike"/>
+            <Spinner
+                    android:id="@+id/spinner4"
+                    android:layout_width="195dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"/>
+        </LinearLayout>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+    </LinearLayout>
+
+    <Button
+            android:text="Finished"
+            android:layout_width="304dp"
+            android:fontFamily="@font/amethysta"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/finished">
+    </Button>
+
+</RelativeLayout>

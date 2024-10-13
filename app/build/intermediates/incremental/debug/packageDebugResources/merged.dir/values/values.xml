@@ -69,11 +69,11 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="friends">Friends</string>
     <string name="friendsAdd">Add as a trusted Contact/Watcher</string>
     <string name="friendsProfile1">Friends in Common</string>
-    <string name="gcm_defaultSenderId" translatable="false">1062654999155</string>
-    <string name="google_api_key" translatable="false">AIzaSyCu0aPzFmwyM33iA1LWKJvAp_HROEdWcFk</string>
-    <string name="google_app_id" translatable="false">1:1062654999155:android:3169d9d2594b6e27894806</string>
-    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCu0aPzFmwyM33iA1LWKJvAp_HROEdWcFk</string>
-    <string name="google_storage_bucket" translatable="false">trailblaze-848aa.appspot.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">1017354103686</string>
+    <string name="google_api_key" translatable="false">AIzaSyBUWF7u2Ek-DOZjOS0bMxIWPLNrJjiqhQ4</string>
+    <string name="google_app_id" translatable="false">1:1017354103686:android:16bf2db4495f7ab07eda07</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBUWF7u2Ek-DOZjOS0bMxIWPLNrJjiqhQ4</string>
+    <string name="google_storage_bucket" translatable="false">trailblaze-48640.appspot.com</string>
     <string name="helloFavorites">Hello FAVORITES Fragment</string>
     <string name="helloHome">Hello HOME Fragment</string>
     <string name="helloMap">Hello MAP Fragment</string>
@@ -156,7 +156,7 @@ With customization options, the latest updates on trails, and an expansive commu
     </string>
     <string name="profile">Profile</string>
     <string name="profilePicture">Profile Picture</string>
-    <string name="project_id" translatable="false">trailblaze-848aa</string>
+    <string name="project_id" translatable="false">trailblaze-48640</string>
     <string name="rememberPassword">Remember Password</string>
     <string name="reviewTerms">Review Terms and Conditions</string>
     <string name="safetyTips">Safety Tips</string>

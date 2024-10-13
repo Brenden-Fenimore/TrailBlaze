@@ -83,11 +83,16 @@ class SettingsScreenActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //set click listener for account
         toAccount.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
+
+            //pass the fragment name
             intent.putExtra("fragment_to_load", "EditProfileFragment")
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
+
+            //close the current activity
             finish()
         }
         }

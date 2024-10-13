@@ -90,8 +90,8 @@
                     android:layout_margin="16dp"
                     android:background="@drawable/edittext_background"
                     android:padding="12dp"
-                    android:scrollbars="vertical" />
-
+                    android:scrollbars="vertical"
+                    android:gravity="top|start"/>
         </LinearLayout>
     </LinearLayout>
 

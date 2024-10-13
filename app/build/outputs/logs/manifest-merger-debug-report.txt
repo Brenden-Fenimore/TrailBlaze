@@ -16,10 +16,12 @@ MERGED from [androidx.navigation:navigation-ui-ktx:2.6.0] /Users/mamiegartin/.gr
 MERGED from [androidx.navigation:navigation-ui:2.6.0] /Users/mamiegartin/.gradle/caches/transforms-4/74543d8f8e957e35b4a2e432737a9458/transformed/navigation-ui-2.6.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.material:material:1.10.0] /Users/mamiegartin/.gradle/caches/transforms-4/67aed5640c008e0c862e1a53a282ae88/transformed/material-1.10.0/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:firebase-auth-ktx:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/4994f814f1fde093d7e39f2c14cd3f0a/transformed/firebase-auth-ktx-23.0.0/AndroidManifest.xml:2:1-17:12
+MERGED from [com.google.firebase:firebase-storage:21.0.1] /Users/mamiegartin/.gradle/caches/transforms-4/36bb2816c45d13e8b6da55496e2f411f/transformed/firebase-storage-21.0.1/AndroidManifest.xml:15:1-39:12
 MERGED from [com.google.firebase:firebase-auth:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:17:1-75:12
 MERGED from [com.google.firebase:firebase-firestore:25.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:2:1-26:12
 MERGED from [com.google.firebase:firebase-analytics:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/079a44e2c2af6d23f49cf9d2adc29c07/transformed/firebase-analytics-22.1.2/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-measurement-api:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:17:1-43:12
+MERGED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/76a3bca46bbf9bb14b4be2f3f143a872/transformed/firebase-appcheck-18.0.0/AndroidManifest.xml:15:1-34:12
 MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:2:1-24:12
 MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/650d565031b7626952d0b0cdf7d482db/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:2:1-18:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /Users/mamiegartin/.gradle/caches/transforms-4/e069a73959e124d8208cb4e4c65e9649/transformed/constraintlayout-2.1.4/AndroidManifest.xml:2:1-11:12
@@ -60,7 +62,7 @@ MERGED from [com.google.android.gms:play-services-ads-identifier:18.0.0] /Users/
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/aee8a6a45f649540470fb03f57493cb0/transformed/play-services-measurement-sdk-api-22.1.2/AndroidManifest.xml:17:1-30:12
 MERGED from [com.google.android.gms:play-services-measurement-base:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/9fa70023dba0c0ef9a7b13aa7d5db820/transformed/play-services-measurement-base-22.1.2/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/mamiegartin/.gradle/caches/transforms-4/0895ae9b71245a8fe736a622069a46c9/transformed/play-services-stats-17.0.2/AndroidManifest.xml:2:1-9:12
-MERGED from [com.google.firebase:firebase-appcheck-interop:17.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/c606d1385ecd29f343ddf975bcb8da80/transformed/firebase-appcheck-interop-17.0.0/AndroidManifest.xml:15:1-25:12
+MERGED from [com.google.firebase:firebase-appcheck-interop:17.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/7ad2231048a396e286b804807ea8dc47/transformed/firebase-appcheck-interop-17.1.0/AndroidManifest.xml:15:1-23:12
 MERGED from [com.google.android.gms:play-services-fido:20.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/51a1af4ad7423ec8f53c2aa8449c3159/transformed/play-services-fido-20.1.0/AndroidManifest.xml:2:1-10:12
 MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/9df44dc82c1095d7355ed4b19f505015/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/644bb53c2dbfbdb36db2bc0ebce423fe/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
@@ -145,6 +147,8 @@ MERGED from [com.google.android.material:material:1.10.0] /Users/mamiegartin/.gr
 MERGED from [com.google.android.material:material:1.10.0] /Users/mamiegartin/.gradle/caches/transforms-4/67aed5640c008e0c862e1a53a282ae88/transformed/material-1.10.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.firebase:firebase-auth-ktx:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/4994f814f1fde093d7e39f2c14cd3f0a/transformed/firebase-auth-ktx-23.0.0/AndroidManifest.xml:7:5-15:19
 MERGED from [com.google.firebase:firebase-auth-ktx:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/4994f814f1fde093d7e39f2c14cd3f0a/transformed/firebase-auth-ktx-23.0.0/AndroidManifest.xml:7:5-15:19
+MERGED from [com.google.firebase:firebase-storage:21.0.1] /Users/mamiegartin/.gradle/caches/transforms-4/36bb2816c45d13e8b6da55496e2f411f/transformed/firebase-storage-21.0.1/AndroidManifest.xml:26:5-37:19
+MERGED from [com.google.firebase:firebase-storage:21.0.1] /Users/mamiegartin/.gradle/caches/transforms-4/36bb2816c45d13e8b6da55496e2f411f/transformed/firebase-storage-21.0.1/AndroidManifest.xml:26:5-37:19
 MERGED from [com.google.firebase:firebase-auth:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:28:5-73:19
 MERGED from [com.google.firebase:firebase-auth:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:28:5-73:19
 MERGED from [com.google.firebase:firebase-firestore:25.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:13:5-24:19
@@ -153,6 +157,8 @@ MERGED from [com.google.firebase:firebase-analytics:22.1.2] /Users/mamiegartin/.
 MERGED from [com.google.firebase:firebase-analytics:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/079a44e2c2af6d23f49cf9d2adc29c07/transformed/firebase-analytics-22.1.2/AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-measurement-api:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:29:5-41:19
 MERGED from [com.google.android.gms:play-services-measurement-api:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:29:5-41:19
+MERGED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/76a3bca46bbf9bb14b4be2f3f143a872/transformed/firebase-appcheck-18.0.0/AndroidManifest.xml:21:5-32:19
+MERGED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/76a3bca46bbf9bb14b4be2f3f143a872/transformed/firebase-appcheck-18.0.0/AndroidManifest.xml:21:5-32:19
 MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:11:5-22:19
 MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:11:5-22:19
 MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/650d565031b7626952d0b0cdf7d482db/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:8:5-16:19
@@ -185,8 +191,8 @@ MERGED from [com.google.android.gms:play-services-measurement-base:22.1.2] /User
 MERGED from [com.google.android.gms:play-services-measurement-base:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/9fa70023dba0c0ef9a7b13aa7d5db820/transformed/play-services-measurement-base-22.1.2/AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/mamiegartin/.gradle/caches/transforms-4/0895ae9b71245a8fe736a622069a46c9/transformed/play-services-stats-17.0.2/AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/mamiegartin/.gradle/caches/transforms-4/0895ae9b71245a8fe736a622069a46c9/transformed/play-services-stats-17.0.2/AndroidManifest.xml:7:5-20
-MERGED from [com.google.firebase:firebase-appcheck-interop:17.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/c606d1385ecd29f343ddf975bcb8da80/transformed/firebase-appcheck-interop-17.0.0/AndroidManifest.xml:23:5-20
-MERGED from [com.google.firebase:firebase-appcheck-interop:17.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/c606d1385ecd29f343ddf975bcb8da80/transformed/firebase-appcheck-interop-17.0.0/AndroidManifest.xml:23:5-20
+MERGED from [com.google.firebase:firebase-appcheck-interop:17.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/7ad2231048a396e286b804807ea8dc47/transformed/firebase-appcheck-interop-17.1.0/AndroidManifest.xml:21:5-20
+MERGED from [com.google.firebase:firebase-appcheck-interop:17.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/7ad2231048a396e286b804807ea8dc47/transformed/firebase-appcheck-interop-17.1.0/AndroidManifest.xml:21:5-20
 MERGED from [com.google.android.gms:play-services-fido:20.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/51a1af4ad7423ec8f53c2aa8449c3159/transformed/play-services-fido-20.1.0/AndroidManifest.xml:7:5-8:19
 MERGED from [com.google.android.gms:play-services-fido:20.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/51a1af4ad7423ec8f53c2aa8449c3159/transformed/play-services-fido-20.1.0/AndroidManifest.xml:7:5-8:19
 MERGED from [androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] /Users/mamiegartin/.gradle/caches/transforms-4/0634bdd8665fb7974ea7f88adc6ddefc/transformed/ads-adservices-1.0.0-beta05/AndroidManifest.xml:22:5-26:19
@@ -385,6 +391,8 @@ MERGED from [com.google.android.material:material:1.10.0] /Users/mamiegartin/.gr
 MERGED from [com.google.android.material:material:1.10.0] /Users/mamiegartin/.gradle/caches/transforms-4/67aed5640c008e0c862e1a53a282ae88/transformed/material-1.10.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-auth-ktx:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/4994f814f1fde093d7e39f2c14cd3f0a/transformed/firebase-auth-ktx-23.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-auth-ktx:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/4994f814f1fde093d7e39f2c14cd3f0a/transformed/firebase-auth-ktx-23.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-storage:21.0.1] /Users/mamiegartin/.gradle/caches/transforms-4/36bb2816c45d13e8b6da55496e2f411f/transformed/firebase-storage-21.0.1/AndroidManifest.xml:19:5-44
+MERGED from [com.google.firebase:firebase-storage:21.0.1] /Users/mamiegartin/.gradle/caches/transforms-4/36bb2816c45d13e8b6da55496e2f411f/transformed/firebase-storage-21.0.1/AndroidManifest.xml:19:5-44
 MERGED from [com.google.firebase:firebase-auth:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:21:5-23:151
 MERGED from [com.google.firebase:firebase-auth:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:21:5-23:151
 MERGED from [com.google.firebase:firebase-firestore:25.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:6:5-44
@@ -393,6 +401,8 @@ MERGED from [com.google.firebase:firebase-analytics:22.1.2] /Users/mamiegartin/.
 MERGED from [com.google.firebase:firebase-analytics:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/079a44e2c2af6d23f49cf9d2adc29c07/transformed/firebase-analytics-22.1.2/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-measurement-api:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-measurement-api:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/76a3bca46bbf9bb14b4be2f3f143a872/transformed/firebase-appcheck-18.0.0/AndroidManifest.xml:18:5-44
+MERGED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/76a3bca46bbf9bb14b4be2f3f143a872/transformed/firebase-appcheck-18.0.0/AndroidManifest.xml:18:5-44
 MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/650d565031b7626952d0b0cdf7d482db/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:5:5-44
@@ -473,8 +483,8 @@ MERGED from [com.google.android.gms:play-services-measurement-base:22.1.2] /User
 MERGED from [com.google.android.gms:play-services-measurement-base:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/9fa70023dba0c0ef9a7b13aa7d5db820/transformed/play-services-measurement-base-22.1.2/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/mamiegartin/.gradle/caches/transforms-4/0895ae9b71245a8fe736a622069a46c9/transformed/play-services-stats-17.0.2/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/mamiegartin/.gradle/caches/transforms-4/0895ae9b71245a8fe736a622069a46c9/transformed/play-services-stats-17.0.2/AndroidManifest.xml:5:5-44
-MERGED from [com.google.firebase:firebase-appcheck-interop:17.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/c606d1385ecd29f343ddf975bcb8da80/transformed/firebase-appcheck-interop-17.0.0/AndroidManifest.xml:18:5-20:41
-MERGED from [com.google.firebase:firebase-appcheck-interop:17.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/c606d1385ecd29f343ddf975bcb8da80/transformed/firebase-appcheck-interop-17.0.0/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.firebase:firebase-appcheck-interop:17.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/7ad2231048a396e286b804807ea8dc47/transformed/firebase-appcheck-interop-17.1.0/AndroidManifest.xml:18:5-44
+MERGED from [com.google.firebase:firebase-appcheck-interop:17.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/7ad2231048a396e286b804807ea8dc47/transformed/firebase-appcheck-interop-17.1.0/AndroidManifest.xml:18:5-44
 MERGED from [com.google.android.gms:play-services-fido:20.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/51a1af4ad7423ec8f53c2aa8449c3159/transformed/play-services-fido-20.1.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-fido:20.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/51a1af4ad7423ec8f53c2aa8449c3159/transformed/play-services-fido-20.1.0/AndroidManifest.xml:5:5-44
 MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/9df44dc82c1095d7355ed4b19f505015/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
@@ -615,12 +625,16 @@ service#com.google.firebase.components.ComponentDiscoveryService
 ADDED from [com.google.firebase:firebase-firestore-ktx:25.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/fcadb54a5146fb15ad617720a8a2b06f/transformed/firebase-firestore-ktx-25.1.0/AndroidManifest.xml:9:9-15:19
 MERGED from [com.google.firebase:firebase-auth-ktx:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/4994f814f1fde093d7e39f2c14cd3f0a/transformed/firebase-auth-ktx-23.0.0/AndroidManifest.xml:8:9-14:19
 MERGED from [com.google.firebase:firebase-auth-ktx:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/4994f814f1fde093d7e39f2c14cd3f0a/transformed/firebase-auth-ktx-23.0.0/AndroidManifest.xml:8:9-14:19
+MERGED from [com.google.firebase:firebase-storage:21.0.1] /Users/mamiegartin/.gradle/caches/transforms-4/36bb2816c45d13e8b6da55496e2f411f/transformed/firebase-storage-21.0.1/AndroidManifest.xml:27:9-36:19
+MERGED from [com.google.firebase:firebase-storage:21.0.1] /Users/mamiegartin/.gradle/caches/transforms-4/36bb2816c45d13e8b6da55496e2f411f/transformed/firebase-storage-21.0.1/AndroidManifest.xml:27:9-36:19
 MERGED from [com.google.firebase:firebase-auth:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:66:9-72:19
 MERGED from [com.google.firebase:firebase-auth:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:66:9-72:19
 MERGED from [com.google.firebase:firebase-firestore:25.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:14:9-23:19
 MERGED from [com.google.firebase:firebase-firestore:25.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:14:9-23:19
 MERGED from [com.google.android.gms:play-services-measurement-api:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:34:9-40:19
 MERGED from [com.google.android.gms:play-services-measurement-api:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:34:9-40:19
+MERGED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/76a3bca46bbf9bb14b4be2f3f143a872/transformed/firebase-appcheck-18.0.0/AndroidManifest.xml:22:9-31:19
+MERGED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/76a3bca46bbf9bb14b4be2f3f143a872/transformed/firebase-appcheck-18.0.0/AndroidManifest.xml:22:9-31:19
 MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:12:9-21:19
 MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:12:9-21:19
 MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/650d565031b7626952d0b0cdf7d482db/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:9:9-15:19
@@ -647,26 +661,10 @@ ADDED from [com.google.firebase:firebase-auth-ktx:23.0.0] /Users/mamiegartin/.gr
 		ADDED from [com.google.firebase:firebase-auth-ktx:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/4994f814f1fde093d7e39f2c14cd3f0a/transformed/firebase-auth-ktx-23.0.0/AndroidManifest.xml:13:17-82
 	android:name
 		ADDED from [com.google.firebase:firebase-auth-ktx:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/4994f814f1fde093d7e39f2c14cd3f0a/transformed/firebase-auth-ktx-23.0.0/AndroidManifest.xml:12:17-119
-uses-permission#android.permission.INTERNET
-ADDED from [com.google.firebase:firebase-auth:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:25:5-67
-MERGED from [com.google.firebase:firebase-firestore:25.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:11:5-67
-MERGED from [com.google.firebase:firebase-firestore:25.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:11:5-67
-MERGED from [com.google.android.gms:play-services-measurement-api:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:22:5-67
-MERGED from [com.google.android.gms:play-services-measurement-api:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:22:5-67
-MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:8:5-67
-MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:8:5-67
-MERGED from [com.google.android.gms:play-services-measurement:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:23:5-67
-MERGED from [com.google.android.gms:play-services-measurement:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:23:5-67
-MERGED from [com.google.android.recaptcha:recaptcha:18.4.0] /Users/mamiegartin/.gradle/caches/transforms-4/bf6c315dcd24da2e72a3c9da06cb78e1/transformed/recaptcha-18.4.0/AndroidManifest.xml:7:5-67
-MERGED from [com.google.android.recaptcha:recaptcha:18.4.0] /Users/mamiegartin/.gradle/caches/transforms-4/bf6c315dcd24da2e72a3c9da06cb78e1/transformed/recaptcha-18.4.0/AndroidManifest.xml:7:5-67
-MERGED from [com.google.android.gms:play-services-measurement-impl:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/6b9c0d578d0703278870101362afe2de/transformed/play-services-measurement-impl-22.1.2/AndroidManifest.xml:23:5-67
-MERGED from [com.google.android.gms:play-services-measurement-impl:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/6b9c0d578d0703278870101362afe2de/transformed/play-services-measurement-impl-22.1.2/AndroidManifest.xml:23:5-67
-MERGED from [com.google.android.gms:play-services-measurement-sdk-api:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/aee8a6a45f649540470fb03f57493cb0/transformed/play-services-measurement-sdk-api-22.1.2/AndroidManifest.xml:23:5-67
-MERGED from [com.google.android.gms:play-services-measurement-sdk-api:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/aee8a6a45f649540470fb03f57493cb0/transformed/play-services-measurement-sdk-api-22.1.2/AndroidManifest.xml:23:5-67
-	android:name
-		ADDED from [com.google.firebase:firebase-auth:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:25:22-64
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from [com.google.firebase:firebase-auth:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:26:5-79
+ADDED from [com.google.firebase:firebase-storage:21.0.1] /Users/mamiegartin/.gradle/caches/transforms-4/36bb2816c45d13e8b6da55496e2f411f/transformed/firebase-storage-21.0.1/AndroidManifest.xml:23:5-79
+MERGED from [com.google.firebase:firebase-auth:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:26:5-79
+MERGED from [com.google.firebase:firebase-auth:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:26:5-79
 MERGED from [com.google.firebase:firebase-firestore:25.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:10:5-79
 MERGED from [com.google.firebase:firebase-firestore:25.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:10:5-79
 MERGED from [com.google.android.gms:play-services-measurement-api:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:23:5-79
@@ -684,7 +682,39 @@ MERGED from [com.google.android.gms:play-services-measurement-sdk-api:22.1.2] /U
 MERGED from [io.grpc:grpc-android:1.62.2] /Users/mamiegartin/.gradle/caches/transforms-4/d6d8205985b9e77e986cf32bad85bbfe/transformed/grpc-android-1.62.2/AndroidManifest.xml:7:5-79
 MERGED from [io.grpc:grpc-android:1.62.2] /Users/mamiegartin/.gradle/caches/transforms-4/d6d8205985b9e77e986cf32bad85bbfe/transformed/grpc-android-1.62.2/AndroidManifest.xml:7:5-79
 	android:name
-		ADDED from [com.google.firebase:firebase-auth:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:26:22-76
+		ADDED from [com.google.firebase:firebase-storage:21.0.1] /Users/mamiegartin/.gradle/caches/transforms-4/36bb2816c45d13e8b6da55496e2f411f/transformed/firebase-storage-21.0.1/AndroidManifest.xml:23:22-76
+uses-permission#android.permission.INTERNET
+ADDED from [com.google.firebase:firebase-storage:21.0.1] /Users/mamiegartin/.gradle/caches/transforms-4/36bb2816c45d13e8b6da55496e2f411f/transformed/firebase-storage-21.0.1/AndroidManifest.xml:24:5-67
+MERGED from [com.google.firebase:firebase-auth:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:25:5-67
+MERGED from [com.google.firebase:firebase-auth:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:25:5-67
+MERGED from [com.google.firebase:firebase-firestore:25.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:11:5-67
+MERGED from [com.google.firebase:firebase-firestore:25.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/9972e0c2cef98793349f9b91ca8e0fa8/transformed/firebase-firestore-25.1.0/AndroidManifest.xml:11:5-67
+MERGED from [com.google.android.gms:play-services-measurement-api:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:22:5-67
+MERGED from [com.google.android.gms:play-services-measurement-api:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:22:5-67
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:8:5-67
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:8:5-67
+MERGED from [com.google.android.gms:play-services-measurement:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/3a13c1f63de155fcaaacb49534963bda/transformed/play-services-measurement-22.1.2/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.recaptcha:recaptcha:18.4.0] /Users/mamiegartin/.gradle/caches/transforms-4/bf6c315dcd24da2e72a3c9da06cb78e1/transformed/recaptcha-18.4.0/AndroidManifest.xml:7:5-67
+MERGED from [com.google.android.recaptcha:recaptcha:18.4.0] /Users/mamiegartin/.gradle/caches/transforms-4/bf6c315dcd24da2e72a3c9da06cb78e1/transformed/recaptcha-18.4.0/AndroidManifest.xml:7:5-67
+MERGED from [com.google.android.gms:play-services-measurement-impl:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/6b9c0d578d0703278870101362afe2de/transformed/play-services-measurement-impl-22.1.2/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-impl:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/6b9c0d578d0703278870101362afe2de/transformed/play-services-measurement-impl-22.1.2/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/aee8a6a45f649540470fb03f57493cb0/transformed/play-services-measurement-sdk-api-22.1.2/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/aee8a6a45f649540470fb03f57493cb0/transformed/play-services-measurement-sdk-api-22.1.2/AndroidManifest.xml:23:5-67
+	android:name
+		ADDED from [com.google.firebase:firebase-storage:21.0.1] /Users/mamiegartin/.gradle/caches/transforms-4/36bb2816c45d13e8b6da55496e2f411f/transformed/firebase-storage-21.0.1/AndroidManifest.xml:24:22-64
+meta-data#com.google.firebase.components:com.google.firebase.storage.FirebaseStorageKtxRegistrar
+ADDED from [com.google.firebase:firebase-storage:21.0.1] /Users/mamiegartin/.gradle/caches/transforms-4/36bb2816c45d13e8b6da55496e2f411f/transformed/firebase-storage-21.0.1/AndroidManifest.xml:30:13-32:85
+	android:value
+		ADDED from [com.google.firebase:firebase-storage:21.0.1] /Users/mamiegartin/.gradle/caches/transforms-4/36bb2816c45d13e8b6da55496e2f411f/transformed/firebase-storage-21.0.1/AndroidManifest.xml:32:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-storage:21.0.1] /Users/mamiegartin/.gradle/caches/transforms-4/36bb2816c45d13e8b6da55496e2f411f/transformed/firebase-storage-21.0.1/AndroidManifest.xml:31:17-118
+meta-data#com.google.firebase.components:com.google.firebase.storage.StorageRegistrar
+ADDED from [com.google.firebase:firebase-storage:21.0.1] /Users/mamiegartin/.gradle/caches/transforms-4/36bb2816c45d13e8b6da55496e2f411f/transformed/firebase-storage-21.0.1/AndroidManifest.xml:33:13-35:85
+	android:value
+		ADDED from [com.google.firebase:firebase-storage:21.0.1] /Users/mamiegartin/.gradle/caches/transforms-4/36bb2816c45d13e8b6da55496e2f411f/transformed/firebase-storage-21.0.1/AndroidManifest.xml:35:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-storage:21.0.1] /Users/mamiegartin/.gradle/caches/transforms-4/36bb2816c45d13e8b6da55496e2f411f/transformed/firebase-storage-21.0.1/AndroidManifest.xml:34:17-107
 activity#com.google.firebase.auth.internal.GenericIdpActivity
 ADDED from [com.google.firebase:firebase-auth:23.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/31523b7f34b16533e3ca345afb6e5f8a/transformed/firebase-auth-23.0.0/AndroidManifest.xml:29:9-46:20
 	android:excludeFromRecents
@@ -795,6 +825,18 @@ ADDED from [com.google.android.gms:play-services-measurement-api:22.1.2] /Users/
 		ADDED from [com.google.android.gms:play-services-measurement-api:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:39:17-82
 	android:name
 		ADDED from [com.google.android.gms:play-services-measurement-api:22.1.2] /Users/mamiegartin/.gradle/caches/transforms-4/293e66f36f5e9e2ad213aef1174591f3/transformed/play-services-measurement-api-22.1.2/AndroidManifest.xml:38:17-139
+meta-data#com.google.firebase.components:com.google.firebase.appcheck.FirebaseAppCheckKtxRegistrar
+ADDED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/76a3bca46bbf9bb14b4be2f3f143a872/transformed/firebase-appcheck-18.0.0/AndroidManifest.xml:25:13-27:85
+	android:value
+		ADDED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/76a3bca46bbf9bb14b4be2f3f143a872/transformed/firebase-appcheck-18.0.0/AndroidManifest.xml:27:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/76a3bca46bbf9bb14b4be2f3f143a872/transformed/firebase-appcheck-18.0.0/AndroidManifest.xml:26:17-120
+meta-data#com.google.firebase.components:com.google.firebase.appcheck.FirebaseAppCheckRegistrar
+ADDED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/76a3bca46bbf9bb14b4be2f3f143a872/transformed/firebase-appcheck-18.0.0/AndroidManifest.xml:28:13-30:85
+	android:value
+		ADDED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/76a3bca46bbf9bb14b4be2f3f143a872/transformed/firebase-appcheck-18.0.0/AndroidManifest.xml:30:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/76a3bca46bbf9bb14b4be2f3f143a872/transformed/firebase-appcheck-18.0.0/AndroidManifest.xml:29:17-117
 meta-data#com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar
 ADDED from [com.google.firebase:firebase-installations:18.0.0] /Users/mamiegartin/.gradle/caches/transforms-4/ac60e8f0a5b436d237a18d1766cc4bfe/transformed/firebase-installations-18.0.0/AndroidManifest.xml:15:13-17:85
 	android:value

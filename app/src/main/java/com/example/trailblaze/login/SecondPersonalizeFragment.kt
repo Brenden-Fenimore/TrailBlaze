@@ -1,6 +1,7 @@
 package com.example.trailblaze.login
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +10,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import com.example.trailblaze.R
 import com.example.trailblaze.ui.UserPreferences.UserPreferences
+import com.example.trailblaze.ui.UserPreferences.UserPreferencesViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class SecondPersonalizeFragment : Fragment() {
 
@@ -24,6 +28,7 @@ class SecondPersonalizeFragment : Fragment() {
     lateinit var selectedValueTextView: TextView
     private var selectedFilterValue: Double = 0.0
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,7 +36,9 @@ class SecondPersonalizeFragment : Fragment() {
 
         //inflate the layout
         val view = inflater.inflate(R.layout.fragment_second_personalize, container, false)
+
         view.findViewById<Button>(R.id.continuebtn2).setOnClickListener {
+            saveUserPreferences()
             //navigate to ThirdFragment
             (activity as? PersonalizeActivity)?.loadFragment(ThirdPersonalizeFragment())
         }
@@ -41,6 +48,7 @@ class SecondPersonalizeFragment : Fragment() {
         zip = view.findViewById(R.id.etZip)
         seekBar = view.findViewById(R.id.seekBar)
         selectedValueTextView = view.findViewById(R.id.range)
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
 
         // Set up the SeekBar listener
         setupSeekBarListener()
@@ -74,13 +82,28 @@ class SecondPersonalizeFragment : Fragment() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
 
         if (userId != null) {
-            // Create a UserPreferences object
-            val userPreferences = UserPreferences(
-                city = userCity,
-                state = userState,
-                zip = userZip,
-                distance = userDistance.toDouble()
+            // Create a Firestore reference
+            val db = FirebaseFirestore.getInstance()
+            val userRef = db.collection("users").document(userId)
+
+            // Create a map of data to save
+            val userPreferences = hashMapOf(
+                "city" to userCity,
+                "state" to userState,
+                "zip" to userZip,
+                "distance" to userDistance
             )
+
+            // Save the data to Firestore
+            userRef.set(userPreferences)
+                .addOnSuccessListener {
+                    // Data saved successfully
+                    Log.d("Firebase", "User preferences saved successfully")
+                }
+                .addOnFailureListener { e ->
+                    // Error saving data
+                    Log.w("Firebase", "Error saving user preferences", e)
+                }
         }
     }
 }
