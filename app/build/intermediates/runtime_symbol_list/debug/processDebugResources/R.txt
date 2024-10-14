@@ -87,7 +87,11 @@ int animator nav_default_pop_exit_anim 0x7f020025
 int array com_google_android_gms_fonts_certs 0x7f030000
 int array com_google_android_gms_fonts_certs_dev 0x7f030001
 int array com_google_android_gms_fonts_certs_prod 0x7f030002
+int array difficulty_level_options 0x7f030004
+int array fitness_level_options 0x7f030005
+int array hike_type_options 0x7f030006
 int array preloaded_fonts 0x7f030003
+int array terrain_options 0x7f030007
 int attr SharedValue 0x7f040000
 int attr SharedValueId 0x7f040001
 int attr action 0x7f040002
@@ -3041,6 +3045,8 @@ int drawable btn_radio_off_mtrl 0x7f080086
 int drawable btn_radio_off_to_on_mtrl_animation 0x7f080087
 int drawable btn_radio_on_mtrl 0x7f080088
 int drawable btn_radio_on_to_off_mtrl_animation 0x7f080089
+int drawable calendar 0x7f080135
+int drawable camera 0x7f080136
 int drawable chevron_left 0x7f08008a
 int drawable chevron_right 0x7f08008b
 int drawable common_full_open_on_phone 0x7f08008c
@@ -3194,6 +3200,7 @@ int drawable notification_template_icon_low_bg 0x7f08011f
 int drawable notification_tile_bg 0x7f080120
 int drawable notify_panel_notification_icon_bg 0x7f080121
 int drawable pace 0x7f080122
+int drawable phone 0x7f080137
 int drawable pinterest1 0x7f080123
 int drawable profile_no_image_available 0x7f080124
 int drawable question 0x7f080125
@@ -3352,6 +3359,7 @@ int id buttonPanel 0x7f0a0087
 int id cache_measures 0x7f0a0088
 int id calendar 0x7f0a0089
 int id callMeasure 0x7f0a008a
+int id camera_icon 0x7f0a02ac
 int id cancel 0x7f0a008b
 int id cancel_button 0x7f0a008c
 int id caption1 0x7f0a008d
@@ -3419,6 +3427,7 @@ int id design_menu_item_text 0x7f0a00ca
 int id design_navigation_view 0x7f0a00cb
 int id dialog_button 0x7f0a00cc
 int id difficultyLevel 0x7f0a00cd
+int id difficulty_Level 0x7f0a02ad
 int id dimensions 0x7f0a00ce
 int id direct 0x7f0a00cf
 int id disableHome 0x7f0a00d0
@@ -3467,6 +3476,7 @@ int id exitUntilCollapsed 0x7f0a00fa
 int id expand_activities_button 0x7f0a00fb
 int id expanded_menu 0x7f0a00fc
 int id fade 0x7f0a00fd
+int id favoritetrails_switch 0x7f0a02ae
 int id fill 0x7f0a00fe
 int id fill_horizontal 0x7f0a00ff
 int id fill_vertical 0x7f0a0100
@@ -3477,6 +3487,7 @@ int id fitEnd 0x7f0a0104
 int id fitStart 0x7f0a0105
 int id fitToContents 0x7f0a0106
 int id fitXY 0x7f0a0107
+int id fitness_Level 0x7f0a02af
 int id fixed 0x7f0a0108
 int id flip 0x7f0a0109
 int id floating 0x7f0a010a
@@ -3544,8 +3555,10 @@ int id italic 0x7f0a0147
 int id item_touch_helper_previous_elevation 0x7f0a0148
 int id jumpToEnd 0x7f0a0149
 int id jumpToStart 0x7f0a014a
+int id label_terrain 0x7f0a02b0
 int id labeled 0x7f0a014b
 int id layout 0x7f0a014c
+int id leaderboard_switch 0x7f0a02b1
 int id left 0x7f0a014d
 int id leftToRight 0x7f0a014e
 int id legacy 0x7f0a014f
@@ -3706,6 +3719,7 @@ int id path 0x7f0a01e9
 int id pathRelative 0x7f0a01ea
 int id peekHeight 0x7f0a01eb
 int id percent 0x7f0a01ec
+int id photos_switch 0x7f0a02b2
 int id pin 0x7f0a01ed
 int id pooling_container_listener_holder_tag 0x7f0a01ee
 int id position 0x7f0a01ef
@@ -3714,6 +3728,7 @@ int id pressed 0x7f0a01f1
 int id privacyAndSecurity 0x7f0a01f2
 int id profileImage 0x7f0a01f3
 int id profile_image 0x7f0a01f4
+int id profile_image_container 0x7f0a02b3
 int id progress_circular 0x7f0a01f5
 int id progress_horizontal 0x7f0a01f6
 int id pw 0x7f0a01f7
@@ -3761,6 +3776,7 @@ int id selection_type 0x7f0a0220
 int id settingsbtn 0x7f0a0221
 int id sharedValueSet 0x7f0a0222
 int id sharedValueUnset 0x7f0a0223
+int id sharelocation_switch 0x7f0a02b4
 int id shortcut 0x7f0a0224
 int id showCustom 0x7f0a0225
 int id showHome 0x7f0a0226
@@ -3803,6 +3819,8 @@ int id stretch 0x7f0a024a
 int id submenuarrow 0x7f0a024b
 int id submit 0x7f0a024c
 int id submit_area 0x7f0a024d
+int id suggested_trails_label 0x7f0a02b5
+int id suggested_trails_seekbar 0x7f0a02b6
 int id supportScrollUp 0x7f0a024e
 int id tabMode 0x7f0a024f
 int id tag_accessibility_actions 0x7f0a0250
@@ -3868,10 +3886,12 @@ int id txtBySigning 0x7f0a028b
 int id txtLogin 0x7f0a028c
 int id txtRegister 0x7f0a028d
 int id type 0x7f0a028e
+int id type_Of_Hike 0x7f0a02b7
 int id unchecked 0x7f0a028f
 int id uniform 0x7f0a0290
 int id unlabeled 0x7f0a0291
 int id up 0x7f0a0292
+int id update_profile_button 0x7f0a02b8
 int id uphill 0x7f0a0293
 int id useLogo 0x7f0a0294
 int id username 0x7f0a0295
@@ -3886,6 +3906,7 @@ int id view_tree_view_model_store_owner 0x7f0a029d
 int id visible 0x7f0a029e
 int id visible_removing_fragment_view_tag 0x7f0a029f
 int id watcher_member 0x7f0a02a0
+int id watcher_switch 0x7f0a02b9
 int id west 0x7f0a02a1
 int id wide 0x7f0a02a2
 int id withText 0x7f0a02a3
@@ -4177,6 +4198,7 @@ int string appearanceTitle 0x7f140025
 int string aspects 0x7f140026
 int string backButton 0x7f140027
 int string backarrow 0x7f140028
+int string birthdate 0x7f140187
 int string bottom_sheet_behavior 0x7f140029
 int string bottomsheet_action_collapse 0x7f14002a
 int string bottomsheet_action_expand 0x7f14002b
@@ -4185,6 +4207,7 @@ int string bottomsheet_drag_handle_clicked 0x7f14002d
 int string bottomsheet_drag_handle_content_description 0x7f14002e
 int string btn_back 0x7f14002f
 int string bug 0x7f140030
+int string calendar 0x7f140188
 int string call_notification_answer_action 0x7f140031
 int string call_notification_answer_video_action 0x7f140032
 int string call_notification_decline_action 0x7f140033
@@ -4192,6 +4215,7 @@ int string call_notification_hang_up_action 0x7f140034
 int string call_notification_incoming_text 0x7f140035
 int string call_notification_ongoing_text 0x7f140036
 int string call_notification_screening_text 0x7f140037
+int string camera 0x7f140189
 int string cancel 0x7f140038
 int string character_counter_content_description 0x7f140039
 int string character_counter_overflowed_content_description 0x7f14003a
@@ -4230,11 +4254,13 @@ int string default_popup_window_title 0x7f14005a
 int string description 0x7f14005b
 int string dest_title 0x7f14005c
 int string difficultyIcon 0x7f14005d
+int string difficultyLevel 0x7f14018a
 int string distance 0x7f14005e
 int string dob 0x7f14005f
 int string dropdown_menu 0x7f140060
 int string editIcon 0x7f140061
 int string editProfile 0x7f140062
+int string editUserEmail 0x7f14018b
 int string emergency 0x7f140063
 int string error_a11y_label 0x7f140064
 int string error_icon_content_description 0x7f140065
@@ -4246,6 +4272,8 @@ int string fallback_menu_item_open_in_browser 0x7f14006a
 int string fallback_menu_item_share_link 0x7f14006b
 int string favorites 0x7f14006c
 int string first_fragment_label 0x7f14006d
+int string fitnessLevel 0x7f14018c
+int string fitnessLevelIcon 0x7f14018d
 int string forgotpassword1 0x7f14006e
 int string forgotpassword2 0x7f14006f
 int string friendProfilePicture 0x7f140070
@@ -4464,6 +4492,7 @@ int string path_password_eye_mask_strike_through 0x7f140144
 int string path_password_eye_mask_visible 0x7f140145
 int string path_password_strike_through 0x7f140146
 int string personalize 0x7f140147
+int string phoneIcon 0x7f14018e
 int string previous 0x7f140148
 int string privacyTitle 0x7f140149
 int string privacy_policy1 0x7f14014a
@@ -4487,10 +4516,13 @@ int string side_sheet_accessibility_pane_title 0x7f14015b
 int string side_sheet_behavior 0x7f14015c
 int string status_bar_notification_info_overflow 0x7f14015d
 int string submit 0x7f14015e
+int string suggestedTrails 0x7f14018f
 int string supportEmail 0x7f14015f
 int string switch_role 0x7f140160
 int string tab 0x7f140161
 int string template_percent 0x7f140162
+int string terrain 0x7f140190
+int string terrainIcon 0x7f140191
 int string titleBreaks 0x7f140163
 int string titleContinue 0x7f140164
 int string titleEmail 0x7f140165
@@ -4517,14 +4549,25 @@ int string title_profile 0x7f140179
 int string tooltip_description 0x7f14017a
 int string tooltip_label 0x7f14017b
 int string troubleshoot 0x7f14017c
+int string typeOfHike 0x7f140192
+int string typeOfHikeIcon 0x7f140193
+int string updateProfile 0x7f140194
 int string userBadge1 0x7f14017d
 int string userBadge2 0x7f14017e
 int string userBadge3 0x7f14017f
+int string userEmail 0x7f140195
 int string userFavoriteTrails 0x7f140180
 int string userFavoriteTrailsPictures 0x7f140181
+int string userFavoriteTrailsSwitch 0x7f140196
+int string userLeaderboardSwitch 0x7f140197
+int string userLocation 0x7f140198
 int string userName 0x7f140182
+int string userPhone 0x7f140199
 int string userPhotoPictures 0x7f140183
 int string userPhotos 0x7f140184
+int string userPhotosSwitch 0x7f14019a
+int string userShareLocationSwitch 0x7f14019b
+int string userWatcherSwitch 0x7f14019c
 int string username 0x7f140185
 int string watcherMember 0x7f140186
 int style AlertDialog_AppCompat 0x7f150000

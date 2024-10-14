@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.trailblaze.app-mergeDebugResources-3:/values-w600dp-v13/values-w600dp-v13.xml",
+            "outputFile": "com.example.trailblaze.app-mergeDebugResources-79:/values-w600dp-v13/values-w600dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Full Sail\\Project and Portfolio 2\\Trail Blaze\\app\\src\\main\\res\\values-w600dp\\dimens.xml",
+                    "source": "C:\\Users\\umbre\\IdeaProjects\\TrailBlaze\\app\\src\\main\\res\\values-w600dp\\dimens.xml",
                     "from": {
                         "startLines": "1",
                         "startColumns": "4",

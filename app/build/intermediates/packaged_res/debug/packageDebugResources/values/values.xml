@@ -14,9 +14,34 @@
             MIIEQzCCAyugAwIBAgIJAMLgh0ZkSjCNMA0GCSqGSIb3DQEBBAUAMHQxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtHb29nbGUgSW5jLjEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDAeFw0wODA4MjEyMzEzMzRaFw0zNjAxMDcyMzEzMzRaMHQxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtHb29nbGUgSW5jLjEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDCCASAwDQYJKoZIhvcNAQEBBQADggENADCCAQgCggEBAKtWLgDYO6IIrgqWbxJOKdoR8qtW0I9Y4sypEwPpt1TTcvZApxsdyxMJZ2JORland2qSGT2y5b+3JKkedxiLDmpHpDsz2WCbdxgxRczfey5YZnTJ4VZbH0xqWVW/8lGmPav5xVwnIiJS6HXk+BVKZF+JcWjAsb/GEuq/eFdpuzSqeYTcfi6idkyugwfYwXFU1+5fZKUaRKYCwkkFQVfcAs1fXA5V+++FGfvjJ/CxURaSxaBvGdGDhfXE28LWuT9ozCl5xw4Yq5OGazvV24mZVSoOO0yZ31j7kYvtwYK6NeADwbSxDdJEqO4k//0zOHKrUiGYXtqw/A0LFFtqoZKFjnkCAQOjgdkwgdYwHQYDVR0OBBYEFMd9jMIhF1Ylmn/Tgt9r45jk14alMIGmBgNVHSMEgZ4wgZuAFMd9jMIhF1Ylmn/Tgt9r45jk14aloXikdjB0MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLR29vZ2xlIEluYy4xEDAOBgNVBAsTB0FuZHJvaWQxEDAOBgNVBAMTB0FuZHJvaWSCCQDC4IdGZEowjTAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBAUAA4IBAQBt0lLO74UwLDYKqs6Tm8/yzKkEu116FmH4rkaymUIE0P9KaMftGlMexFlaYjzmB2OxZyl6euNXEsQH8gjwyxCUKRJNexBiGcCEyj6z+a1fuHHvkiaai+KL8W1EyNmgjmyy8AW7P+LLlkR+ho5zEHatRbM/YAnqGcFh5iZBqpknHf1SKMXFh4dd239FJ1jWYfbMDMy3NS5CTMQ2XFI1MvcyUTdZPErjQfTbQe3aDQsQcafEQPD+nqActifKZ0Np0IS9L9kR/wbNvyz6ENwPiTrjV2KRkEjH78ZMcUQXg0L3BYHJ3lc69Vs5Ddf9uUGGMYldX3WfMBEmh/9iFBDAaTCK
         </item>
     </string-array>
+    <string-array name="difficulty_level_options">
+        <item>Easiest</item>
+        <item>Easy</item>
+        <item>Moderate</item>
+        <item>Moderate Difficult</item>
+        <item>Difficult</item>
+        <item>Extremely Difficult</item>
+    </string-array>
+    <string-array name="fitness_level_options">
+        <item>Beginner</item>
+        <item>Intermediate</item>
+        <item>Advanced</item>
+    </string-array>
+    <string-array name="hike_type_options">
+        <item>Day Hike</item>
+        <item>Backpacking</item>
+        <item>Trail Running</item>
+        <item>Climbing</item>
+    </string-array>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/amethysta</item>
     </array>
+    <string-array name="terrain_options">
+        <item>Mountain</item>
+        <item>Forest</item>
+        <item>Desert</item>
+        <item>Beach</item>
+    </string-array>
     <color name="black">#FF000000</color>
     <color name="custom_red">#FF0000</color>
     <color name="green">#4CAF50</color>
@@ -40,8 +65,11 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="aspects">What aspect/s of hiking do you like to experience most?</string>
     <string name="backButton">Back Button</string>
     <string name="backarrow">backArrow</string>
+    <string name="birthdate">Date of Birth MM/DD/YYYY</string>
     <string name="btn_back">Goes back to the previous page</string>
     <string name="bug">Report a Bug</string>
+    <string name="calendar">Calendar</string>
+    <string name="camera">Edit Picture</string>
     <string name="cancel">Cancel</string>
     <string name="contact">Contact Us</string>
     <string name="contact4">You can also contact us at</string>
@@ -54,13 +82,17 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="createAccount">Create Account</string>
     <string name="description">Enter a description...</string>
     <string name="difficultyIcon">Difficulty Icon</string>
+    <string name="difficultyLevel">Difficulty Level</string>
     <string name="distance">How far would you like to receive suggested trails?</string>
     <string name="dob">Date of Birth mm/dd/yy</string>
     <string name="editIcon">Edit</string>
     <string name="editProfile">Edit Profile</string>
+    <string name="editUserEmail">Email Address</string>
     <string name="emergency">I am in an emergency! (Dial 911)</string>
     <string name="favorites">Favorites</string>
     <string name="first_fragment_label">First Fragment</string>
+    <string name="fitnessLevel">Fitness Level</string>
+    <string name="fitnessLevelIcon">Fitness Level Icon</string>
     <string name="forgotpassword1">Enter the Email address associated with your account.</string>
     <string name="forgotpassword2">We will email you a link to reset your password</string>
     <string name="friendProfilePicture">Friend Profile Picture</string>
@@ -140,6 +172,7 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="passWord">Password</string>
     <string name="password2">Confirm Password</string>
     <string name="personalize">Lets Personalize your account</string>
+    <string name="phoneIcon">Phone Icon</string>
     <string name="previous">Previous</string>
     <string name="privacyTitle">Privacy and Security</string>
     <string name="privacy_policy1">Your privacy is important to us. It is TrailBlaze policy to respect your privacy
@@ -160,7 +193,10 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="second_fragment_label">Second Fragment</string>
     <string name="settings">Settings</string>
     <string name="submit">Submit</string>
+    <string name="suggestedTrails">Suggested Trails</string>
     <string name="supportEmail">customersupport@trailblaze.com</string>
+    <string name="terrain">Terrain</string>
+    <string name="terrainIcon">Terrain Icon</string>
     <string name="titleBreaks">Breaks</string>
     <string name="titleContinue">Continue</string>
     <string name="titleEmail">Email Address</string>
@@ -185,14 +221,25 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="title_notifications">Notifications</string>
     <string name="title_profile">Profile</string>
     <string name="troubleshoot">Troubleshooting Guide</string>
+    <string name="typeOfHike">Type of Hike</string>
+    <string name="typeOfHikeIcon">Type of Hike Icon</string>
+    <string name="updateProfile">Update Profile</string>
     <string name="userBadge1">User Badge 1</string>
     <string name="userBadge2">User Badge 2</string>
     <string name="userBadge3">User Badge 3</string>
+    <string name="userEmail">Users Email</string>
     <string name="userFavoriteTrails">Favorite Trails</string>
     <string name="userFavoriteTrailsPictures">User Favorite Trail Picture</string>
+    <string name="userFavoriteTrailsSwitch">Favorite Trails</string>
+    <string name="userLeaderboardSwitch">Leaderboard</string>
+    <string name="userLocation">Location</string>
     <string name="userName">Username</string>
+    <string name="userPhone">Phone Number</string>
     <string name="userPhotoPictures">User Photo Picture</string>
     <string name="userPhotos">Photos</string>
+    <string name="userPhotosSwitch">Photos</string>
+    <string name="userShareLocationSwitch">Share Location</string>
+    <string name="userWatcherSwitch">Watcher</string>
     <string name="username">Username</string>
     <string name="watcherMember">Watcher Member</string>
     <style name="Base.Theme.TrailBlaze" parent="Theme.Material3.DayNight.NoActionBar">

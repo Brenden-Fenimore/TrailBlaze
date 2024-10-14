@@ -164,4 +164,58 @@
     <string name="title_activity_help_frag">HelpFrag</string>
     <string name="friend_s_profile">Friend\'s Profile</string>
     <string name="backarrow">backArrow</string>
+    <string name="camera">Edit Picture</string>
+    <string name="calendar">Calendar</string>
+    <string name="birthdate">Date of Birth MM/DD/YYYY</string>
+    <string name="userEmail">Users Email</string>
+    <string name="editUserEmail">Email Address</string>
+    <string name="userLocation">Location</string>
+    <string name="phoneIcon">Phone Icon</string>
+    <string name="userPhone">Phone Number</string>
+    <string name="terrainIcon">Terrain Icon</string>
+    <string name="terrain">Terrain</string>
+    <string name="fitnessLevelIcon">Fitness Level Icon</string>
+    <string name="fitnessLevel">Fitness Level</string>
+    <string name="difficultyLevel">Difficulty Level</string>
+    <string name="typeOfHikeIcon">Type of Hike Icon</string>
+    <string name="typeOfHike">Type of Hike</string>
+    <string name="suggestedTrails">Suggested Trails</string>
+    <string name="userLeaderboardSwitch">Leaderboard</string>
+    <string name="userPhotosSwitch">Photos</string>
+    <string name="userFavoriteTrailsSwitch">Favorite Trails</string>
+    <string name="userWatcherSwitch">Watcher</string>
+    <string name="userShareLocationSwitch">Share Location</string>
+    <string name="updateProfile">Update Profile</string>
+    <!-- Spinner options for terrain -->
+    <string-array name="terrain_options">
+        <item>Mountain</item>
+        <item>Forest</item>
+        <item>Desert</item>
+        <item>Beach</item>
+    </string-array>
+
+    <!-- Spinner options for fitness level -->
+    <string-array name="fitness_level_options">
+        <item>Beginner</item>
+        <item>Intermediate</item>
+        <item>Advanced</item>
+    </string-array>
+
+    <!-- Spinner options for difficulty level -->
+    <string-array name="difficulty_level_options">
+        <item>Easiest</item>
+        <item>Easy</item>
+        <item>Moderate</item>
+        <item>Moderate Difficult</item>
+        <item>Difficult</item>
+        <item>Extremely Difficult</item>
+    </string-array>
+
+    <!-- Spinner options for hike type -->
+    <string-array name="hike_type_options">
+        <item>Day Hike</item>
+        <item>Backpacking</item>
+        <item>Trail Running</item>
+        <item>Climbing</item>
+    </string-array>
 </resources>

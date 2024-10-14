@@ -88,7 +88,11 @@ animator nav_default_pop_exit_anim
 array com_google_android_gms_fonts_certs
 array com_google_android_gms_fonts_certs_dev
 array com_google_android_gms_fonts_certs_prod
+array difficulty_level_options
+array fitness_level_options
+array hike_type_options
 array preloaded_fonts
+array terrain_options
 attr SharedValue
 attr SharedValueId
 attr action
@@ -3042,6 +3046,8 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable calendar
+drawable camera
 drawable chevron_left
 drawable chevron_right
 drawable common_full_open_on_phone
@@ -3195,6 +3201,7 @@ drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable pace
+drawable phone
 drawable pinterest1
 drawable profile_no_image_available
 drawable question
@@ -3353,6 +3360,7 @@ id buttonPanel
 id cache_measures
 id calendar
 id callMeasure
+id camera_icon
 id cancel
 id cancel_button
 id caption1
@@ -3420,6 +3428,7 @@ id design_menu_item_text
 id design_navigation_view
 id dialog_button
 id difficultyLevel
+id difficulty_Level
 id dimensions
 id direct
 id disableHome
@@ -3468,6 +3477,7 @@ id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
 id fade
+id favoritetrails_switch
 id fill
 id fill_horizontal
 id fill_vertical
@@ -3478,6 +3488,7 @@ id fitEnd
 id fitStart
 id fitToContents
 id fitXY
+id fitness_Level
 id fixed
 id flip
 id floating
@@ -3545,8 +3556,10 @@ id italic
 id item_touch_helper_previous_elevation
 id jumpToEnd
 id jumpToStart
+id label_terrain
 id labeled
 id layout
+id leaderboard_switch
 id left
 id leftToRight
 id legacy
@@ -3707,6 +3720,7 @@ id path
 id pathRelative
 id peekHeight
 id percent
+id photos_switch
 id pin
 id pooling_container_listener_holder_tag
 id position
@@ -3715,6 +3729,7 @@ id pressed
 id privacyAndSecurity
 id profileImage
 id profile_image
+id profile_image_container
 id progress_circular
 id progress_horizontal
 id pw
@@ -3762,6 +3777,7 @@ id selection_type
 id settingsbtn
 id sharedValueSet
 id sharedValueUnset
+id sharelocation_switch
 id shortcut
 id showCustom
 id showHome
@@ -3804,6 +3820,8 @@ id stretch
 id submenuarrow
 id submit
 id submit_area
+id suggested_trails_label
+id suggested_trails_seekbar
 id supportScrollUp
 id tabMode
 id tag_accessibility_actions
@@ -3869,10 +3887,12 @@ id txtBySigning
 id txtLogin
 id txtRegister
 id type
+id type_Of_Hike
 id unchecked
 id uniform
 id unlabeled
 id up
+id update_profile_button
 id uphill
 id useLogo
 id username
@@ -3887,6 +3907,7 @@ id view_tree_view_model_store_owner
 id visible
 id visible_removing_fragment_view_tag
 id watcher_member
+id watcher_switch
 id west
 id wide
 id withText
@@ -4178,6 +4199,7 @@ string appearanceTitle
 string aspects
 string backButton
 string backarrow
+string birthdate
 string bottom_sheet_behavior
 string bottomsheet_action_collapse
 string bottomsheet_action_expand
@@ -4186,6 +4208,7 @@ string bottomsheet_drag_handle_clicked
 string bottomsheet_drag_handle_content_description
 string btn_back
 string bug
+string calendar
 string call_notification_answer_action
 string call_notification_answer_video_action
 string call_notification_decline_action
@@ -4193,6 +4216,7 @@ string call_notification_hang_up_action
 string call_notification_incoming_text
 string call_notification_ongoing_text
 string call_notification_screening_text
+string camera
 string cancel
 string character_counter_content_description
 string character_counter_overflowed_content_description
@@ -4231,11 +4255,13 @@ string default_popup_window_title
 string description
 string dest_title
 string difficultyIcon
+string difficultyLevel
 string distance
 string dob
 string dropdown_menu
 string editIcon
 string editProfile
+string editUserEmail
 string emergency
 string error_a11y_label
 string error_icon_content_description
@@ -4247,6 +4273,8 @@ string fallback_menu_item_open_in_browser
 string fallback_menu_item_share_link
 string favorites
 string first_fragment_label
+string fitnessLevel
+string fitnessLevelIcon
 string forgotpassword1
 string forgotpassword2
 string friendProfilePicture
@@ -4465,6 +4493,7 @@ string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
 string personalize
+string phoneIcon
 string previous
 string privacyTitle
 string privacy_policy1
@@ -4488,10 +4517,13 @@ string side_sheet_accessibility_pane_title
 string side_sheet_behavior
 string status_bar_notification_info_overflow
 string submit
+string suggestedTrails
 string supportEmail
 string switch_role
 string tab
 string template_percent
+string terrain
+string terrainIcon
 string titleBreaks
 string titleContinue
 string titleEmail
@@ -4518,14 +4550,25 @@ string title_profile
 string tooltip_description
 string tooltip_label
 string troubleshoot
+string typeOfHike
+string typeOfHikeIcon
+string updateProfile
 string userBadge1
 string userBadge2
 string userBadge3
+string userEmail
 string userFavoriteTrails
 string userFavoriteTrailsPictures
+string userFavoriteTrailsSwitch
+string userLeaderboardSwitch
+string userLocation
 string userName
+string userPhone
 string userPhotoPictures
 string userPhotos
+string userPhotosSwitch
+string userShareLocationSwitch
+string userWatcherSwitch
 string username
 string watcherMember
 style AlertDialog_AppCompat

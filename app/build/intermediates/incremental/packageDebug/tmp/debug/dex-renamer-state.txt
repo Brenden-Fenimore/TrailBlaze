@@ -1,16 +1,16 @@
-#Sat Oct 12 15:14:57 PDT 2024
-base.0=C\:\\Full Sail\\Project and Portfolio 2\\Trail Blaze\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=C\:\\Full Sail\\Project and Portfolio 2\\Trail Blaze\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.10=C\:\\Full Sail\\Project and Portfolio 2\\Trail Blaze\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
-base.11=C\:\\Full Sail\\Project and Portfolio 2\\Trail Blaze\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes4.dex
-base.2=C\:\\Full Sail\\Project and Portfolio 2\\Trail Blaze\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
-base.3=C\:\\Full Sail\\Project and Portfolio 2\\Trail Blaze\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
-base.4=C\:\\Full Sail\\Project and Portfolio 2\\Trail Blaze\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
-base.5=C\:\\Full Sail\\Project and Portfolio 2\\Trail Blaze\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\3\\classes.dex
-base.6=C\:\\Full Sail\\Project and Portfolio 2\\Trail Blaze\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\4\\classes.dex
-base.7=C\:\\Full Sail\\Project and Portfolio 2\\Trail Blaze\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
-base.8=C\:\\Full Sail\\Project and Portfolio 2\\Trail Blaze\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
-base.9=C\:\\Full Sail\\Project and Portfolio 2\\Trail Blaze\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
+#Mon Oct 14 13:35:15 EDT 2024
+base.0=C\:\\Users\\umbre\\IdeaProjects\\TrailBlaze\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=C\:\\Users\\umbre\\IdeaProjects\\TrailBlaze\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.10=C\:\\Users\\umbre\\IdeaProjects\\TrailBlaze\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
+base.11=C\:\\Users\\umbre\\IdeaProjects\\TrailBlaze\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes4.dex
+base.2=C\:\\Users\\umbre\\IdeaProjects\\TrailBlaze\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
+base.3=C\:\\Users\\umbre\\IdeaProjects\\TrailBlaze\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
+base.4=C\:\\Users\\umbre\\IdeaProjects\\TrailBlaze\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
+base.5=C\:\\Users\\umbre\\IdeaProjects\\TrailBlaze\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\3\\classes.dex
+base.6=C\:\\Users\\umbre\\IdeaProjects\\TrailBlaze\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\4\\classes.dex
+base.7=C\:\\Users\\umbre\\IdeaProjects\\TrailBlaze\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
+base.8=C\:\\Users\\umbre\\IdeaProjects\\TrailBlaze\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
+base.9=C\:\\Users\\umbre\\IdeaProjects\\TrailBlaze\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.10=classes3.dex
