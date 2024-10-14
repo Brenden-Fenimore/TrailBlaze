@@ -16,11 +16,6 @@
                 android:name=".settings.SafetyActivity"
                 android:exported="false"/>
         <activity
-                android:name=".settings.SafetyTipsActivity"
-                android:exported="false"
-                android:label="@string/title_activity_safety_tips"
-                android:theme="@style/Theme.TrailBlaze"/>
-        <activity
                 android:name=".ui.profile.EditProfileActivity"
                 android:exported="false"
                 android:theme="@style/Theme.TrailBlaze"/>
