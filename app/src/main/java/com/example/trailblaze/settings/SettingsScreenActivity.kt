@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.trailblaze.MainActivity
 import com.example.trailblaze.R
 import com.example.trailblaze.login.LoginActivity
-import com.example.trailblaze.ui.profile.EditProfileFragment
+import com.example.trailblaze.ui.profile.EditProfileActivity
 
 
 class SettingsScreenActivity : AppCompatActivity() {
@@ -83,17 +83,11 @@ class SettingsScreenActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        //set click listener for account
+        // Set click listener for account
         toAccount.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-
-            //pass the fragment name
-            intent.putExtra("fragment_to_load", "EditProfileFragment")
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            val intent = Intent(this, EditProfileActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
-
-            //close the current activity
-            finish()
-        }
         }
     }
+}

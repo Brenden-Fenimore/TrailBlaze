@@ -9,6 +9,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import com.example.trailblaze.login.LoginActivity
 import com.example.trailblaze.settings.ContactUsActivity
+import com.example.trailblaze.settings.SafetyActivity
 import com.example.trailblaze.settings.SettingsScreenActivity
 import com.example.trailblaze.settings.SupportScreenActivity
 import com.example.trailblaze.ui.home.HomeFragment
@@ -60,6 +61,11 @@ class MenuActivity : AppCompatActivity() {
 
         findViewById<TextView>(R.id.navigation_contact).setOnClickListener{
             val intent = Intent(this, ContactUsActivity::class.java)
+            startActivity(intent)
+        }
+
+        findViewById<TextView>(R.id.navigation_safety).setOnClickListener{
+            val intent = Intent(this, SafetyActivity::class.java)
             startActivity(intent)
         }
     }

@@ -2029,8 +2029,11 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with <ns2:g example="Mail" id="application_name">%s</ns2:g></string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
-    <string name="aboutContent">TrailBlaze aims to be the go-to application for all hikers, climbers, and outdoorsy types by offering a fantastic way to view trail options whether traveling or at home. 
-With customization options, the latest updates on trails, and an expansive community, it is sure to be a standout in the space.</string>
+    <string name="aboutContent">TrailBlaze aims to be the go-to application for all hikers, climbers, and outdoorsy
+        types by offering a fantastic way to view trail options whether traveling or at home. 
+With customization
+        options, the latest updates on trails, and an expansive community, it is sure to be a standout in the space.
+    </string>
     <string name="aboutTitle">About</string>
     <string name="accountTitle">Account</string>
     <string name="activityTitle">Settings</string>
@@ -2038,12 +2041,22 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="android.credentials.TYPE_PASSWORD_CREDENTIAL">Password</string>
     <string name="androidx.credentials.TYPE_PUBLIC_KEY_CREDENTIAL">Passkey</string>
     <string name="androidx_startup" translatable="false">androidx.startup</string>
+    <string name="animal">Never feed or touch wildlife: Do not approach or attempt to move sick or injured wildlife.
+        Please report any encounters with aggressive, sick or injured animals to a park staff.
+    </string>
     <string name="app_name">TrailBlaze</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
     <string name="appearanceTitle">Appearance</string>
     <string name="aspects">What aspect/s of hiking do you like to experience most?</string>
     <string name="backButton">Back Button</string>
     <string name="backarrow">backArrow</string>
+    <string name="bear">Wildlife lives in all state parks, even near urban areas: Although rare, black bears, mountain
+        lions and rattlesnakes may be seen. If you encounter wildlife on the trail, keep your distance, back away slowly
+        and do not run. Report your sightings to park staff.
+    </string>
+    <string name="boots">Wear proper footwear: Wear quality closed-toe shoes with good cushioning and grip to avoid sore
+        feet and ankle injuries.
+    </string>
     <string name="bottom_sheet_behavior" translatable="false">com.google.android.material.bottomsheet.BottomSheetBehavior</string>
     <string description="A description of an accessibility action to collapse the bottom sheet [CHAR LIMIT=NONE]" name="bottomsheet_action_collapse">Collapse the bottom sheet</string>
     <string description="A description of an accessibility action to expand the bottom sheet [CHAR LIMIT=NONE]" name="bottomsheet_action_expand">Expand the bottom sheet</string>
@@ -2087,7 +2100,7 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="contact">Contact Us</string>
     <string name="contact4">You can also contact us at</string>
     <string name="contactTitle">If you are experiencing any issues, please let us know. We will try to solve them as
-            soon as possible.
+        soon as possible.
     </string>
     <string name="contactTitle2">Title</string>
     <string name="contactTitle3">Explain the problem</string>
@@ -2100,7 +2113,7 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="dest_title">destination title</string>
     <string name="difficultyIcon">Difficulty Icon</string>
     <string name="distance">How far would you like to receive suggested trails?</string>
-    <string name="dob">Date of Birth mm/dd/yy</string>
+    <string name="dob">Date of Birth mm/dd/yyyy</string>
     <string name="dropdown_menu">"Dropdown menu"</string>
     <string name="editIcon">Edit</string>
     <string name="editProfile">Edit Profile</string>
@@ -2118,6 +2131,9 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="fallback_menu_item_share_link">Share link</string>
     <string name="favorites">Favorites</string>
     <string name="first_fragment_label">First Fragment</string>
+    <string name="flashligh">Carry essentials: Bring a flashlight, matches, emergency shelter, and extra food and
+        water.
+    </string>
     <string name="forgotpassword1">Enter the Email address associated with your account.</string>
     <string name="forgotpassword2">We will email you a link to reset your password</string>
     <string name="friendProfilePicture">Friend Profile Picture</string>
@@ -2125,6 +2141,9 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="friends">Friends</string>
     <string name="friendsAdd">Add as a trusted Contact/Watcher</string>
     <string name="friendsProfile1">Friends in Common</string>
+    <string name="fun">But mostly have fun! Enjoy nature! Love yourself. And remember leave only footprints, and take
+        only memories!
+    </string>
     <string name="gcm_defaultSenderId" translatable="false">1017354103686</string>
     <string name="google_api_key" translatable="false">AIzaSyBUWF7u2Ek-DOZjOS0bMxIWPLNrJjiqhQ4</string>
     <string name="google_app_id" translatable="false">1:1017354103686:android:16bf2db4495f7ab07eda07</string>
@@ -2155,8 +2174,12 @@ With customization options, the latest updates on trails, and an expansive commu
         trail.
     </string>
     <string name="item_view_role_description">Tab</string>
+    <string name="layers">Dress in layers: Wear clothes that work for the weather and avoid cotton.</string>
     <string name="leaderboard">Leaderboard</string>
     <string name="leaderboardPicture">Leaderboard Picture</string>
+    <string name="limits">Know your limits: Be aware of your physical abilities and listen to your body. Recognize signs
+        of fatigue or distress, such as shortness of breath or dizziness.
+    </string>
     <string name="location">TrailBlaze utilizes your location to provide personalized suggestions of nearby trails,
         please enter your location.
     </string>
@@ -2270,6 +2293,9 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="m3c_tooltip_long_press_label">Show tooltip</string>
     <string name="m3c_tooltip_pane_description">Tooltip</string>
     <string name="map_image">Map</string>
+    <string name="markedtrail">Stay on marked trails: Making shortcuts can lead to erosion and increase your chances of
+        getting lost.
+    </string>
     <string name="material_clock_display_divider" translatable="false">:</string>
     <string description="Description for the toggle to choose between AM and PM [CHAR_LIMIT=NONE]" name="material_clock_toggle_content_description">Select AM or PM</string>
     <string description="Spoken suffix for an hour in the 24-hour clock [CHAR_LIMIT=10]" name="material_hour_24h_suffix"><ns2:g id="number">%1$s</ns2:g> hours</string>
@@ -2380,6 +2406,12 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="path_password_eye_mask_visible" translatable="false">M2,4.27 L2,4.27 L4.54,1.73 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_strike_through" translatable="false">M3.27,4.27 L19.74,20.74</string>
     <string name="personalize">Lets Personalize your account</string>
+    <string name="phone">Dont rely on cell phones: Dont count on cell phones to work in the wilderness.</string>
+    <string name="phoneNumber">Phone Number</string>
+    <string name="poisonivy">Poison oak: It is a common plant throughout much of California. Learn to identify its
+        shiny, three-leaf pattern, and avoid touching it. If you touch poison oak, wash immediately with water and mild
+        soap. Pat dry with a clean towel.
+    </string>
     <string name="previous">Previous</string>
     <string name="privacyTitle">Privacy and Security</string>
     <string name="privacy_policy1">Your privacy is important to us. It is TrailBlaze policy to respect your privacy
@@ -2411,12 +2443,22 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="settings">Settings</string>
     <string description="Title of the side sheet&apos;s accessibility pane that is spoken by TalkBack when the side sheet appears on screen. [CHAR_LIMIT=NONE]" name="side_sheet_accessibility_pane_title">Side Sheet</string>
     <string name="side_sheet_behavior" translatable="false">com.google.android.material.sidesheet.SideSheetBehavior</string>
+    <string name="snakes">Snakes: Always know where you are stepping. For example, if you must traverse a log that has
+        fallen across the trail, rather than just stepping over the log, first step up onto the log then step down once
+        you know the coast is clear. Be cautious when climbing rocks or picking up firewood. If you see a snake,
+        maintain a distance of at least 6 feet. Most bites occur when people get too close or try to touch them.
+    </string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="submit">Submit</string>
     <string name="supportEmail">customersupport@trailblaze.com</string>
     <string name="switch_role">Switch</string>
     <string name="tab">Tab</string>
     <string name="template_percent"><ns2:g id="percentage">%1$d</ns2:g> percent.</string>
+    <string name="ticks">Ticks: Tick populations can increase depending on the season. Take the following precautions
+        to avoid them:
+        Walk in the middle of trails. Use insect repellent. Tuck your pants into your socks. After taking off gear,
+        check for hitchhiking ticks. Always do a “tick check” with the help of a friend.
+    </string>
     <string name="titleBreaks">Breaks</string>
     <string name="titleContinue">Continue</string>
     <string name="titleEmail">Email Address</string>
@@ -2431,6 +2473,7 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="titleUphill">Uphill</string>
     <string name="title_activity_help_frag">HelpFrag</string>
     <string name="title_activity_login">Login</string>
+    <string name="title_activity_safety_tips">SafetyTipsActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_terms">TermsActivity</string>
     <string name="title_activity_terms_and_conditions">TermsAndConditions</string>
@@ -2454,6 +2497,14 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="userPhotos">Photos</string>
     <string name="username">Username</string>
     <string name="watcherMember">Watcher Member</string>
+    <string name="water">Stay hydrated: Dehydration can be a serious health problem, so bring more water than you think
+        youll need. Use a durable water bottle to ensure you have access to clean water.
+    </string>
+    <string name="waterfalls">Dont climb on waterfalls: Falls from waterfalls and wet rocks can cause serious injuries
+        and deaths.
+    </string>
+    <string name="whistle">Use a whistle: A whistle can be heard from far away and takes less energy than yelling.
+    </string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
     <style name="Animation.AppCompat.Dialog" parent="Base.Animation.AppCompat.Dialog"/>

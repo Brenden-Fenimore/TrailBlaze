@@ -12,12 +12,12 @@
         "source": "com.example.trailblaze.app-main-83:/drawable/baseline_contact_mail_24.xml"
     },
     {
-        "merged": "com.example.trailblaze.app-debug-81:/layout_fragment_edit_profile.xml.flat",
-        "source": "com.example.trailblaze.app-main-83:/layout/fragment_edit_profile.xml"
-    },
-    {
         "merged": "com.example.trailblaze.app-debug-81:/drawable_account_circle.png.flat",
         "source": "com.example.trailblaze.app-main-83:/drawable/account_circle.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-81:/drawable_waterfalls.png.flat",
+        "source": "com.example.trailblaze.app-main-83:/drawable/waterfalls.png"
     },
     {
         "merged": "com.example.trailblaze.app-debug-81:/layout_activity_main.xml.flat",
@@ -72,6 +72,10 @@
         "source": "com.example.trailblaze.app-main-83:/drawable/xpic.png"
     },
     {
+        "merged": "com.example.trailblaze.app-debug-81:/drawable_saltysnack.png.flat",
+        "source": "com.example.trailblaze.app-main-83:/drawable/saltysnack.png"
+    },
+    {
         "merged": "com.example.trailblaze.app-debug-81:/mipmap-mdpi_ic_launcher.webp.flat",
         "source": "com.example.trailblaze.app-main-83:/mipmap-mdpi/ic_launcher.webp"
     },
@@ -84,12 +88,24 @@
         "source": "com.example.trailblaze.app-main-83:/drawable/directions_walk.png"
     },
     {
+        "merged": "com.example.trailblaze.app-debug-81:/drawable_waterbottle.png.flat",
+        "source": "com.example.trailblaze.app-main-83:/drawable/waterbottle.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-81:/drawable_snake.png.flat",
+        "source": "com.example.trailblaze.app-main-83:/drawable/snake.png"
+    },
+    {
         "merged": "com.example.trailblaze.app-debug-81:/drawable_hike.png.flat",
         "source": "com.example.trailblaze.app-main-83:/drawable/hike.png"
     },
     {
         "merged": "com.example.trailblaze.app-debug-81:/drawable_ic_dashboard_black_24dp.xml.flat",
         "source": "com.example.trailblaze.app-main-83:/drawable/ic_dashboard_black_24dp.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-81:/drawable_boots.png.flat",
+        "source": "com.example.trailblaze.app-main-83:/drawable/boots.png"
     },
     {
         "merged": "com.example.trailblaze.app-debug-81:/layout_activity_register.xml.flat",
@@ -116,12 +132,24 @@
         "source": "com.example.trailblaze.app-main-83:/drawable/userperson.png"
     },
     {
+        "merged": "com.example.trailblaze.app-debug-81:/layout_activity_safety.xml.flat",
+        "source": "com.example.trailblaze.app-main-83:/layout/activity_safety.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-81:/drawable_flashlight.png.flat",
+        "source": "com.example.trailblaze.app-main-83:/drawable/flashlight.png"
+    },
+    {
         "merged": "com.example.trailblaze.app-debug-81:/drawable_home.png.flat",
         "source": "com.example.trailblaze.app-main-83:/drawable/home.png"
     },
     {
         "merged": "com.example.trailblaze.app-debug-81:/navigation_nav_graph10.xml.flat",
         "source": "com.example.trailblaze.app-main-83:/navigation/nav_graph10.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-81:/drawable_dontfeedwildlife.png.flat",
+        "source": "com.example.trailblaze.app-main-83:/drawable/dontfeedwildlife.png"
     },
     {
         "merged": "com.example.trailblaze.app-debug-81:/drawable_edit_icon.png.flat",
@@ -152,6 +180,10 @@
         "source": "com.example.trailblaze.app-main-83:/drawable/hamburger_menu.png"
     },
     {
+        "merged": "com.example.trailblaze.app-debug-81:/drawable_poisonivy.png.flat",
+        "source": "com.example.trailblaze.app-main-83:/drawable/poisonivy.png"
+    },
+    {
         "merged": "com.example.trailblaze.app-debug-81:/drawable_hikingimage2.png.flat",
         "source": "com.example.trailblaze.app-main-83:/drawable/hikingimage2.png"
     },
@@ -164,12 +196,20 @@
         "source": "com.example.trailblaze.app-main-83:/layout/activity_forgot_password.xml"
     },
     {
+        "merged": "com.example.trailblaze.app-debug-81:/drawable_layers.png.flat",
+        "source": "com.example.trailblaze.app-main-83:/drawable/layers.png"
+    },
+    {
         "merged": "com.example.trailblaze.app-debug-81:/drawable_settings_icon.png.flat",
         "source": "com.example.trailblaze.app-main-83:/drawable/settings_icon.png"
     },
     {
         "merged": "com.example.trailblaze.app-debug-81:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
         "source": "com.example.trailblaze.app-main-83:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-81:/drawable_limits.png.flat",
+        "source": "com.example.trailblaze.app-main-83:/drawable/limits.png"
     },
     {
         "merged": "com.example.trailblaze.app-debug-81:/drawable_watcherslogo.png.flat",
@@ -214,6 +254,10 @@
     {
         "merged": "com.example.trailblaze.app-debug-81:/mipmap-xhdpi_ic_launcher_round.webp.flat",
         "source": "com.example.trailblaze.app-main-83:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-81:/drawable_ticks.png.flat",
+        "source": "com.example.trailblaze.app-main-83:/drawable/ticks.png"
     },
     {
         "merged": "com.example.trailblaze.app-debug-81:/drawable_baseline_arrow_back_ios_new_24.xml.flat",
@@ -388,12 +432,24 @@
         "source": "com.example.trailblaze.app-main-83:/drawable/ic_notifications_black_24dp.xml"
     },
     {
+        "merged": "com.example.trailblaze.app-debug-81:/navigation_nav_graph11.xml.flat",
+        "source": "com.example.trailblaze.app-main-83:/navigation/nav_graph11.xml"
+    },
+    {
         "merged": "com.example.trailblaze.app-debug-81:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "com.example.trailblaze.app-main-83:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
         "merged": "com.example.trailblaze.app-debug-81:/mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "com.example.trailblaze.app-main-83:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-81:/drawable_bear.png.flat",
+        "source": "com.example.trailblaze.app-main-83:/drawable/bear.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-81:/layout_activity_edit_profile.xml.flat",
+        "source": "com.example.trailblaze.app-main-83:/layout/activity_edit_profile.xml"
     },
     {
         "merged": "com.example.trailblaze.app-debug-81:/layout_activity_appearance.xml.flat",
@@ -420,8 +476,16 @@
         "source": "com.example.trailblaze.app-main-83:/drawable/edittext_background.xml"
     },
     {
+        "merged": "com.example.trailblaze.app-debug-81:/drawable_whistle.png.flat",
+        "source": "com.example.trailblaze.app-main-83:/drawable/whistle.png"
+    },
+    {
         "merged": "com.example.trailblaze.app-debug-81:/drawable_magnifying_glass_small.png.flat",
         "source": "com.example.trailblaze.app-main-83:/drawable/magnifying_glass_small.png"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-81:/drawable_nocellphone.png.flat",
+        "source": "com.example.trailblaze.app-main-83:/drawable/nocellphone.png"
     },
     {
         "merged": "com.example.trailblaze.app-debug-81:/drawable_ic_launcher_background.xml.flat",
@@ -430,6 +494,10 @@
     {
         "merged": "com.example.trailblaze.app-debug-81:/layout_activity_menu.xml.flat",
         "source": "com.example.trailblaze.app-main-83:/layout/activity_menu.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-debug-81:/drawable_stayontrails.png.flat",
+        "source": "com.example.trailblaze.app-main-83:/drawable/stayontrails.png"
     },
     {
         "merged": "com.example.trailblaze.app-debug-81:/layout_fragment_home.xml.flat",

@@ -56,7 +56,7 @@ public final class ActivityMenuBinding implements ViewBinding {
   public final TextView navigationMap;
 
   @NonNull
-  public final TextView navigationProfile;
+  public final TextView navigationSafety;
 
   @NonNull
   public final ImageButton settingsbtn;
@@ -66,7 +66,7 @@ public final class ActivityMenuBinding implements ViewBinding {
       @NonNull Button logoutbtn, @NonNull LinearLayout menuTitle, @NonNull RelativeLayout navLayout,
       @NonNull TextView navigationContact, @NonNull TextView navigationFavorites,
       @NonNull TextView navigationHelp, @NonNull TextView navigationHome,
-      @NonNull TextView navigationMap, @NonNull TextView navigationProfile,
+      @NonNull TextView navigationMap, @NonNull TextView navigationSafety,
       @NonNull ImageButton settingsbtn) {
     this.rootView = rootView;
     this.Settings = Settings;
@@ -80,7 +80,7 @@ public final class ActivityMenuBinding implements ViewBinding {
     this.navigationHelp = navigationHelp;
     this.navigationHome = navigationHome;
     this.navigationMap = navigationMap;
-    this.navigationProfile = navigationProfile;
+    this.navigationSafety = navigationSafety;
     this.settingsbtn = settingsbtn;
   }
 
@@ -173,9 +173,9 @@ public final class ActivityMenuBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.navigation_profile;
-      TextView navigationProfile = ViewBindings.findChildViewById(rootView, id);
-      if (navigationProfile == null) {
+      id = R.id.navigation_safety;
+      TextView navigationSafety = ViewBindings.findChildViewById(rootView, id);
+      if (navigationSafety == null) {
         break missingId;
       }
 
@@ -187,7 +187,7 @@ public final class ActivityMenuBinding implements ViewBinding {
 
       return new ActivityMenuBinding((RelativeLayout) rootView, Settings, chevronLeft,
           fragmentContainer, logoutbtn, menuTitle, navLayout, navigationContact,
-          navigationFavorites, navigationHelp, navigationHome, navigationMap, navigationProfile,
+          navigationFavorites, navigationHelp, navigationHome, navigationMap, navigationSafety,
           settingsbtn);
     }
     String missingId = rootView.getResources().getResourceName(id);

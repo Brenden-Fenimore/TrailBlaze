@@ -9,7 +9,6 @@ import com.example.trailblaze.R
 class ContactUsActivity : AppCompatActivity() {
 
     //declaration
-    private lateinit var cancelBtn: Button
     private lateinit var submitBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,11 +21,6 @@ class ContactUsActivity : AppCompatActivity() {
         //set the listener for the back button
         findViewById<ImageButton>(R.id.chevron_left).setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
-        }
-
-        //set the click listener to close the screen
-        cancelBtn.setOnClickListener {
-            finish()
         }
 
         //set the click listener to close the screen

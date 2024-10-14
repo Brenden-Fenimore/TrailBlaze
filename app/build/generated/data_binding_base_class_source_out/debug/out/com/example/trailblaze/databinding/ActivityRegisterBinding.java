@@ -52,6 +52,9 @@ public final class ActivityRegisterBinding implements ViewBinding {
   public final EditText etEmail;
 
   @NonNull
+  public final EditText etPhone;
+
+  @NonNull
   public final EditText etUsername;
 
   @NonNull
@@ -68,6 +71,9 @@ public final class ActivityRegisterBinding implements ViewBinding {
 
   @NonNull
   public final LinearLayout linearColumnEmail;
+
+  @NonNull
+  public final LinearLayout linearColumnPhone;
 
   @NonNull
   public final LinearLayout linearColumnconfirmpw;
@@ -88,6 +94,9 @@ public final class ActivityRegisterBinding implements ViewBinding {
   public final LinearLayout linearRowRememberpass;
 
   @NonNull
+  public final ImageView phone;
+
+  @NonNull
   public final ImageView pw;
 
   @NonNull
@@ -106,14 +115,15 @@ public final class ActivityRegisterBinding implements ViewBinding {
       @NonNull LinearLayout LinearColumnlreg, @NonNull TextView Register,
       @NonNull ImageView calendar, @NonNull AppCompatCheckBox checkBoxTerms,
       @NonNull Button createAccountBtn, @NonNull ImageView email, @NonNull EditText etConfirmpw,
-      @NonNull EditText etDateofbirth, @NonNull EditText etEmail, @NonNull EditText etUsername,
-      @NonNull EditText etpw1, @NonNull FrameLayout frameStackorConnectw,
-      @NonNull ImageView imageView3, @NonNull ImageView imageView8,
-      @NonNull LinearLayout linearColumnEmail, @NonNull LinearLayout linearColumnconfirmpw,
+      @NonNull EditText etDateofbirth, @NonNull EditText etEmail, @NonNull EditText etPhone,
+      @NonNull EditText etUsername, @NonNull EditText etpw1,
+      @NonNull FrameLayout frameStackorConnectw, @NonNull ImageView imageView3,
+      @NonNull ImageView imageView8, @NonNull LinearLayout linearColumnEmail,
+      @NonNull LinearLayout linearColumnPhone, @NonNull LinearLayout linearColumnconfirmpw,
       @NonNull LinearLayout linearColumndob, @NonNull LinearLayout linearColumnpw,
       @NonNull LinearLayout linearColumnregister, @NonNull LinearLayout linearColumnusername,
-      @NonNull LinearLayout linearRowRememberpass, @NonNull ImageView pw, @NonNull ImageView pw2,
-      @NonNull TextView termsandconditions, @NonNull TextView txtLogin,
+      @NonNull LinearLayout linearRowRememberpass, @NonNull ImageView phone, @NonNull ImageView pw,
+      @NonNull ImageView pw2, @NonNull TextView termsandconditions, @NonNull TextView txtLogin,
       @NonNull TextView txtRegister) {
     this.rootView = rootView;
     this.LinearColumnlreg = LinearColumnlreg;
@@ -125,18 +135,21 @@ public final class ActivityRegisterBinding implements ViewBinding {
     this.etConfirmpw = etConfirmpw;
     this.etDateofbirth = etDateofbirth;
     this.etEmail = etEmail;
+    this.etPhone = etPhone;
     this.etUsername = etUsername;
     this.etpw1 = etpw1;
     this.frameStackorConnectw = frameStackorConnectw;
     this.imageView3 = imageView3;
     this.imageView8 = imageView8;
     this.linearColumnEmail = linearColumnEmail;
+    this.linearColumnPhone = linearColumnPhone;
     this.linearColumnconfirmpw = linearColumnconfirmpw;
     this.linearColumndob = linearColumndob;
     this.linearColumnpw = linearColumnpw;
     this.linearColumnregister = linearColumnregister;
     this.linearColumnusername = linearColumnusername;
     this.linearRowRememberpass = linearRowRememberpass;
+    this.phone = phone;
     this.pw = pw;
     this.pw2 = pw2;
     this.termsandconditions = termsandconditions;
@@ -225,6 +238,12 @@ public final class ActivityRegisterBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.etPhone;
+      EditText etPhone = ViewBindings.findChildViewById(rootView, id);
+      if (etPhone == null) {
+        break missingId;
+      }
+
       id = R.id.etUsername;
       EditText etUsername = ViewBindings.findChildViewById(rootView, id);
       if (etUsername == null) {
@@ -258,6 +277,12 @@ public final class ActivityRegisterBinding implements ViewBinding {
       id = R.id.linearColumnEmail;
       LinearLayout linearColumnEmail = ViewBindings.findChildViewById(rootView, id);
       if (linearColumnEmail == null) {
+        break missingId;
+      }
+
+      id = R.id.linearColumnPhone;
+      LinearLayout linearColumnPhone = ViewBindings.findChildViewById(rootView, id);
+      if (linearColumnPhone == null) {
         break missingId;
       }
 
@@ -297,6 +322,12 @@ public final class ActivityRegisterBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.phone;
+      ImageView phone = ViewBindings.findChildViewById(rootView, id);
+      if (phone == null) {
+        break missingId;
+      }
+
       id = R.id.pw;
       ImageView pw = ViewBindings.findChildViewById(rootView, id);
       if (pw == null) {
@@ -329,10 +360,10 @@ public final class ActivityRegisterBinding implements ViewBinding {
 
       return new ActivityRegisterBinding((LinearLayout) rootView, LinearColumnlreg, Register,
           calendar, checkBoxTerms, createAccountBtn, email, etConfirmpw, etDateofbirth, etEmail,
-          etUsername, etpw1, frameStackorConnectw, imageView3, imageView8, linearColumnEmail,
-          linearColumnconfirmpw, linearColumndob, linearColumnpw, linearColumnregister,
-          linearColumnusername, linearRowRememberpass, pw, pw2, termsandconditions, txtLogin,
-          txtRegister);
+          etPhone, etUsername, etpw1, frameStackorConnectw, imageView3, imageView8,
+          linearColumnEmail, linearColumnPhone, linearColumnconfirmpw, linearColumndob,
+          linearColumnpw, linearColumnregister, linearColumnusername, linearRowRememberpass, phone,
+          pw, pw2, termsandconditions, txtLogin, txtRegister);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

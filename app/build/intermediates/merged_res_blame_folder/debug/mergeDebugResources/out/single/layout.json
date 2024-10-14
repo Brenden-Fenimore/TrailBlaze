@@ -20,10 +20,6 @@
         "source": "com.example.trailblaze.app-main-83:/layout/activity_terms.xml"
     },
     {
-        "merged": "com.example.trailblaze.app-mergeDebugResources-80:/layout/fragment_edit_profile.xml",
-        "source": "com.example.trailblaze.app-main-83:/layout/fragment_edit_profile.xml"
-    },
-    {
         "merged": "com.example.trailblaze.app-mergeDebugResources-80:/layout/fragment_first_personalize.xml",
         "source": "com.example.trailblaze.app-main-83:/layout/fragment_first_personalize.xml"
     },
@@ -72,8 +68,16 @@
         "source": "com.example.trailblaze.app-main-83:/layout/fragment_favorites.xml"
     },
     {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-80:/layout/activity_edit_profile.xml",
+        "source": "com.example.trailblaze.app-main-83:/layout/activity_edit_profile.xml"
+    },
+    {
         "merged": "com.example.trailblaze.app-mergeDebugResources-80:/layout/activity_settings_screen.xml",
         "source": "com.example.trailblaze.app-main-83:/layout/activity_settings_screen.xml"
+    },
+    {
+        "merged": "com.example.trailblaze.app-mergeDebugResources-80:/layout/activity_safety.xml",
+        "source": "com.example.trailblaze.app-main-83:/layout/activity_safety.xml"
     },
     {
         "merged": "com.example.trailblaze.app-mergeDebugResources-80:/layout/activity_personalize.xml",

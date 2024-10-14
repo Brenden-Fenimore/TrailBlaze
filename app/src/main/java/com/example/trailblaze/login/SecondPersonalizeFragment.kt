@@ -10,19 +10,16 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.TextView
-import androidx.lifecycle.ViewModelProvider
 import com.example.trailblaze.R
-import com.example.trailblaze.ui.UserPreferences.UserPreferences
-import com.example.trailblaze.ui.UserPreferences.UserPreferencesViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class SecondPersonalizeFragment : Fragment() {
 
     //declaration
-    private lateinit var city : EditText
+    private lateinit var city: EditText
     private lateinit var state: EditText
-    private lateinit var zip : EditText
+    private lateinit var zip: EditText
 
     lateinit var seekBar: SeekBar
     lateinit var selectedValueTextView: TextView
@@ -55,6 +52,7 @@ class SecondPersonalizeFragment : Fragment() {
 
         return view
     }
+
     private fun setupSeekBarListener() {
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -73,6 +71,7 @@ class SecondPersonalizeFragment : Fragment() {
             }
         })
     }
+
     private fun saveUserPreferences() {
         // Get user input
         val userCity = city.text.toString()
@@ -86,7 +85,7 @@ class SecondPersonalizeFragment : Fragment() {
             val db = FirebaseFirestore.getInstance()
             val userRef = db.collection("users").document(userId)
 
-            // Create a map of data to save
+            // Create a map to store the user preferences
             val userPreferences = hashMapOf(
                 "city" to userCity,
                 "state" to userState,
@@ -94,15 +93,17 @@ class SecondPersonalizeFragment : Fragment() {
                 "distance" to userDistance
             )
 
-            // Save the data to Firestore
-            userRef.set(userPreferences)
+            // Update the user document with the preferences
+            userRef.update(userPreferences as Map<String, Any>)
                 .addOnSuccessListener {
                     // Data saved successfully
                     Log.d("Firebase", "User preferences saved successfully")
+                    // Navigate to the next fragment
+                    (activity as? PersonalizeActivity)?.loadFragment(ThirdPersonalizeFragment())
                 }
-                .addOnFailureListener { e ->
+                .addOnFailureListener { exception ->
                     // Error saving data
-                    Log.w("Firebase", "Error saving user preferences", e)
+                    Log.w("Firebase", "Error saving user preferences", exception)
                 }
         }
     }

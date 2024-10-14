@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:2:1-79:12
-INJECTED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:2:1-79:12
-INJECTED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:2:1-79:12
-INJECTED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:2:1-79:12
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:2:1-91:12
+INJECTED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:2:1-91:12
+INJECTED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:2:1-91:12
+INJECTED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:2:1-91:12
 MERGED from [androidx.databinding:viewbinding:8.6.0-alpha07] /Users/mamiegartin/.gradle/caches/transforms-4/21152c079908a89caf553a26acf500a1/transformed/viewbinding-8.6.0-alpha07/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.firebase:firebase-firestore-ktx:25.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/fcadb54a5146fb15ad617720a8a2b06f/transformed/firebase-firestore-ktx-25.1.0/AndroidManifest.xml:2:1-18:12
 MERGED from [androidx.navigation:navigation-common:2.6.0] /Users/mamiegartin/.gradle/caches/transforms-4/e4156247928319287f1d1772b09fcd32/transformed/navigation-common-2.6.0/AndroidManifest.xml:17:1-22:12
@@ -139,8 +139,8 @@ MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] /Users/mamie
 	xmlns:android
 		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:2:11-69
 application
-ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:5:5-77:19
-INJECTED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:5:5-77:19
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:5:5-89:19
+INJECTED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:5:5-89:19
 MERGED from [com.google.firebase:firebase-firestore-ktx:25.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/fcadb54a5146fb15ad617720a8a2b06f/transformed/firebase-firestore-ktx-25.1.0/AndroidManifest.xml:8:5-16:19
 MERGED from [com.google.firebase:firebase-firestore-ktx:25.1.0] /Users/mamiegartin/.gradle/caches/transforms-4/fcadb54a5146fb15ad617720a8a2b06f/transformed/firebase-firestore-ktx-25.1.0/AndroidManifest.xml:8:5-16:19
 MERGED from [com.google.android.material:material:1.10.0] /Users/mamiegartin/.gradle/caches/transforms-4/67aed5640c008e0c862e1a53a282ae88/transformed/material-1.10.0/AndroidManifest.xml:22:5-20
@@ -241,128 +241,152 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/mami
 		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:13:13-52
 	android:dataExtractionRules
 		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:7:13-69
-activity#com.example.trailblaze.ui.MenuActivity
-ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:15:9-18:63
+activity#com.example.trailblaze.settings.SafetyActivity
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:15:9-17:43
 	android:exported
 		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:17:17-41
-	android:theme
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:18:17-61
 	android:name
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:16:17-48
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:16:17-56
+activity#com.example.trailblaze.settings.SafetyTipsActivity
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:18:9-22:58
+	android:label
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:21:17-67
+	android:exported
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:20:17-41
+	android:theme
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:22:17-56
+	android:name
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:19:17-60
+activity#com.example.trailblaze.ui.profile.EditProfileActivity
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:23:9-26:58
+	android:exported
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:25:17-41
+	android:theme
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:26:17-56
+	android:name
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:24:17-63
+activity#com.example.trailblaze.ui.MenuActivity
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:27:9-30:63
+	android:exported
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:29:17-41
+	android:theme
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:30:17-61
+	android:name
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:28:17-48
 activity#com.example.trailblaze.settings.AboutActivity
-ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:19:9-21:43
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:31:9-33:43
 	android:exported
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:21:17-41
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:33:17-41
 	android:name
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:20:17-55
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:32:17-55
 activity#com.example.trailblaze.settings.PrivacyAndSecurityActivity
-ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:22:9-24:43
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:34:9-36:43
 	android:exported
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:24:17-41
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:36:17-41
 	android:name
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:23:17-68
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:35:17-68
 activity#com.example.trailblaze.settings.AppearanceActivity
-ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:25:9-27:43
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:37:9-39:43
 	android:exported
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:27:17-41
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:39:17-41
 	android:name
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:26:17-60
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:38:17-60
 activity#com.example.trailblaze.settings.NotificationsActivity
-ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:28:9-31:58
-	android:exported
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:30:17-41
-	android:theme
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:31:17-56
-	android:name
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:29:17-63
-activity#com.example.trailblaze.settings.ContactUsActivity
-ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:32:9-35:58
-	android:exported
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:34:17-41
-	android:theme
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:35:17-56
-	android:name
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:33:17-59
-activity#com.example.trailblaze.settings.SupportScreenActivity
-ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:36:9-39:58
-	android:exported
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:38:17-41
-	android:theme
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:39:17-56
-	android:name
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:37:17-63
-activity#com.example.trailblaze.ui.profile.FriendsProfile
-ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:40:9-42:43
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:40:9-43:58
 	android:exported
 		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:42:17-41
+	android:theme
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:43:17-56
 	android:name
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:41:17-58
-activity#com.example.trailblaze.login.TermsActivity
-ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:43:9-47:58
-	android:label
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:46:17-61
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:41:17-63
+activity#com.example.trailblaze.settings.ContactUsActivity
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:44:9-47:58
 	android:exported
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:45:17-41
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:46:17-41
 	android:theme
 		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:47:17-56
 	android:name
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:44:17-52
-activity#com.example.trailblaze.login.PersonalizeActivity
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:45:17-59
+activity#com.example.trailblaze.settings.SupportScreenActivity
 ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:48:9-51:58
 	android:exported
 		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:50:17-41
 	android:theme
 		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:51:17-56
 	android:name
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:49:17-58
-activity#com.example.trailblaze.login.ForgotPasswordActivity
-ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:52:9-55:58
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:49:17-63
+activity#com.example.trailblaze.ui.profile.FriendsProfile
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:52:9-54:43
 	android:exported
 		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:54:17-41
-	android:theme
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:55:17-56
 	android:name
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:53:17-61
-activity#com.example.trailblaze.login.RegisterActivity
-ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:56:9-58:43
-	android:exported
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:58:17-41
-	android:name
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:57:17-55
-activity#com.example.trailblaze.login.LoginActivity
-ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:59:9-62:58
-	android:exported
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:61:17-40
-	android:theme
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:62:17-56
-	android:name
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:60:17-52
-activity#com.example.trailblaze.settings.SettingsScreenActivity
-ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:63:9-66:58
-	android:exported
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:65:17-41
-	android:theme
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:66:17-56
-	android:name
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:64:17-64
-activity#com.example.trailblaze.MainActivity
-ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:67:9-76:20
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:53:17-58
+activity#com.example.trailblaze.login.TermsActivity
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:55:9-59:58
 	android:label
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:70:17-49
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:58:17-61
 	android:exported
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:69:17-40
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:57:17-41
+	android:theme
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:59:17-56
 	android:name
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:68:17-45
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:56:17-52
+activity#com.example.trailblaze.login.PersonalizeActivity
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:60:9-63:58
+	android:exported
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:62:17-41
+	android:theme
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:63:17-56
+	android:name
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:61:17-58
+activity#com.example.trailblaze.login.ForgotPasswordActivity
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:64:9-67:58
+	android:exported
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:66:17-41
+	android:theme
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:67:17-56
+	android:name
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:65:17-61
+activity#com.example.trailblaze.login.RegisterActivity
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:68:9-70:43
+	android:exported
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:70:17-41
+	android:name
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:69:17-55
+activity#com.example.trailblaze.login.LoginActivity
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:71:9-74:58
+	android:exported
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:73:17-40
+	android:theme
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:74:17-56
+	android:name
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:72:17-52
+activity#com.example.trailblaze.settings.SettingsScreenActivity
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:75:9-78:58
+	android:exported
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:77:17-41
+	android:theme
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:78:17-56
+	android:name
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:76:17-64
+activity#com.example.trailblaze.MainActivity
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:79:9-88:20
+	android:label
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:82:17-49
+	android:exported
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:81:17-40
+	android:name
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:80:17-45
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:71:13-75:29
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:83:13-87:29
 action#android.intent.action.MAIN
-ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:72:17-68
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:84:17-68
 	android:name
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:72:25-66
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:84:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:74:17-76
+ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:86:17-76
 	android:name
-		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:74:27-74
+		ADDED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml:86:27-74
 uses-sdk
 INJECTED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/src/main/AndroidManifest.xml

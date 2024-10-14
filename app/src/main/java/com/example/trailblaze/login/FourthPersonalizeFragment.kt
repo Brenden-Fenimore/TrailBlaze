@@ -116,7 +116,7 @@ class FourthPersonalizeFragment : Fragment() {
             val db = FirebaseFirestore.getInstance()
             val userRef = db.collection("users").document(userId)
 
-            // Create a map of data to save
+            // Create a map to store the user preferences
             val userPreferences = hashMapOf(
                 "terrain" to selectedTerrain,
                 "fitnessLevel" to selectedFitnessLevel,
@@ -124,15 +124,17 @@ class FourthPersonalizeFragment : Fragment() {
                 "typeOfHike" to selectedTypeOfHike
             )
 
-            // Save the data to Firestore
-            userRef.set(userPreferences)
+            // Update the user document with the preferences
+            userRef.update(userPreferences as Map<String, Any>)
                 .addOnSuccessListener {
                     // Data saved successfully
                     Log.d("Firebase", "User preferences saved successfully")
+                    // Navigate to the next fragment
+                    // (activity as? PersonalizeActivity)?.loadFragment(ThirdPersonalizeFragment())
                 }
-                .addOnFailureListener { e ->
+                .addOnFailureListener { exception ->
                     // Error saving data
-                    Log.w("Firebase", "Error saving user preferences", e)
+                    Log.w("Firebase", "Error saving user preferences", exception)
                 }
         }
     }

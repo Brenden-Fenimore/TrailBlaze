@@ -78,6 +78,8 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
     implementation("com.google.firebase:firebase-analytics")
 
+    implementation ("com.google.firebase:firebase-firestore-ktx:24.0.1")
+
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1") // Use the latest version
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1") // Use the latest version
 
