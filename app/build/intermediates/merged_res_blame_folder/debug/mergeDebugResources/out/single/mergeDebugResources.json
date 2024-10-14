@@ -332,6 +332,10 @@
         "source": "/Users/mamiegartin/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/drawable/leaderboard.png"
     },
     {
+        "merged": "com.example.trailblaze.app-debug-81:/layout_popup_tooltip.xml.flat",
+        "source": "com.example.trailblaze.app-main-83:/layout/popup_tooltip.xml"
+    },
+    {
         "merged": "/Users/mamiegartin/.gradle/daemon/8.7/com.example.trailblaze.app-debug-81:/drawable_pace.png.flat",
         "source": "/Users/mamiegartin/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/drawable/pace.png"
     },
@@ -532,8 +536,8 @@
         "source": "/Users/mamiegartin/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/layout/fragment_third_personalize.xml"
     },
     {
-        "merged": "com.example.trailblaze.app-debug-81:/layout_activity_achievements.xml.flat",
-        "source": "com.example.trailblaze.app-main-83:/layout/activity_achievements.xml"
+        "merged": "/Users/mamiegartin/.gradle/daemon/8.7/com.example.trailblaze.app-debug-81:/layout_popup_tooltip.xml.flat",
+        "source": "/Users/mamiegartin/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/layout/popup_tooltip.xml"
     },
     {
         "merged": "/Users/mamiegartin/.gradle/daemon/8.7/com.example.trailblaze.app-debug-81:/drawable_linkedin1.png.flat",

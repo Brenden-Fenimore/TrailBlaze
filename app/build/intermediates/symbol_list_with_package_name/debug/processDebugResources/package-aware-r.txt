@@ -3786,6 +3786,7 @@ id phone
 id phonelayout
 id pin
 id pooling_container_listener_holder_tag
+id popup_text
 id position
 id postLayout
 id pressed
@@ -4222,6 +4223,7 @@ layout notification_template_custom_big
 layout notification_template_icon_group
 layout notification_template_part_chronometer
 layout notification_template_part_time
+layout popup_tooltip
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
@@ -4286,6 +4288,7 @@ string appearanceTitle
 string aspects
 string backButton
 string backarrow
+string badgecollector
 string bear
 string boots
 string bottom_sheet_behavior
@@ -4328,6 +4331,8 @@ string common_google_play_services_wear_update_text
 string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
+string communitybuilder
+string conqueror
 string contact
 string contact4
 string contactTitle
@@ -4336,6 +4341,7 @@ string contactTitle3
 string contact_us
 string copy_toast_msg
 string createAccount
+string dailyadventurer
 string default_error_message
 string default_popup_window_title
 string description
@@ -4350,6 +4356,7 @@ string emergency
 string error_a11y_label
 string error_icon_content_description
 string exploreTrails
+string explorer
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
@@ -4368,10 +4375,12 @@ string friendsAdd
 string friendsProfile1
 string fun
 string gcm_defaultSenderId
+string goalsetter
 string google_api_key
 string google_app_id
 string google_crash_reporting_api_key
 string google_storage_bucket
+string habitualhiker
 string helloFavorites
 string helloHome
 string helloMap
@@ -4398,11 +4407,13 @@ string item_view_role_description
 string layers
 string leaderboard
 string leaderboardPicture
+string leaderboardtip
 string limits
 string location
 string locationIcon
 string login1
 string logout
+string longdistancetrekker
 string lorem_ipsum
 string m3_exceed_max_badge_text_suffix
 string m3_ref_typeface_brand_medium
@@ -4501,6 +4512,7 @@ string material_timepicker_pm
 string material_timepicker_select_time
 string material_timepicker_text_input_mode_description
 string menuTitle
+string mountainclimber
 string mtrl_badge_numberless_content_description
 string mtrl_checkbox_button_icon_path_checked
 string mtrl_checkbox_button_icon_path_group_name
@@ -4585,6 +4597,7 @@ string path_password_strike_through
 string personalize
 string phone
 string phoneNumber
+string photographer
 string poisonivy
 string previous
 string privacyTitle
@@ -4599,6 +4612,7 @@ string range_start
 string rememberPassword
 string reviewTerms
 string safetyTips
+string safteyexpert
 string search_menu_title
 string searchbar_scrolling_view_behavior
 string searchview_clear_text_content_description
@@ -4609,11 +4623,13 @@ string settings
 string side_sheet_accessibility_pane_title
 string side_sheet_behavior
 string snakes
+string socialbutterfly
 string status_bar_notification_info_overflow
 string submit
 string supportEmail
 string switch_role
 string tab
+string teamplayer
 string template_percent
 string ticks
 string titleBreaks
@@ -4643,6 +4659,8 @@ string title_profile
 string tooltip_description
 string tooltip_label
 string trailChallenges
+string trailblazer
+string trailmaster
 string troubleshoot
 string userBadge1
 string userBadge2
@@ -4656,7 +4674,9 @@ string username
 string watcherMember
 string water
 string waterfalls
+string weekendwarrior
 string whistle
+string wildlifewatcher
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog

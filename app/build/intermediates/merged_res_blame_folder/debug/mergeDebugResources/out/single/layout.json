@@ -20,12 +20,20 @@
         "source": "/Users/mamiegartin/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/layout/activity_menu.xml"
     },
     {
-        "merged": "/Users/mamiegartin/.gradle/daemon/8.7/com.example.trailblaze.app-mergeDebugResources-80:/layout/activity_personalize.xml",
-        "source": "/Users/mamiegartin/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/layout/activity_personalize.xml"
+        "merged": "com.example.trailblaze.app-mergeDebugResources-80:/layout/popup_tooltip.xml",
+        "source": "com.example.trailblaze.app-main-83:/layout/popup_tooltip.xml"
+    },
+    {
+        "merged": "/Users/mamiegartin/.gradle/daemon/8.7/com.example.trailblaze.app-mergeDebugResources-80:/layout/popup_tooltip.xml",
+        "source": "/Users/mamiegartin/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/layout/popup_tooltip.xml"
     },
     {
         "merged": "/Users/mamiegartin/.gradle/daemon/8.7/com.example.trailblaze.app-mergeDebugResources-80:/layout/achievement_card.xml",
         "source": "/Users/mamiegartin/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/layout/achievement_card.xml"
+    },
+    {
+        "merged": "/Users/mamiegartin/.gradle/daemon/8.7/com.example.trailblaze.app-mergeDebugResources-80:/layout/activity_personalize.xml",
+        "source": "/Users/mamiegartin/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/layout/activity_personalize.xml"
     },
     {
         "merged": "/Users/mamiegartin/.gradle/daemon/8.7/com.example.trailblaze.app-mergeDebugResources-80:/layout/content_menu.xml",
@@ -98,10 +106,6 @@
     {
         "merged": "/Users/mamiegartin/.gradle/daemon/8.7/com.example.trailblaze.app-mergeDebugResources-80:/layout/activity_main.xml",
         "source": "/Users/mamiegartin/.gradle/daemon/8.7/com.example.trailblaze.app-main-83:/layout/activity_main.xml"
-    },
-    {
-        "merged": "com.example.trailblaze.app-mergeDebugResources-80:/layout/activity_achievements.xml",
-        "source": "com.example.trailblaze.app-main-83:/layout/activity_achievements.xml"
     },
     {
         "merged": "/Users/mamiegartin/.gradle/daemon/8.7/com.example.trailblaze.app-mergeDebugResources-80:/layout/activity_about.xml",

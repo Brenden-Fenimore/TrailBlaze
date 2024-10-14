@@ -128,6 +128,26 @@
 
     <string name="achievementsTitle">Achievements</string>
     <string name="overallProgress">Overall Progress</string>
+    <!-- badge tool tips-->
+    <string name="trailblazer">Trailblazer: Complete a trail of a certain distance or elevation gain.</string>
+    <string name="mountainclimber">Mountain Climber: Reach a specific altitude or summit.</string>
+    <string name="longdistancetrekker">Long-Distance Trekker: Hike a certain number of miles in a single day or week</string>
+    <string name="habitualhiker">Habitual Hiker: Hike a certain number of times per week or month.</string>
+    <string name="weekendwarrior">Weekend Warrior: Complete a trail every weekend.</string>
+    <string name="dailyadventurer">Daily Adventurer: Hike at least once a day for a week.</string>
+    <string name="conqueror">Conqueror: Complete a challenging trail with a difficult rating.</string>
+    <string name="explorer">Explorer: Hike trails in various terrains (e.g., mountains, forests, deserts).</string>
+    <string name="trailmaster">Trail Master: Complete trails in all four seasons.</string>
+    <string name="socialbutterfly">Social Butterfly: Hike with a group of friends or family.</string>
+    <string name="teamplayer">Team Player: Complete a group challenge or relay race.</string>
+    <string name="safteyexpert">Safety Expert: Look at the safety tips.</string>
+    <string name="communitybuilder">Community Builder: Organize a group hike or event.</string>
+    <string name="wildlifewatcher">Wildlife Watcher: Spot a specific animal or bird on a hike.</string>
+    <string name="photographer">Photographer: Capture a stunning photo of a trail or landscape.</string>
+    <string name="goalsetter">Goal Setter: Set a personal hiking goal and achieve it.</string>
+    <string name="badgecollector">Badge Collector: Earn badges for completing specific challenges or achievements.</string>
+    <string name="leaderboardtip">Leaderboard Climber: Compete with friends or other users on a leaderboard.</string>
+
 
 
     <string name="lorem_ipsum">

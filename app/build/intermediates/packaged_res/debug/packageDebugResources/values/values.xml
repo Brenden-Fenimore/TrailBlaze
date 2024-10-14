@@ -47,6 +47,7 @@ With customization
     <string name="aspects">What aspect/s of hiking do you like to experience most?</string>
     <string name="backButton">Back Button</string>
     <string name="backarrow">backArrow</string>
+    <string name="badgecollector">Badge Collector: Earn badges for completing specific challenges or achievements.</string>
     <string name="bear">Wildlife lives in all state parks, even near urban areas: Although rare, black bears, mountain
         lions and rattlesnakes may be seen. If you encounter wildlife on the trail, keep your distance, back away slowly
         and do not run. Report your sightings to park staff.
@@ -57,6 +58,8 @@ With customization
     <string name="btn_back">Goes back to the previous page</string>
     <string name="bug">Report a Bug</string>
     <string name="cancel">Cancel</string>
+    <string name="communitybuilder">Community Builder: Organize a group hike or event.</string>
+    <string name="conqueror">Conqueror: Complete a challenging trail with a difficult rating.</string>
     <string name="contact">Contact Us</string>
     <string name="contact4">You can also contact us at</string>
     <string name="contactTitle">If you are experiencing any issues, please let us know. We will try to solve them as
@@ -66,6 +69,7 @@ With customization
     <string name="contactTitle3">Explain the problem</string>
     <string name="contact_us">Contact Us</string>
     <string name="createAccount">Create Account</string>
+    <string name="dailyadventurer">Daily Adventurer: Hike at least once a day for a week.</string>
     <string name="description">Enter a description…</string>
     <string name="difficultyIcon">Difficulty Icon</string>
     <string name="distance">How far would you like to receive suggested trails?</string>
@@ -74,6 +78,7 @@ With customization
     <string name="editProfile">Edit Profile</string>
     <string name="emergency">I am in an emergency! (Dial 911)</string>
     <string name="exploreTrails">Explore Trails</string>
+    <string name="explorer">Explorer: Hike trails in various terrains (e.g., mountains, forests, deserts).</string>
     <string name="favorites">Favorites</string>
     <string name="first_fragment_label">First Fragment</string>
     <string name="flashligh">Carry essentials: Bring a flashlight, matches, emergency shelter, and extra food and
@@ -90,10 +95,12 @@ With customization
         only memories!
     </string>
     <string name="gcm_defaultSenderId" translatable="false">1017354103686</string>
+    <string name="goalsetter">Goal Setter: Set a personal hiking goal and achieve it.</string>
     <string name="google_api_key" translatable="false">AIzaSyBUWF7u2Ek-DOZjOS0bMxIWPLNrJjiqhQ4</string>
     <string name="google_app_id" translatable="false">1:1017354103686:android:16bf2db4495f7ab07eda07</string>
     <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBUWF7u2Ek-DOZjOS0bMxIWPLNrJjiqhQ4</string>
     <string name="google_storage_bucket" translatable="false">trailblaze-48640.appspot.com</string>
+    <string name="habitualhiker">Habitual Hiker: Hike a certain number of times per week or month.</string>
     <string name="helloFavorites">Hello FAVORITES Fragment</string>
     <string name="helloHome">Hello HOME Fragment</string>
     <string name="helloMap">Hello MAP Fragment</string>
@@ -117,6 +124,7 @@ With customization
     <string name="layers">Dress in layers: Wear clothes that work for the weather and avoid cotton.</string>
     <string name="leaderboard">Leaderboard</string>
     <string name="leaderboardPicture">Leaderboard Picture</string>
+    <string name="leaderboardtip">Leaderboard Climber: Compete with friends or other users on a leaderboard.</string>
     <string name="limits">Know your limits: Be aware of your physical abilities and listen to your body. Recognize signs
         of fatigue or distress, such as shortness of breath or dizziness.
     </string>
@@ -126,6 +134,7 @@ With customization
     <string name="locationIcon">Location Icon</string>
     <string name="login1">By signing in you are agreeing to our</string>
     <string name="logout">Logout</string>
+    <string name="longdistancetrekker">Long-Distance Trekker: Hike a certain number of miles in a single day or week</string>
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris volutpat, dolor id
         interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus dui nec risus. Maecenas non sodales
@@ -161,6 +170,7 @@ With customization
         getting lost.
     </string>
     <string name="menuTitle">Menu</string>
+    <string name="mountainclimber">Mountain Climber: Reach a specific altitude or summit.</string>
     <string name="next">Next</string>
     <string name="notificationTitle">Notifications</string>
     <string name="ok">OK</string>
@@ -172,6 +182,7 @@ With customization
     <string name="personalize">Lets Personalize your account</string>
     <string name="phone">Dont rely on cell phones: Dont count on cell phones to work in the wilderness.</string>
     <string name="phoneNumber">Phone Number</string>
+    <string name="photographer">Photographer: Capture a stunning photo of a trail or landscape.</string>
     <string name="poisonivy">Poison oak: It is a common plant throughout much of California. Learn to identify its
         shiny, three-leaf pattern, and avoid touching it. If you touch poison oak, wash immediately with water and mild
         soap. Pat dry with a clean towel.
@@ -194,6 +205,7 @@ With customization
     <string name="rememberPassword">Remember Password</string>
     <string name="reviewTerms">Review Terms and Conditions</string>
     <string name="safetyTips">Safety Tips</string>
+    <string name="safteyexpert">Safety Expert: Look at the safety tips.</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="settings">Settings</string>
     <string name="snakes">Snakes: Always know where you are stepping. For example, if you must traverse a log that has
@@ -201,8 +213,10 @@ With customization
         you know the coast is clear. Be cautious when climbing rocks or picking up firewood. If you see a snake,
         maintain a distance of at least 6 feet. Most bites occur when people get too close or try to touch them.
     </string>
+    <string name="socialbutterfly">Social Butterfly: Hike with a group of friends or family.</string>
     <string name="submit">Submit</string>
     <string name="supportEmail">customersupport@trailblaze.com</string>
+    <string name="teamplayer">Team Player: Complete a group challenge or relay race.</string>
     <string name="ticks">Ticks: Tick populations can increase depending on the season. Take the following precautions
         to avoid them:
         Walk in the middle of trails. Use insect repellent. Tuck your pants into your socks. After taking off gear,
@@ -233,6 +247,8 @@ With customization
     <string name="title_notifications">Notifications</string>
     <string name="title_profile">Profile</string>
     <string name="trailChallenges">Trail Challenges</string>
+    <string name="trailblazer">Trailblazer: Complete a trail of a certain distance or elevation gain.</string>
+    <string name="trailmaster">Trail Master: Complete trails in all four seasons.</string>
     <string name="troubleshoot">Troubleshooting Guide</string>
     <string name="userBadge1">User Badge 1</string>
     <string name="userBadge2">User Badge 2</string>
@@ -250,8 +266,10 @@ With customization
     <string name="waterfalls">Dont climb on waterfalls: Falls from waterfalls and wet rocks can cause serious injuries
         and deaths.
     </string>
+    <string name="weekendwarrior">Weekend Warrior: Complete a trail every weekend.</string>
     <string name="whistle">Use a whistle: A whistle can be heard from far away and takes less energy than yelling.
     </string>
+    <string name="wildlifewatcher">Wildlife Watcher: Spot a specific animal or bird on a hike.</string>
     <style name="Base.Theme.TrailBlaze" parent="Theme.Material3.DayNight.NoActionBar">
         
         

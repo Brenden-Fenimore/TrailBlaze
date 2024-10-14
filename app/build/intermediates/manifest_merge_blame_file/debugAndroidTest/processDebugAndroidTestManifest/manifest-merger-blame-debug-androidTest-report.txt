@@ -3,24 +3,24 @@
 3    package="com.example.trailblaze.test" >
 4
 5    <uses-sdk
-5-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7913206979790294363.xml:5:5-74
+5-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest18295278685782960110.xml:5:5-74
 6        android:minSdkVersion="24"
-6-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7913206979790294363.xml:5:15-41
+6-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest18295278685782960110.xml:5:15-41
 7        android:targetSdkVersion="34" />
-7-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7913206979790294363.xml:5:42-71
+7-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest18295278685782960110.xml:5:42-71
 8
 9    <instrumentation
-9-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7913206979790294363.xml:11:5-15:72
+9-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest18295278685782960110.xml:11:5-15:72
 10        android:name="androidx.test.runner.AndroidJUnitRunner"
-10-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7913206979790294363.xml:11:22-76
+10-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest18295278685782960110.xml:11:22-76
 11        android:functionalTest="false"
-11-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7913206979790294363.xml:14:22-52
+11-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest18295278685782960110.xml:14:22-52
 12        android:handleProfiling="false"
-12-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7913206979790294363.xml:13:22-53
+12-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest18295278685782960110.xml:13:22-53
 13        android:label="Tests for com.example.trailblaze"
-13-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7913206979790294363.xml:15:22-70
+13-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest18295278685782960110.xml:15:22-70
 14        android:targetPackage="com.example.trailblaze" />
-14-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7913206979790294363.xml:12:22-68
+14-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest18295278685782960110.xml:12:22-68
 15
 16    <uses-permission android:name="android.permission.REORDER_TASKS" />
 16-->[androidx.test:core:1.5.0] /Users/mamiegartin/.gradle/caches/transforms-4/bd10a8c2c0fe43e13e70d8a04e7f6635/transformed/core-1.5.0/AndroidManifest.xml:24:5-72
@@ -40,12 +40,12 @@
 22    </queries>
 23
 24    <application
-24-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7913206979790294363.xml:7:5-9:19
+24-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest18295278685782960110.xml:7:5-9:19
 25        android:debuggable="true"
 26        android:extractNativeLibs="false" >
 27        <uses-library android:name="android.test.runner" />
-27-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7913206979790294363.xml:8:9-60
-27-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest7913206979790294363.xml:8:23-57
+27-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest18295278685782960110.xml:8:9-60
+27-->/Users/mamiegartin/Documents/CS Ass/PnP2/TrailBlaze/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest18295278685782960110.xml:8:23-57
 28
 29        <activity
 29-->[androidx.test:core:1.5.0] /Users/mamiegartin/.gradle/caches/transforms-4/bd10a8c2c0fe43e13e70d8a04e7f6635/transformed/core-1.5.0/AndroidManifest.xml:27:9-34:20
