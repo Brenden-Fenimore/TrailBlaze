@@ -39,13 +39,11 @@
         android:testOnly="true"
         android:theme="@style/Theme.TrailBlaze" >
         <activity
-            android:name="com.example.trailblaze.settings.SafetyActivity"
+            android:name="com.example.trailblaze.ui.achievements.AchievementsActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.trailblaze.settings.SafetyTipsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_safety_tips"
-            android:theme="@style/Theme.TrailBlaze" />
+            android:name="com.example.trailblaze.settings.SafetyActivity"
+            android:exported="false" />
         <activity
             android:name="com.example.trailblaze.ui.profile.EditProfileActivity"
             android:exported="false"

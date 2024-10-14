@@ -36,6 +36,7 @@ With customization
     </string>
     <string name="aboutTitle">About</string>
     <string name="accountTitle">Account</string>
+    <string name="achievementsTitle">Achievements</string>
     <string name="activityTitle">Settings</string>
     <string name="agree">You agree to our</string>
     <string name="animal">Never feed or touch wildlife: Do not approach or attempt to move sick or injured wildlife.
@@ -164,6 +165,7 @@ With customization
     <string name="notificationTitle">Notifications</string>
     <string name="ok">OK</string>
     <string name="options">Please select your preferences for each of the categories listed below.</string>
+    <string name="overallProgress">Overall Progress</string>
     <string name="pace">Pace</string>
     <string name="passWord">Password</string>
     <string name="password2">Confirm Password</string>

@@ -125,6 +125,11 @@
         you know the coast is clear. Be cautious when climbing rocks or picking up firewood. If you see a snake,
         maintain a distance of at least 6 feet. Most bites occur when people get too close or try to touch them.
     </string>
+
+    <string name="achievementsTitle">Achievements</string>
+    <string name="overallProgress">Overall Progress</string>
+
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris volutpat, dolor id
         interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus dui nec risus. Maecenas non sodales

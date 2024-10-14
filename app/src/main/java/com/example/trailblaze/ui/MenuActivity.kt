@@ -12,6 +12,7 @@ import com.example.trailblaze.settings.ContactUsActivity
 import com.example.trailblaze.settings.SafetyActivity
 import com.example.trailblaze.settings.SettingsScreenActivity
 import com.example.trailblaze.settings.SupportScreenActivity
+import com.example.trailblaze.ui.achievements.AchievementsActivity
 import com.example.trailblaze.ui.home.HomeFragment
 
 class MenuActivity : AppCompatActivity() {
@@ -66,6 +67,11 @@ class MenuActivity : AppCompatActivity() {
 
         findViewById<TextView>(R.id.navigation_safety).setOnClickListener{
             val intent = Intent(this, SafetyActivity::class.java)
+            startActivity(intent)
+        }
+
+        findViewById<TextView>(R.id.navigation_trailChallenges).setOnClickListener{
+            val intent = Intent(this, AchievementsActivity::class.java)
             startActivity(intent)
         }
     }

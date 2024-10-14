@@ -44,9 +44,6 @@ public final class ActivityMenuBinding implements ViewBinding {
   public final TextView navigationContact;
 
   @NonNull
-  public final TextView navigationFavorites;
-
-  @NonNull
   public final TextView navigationHelp;
 
   @NonNull
@@ -59,14 +56,17 @@ public final class ActivityMenuBinding implements ViewBinding {
   public final TextView navigationSafety;
 
   @NonNull
+  public final TextView navigationTrailChallenges;
+
+  @NonNull
   public final ImageButton settingsbtn;
 
   private ActivityMenuBinding(@NonNull RelativeLayout rootView, @NonNull TextView Settings,
       @NonNull ImageButton chevronLeft, @NonNull RelativeLayout fragmentContainer,
       @NonNull Button logoutbtn, @NonNull LinearLayout menuTitle, @NonNull RelativeLayout navLayout,
-      @NonNull TextView navigationContact, @NonNull TextView navigationFavorites,
-      @NonNull TextView navigationHelp, @NonNull TextView navigationHome,
-      @NonNull TextView navigationMap, @NonNull TextView navigationSafety,
+      @NonNull TextView navigationContact, @NonNull TextView navigationHelp,
+      @NonNull TextView navigationHome, @NonNull TextView navigationMap,
+      @NonNull TextView navigationSafety, @NonNull TextView navigationTrailChallenges,
       @NonNull ImageButton settingsbtn) {
     this.rootView = rootView;
     this.Settings = Settings;
@@ -76,11 +76,11 @@ public final class ActivityMenuBinding implements ViewBinding {
     this.menuTitle = menuTitle;
     this.navLayout = navLayout;
     this.navigationContact = navigationContact;
-    this.navigationFavorites = navigationFavorites;
     this.navigationHelp = navigationHelp;
     this.navigationHome = navigationHome;
     this.navigationMap = navigationMap;
     this.navigationSafety = navigationSafety;
+    this.navigationTrailChallenges = navigationTrailChallenges;
     this.settingsbtn = settingsbtn;
   }
 
@@ -149,12 +149,6 @@ public final class ActivityMenuBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.navigation_favorites;
-      TextView navigationFavorites = ViewBindings.findChildViewById(rootView, id);
-      if (navigationFavorites == null) {
-        break missingId;
-      }
-
       id = R.id.navigation_help;
       TextView navigationHelp = ViewBindings.findChildViewById(rootView, id);
       if (navigationHelp == null) {
@@ -179,6 +173,12 @@ public final class ActivityMenuBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.navigation_trailChallenges;
+      TextView navigationTrailChallenges = ViewBindings.findChildViewById(rootView, id);
+      if (navigationTrailChallenges == null) {
+        break missingId;
+      }
+
       id = R.id.settingsbtn;
       ImageButton settingsbtn = ViewBindings.findChildViewById(rootView, id);
       if (settingsbtn == null) {
@@ -186,9 +186,8 @@ public final class ActivityMenuBinding implements ViewBinding {
       }
 
       return new ActivityMenuBinding((RelativeLayout) rootView, Settings, chevronLeft,
-          fragmentContainer, logoutbtn, menuTitle, navLayout, navigationContact,
-          navigationFavorites, navigationHelp, navigationHome, navigationMap, navigationSafety,
-          settingsbtn);
+          fragmentContainer, logoutbtn, menuTitle, navLayout, navigationContact, navigationHelp,
+          navigationHome, navigationMap, navigationSafety, navigationTrailChallenges, settingsbtn);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
