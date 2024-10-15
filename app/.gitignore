@@ -28,18 +28,19 @@ app/build/
 .cxx/
 
 # Generated files
-*.class
-*.jar
-*.war
-*.ear
-*.apk
-*.ap_
-*.dex
-*.so
-*.log
+.class
+.jar
+.war
+.ear
+.apk
+.ap_
+.dex
+.so
+.log
+
 
 # Miscellaneous
-*.orig
-*.swp
-*.swo
-*.lock
+.orig
+.swp
+.swo
+.lock
