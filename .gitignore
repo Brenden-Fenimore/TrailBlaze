@@ -13,3 +13,34 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+google-services.json
+# Gradle files
+*.gradle
+.gradle/
+build/
+app/build/
+*/build/
+
+# Android Studio specific files
+.externalNativeBuild/
+.cxx/
+.nav/
+.cxx/
+
+# Generated files
+*.class
+*.jar
+*.war
+*.ear
+*.apk
+*.ap_
+*.dex
+*.so
+*.log
+
+# Miscellaneous
+*.orig
+*.swp
+*.swo
+*.lock
