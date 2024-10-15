@@ -7,6 +7,7 @@ import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trailblaze.R
 import com.example.trailblaze.login.LoginActivity
+import com.example.trailblaze.ui.Map.MapFragment
 
 
 class SettingsScreenActivity : AppCompatActivity() {
@@ -80,5 +81,5 @@ class SettingsScreenActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
-        }
     }
+}

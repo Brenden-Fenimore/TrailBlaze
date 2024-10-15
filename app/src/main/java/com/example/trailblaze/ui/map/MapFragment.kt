@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.trailblaze.R
 import com.example.trailblaze.databinding.FragmentMapBinding
 import com.example.trailblaze.settings.SettingsScreenActivity
 
@@ -22,13 +23,12 @@ class MapFragment : Fragment() {
         _binding = FragmentMapBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.settingsbtn.setOnClickListener {
-            val intent = Intent(requireActivity(), SettingsScreenActivity::class.java)
-            startActivity(intent)
-        }
+//        binding.settingsbtn.setOnClickListener {
+//            val intent = Intent(requireActivity(), SettingsScreenActivity::class.java)
+//            startActivity(intent)
+//        }
         return root
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
