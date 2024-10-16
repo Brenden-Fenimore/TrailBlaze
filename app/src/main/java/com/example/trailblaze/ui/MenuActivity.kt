@@ -6,68 +6,73 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trailblaze.R
 import android.widget.ImageButton
+import android.widget.TextView
 import com.example.trailblaze.login.LoginActivity
+import com.example.trailblaze.settings.ContactUsActivity
+import com.example.trailblaze.settings.SafetyActivity
 import com.example.trailblaze.settings.SettingsScreenActivity
-import com.example.trailblaze.ui.Map.MapFragment
-import com.example.trailblaze.ui.profile.ProfileFragment
+import com.example.trailblaze.settings.SupportScreenActivity
+import com.example.trailblaze.ui.achievements.AchievementsActivity
+import com.example.trailblaze.ui.home.HomeFragment
 
-// Activity for the menu screen
 class MenuActivity : AppCompatActivity() {
 
-    // Called when the activity is created
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_menu)          // Set the layout for this activity to activity_menu.xml
-        findViewById<ImageButton>(R.id.chevron_left).setOnClickListener{        // Find the ImageButton by its ID and set a click listener
-            onBackPressedDispatcher.onBackPressed()     // When the button is clicked, go back to the previous activity
+        setContentView(R.layout.activity_menu)
+
+        val logoutbtn = findViewById<Button>(R.id.logoutbtn)
+
+
+        //set click listener for the logout button
+        logoutbtn.setOnClickListener {
+            val sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putBoolean("isLoggedIn", false)
+            editor.apply()
+
+            //navigate back to login
+            val intent = Intent(this, LoginActivity::class.java)
+
+            //clear the stack
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            startActivity(intent)
+            finish()
         }
 
-        // Handle settings button press and navigate to SettingsScreenActivity
-        findViewById<ImageButton>(R.id.imageButton).setOnClickListener {
+        findViewById<ImageButton>(R.id.chevron_left).setOnClickListener{
+            onBackPressedDispatcher.onBackPressed()
+        }
+
+        findViewById<ImageButton>(R.id.settingsbtn).setOnClickListener{
             val intent = Intent(this, SettingsScreenActivity::class.java)
             startActivity(intent)
         }
 
-        val logoutButton = findViewById<Button>(R.id.logoutbtn)
-        logoutButton.setOnClickListener {
-            handleLogout()
+
+        findViewById<TextView>(R.id.navigation_home).setOnClickListener{
+           val intent = Intent(this, HomeFragment::class.java)
+            startActivity(intent)
         }
 
-        // Initialize the mapButton
-        val mapButton = findViewById<ImageButton>(R.id.mapButton)
-
-        // Set the click listener for the mapButton
-        mapButton.setOnClickListener {
-            val fragment = MapFragment()
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit()
+        findViewById<TextView>(R.id.navigation_help).setOnClickListener{
+            val intent = Intent(this, SupportScreenActivity::class.java)
+            startActivity(intent)
         }
 
-        // Profile button -> Navigate to ProfileFragment
-        val profileButton = findViewById<ImageButton>(R.id.profileButton)
-        profileButton.setOnClickListener {
-            val fragment = ProfileFragment()  // Replace with actual fragment
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit()
+        findViewById<TextView>(R.id.navigation_contact).setOnClickListener{
+            val intent = Intent(this, ContactUsActivity::class.java)
+            startActivity(intent)
         }
 
+        findViewById<TextView>(R.id.navigation_safety).setOnClickListener{
+            val intent = Intent(this, SafetyActivity::class.java)
+            startActivity(intent)
+        }
 
-    }
-
-    // Helper function to handle logout logic
-    private fun handleLogout() {
-        val sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putBoolean("isLoggedIn", false)
-        editor.apply()
-
-        val intent = Intent(this, LoginActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        startActivity(intent)
-        finish()
+        findViewById<TextView>(R.id.navigation_trailChallenges).setOnClickListener{
+            val intent = Intent(this, AchievementsActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

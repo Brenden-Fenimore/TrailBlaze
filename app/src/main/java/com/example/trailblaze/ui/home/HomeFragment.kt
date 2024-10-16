@@ -6,65 +6,79 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.trailblaze.ParksAdapter
-import com.example.trailblaze.RetrofitInstance
-import com.example.trailblaze.NPSResponse
 import com.example.trailblaze.databinding.FragmentHomeBinding
+import com.example.trailblaze.settings.SettingsScreenActivity
 import com.example.trailblaze.ui.MenuActivity
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment()
+{
 
     private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!      // Safe access to binding when it's non-null
+    private lateinit var firestore: FirebaseFirestore
+    private lateinit var auth: FirebaseAuth
 
-    private lateinit var recyclerView: RecyclerView     // RecyclerView to display parks
-    private lateinit var parksAdapter: ParksAdapter     // Adapter for RecyclerView
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)      // Inflate layout using ViewBinding
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View
+    {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        // Initialize RecyclerView
-        recyclerView = binding.recyclerView
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())      // Set vertical layout
-        parksAdapter = ParksAdapter(emptyList())                                // Initialize adapter with an empty list
-        recyclerView.adapter = parksAdapter                                     // Set adapter to RecyclerView
+        // Initialize Firestore
+        firestore = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
 
-        fetchParksData()                                                        // Fetch park data from API
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser != null) {
+            // User is logged in, fetch the username
+            fetchUsername()
+        } else {
+            binding.homepageusername.text = "Not logged in"
+            }
 
-        // Set onClickListener for the hamburger button to navigate to MenuActivity
-        binding.hamburger.setOnClickListener {
-            val intent = Intent(requireContext(), MenuActivity::class.java)
+        binding.menuButton.setOnClickListener {
+            val intent = Intent(context, MenuActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.settingsbtn.setOnClickListener {
+            val intent = Intent(context, SettingsScreenActivity::class.java)
             startActivity(intent)
         }
 
         return root
-    }
 
-    // Function to fetch park data using Retrofit
-    private fun fetchParksData() {
-        RetrofitInstance.api.getParks(10).enqueue(object : Callback<NPSResponse> {
-            override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
-                if (response.isSuccessful) {
-                    val parks = response.body()?.data                           // Update the RecyclerView with fetched parks data
-                    parks?.let {
-                        parksAdapter.updateData(it)
+    }
+    private fun fetchUsername() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid // Get the current user's ID
+
+        if (userId != null) {
+            firestore.collection("users").document(userId).get()
+                .addOnSuccessListener { document ->
+                    if (document != null && document.exists()) {
+                        val username = document.getString("username") // Fetch the username
+                        binding.homepageusername.text = username // Set the username in the TextView
+                    } else {
+                        // Handle the case where the document does not exist
+                        binding.homepageusername.text = "Username not found"
                     }
                 }
-            }
-
-            override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
-            }
-        })
+                .addOnFailureListener { exception ->
+                    // Handle any errors
+                }
+        } else {
+            // Handle the case where userId is null (not logged in)
+            binding.homepageusername.text = "Not logged in"
+        }
     }
 
-    override fun onDestroyView() {
+    override fun onDestroyView()
+    {
         super.onDestroyView()
-        _binding = null                                                         // Release binding when view is destroyed
+        _binding = null
     }
 }

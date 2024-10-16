@@ -25,6 +25,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var etConfirmPassword : EditText
     private lateinit var etDateofBirth : EditText
     private lateinit var etEmail : EditText
+    private lateinit var etPhone : EditText
 
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
@@ -35,6 +36,7 @@ class RegisterActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_register)
 
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
         //initialize Firestore and FirebaseAuth
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
@@ -48,6 +50,7 @@ class RegisterActivity : AppCompatActivity() {
         etConfirmPassword = findViewById(R.id.etConfirmpw)
         etDateofBirth = findViewById(R.id.etDateofbirth)
         etEmail = findViewById(R.id.etEmail)
+        etPhone = findViewById(R.id.etPhone)
         val logintxt = findViewById<TextView>(R.id.txtLogin)
 
         //set clicker listener for logintxt
@@ -66,6 +69,7 @@ class RegisterActivity : AppCompatActivity() {
         etDateofBirth.addTextChangedListener { updateCreateAccountButtonState() }
         etEmail.addTextChangedListener { updateCreateAccountButtonState() }
         etPassword.addTextChangedListener { updateCreateAccountButtonState() }
+        etPhone.addTextChangedListener { updateCreateAccountButtonState() }
         etConfirmPassword.addTextChangedListener { updateCreateAccountButtonState()
         }
 
@@ -96,6 +100,7 @@ class RegisterActivity : AppCompatActivity() {
         val password = etPassword.text.toString()
         val dateOfBirth = etDateofBirth.text.toString()
         val email = etEmail.text.toString()
+        val phone = etPhone.text.toString()
 
         //create user with Firebase Authentication
         auth.createUserWithEmailAndPassword(email, password)
@@ -104,7 +109,8 @@ class RegisterActivity : AppCompatActivity() {
                     val user = hashMapOf(
                         "username" to username,
                         "dateOfBirth" to dateOfBirth,
-                        "email" to email
+                        "email" to email,
+                        "phone" to phone,
                     )
 
                     //save user information to Firestore

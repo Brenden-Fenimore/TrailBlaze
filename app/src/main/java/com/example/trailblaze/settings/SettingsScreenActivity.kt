@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import com.example.trailblaze.MainActivity
 import com.example.trailblaze.R
 import com.example.trailblaze.login.LoginActivity
+import com.example.trailblaze.ui.profile.EditProfileActivity
 
 
 class SettingsScreenActivity : AppCompatActivity() {
@@ -87,5 +89,12 @@ class SettingsScreenActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
+
+        // Set click listener for account
+        toAccount.setOnClickListener {
+            val intent = Intent(this, EditProfileActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
         }
     }
+}
