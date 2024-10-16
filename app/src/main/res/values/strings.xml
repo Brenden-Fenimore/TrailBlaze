@@ -253,4 +253,6 @@
     <string name="entrance_passes">Entrance Passes</string>
     <string name="images">Images</string>
     <string name="weather_info">Weather Info</string>
+    <string name="photos">Photos</string>
+    <string name="favorite_trails">Favorite Trails</string>
 </resources>
