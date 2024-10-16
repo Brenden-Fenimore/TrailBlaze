@@ -54,5 +54,84 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/parkDescription" />
 
+        <!-- Latitude -->
+        <TextView
+                android:id="@+id/parkLatitudeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/latitude"
+                android:textSize="16sp"/>
+
+        <!-- Longitude -->
+        <TextView
+                android:id="@+id/parkLongitudeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/longitude"
+                android:textSize="16sp"/>
+
+        <!-- Addresses -->
+        <TextView
+                android:id="@+id/parkAddressTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/addresses"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
+
+        <!-- Activities -->
+        <TextView
+                android:id="@+id/parkActivitiesTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/activities"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
+
+        <!-- Operating Hours -->
+        <TextView
+                android:id="@+id/parkOperatingHoursTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/operating_hours"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
+
+        <!-- Contacts -->
+        <TextView
+                android:id="@+id/parkContactsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contacts"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
+
+        <!-- Entrance Passes -->
+        <TextView
+                android:id="@+id/parkEntrancePassesTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/entrance_passes"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
+
+        <!-- Park Images (URL or description of images) -->
+        <TextView
+                android:id="@+id/parkImagesTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/images"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
+
+        <!-- Weather Info -->
+        <TextView
+                android:id="@+id/parkWeatherInfoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/weather_info"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
+
     </LinearLayout>
 </RelativeLayout>

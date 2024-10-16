@@ -242,6 +242,15 @@
     </string>
     <string name="title_activity_help_frag">HelpFrag</string>
     <string name="friend_s_profile">Friend\'s Profile</string>
-    <string name="backarrow">backArrow</string>
+    <string name="backArrow">backArrow</string>
     <string name="title_activity_safety_tips">SafetyTipsActivity</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="activities">Activities</string>
+    <string name="addresses">Addresses</string>
+    <string name="operating_hours">Operating Hours</string>
+    <string name="contacts">Contacts</string>
+    <string name="entrance_passes">Entrance Passes</string>
+    <string name="images">Images</string>
+    <string name="weather_info">Weather Info</string>
 </resources>
