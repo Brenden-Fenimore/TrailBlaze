@@ -3428,7 +3428,6 @@ id design_menu_item_text
 id design_navigation_view
 id dialog_button
 id difficultyLevel
-id difficulty_Level
 id dimensions
 id direct
 id disableHome
@@ -3453,9 +3452,18 @@ id edge
 id editProfileFragment
 id editTextDescription
 id editTextInput
+id edit_difficulty
+id edit_dob
+id edit_email
+id edit_fitness
+id edit_location
+id edit_phone
 id edit_profile_button
 id edit_query
+id edit_terrain
 id edit_text_id
+id edit_type_Of_Hike
+id edit_username
 id elastic
 id email
 id embed
@@ -3488,7 +3496,6 @@ id fitEnd
 id fitStart
 id fitToContents
 id fitXY
-id fitness_Level
 id fixed
 id flip
 id floating
@@ -3556,7 +3563,6 @@ id italic
 id item_touch_helper_previous_elevation
 id jumpToEnd
 id jumpToStart
-id label_terrain
 id labeled
 id layout
 id leaderboard_switch
@@ -3820,8 +3826,8 @@ id stretch
 id submenuarrow
 id submit
 id submit_area
-id suggested_trails_label
 id suggested_trails_seekbar
+id suggested_trails_value
 id supportScrollUp
 id tabMode
 id tag_accessibility_actions
@@ -3887,7 +3893,6 @@ id txtBySigning
 id txtLogin
 id txtRegister
 id type
-id type_Of_Hike
 id unchecked
 id uniform
 id unlabeled
@@ -4518,6 +4523,7 @@ string side_sheet_behavior
 string status_bar_notification_info_overflow
 string submit
 string suggestedTrails
+string suggestedTrailsMiles
 string supportEmail
 string switch_role
 string tab

@@ -70,10 +70,12 @@
                     android:contentDescription="@string/profilePicture" />
 
             <EditText
+                    android:id="@+id/edit_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:hint="@string/username"
+                    android:autofillHints="username"
                     android:inputType="textPersonName" />
         </LinearLayout>
 
@@ -92,10 +94,12 @@
                     android:contentDescription="@string/calendar" />
 
             <EditText
+                    android:id="@+id/edit_dob"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:hint="@string/birthdate"
+                    android:autofillHints="dateOfBirth"
                     android:inputType="date" />
         </LinearLayout>
 
@@ -114,10 +118,12 @@
                     android:contentDescription="@string/userEmail" />
 
             <EditText
+                    android:id="@+id/edit_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:hint="@string/editUserEmail"
+                    android:autofillHints="emailAddress"
                     android:inputType="textEmailAddress" />
         </LinearLayout>
 
@@ -136,10 +142,12 @@
                     android:contentDescription="@string/locationIcon" />
 
             <EditText
+                    android:id="@+id/edit_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:hint="@string/userLocation"
+                    android:autofillHints="location"
                     android:inputType="textPostalAddress" />
         </LinearLayout>
 
@@ -158,14 +166,17 @@
                     android:contentDescription="@string/phoneIcon" />
 
             <EditText
+                    android:id="@+id/edit_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:hint="@string/userPhone"
+                    android:autofillHints="phone"
                     android:inputType="phone" />
         </LinearLayout>
 
         <!-- Dropdowns (Spinners) -->
+
         <!-- Terrain -->
         <LinearLayout
                 android:layout_width="match_parent"
@@ -182,7 +193,7 @@
                     android:layout_marginEnd="8dp"/>
 
             <TextView
-                    android:id="@+id/label_terrain"
+                    android:id="@+id/edit_terrain"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/terrain"
@@ -213,7 +224,7 @@
                     android:layout_marginEnd="8dp"/>
 
             <TextView
-                    android:id="@+id/fitness_Level"
+                    android:id="@+id/edit_fitness"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/fitnessLevel"
@@ -242,7 +253,7 @@
                     android:layout_marginEnd="8dp"/>
 
             <TextView
-                    android:id="@+id/difficulty_Level"
+                    android:id="@+id/edit_difficulty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/difficultyLevel"
@@ -270,7 +281,7 @@
                     android:layout_marginEnd="8dp"/>
 
             <TextView
-                    android:id="@+id/type_Of_Hike"
+                    android:id="@+id/edit_type_Of_Hike"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/typeOfHike"
@@ -285,7 +296,7 @@
 
         <!-- Suggested Trails SeekBar -->
         <TextView
-                android:id="@+id/suggested_trails_label"
+                android:id="@+id/suggested_trails_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/suggestedTrails"

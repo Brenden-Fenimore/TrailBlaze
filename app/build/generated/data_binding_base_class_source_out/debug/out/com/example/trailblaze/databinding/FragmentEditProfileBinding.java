@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -35,16 +36,34 @@ public final class FragmentEditProfileBinding implements ViewBinding {
   public final ImageView cameraIcon;
 
   @NonNull
-  public final TextView difficultyLevel;
+  public final TextView editDifficulty;
+
+  @NonNull
+  public final EditText editDob;
+
+  @NonNull
+  public final EditText editEmail;
+
+  @NonNull
+  public final TextView editFitness;
+
+  @NonNull
+  public final EditText editLocation;
+
+  @NonNull
+  public final EditText editPhone;
+
+  @NonNull
+  public final TextView editTerrain;
+
+  @NonNull
+  public final TextView editTypeOfHike;
+
+  @NonNull
+  public final EditText editUsername;
 
   @NonNull
   public final Switch favoritetrailsSwitch;
-
-  @NonNull
-  public final TextView fitnessLevel;
-
-  @NonNull
-  public final TextView labelTerrain;
 
   @NonNull
   public final Switch leaderboardSwitch;
@@ -62,13 +81,10 @@ public final class FragmentEditProfileBinding implements ViewBinding {
   public final Switch sharelocationSwitch;
 
   @NonNull
-  public final TextView suggestedTrailsLabel;
-
-  @NonNull
   public final SeekBar suggestedTrailsSeekbar;
 
   @NonNull
-  public final TextView typeOfHike;
+  public final TextView suggestedTrailsValue;
 
   @NonNull
   public final Button updateProfileButton;
@@ -78,29 +94,36 @@ public final class FragmentEditProfileBinding implements ViewBinding {
 
   private FragmentEditProfileBinding(@NonNull ScrollView rootView, @NonNull TextView accountTitle,
       @NonNull ImageButton backButton, @NonNull ImageView cameraIcon,
-      @NonNull TextView difficultyLevel, @NonNull Switch favoritetrailsSwitch,
-      @NonNull TextView fitnessLevel, @NonNull TextView labelTerrain,
+      @NonNull TextView editDifficulty, @NonNull EditText editDob, @NonNull EditText editEmail,
+      @NonNull TextView editFitness, @NonNull EditText editLocation, @NonNull EditText editPhone,
+      @NonNull TextView editTerrain, @NonNull TextView editTypeOfHike,
+      @NonNull EditText editUsername, @NonNull Switch favoritetrailsSwitch,
       @NonNull Switch leaderboardSwitch, @NonNull Switch photosSwitch,
       @NonNull ImageView profileImage, @NonNull FrameLayout profileImageContainer,
-      @NonNull Switch sharelocationSwitch, @NonNull TextView suggestedTrailsLabel,
-      @NonNull SeekBar suggestedTrailsSeekbar, @NonNull TextView typeOfHike,
-      @NonNull Button updateProfileButton, @NonNull Switch watcherSwitch) {
+      @NonNull Switch sharelocationSwitch, @NonNull SeekBar suggestedTrailsSeekbar,
+      @NonNull TextView suggestedTrailsValue, @NonNull Button updateProfileButton,
+      @NonNull Switch watcherSwitch) {
     this.rootView = rootView;
     this.accountTitle = accountTitle;
     this.backButton = backButton;
     this.cameraIcon = cameraIcon;
-    this.difficultyLevel = difficultyLevel;
+    this.editDifficulty = editDifficulty;
+    this.editDob = editDob;
+    this.editEmail = editEmail;
+    this.editFitness = editFitness;
+    this.editLocation = editLocation;
+    this.editPhone = editPhone;
+    this.editTerrain = editTerrain;
+    this.editTypeOfHike = editTypeOfHike;
+    this.editUsername = editUsername;
     this.favoritetrailsSwitch = favoritetrailsSwitch;
-    this.fitnessLevel = fitnessLevel;
-    this.labelTerrain = labelTerrain;
     this.leaderboardSwitch = leaderboardSwitch;
     this.photosSwitch = photosSwitch;
     this.profileImage = profileImage;
     this.profileImageContainer = profileImageContainer;
     this.sharelocationSwitch = sharelocationSwitch;
-    this.suggestedTrailsLabel = suggestedTrailsLabel;
     this.suggestedTrailsSeekbar = suggestedTrailsSeekbar;
-    this.typeOfHike = typeOfHike;
+    this.suggestedTrailsValue = suggestedTrailsValue;
     this.updateProfileButton = updateProfileButton;
     this.watcherSwitch = watcherSwitch;
   }
@@ -150,27 +173,63 @@ public final class FragmentEditProfileBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.difficulty_Level;
-      TextView difficultyLevel = ViewBindings.findChildViewById(rootView, id);
-      if (difficultyLevel == null) {
+      id = R.id.edit_difficulty;
+      TextView editDifficulty = ViewBindings.findChildViewById(rootView, id);
+      if (editDifficulty == null) {
+        break missingId;
+      }
+
+      id = R.id.edit_dob;
+      EditText editDob = ViewBindings.findChildViewById(rootView, id);
+      if (editDob == null) {
+        break missingId;
+      }
+
+      id = R.id.edit_email;
+      EditText editEmail = ViewBindings.findChildViewById(rootView, id);
+      if (editEmail == null) {
+        break missingId;
+      }
+
+      id = R.id.edit_fitness;
+      TextView editFitness = ViewBindings.findChildViewById(rootView, id);
+      if (editFitness == null) {
+        break missingId;
+      }
+
+      id = R.id.edit_location;
+      EditText editLocation = ViewBindings.findChildViewById(rootView, id);
+      if (editLocation == null) {
+        break missingId;
+      }
+
+      id = R.id.edit_phone;
+      EditText editPhone = ViewBindings.findChildViewById(rootView, id);
+      if (editPhone == null) {
+        break missingId;
+      }
+
+      id = R.id.edit_terrain;
+      TextView editTerrain = ViewBindings.findChildViewById(rootView, id);
+      if (editTerrain == null) {
+        break missingId;
+      }
+
+      id = R.id.edit_type_Of_Hike;
+      TextView editTypeOfHike = ViewBindings.findChildViewById(rootView, id);
+      if (editTypeOfHike == null) {
+        break missingId;
+      }
+
+      id = R.id.edit_username;
+      EditText editUsername = ViewBindings.findChildViewById(rootView, id);
+      if (editUsername == null) {
         break missingId;
       }
 
       id = R.id.favoritetrails_switch;
       Switch favoritetrailsSwitch = ViewBindings.findChildViewById(rootView, id);
       if (favoritetrailsSwitch == null) {
-        break missingId;
-      }
-
-      id = R.id.fitness_Level;
-      TextView fitnessLevel = ViewBindings.findChildViewById(rootView, id);
-      if (fitnessLevel == null) {
-        break missingId;
-      }
-
-      id = R.id.label_terrain;
-      TextView labelTerrain = ViewBindings.findChildViewById(rootView, id);
-      if (labelTerrain == null) {
         break missingId;
       }
 
@@ -204,21 +263,15 @@ public final class FragmentEditProfileBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.suggested_trails_label;
-      TextView suggestedTrailsLabel = ViewBindings.findChildViewById(rootView, id);
-      if (suggestedTrailsLabel == null) {
-        break missingId;
-      }
-
       id = R.id.suggested_trails_seekbar;
       SeekBar suggestedTrailsSeekbar = ViewBindings.findChildViewById(rootView, id);
       if (suggestedTrailsSeekbar == null) {
         break missingId;
       }
 
-      id = R.id.type_Of_Hike;
-      TextView typeOfHike = ViewBindings.findChildViewById(rootView, id);
-      if (typeOfHike == null) {
+      id = R.id.suggested_trails_value;
+      TextView suggestedTrailsValue = ViewBindings.findChildViewById(rootView, id);
+      if (suggestedTrailsValue == null) {
         break missingId;
       }
 
@@ -235,10 +288,10 @@ public final class FragmentEditProfileBinding implements ViewBinding {
       }
 
       return new FragmentEditProfileBinding((ScrollView) rootView, accountTitle, backButton,
-          cameraIcon, difficultyLevel, favoritetrailsSwitch, fitnessLevel, labelTerrain,
-          leaderboardSwitch, photosSwitch, profileImage, profileImageContainer, sharelocationSwitch,
-          suggestedTrailsLabel, suggestedTrailsSeekbar, typeOfHike, updateProfileButton,
-          watcherSwitch);
+          cameraIcon, editDifficulty, editDob, editEmail, editFitness, editLocation, editPhone,
+          editTerrain, editTypeOfHike, editUsername, favoritetrailsSwitch, leaderboardSwitch,
+          photosSwitch, profileImage, profileImageContainer, sharelocationSwitch,
+          suggestedTrailsSeekbar, suggestedTrailsValue, updateProfileButton, watcherSwitch);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -126,11 +126,19 @@ id continuebtn2
 id continuebtn3
 id createAccountBtn
 id difficultyLevel
-id difficulty_Level
 id editProfileFragment
 id editTextDescription
 id editTextInput
+id edit_difficulty
+id edit_dob
+id edit_email
+id edit_fitness
+id edit_location
+id edit_phone
 id edit_profile_button
+id edit_terrain
+id edit_type_Of_Hike
+id edit_username
 id email
 id emergency
 id etCity
@@ -144,7 +152,6 @@ id etZip
 id etpw1
 id favoritetrails_switch
 id finished
-id fitness_Level
 id floatingActionButton
 id forgotPassword
 id fragmentContainer
@@ -170,7 +177,6 @@ id interaction2
 id interaction3
 id interaction4
 id invitefriendslayout
-id label_terrain
 id leaderboard_switch
 id linearColumnEmail
 id linearColumnPassword
@@ -229,8 +235,8 @@ id spinner2
 id spinner3
 id spinner4
 id submit
-id suggested_trails_label
 id suggested_trails_seekbar
+id suggested_trails_value
 id termsOKbtn
 id termsandco
 id termsandconditions
@@ -249,7 +255,6 @@ id txtBySigning
 id txtLogin
 id txtRegister
 id type
-id type_Of_Hike
 id update_profile_button
 id uphill
 id username
@@ -393,6 +398,7 @@ string second_fragment_label
 string settings
 string submit
 string suggestedTrails
+string suggestedTrailsMiles
 string supportEmail
 string terrain
 string terrainIcon

@@ -194,6 +194,7 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="settings">Settings</string>
     <string name="submit">Submit</string>
     <string name="suggestedTrails">Suggested Trails</string>
+    <string name="suggestedTrailsMiles">Suggested Trails: %1$d miles</string>
     <string name="supportEmail">customersupport@trailblaze.com</string>
     <string name="terrain">Terrain</string>
     <string name="terrainIcon">Terrain Icon</string>
