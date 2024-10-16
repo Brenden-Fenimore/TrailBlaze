@@ -141,38 +141,14 @@
                         android:scrollbarStyle="insideOverlay"
                         android:layout_below="@id/nearbytrailslayout"
                         android:scrollbarAlwaysDrawHorizontalTrack="true">
-                    <LinearLayout
-                            android:layout_width="wrap_content"
+                    <!-- RecyclerView for Nearby Trails -->
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/parksRecyclerView"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="15dp">
-                        <ImageView
-                                android:layout_width="128dp"
-                                android:layout_height="128dp"
-                                app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"/>
+                            android:layout_marginTop="16dp"
+                      />
 
-                        <ImageView
-                                android:layout_width="128dp"
-                                android:layout_height="128dp"
-                                app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"/>
-                        <ImageView
-                                android:layout_width="128dp"
-                                android:layout_height="128dp"
-                                app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"/>
-                        <ImageView
-                                android:layout_width="128dp"
-                                android:layout_height="128dp"
-                                app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"/>
-                        <ImageView
-                                android:layout_width="128dp"
-                                android:layout_height="128dp"
-                                app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"/>
-                    </LinearLayout>
                 </HorizontalScrollView>
                 <LinearLayout
                         android:id="@+id/browsedifficultylayout"

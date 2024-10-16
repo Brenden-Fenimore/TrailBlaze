@@ -2,15 +2,27 @@ package com.example.trailblaze.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.databinding.FragmentHomeBinding
+import com.example.trailblaze.nps.NPSResponse
+import com.example.trailblaze.nps.ParksAdapter
+import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.settings.SettingsScreenActivity
 import com.example.trailblaze.ui.MenuActivity
+import com.example.trailblaze.ui.parks.ParkDetailActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+
 
 class HomeFragment : Fragment()
 {
@@ -19,12 +31,14 @@ class HomeFragment : Fragment()
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
 
+    private lateinit var parksRecyclerView: RecyclerView   // RecyclerView to display parks
+    private lateinit var parksAdapter: ParksAdapter         // Adapter for RecyclerView
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View
-    {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -32,27 +46,36 @@ class HomeFragment : Fragment()
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
 
+        // RecyclerView setup
+        parksRecyclerView = binding.parksRecyclerView
+        parksRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+        // Initialize adapter with an empty list
+        parksAdapter = ParksAdapter(emptyList()) { park ->
+            // Handle park item clicks
+            val intent = Intent(context, ParkDetailActivity::class.java).apply {
+                putExtra("PARK_INDEX", parksAdapter.parksList.indexOf(park))
+            }
+            startActivity(intent)
+        }
+
+        // Set adapter to RecyclerView
+        parksRecyclerView.adapter = parksAdapter
+
+        // Fetch parks data
+        fetchParksData()
+
+        // Username fetching logic
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser != null) {
-            // User is logged in, fetch the username
             fetchUsername()
         } else {
             binding.homepageusername.text = "Not logged in"
-            }
-
-        binding.menuButton.setOnClickListener {
-            val intent = Intent(context, MenuActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.settingsbtn.setOnClickListener {
-            val intent = Intent(context, SettingsScreenActivity::class.java)
-            startActivity(intent)
         }
 
         return root
-
     }
+
     private fun fetchUsername() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid // Get the current user's ID
 
@@ -75,6 +98,29 @@ class HomeFragment : Fragment()
             binding.homepageusername.text = "Not logged in"
         }
     }
+
+    private fun fetchParksData() {
+        RetrofitInstance.api.getParks(10).enqueue(object : Callback<NPSResponse> {
+            override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
+                if (response.isSuccessful) {
+                    val parks = response.body()?.data // Update the RecyclerView with fetched parks data
+                    if (parks != null) {
+                        parksAdapter.updateData(parks) // Update the adapter with the fetched park data
+                    } else {
+                        Log.e("HomeFragment", "Parks data is null")
+                    }
+                } else {
+                    Log.e("HomeFragment", "Response not successful: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
+                Log.e("HomeFragment", "Error fetching parks: ${t.message}")
+                // Handle failure case (e.g., show a Toast message)
+            }
+        })
+    }
+
 
     override fun onDestroyView()
     {

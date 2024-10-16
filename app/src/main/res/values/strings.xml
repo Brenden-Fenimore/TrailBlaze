@@ -147,7 +147,9 @@
     <string name="goalsetter">Goal Setter: Set a personal hiking goal and achieve it.</string>
     <string name="badgecollector">Badge Collector: Earn badges for completing specific challenges or achievements.</string>
     <string name="leaderboardtip">Leaderboard Climber: Compete with friends or other users on a leaderboard.</string>
-
+    <string name="parkInfo">Park Information</string>
+    <string name="parkName">Park Name</string>
+    <string name="parkDescription">Park Description</string>
 
 
     <string name="lorem_ipsum">
