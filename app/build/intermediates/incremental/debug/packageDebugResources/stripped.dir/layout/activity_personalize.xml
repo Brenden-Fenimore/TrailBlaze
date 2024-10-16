@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <ImageButton
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            app:srcCompat="@drawable/chevron_left"
+            android:background="@android:color/transparent"
+            android:id="@+id/chevron_left"
+            android:contentDescription="@string/description"/>
+    <LinearLayout
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+        <TextView
+                android:id="@+id/Personalizehost"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="@string/personalize"
+                android:textSize="40sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <FrameLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_gravity="center"
+            android:layout_width="315dp"
+            android:layout_height="610dp">
+
+
+    </FrameLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical"
+             tools:context=".ui.favorites.FavoritesFragment">
+
+    <!-- Parent RelativeLayout for back and settings buttons -->
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+        <!-- Back button (left arrow) -->
+        <ImageButton
+                app:srcCompat="@drawable/baseline_arrow_back_ios_new_24"
+                android:contentDescription="@string/btn_back"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:id="@+id/chevron_left"
+                android:background="@android:color/transparent"
+                android:layout_centerVertical="true"/>
+
+        <!-- Settings button (right side) -->
+        <ImageButton
+                android:src="@drawable/baseline_settings_24"
+                android:contentDescription="@string/settings"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/imageButton"
+                android:background="@android:color/transparent"
+                android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+    <!-- LinearLayout for profile picture and username -->
+
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <!-- Menu Title -->
+        <TextView
+                android:id="@+id/menuTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/menuTitle"
+                android:textSize="40sp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp">
+
+        </TextView>
+
+        <!-- Profile picture (ImageView) -->
+        <ImageView
+                android:layout_width="335dp"
+                android:layout_height="232dp"
+                app:srcCompat="@drawable/account_circle"
+                android:contentDescription="@string/username"
+                android:paddingTop="35dp"
+                android:layout_gravity="center"/>
+
+
+
+        <!-- Section containing multiple items (map, profile, favorites, etc.) -->
+        <LinearLayout
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <!-- Map section with icon and label -->
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal">
+
+                <ImageButton
+                        android:id="@+id/mapButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/map"
+                        android:contentDescription="@string/map_image"
+                        android:background="@android:color/transparent"/>
+
+                <TextView
+                        android:text="@string/map_image"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:paddingBottom="8dp"/>
+
+            </LinearLayout>
+
+            <!-- Profile section -->
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal">
+
+                <ImageButton
+                        android:id="@+id/profileButton"
+                        android:layout_width="37dp"
+                        android:layout_height="match_parent"
+                        app:srcCompat="@drawable/account_circle"
+                        android:contentDescription="@string/profile"
+                        android:background="@android:color/transparent"/>
+
+                <TextView
+                        android:text="@string/profile"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:paddingBottom="8dp"/>
+
+            </LinearLayout>
+
+            <!-- Favorites section -->
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal">
+
+                <ImageButton
+                        android:layout_width="37dp"
+                        android:layout_height="match_parent"
+                        app:srcCompat="@drawable/favorite"
+                        android:contentDescription="@string/favorites"
+                        android:background="@android:color/transparent"/>
+
+                <TextView
+                        android:text="@string/favorites"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:paddingBottom="8dp"/>
+
+            </LinearLayout>
+
+            <!-- Help Center section -->
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal">
+
+                <ImageButton
+                        android:layout_width="37dp"
+                        android:layout_height="match_parent"
+                        app:srcCompat="@drawable/question"
+                        android:contentDescription="@string/help_center"
+                        android:background="@android:color/transparent"/>
+
+                <TextView
+                        android:text="@string/help_center"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:paddingBottom="8dp"/>
+
+            </LinearLayout>
+
+            <!-- Contact Us section -->
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal">
+
+                <ImageButton
+                        android:layout_width="37dp"
+                        android:layout_height="match_parent"
+                        app:srcCompat="@drawable/baseline_contact_mail_24"
+                        android:contentDescription="@string/contact_us"
+                        android:background="@android:color/transparent"/>
+
+                <TextView
+                        android:text="@string/contact_us"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:paddingBottom="8dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Logout button at the bottom of the screen -->
+    <Button
+            android:id="@+id/logoutbtn"
+            android:text="@string/titleLogout"
+            android:layout_width="304dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true">
+    </Button>
+
+    <!-- Fragment container -->
+    <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/menuTitle"/>
+
+</RelativeLayout>
