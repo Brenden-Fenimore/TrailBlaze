@@ -186,6 +186,7 @@
     <string name="userWatcherSwitch">Watcher</string>
     <string name="userShareLocationSwitch">Share Location</string>
     <string name="updateProfile">Update Profile</string>
+    <string name="suggestedTrailsMiles">Suggested Trails: %1$d miles</string>
     <!-- Spinner options for terrain -->
     <string-array name="terrain_options">
         <item>Mountain</item>

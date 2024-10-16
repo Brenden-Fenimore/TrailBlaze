@@ -9,6 +9,9 @@ import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
 import com.example.trailblaze.R
 import com.example.trailblaze.databinding.FragmentProfileBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+
 
 class ProfileFragment : Fragment() {
 
