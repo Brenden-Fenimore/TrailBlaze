@@ -3,4 +3,165 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_map">Map</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_profile">Profile</string>
+    <string name="helloHome">Hello HOME Fragment</string>
+    <string name="helloMap">Hello MAP Fragment</string>
+    <string name="helloFavorites">Hello FAVORITES Fragment</string>
+    <string name="helloProfile">Hello PROFILE Fragment</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="map_image">Map</string>
+    <string name="profile">Profile</string>
+    <string name ="contact_us">Contact Us</string>
+    <string name="favorites">Favorites</string>
+    <string name="help_center">Help Center</string>
+    <string name="username">Username</string>
+    <string name="logout">Logout</string>
+    <string name="btn_back">Goes back to the previous page</string>
+    <string name="settings">Settings</string>
+    <string name="forgotpassword1">Enter the Email address associated with your account.</string>
+    <string name="forgotpassword2">We will email you a link to reset your password</string>
+    <string name="aspects">What aspect/s of hiking do you like to experience most?</string>
+    <string name="location">TrailBlaze utilizes your location to provide personalized suggestions of nearby trails,
+        please enter your location.
+    </string>
+    <string name="distance">How far would you like to receive suggested trails?</string>
+    <string name="interact">How would you like to interact with the community></string>
+    <string name="interaction1">I would like my account to be found by others.</string>
+    <string name="interaction2">I would like my hiking experience shared with others and/or on leaderboards.</string>
+    <string name="interaction3">I would like to volunteer for creating and maintaining trails for my community.</string>
+    <string name="interaction4">I would like to be notified if someone is in danger or any potential danger is on a
+        trail.
+    </string>
+    <string name="options">Please select your preferences for each of the categories listed below.</string>
+    <string name="privacy_policy1">Your privacy is important to us. It is TrailBlaze policy to respect your privacy
+        regarding any information we may collect from you across our website, and other sites we own and operate.
+    </string>
+    <string name="privacy_policy2">We only ask for personal information when we truly need it to provide a service to
+        you. We collect it by fair and lawful means, with your knowledge and consent. We also let you know why we’re
+        collecting it and how it will be used.
+    </string>
+    <string name="privacy_policy3">We only retain collected information for as long as necessary to provide you with
+        your requested service.">
+    </string>
+<string name="titleForgotPassword">Forgot Password</string>
+    <string name="titleEmail">Email Address</string>
+    <string name="titleResetPw">Reset Password</string>
+    <string name="titleLogin">Login</string>
+    <string name="login1">By signing in you are agreeing to our</string>
+    <string name="titleTerms">Terms and Conditions</string>
+    <string name="titleRegister">Register</string>
+    <string name="passWord">Password</string>
+    <string name="rememberPassword">Remember Password</string>
+    <string name="personalize">Lets Personalize your account</string>
+    <string name="userName">Username</string>
+    <string name="dob">Date of Birth mm/dd/yy</string>
+    <string name="password2">Confirm Password</string>
+    <string name="agree">You agree to our</string>
+    <string name="createAccount">Create Account</string>
+    <string name="titleLogout">Logout</string>
+    <string name="reviewTerms">Review Terms and Conditions</string>
+    <string name="ok">OK</string>
+    <string name="titleNature">Nature</string>
+    <string name="titleBreaks">Breaks</string>
+    <string name="titleUphill">Uphill</string>
+    <string name="pace">Pace</string>
+    <string name="titleContinue">Continue</string>
+
+
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris volutpat, dolor id
+        interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus dui nec risus. Maecenas non sodales
+        nisi, vel dictum dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+        himenaeos. Suspendisse blandit eleifend diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet,
+        imperdiet nisl a, ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
+        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus egestas, est a
+        condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed neque. Morbi tellus erat, dapibus ut
+        sem a, iaculis tincidunt dui. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur et eros
+        porttitor, ultricies urna vitae, molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl
+        nec dolor bibendum, vel congue leo egestas.\n\n
+        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit amet auctor at,
+        mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel, molestie quam. Fusce blandit tincidunt
+        nulla, quis sollicitudin libero facilisis et. Integer interdum nunc ligula, et fermentum metus hendrerit id.
+        Vestibulum lectus felis, dictum at lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse
+        sodales nunc ligula, in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
+        est.\n\n
+        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh. Morbi laoreet, tortor
+        sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui non lorem. Nam mollis ipsum quis auctor
+        varius. Quisque elementum eu libero sed commodo. In eros nisl, imperdiet vel imperdiet et, scelerisque a mauris.
+        Pellentesque varius ex nunc, quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non
+        viverra ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a placerat
+        diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus convallis.\n\n
+        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+        egestas. In volutpat arcu ut felis sagittis, in finibus massa gravida. Pellentesque id tellus orci. Integer
+        dictum, lorem sed efficitur ullamcorper, libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec
+        maximus ullamcorper sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
+        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus vestibulum. Fusce
+        dictum libero quis erat maximus, vitae volutpat diam dignissim.
+    </string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_terms_and_conditions">TermsAndConditions</string>
+    <string name="title_activity_terms">TermsActivity</string>
+    //User variables
+    <string name="homepage_welcome_user">Good Afternoon,</string>
+    <string name="homepage_searchbar_hint">Search</string>
+    <string name="homepage_nearby_trails">Top trails nearby:</string>
+    <string name="homepage_browse_by_difficulty">Browse by difficulty:</string>
+    <string name="homepage_friends">Hike with friends!</string>
+
+    <string name="locationIcon">Location Icon</string>
+    <string name="profilePicture">Profile Picture</string>
+    <string name="difficultyIcon">Difficulty Icon</string>
+    <string name="watcherMember">Watcher Member</string>
+    <string name="friends">Friends</string>
+    <string name="friendProfilePicture">Friend Profile Picture</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="leaderboardPicture">Leaderboard Picture</string>
+    <string name="userPhotos">Photos</string>
+    <string name="userPhotoPictures">User Photo Picture</string>
+    <string name="userFavoriteTrails">Favorite Trails</string>
+    <string name="userFavoriteTrailsPictures">User Favorite Trail Picture</string>
+    <string name="userBadge1">User Badge 1</string>
+    <string name="userBadge2">User Badge 2</string>
+    <string name="userBadge3">User Badge 3</string>
+    <string name="editIcon">Edit</string>
+    <string name="editProfile">Edit Profile</string>
+    <string name="backButton">Back Button</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="activityTitle">Settings</string>
+    <string name="accountTitle">Account</string>
+    <string name="notificationTitle">Notifications</string>
+    <string name="appearanceTitle">Appearance</string>
+    <string name="helpAndSupportTitle">Help and Support</string>
+    <string name="aboutTitle">About</string>
+    <string name="privacyTitle">Privacy and Security</string>
+    <string name="friendsProfile1">Friends in Common</string>
+    <string name="friendsAdd">Add as a trusted Contact/Watcher</string>
+    <string name="titleHelp">Help and Support</string>
+    <string name="contact">Contact Us</string>
+    <string name="troubleshoot">Troubleshooting Guide</string>
+    <string name="bug">Report a Bug</string>
+    <string name="emergency">I am in an emergency! (Dial 911)</string>
+    <string name="contactTitle">If you are experiencing any issues, please let us know. We will try to solve them as
+            soon as possible.
+    </string>
+    <string name="contactTitle2">Title</string>
+    <string name="contactTitle3">Explain the problem</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="inputText">Input Text</string>
+    <string name="description">Enter a description...</string>
+    <string name="contact4">You can also contact us at</string>
+    <string name="supportEmail">customersupport@trailblaze.com</string>
+    <string name="aboutContent">TrailBlaze aims to be the go-to application for all hikers, climbers, and outdoorsy types by offering a fantastic way to view trail options whether traveling or at home. &#10;With customization options, the latest updates on trails, and an expansive community, it is sure to be a standout in the space.</string>
+    <string name="title_activity_help_frag">HelpFrag</string>
+    <string name="friend_s_profile">Friend\'s Profile</string>
+    <string name="backarrow">backArrow</string>
 </resources>

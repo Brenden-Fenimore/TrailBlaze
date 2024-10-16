@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+    <!-- Account Header Section -->
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="16dp">
+
+        <ImageButton
+                android:id="@+id/backArrow"
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/chevron_left"
+                android:layout_alignParentStart="true"
+                android:contentDescription="@string/backarrow"/>
+
+        <ImageButton
+                android:layout_width="37dp"
+                android:layout_height="27dp"
+                android:layout_alignParentEnd="true"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/add_circle"
+                android:id="@+id/addFriend"
+                android:contentDescription="@string/description"/>
+    </RelativeLayout>
+
+    <!-- Profile Picture and Username Section -->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/subtract_upside"
+            android:padding="16dp">
+
+        <ImageView
+                android:id="@+id/profileImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/account_circle"
+                android:contentDescription="@string/description"
+                />
+
+        <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/userName"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"/>
+       <LinearLayout
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    app:srcCompat="@drawable/xpic"
+                    android:id="@+id/imageView3"
+                    android:contentDescription="@string/description"/>
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    app:srcCompat="@drawable/xpic"
+                    android:id="@+id/imageView4"
+                    android:contentDescription="@string/description"/>
+           <ImageView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:srcCompat="@drawable/xpic"
+                   android:id="@+id/imageView5"
+                   android:contentDescription="@string/description"/>
+
+
+       </LinearLayout>
+        <LinearLayout
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <androidx.appcompat.widget.AppCompatCheckBox
+                    android:ellipsize="end"
+                    android:id="@+id/checkBoxRememberPassword"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/friendsAdd"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:textStyle="normal"/>
+        </LinearLayout>
+       </LinearLayout>
+
+    <!-- Friends Section -->
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/friendsProfile1"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+    <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+            <!-- Placeholder friends' profile pictures -->
+            <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/account_circle"
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"
+                    />
+
+            <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/account_circle"
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"
+                    />
+
+            <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/account_circle"
+                    android:contentDescription="@string/description"/>
+
+            <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/account_circle"
+                    android:contentDescription="@string/description"
+                    />
+
+            <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/account_circle"
+                    android:contentDescription="@string/description"
+                    />
+
+            <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/account_circle"
+                    android:contentDescription="@string/friend_s_profile"/>
+
+            <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/account_circle"
+                    android:contentDescription="@string/friend_s_profile"/>
+
+            <!-- Add more friends as needed -->
+        </LinearLayout>
+    </HorizontalScrollView>
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+    <!-- Leaderboard Section -->
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Leaderboard"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+    <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+        <LinearLayout
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+            <!-- Placeholder leaderboard items -->
+            <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/question"
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
+
+            <!-- Add more grid items as needed -->
+
+            <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/question"
+                    android:contentDescription="@string/description"/>
+
+            <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/question"
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
+
+            <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/question"
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
+
+
+
+        </LinearLayout>
+    </HorizontalScrollView>
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+    <!-- Photos Section -->
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Photos"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+    <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+        <LinearLayout
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+            <!-- Placeholder photo items -->
+            <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/question"
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
+
+            <!-- Add more grid items as needed -->
+            <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/question"
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
+
+            <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/question"
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
+
+            <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/question"
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
+
+            <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/question"
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
+
+
+        </LinearLayout>
+    </HorizontalScrollView>
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+    <!-- Favorite Trails Section -->
+    <TextView
+            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Favorite Trails"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+    <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+        <LinearLayout
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+            <!-- Placeholder favorite trails items -->
+            <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/question"
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
+
+            <!-- Add more grid items as needed -->
+
+            <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/question"
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
+
+            <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/question"
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
+
+            <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/question"
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
+
+            <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/question"
+                    android:layout_marginEnd="25dp"
+                    android:contentDescription="@string/description"/>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</LinearLayout>
