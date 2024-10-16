@@ -24,8 +24,7 @@ import retrofit2.Response
 
 
 
-class HomeFragment : Fragment()
-{
+class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private lateinit var firestore: FirebaseFirestore
@@ -99,6 +98,8 @@ class HomeFragment : Fragment()
         }
     }
 
+
+
     private fun fetchParksData() {
         RetrofitInstance.api.getParks(10).enqueue(object : Callback<NPSResponse> {
             override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
@@ -120,6 +121,7 @@ class HomeFragment : Fragment()
             }
         })
     }
+
 
 
     override fun onDestroyView()

@@ -112,7 +112,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/searchbarlayout"
-                android:layout_marginTop="25dp"
                 android:overScrollMode="always">
             <RelativeLayout
                     android:layout_width="match_parent"
@@ -130,31 +129,32 @@
                             android:textSize="20sp"
                             android:fontFamily="@font/amethysta"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" android:textColor="#000000"/>
+                            android:layout_height="wrap_content"
+                            android:textColor="#000000"/>
                 </LinearLayout>
                 <!--        Top Trails Nearby Images-->
-                <HorizontalScrollView
-                        android:id="@+id/nearbytrailscroll"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:scrollbars="horizontal"
-                        android:scrollbarStyle="insideOverlay"
-                        android:layout_below="@id/nearbytrailslayout"
-                        android:scrollbarAlwaysDrawHorizontalTrack="true">
-                    <!-- RecyclerView for Nearby Trails -->
+                <LinearLayout android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:id="@+id/recyclerViewlayout"
+                              android:layout_marginStart="15dp"
+                              android:layout_below="@id/nearbytrailslayout">
+
+
+               <!-- RecyclerView for Nearby Trails -->
                     <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/parksRecyclerView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                      />
+                            android:layout_width="wrap_content"
 
-                </HorizontalScrollView>
+                            android:layout_height="wrap_content"
+                      />
+                </LinearLayout>
+
+
                 <LinearLayout
                         android:id="@+id/browsedifficultylayout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/nearbytrailscroll">
+                        android:layout_below="@id/recyclerViewlayout">
                     <!--        Browse By Difficulty-->
                     <TextView
                             android:id="@+id/browsedifficulty"
