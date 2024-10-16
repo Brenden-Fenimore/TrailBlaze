@@ -1,3 +1,0 @@
-com.example.trailblaze.test
-style WhiteBackgroundDialogTheme
-style WhiteBackgroundTheme
