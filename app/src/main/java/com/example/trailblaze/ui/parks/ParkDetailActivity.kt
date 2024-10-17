@@ -1,9 +1,7 @@
 package com.example.trailblaze.ui.parks
 
 import android.os.Bundle
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.Park
@@ -18,6 +16,15 @@ class ParkDetailActivity : AppCompatActivity() {
     private var parkIndex: Int = -1 // Default to -1 if not found
     private lateinit var parkNameTextView: TextView
     private lateinit var parkDescriptionTextView: TextView
+    private lateinit var parkLatitudeTextView: TextView
+    private lateinit var parkLongitudeTextView: TextView
+    private lateinit var parkAddressTextView: TextView
+    private lateinit var parkActivitiesTextView: TextView
+    private lateinit var parkOperatingHoursTextView: TextView
+    private lateinit var parkContactsTextView: TextView
+    private lateinit var parkWeatherInfoTextView: TextView
+    private lateinit var parkEntrancePassesTextView: TextView
+    private lateinit var parkImagesTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,13 +40,36 @@ class ParkDetailActivity : AppCompatActivity() {
         // Initialize views
         parkNameTextView = findViewById(R.id.parkNameTextView)
         parkDescriptionTextView = findViewById(R.id.parkDescriptionTextView)
+        parkLatitudeTextView = findViewById(R.id.parkLatitudeTextView)
+        parkLongitudeTextView = findViewById(R.id.parkLongitudeTextView)
+        parkAddressTextView = findViewById(R.id.parkAddressTextView)
+        parkActivitiesTextView = findViewById(R.id.parkActivitiesTextView)
+        parkOperatingHoursTextView = findViewById(R.id.parkOperatingHoursTextView)
+        parkContactsTextView = findViewById(R.id.parkContactsTextView)
+        parkWeatherInfoTextView = findViewById(R.id.parkWeatherInfoTextView)
+        parkEntrancePassesTextView = findViewById(R.id.parkEntrancePassesTextView)
+        parkImagesTextView = findViewById(R.id.parkImagesTextView)
+
 
         // Fetch parks data again or use a shared data source
         fetchParksData { parksList ->
             if (parkIndex >= 0 && parkIndex < parksList.size) {
                 val park = parksList[parkIndex] // Get the park using the index
+                val address = park.addresses.joinToString("\n") { "${it.line1}, ${it.line2}, ${it.line3}, ${it.city}, ${it.postalCode}, ${it.stateCode}" }
+                val images = park.images.joinToString("\n") { "${it.url}\n" }
+
                 parkNameTextView.text = park.fullName
                 parkDescriptionTextView.text = park.description
+                parkLatitudeTextView.text = "Latitude: ${park.latitude ?: "N/A"}"
+                parkLongitudeTextView.text = "Longitude: ${park.longitude ?: "N/A"}"
+                parkAddressTextView.text = address
+//                parkActivitiesTextView.text = park.activities.toString()
+//                parkOperatingHoursTextView.text = park.operatingHours.toString()
+//                parkContactsTextView.text = park.contacts
+//                parkWeatherInfoTextView.text = park.weatherInfo
+//                parkEntrancePassesTextView.text = park.entrancePasses
+                parkImagesTextView.text = images
+
                 // Optionally load the park image if you have an ImageView for it
             } else {
                 Toast.makeText(this, "Invalid park index", Toast.LENGTH_SHORT).show()

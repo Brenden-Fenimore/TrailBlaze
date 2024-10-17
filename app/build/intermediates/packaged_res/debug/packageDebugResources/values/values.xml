@@ -37,7 +37,9 @@ With customization
     <string name="aboutTitle">About</string>
     <string name="accountTitle">Account</string>
     <string name="achievementsTitle">Achievements</string>
+    <string name="activities">Activities</string>
     <string name="activityTitle">Settings</string>
+    <string name="addresses">Addresses</string>
     <string name="agree">You agree to our</string>
     <string name="animal">Never feed or touch wildlife: Do not approach or attempt to move sick or injured wildlife.
         Please report any encounters with aggressive, sick or injured animals to a park staff.
@@ -45,8 +47,8 @@ With customization
     <string name="app_name">TrailBlaze</string>
     <string name="appearanceTitle">Appearance</string>
     <string name="aspects">What aspect/s of hiking do you like to experience most?</string>
+    <string name="backArrow">backArrow</string>
     <string name="backButton">Back Button</string>
-    <string name="backarrow">backArrow</string>
     <string name="badgecollector">Badge Collector: Earn badges for completing specific challenges or achievements.</string>
     <string name="bear">Wildlife lives in all state parks, even near urban areas: Although rare, black bears, mountain
         lions and rattlesnakes may be seen. If you encounter wildlife on the trail, keep your distance, back away slowly
@@ -68,6 +70,7 @@ With customization
     <string name="contactTitle2">Title</string>
     <string name="contactTitle3">Explain the problem</string>
     <string name="contact_us">Contact Us</string>
+    <string name="contacts">Contacts</string>
     <string name="createAccount">Create Account</string>
     <string name="dailyadventurer">Daily Adventurer: Hike at least once a day for a week.</string>
     <string name="description">Enter a description…</string>
@@ -77,8 +80,10 @@ With customization
     <string name="editIcon">Edit</string>
     <string name="editProfile">Edit Profile</string>
     <string name="emergency">I am in an emergency! (Dial 911)</string>
+    <string name="entrance_passes">Entrance Passes</string>
     <string name="exploreTrails">Explore Trails</string>
     <string name="explorer">Explorer: Hike trails in various terrains (e.g., mountains, forests, deserts).</string>
+    <string name="favorite_trails">Favorite Trails</string>
     <string name="favorites">Favorites</string>
     <string name="first_fragment_label">First Fragment</string>
     <string name="flashligh">Carry essentials: Bring a flashlight, matches, emergency shelter, and extra food and
@@ -113,6 +118,7 @@ With customization
     <string name="homepage_nearby_trails">Top trails nearby:</string>
     <string name="homepage_searchbar_hint">Search</string>
     <string name="homepage_welcome_user">Good Afternoon,</string>
+    <string name="images">Images</string>
     <string name="inputText">Input Text</string>
     <string name="interact">How would you like to interact with the community></string>
     <string name="interaction1">I would like my account to be found by others.</string>
@@ -121,6 +127,7 @@ With customization
     <string name="interaction4">I would like to be notified if someone is in danger or any potential danger is on a
         trail.
     </string>
+    <string name="latitude">Latitude</string>
     <string name="layers">Dress in layers: Wear clothes that work for the weather and avoid cotton.</string>
     <string name="leaderboard">Leaderboard</string>
     <string name="leaderboardPicture">Leaderboard Picture</string>
@@ -135,6 +142,7 @@ With customization
     <string name="login1">By signing in you are agreeing to our</string>
     <string name="logout">Logout</string>
     <string name="longdistancetrekker">Long-Distance Trekker: Hike a certain number of miles in a single day or week</string>
+    <string name="longitude">Longitude</string>
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris volutpat, dolor id
         interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus dui nec risus. Maecenas non sodales
@@ -174,15 +182,20 @@ With customization
     <string name="next">Next</string>
     <string name="notificationTitle">Notifications</string>
     <string name="ok">OK</string>
+    <string name="operating_hours">Operating Hours</string>
     <string name="options">Please select your preferences for each of the categories listed below.</string>
     <string name="overallProgress">Overall Progress</string>
     <string name="pace">Pace</string>
+    <string name="parkDescription">Park Description</string>
+    <string name="parkInfo">Park Information</string>
+    <string name="parkName">Park Name</string>
     <string name="passWord">Password</string>
     <string name="password2">Confirm Password</string>
     <string name="personalize">Lets Personalize your account</string>
     <string name="phone">Dont rely on cell phones: Dont count on cell phones to work in the wilderness.</string>
     <string name="phoneNumber">Phone Number</string>
     <string name="photographer">Photographer: Capture a stunning photo of a trail or landscape.</string>
+    <string name="photos">Photos</string>
     <string name="poisonivy">Poison oak: It is a common plant throughout much of California. Learn to identify its
         shiny, three-leaf pattern, and avoid touching it. If you touch poison oak, wash immediately with water and mild
         soap. Pat dry with a clean towel.
@@ -266,6 +279,7 @@ With customization
     <string name="waterfalls">Dont climb on waterfalls: Falls from waterfalls and wet rocks can cause serious injuries
         and deaths.
     </string>
+    <string name="weather_info">Weather Info</string>
     <string name="weekendwarrior">Weekend Warrior: Complete a trail every weekend.</string>
     <string name="whistle">Use a whistle: A whistle can be heard from far away and takes less energy than yelling.
     </string>

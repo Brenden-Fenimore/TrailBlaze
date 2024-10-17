@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.trailblaze.R;
@@ -52,13 +53,16 @@ public final class FragmentHomeBinding implements ViewBinding {
   public final ImageButton menuButton;
 
   @NonNull
-  public final RelativeLayout navlayout;
-
-  @NonNull
-  public final HorizontalScrollView nearbytrailscroll;
+  public final RelativeLayout navLayout;
 
   @NonNull
   public final LinearLayout nearbytrailslayout;
+
+  @NonNull
+  public final RecyclerView parksRecyclerView;
+
+  @NonNull
+  public final LinearLayout recyclerViewLayout;
 
   @NonNull
   public final TextInputEditText searchbar;
@@ -83,11 +87,12 @@ public final class FragmentHomeBinding implements ViewBinding {
       @NonNull LinearLayout browsedifficultylayout, @NonNull ImageButton floatingActionButton,
       @NonNull TextView hikewithfriends, @NonNull TextView homepagegreeting,
       @NonNull TextView homepageusername, @NonNull LinearLayout invitefriendslayout,
-      @NonNull ImageButton menuButton, @NonNull RelativeLayout navlayout,
-      @NonNull HorizontalScrollView nearbytrailscroll, @NonNull LinearLayout nearbytrailslayout,
-      @NonNull TextInputEditText searchbar, @NonNull LinearLayout searchbarlayout,
-      @NonNull TextInputLayout searchbartextfield, @NonNull ImageButton settingsbtn,
-      @NonNull TextView toptrails, @NonNull LinearLayout usernamelayout) {
+      @NonNull ImageButton menuButton, @NonNull RelativeLayout navLayout,
+      @NonNull LinearLayout nearbytrailslayout, @NonNull RecyclerView parksRecyclerView,
+      @NonNull LinearLayout recyclerViewLayout, @NonNull TextInputEditText searchbar,
+      @NonNull LinearLayout searchbarlayout, @NonNull TextInputLayout searchbartextfield,
+      @NonNull ImageButton settingsbtn, @NonNull TextView toptrails,
+      @NonNull LinearLayout usernamelayout) {
     this.rootView = rootView;
     this.browsebydifficultyscroll = browsebydifficultyscroll;
     this.browsedifficulty = browsedifficulty;
@@ -98,9 +103,10 @@ public final class FragmentHomeBinding implements ViewBinding {
     this.homepageusername = homepageusername;
     this.invitefriendslayout = invitefriendslayout;
     this.menuButton = menuButton;
-    this.navlayout = navlayout;
-    this.nearbytrailscroll = nearbytrailscroll;
+    this.navLayout = navLayout;
     this.nearbytrailslayout = nearbytrailslayout;
+    this.parksRecyclerView = parksRecyclerView;
+    this.recyclerViewLayout = recyclerViewLayout;
     this.searchbar = searchbar;
     this.searchbarlayout = searchbarlayout;
     this.searchbartextfield = searchbartextfield;
@@ -190,21 +196,27 @@ public final class FragmentHomeBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.navlayout;
-      RelativeLayout navlayout = ViewBindings.findChildViewById(rootView, id);
-      if (navlayout == null) {
-        break missingId;
-      }
-
-      id = R.id.nearbytrailscroll;
-      HorizontalScrollView nearbytrailscroll = ViewBindings.findChildViewById(rootView, id);
-      if (nearbytrailscroll == null) {
+      id = R.id.nav_layout;
+      RelativeLayout navLayout = ViewBindings.findChildViewById(rootView, id);
+      if (navLayout == null) {
         break missingId;
       }
 
       id = R.id.nearbytrailslayout;
       LinearLayout nearbytrailslayout = ViewBindings.findChildViewById(rootView, id);
       if (nearbytrailslayout == null) {
+        break missingId;
+      }
+
+      id = R.id.parksRecyclerView;
+      RecyclerView parksRecyclerView = ViewBindings.findChildViewById(rootView, id);
+      if (parksRecyclerView == null) {
+        break missingId;
+      }
+
+      id = R.id.recycler_view_layout;
+      LinearLayout recyclerViewLayout = ViewBindings.findChildViewById(rootView, id);
+      if (recyclerViewLayout == null) {
         break missingId;
       }
 
@@ -246,9 +258,9 @@ public final class FragmentHomeBinding implements ViewBinding {
 
       return new FragmentHomeBinding((RelativeLayout) rootView, browsebydifficultyscroll,
           browsedifficulty, browsedifficultylayout, floatingActionButton, hikewithfriends,
-          homepagegreeting, homepageusername, invitefriendslayout, menuButton, navlayout,
-          nearbytrailscroll, nearbytrailslayout, searchbar, searchbarlayout, searchbartextfield,
-          settingsbtn, toptrails, usernamelayout);
+          homepagegreeting, homepageusername, invitefriendslayout, menuButton, navLayout,
+          nearbytrailslayout, parksRecyclerView, recyclerViewLayout, searchbar, searchbarlayout,
+          searchbartextfield, settingsbtn, toptrails, usernamelayout);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

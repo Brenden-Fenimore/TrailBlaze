@@ -6,12 +6,12 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 tools:context=".ui.home.HomeFragment">
-<RelativeLayout android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/navlayout">
+    <RelativeLayout
+            android:id="@+id/nav_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
     <!--    Hamburger menu in top left-->
-
-
     <ImageButton
             android:src="@drawable/baseline_settings_24"
             android:contentDescription="@string/settings"
@@ -21,6 +21,7 @@
             android:id="@+id/settingsbtn"
             android:background="@android:color/transparent"
             android:layout_centerVertical="true"/>
+
     <ImageButton
             android:src="@drawable/three_line_menu"
             android:layout_width="60dp"
@@ -35,7 +36,7 @@
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/navlayout"
+            android:layout_below="@id/nav_layout"
             android:layout_marginEnd="0dp">
         <TextView
                 android:id="@+id/homepagegreeting"
@@ -132,29 +133,30 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:textColor="#000000"/>
                 </LinearLayout>
+
+
                 <!--        Top Trails Nearby Images-->
-                <HorizontalScrollView
-                        android:id="@+id/nearbytrailscroll"
-                        android:layout_width="match_parent"
+            <LinearLayout
+                        android:id="@+id/recycler_view_layout"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:scrollbars="horizontal"
-                        android:scrollbarStyle="insideOverlay"
-                        android:layout_below="@id/nearbytrailslayout"
-                        android:scrollbarAlwaysDrawHorizontalTrack="true">
+                        android:layout_marginStart="15dp"
+                        android:layout_below="@id/nearbytrailslayout" >
+
                     <!-- RecyclerView for Nearby Trails -->
                     <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/parksRecyclerView"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                      />
+                            android:layout_marginTop="16dp"/>
+                </LinearLayout>
 
-                </HorizontalScrollView>
-                <LinearLayout
+            <LinearLayout
                         android:id="@+id/browsedifficultylayout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/nearbytrailscroll">
+                        android:layout_below="@id/recycler_view_layout">
+                    
                     <!--        Browse By Difficulty-->
                     <TextView
                             android:id="@+id/browsedifficulty"
@@ -166,8 +168,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:textColor="#000000"/>
                 </LinearLayout>
+
                 <!--        Browse By Difficulty Images-->
-                <HorizontalScrollView
+            <HorizontalScrollView
                         android:id="@+id/browsebydifficultyscroll"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -208,7 +211,8 @@
                                 android:layout_marginStart="15dp"/>
                     </LinearLayout>
                 </HorizontalScrollView>
-                <LinearLayout
+
+            <LinearLayout
                         android:id="@+id/invitefriendslayout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -232,10 +236,10 @@
                             android:clickable="true"
                             android:id="@+id/floatingActionButton" app:maxImageSize="24dp"
                             app:backgroundTint="#00FFFFFF" android:scaleX="2" android:scaleY="2"/>
-
                 </LinearLayout>
+
                 <!--        Browse By Difficulty Images-->
-                <HorizontalScrollView
+            <HorizontalScrollView
                         android:layout_width="match_parent"
                         android:layout_height="500dp"
                         android:scrollbars="horizontal"

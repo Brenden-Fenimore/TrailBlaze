@@ -4,7 +4,7 @@
             "outputFile": "com.example.trailblaze.app-mergeDebugResources-79:/values-port/values-port.xml",
             "map": [
                 {
-                    "source": "/Users/mamiegartin/.gradle/caches/transforms-4/c55065fa3f17c5fb64083c1813194854/transformed/appcompat-1.6.1/res/values-port/values-port.xml",
+                    "source": "/Users/lipeduh/.gradle/caches/transforms-4/c55065fa3f17c5fb64083c1813194854/transformed/appcompat-1.6.1/res/values-port/values-port.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

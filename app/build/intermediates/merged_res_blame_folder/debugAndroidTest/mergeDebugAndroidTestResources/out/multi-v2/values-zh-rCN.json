@@ -4,7 +4,7 @@
             "outputFile": "com.example.trailblaze.test.app-mergeDebugAndroidTestResources-32:/values-zh-rCN/values-zh-rCN.xml",
             "map": [
                 {
-                    "source": "/Users/mamiegartin/.gradle/caches/transforms-4/197c90127c800cd7ba7a9bfea7a49398/transformed/ui-release/res/values-zh-rCN/values-zh-rCN.xml",
+                    "source": "/Users/lipeduh/.gradle/caches/transforms-4/197c90127c800cd7ba7a9bfea7a49398/transformed/ui-release/res/values-zh-rCN/values-zh-rCN.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/mamiegartin/.gradle/caches/transforms-4/ba180f2a8120a6c1ec2189d75f0ba086/transformed/core-1.13.0/res/values-zh-rCN/values-zh-rCN.xml",
+                    "source": "/Users/lipeduh/.gradle/caches/transforms-4/ba180f2a8120a6c1ec2189d75f0ba086/transformed/core-1.13.0/res/values-zh-rCN/values-zh-rCN.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
