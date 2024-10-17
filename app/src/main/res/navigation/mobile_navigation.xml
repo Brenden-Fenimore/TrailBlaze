@@ -34,12 +34,22 @@
                 app:destination="@id/editProfileFragment" />
     </fragment>
 
+    <activity
+            android:id="@+id/settingsScreenActivity"
+            android:name="com.example.trailblaze.settings.SettingsScreenActivity"
+            android:label="Settings" />
+
     <fragment
             android:id="@+id/editProfileFragment"
             android:name="com.example.trailblaze.ui.profile.EditProfileFragment"
             android:label="Edit Profile"
-            tools:layout="@layout/fragment_edit_profile" />
-    <action
-            android:id="@+id/action_editProfileFragment_to_profileFragment"
-            app:destination="@id/navigation_profile" />
+            tools:layout="@layout/fragment_edit_profile" >
+        <action android:id="@+id/action_editProfileFragment_to_settingsScreenActivity"
+                app:destination="@id/settingsScreenActivity"/>
+        <action android:id="@+id/action_editProfileFragment_to_navigation_profile"
+                app:destination="@id/navigation_profile"/>
+    </fragment>
+
+
+
 </navigation>

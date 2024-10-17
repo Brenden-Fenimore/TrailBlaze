@@ -31,9 +31,14 @@ class EditProfileFragment : Fragment() {
         // Initialize views using ViewBinding
         binding.backButton.setOnClickListener {
             // Navigate to the profile fragment
-            findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
+            findNavController().navigate(R.id.action_editProfileFragment_to_navigation_profile)
         }
 
+        // Initialize views using ViewBinding
+        binding.settingsButton.setOnClickListener {
+            //Navigate to the settings page
+            findNavController().navigate(R.id.action_editProfileFragment_to_settingsScreenActivity)
+        }
 
         // Set up SeekBar range and listener
         binding.suggestedTrailsSeekbar.max = 200

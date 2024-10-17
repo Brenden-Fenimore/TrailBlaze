@@ -31,7 +31,7 @@
                     android:id="@+id/edit_profile_button"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:scaleType="centerCrop"
+                    android:background="@android:color/transparent"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/edit_icon"
@@ -53,6 +53,7 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:scaleType="centerCrop"
+                    android:background="@android:color/transparent"
                     android:src="@drawable/location"
                     android:contentDescription="@string/locationIcon"
                     android:layout_marginEnd="16dp" />
@@ -63,6 +64,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/account_circle"
+                    android:scaleType="centerCrop"
                     android:contentDescription="@string/profilePicture"
                     android:layout_gravity="center" />
 
@@ -72,6 +74,7 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:scaleType="centerCrop"
+                    android:background="@android:color/transparent"
                     android:src="@drawable/difficulty"
                     android:contentDescription="@string/difficultyIcon"
                     android:layout_marginStart="16dp"/>
@@ -103,6 +106,7 @@
                     android:layout_height="50dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/badge"
+                    android:background="@android:color/transparent"
                     android:contentDescription="@string/userBadge1"
                     android:layout_marginEnd="8dp"/>
 
@@ -112,6 +116,7 @@
                     android:layout_height="50dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/badge"
+                    android:background="@android:color/transparent"
                     android:contentDescription="@string/userBadge2"
                     android:layout_marginEnd="8dp"/>
 
@@ -121,6 +126,7 @@
                     android:layout_height="50dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/badge"
+                    android:background="@android:color/transparent"
                     android:contentDescription="@string/userBadge3"/>
 
         </LinearLayout>
@@ -216,31 +222,36 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/question"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/leaderboardPicture" />
             <ImageButton
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/question"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/leaderboardPicture" />
             <ImageButton
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/question"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/leaderboardPicture" />
             <ImageButton
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/question"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/leaderboardPicture" />
             <ImageButton
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/question"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/leaderboardPicture" />
             <!-- Add more leaderboard items here -->
         </LinearLayout>
@@ -271,31 +282,36 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/question"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/userPhotoPictures" />
             <ImageButton
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/question"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/userPhotoPictures" />
             <ImageButton
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/question"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/userPhotoPictures" />
             <ImageButton
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/question"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/userPhotoPictures" />
             <ImageButton
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/question"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/userPhotoPictures" />
             <!-- Add more photo placeholders -->
         </LinearLayout>
@@ -326,38 +342,44 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/question"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/userFavoriteTrailsPictures" />
 
             <ImageButton
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/question"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/userFavoriteTrailsPictures" />
             <ImageButton
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/question"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/userFavoriteTrailsPictures" />
             <ImageButton
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/question"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/userFavoriteTrailsPictures" />
             <ImageButton
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/question"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/userFavoriteTrailsPictures" />
             <ImageButton
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginEnd="25dp"
-                    android:src="@drawable/question"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/userFavoriteTrailsPictures" />
             <!-- Add more favorite trail placeholders -->
         </LinearLayout>
