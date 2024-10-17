@@ -17,13 +17,13 @@ data class Park(
     val longitude: String?,
     val states: String,
     val addresses: List<Address>,
-//    val activities: List<String>,
-//    val contacts: String,
-//    val entrancePasses: String,
-    val images: List<Images>
-//    val stateCode: String,
-//    val weatherInfo: String,
-//    val operatingHours: String
+    val activities: List<Activies>,
+    val contacts: Contacts,
+    val entrancePasses: List<Passes>,
+    val images: List<Images>,
+    val stateCode: String,
+    val weatherInfo: String,
+    val operatingHours: List<OperatingHours>
 
 )
 
@@ -44,4 +44,68 @@ data class Images(
     val title: String,
     val caption: String,
     val url: String
+)
+
+data class Activies(
+    val id: String,
+    val name: String
+)
+
+data class OperatingHours(
+    val name: String,
+    val description: String,
+    val standardHours: StandardHours,
+    val exceptions: List<Exceptions>
+)
+
+data class StandardHours(
+    val sunday: String,
+    val monday: String,
+    val tuesday: String,
+    val wednesday: String,
+    val thursday: String,
+    val friday: String,
+    val saturday: String
+)
+
+data class Exceptions(
+    val name: String,
+    val startDate: String,
+    val endDate: String,
+    val exceptionHours: ExceptionHours
+)
+
+data class ExceptionHours(
+    val sunday: String,
+    val monday: String,
+    val tuesday: String,
+    val wednesday: String,
+    val thursday: String,
+    val friday: String,
+    val saturday: String
+)
+
+data class Contacts(
+    val phoneNumbers: List<PhoneNumber>,
+    val emailAddresses: List<EmailAddress>
+)
+
+data class PhoneNumber(
+    val phoneNumber: String,
+    val description: String,
+    val extension: String,
+    val type: ContactType
+)
+
+data class EmailAddress(
+    val emailAddress: String,
+    val description: String
+)
+
+enum class ContactType { Voice, Fax, TTY }
+
+data class Passes(
+    val cost: String,
+    val description: String,
+    val title: String
 )
