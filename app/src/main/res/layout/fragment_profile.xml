@@ -38,9 +38,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/profile"
-                android:textSize="40sp"
                 android:fontFamily="@font/amethysta"
-                android:textStyle="bold"
+                android:textSize="40sp"
                 android:gravity="center"
                 android:paddingBottom="16dp"/>
         <LinearLayout
@@ -89,47 +88,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/username"
-                android:textSize="20sp"
+                android:textSize="27sp"
                 android:fontFamily="@font/amethysta"
-                android:textStyle="bold"
                 android:layout_gravity="center"
                 android:paddingTop="8dp" />
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
 
-        <!-- Badges Layout -->
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/badgesRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:padding="8dp">
-
-            <!-- Badge 1 -->
-            <ImageButton
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/badge"
-                    android:contentDescription="@string/userBadge1"
-                    android:layout_marginEnd="8dp"/>
-
-            <!-- Badge 2 -->
-            <ImageButton
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/badge"
-                    android:contentDescription="@string/userBadge2"
-                    android:layout_marginEnd="8dp"/>
-
-            <!-- Badge 3 -->
-            <ImageButton
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/badge"
-                    android:contentDescription="@string/userBadge3"/>
-
-        </LinearLayout>
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
 
         <!-- Watcher Member -->
         <TextView

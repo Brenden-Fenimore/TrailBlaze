@@ -41,6 +41,16 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        binding.menuButton.setOnClickListener {
+            val intent = Intent(activity, MenuActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.settingsbtn.setOnClickListener {
+            val intent = Intent(activity, SettingsScreenActivity::class.java)
+            startActivity(intent)
+        }
+
         // Initialize Firestore
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
@@ -69,7 +79,7 @@ class HomeFragment : Fragment() {
         if (currentUser != null) {
             fetchUsername()
         } else {
-            binding.homepageusername.text = "Not logged in"
+            binding.homepageusername.text = "<UserName>"
         }
 
         return root

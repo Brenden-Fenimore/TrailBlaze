@@ -12,14 +12,20 @@ import com.example.trailblaze.settings.ContactUsActivity
 import com.example.trailblaze.settings.SafetyActivity
 import com.example.trailblaze.settings.SettingsScreenActivity
 import com.example.trailblaze.settings.SupportScreenActivity
+import com.example.trailblaze.ui.achievements.AchievementManager
 import com.example.trailblaze.ui.achievements.AchievementsActivity
 import com.example.trailblaze.ui.home.HomeFragment
 
 class MenuActivity : AppCompatActivity() {
 
+    private lateinit var achievementManager: AchievementManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
+
+        // Initialize AchievementManager
+        achievementManager = AchievementManager(this)
 
         val logoutbtn = findViewById<Button>(R.id.logoutbtn)
 
@@ -66,6 +72,10 @@ class MenuActivity : AppCompatActivity() {
         }
 
         findViewById<TextView>(R.id.navigation_safety).setOnClickListener{
+
+            // Grant the Safety Expert badge
+            achievementManager.checkAndGrantSafetyExpertBadge()
+
             val intent = Intent(this, SafetyActivity::class.java)
             startActivity(intent)
         }

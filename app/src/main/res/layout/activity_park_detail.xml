@@ -54,5 +54,15 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/parkDescription" />
 
+        <!-- Park Address -->
+        <TextView
+                android:id="@+id/parkAddressView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:layout_marginTop="8dp"
+                android:text="Park Address" />
+
     </LinearLayout>
 </RelativeLayout>

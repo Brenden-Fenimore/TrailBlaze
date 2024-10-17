@@ -18,6 +18,7 @@ class ParkDetailActivity : AppCompatActivity() {
     private var parkIndex: Int = -1 // Default to -1 if not found
     private lateinit var parkNameTextView: TextView
     private lateinit var parkDescriptionTextView: TextView
+    private lateinit var parkAddress: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +34,7 @@ class ParkDetailActivity : AppCompatActivity() {
         // Initialize views
         parkNameTextView = findViewById(R.id.parkNameTextView)
         parkDescriptionTextView = findViewById(R.id.parkDescriptionTextView)
+        parkAddress = findViewById(R.id.parkAddressView)
 
         // Fetch parks data again or use a shared data source
         fetchParksData { parksList ->

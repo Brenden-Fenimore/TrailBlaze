@@ -9,5 +9,8 @@ data class AchievementCategory(
     val tooltipTexts: List<String>,
 
     //progress percentage
-    val progress: Int
+    var progress: Int
 )
+
+
+
