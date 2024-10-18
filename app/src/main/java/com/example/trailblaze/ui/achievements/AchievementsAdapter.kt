@@ -16,12 +16,9 @@ class AchievementsAdapter(private val categories: List<AchievementCategory>) :
         val badge1: ImageView = view.findViewById(R.id.badge_1)
         val badge2: ImageView = view.findViewById(R.id.badge_2)
         val badge3: ImageView = view.findViewById(R.id.badge_3)
-        val progressBar: ProgressBar = view.findViewById(R.id.category_progress_bar)
 
             fun bind(category: AchievementCategory) {
                 title.text = category.title
-                progressBar.max = 100
-                progressBar.progress = category.progress
 
                 //set the default badges
                 badge1.setImageResource(category.badgeResourceIds.getOrNull(0) ?: R.drawable.default_badge)

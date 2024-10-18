@@ -7,16 +7,6 @@ import android.util.Log
 class AchievementManager(context: Context) {
     private val sharedPreferences = context.getSharedPreferences("user_achievements", Context.MODE_PRIVATE)
 
-    // Save progress for achievements
-    fun saveProgress(achievementId: String, progress: Int) {
-        sharedPreferences.edit().putInt(achievementId, progress).apply()
-    }
-
-    // Get progress for achievements
-    fun getProgress(achievementId: String): Int {
-        return sharedPreferences.getInt(achievementId, 0)
-    }
-
     // Unlock an achievement
     fun unlockAchievement(achievementId: String) {
         sharedPreferences.edit().putBoolean("${achievementId}_unlocked", true).apply()
@@ -40,7 +30,6 @@ class AchievementManager(context: Context) {
 
             // Update the shared preferences
             unlockAchievement("safetyexpert")
-            Log.d("AchievementManager", "Safety Expert badge granted.")
         } else {
             Log.d("AchievementManager", "Safety Expert badge already unlocked.")
         }

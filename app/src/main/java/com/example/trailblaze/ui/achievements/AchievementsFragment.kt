@@ -41,7 +41,6 @@ class AchievementsFragment : Fragment() {
                     getString(R.string.mountainclimber),
                     getString(R.string.longdistancetrekker)
                 ),
-                progress = 0
             ),
             AchievementCategory(
                 title = "Frequency",
@@ -51,7 +50,6 @@ class AchievementsFragment : Fragment() {
                     getString(R.string.weekendwarrior),
                     getString(R.string.dailyadventurer)
                 ),
-                progress = 0
             ),
             AchievementCategory(
                 title = "Difficulty",
@@ -61,7 +59,6 @@ class AchievementsFragment : Fragment() {
                     getString(R.string.explorer),
                     getString(R.string.trailmaster),
                 ),
-                progress = 0
             ),
             AchievementCategory(
                 title = "Group Hiking",
@@ -71,7 +68,6 @@ class AchievementsFragment : Fragment() {
                     getString(R.string.teamplayer),
                     getString(R.string.communitybuilder),
                 ),
-                progress = 0
             ),
             AchievementCategory(
                 title = "Adventurer",
@@ -81,7 +77,6 @@ class AchievementsFragment : Fragment() {
                     getString(R.string.photographer),
                     getString(R.string.safteyexpert)
                 ),
-                progress = 0
             ),
             AchievementCategory(
                 title = "Goal Achiever",
@@ -91,26 +86,12 @@ class AchievementsFragment : Fragment() {
                     getString(R.string.badgecollector),
                     getString(R.string.leaderboardtip)
                 ),
-                progress = 0
             )
         )
     }
 
     fun onSafetyTipsNavigated() {
         achievementManager.checkAndGrantSafetyExpertBadge()
-
-        // Update the categories list after granting the badge
-        refreshProgress()
     }
 
-    private fun refreshProgress() {
-        // Update the progress for the Adventurer category
-        val adventurerProgress = achievementManager.getAdventurerProgress()
-
-        // Update the relevant category in the list
-        categories.find { it.title == "Adventurer" }?.progress = adventurerProgress
-
-        // Notify the adapter to refresh the display
-        achievementsAdapter.notifyDataSetChanged()
-    }
 }

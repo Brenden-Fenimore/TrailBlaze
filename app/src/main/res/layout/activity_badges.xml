@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+<ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/chevron_left"
+        android:id="@+id/chevron_left"/>
+
+<LinearLayout
+        android:id="@+id/titleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chevron_left"
+        android:orientation="vertical">
+
+    <TextView
+            android:id="@+id/badgesViewLayout"
+            android:layout_gravity="center_horizontal"
+            android:text="Your Badges"
+            android:textSize="40sp"
+            android:fontFamily="@font/amethysta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+</LinearLayout>
+
+<!-- RecyclerView to show earned badges -->
+<androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/titleLayout"
+        android:id="@+id/recycler_view_badges"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"/>
+
+<!-- Sash to drag and drop badges -->
+<FrameLayout
+        android:id="@+id/sash"
+        android:layout_below="@id/recycler_view_badges"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:orientation="vertical"
+        android:background="@drawable/sash_background"
+        android:layout_marginTop="16dp"/>
+
+</RelativeLayout>

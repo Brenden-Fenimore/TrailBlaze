@@ -7,9 +7,6 @@ data class AchievementCategory(
     val badgeResourceIds: List<Int>,
 
     val tooltipTexts: List<String>,
-
-    //progress percentage
-    var progress: Int
 )
 
 

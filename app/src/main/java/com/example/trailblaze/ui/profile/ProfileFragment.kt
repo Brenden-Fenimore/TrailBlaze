@@ -14,6 +14,7 @@ import com.example.trailblaze.databinding.FragmentProfileBinding
 import com.example.trailblaze.ui.achievements.AchievementManager
 import com.example.trailblaze.ui.achievements.BadgesAdapter
 import com.example.trailblaze.ui.achievements.Badge
+import com.example.trailblaze.ui.achievements.BadgesActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -88,13 +89,16 @@ class ProfileFragment : Fragment() {
         )
 
         // Filter unlocked badges
-        val unlockedBadges = allBadges.filter {
-            achievementManager.isAchievementUnlocked(it.id)
-        }
+        val unlockedBadges = allBadges.filter { achievementManager.isAchievementUnlocked(it.id) }
 
-        badgesAdapter = BadgesAdapter(unlockedBadges)
+        badgesAdapter = BadgesAdapter(unlockedBadges, itemClickListener = { badge ->
+            // Handle badge click to navigate to BadgesActivity
+            val intent = Intent(requireActivity(), BadgesActivity::class.java)
+            startActivity(intent)
+        }, sashDragListener = null) // Pass null for the drag listener
+
+
         badgesList.adapter = badgesAdapter
-
 
         return binding.root
     }
