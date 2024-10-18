@@ -94,36 +94,36 @@
 
             <!-- Placeholder for favorite trails images -->
             <ImageButton
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
                     android:layout_marginEnd="25dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/userFavoriteTrails" />
             <ImageButton
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
                     android:layout_marginEnd="25dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/userFavoriteTrails" />
             <ImageButton
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
                     android:layout_marginEnd="25dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/userFavoriteTrails" />
             <ImageButton
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
                     android:layout_marginEnd="25dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/userFavoriteTrails" />
             <ImageButton
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
                     android:layout_marginEnd="25dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/profile_no_image_available"
@@ -154,36 +154,36 @@
 
             <!-- Placeholder for bucket list trails images -->
             <ImageButton
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
                     android:layout_marginEnd="25dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/bucketListTrails" />
             <ImageButton
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
                     android:layout_marginEnd="25dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/bucketListTrails" />
             <ImageButton
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
                     android:layout_marginEnd="25dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/bucketListTrails" />
             <ImageButton
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
                     android:layout_marginEnd="25dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/profile_no_image_available"
                     android:contentDescription="@string/bucketListTrails" />
             <ImageButton
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
                     android:layout_marginEnd="25dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/profile_no_image_available"
@@ -214,36 +214,36 @@
 
             <!-- Placeholder for favorite friends profile pictures -->
             <ImageButton
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
                     android:layout_marginEnd="25dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/userperson"
                     android:contentDescription="@string/favoriteFriends" />
             <ImageButton
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
                     android:layout_marginEnd="25dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/userperson"
                     android:contentDescription="@string/favoriteFriends" />
             <ImageButton
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
                     android:layout_marginEnd="25dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/userperson"
                     android:contentDescription="@string/favoriteFriends" />
             <ImageButton
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
                     android:layout_marginEnd="25dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/userperson"
                     android:contentDescription="@string/favoriteFriends" />
             <ImageButton
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
                     android:layout_marginEnd="25dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/userperson"
