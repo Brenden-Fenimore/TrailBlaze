@@ -56,13 +56,13 @@
                 android:background="@android:color/darker_gray"/>
 
         <!-- Park Images (URL or description of images) -->
-        <TextView
-                android:id="@+id/parkImagesTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/images"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp"/>
+        <ImageView
+                android:id="@+id/parkImagesImageView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:contentDescription="@string/park_image"
+                android:layout_marginTop="16dp"
+                android:paddingBottom="16dp"/>
 
         <View
                 android:layout_width="match_parent"

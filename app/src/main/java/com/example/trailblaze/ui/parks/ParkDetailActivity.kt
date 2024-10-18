@@ -1,8 +1,10 @@
 package com.example.trailblaze.ui.parks
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.Park
 import com.example.trailblaze.nps.RetrofitInstance
@@ -24,7 +26,7 @@ class ParkDetailActivity : AppCompatActivity() {
     private lateinit var parkContactsTextView: TextView
     private lateinit var parkWeatherInfoTextView: TextView
     private lateinit var parkEntrancePassesTextView: TextView
-    private lateinit var parkImagesTextView: TextView
+    private lateinit var parkImagesImageView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +50,7 @@ class ParkDetailActivity : AppCompatActivity() {
         parkContactsTextView = findViewById(R.id.parkContactsTextView)
         parkWeatherInfoTextView = findViewById(R.id.parkWeatherInfoTextView)
         parkEntrancePassesTextView = findViewById(R.id.parkEntrancePassesTextView)
-        parkImagesTextView = findViewById(R.id.parkImagesTextView)
+        parkImagesImageView = findViewById<ImageView>(R.id.parkImagesImageView)
 
 
         // Fetch parks data again or use a shared data source
@@ -56,7 +58,6 @@ class ParkDetailActivity : AppCompatActivity() {
             if (parkIndex >= 0 && parkIndex < parksList.size) {
                 val park = parksList[parkIndex] // Get the park using the index
                 val address = park.addresses.joinToString("\n") { "${it.line1}, ${it.line2}, ${it.line3}, ${it.city}, ${it.postalCode}, ${it.stateCode}" }
-                val images = park.images.joinToString("\n") { "${it.url}\n" }
                 val contactNumber = park.contacts.phoneNumbers.joinToString("\n"){ it.phoneNumber }
                 val contactEmail = park.contacts.emailAddresses.joinToString("\n"){ it.emailAddress }
                 val entrancePass = park.entrancePasses.joinToString("\n") {"${it.cost}, ${it.description}, ${it.title}"   }
@@ -85,7 +86,19 @@ class ParkDetailActivity : AppCompatActivity() {
                 parkContactsTextView.text = "Phone Number:\n$contactNumber\n\nEmail:\n$contactEmail"
                 parkWeatherInfoTextView.text = "Yearly Weather Conditions:\n$weatherInfo"
                 parkEntrancePassesTextView.text = "Entrance Fee:\n$entrancePass"
-                parkImagesTextView.text = images
+
+                if (park.images != null && park.images.isNotEmpty()) {
+                    val imageURL = park.images[0].url   // Extract the URL from the first image
+                    Log.d("ParkDetailActivity", "Image URL: $imageURL")
+
+                    Glide.with(this)
+                        .load(imageURL)  // Fetch the first image from the park's image list
+                        .placeholder(R.drawable.baseline_downloading_24)    // Placeholder while loading
+                        .error(R.drawable.no_image_available) // Fallback if the image URL is invalid
+                        .into(parkImagesImageView)
+                } else {
+                    parkImagesImageView.setImageResource(R.drawable.no_image_available) // Use a placeholder if no image is available
+                }
 
                 // Optionally load the park image if you have an ImageView for it
             } else {

@@ -255,4 +255,5 @@
     <string name="weather_info">Weather Info</string>
     <string name="photos">Photos</string>
     <string name="favorite_trails">Favorite Trails</string>
+    <string name="park_image">park_image</string>
 </resources>
