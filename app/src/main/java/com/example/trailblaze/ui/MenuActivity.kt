@@ -76,6 +76,9 @@ class MenuActivity : AppCompatActivity() {
             // Grant the Safety Expert badge
             achievementManager.checkAndGrantSafetyExpertBadge()
 
+            //save to firebase
+            achievementManager.saveBadgeToUserProfile("safetyexpert")
+
             val intent = Intent(this, SafetyActivity::class.java)
             startActivity(intent)
         }

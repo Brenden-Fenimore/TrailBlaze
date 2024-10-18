@@ -2,6 +2,7 @@ package com.example.trailblaze.ui.profile
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +32,30 @@ class ProfileFragment : Fragment() {
     private lateinit var badgesList: RecyclerView
     private lateinit var badgesAdapter: BadgesAdapter
 
-    override fun onCreateView(
+    // Define all possible badges
+    private val allBadges = listOf(
+        Badge("safetyexpert", "Safety Expert", R.drawable.safetyexpert),
+        Badge("trailblaze", "TrailBlazer", R.drawable.trailblaze_logo),
+        Badge("mountainclimber", "MountainClimber", R.drawable.mountainclimber),
+        Badge("trekker", "Trekker", R.drawable.trekker),
+        Badge("hiker", "Hiker", R.drawable.hhiker),
+        Badge("weekendwarrior", "Weekend Warrior", R.drawable.weekendwarrior),
+        Badge("dailyadventurer", "Daily Adventurer", R.drawable.dailyadventurer),
+        Badge("conqueror", "Conqueror", R.drawable.conqueror),
+        Badge("explorer", "Explorer", R.drawable.explorer),
+        Badge("trailmaster", "Trailmaster", R.drawable.trailmaster),
+        Badge("socialbutterfly", "Socialbutterfly", R.drawable.socialbutterfly),
+        Badge("teamplayer", "Teleamplayer", R.drawable.teamplayer),
+        Badge("communitybuilder", "Community Builder", R.drawable.communitybuilder),
+        Badge("wildlifewatcher", "Wildlifewatcher", R.drawable.wildlifewatcher),
+        Badge("photographer", "Photographer", R.drawable.photographer),
+        Badge("goalsetter", "Goalsetter", R.drawable.goalsetter),
+        Badge("badgecollector", "Badge Collector", R.drawable.badgecollector),
+        Badge("leaderboard", "Leaderboard", R.drawable.leaderboard),
+    )
+
+
+        override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,6 +81,7 @@ class ProfileFragment : Fragment() {
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser != null) {
             fetchUsername()
+            fetchUserBadges()
         } else {
             binding.username.text = "Not logged in"
         }
@@ -64,29 +89,6 @@ class ProfileFragment : Fragment() {
         achievementManager = AchievementManager(requireContext())
         badgesList = binding.badgesRecyclerView
         badgesList.layoutManager = LinearLayoutManager(context)
-
-        // Define all possible badges
-        val allBadges = listOf(
-            Badge("safetyexpert", "Safety Expert", R.drawable.safetyexpert),
-            Badge("trailblaze", "TrailBlazer", R.drawable.trailblaze_logo),
-            Badge("mountainclimber", "MountainClimber", R.drawable.mountainclimber),
-            Badge("trekker", "Trekker", R.drawable.trekker),
-            Badge("hiker", "Hiker", R.drawable.hhiker),
-            Badge("weekendwarrior", "Weekend Warrior", R.drawable.weekendwarrior),
-            Badge("dailyadventurer", "Daily Adventurer", R.drawable.dailyadventurer),
-            Badge("conqueror", "Conqueror", R.drawable.conqueror),
-            Badge("explorer", "Explorer", R.drawable.explorer),
-            Badge("trailmaster", "Trailmaster", R.drawable.trailmaster),
-            Badge("socialbutterfly", "Socialbutterfly", R.drawable.socialbutterfly),
-            Badge("teamplayer", "Teleamplayer", R.drawable.teamplayer),
-            Badge("communitybuilder", "Community Builder", R.drawable.communitybuilder),
-            Badge("wildlifewatcher", "Wildlifewatcher", R.drawable.wildlifewatcher),
-            Badge("photographer", "Photographer", R.drawable.photographer),
-            Badge("goalsetter", "Goalsetter", R.drawable.goalsetter),
-            Badge("badgecollector", "Badge Collector", R.drawable.badgecollector),
-            Badge("leaderboard", "Leaderboard", R.drawable.leaderboard),
-
-        )
 
         // Filter unlocked badges
         val unlockedBadges = allBadges.filter { achievementManager.isAchievementUnlocked(it.id) }
@@ -125,7 +127,39 @@ class ProfileFragment : Fragment() {
             binding.username.text = "<UserName>"
         }
     }
-    
+
+    private fun fetchUserBadges() {
+        // Fetching badges logic here
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+            firestore.collection("users").document(userId).get()
+                .addOnSuccessListener { document ->
+                    if (document.exists()) {
+                        val badges = document.get("badges") as? List<String> ?: emptyList()
+                        updateBadgesList(badges)
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Log.e("Firestore", "Error fetching badges: ", e)
+                }
+        }
+    }
+
+    private fun updateBadgesList(badges: List<String>) {
+        // Filter the list of all badges based on fetched user badges
+        val unlockedBadges = allBadges.filter { badges.contains(it.id) }
+
+        // Initialize or update the adapter
+        if (!::badgesAdapter.isInitialized) {
+            badgesAdapter = BadgesAdapter(unlockedBadges, itemClickListener = { badge ->
+                // Handle badge click
+            }, sashDragListener = null)
+
+            binding.badgesRecyclerView.adapter = badgesAdapter
+        } else {
+            badgesAdapter.updateBadges(unlockedBadges)
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

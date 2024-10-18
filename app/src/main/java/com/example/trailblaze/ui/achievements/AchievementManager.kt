@@ -3,10 +3,14 @@ package com.example.trailblaze.ui.achievements
 import android.app.AlertDialog
 import android.content.Context
 import android.util.Log
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 
 class AchievementManager(context: Context) {
     private val sharedPreferences = context.getSharedPreferences("user_achievements", Context.MODE_PRIVATE)
-
+    private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     // Unlock an achievement
     fun unlockAchievement(achievementId: String) {
         sharedPreferences.edit().putBoolean("${achievementId}_unlocked", true).apply()
@@ -25,9 +29,6 @@ class AchievementManager(context: Context) {
             // Grant the badge
             grantBadge("safetyexpert")
 
-            // Update progress for Adventurer category
-            updateProgressForAdventurerCategory()
-
             // Update the shared preferences
             unlockAchievement("safetyexpert")
         } else {
@@ -40,22 +41,26 @@ class AchievementManager(context: Context) {
         Log.d("AchievementManager", "Granting badge: $badgeId")
     }
 
-    private fun updateProgressForAdventurerCategory() {
-        // Update progress logic
-        val currentProgress = sharedPreferences.getInt("adventurer_progress", 0)
+    fun saveBadgeToUserProfile(badgeId: String) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+            val userRef = firestore.collection("users").document(userId)
 
-        val newProgress = currentProgress + 33
-
-        // Cap the progress at 100%
-        if (newProgress > 100) {
-            sharedPreferences.edit().putInt("adventurer_progress", 100).apply()
+            // Update the badges array in Firestore
+            userRef.set(
+                mapOf("badges" to FieldValue.arrayUnion(badgeId)),
+                SetOptions.merge() // This will merge the new badge with existing data
+            )
+                .addOnSuccessListener {
+                    // Badge successfully added
+                    Log.d("Firestore", "Badge added successfully.")
+                }
+                .addOnFailureListener { e ->
+                    // Handle any errors
+                    Log.e("Firestore", "Error adding badge: ", e)
+                }
         } else {
-            sharedPreferences.edit().putInt("adventurer_progress", newProgress).apply()
+            Log.e("Firestore", "User not logged in")
         }
-    }
-
-    // Method to get the current progress for the Adventurer category
-    fun getAdventurerProgress(): Int {
-        return sharedPreferences.getInt("adventurer_progress", 0)
     }
 }

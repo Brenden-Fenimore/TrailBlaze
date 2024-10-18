@@ -1,6 +1,7 @@
 package com.example.trailblaze.ui.achievements
 
 import android.os.Bundle
+import android.util.Log
 import android.view.DragEvent
 import android.view.MotionEvent
 import android.view.View
@@ -14,6 +15,8 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class BadgesActivity : AppCompatActivity() {
 
@@ -59,6 +62,10 @@ class BadgesActivity : AppCompatActivity() {
         badgesRecyclerView.adapter = badgesAdapter
         badgesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
+        // Fetch user badges from Firestore
+        fetchUserBadges { userBadges ->
+            updateBadgesList(userBadges)
+        }
         // Set the drag listener on the sash
         sash.setOnDragListener(sashDragListener)
     }
@@ -124,5 +131,41 @@ class BadgesActivity : AppCompatActivity() {
 
             else -> false
         }
+    }
+
+    private fun fetchUserBadges(onResult: (List<String>) -> Unit) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+            val firestore = FirebaseFirestore.getInstance()
+            firestore.collection("users").document(userId).get()
+                .addOnSuccessListener { document ->
+                    if (document.exists()) {
+                        val badges = document.get("badges") as? List<String> ?: emptyList()
+                        onResult(badges) // Return the fetched badges to the caller
+                    } else {
+                        onResult(emptyList()) // Return an empty list if no document exists
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Log.e("Firestore", "Error fetching badges: ", e)
+                    onResult(emptyList()) // Return an empty list on error
+                }
+        } else {
+            Log.e("Firestore", "User not logged in")
+            onResult(emptyList()) // Return an empty list if user is not logged in
+        }
+    }
+
+    private fun updateBadgesList(userBadgeIds: List<String>) {
+        // Filter the list of all badges based on fetched user badge IDs
+        val unlockedBadges = badges.filter { userBadgeIds.contains(it.id) }
+
+        // Initialize the adapter with the unlocked badges
+        badgesAdapter = BadgesAdapter(unlockedBadges, itemClickListener = { badge ->
+            // Handle badge click
+        }, sashDragListener = null)
+
+        // Set the adapter to the RecyclerView
+        badgesRecyclerView.adapter = badgesAdapter // Use the initialized badgesRecyclerView
     }
 }

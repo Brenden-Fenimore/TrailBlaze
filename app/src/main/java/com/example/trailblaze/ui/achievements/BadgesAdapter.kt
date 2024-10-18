@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
 
 class BadgesAdapter(
-    private val badges: List<Badge>,
+    private var badges: List<Badge>,
     private val itemClickListener: ((Badge) -> Unit)? = null,
     private val sashDragListener: View.OnDragListener? = null
 ) : RecyclerView.Adapter<BadgesAdapter.ViewHolder>() {
@@ -23,11 +23,9 @@ class BadgesAdapter(
         fun bind(badge: Badge) {
             badgeImage.setImageResource(badge.resourceId)
 
-            // Set a click listener on the badge image if provided
-            itemClickListener?.let { clickListener ->
-                badgeImage.setOnClickListener {
-                    clickListener(badge) // Trigger the click listener when badge is clicked
-                }
+            // Set click listener for the badge
+            itemView.setOnClickListener {
+                itemClickListener?.invoke(badge)
             }
 
             // Start drag on touch
@@ -56,4 +54,11 @@ class BadgesAdapter(
     }
 
     override fun getItemCount(): Int = badges.size
+
+
+    // Function to update the badges list
+    fun updateBadges(newBadges: List<Badge>) {
+        this.badges = newBadges // Update the internal list of badges
+        notifyDataSetChanged() // Notify the adapter that the data has changed
+    }
 }
