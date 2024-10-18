@@ -23,7 +23,8 @@ class ParkDetailActivity : AppCompatActivity() {
     private lateinit var parkAddressTextView: TextView
     private lateinit var parkActivitiesTextView: TextView
     private lateinit var parkOperatingHoursTextView: TextView
-    private lateinit var parkContactsTextView: TextView
+    private lateinit var parkContactsPhoneTextView: TextView
+    private lateinit var parkContactsEmailTextView: TextView
     private lateinit var parkWeatherInfoTextView: TextView
     private lateinit var parkEntrancePassesTextView: TextView
     private lateinit var parkImagesImageView: ImageView
@@ -47,7 +48,8 @@ class ParkDetailActivity : AppCompatActivity() {
         parkAddressTextView = findViewById(R.id.parkAddressTextView)
         parkActivitiesTextView = findViewById(R.id.parkActivitiesTextView)
         parkOperatingHoursTextView = findViewById(R.id.parkOperatingHoursTextView)
-        parkContactsTextView = findViewById(R.id.parkContactsTextView)
+        parkContactsPhoneTextView = findViewById(R.id.parkContactsPhoneTextView)
+        parkContactsEmailTextView = findViewById(R.id.parkContactsEmailTextView)
         parkWeatherInfoTextView = findViewById(R.id.parkWeatherInfoTextView)
         parkEntrancePassesTextView = findViewById(R.id.parkEntrancePassesTextView)
         parkImagesImageView = findViewById<ImageView>(R.id.parkImagesImageView)
@@ -74,18 +76,23 @@ class ParkDetailActivity : AppCompatActivity() {
                     Friday: ${standardHours.friday}
                     Saturday: ${standardHours.saturday}
                 """.trimIndent()
-                    parkOperatingHoursTextView.text = "Operating hours:\n$hoursText"} ?: run{parkOperatingHoursTextView.text = "Operating hours not available"}
+                    parkOperatingHoursTextView.text = hoursText} ?: run{parkOperatingHoursTextView.text = "Operating hours not available"}
                 val activity = park.activities.joinToString("\n") { it.name }
 
                 parkNameTextView.text = park.fullName
                 parkDescriptionTextView.text = park.description
-                parkLatitudeTextView.text = "Latitude: ${park.latitude ?: "N/A"}"
-                parkLongitudeTextView.text = "Longitude: ${park.longitude ?: "N/A"}"
-                parkAddressTextView.text = "Address:\n$address"
-                parkActivitiesTextView.text = "Activity:\n$activity"
-                parkContactsTextView.text = "Phone Number:\n$contactNumber\n\nEmail:\n$contactEmail"
-                parkWeatherInfoTextView.text = "Yearly Weather Conditions:\n$weatherInfo"
-                parkEntrancePassesTextView.text = "Entrance Fee:\n$entrancePass"
+                parkLatitudeTextView.text = park.latitude ?: "N/A"
+                parkLongitudeTextView.text = park.longitude ?: "N/A"
+                parkAddressTextView.text = address
+                parkActivitiesTextView.text = activity
+                parkContactsPhoneTextView.text = contactNumber
+                parkContactsEmailTextView.text = contactEmail
+                parkWeatherInfoTextView.text = weatherInfo
+                if (entrancePass.isNotEmpty()) {
+                    parkEntrancePassesTextView.text = entrancePass
+                } else {
+                    parkEntrancePassesTextView.text = "No entrance fee information available."
+                }
 
                 if (park.images != null && park.images.isNotEmpty()) {
                     val imageURL = park.images[0].url   // Extract the URL from the first image

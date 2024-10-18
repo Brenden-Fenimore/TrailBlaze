@@ -256,4 +256,14 @@
     <string name="photos">Photos</string>
     <string name="favorite_trails">Favorite Trails</string>
     <string name="park_image">park_image</string>
+    <string name="address_heading">Address:</string>
+    <string name="latitude_heading">Latitude:</string>
+    <string name="longitude_heading">Longitude:</string>
+    <string name="activities_heading">Available Activities:</string>
+    <string name="operating_hours_header">Hours of Operation:</string>
+    <string name="contact_heading">Contact Us:</string>
+    <string name="phone_number_heading">Phone Number:</string>
+    <string name="email_heading">Email:</string>
+    <string name="entrance_fee_heading">Entrance Fee:</string>
+    <string name="weather_info_heading">Yearly Weather Conditions:</string>
 </resources>

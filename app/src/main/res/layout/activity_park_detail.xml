@@ -27,7 +27,8 @@
                 android:id="@+id/Settings"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/parkInfo"
-                android:textSize="40sp"
+                android:textSize="36sp"
+                android:textStyle="bold"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -45,8 +46,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
                 android:textColor="#000000"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 android:text="@string/parkName" />
 
         <View
@@ -62,7 +66,7 @@
                 android:layout_height="200dp"
                 android:contentDescription="@string/park_image"
                 android:layout_marginTop="16dp"
-                android:paddingBottom="16dp"/>
+                android:layout_marginBottom="16dp"/>
 
         <View
                 android:layout_width="match_parent"
@@ -79,13 +83,23 @@
                 android:textColor="#333333"
                 android:layout_marginTop="8dp"
                 android:text="@string/parkDescription"
-                android:paddingBottom="5dp"/>
+                android:layout_marginBottom="16dp"/>
 
         <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="10dp"
                 android:background="@android:color/darker_gray"/>
+
+        <!-- Latitude Header-->
+        <TextView
+                android:id="@+id/parkLatitudeHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/latitude_heading"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
 
         <!-- Latitude -->
         <TextView
@@ -95,6 +109,16 @@
                 android:text="@string/latitude"
                 android:textSize="16sp"/>
 
+        <!-- Longitude Header-->
+        <TextView
+                android:id="@+id/parkLongitudeHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/longitude_heading"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
+
         <!-- Longitude -->
         <TextView
                 android:id="@+id/parkLongitudeTextView"
@@ -102,13 +126,23 @@
                 android:layout_height="wrap_content"
                 android:text="@string/longitude"
                 android:textSize="16sp"
-                android:paddingBottom="5dp"/>
+                android:layout_marginBottom="16dp"/>
 
         <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="10dp"
                 android:background="@android:color/darker_gray"/>
+
+        <!-- Addresses Header-->
+        <TextView
+                android:id="@+id/parkAddressHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/address_heading"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
 
         <!-- Addresses -->
         <TextView
@@ -118,14 +152,23 @@
                 android:text="@string/addresses"
                 android:textSize="16sp"
                 android:textStyle="italic"
-                android:layout_marginTop="8dp"
-                android:paddingBottom="5dp"/>
+                android:layout_marginBottom="16dp"/>
 
         <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="10dp"
                 android:background="@android:color/darker_gray"/>
+
+        <!-- Activities Header-->
+        <TextView
+                android:id="@+id/parkActivitiesHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/activities_heading"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
 
         <!-- Activities -->
         <TextView
@@ -134,14 +177,23 @@
                 android:layout_height="wrap_content"
                 android:text="@string/activities"
                 android:textSize="16sp"
-                android:layout_marginTop="8dp"
-                android:paddingBottom="5dp"/>
+                android:layout_marginBottom="16dp"/>
 
         <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="10dp"
                 android:background="@android:color/darker_gray"/>
+
+        <!-- Operating Hours Header-->
+        <TextView
+                android:id="@+id/parkOperatingHoursHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/operating_hours_header"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
 
         <!-- Operating Hours -->
         <TextView
@@ -150,8 +202,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/operating_hours"
                 android:textSize="16sp"
-                android:layout_marginTop="8dp"
-                android:paddingBottom="5dp"/>
+                android:layout_marginBottom="16dp"/>
 
         <View
                 android:layout_width="match_parent"
@@ -159,21 +210,59 @@
                 android:layout_marginBottom="10dp"
                 android:background="@android:color/darker_gray"/>
 
-        <!-- Contacts -->
+        <!-- Phone Number Header-->
         <TextView
-                android:id="@+id/parkContactsTextView"
+                android:id="@+id/parkContactsPhoneNumberHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phone_number_heading"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
+
+        <!-- Contacts - Phone Number -->
+        <TextView
+                android:id="@+id/parkContactsPhoneTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/contacts"
                 android:textSize="16sp"
-                android:layout_marginTop="8dp"
-                android:paddingBottom="5dp"/>
+                android:layout_marginBottom="16dp"/>
+
+        <!-- Email Header-->
+        <TextView
+                android:id="@+id/parkContactsEmailHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/email_heading"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
+
+        <!-- Contacts - Email -->
+        <TextView
+                android:id="@+id/parkContactsEmailTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contacts"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp"/>
 
         <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="10dp"
                 android:background="@android:color/darker_gray"/>
+
+        <!-- Entrance Passes Header-->
+        <TextView
+                android:id="@+id/parkEntrancePassesHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/entrance_fee_heading"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
 
         <!-- Entrance Passes -->
         <TextView
@@ -182,14 +271,23 @@
                 android:layout_height="wrap_content"
                 android:text="@string/entrance_passes"
                 android:textSize="16sp"
-                android:layout_marginTop="8dp"
-                android:paddingBottom="5dp"/>
+                android:layout_marginBottom="16dp"/>
 
         <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="10dp"
                 android:background="@android:color/darker_gray"/>
+
+        <!-- Weather Info Header-->
+        <TextView
+                android:id="@+id/parkWeatherInfoHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/weather_info_heading"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
 
         <!-- Weather Info -->
         <TextView
@@ -198,8 +296,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/weather_info"
                 android:textSize="16sp"
-                android:layout_marginTop="8dp"
-                android:paddingBottom="5dp"/>
+                android:layout_marginBottom="16dp"/>
 
     </LinearLayout>
 </RelativeLayout>
