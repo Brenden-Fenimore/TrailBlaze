@@ -60,7 +60,7 @@ class ParkDetailActivity : AppCompatActivity() {
                 val contactNumber = park.contacts.phoneNumbers.joinToString("\n"){ it.phoneNumber }
                 val contactEmail = park.contacts.emailAddresses.joinToString("\n"){ it.emailAddress }
                 val entrancePass = park.entrancePasses.joinToString("\n") {"${it.cost}, ${it.description}, ${it.title}"   }
-
+                val weatherInfo = park.weatherInfo ?: "No weather information available"
                 val firstOperatingHours = park.operatingHours.firstOrNull()
                 firstOperatingHours?.let {operatingHours ->
                 val standardHours = operatingHours.standardHours
@@ -83,7 +83,7 @@ class ParkDetailActivity : AppCompatActivity() {
                 parkAddressTextView.text = "Address:\n$address"
                 parkActivitiesTextView.text = "Activity:\n$activity"
                 parkContactsTextView.text = "Phone Number:\n$contactNumber\n\nEmail:\n$contactEmail"
-                parkWeatherInfoTextView.text = "Yearly Weather Conditions:\n$park.weatherInfo"
+                parkWeatherInfoTextView.text = "Yearly Weather Conditions:\n$weatherInfo"
                 parkEntrancePassesTextView.text = "Entrance Fee:\n$entrancePass"
                 parkImagesTextView.text = images
 
