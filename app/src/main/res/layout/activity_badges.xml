@@ -50,10 +50,10 @@
     <FrameLayout
             android:id="@+id/sash"
             android:layout_below="@id/card_view_badges"
-            android:layout_width="match_parent"
+            android:layout_width="400dp"
             android:layout_height="600dp"
             android:orientation="vertical"
             android:background="@drawable/sash_background"
-            android:layout_marginTop="16dp" />
-
+            android:layout_marginTop="16dp"
+    />
 </RelativeLayout>

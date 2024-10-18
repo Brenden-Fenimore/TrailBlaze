@@ -126,7 +126,7 @@
         maintain a distance of at least 6 feet. Most bites occur when people get too close or try to touch them.
     </string>
 
-    <string name="achievementsTitle">Achievements</string>
+    <string name="achievementsTitle">TrailBlaze Challenges</string>
     <string name="overallProgress">Overall Progress</string>
     <!-- badge tool tips-->
     <string name="trailblazer">Trailblazer: Complete a trail of a certain distance or elevation gain.</string>
@@ -150,6 +150,8 @@
     <string name="parkInfo">Park Information</string>
     <string name="parkName">Park Name</string>
     <string name="parkDescription">Park Description</string>
+    <string name="editSash">Edit Sash</string>
+    <string name="save">Save</string>
 
 
     <string name="lorem_ipsum">

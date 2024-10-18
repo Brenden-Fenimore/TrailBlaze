@@ -97,7 +97,7 @@ class ProfileFragment : Fragment() {
             // Handle badge click to navigate to BadgesActivity
             val intent = Intent(requireActivity(), BadgesActivity::class.java)
             startActivity(intent)
-        }, sashDragListener = null) // Pass null for the drag listener
+        })
 
 
         badgesList.adapter = badgesAdapter
@@ -153,7 +153,7 @@ class ProfileFragment : Fragment() {
         if (!::badgesAdapter.isInitialized) {
             badgesAdapter = BadgesAdapter(unlockedBadges, itemClickListener = { badge ->
                 // Handle badge click
-            }, sashDragListener = null)
+            })
 
             binding.badgesRecyclerView.adapter = badgesAdapter
         } else {

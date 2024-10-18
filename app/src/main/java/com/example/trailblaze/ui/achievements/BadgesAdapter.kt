@@ -12,13 +12,28 @@ import com.example.trailblaze.R
 
 class BadgesAdapter(
     private var badges: List<Badge>,
-    private val itemClickListener: ((Badge) -> Unit)? = null,
-    private val sashDragListener: View.OnDragListener? = null
+    private val itemClickListener: ((Badge) -> Unit)
 ) : RecyclerView.Adapter<BadgesAdapter.ViewHolder>() {
 
+    // Property to hold the current badges
+    var currentBadges: List<Badge> = badges
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val badgeImage: ImageView = view.findViewById(R.id.badge_image)
+
+        init {
+            // Set click listener for the badge item
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    // Get the badge at the clicked position
+                    val badge = badges[position]
+                    // Call the item click listener
+                    itemClickListener(badge)
+                }
+            }
+        }
+
 
         fun bind(badge: Badge) {
             badgeImage.setImageResource(badge.resourceId)
@@ -56,9 +71,12 @@ class BadgesAdapter(
     override fun getItemCount(): Int = badges.size
 
 
-    // Function to update the badges list
+    // Update the badges list
     fun updateBadges(newBadges: List<Badge>) {
-        this.badges = newBadges // Update the internal list of badges
+        this.badges = newBadges
+        this.currentBadges = newBadges // Update current badges to the new list
         notifyDataSetChanged() // Notify the adapter that the data has changed
     }
+
+
 }

@@ -120,7 +120,7 @@
                           android:orientation="horizontal">
 
                 <TextView
-                        android:text="@string/trailChallenges"
+                        android:text="@string/achievementsTitle"
                         android:id="@+id/navigation_trailChallenges"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
