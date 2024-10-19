@@ -14,5 +14,4 @@ class MenuActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
     }
-
 }
