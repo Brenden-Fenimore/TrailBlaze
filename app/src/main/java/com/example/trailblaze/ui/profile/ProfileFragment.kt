@@ -1,4 +1,4 @@
-package com.example.trailblaze.features.profile
+package com.example.trailblaze.ui.profile
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
 import com.example.trailblaze.databinding.FragmentProfileBinding
-import com.example.trailblaze.features.achievements.AchievementManager
-import com.example.trailblaze.features.achievements.BadgesAdapter
-import com.example.trailblaze.features.achievements.Badge
-import com.example.trailblaze.features.achievements.BadgesActivity
+import com.example.trailblaze.ui.achievements.AchievementManager
+import com.example.trailblaze.ui.achievements.BadgesAdapter
+import com.example.trailblaze.ui.achievements.Badge
+import com.example.trailblaze.ui.achievements.BadgesActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 

@@ -1,4 +1,4 @@
-package com.example.trailblaze.features.home
+package com.example.trailblaze.ui.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,8 +14,8 @@ import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.ParksAdapter
 import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.settings.SettingsScreenActivity
-import com.example.trailblaze.features.MenuActivity
-import com.example.trailblaze.features.parks.ParkDetailActivity
+import com.example.trailblaze.ui.MenuActivity
+import com.example.trailblaze.ui.parks.ParkDetailActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import retrofit2.Call

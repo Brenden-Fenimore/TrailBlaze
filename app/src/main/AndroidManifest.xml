@@ -14,42 +14,42 @@
             tools:targetApi="31">
 
         <activity
-                android:name=".features.achievements.BadgesActivity"
+                android:name=".ui.achievements.BadgesActivity"
                 android:exported="true"/>
         <activity
-                android:name=".features.achievements.Badge"
+                android:name=".ui.achievements.Badge"
                 android:exported="true"/>
         <activity
-                android:name=".features.achievements.Achievement"
+                android:name=".ui.achievements.Achievement"
                 android:exported="true"/>
         <activity
-                android:name=".features.achievements.BadgesAdapter"
+                android:name=".ui.achievements.BadgesAdapter"
                 android:exported="true"/>
         <activity
-                android:name=".features.achievements.AchievementCategory"
+                android:name=".ui.achievements.AchievementCategory"
                 android:exported="true"/>
         <activity
-                android:name=".features.achievements.AchievementsAdapter"
+                android:name=".ui.achievements.AchievementsAdapter"
                 android:exported="true"/>
         <activity
-                android:name=".features.achievements.AchievementsFragment"
+                android:name=".ui.achievements.AchievementsFragment"
                 android:exported="true"/>
 
         <activity
-                android:name=".features.parks.ParkDetailActivity"
+                android:name=".ui.parks.ParkDetailActivity"
                 android:exported="true"/>
         <activity
-                android:name=".features.achievements.AchievementsActivity"
+                android:name=".ui.achievements.AchievementsActivity"
                 android:exported="false"/>
         <activity
                 android:name=".settings.SafetyActivity"
                 android:exported="false"/>
         <activity
-                android:name=".features.profile.EditProfileActivity"
+                android:name=".ui.profile.EditProfileActivity"
                 android:exported="false"
                 android:theme="@style/Theme.TrailBlaze"/>
         <activity
-                android:name=".features.MenuActivity"
+                android:name=".ui.MenuActivity"
                 android:exported="false"/>
         <activity
                 android:name=".settings.AboutActivity"
@@ -73,7 +73,7 @@
                 android:exported="false"
                 android:theme="@style/Theme.TrailBlaze"/>
         <activity
-                android:name=".features.profile.FriendsProfile"
+                android:name=".ui.profile.FriendsProfile"
                 android:exported="false"/>
         <activity
                 android:name=".login.TermsActivity"

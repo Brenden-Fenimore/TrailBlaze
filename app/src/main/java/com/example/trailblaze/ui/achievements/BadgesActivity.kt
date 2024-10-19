@@ -1,4 +1,4 @@
-package com.example.trailblaze.features.achievements
+package com.example.trailblaze.ui.achievements
 
 import android.os.Bundle
 import android.util.Log
@@ -72,25 +72,14 @@ class BadgesActivity : AppCompatActivity() {
                     if (dragData != null && dragData.itemCount > 0) {
                         // Get the badge resource ID from the ClipData
                         val drawableResId = dragData.getItemAt(0).text.toString().toInt()
-                        // Check which badge is being dragged
-                        for (i in 0 until sash.childCount) {
-                            val badge = sash.getChildAt(i) as ImageView
-                            if (badge.tag == drawableResId) {
-                                // Update the badge position based on drop coordinates
-                                val params = badge.layoutParams as FrameLayout.LayoutParams
-                                params.leftMargin = (event.x - badge.width / 2).toInt()
-                                params.topMargin = (event.y - badge.height / 2).toInt()
-                                badge.layoutParams = params
-                                badge.requestLayout() // Request layout update
-                                break
-                            }
-                        }
+
+                        // Add the badge to the sash
+                        addBadgeToSash(drawableResId, event.x, event.y) // Call to add badge directly
                     } else {
                         Log.e("BadgesActivity", "ClipData is null or empty")
                     }
                     true
                 }
-
                 DragEvent.ACTION_DRAG_ENDED -> true
                 else -> false
             }
@@ -115,21 +104,18 @@ class BadgesActivity : AppCompatActivity() {
         val badgeSize = 100 // You can define the size of the badge here
         val params = FrameLayout.LayoutParams(badgeSize, badgeSize)
 
-        // Adjust for sash padding
-        val sashPaddingLeft = sash.paddingLeft
-        val sashPaddingTop = sash.paddingTop
-
         // Position the badge based on drop coordinates
         params.leftMargin = (x - badgeSize / 2).toInt() // Center the badge on the drop location
         params.topMargin = (y - badgeSize / 2).toInt() // Center the badge on the drop location
 
-        badge.layoutParams = params
-
-        // Optionally, you can set a tag to store the drawable resource ID
+        // Set the tag to store the drawable resource ID
         badge.tag = drawableResId
 
         // Add the badge to the sash (FrameLayout)
         sash.addView(badge)
+        badge.layoutParams = params // Set the layout parameters after adding
+        badge.requestLayout() // Request layout update
+        Log.d("BadgesActivity", "Added badge with resource ID: $drawableResId to sash at x: $x, y: $y")
     }
 
     private fun saveBadgesState() {
@@ -176,4 +162,3 @@ class BadgesActivity : AppCompatActivity() {
         }
     }
 }
-

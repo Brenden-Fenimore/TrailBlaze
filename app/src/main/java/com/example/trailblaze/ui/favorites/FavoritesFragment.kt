@@ -1,4 +1,4 @@
-package com.example.trailblaze.features.favorites
+package com.example.trailblaze.ui.favorites
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,4 +1,4 @@
-package com.example.trailblaze.features.parks
+package com.example.trailblaze.ui.parks
 
 import android.os.Bundle
 import android.util.Log

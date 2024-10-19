@@ -1,4 +1,4 @@
-package com.example.trailblaze.features.achievements
+package com.example.trailblaze.ui.achievements
 
 import android.os.Bundle
 import android.view.LayoutInflater

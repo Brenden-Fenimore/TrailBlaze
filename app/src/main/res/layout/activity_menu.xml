@@ -5,7 +5,7 @@
              android:layout_height="match_parent"
              android:orientation="vertical"
                 android:id="@+id/fragment_container"
-             tools:context=".features.favorites.FavoritesFragment">
+             tools:context=".ui.favorites.FavoritesFragment">
 
     <RelativeLayout android:layout_width="match_parent"
                     android:layout_height="wrap_content"

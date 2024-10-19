@@ -7,7 +7,7 @@ import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trailblaze.R
 import com.example.trailblaze.login.LoginActivity
-import com.example.trailblaze.features.profile.EditProfileActivity
+import com.example.trailblaze.ui.profile.EditProfileActivity
 
 
 class SettingsScreenActivity : AppCompatActivity() {
