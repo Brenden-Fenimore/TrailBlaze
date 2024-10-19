@@ -125,7 +125,27 @@
         you know the coast is clear. Be cautious when climbing rocks or picking up firewood. If you see a snake,
         maintain a distance of at least 6 feet. Most bites occur when people get too close or try to touch them.
     </string>
-
+    <string name="park_image">park_image</string>
+    <string name="latitude_heading">Latitude:</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="longitude_heading">Longitude:</string>
+    <string name="address_heading">Address:</string>
+    <string name="activities">Activities</string>
+    <string name="addresses">Addresses</string>
+    <string name="operating_hours">Operating Hours</string>
+    <string name="contacts">Contacts</string>
+    <string name="entrance_passes">Entrance Passes</string>
+    <string name="images">Images</string>
+    <string name="weather_info">Weather Info</string>
+    <string name="photos">Photos</string>
+    <string name="activities_heading">Available Activities:</string>
+    <string name="operating_hours_header">Hours of Operation:</string>
+    <string name="contact_heading">Contact Us:</string>
+    <string name="phone_number_heading">Phone Number:</string>
+    <string name="email_heading">Email:</string>
+    <string name="entrance_fee_heading">Entrance Fee:</string>
+    <string name="weather_info_heading">Yearly Weather Conditions:</string>
     <string name="achievementsTitle">TrailBlaze Challenges</string>
     <string name="overallProgress">Overall Progress</string>
     <!-- badge tool tips-->

@@ -1,6 +1,5 @@
-package com.example.trailblaze.ui.achievements
+package com.example.trailblaze.features.achievements
 
-import android.app.AlertDialog
 import android.content.Context
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth

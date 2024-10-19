@@ -1,4 +1,4 @@
-package com.example.trailblaze.ui
+package com.example.trailblaze.features
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,9 +12,9 @@ import com.example.trailblaze.settings.ContactUsActivity
 import com.example.trailblaze.settings.SafetyActivity
 import com.example.trailblaze.settings.SettingsScreenActivity
 import com.example.trailblaze.settings.SupportScreenActivity
-import com.example.trailblaze.ui.achievements.AchievementManager
-import com.example.trailblaze.ui.achievements.AchievementsActivity
-import com.example.trailblaze.ui.home.HomeFragment
+import com.example.trailblaze.features.achievements.AchievementManager
+import com.example.trailblaze.features.achievements.AchievementsActivity
+import com.example.trailblaze.features.home.HomeFragment
 
 class MenuActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.example.trailblaze.ui.achievements
+package com.example.trailblaze.features.achievements
 
 import android.content.Intent
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.example.trailblaze.ui.profile
+package com.example.trailblaze.features.profile
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

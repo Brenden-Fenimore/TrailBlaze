@@ -2,15 +2,14 @@ package com.example.trailblaze
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.trailblaze.databinding.ActivityMainBinding
-import com.example.trailblaze.databinding.FragmentHomeBinding
 import com.example.trailblaze.login.LoginActivity
 import com.google.firebase.firestore.FirebaseFirestore
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
             // Initialize Firestore
             firestore = FirebaseFirestore.getInstance()
-            
+
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.trailblaze.ui.achievements
+package com.example.trailblaze.features.achievements
 
 data class Badge(
     val id: String,

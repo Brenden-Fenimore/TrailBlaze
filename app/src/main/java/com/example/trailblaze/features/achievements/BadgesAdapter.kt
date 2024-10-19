@@ -1,12 +1,10 @@
-package com.example.trailblaze.ui.achievements
+package com.example.trailblaze.features.achievements
 
-import android.content.ClipData
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
 
