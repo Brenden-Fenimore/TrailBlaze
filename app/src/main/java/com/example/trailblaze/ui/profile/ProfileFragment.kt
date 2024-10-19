@@ -90,18 +90,6 @@ class ProfileFragment : Fragment() {
         badgesList = binding.badgesRecyclerView
         badgesList.layoutManager = LinearLayoutManager(context)
 
-        // Filter unlocked badges
-        val unlockedBadges = allBadges.filter { achievementManager.isAchievementUnlocked(it.id) }
-
-        badgesAdapter = BadgesAdapter(unlockedBadges, itemClickListener = { badge ->
-            // Handle badge click to navigate to BadgesActivity
-            val intent = Intent(requireActivity(), BadgesActivity::class.java)
-            startActivity(intent)
-        })
-
-
-        badgesList.adapter = badgesAdapter
-
         return binding.root
     }
 
@@ -165,6 +153,4 @@ class ProfileFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }
