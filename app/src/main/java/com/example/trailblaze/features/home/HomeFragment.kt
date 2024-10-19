@@ -99,8 +99,7 @@ class HomeFragment : Fragment() {
                         binding.homepageusername.text = "Username not found"
                     }
                 }
-                .addOnFailureListener { exception ->
-                    // Handle any errors
+                .addOnFailureListener {
                 }
         } else {
             // Handle the case where userId is null (not logged in)

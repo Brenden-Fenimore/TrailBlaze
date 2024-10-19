@@ -1,5 +1,6 @@
 package com.example.trailblaze.features.achievements
 
+import android.content.ClipData
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -38,18 +39,21 @@ class BadgesAdapter(
 
             // Set click listener for the badge
             itemView.setOnClickListener {
-                itemClickListener?.invoke(badge)
+                itemClickListener.invoke(badge)
             }
 
             // Start drag on touch
             badgeImage.setOnTouchListener { v, event ->
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
+                        // Create ClipData with the badge resource ID
+                        val dragData = ClipData.newPlainText("badgeId", badge.resourceId.toString())
                         val dragShadowBuilder = View.DragShadowBuilder(badgeImage)
-                        v.startDragAndDrop(null, dragShadowBuilder, badgeImage, 0)
+
+                        // Start the drag event
+                        v.startDragAndDrop(dragData, dragShadowBuilder, badgeImage, 0)
                         true
                     }
-
                     else -> false
                 }
             }
@@ -78,3 +82,5 @@ class BadgesAdapter(
 
 
 }
+
+

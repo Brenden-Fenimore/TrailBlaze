@@ -89,9 +89,4 @@ class AchievementsFragment : Fragment() {
             )
         )
     }
-
-    fun onSafetyTipsNavigated() {
-        achievementManager.checkAndGrantSafetyExpertBadge()
-    }
-
 }

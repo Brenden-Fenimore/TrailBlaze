@@ -1,4 +1,4 @@
-package com.example.trailblaze.features.Map
+package com.example.trailblaze.features.map
 
 import android.content.ContentValues.TAG
 import android.os.Bundle

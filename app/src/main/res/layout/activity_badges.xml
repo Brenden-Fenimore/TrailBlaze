@@ -48,12 +48,29 @@
 
     <!-- Sash to drag and drop badges -->
     <FrameLayout
-            android:id="@+id/sash"
+            android:id="@+id/sashLayout"
             android:layout_below="@id/card_view_badges"
-            android:layout_width="400dp"
-            android:layout_height="600dp"
-            android:orientation="vertical"
-            android:background="@drawable/sash_background"
-            android:layout_marginTop="16dp"
-    />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"> <!-- Adjust padding as needed -->
+
+        <!-- Sash ImageView -->
+        <ImageView
+                android:id="@+id/sashImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/sash_background"
+                android:clickable="false" /> <!-- Prevents intercepting touch events -->
+
+    </FrameLayout>
+
+    <Button
+            android:text="Save"
+            android:layout_width="304dp"
+            android:fontFamily="@font/amethysta"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/save">
+    </Button>
 </RelativeLayout>
