@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.trailblaze.R
 import com.example.trailblaze.databinding.FragmentProfileBinding
 import com.example.trailblaze.ui.achievements.AchievementManager
@@ -64,8 +65,7 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
         binding.editbutton.setOnClickListener {
-            val intent = Intent(requireActivity(), EditProfileActivity::class.java)
-            startActivity(intent)
+            findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
         }
 
         //set click listener
@@ -76,6 +76,7 @@ class ProfileFragment : Fragment() {
         // Initialize Firestore
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
+            loadProfilePicture()
 
         // Username fetching logic
         val currentUser = FirebaseAuth.getInstance().currentUser
@@ -148,6 +149,31 @@ class ProfileFragment : Fragment() {
             badgesAdapter.updateBadges(unlockedBadges)
         }
     }
+
+    private fun loadProfilePicture() {
+        val userId = auth.currentUser?.uid ?: return
+        val userRef = firestore.collection("users").document(userId)
+
+        userRef.get().addOnSuccessListener { document ->
+            if (document != null) {
+                val imageUrl = document.getString("profileImageUrl")
+                if (imageUrl != null) {
+                    // Load the image URL into the ImageView using Glide
+                    Glide.with(this)
+                        .load(imageUrl)
+                        .placeholder(R.drawable.account_circle) // Placeholder image while loading
+                        .error(R.drawable.account_circle) // Error image if the load fails
+                        .into(binding.profilePicture) // Assuming you have an ImageView with this ID in your layout
+                } else {
+                    // Handle the case where the URL is missing
+                    binding.profilePicture.setImageResource(R.drawable.account_circle) // Set a default image
+                }
+            }
+        }.addOnFailureListener { exception ->
+            Log.e("Firestore", "Error getting profile picture: ${exception.message}")
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

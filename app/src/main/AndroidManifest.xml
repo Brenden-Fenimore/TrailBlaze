@@ -45,7 +45,7 @@
                 android:name=".settings.SafetyActivity"
                 android:exported="false"/>
         <activity
-                android:name=".ui.profile.EditProfileActivity"
+                android:name=".ui.profile.EditProfileFragment"
                 android:exported="false"
                 android:theme="@style/Theme.TrailBlaze"/>
         <activity

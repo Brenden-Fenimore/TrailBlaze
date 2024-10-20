@@ -59,6 +59,7 @@
         <ImageView
                 android:layout_width="335dp"
                 android:layout_height="232dp"
+                android:id="@+id/profilePicture"
                 app:srcCompat="@drawable/account_circle"
                 android:contentDescription="@string/username"
                 android:paddingTop="68dp"
