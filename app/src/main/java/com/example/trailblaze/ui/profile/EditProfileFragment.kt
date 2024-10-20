@@ -15,6 +15,8 @@ import androidx.navigation.fragment.findNavController
 import android.widget.SeekBar
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.example.trailblaze.firestore.ImageLoader
+import com.example.trailblaze.firestore.UserRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -31,6 +33,7 @@ class EditProfileFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var storageReference: StorageReference
     private lateinit var firestore: FirebaseFirestore
+    private lateinit var userRepository: UserRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +45,8 @@ class EditProfileFragment : Fragment() {
         //setup firestore instance
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
+        userRepository = UserRepository(firestore)
+        loadProfilePicture()
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         storageReference = FirebaseStorage.getInstance().reference.child("profile_pictures")
 
@@ -67,7 +72,7 @@ class EditProfileFragment : Fragment() {
             //Navigate to the settings page
             findNavController().navigate(R.id.action_editProfileFragment_to_settingsScreenActivity)
         }
-        loadProfilePicture()
+
         return view
     }
 
@@ -131,30 +136,7 @@ class EditProfileFragment : Fragment() {
                 }
             }
     }
-private fun loadProfilePicture() {
-    val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
-    val userRef = firestore.collection("users").document(userId)
 
-    userRef.get().addOnSuccessListener { document ->
-        if (document != null) {
-            val imageUrl = document.getString("profileImageUrl")
-            if (imageUrl != null) {
-                // Load the image URL into the ImageView
-                Glide.with(this)
-                    .load(imageUrl)
-                    .placeholder(R.drawable.account_circle) // Placeholder image while loading
-                    .error(R.drawable.account_circle) // Error image if the load fails
-                    .into(binding.profilePicture)
-            } else {
-                // Handle the case where the URL is missing
-                // You might want to display a default profile picture
-                binding.profilePicture.setImageResource(R.drawable.account_circle)
-            }
-        }
-    }.addOnFailureListener { exception ->
-        Log.e("Firestore", "Error getting profile picture: ${exception.message}")
-    }
-}
 
     // Create a method to load the image into the ImageView
     private fun updateProfilePicture(imageUrl: String) {
@@ -165,6 +147,12 @@ private fun loadProfilePicture() {
             .into(binding.profilePicture) // Assuming you have an ImageView with this ID in your layout
     }
 
+    private fun loadProfilePicture() {
+        val userId = auth.currentUser?.uid ?: return
+        userRepository.getUserProfileImage(userId) { imageUrl ->
+            ImageLoader.loadProfilePicture(requireContext(), binding.profilePicture, imageUrl)
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

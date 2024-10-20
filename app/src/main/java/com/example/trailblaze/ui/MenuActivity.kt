@@ -8,8 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.trailblaze.R
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.bumptech.glide.Glide
 import com.example.trailblaze.databinding.ActivityMenuBinding
+import com.example.trailblaze.firestore.ImageLoader
+import com.example.trailblaze.firestore.UserRepository
 import com.example.trailblaze.login.LoginActivity
 import com.example.trailblaze.settings.ContactUsActivity
 import com.example.trailblaze.settings.SafetyActivity
@@ -21,12 +24,14 @@ import com.example.trailblaze.ui.home.HomeFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
+
 class MenuActivity : AppCompatActivity() {
 
     private lateinit var achievementManager: AchievementManager
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityMenuBinding
+    private lateinit var userRepository: UserRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,10 +44,10 @@ class MenuActivity : AppCompatActivity() {
         // Initialize Firestore
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
+        userRepository = UserRepository(firestore)
         loadProfilePicture()
 
         val logoutbtn = findViewById<Button>(R.id.logoutbtn)
-
 
         //set click listener for the logout button
         logoutbtn.setOnClickListener {
@@ -66,7 +71,6 @@ class MenuActivity : AppCompatActivity() {
             val intent = Intent(this, SettingsScreenActivity::class.java)
             startActivity(intent)
         }
-
 
         binding.navigationHome.setOnClickListener {
             val intent = Intent(this, HomeFragment::class.java)
@@ -102,25 +106,8 @@ class MenuActivity : AppCompatActivity() {
 
     private fun loadProfilePicture() {
         val userId = auth.currentUser?.uid ?: return
-        val userRef = firestore.collection("users").document(userId)
-
-        userRef.get().addOnSuccessListener { document ->
-            if (document != null) {
-                val imageUrl = document.getString("profileImageUrl")
-                if (imageUrl != null) {
-                    // Load the image URL into the ImageView using Glide
-                    Glide.with(this)
-                        .load(imageUrl)
-                        .placeholder(R.drawable.account_circle) // Placeholder image while loading
-                        .error(R.drawable.account_circle) // Error image if the load fails
-                        .into(binding.profilePicture) // Assuming you have an ImageView with this ID in your layout
-                } else {
-                    // Handle the case where the URL is missing
-                    binding.profilePicture.setImageResource(R.drawable.account_circle) // Set a default image
-                }
-            }
-        }.addOnFailureListener { exception ->
-            Log.e("Firestore", "Error getting profile picture: ${exception.message}")
+        userRepository.getUserProfileImage(userId) { imageUrl ->
+            ImageLoader.loadProfilePicture(this, binding.profilePicture, imageUrl)
         }
     }
 }
