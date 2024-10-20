@@ -52,25 +52,20 @@
             android:layout_below="@id/card_view_badges"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="16dp"> <!-- Adjust padding as needed -->
-
-        <!-- Sash ImageView -->
-        <ImageView
-                android:id="@+id/sashImageView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/sash_background"
-                android:clickable="false" /> <!-- Prevents intercepting touch events -->
+            android:background="@drawable/sash_background"> <!-- Adjust padding as needed -->
 
     </FrameLayout>
+
+
 
     <Button
             android:text="Save"
             android:layout_width="304dp"
-            android:fontFamily="@font/amethysta"
-            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:id="@+id/save">
-    </Button>
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/amethysta"
+            android:id="@+id/save"/>
+
 </RelativeLayout>

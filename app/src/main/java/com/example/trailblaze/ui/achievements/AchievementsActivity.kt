@@ -30,6 +30,7 @@ class AchievementsActivity : AppCompatActivity() {
         yourBadges.setOnClickListener {
             // Create an Intent to start BadgesActivity
             val intent = Intent(this, BadgesActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
         }
 
