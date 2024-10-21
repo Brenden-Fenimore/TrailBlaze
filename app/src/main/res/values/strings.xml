@@ -188,7 +188,7 @@
     //User variables
     <string name="homepage_welcome_user">Good Afternoon,</string>
     <string name="homepage_searchbar_hint">Search</string>
-    <string name="homepage_nearby_trails">Top trails nearby:</string>
+    <string name="homepage_nearby_trails">Top pThuarks nearby:</string>
     <string name="homepage_browse_by_difficulty">Browse by difficulty:</string>
     <string name="homepage_friends">Hike with friends!</string>
 
@@ -266,4 +266,7 @@
     <string name="email_heading">Email:</string>
     <string name="entrance_fee_heading">Entrance Fee:</string>
     <string name="weather_info_heading">Yearly Weather Conditions:</string>
+    <string name="thumbnail">thumbnail</string>
+    <string name="homepage_friend_list">List of preferred friends</string>
+    <string name="search">Search</string>
 </resources>

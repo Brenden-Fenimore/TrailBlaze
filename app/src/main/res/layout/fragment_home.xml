@@ -99,7 +99,7 @@
 
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Search"
+                            android:hint="@string/search"
                             android:textSize="18sp"
                             android:id="@+id/searchbar"
                             android:fontFamily="@font/amethysta"
@@ -128,7 +128,9 @@
                             android:layout_marginTop="30dp"
                             android:layout_marginStart="20dp"
                             android:text="@string/homepage_nearby_trails"
+
                             android:textSize="20sp"
+                            android:textStyle="bold"
                             android:fontFamily="@font/amethysta"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:textColor="#000000"/>
@@ -145,7 +147,7 @@
 
                     <!-- RecyclerView for Nearby Trails -->
                     <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/parksRecyclerView"
+                            android:id="@+id/thumbnailRecyclerView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"/>
@@ -187,28 +189,34 @@
                                 android:layout_width="128dp"
                                 android:layout_height="128dp"
                                 app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"/>
+                                android:layout_marginStart="15dp"
+                                android:contentDescription="@string/homepage_browse_by_difficulty"/>
 
                         <ImageView
                                 android:layout_width="128dp"
                                 android:layout_height="128dp"
                                 app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"/>
+                                android:layout_marginStart="15dp"
+                                android:contentDescription="@string/homepage_browse_by_difficulty"/>
                         <ImageView
                                 android:layout_width="128dp"
                                 android:layout_height="128dp"
                                 app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"/>
+                                android:layout_marginStart="15dp"
+                                android:contentDescription="@string/homepage_browse_by_difficulty"/>
                         <ImageView
                                 android:layout_width="128dp"
                                 android:layout_height="128dp"
                                 app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"/>
+                                android:layout_marginStart="15dp"
+                                android:contentDescription="@string/homepage_browse_by_difficulty"/>
                         <ImageView
                                 android:layout_width="128dp"
                                 android:layout_height="128dp"
                                 app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"/>
+                                android:layout_marginStart="15dp"
+                                android:contentDescription="@string/homepage_browse_by_difficulty"
+                        />
                     </LinearLayout>
                 </HorizontalScrollView>
 
@@ -230,12 +238,16 @@
                     <ImageButton
                             android:layout_marginTop="15dp"
                             android:layout_marginStart="125dp"
+                            android:focusable="true"
                             android:src="@android:drawable/ic_menu_add"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:clickable="true"
                             android:id="@+id/floatingActionButton" app:maxImageSize="24dp"
-                            app:backgroundTint="#00FFFFFF" android:scaleX="2" android:scaleY="2"/>
+                            app:backgroundTint="#00FFFFFF"
+                            android:scaleX="2"
+                            android:scaleY="2"
+                            android:contentDescription="@string/homepage_friend_list"/>
                 </LinearLayout>
 
                 <!--        Browse By Difficulty Images-->
@@ -255,28 +267,33 @@
                                 android:layout_width="98dp"
                                 android:layout_height="98dp"
                                 app:srcCompat="@drawable/profile_no_image_available"
-                                android:layout_marginStart="15dp"/>
+                                android:layout_marginStart="15dp"
+                                android:contentDescription="@string/homepage_friend_list"/>
 
                         <ImageView
                                 android:layout_width="98dp"
                                 android:layout_height="98dp"
                                 app:srcCompat="@drawable/profile_no_image_available"
-                                android:layout_marginStart="15dp"/>
+                                android:layout_marginStart="15dp"
+                                android:contentDescription="@string/homepage_friend_list"/>
                         <ImageView
                                 android:layout_width="98dp"
                                 android:layout_height="98dp"
                                 app:srcCompat="@drawable/profile_no_image_available"
-                                android:layout_marginStart="15dp"/>
+                                android:layout_marginStart="15dp"
+                                android:contentDescription="@string/homepage_friend_list"/>
                         <ImageView
                                 android:layout_width="98dp"
                                 android:layout_height="98dp"
                                 app:srcCompat="@drawable/profile_no_image_available"
-                                android:layout_marginStart="15dp"/>
+                                android:layout_marginStart="15dp"
+                                android:contentDescription="@string/homepage_friend_list"/>
                         <ImageView
                                 android:layout_width="98dp"
                                 android:layout_height="98dp"
                                 app:srcCompat="@drawable/profile_no_image_available"
-                                android:layout_marginStart="15dp"/>
+                                android:layout_marginStart="15dp"
+                                android:contentDescription="@string/homepage_friend_list"/>
                     </LinearLayout>
                 </HorizontalScrollView>
             </RelativeLayout>
