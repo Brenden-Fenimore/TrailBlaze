@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-    <LinearLayout
+
+    <!-- Custom Swish Background -->
+    <com.example.trailblaze.view.SwishBackgroundView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_height="100dp" />
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
 
         <!-- Top bar with Back Button, Title, and Settings Button -->
         <LinearLayout
@@ -31,22 +42,6 @@
                     android:layout_height="6dp"
                     android:layout_weight="1"/>
 
-            <!-- Account Title -->
-            <TextView
-                    android:id="@+id/account_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/editProfile"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:gravity="center" />
-
-            <!-- Spacer to center the title -->
-            <View
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
             <!-- Settings Button -->
             <ImageButton
                     android:id="@+id/settingsButton"
@@ -57,6 +52,17 @@
                     android:contentDescription="@string/settings" />
         </LinearLayout>
 
+            <!-- Edit Profile Title -->
+            <TextView
+                    android:id="@+id/account_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/editProfile"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:paddingBottom="16dp"
+                    android:paddingTop="42dp"/>
 
         <!-- Profile Image with Camera Icon -->
         <FrameLayout
@@ -90,7 +96,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="16dp"
+                android:padding="16dp">
 
             <ImageView
                     android:layout_width="24dp"
@@ -448,3 +455,5 @@
 
 
 </ScrollView>
+
+</FrameLayout>

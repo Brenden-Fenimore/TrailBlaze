@@ -30,18 +30,6 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="16dp">
 
-                    <!-- Account Title -->
-                    <TextView
-                            android:id="@+id/account_title"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/profile"
-                            android:textSize="24sp"
-                            android:textStyle="bold"
-                            android:gravity="center"
-                            android:paddingBottom="16dp"
-                            android:paddingTop="16dp"/>
-
                     <!-- Edit Profile Button -->
                     <ImageButton
                             android:id="@+id/edit_profile_button"
@@ -54,6 +42,19 @@
                             android:contentDescription="@string/editIcon" />
                 </RelativeLayout>
 
+                <!-- Account Title -->
+                <TextView
+                        android:id="@+id/account_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/profile"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:paddingBottom="16dp"
+                        android:paddingTop="16dp"/>
+
+
                 <!-- User Profile Section with Location and Difficulty -->
                 <LinearLayout
                         android:layout_width="match_parent"
@@ -61,6 +62,7 @@
                         android:orientation="horizontal"
                         android:gravity="center"
                         android:padding="8dp">
+
 
                     <!-- Location Icon on the Left -->
                     <ImageButton

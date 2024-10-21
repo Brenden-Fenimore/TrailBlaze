@@ -22,21 +22,21 @@
             android:padding="16dp"
             android:gravity="center">
 
-
-        <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/favorites"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_marginStart="16dp" />
-
     </LinearLayout>
     </FrameLayout>
 
     <!-- Search Bar -->
+
+    <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/favorites"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"
+            android:paddingBottom="16dp"/>
     <LinearLayout
             android:id="@+id/searchbarlayout"
             android:layout_width="match_parent"
