@@ -8,6 +8,14 @@
 
     <RelativeLayout android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+        <!-- Custom Swish Background at the bottom layer -->
+        <com.example.trailblaze.view.SwishBackgroundView
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
 
         <ImageButton
                 app:srcCompat="@drawable/baseline_arrow_back_ios_new_24"
@@ -27,6 +35,7 @@
                 android:id="@+id/imageButton"
                 android:background="@android:color/transparent"
                 android:layout_centerVertical="true"/>
+        </FrameLayout>
 
     </RelativeLayout>
 

@@ -6,80 +6,96 @@
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="vertical">
 
-        <!-- Title Bar with Account and Edit Profile Button -->
-        <RelativeLayout
+        <!-- FrameLayout for SwishBackgroundView and content -->
+        <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="16dp">
+                android:layout_height="wrap_content">
 
-        <!-- Account Title -->
-        <TextView
-                android:id="@+id/account_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/profile"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:paddingBottom="16dp" />
+            <!-- Custom Swish Background at the bottom layer -->
+            <com.example.trailblaze.view.SwishBackgroundView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
 
-            <!-- Edit Profile Button -->
-            <ImageButton
-                    android:id="@+id/edit_profile_button"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@android:color/transparent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/edit_icon"
-                    android:contentDescription="@string/editIcon"/>
+            <!-- All other content layered on top of the background -->
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-        </RelativeLayout>
+                <!-- Title Bar with Profile and Edit Profile Button -->
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="16dp">
 
-        <!-- User Profile Section with Location and Difficulty -->
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:padding="8dp">
+                    <!-- Account Title -->
+                    <TextView
+                            android:id="@+id/account_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/profile"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:paddingBottom="16dp"
+                            android:paddingTop="16dp"/>
 
-            <!-- Location Icon on the Left -->
-            <ImageButton
-                    android:id="@+id/icon_location"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:scaleType="centerCrop"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/location"
-                    android:contentDescription="@string/locationIcon"
-                    android:layout_marginEnd="16dp" />
+                    <!-- Edit Profile Button -->
+                    <ImageButton
+                            android:id="@+id/edit_profile_button"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@android:color/transparent"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/edit_icon"
+                            android:contentDescription="@string/editIcon" />
+                </RelativeLayout>
 
-            <!-- Profile Image in the Center -->
-            <ImageButton
-                    android:id="@+id/profile_image"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/account_circle"
-                    android:scaleType="centerCrop"
-                    android:contentDescription="@string/profilePicture"
-                    android:layout_gravity="center" />
+                <!-- User Profile Section with Location and Difficulty -->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:padding="8dp">
 
-            <!-- Difficulty Icon on the Right -->
-            <ImageButton
-                    android:id="@+id/icon_difficulty"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:scaleType="centerCrop"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/difficulty"
-                    android:contentDescription="@string/difficultyIcon"
-                    android:layout_marginStart="16dp"/>
+                    <!-- Location Icon on the Left -->
+                    <ImageButton
+                            android:id="@+id/icon_location"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:scaleType="centerCrop"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/location"
+                            android:contentDescription="@string/locationIcon"
+                            android:layout_marginEnd="16dp" />
 
-        </LinearLayout>
+                    <!-- Profile Image in the Center -->
+                    <ImageButton
+                            android:id="@+id/profile_image"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:src="@drawable/account_circle"
+                            android:scaleType="centerCrop"
+                            android:contentDescription="@string/profilePicture"
+                            android:layout_gravity="center" />
+
+                    <!-- Difficulty Icon on the Right -->
+                    <ImageButton
+                            android:id="@+id/icon_difficulty"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:scaleType="centerCrop"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/difficulty"
+                            android:contentDescription="@string/difficultyIcon"
+                            android:layout_marginStart="16dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
 
         <!-- Username, Badges, and Watcher -->
         <TextView
@@ -90,7 +106,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_gravity="center"
-                android:paddingTop="8dp" />
+                android:paddingTop="0dp" />
 
         <!-- Badges Layout -->
         <LinearLayout
@@ -150,12 +166,14 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:paddingTop="16dp"
-                android:paddingBottom="8dp" />
+                android:paddingBottom="8dp"
+                android:padding="16dp"/>
 
         <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="horizontal">
+                android:scrollbars="horizontal"
+                android:padding="16dp">
 
         <LinearLayout
                 android:layout_width="wrap_content"
@@ -205,12 +223,14 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:paddingTop="16dp"
-                android:paddingBottom="8dp" />
+                android:paddingBottom="8dp"
+                android:padding="16dp"/>
 
         <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="horizontal">
+                android:scrollbars="horizontal"
+                android:padding="16dp">
 
         <LinearLayout
                 android:layout_width="wrap_content"
@@ -265,12 +285,14 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:paddingTop="16dp"
-                android:paddingBottom="8dp" />
+                android:paddingBottom="8dp"
+                android:padding="16dp"/>
 
         <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="horizontal">
+                android:scrollbars="horizontal"
+                android:padding="16dp">
 
         <LinearLayout
                 android:layout_width="wrap_content"
@@ -325,12 +347,14 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:paddingTop="16dp"
-                android:paddingBottom="8dp" />
+                android:paddingBottom="8dp"
+                android:padding="16dp"/>
 
         <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="horizontal">
+                android:scrollbars="horizontal"
+                android:padding="16dp">
 
         <LinearLayout
                 android:layout_width="wrap_content"
