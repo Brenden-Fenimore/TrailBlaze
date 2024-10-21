@@ -61,8 +61,8 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Initialize the binding
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+            // Initialize the binding
+            _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
         binding.editbutton.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)

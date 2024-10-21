@@ -213,7 +213,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/browsebydifficultyscroll">
-                    <!--        Browse By Difficulty-->
                     <TextView
                             android:id="@+id/hikewithfriends"
                             android:layout_marginTop="30dp"
@@ -230,51 +229,24 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:clickable="true"
-                            android:id="@+id/floatingActionButton" app:maxImageSize="24dp"
+                            android:id="@+id/addFriend"
+                            app:maxImageSize="24dp"
                             app:backgroundTint="#00FFFFFF" android:scaleX="2" android:scaleY="2"/>
-
                 </LinearLayout>
-                <!--        Browse By Difficulty Images-->
-                <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="500dp"
-                        android:scrollbars="horizontal"
-                        android:scrollbarStyle="insideOverlay"
-                        android:layout_below="@id/invitefriendslayout"
-                        android:scrollbarAlwaysDrawHorizontalTrack="true">
                     <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:id="@+id/userListLayout"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="15dp">
-                        <ImageView
-                                android:layout_width="98dp"
-                                android:layout_height="98dp"
-                                app:srcCompat="@drawable/profile_no_image_available"
-                                android:layout_marginStart="15dp"/>
+                            android:layout_below="@id/invitefriendslayout"
+                            android:orientation="vertical">
 
-                        <ImageView
-                                android:layout_width="98dp"
-                                android:layout_height="98dp"
-                                app:srcCompat="@drawable/profile_no_image_available"
-                                android:layout_marginStart="15dp"/>
-                        <ImageView
-                                android:layout_width="98dp"
-                                android:layout_height="98dp"
-                                app:srcCompat="@drawable/profile_no_image_available"
-                                android:layout_marginStart="15dp"/>
-                        <ImageView
-                                android:layout_width="98dp"
-                                android:layout_height="98dp"
-                                app:srcCompat="@drawable/profile_no_image_available"
-                                android:layout_marginStart="15dp"/>
-                        <ImageView
-                                android:layout_width="98dp"
-                                android:layout_height="98dp"
-                                app:srcCompat="@drawable/profile_no_image_available"
-                                android:layout_marginStart="15dp"/>
+                        <!-- RecyclerView for Users -->
+                        <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/usersRecyclerView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:nestedScrollingEnabled="false"/>
                     </LinearLayout>
-                </HorizontalScrollView>
             </RelativeLayout>
         </ScrollView>
     </RelativeLayout>

@@ -74,7 +74,6 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/account_circle"
                     android:scaleType="centerCrop"
-                    android:background="@drawable/circle_shape"
                     android:contentDescription="@string/profilePicture" />
 
             <ImageButton
