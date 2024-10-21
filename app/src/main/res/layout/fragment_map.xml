@@ -1,27 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     <FrameLayout
-                 xmlns:tools="http://schemas.android.com/tools"
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 tools:context=".MainActivity">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".MainActivity">
 
         <fragment
                 class="com.google.android.gms.maps.SupportMapFragment"
-                android:id="@+id/map"
+                android:id="@+id/map_fragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"/>
 
 
     </FrameLayout>
-    <fragment
-            android:id="@+id/autocomplete_fragment"
-            android:layout_width="match_parent"
+    <MultiAutoCompleteTextView
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="85dp"
+            android:id="@+id/map_search"
+            android:text=""
+            android:hint="@string/map_search_hint"
+            android:ems="10"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-    />
+            android:fontFamily="@font/amethysta"
+            android:singleLine="true"
+            android:dropDownHeight="wrap_content"/>
+
+    <ImageButton
+            android:layout_marginStart="350dp"
+            android:layout_marginTop="42dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:id="@+id/clear_mapsearchtext"
+            app:srcCompat="@drawable/xpic"
+            android:clickable="true"/>
+
 </RelativeLayout>

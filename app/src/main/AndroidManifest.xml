@@ -49,6 +49,10 @@
                 android:name=".settings.SafetyActivity"
                 android:exported="false"/>
         <activity
+                android:name=".ui.Map.MapFragment"
+                android:exported="false"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
                 android:name=".ui.profile.EditProfileFragment"
                 android:exported="false"
                 android:theme="@style/Theme.TrailBlaze"/>

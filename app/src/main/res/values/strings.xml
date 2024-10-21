@@ -295,6 +295,7 @@
     <string name="addAsTrusted">Add as trusted Contact</string>
     <string name="friendsInCommon">Friends in Common</string>
     <string name="meetTrailMates">Meet TrailMates</string>
+    <string name="map_search_hint">Search for a Trail</string>
     <!-- Spinner options for terrain -->
     <string-array name="terrain_options">
         <item>Mountain</item>
