@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.Park
-import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.R
 import retrofit2.Call
 import retrofit2.Callback
