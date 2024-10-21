@@ -1,23 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+    <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-    <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/swishLayout">
+
+        <!-- Custom Swish Background at the bottom layer -->
+        <com.example.trailblaze.view.SwishBackgroundView
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
         <ImageButton
+                app:srcCompat="@drawable/baseline_arrow_back_ios_new_24"
+                android:contentDescription="@string/btn_back"
                 android:layout_width="39dp"
                 android:layout_height="39dp"
-                app:srcCompat="@drawable/chevron_left"
-                android:background="@android:color/transparent"
                 android:id="@+id/chevron_left"
-                android:contentDescription="@string/description"/>
+                android:background="@android:color/transparent"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+<ScrollView
+        android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@id/swishLayout">
+
+    <RelativeLayout android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:layout_below="@id/chevron_left"
                 android:id="@+id/titellayout"
                 android:orientation="vertical">
             <TextView
@@ -377,3 +397,4 @@
         </LinearLayout>
     </RelativeLayout>
 </ScrollView>
+</RelativeLayout>

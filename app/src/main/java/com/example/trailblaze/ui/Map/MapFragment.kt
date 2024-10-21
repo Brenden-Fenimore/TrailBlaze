@@ -40,10 +40,10 @@ class MapFragment : Fragment() {
         }
 
         //Initialize the SDK
-        Places.initialize(context, apiKey)
+        Places.initialize(requireContext(), apiKey)
 
         // Create a new PlacesClient instance
-        val placesClient = Places.createClient(context)
+        val placesClient = Places.createClient(requireContext())
 
         // Initialize the AutocompleteSupportFragment.
         val autocompleteFragment =

@@ -81,28 +81,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-            <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:orientation="horizontal">
-
-                <TextView
-                        android:text="@string/title_home"
-                        android:id="@+id/navigation_home"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:textSize="20sp"
-                        android:fontFamily="@font/amethysta"
-                        android:paddingBottom="8dp"/>
-
-            </LinearLayout>
-            <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@android:color/darker_gray"/>
-
 
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
@@ -179,29 +157,6 @@
                 <TextView
                         android:text="@string/help_center"
                         android:id="@+id/navigation_help"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:textSize="20sp"
-                        android:fontFamily="@font/amethysta"
-                        android:paddingBottom="8dp"/>
-
-            </LinearLayout>
-
-            <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@android:color/darker_gray"/>
-
-            <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:orientation="horizontal">
-
-                <TextView
-                        android:text="@string/contact_us"
-                        android:id="@+id/navigation_contact"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"

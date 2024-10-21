@@ -64,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
             val password = passwordInput.text.toString()
 
             //login logic here
-            if (email.isNotEmpty() && password.isNotEmpty()) {
+            if (email.isNotEmpty() && password.isNotEmpty() && isValidEmail(email)) {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {

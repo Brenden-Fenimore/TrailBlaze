@@ -1,7 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
-            android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/swishLayout">
+
+        <!-- Custom Swish Background at the bottom layer -->
+        <com.example.trailblaze.view.SwishBackgroundView
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+        <!--    Hamburger menu in top left-->
+
+        <ImageButton
+                app:srcCompat="@drawable/chevron_left"
+                android:contentDescription="@string/settings"
+                android:layout_width="49dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:id="@+id/chevron_left"
+                android:background="@android:color/transparent"
+                android:layout_centerVertical="true"/>
+        <ImageButton
+                app:srcCompat="@drawable/edit2"
+                android:contentDescription="@string/settings"
+                android:layout_width="49dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/editbutton"
+                android:background="@android:color/transparent"
+                android:layout_centerVertical="true"/>
+
+
+    </RelativeLayout>
+
+
+    <ScrollView android:layout_width="match_parent"
+            android:layout_height="match_parent"
+    android:layout_below="@id/swishLayout">
 
 
     <LinearLayout
@@ -9,43 +48,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <!-- Title Bar with Account and Edit Profile Button -->
-
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/swishLayout">
-
-            <!-- Custom Swish Background at the bottom layer -->
-            <com.example.trailblaze.view.SwishBackgroundView
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp" />
-            <!--    Hamburger menu in top left-->
-
-            <ImageButton
-                    app:srcCompat="@drawable/chevron_left"
-                    android:contentDescription="@string/settings"
-                    android:layout_width="49dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentStart="true"
-                    android:id="@+id/chevron_left"
-                    android:background="@android:color/transparent"
-                    android:layout_centerVertical="true"/>
-            <ImageButton
-                    app:srcCompat="@drawable/edit2"
-                    android:contentDescription="@string/settings"
-                    android:layout_width="49dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentEnd="true"
-                    android:id="@+id/editbutton"
-                    android:background="@android:color/transparent"
-                    android:layout_centerVertical="true"/>
-
-
-        </RelativeLayout>
-
-        <!-- Account Title -->
-        <!-- User Profile Section with Location and Difficulty -->
         <TextView
                 android:id="@+id/account_title"
                 android:layout_width="match_parent"
@@ -109,7 +111,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:paddingLeft="16dp">
 
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/badgesRecyclerView"
@@ -369,3 +372,4 @@
     </LinearLayout>
     </LinearLayout>
 </ScrollView>
+</RelativeLayout>

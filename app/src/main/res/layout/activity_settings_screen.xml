@@ -55,71 +55,16 @@
                 android:orientation="horizontal"
                 android:paddingEnd="9dp"
                 android:paddingStart="9dp">
-            <ImageView
-                    android:layout_width="29dp"
-                    android:layout_height="29dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="10dp"
-                    app:srcCompat="@drawable/account_circle"
-                    android:id="@+id/imageView1"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/description"/>
+
             <TextView
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
+                    android:gravity="center"
                     android:fontFamily="@font/amethysta"
-                    android:layout_gravity="center"
-                    android:id="@+id/account"
-                    android:text="@string/accountTitle"/>
-            <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    app:srcCompat="@drawable/chevron_right"
-                    android:background="@android:color/transparent"
-                    android:id="@+id/toAccount"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/description"/>
-
-
-        </LinearLayout>
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:background="@android:color/darker_gray"/>
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:orientation="horizontal"
-                android:paddingEnd="9dp"
-                android:paddingStart="9dp">
-            <ImageView
-                    android:layout_width="29dp"
-                    android:layout_height="29dp"
-                    android:layout_marginEnd="10dp"
-                    app:srcCompat="@drawable/notification"
-                    android:id="@+id/imageView4"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/description"/>
-            <TextView
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/amethysta"
-                    android:layout_gravity="center"
                     android:id="@+id/notification"
                     android:text="@string/notificationTitle"/>
-            <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/chevron_right"
-                    android:background="@android:color/transparent"
-                    android:id="@+id/toNotifications"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/description"/>
+
 
 
         </LinearLayout>
@@ -135,30 +80,16 @@
                 android:orientation="horizontal"
                 android:paddingEnd="9dp"
                 android:paddingStart="9dp">
-            <ImageView
-                    android:layout_width="29dp"
-                    android:layout_height="29dp"
-                    android:layout_marginEnd="10dp"
-                    app:srcCompat="@drawable/eye" android:id="@+id/imageView3"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/description"/>
+
             <TextView
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
+                    android:gravity="center"
                     android:fontFamily="@font/amethysta"
-                    android:layout_gravity="center"
                     android:id="@+id/appearance"
                     android:text="@string/appearanceTitle"
                     android:contentDescription="@string/description"/>
-            <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/chevron_right"
-                    android:background="@android:color/transparent"
-                    android:id="@+id/toAppearance"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/description"/>
 
 
         </LinearLayout>
@@ -174,31 +105,16 @@
                 android:orientation="horizontal"
                 android:paddingEnd="9dp"
                 android:paddingStart="9dp">
-            <ImageView
-                    android:layout_width="29dp"
-                    android:layout_height="29dp"
-                    android:layout_marginEnd="10dp"
-                    app:srcCompat="@drawable/lockoutline"
-                    android:id="@+id/imageView5"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/description"/>
+
             <TextView
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:fontFamily="@font/amethysta"
-                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:id="@+id/privacyAndSecurity"
                     android:text="@string/privacyTitle"
                     android:contentDescription="@string/description"/>
-            <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/chevron_right"
-                    android:background="@android:color/transparent"
-                    android:id="@+id/toPrivacy"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/description"/>
 
 
         </LinearLayout>
@@ -208,7 +124,6 @@
                 android:layout_marginBottom="10dp"
                 android:background="@android:color/darker_gray"/>
 
-
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -216,71 +131,17 @@
                 android:paddingBottom="8dp"
                 android:paddingEnd="9dp"
                 android:paddingStart="9dp">
-            <ImageView
-                    android:layout_width="29dp"
-                    android:layout_height="29dp"
-                    android:layout_marginEnd="10dp"
-                    app:srcCompat="@drawable/help" android:id="@+id/imageView"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/description"/>
+
             <TextView
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:fontFamily="@font/amethysta"
-                    android:layout_gravity="center"
-                    android:id="@+id/helpAndSupport"
-                    android:text="@string/helpAndSupportTitle"
-                    android:contentDescription="@string/description"/>
-            <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/chevron_right"
-                    android:background="@android:color/transparent"
-                    android:id="@+id/toHelpandSupport"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/description"/>
-
-
-        </LinearLayout>
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:background="@android:color/darker_gray"/>
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="8dp"
-                android:paddingEnd="9dp"
-                android:paddingStart="9dp">
-            <ImageView
-                    android:layout_width="29dp"
-                    android:layout_height="29dp"
-                    android:layout_marginEnd="10dp"
-                    app:srcCompat="@drawable/questionmark"
-                    android:id="@+id/imageView6"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/description"/>
-            <TextView
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-
-                    android:textSize="20sp"
-                    android:fontFamily="@font/amethysta"
-                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:id="@+id/about"
                     android:text="@string/aboutTitle"
                     android:contentDescription="@string/description"/>
-            <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/chevron_right"
-                    android:background="@android:color/transparent"
-                    android:id="@+id/toAbout"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/description"/>
+
 
 
         </LinearLayout>

@@ -72,18 +72,8 @@ class MenuActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.navigationHome.setOnClickListener {
-            val intent = Intent(this, HomeFragment::class.java)
-            startActivity(intent)
-        }
-
         binding.navigationHelp.setOnClickListener {
             val intent = Intent(this, SupportScreenActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.navigationContact.setOnClickListener {
-            val intent = Intent(this, ContactUsActivity::class.java)
             startActivity(intent)
         }
 
