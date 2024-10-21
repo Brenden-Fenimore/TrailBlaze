@@ -294,7 +294,7 @@
     <string name="favoriteFriends">Favorite Friends</string>
     <string name="addAsTrusted">Add as trusted Contact</string>
     <string name="friendsInCommon">Friends in Common</string>
-    <string name="meetTrailMates">Meet Trailmates</string>
+    <string name="meetTrailMates">Meet TrailMates</string>
     <!-- Spinner options for terrain -->
     <string-array name="terrain_options">
         <item>Mountain</item>
