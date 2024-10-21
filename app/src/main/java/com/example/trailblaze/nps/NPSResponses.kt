@@ -1,6 +1,6 @@
 package com.example.trailblaze.nps
 
-import com.example.trailblaze.com.example.trailblaze.nps.NPSApi
+import com.example.trailblaze.nps.NPSApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

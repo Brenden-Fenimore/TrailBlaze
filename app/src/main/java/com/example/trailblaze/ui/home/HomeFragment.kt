@@ -13,6 +13,7 @@ import com.example.trailblaze.R
 import com.example.trailblaze.databinding.FragmentHomeBinding
 import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.ParksAdapter
+import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.settings.SettingsScreenActivity
 import com.example.trailblaze.ui.MenuActivity
 import com.example.trailblaze.ui.parks.ParkDetailActivity

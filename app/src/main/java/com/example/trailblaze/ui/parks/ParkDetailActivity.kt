@@ -17,6 +17,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import com.example.trailblaze.ImagesAdapter
+import com.example.trailblaze.nps.RetrofitInstance
 
 class ParkDetailActivity : AppCompatActivity() {
 

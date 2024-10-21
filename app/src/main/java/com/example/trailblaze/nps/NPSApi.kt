@@ -1,4 +1,4 @@
-package com.example.trailblaze.com.example.trailblaze.nps
+package com.example.trailblaze.nps
 
 import com.example.trailblaze.nps.NPSResponse
 import retrofit2.Call
