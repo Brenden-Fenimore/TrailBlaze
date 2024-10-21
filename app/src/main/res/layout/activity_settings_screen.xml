@@ -276,6 +276,27 @@
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"/>
     </LinearLayout>
+    <FrameLayout
+            android:id="@+id/frameStackorConnectw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="0dp">
+
+        <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="449dp"
+                android:layout_height="324dp"
+                android:layout_gravity="center_horizontal"
+                app:srcCompat="@drawable/flowers"
+                android:contentDescription="@string/description"/>
+        <LinearLayout
+                android:id="@+id/linearRowFacebookOne"
+                android:layout_gravity="top|center"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"/>
+    </FrameLayout>
 
     <Button
             android:text="@string/titleLogout"
