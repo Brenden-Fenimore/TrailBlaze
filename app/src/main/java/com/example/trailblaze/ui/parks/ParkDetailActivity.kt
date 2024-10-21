@@ -7,6 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.Park
@@ -15,6 +17,7 @@ import com.example.trailblaze.R
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.example.trailblaze.ImagesAdapter
 
 class ParkDetailActivity : AppCompatActivity() {
 
@@ -30,7 +33,7 @@ class ParkDetailActivity : AppCompatActivity() {
     private lateinit var parkContactsEmailTextView: TextView
     private lateinit var parkWeatherInfoTextView: TextView
     private lateinit var parkEntrancePassesTextView: TextView
-    private lateinit var parkImagesImageView: ImageView
+    private lateinit var parkImagesRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +58,10 @@ class ParkDetailActivity : AppCompatActivity() {
         parkContactsEmailTextView = findViewById(R.id.parkContactsEmailTextView)
         parkWeatherInfoTextView = findViewById(R.id.parkWeatherInfoTextView)
         parkEntrancePassesTextView = findViewById(R.id.parkEntrancePassesTextView)
-        parkImagesImageView = findViewById<ImageView>(R.id.parkImagesImageView)
+
+        // Initialize RecyclerView for images once at the beginning of onCreate()
+        parkImagesRecyclerView = findViewById(R.id.parkImagesRecyclerView)
+        parkImagesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
 
         // Fetch parks data again or use a shared data source
@@ -97,18 +103,17 @@ class ParkDetailActivity : AppCompatActivity() {
                     parkEntrancePassesTextView.text = "No entrance fee information available."
                 }
 
-                if (park.images != null && park.images.isNotEmpty()) {
-                    val imageURL = park.images[0].url   // Extract the URL from the first image
-                    Log.d("ParkDetailActivity", "Image URL: $imageURL")
+                // Debugging: Log image URLs list size
+                Log.d("ParkDetailActivity", "Image List Size: ${park.images.size}")
 
-                    Glide.with(this)
-                        .load(imageURL)  // Fetch the first image from the park's image list
-                        .placeholder(R.drawable.baseline_downloading_24)    // Placeholder while loading
-                        .error(R.drawable.no_image_available) // Fallback if the image URL is invalid
-                        .into(parkImagesImageView)
+                // Set up the images RecyclerView
+                if (park.images.isNotEmpty()) {
+                    val imagesAdapter = ImagesAdapter(park.images.map { it.url }) // Ensure only URLs are passed
+                    parkImagesRecyclerView.adapter = imagesAdapter
                 } else {
-                    parkImagesImageView.setImageResource(R.drawable.no_image_available) // Use a placeholder if no image is available
+                    Toast.makeText(this, "No images available for this park", Toast.LENGTH_SHORT).show()
                 }
+
 
                 // Optionally load the park image if you have an ImageView for it
             } else {
@@ -116,6 +121,7 @@ class ParkDetailActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun fetchParksData(onDataFetched: (List<Park>) -> Unit) {
         RetrofitInstance.api.getParks(10).enqueue(object : Callback<NPSResponse> {
             override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
@@ -133,4 +139,3 @@ class ParkDetailActivity : AppCompatActivity() {
         })
     }
 }
-

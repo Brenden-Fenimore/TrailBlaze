@@ -6,36 +6,45 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 tools:context=".ui.home.HomeFragment">
-<RelativeLayout android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/navlayout">
-    <!--    Hamburger menu in top left-->
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/swishLayout">
+
+        <!-- Custom Swish Background at the bottom layer -->
+        <com.example.trailblaze.view.SwishBackgroundView
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+        <!--    Hamburger menu in top left-->
+
+        <ImageButton
+                android:src="@drawable/three_line_menu"
+                android:contentDescription="@string/settings"
+                android:layout_width="49dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:id="@+id/menuButton"
+                android:background="@android:color/transparent"
+                android:layout_centerVertical="true"/>
+        <ImageButton
+                android:src="@drawable/baseline_settings_24"
+                android:contentDescription="@string/settings"
+                android:layout_width="49dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/settingsbtn"
+                android:background="@android:color/transparent"
+                android:layout_centerVertical="true"/>
 
 
-    <ImageButton
-            android:src="@drawable/baseline_settings_24"
-            android:contentDescription="@string/settings"
-            android:layout_width="49dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:id="@+id/settingsbtn"
-            android:background="@android:color/transparent"
-            android:layout_centerVertical="true"/>
-    <ImageButton
-            android:src="@drawable/three_line_menu"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:background="@android:color/transparent"
-            android:id="@+id/menuButton"
-            android:contentDescription="@string/menuTitle"/>
-
-</RelativeLayout>
+    </RelativeLayout>
 
     <!--    Good afternoon Greeting-->
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/navlayout"
+            android:layout_below="@id/swishLayout"
             android:layout_marginEnd="0dp">
         <TextView
                 android:id="@+id/homepagegreeting"

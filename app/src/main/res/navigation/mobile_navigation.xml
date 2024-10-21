@@ -38,6 +38,8 @@
             android:id="@+id/settingsScreenActivity"
             android:name="com.example.trailblaze.settings.SettingsScreenActivity"
             android:label="Settings" />
+    <action android:id="@+id/action_settingsScreenActivity_editProfileFragment"
+            app:destination="@id/settingsScreenActivity"/>
 
     <fragment
             android:id="@+id/editProfileFragment"

@@ -7,7 +7,8 @@ import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trailblaze.R
 import com.example.trailblaze.login.LoginActivity
-import com.example.trailblaze.ui.profile.EditProfileFragment
+import androidx.navigation.findNavController
+import com.example.trailblaze.ui.home.HomeFragment
 
 
 class SettingsScreenActivity : AppCompatActivity() {
@@ -84,9 +85,9 @@ class SettingsScreenActivity : AppCompatActivity() {
 
         // Set click listener for account
         toAccount.setOnClickListener {
-            val intent = Intent(this, EditProfileFragment::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+            val navController = findNavController(R.id.mobile_navigation)
+            navController.navigate(R.id.editProfileFragment)
         }
+        
     }
 }

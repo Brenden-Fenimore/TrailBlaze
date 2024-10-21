@@ -9,29 +9,39 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-        <!-- Title Bar with Account and Edit Profile Button -->
         <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <!-- Edit Profile Button -->
+                android:layout_height="wrap_content"
+                android:id="@+id/swishLayout">
+
+            <!-- Custom Swish Background at the bottom layer -->
+            <com.example.trailblaze.view.SwishBackgroundView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+            <!--    Hamburger menu in top left-->
+
             <ImageButton
-                    android:layout_width="39dp"
-                    android:layout_height="39dp"
-                    app:srcCompat="@drawable/chevron_left"
-                    android:background="@android:color/transparent"
-                    android:id="@+id/chevron_left"
-                    android:contentDescription="@string/description"/>
-            <ImageButton
-                    android:layout_width="50dp"
+                    android:src="@drawable/chevron_left"
+                    android:contentDescription="@string/settings"
+                    android:layout_width="49dp"
                     android:layout_height="50dp"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/chevron_left"
                     android:background="@android:color/transparent"
+                    android:layout_centerVertical="true"/>
+            <ImageButton
+                    android:src="@drawable/add_circle"
+                    android:contentDescription="@string/settings"
+                    android:layout_width="49dp"
+                    android:layout_height="50dp"
                     android:layout_alignParentEnd="true"
-                    app:srcCompat="@drawable/add_circle"
                     android:id="@+id/addFriend"
-                    android:contentDescription="@string/editIcon"/>
+                    android:background="@android:color/transparent"
+                    android:layout_centerVertical="true"/>
+
+
         </RelativeLayout>
 
-        <!-- Account Title -->
         <!-- User Profile Section with Location and Difficulty -->
         <LinearLayout
                 android:layout_width="match_parent"

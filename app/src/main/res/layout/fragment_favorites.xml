@@ -1,15 +1,299 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".ui.favorites.FavoritesFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/swishLayout">
+
+        <!-- Custom Swish Background at the bottom layer -->
+        <com.example.trailblaze.view.SwishBackgroundView
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+        <!--    Hamburger menu in top left-->
+
+        <ImageButton
+                android:src="@drawable/three_line_menu"
+                android:contentDescription="@string/settings"
+                android:layout_width="49dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:id="@+id/menuButton"
+                android:background="@android:color/transparent"
+                android:layout_centerVertical="true"/>
+        <ImageButton
+                android:src="@drawable/baseline_settings_24"
+                android:contentDescription="@string/settings"
+                android:layout_width="49dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/settingsbtn"
+                android:background="@android:color/transparent"
+                android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+
+    <!-- Favorites Title -->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center">
+
+
+        <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/favorites"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:layout_marginStart="16dp" />
+
+    </LinearLayout>
+
+    <!-- Search Bar -->
+    <LinearLayout
+            android:id="@+id/searchbarlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/usernamelayout">
+        <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/searchbartextfield"
+                    android:layout_width="380dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+                    app:boxStrokeWidth="2dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:startIconDrawable="@drawable/magnifying_glass_small"
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@drawable/mic_small"
+                    app:boxBackgroundColor="#E4E2E2"
+                    app:boxStrokeColor="#0386D0"
+                    app:cursorColor="#0386D0"
+                    app:hintTextColor="#0386D0">
+
+                <com.google.android.material.textfield.TextInputEditText
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Search"
+                        android:textSize="18sp"
+                        android:id="@+id/searchbar"
+                        android:fontFamily="@font/amethysta"
+                        android:textColor="#000000"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp"
+                        android:singleLine="true"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+
+    <!-- Favorite Trails Section -->
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_horizontal"
-            android:text="@string/helloFavorites"/>
+            android:text="@string/userFavoriteTrails"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingTop="35dp"
+            android:paddingBottom="25dp"
+            android:padding="16dp"/>
 
-</FrameLayout>
+    <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal"
+            android:padding="16dp">
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <!-- Placeholder for favorite trails images -->
+            <ImageButton
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_marginEnd="25dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
+                    android:contentDescription="@string/userFavoriteTrails" />
+            <ImageButton
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_marginEnd="25dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
+                    android:contentDescription="@string/userFavoriteTrails" />
+            <ImageButton
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_marginEnd="25dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
+                    android:contentDescription="@string/userFavoriteTrails" />
+            <ImageButton
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_marginEnd="25dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
+                    android:contentDescription="@string/userFavoriteTrails" />
+            <ImageButton
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_marginEnd="25dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
+                    android:contentDescription="@string/userFavoriteTrails" />
+            <!-- Repeat as necessary for other trails -->
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Bucket List Trails Section -->
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bucketListTrails"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingTop="25dp"
+            android:paddingBottom="25dp"
+            android:padding="16dp"/>
+
+    <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal"
+            android:padding="16dp">
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <!-- Placeholder for bucket list trails images -->
+            <ImageButton
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_marginEnd="25dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
+                    android:contentDescription="@string/bucketListTrails" />
+            <ImageButton
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_marginEnd="25dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
+                    android:contentDescription="@string/bucketListTrails" />
+            <ImageButton
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_marginEnd="25dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
+                    android:contentDescription="@string/bucketListTrails" />
+            <ImageButton
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_marginEnd="25dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
+                    android:contentDescription="@string/bucketListTrails" />
+            <ImageButton
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_marginEnd="25dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_no_image_available"
+                    android:contentDescription="@string/bucketListTrails" />
+            <!-- Repeat as necessary for other trails -->
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Favorite Friends Section -->
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/favoriteFriends"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingTop="25dp"
+            android:paddingBottom="25dp"
+            android:padding="16dp"/>
+
+    <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal"
+            android:padding="16dp">
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <!-- Placeholder for favorite friends profile pictures -->
+            <ImageButton
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_marginEnd="25dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/userperson"
+                    android:contentDescription="@string/favoriteFriends" />
+            <ImageButton
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_marginEnd="25dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/userperson"
+                    android:contentDescription="@string/favoriteFriends" />
+            <ImageButton
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_marginEnd="25dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/userperson"
+                    android:contentDescription="@string/favoriteFriends" />
+            <ImageButton
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_marginEnd="25dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/userperson"
+                    android:contentDescription="@string/favoriteFriends" />
+            <ImageButton
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_marginEnd="25dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/userperson"
+                    android:contentDescription="@string/favoriteFriends" />
+            <!-- Repeat as necessary for other friends -->
+        </LinearLayout>
+    </HorizontalScrollView>
+
+
+    <!-- Spacer to add margin for navigation bar -->
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="75dp" />
+</LinearLayout>
