@@ -16,7 +16,7 @@ class SwishBackgroundView @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr) {
 
     private val paint = Paint().apply {
-        color = Color.parseColor("#4CAF50")
+        color = Color.parseColor("#4C662B")
         isAntiAlias = true
     }
 
