@@ -7,7 +7,7 @@
 
 <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
     <ImageButton
             android:layout_width="39dp"
@@ -60,13 +60,13 @@
                 android:background="@android:color/darker_gray"/>
 
         <!-- Park Images (URL or description of images) -->
-        <ImageView
-                android:id="@+id/parkImagesImageView"
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/parkImagesRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:contentDescription="@string/park_image"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"/>
+        />
 
         <View
                 android:layout_width="match_parent"
