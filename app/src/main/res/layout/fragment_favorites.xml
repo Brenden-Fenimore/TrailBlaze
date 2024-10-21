@@ -3,7 +3,8 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical">
+              android:orientation="vertical"
+              android:paddingBottom="16dp">
 
     <RelativeLayout
             android:layout_width="match_parent"
@@ -38,14 +39,6 @@
 
 
     <!-- Favorites Title -->
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp"
-            android:gravity="center">
-
-
         <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
@@ -53,11 +46,9 @@
                 android:layout_gravity="center"
                 android:text="@string/favorites"
                 android:textSize="40sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/amethysta"
                 android:layout_marginStart="16dp" />
-
-    </LinearLayout>
-
+    
     <!-- Search Bar -->
     <LinearLayout
             android:id="@+id/searchbarlayout"
@@ -104,23 +95,25 @@
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
-
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:orientation="vertical">
     <!-- Favorite Trails Section -->
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/userFavoriteTrails"
             android:textSize="18sp"
+            android:fontFamily="@font/amethysta"
             android:textStyle="bold"
-            android:paddingTop="35dp"
-            android:paddingBottom="25dp"
-            android:padding="16dp"/>
+            android:paddingTop="35dp"/>
 
     <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="horizontal"
-            android:padding="16dp">
+            android:scrollbars="horizontal">
 
         <LinearLayout
                 android:layout_width="wrap_content"
@@ -173,16 +166,14 @@
             android:layout_height="wrap_content"
             android:text="@string/bucketListTrails"
             android:textSize="18sp"
+            android:fontFamily="@font/amethysta"
             android:textStyle="bold"
-            android:paddingTop="25dp"
-            android:paddingBottom="25dp"
-            android:padding="16dp"/>
+            android:paddingTop="25dp"/>
 
     <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="horizontal"
-            android:padding="16dp">
+            android:scrollbars="horizontal">
 
         <LinearLayout
                 android:layout_width="wrap_content"
@@ -236,15 +227,13 @@
             android:text="@string/favoriteFriends"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:paddingTop="25dp"
-            android:paddingBottom="25dp"
-            android:padding="16dp"/>
+            android:fontFamily="@font/amethysta"
+            android:paddingTop="25dp"/>
 
     <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="horizontal"
-            android:padding="16dp">
+            android:scrollbars="horizontal">
 
         <LinearLayout
                 android:layout_width="wrap_content"
@@ -290,6 +279,7 @@
             <!-- Repeat as necessary for other friends -->
         </LinearLayout>
     </HorizontalScrollView>
+</LinearLayout>
 
 
     <!-- Spacer to add margin for navigation bar -->

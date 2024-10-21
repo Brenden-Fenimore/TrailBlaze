@@ -129,6 +129,11 @@
                 android:layout_gravity="center"
                 android:paddingTop="4dp" />
 
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:orientation="vertical">
         <!-- Friends Section -->
         <TextView
                 android:layout_width="match_parent"
@@ -137,8 +142,7 @@
                 android:textSize="18sp"
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
-                android:paddingTop="16dp"
-                android:paddingLeft="16dp"/>
+                android:paddingTop="16dp"/>
 
         <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -149,8 +153,7 @@
             <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:orientation="horizontal">
 
                 <!-- Placeholder for friend avatars -->
                 <ImageButton
@@ -195,14 +198,12 @@
                 android:textSize="18sp"
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
-                android:paddingTop="16dp"
-                android:paddingLeft="16dp" />
+                android:paddingTop="16dp"/>
 
         <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="horizontal"
-                android:padding="16dp">
+                android:scrollbars="horizontal">
 
             <LinearLayout
                     android:layout_width="wrap_content"
@@ -252,14 +253,12 @@
                 android:textSize="18sp"
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
-                android:paddingTop="16dp"
-                android:paddingLeft="16dp"/>
+                android:paddingTop="16dp"/>
 
         <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="horizontal"
-                android:padding="16dp">
+                android:scrollbars="horizontal">
 
             <LinearLayout
                     android:layout_width="wrap_content"
@@ -309,14 +308,12 @@
                 android:textSize="18sp"
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
-                android:paddingTop="16dp"
-                android:paddingLeft="16dp"/>
+                android:paddingTop="16dp"/>
 
         <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="horizontal"
-                android:padding="16dp">
+                android:scrollbars="horizontal">
 
             <LinearLayout
                     android:layout_width="wrap_content"
@@ -369,6 +366,6 @@
         <View
                 android:layout_width="match_parent"
                 android:layout_height="75dp" />
-
+    </LinearLayout>
     </LinearLayout>
 </ScrollView>
