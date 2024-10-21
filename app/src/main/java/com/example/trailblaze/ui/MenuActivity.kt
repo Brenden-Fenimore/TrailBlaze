@@ -2,25 +2,18 @@ package com.example.trailblaze.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trailblaze.R
-import android.widget.ImageButton
-import android.widget.TextView
-import androidx.core.content.ContentProviderCompat.requireContext
-import com.bumptech.glide.Glide
 import com.example.trailblaze.databinding.ActivityMenuBinding
 import com.example.trailblaze.firestore.ImageLoader
 import com.example.trailblaze.firestore.UserRepository
 import com.example.trailblaze.login.LoginActivity
-import com.example.trailblaze.settings.ContactUsActivity
 import com.example.trailblaze.settings.SafetyActivity
 import com.example.trailblaze.settings.SettingsScreenActivity
 import com.example.trailblaze.settings.SupportScreenActivity
 import com.example.trailblaze.ui.achievements.AchievementManager
 import com.example.trailblaze.ui.achievements.AchievementsActivity
-import com.example.trailblaze.ui.home.HomeFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 

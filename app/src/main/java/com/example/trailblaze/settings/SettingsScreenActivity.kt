@@ -8,9 +8,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trailblaze.R
 import com.example.trailblaze.login.LoginActivity
-import androidx.navigation.findNavController
-import com.example.trailblaze.MainActivity
-import com.example.trailblaze.ui.home.HomeFragment
 
 
 class SettingsScreenActivity : AppCompatActivity() {

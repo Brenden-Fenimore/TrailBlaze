@@ -1,9 +1,5 @@
 package com.example.trailblaze.nps
 
-import com.example.trailblaze.nps.NPSApi
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-
 // Data classes for mapping the API response
 data class NPSResponse(
     val total: String,              // Total number of parks

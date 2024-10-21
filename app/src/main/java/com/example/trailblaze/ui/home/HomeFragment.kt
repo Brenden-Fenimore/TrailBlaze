@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.trailblaze.R
 import com.example.trailblaze.databinding.FragmentHomeBinding
 import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.ParksAdapter

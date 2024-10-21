@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.trailblaze.R
 
 class ImagesAdapter(private val images: List<String>) : RecyclerView.Adapter<ImagesAdapter.ImageViewHolder>() {
 

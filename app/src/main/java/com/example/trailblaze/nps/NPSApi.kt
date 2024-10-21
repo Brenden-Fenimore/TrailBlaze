@@ -1,6 +1,5 @@
 package com.example.trailblaze.nps
 
-import com.example.trailblaze.nps.NPSResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
