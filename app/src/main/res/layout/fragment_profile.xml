@@ -3,32 +3,45 @@
             xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="vertical">
 
         <!-- Title Bar with Account and Edit Profile Button -->
+
         <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <!-- Edit Profile Button -->
+                android:layout_height="wrap_content"
+                android:id="@+id/swishLayout">
+
+            <!-- Custom Swish Background at the bottom layer -->
+            <com.example.trailblaze.view.SwishBackgroundView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+            <!--    Hamburger menu in top left-->
+
             <ImageButton
-                    android:layout_width="39dp"
-                    android:layout_height="39dp"
                     app:srcCompat="@drawable/chevron_left"
-                    android:background="@android:color/transparent"
-                    android:id="@+id/chevron_left"
-                    android:contentDescription="@string/description"/>
-            <ImageButton
-                    android:layout_width="50dp"
+                    android:contentDescription="@string/settings"
+                    android:layout_width="49dp"
                     android:layout_height="50dp"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/chevron_left"
                     android:background="@android:color/transparent"
-                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"/>
+            <ImageButton
                     app:srcCompat="@drawable/edit2"
+                    android:contentDescription="@string/settings"
+                    android:layout_width="49dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
                     android:id="@+id/editbutton"
-                    android:contentDescription="@string/editIcon"/>
+                    android:background="@android:color/transparent"
+                    android:layout_centerVertical="true"/>
+
+
         </RelativeLayout>
 
         <!-- Account Title -->
@@ -125,17 +138,19 @@
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
                 android:paddingTop="16dp"
-                android:paddingBottom="8dp" />
+                android:paddingLeft="16dp"/>
 
         <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="horizontal">
+                android:scrollbars="horizontal"
+        >
 
             <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
                 <!-- Placeholder for friend avatars -->
                 <ImageButton
@@ -181,12 +196,13 @@
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
                 android:paddingTop="16dp"
-                android:paddingBottom="8dp" />
+                android:paddingLeft="16dp" />
 
         <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="horizontal">
+                android:scrollbars="horizontal"
+                android:padding="16dp">
 
             <LinearLayout
                     android:layout_width="wrap_content"
@@ -237,12 +253,13 @@
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
                 android:paddingTop="16dp"
-                android:paddingBottom="8dp" />
+                android:paddingLeft="16dp"/>
 
         <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="horizontal">
+                android:scrollbars="horizontal"
+                android:padding="16dp">
 
             <LinearLayout
                     android:layout_width="wrap_content"
@@ -293,12 +310,13 @@
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
                 android:paddingTop="16dp"
-                android:paddingBottom="8dp" />
+                android:paddingLeft="16dp"/>
 
         <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="horizontal">
+                android:scrollbars="horizontal"
+                android:padding="16dp">
 
             <LinearLayout
                     android:layout_width="wrap_content"

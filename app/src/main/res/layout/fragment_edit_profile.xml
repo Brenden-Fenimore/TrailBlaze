@@ -6,48 +6,40 @@
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-        <!-- Top bar with Back Button, Title, and Settings Button -->
-        <LinearLayout
+            android:orientation="vertical">
+        <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:id="@+id/swishLayout">
 
-            <!-- Back Button -->
+            <!-- Custom Swish Background at the bottom layer -->
+            <com.example.trailblaze.view.SwishBackgroundView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+            <!--    Hamburger menu in top left-->
+
             <ImageButton
-                    android:id="@+id/backButton"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
                     android:src="@drawable/chevron_left"
+                    android:contentDescription="@string/settings"
+                    android:layout_width="49dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/backButton"
                     android:background="@android:color/transparent"
-                    android:contentDescription="@string/backButton" />
-
-            <!-- Spacer to center the title -->
-            <View
-                    android:layout_width="0dp"
-                    android:layout_height="6dp"
-                    android:layout_weight="1"/>
-
-
-
-            <!-- Spacer to center the title -->
-            <View
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-            <!-- Settings Button -->
+                    android:layout_centerVertical="true"/>
             <ImageButton
-                    android:id="@+id/settingsButton"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
                     android:src="@drawable/baseline_settings_24"
+                    android:contentDescription="@string/settings"
+                    android:layout_width="49dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/settingsButton"
                     android:background="@android:color/transparent"
-                    android:contentDescription="@string/settings" />
-        </LinearLayout>
+                    android:layout_centerVertical="true"/>
+
+
+        </RelativeLayout>
+
         <!-- Account Title -->
         <TextView
                 android:id="@+id/account_title"
@@ -55,8 +47,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/editProfile"
-                android:textSize="20sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/amethysta"
+                android:textSize="40sp"
                 android:gravity="center" />
 
 
@@ -87,7 +79,11 @@
                     android:contentDescription="@string/camera" />
 
         </FrameLayout>
-
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
         <!-- Username Field -->
         <LinearLayout
                 android:layout_width="match_parent"
@@ -463,8 +459,9 @@
         <!-- Update Profile Button -->
         <Button
                 android:id="@+id/update_profile_button"
-                android:layout_width="match_parent"
+                android:layout_width="304dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="32dp"
                 android:text="@string/updateProfile" />
         <!-- Spacer to add margin for navigation bar -->
@@ -474,5 +471,5 @@
 
     </LinearLayout>
 
-
+    </LinearLayout>
 </ScrollView>
