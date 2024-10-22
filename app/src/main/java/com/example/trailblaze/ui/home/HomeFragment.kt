@@ -114,16 +114,6 @@ class HomeFragment : Fragment() {
 
         // Load users (you would need to implement this)
         loadUsers()
-        binding.menuButton.setOnClickListener {
-            val intent = Intent(context, MenuActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.settingsbtn.setOnClickListener {
-            val intent = Intent(context, SettingsScreenActivity::class.java)
-            startActivity(intent)
-        }
-
         return root
     }
 
