@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 
+@Suppress("DEPRECATION")
 class MenuActivity : AppCompatActivity() {
 
     private lateinit var achievementManager: AchievementManager

@@ -111,7 +111,6 @@
                 android:id="@+id/card_view_badges"
                 android:layout_width="182dp"
                 android:layout_height="50dp"
-                android:layout_below="@id/titleLayout"
                 android:layout_gravity="center"
                 app:cardElevation="4dp"
                 app:cardCornerRadius="8dp"

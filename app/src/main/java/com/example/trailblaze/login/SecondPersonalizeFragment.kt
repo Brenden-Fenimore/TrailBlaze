@@ -21,7 +21,7 @@ class SecondPersonalizeFragment : Fragment() {
     private lateinit var state: EditText
     private lateinit var zip: EditText
 
-    lateinit var seekBar: SeekBar
+    private lateinit var seekBar: SeekBar
     lateinit var selectedValueTextView: TextView
     private var selectedFilterValue: Double = 0.0
 
@@ -45,7 +45,7 @@ class SecondPersonalizeFragment : Fragment() {
         zip = view.findViewById(R.id.etZip)
         seekBar = view.findViewById(R.id.seekBar)
         selectedValueTextView = view.findViewById(R.id.range)
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
+
 
         // Set up the SeekBar listener
         setupSeekBarListener()

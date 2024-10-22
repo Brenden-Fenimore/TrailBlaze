@@ -71,7 +71,7 @@ class BadgesActivity : AppCompatActivity() {
         badgesRecyclerView.adapter = badgesAdapter
         badgesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        sash.setOnDragListener { view, event ->
+        sash.setOnDragListener { _, event ->
             when (event.action) {
                 DragEvent.ACTION_DRAG_STARTED -> true
                 DragEvent.ACTION_DRAG_ENTERED -> true
@@ -98,14 +98,6 @@ class BadgesActivity : AppCompatActivity() {
 
         // Fetch the user's unlocked badges from Firestore
         fetchUserBadges()
-    }
-
-    override fun onPause() {
-        super.onPause()
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     private fun fetchUserBadges() {

@@ -37,6 +37,7 @@
             android:layout_height="10dp"
             android:id="@+id/clear_mapsearchtext"
             app:srcCompat="@drawable/x"
-            android:clickable="true"/>
+            android:clickable="true"
+            android:contentDescription="@string/description"/>
 
 </RelativeLayout>

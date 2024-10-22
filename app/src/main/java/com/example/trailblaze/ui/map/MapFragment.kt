@@ -1,17 +1,12 @@
 package com.example.trailblaze.ui.Map
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.text.style.CharacterStyle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.annotation.Nullable
 import androidx.core.widget.addTextChangedListener
-import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import com.example.trailblaze.BuildConfig.PLACES_API_KEY
 import com.example.trailblaze.R
@@ -21,21 +16,13 @@ import com.google.android.gms.maps.GoogleMap.*
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.PolylineOptions
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.android.gms.tasks.Task
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.AutocompletePrediction
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken
-import com.google.android.libraries.places.api.model.PlaceTypes.*
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
-import com.google.android.libraries.places.api.net.FindAutocompletePredictionsResponse
 import com.google.android.libraries.places.api.net.PlacesClient
-import com.google.android.libraries.places.api.net.kotlin.awaitFindAutocompletePredictions
-import kotlinx.coroutines.processNextEventInCurrentThread
-import kotlinx.coroutines.tasks.await
-import java.util.*
+
 
 class MapFragment : Fragment(),
     OnCameraMoveStartedListener,
