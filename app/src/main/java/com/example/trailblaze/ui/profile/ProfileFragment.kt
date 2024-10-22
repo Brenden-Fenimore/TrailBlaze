@@ -10,12 +10,17 @@ import android.widget.ImageButton
 import androidx.navigation.fragment.findNavController
 import com.example.trailblaze.R
 import com.example.trailblaze.databinding.FragmentProfileBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.example.trailblaze.settings.SettingsScreenActivity
 
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var firestore: FirebaseFirestore
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,

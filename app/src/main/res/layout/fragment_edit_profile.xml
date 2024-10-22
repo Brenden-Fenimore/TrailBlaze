@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+    <!-- Custom Swish Background -->
+    <com.example.trailblaze.view.SwishBackgroundView
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+
+        <!-- Top bar with Back Button, Title, and Settings Button -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+            <!-- Back Button -->
+            <ImageButton
+                    android:id="@+id/backButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/chevron_left"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/backButton" />
+
+            <!-- Spacer to center the title -->
+            <View
+                    android:layout_width="0dp"
+                    android:layout_height="6dp"
+                    android:layout_weight="1"/>
+
+            <!-- Settings Button -->
+            <ImageButton
+                    android:id="@+id/settingsButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/baseline_settings_24"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/settings" />
+        </LinearLayout>
+
+            <!-- Edit Profile Title -->
+            <TextView
+                    android:id="@+id/account_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/editProfile"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:paddingBottom="16dp"
+                    android:paddingTop="42dp"/>
+
+        <!-- Profile Image with Camera Icon -->
+        <FrameLayout
+                android:id="@+id/profile_image_container"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp">
+
+            <ImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/account_circle"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/profilePicture" />
+
+            <ImageView
+                    android:id="@+id/camera_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="bottom|end"
+                    android:src="@drawable/camera"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/camera" />
+
+        </FrameLayout>
+
+        <!-- Username Field -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:padding="16dp">
+
+            <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/userperson"
+                    android:contentDescription="@string/profilePicture" />
+
+            <EditText
+                    android:id="@+id/edit_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:hint="@string/username"
+                    android:autofillHints="username"
+                    android:inputType="textPersonName" />
+        </LinearLayout>
+
+        <!-- Date of Birth Field -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+            <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/calendar"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/calendar" />
+
+            <EditText
+                    android:id="@+id/edit_dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:hint="@string/birthdate"
+                    android:autofillHints="dateOfBirth"
+                    android:inputType="date" />
+        </LinearLayout>
+
+        <!-- Email Address Field -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+            <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/baseline_contact_mail_24"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/userEmail" />
+
+            <EditText
+                    android:id="@+id/edit_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:hint="@string/editUserEmail"
+                    android:autofillHints="emailAddress"
+                    android:inputType="textEmailAddress" />
+        </LinearLayout>
+
+        <!-- Location Field -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+            <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/location"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/locationIcon" />
+
+            <EditText
+                    android:id="@+id/edit_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:hint="@string/userLocation"
+                    android:autofillHints="location"
+                    android:inputType="textPostalAddress" />
+        </LinearLayout>
+
+        <!-- Phone Number Field -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+            <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/phone"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/phoneIcon" />
+
+            <EditText
+                    android:id="@+id/edit_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:hint="@string/userPhone"
+                    android:autofillHints="phone"
+                    android:inputType="phone" />
+        </LinearLayout>
+
+        <!-- Dropdowns (Spinners) -->
+
+        <!-- Terrain -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical">
+            <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/map"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/terrainIcon"
+                    android:layout_marginEnd="8dp"/>
+
+            <TextView
+                    android:id="@+id/edit_terrain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/terrain"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="16dp" />
+
+
+            <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:entries="@array/terrain_options" />
+        </LinearLayout>
+
+        <!-- Fitness Level -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+            <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/directions_walk"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/fitnessLevelIcon"
+                    android:layout_marginEnd="8dp"/>
+
+            <TextView
+                    android:id="@+id/edit_fitness"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fitnessLevel"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="16dp" />
+            <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:entries="@array/fitness_level_options" />
+        </LinearLayout>
+
+        <!-- Difficulty Level -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+            <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/difficulty"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/difficultyIcon"
+                    android:layout_marginEnd="8dp"/>
+
+            <TextView
+                    android:id="@+id/edit_difficulty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/difficultyLevel"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="16dp" />
+            <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:entries="@array/difficulty_level_options" />
+        </LinearLayout>
+
+        <!-- Type of Hike -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+            <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/map"
+                    android:contentDescription="@string/typeOfHikeIcon"
+                    android:layout_marginEnd="8dp"/>
+
+            <TextView
+                    android:id="@+id/edit_type_Of_Hike"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/typeOfHike"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="16dp" />
+            <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:entries="@array/hike_type_options" />
+        </LinearLayout>
+
+        <!-- Suggested Trails SeekBar -->
+        <TextView
+                android:id="@+id/suggested_trails_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/suggestedTrails"
+                android:layout_marginTop="16dp" />
+
+        <SeekBar
+                android:id="@+id/suggested_trails_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="200" />
+
+        <!-- Leaderboard Switch -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/userLeaderboardSwitch" />
+
+            <Switch
+                    android:id="@+id/leaderboard_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- Photos Switch -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/userPhotosSwitch" />
+
+            <Switch
+                    android:id="@+id/photos_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- Favorite Trails Switch -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/userFavoriteTrailsSwitch" />
+
+            <Switch
+                    android:id="@+id/favoritetrails_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- Watcher Switch -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/userWatcherSwitch" />
+
+            <Switch
+                    android:id="@+id/watcher_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- Share Location Switch -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/userShareLocationSwitch" />
+
+            <Switch
+                    android:id="@+id/sharelocation_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- Update Profile Button -->
+        <Button
+                android:id="@+id/update_profile_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/updateProfile" />
+        <!-- Spacer to add margin for navigation bar -->
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="75dp" />
+
+    </LinearLayout>
+
+
+</ScrollView>
+
+</FrameLayout>
