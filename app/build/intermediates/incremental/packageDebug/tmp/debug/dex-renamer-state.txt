@@ -1,4 +1,4 @@
-#Mon Oct 21 17:35:08 EDT 2024
+#Mon Oct 21 22:16:56 EDT 2024
 base.0=/Users/theholisticfairy/IdeaProjects/TrailBlaze/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
 base.1=/Users/theholisticfairy/IdeaProjects/TrailBlaze/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
 base.10=/Users/theholisticfairy/IdeaProjects/TrailBlaze/app/build/intermediates/dex/debug/mergeExtDexDebug/classes3.dex
