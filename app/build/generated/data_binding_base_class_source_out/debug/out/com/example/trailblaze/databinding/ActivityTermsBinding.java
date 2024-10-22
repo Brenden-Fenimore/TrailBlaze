@@ -24,7 +24,10 @@ public final class ActivityTermsBinding implements ViewBinding {
   public final LinearLayout LinearColumnterms;
 
   @NonNull
-  public final TextView Review;
+  public final TextView agreement;
+
+  @NonNull
+  public final TextView lastupdated;
 
   @NonNull
   public final TextView msgTermsandco2;
@@ -36,24 +39,105 @@ public final class ActivityTermsBinding implements ViewBinding {
   public final Button termsOKbtn;
 
   @NonNull
-  public final TextView termsandco;
-
-  @NonNull
   public final TextView termsandconditions;
 
+  @NonNull
+  public final TextView tocContLicense;
+
+  @NonNull
+  public final TextView tocContactUs;
+
+  @NonNull
+  public final TextView tocCorrections;
+
+  @NonNull
+  public final TextView tocDisRes;
+
+  @NonNull
+  public final TextView tocDisclaimer;
+
+  @NonNull
+  public final TextView tocElectronicCommunitcations;
+
+  @NonNull
+  public final TextView tocGovLaw;
+
+  @NonNull
+  public final TextView tocIndemnification;
+
+  @NonNull
+  public final TextView tocIntellectualProperty;
+
+  @NonNull
+  public final TextView tocLiabilityLimitations;
+
+  @NonNull
+  public final TextView tocMisc;
+
+  @NonNull
+  public final TextView tocModInt;
+
+  @NonNull
+  public final TextView tocProhActivities;
+
+  @NonNull
+  public final TextView tocSerManagement;
+
+  @NonNull
+  public final TextView tocServices;
+
+  @NonNull
+  public final TextView tocTermTerm;
+
+  @NonNull
+  public final TextView tocUserData;
+
+  @NonNull
+  public final TextView tocUserGenCon;
+
+  @NonNull
+  public final TextView tocUserRep;
+
   private ActivityTermsBinding(@NonNull LinearLayout rootView,
-      @NonNull LinearLayout LinearColumnterms, @NonNull TextView Review,
-      @NonNull TextView msgTermsandco2, @NonNull TextView msgTermsandco3,
-      @NonNull Button termsOKbtn, @NonNull TextView termsandco,
-      @NonNull TextView termsandconditions) {
+      @NonNull LinearLayout LinearColumnterms, @NonNull TextView agreement,
+      @NonNull TextView lastupdated, @NonNull TextView msgTermsandco2,
+      @NonNull TextView msgTermsandco3, @NonNull Button termsOKbtn,
+      @NonNull TextView termsandconditions, @NonNull TextView tocContLicense,
+      @NonNull TextView tocContactUs, @NonNull TextView tocCorrections, @NonNull TextView tocDisRes,
+      @NonNull TextView tocDisclaimer, @NonNull TextView tocElectronicCommunitcations,
+      @NonNull TextView tocGovLaw, @NonNull TextView tocIndemnification,
+      @NonNull TextView tocIntellectualProperty, @NonNull TextView tocLiabilityLimitations,
+      @NonNull TextView tocMisc, @NonNull TextView tocModInt, @NonNull TextView tocProhActivities,
+      @NonNull TextView tocSerManagement, @NonNull TextView tocServices,
+      @NonNull TextView tocTermTerm, @NonNull TextView tocUserData, @NonNull TextView tocUserGenCon,
+      @NonNull TextView tocUserRep) {
     this.rootView = rootView;
     this.LinearColumnterms = LinearColumnterms;
-    this.Review = Review;
+    this.agreement = agreement;
+    this.lastupdated = lastupdated;
     this.msgTermsandco2 = msgTermsandco2;
     this.msgTermsandco3 = msgTermsandco3;
     this.termsOKbtn = termsOKbtn;
-    this.termsandco = termsandco;
     this.termsandconditions = termsandconditions;
+    this.tocContLicense = tocContLicense;
+    this.tocContactUs = tocContactUs;
+    this.tocCorrections = tocCorrections;
+    this.tocDisRes = tocDisRes;
+    this.tocDisclaimer = tocDisclaimer;
+    this.tocElectronicCommunitcations = tocElectronicCommunitcations;
+    this.tocGovLaw = tocGovLaw;
+    this.tocIndemnification = tocIndemnification;
+    this.tocIntellectualProperty = tocIntellectualProperty;
+    this.tocLiabilityLimitations = tocLiabilityLimitations;
+    this.tocMisc = tocMisc;
+    this.tocModInt = tocModInt;
+    this.tocProhActivities = tocProhActivities;
+    this.tocSerManagement = tocSerManagement;
+    this.tocServices = tocServices;
+    this.tocTermTerm = tocTermTerm;
+    this.tocUserData = tocUserData;
+    this.tocUserGenCon = tocUserGenCon;
+    this.tocUserRep = tocUserRep;
   }
 
   @Override
@@ -89,9 +173,15 @@ public final class ActivityTermsBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.Review;
-      TextView Review = ViewBindings.findChildViewById(rootView, id);
-      if (Review == null) {
+      id = R.id.agreement;
+      TextView agreement = ViewBindings.findChildViewById(rootView, id);
+      if (agreement == null) {
+        break missingId;
+      }
+
+      id = R.id.lastupdated;
+      TextView lastupdated = ViewBindings.findChildViewById(rootView, id);
+      if (lastupdated == null) {
         break missingId;
       }
 
@@ -113,20 +203,132 @@ public final class ActivityTermsBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.termsandco;
-      TextView termsandco = ViewBindings.findChildViewById(rootView, id);
-      if (termsandco == null) {
-        break missingId;
-      }
-
       id = R.id.termsandconditions;
       TextView termsandconditions = ViewBindings.findChildViewById(rootView, id);
       if (termsandconditions == null) {
         break missingId;
       }
 
-      return new ActivityTermsBinding((LinearLayout) rootView, LinearColumnterms, Review,
-          msgTermsandco2, msgTermsandco3, termsOKbtn, termsandco, termsandconditions);
+      id = R.id.toc_contLicense;
+      TextView tocContLicense = ViewBindings.findChildViewById(rootView, id);
+      if (tocContLicense == null) {
+        break missingId;
+      }
+
+      id = R.id.toc_contactUs;
+      TextView tocContactUs = ViewBindings.findChildViewById(rootView, id);
+      if (tocContactUs == null) {
+        break missingId;
+      }
+
+      id = R.id.toc_corrections;
+      TextView tocCorrections = ViewBindings.findChildViewById(rootView, id);
+      if (tocCorrections == null) {
+        break missingId;
+      }
+
+      id = R.id.toc_dis_res;
+      TextView tocDisRes = ViewBindings.findChildViewById(rootView, id);
+      if (tocDisRes == null) {
+        break missingId;
+      }
+
+      id = R.id.toc_disclaimer;
+      TextView tocDisclaimer = ViewBindings.findChildViewById(rootView, id);
+      if (tocDisclaimer == null) {
+        break missingId;
+      }
+
+      id = R.id.toc_electronic_communitcations;
+      TextView tocElectronicCommunitcations = ViewBindings.findChildViewById(rootView, id);
+      if (tocElectronicCommunitcations == null) {
+        break missingId;
+      }
+
+      id = R.id.toc_govLaw;
+      TextView tocGovLaw = ViewBindings.findChildViewById(rootView, id);
+      if (tocGovLaw == null) {
+        break missingId;
+      }
+
+      id = R.id.toc_indemnification;
+      TextView tocIndemnification = ViewBindings.findChildViewById(rootView, id);
+      if (tocIndemnification == null) {
+        break missingId;
+      }
+
+      id = R.id.toc_intellectualProperty;
+      TextView tocIntellectualProperty = ViewBindings.findChildViewById(rootView, id);
+      if (tocIntellectualProperty == null) {
+        break missingId;
+      }
+
+      id = R.id.toc_liability_limitations;
+      TextView tocLiabilityLimitations = ViewBindings.findChildViewById(rootView, id);
+      if (tocLiabilityLimitations == null) {
+        break missingId;
+      }
+
+      id = R.id.toc_misc;
+      TextView tocMisc = ViewBindings.findChildViewById(rootView, id);
+      if (tocMisc == null) {
+        break missingId;
+      }
+
+      id = R.id.toc_mod_int;
+      TextView tocModInt = ViewBindings.findChildViewById(rootView, id);
+      if (tocModInt == null) {
+        break missingId;
+      }
+
+      id = R.id.toc_prohActivities;
+      TextView tocProhActivities = ViewBindings.findChildViewById(rootView, id);
+      if (tocProhActivities == null) {
+        break missingId;
+      }
+
+      id = R.id.toc_serManagement;
+      TextView tocSerManagement = ViewBindings.findChildViewById(rootView, id);
+      if (tocSerManagement == null) {
+        break missingId;
+      }
+
+      id = R.id.toc_services;
+      TextView tocServices = ViewBindings.findChildViewById(rootView, id);
+      if (tocServices == null) {
+        break missingId;
+      }
+
+      id = R.id.toc_term_term;
+      TextView tocTermTerm = ViewBindings.findChildViewById(rootView, id);
+      if (tocTermTerm == null) {
+        break missingId;
+      }
+
+      id = R.id.toc_userData;
+      TextView tocUserData = ViewBindings.findChildViewById(rootView, id);
+      if (tocUserData == null) {
+        break missingId;
+      }
+
+      id = R.id.toc_userGenCon;
+      TextView tocUserGenCon = ViewBindings.findChildViewById(rootView, id);
+      if (tocUserGenCon == null) {
+        break missingId;
+      }
+
+      id = R.id.toc_userRep;
+      TextView tocUserRep = ViewBindings.findChildViewById(rootView, id);
+      if (tocUserRep == null) {
+        break missingId;
+      }
+
+      return new ActivityTermsBinding((LinearLayout) rootView, LinearColumnterms, agreement,
+          lastupdated, msgTermsandco2, msgTermsandco3, termsOKbtn, termsandconditions,
+          tocContLicense, tocContactUs, tocCorrections, tocDisRes, tocDisclaimer,
+          tocElectronicCommunitcations, tocGovLaw, tocIndemnification, tocIntellectualProperty,
+          tocLiabilityLimitations, tocMisc, tocModInt, tocProhActivities, tocSerManagement,
+          tocServices, tocTermTerm, tocUserData, tocUserGenCon, tocUserRep);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -89,6 +89,7 @@ array com_google_android_gms_fonts_certs
 array com_google_android_gms_fonts_certs_dev
 array com_google_android_gms_fonts_certs_prod
 array preloaded_fonts
+array termsOfConditions_table
 attr SharedValue
 attr SharedValueId
 attr action
@@ -3228,7 +3229,6 @@ id META
 id NO_DEBUG
 id Personalizehost
 id Register
-id Review
 id SHIFT
 id SHOW_ALL
 id SHOW_PATH
@@ -3305,6 +3305,7 @@ id add
 id addFriend
 id adjust_height
 id adjust_width
+id agreement
 id alertTitle
 id aligned
 id all
@@ -3546,6 +3547,7 @@ id item_touch_helper_previous_elevation
 id jumpToEnd
 id jumpToStart
 id labeled
+id lastupdated
 id layout
 id left
 id leftToRight
@@ -3820,7 +3822,6 @@ id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
 id tag_window_insets_animation_callback
 id termsOKbtn
-id termsandco
 id termsandconditions
 id terrain
 id text
@@ -3851,6 +3852,25 @@ id toAppearance
 id toHelpandSupport
 id toNotifications
 id toPrivacy
+id toc_contLicense
+id toc_contactUs
+id toc_corrections
+id toc_dis_res
+id toc_disclaimer
+id toc_electronic_communitcations
+id toc_govLaw
+id toc_indemnification
+id toc_intellectualProperty
+id toc_liability_limitations
+id toc_misc
+id toc_mod_int
+id toc_prohActivities
+id toc_serManagement
+id toc_services
+id toc_term_term
+id toc_userData
+id toc_userGenCon
+id toc_userRep
 id toggle
 id top
 id topPanel
@@ -4169,6 +4189,7 @@ string aboutTitle
 string accountTitle
 string activityTitle
 string agree
+string agreementToTerms
 string android_credentials_TYPE_PASSWORD_CREDENTIAL
 string androidx_credentials_TYPE_PUBLIC_KEY_CREDENTIAL
 string androidx_startup
@@ -4282,6 +4303,7 @@ string interaction2
 string interaction3
 string interaction4
 string item_view_role_description
+string lastUpdated_toc
 string leaderboard
 string leaderboardPicture
 string location
@@ -4456,6 +4478,7 @@ string off
 string ok
 string on
 string options
+string ourServices
 string pace
 string passWord
 string password2
@@ -4466,6 +4489,7 @@ string path_password_eye_mask_visible
 string path_password_strike_through
 string personalize
 string previous
+string privacy
 string privacyTitle
 string privacy_policy1
 string privacy_policy2
@@ -4492,6 +4516,7 @@ string supportEmail
 string switch_role
 string tab
 string template_percent
+string termsIntro
 string titleBreaks
 string titleContinue
 string titleEmail

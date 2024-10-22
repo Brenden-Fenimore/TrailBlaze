@@ -1,95 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.trailblaze.app-mergeDebugResources-3:/values-de/values-de.xml",
+            "outputFile": "com.example.trailblaze.app-mergeDebugResources-79:/values-de/values-de.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\thebr\\.gradle\\caches\\transforms-4\\ba180f2a8120a6c1ec2189d75f0ba086\\transformed\\core-1.13.0\\res\\values-de\\values-de.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,153,255,355,455,563,668,786",
-                        "endColumns": "97,101,99,99,107,104,117,100",
-                        "endOffsets": "148,250,350,450,558,663,781,882"
-                    },
-                    "to": {
-                        "startLines": "40,41,42,43,44,45,46,205",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "3722,3820,3922,4022,4122,4230,4335,20114",
-                        "endColumns": "97,101,99,99,107,104,117,100",
-                        "endOffsets": "3815,3917,4017,4117,4225,4330,4448,20210"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\thebr\\.gradle\\caches\\transforms-4\\23c95f7c438d7af2319f4e2e8c5e636c\\transformed\\credentials-1.2.0-rc01\\res\\values-de\\values-de.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,167",
-                        "endColumns": "111,113",
-                        "endOffsets": "162,276"
-                    },
-                    "to": {
-                        "startLines": "33,34",
-                        "startColumns": "4,4",
-                        "startOffsets": "3060,3172",
-                        "endColumns": "111,113",
-                        "endOffsets": "3167,3281"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\thebr\\.gradle\\caches\\transforms-4\\3439f9c59d72137724e9b9454df7822f\\transformed\\play-services-basement-18.4.0\\res\\values-de\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "140",
-                        "endOffsets": "335"
-                    },
-                    "to": {
-                        "startLines": "60",
-                        "startColumns": "4",
-                        "startOffsets": "6003",
-                        "endColumns": "144",
-                        "endOffsets": "6143"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\thebr\\.gradle\\caches\\transforms-4\\19c13c1876784e21bc9a521136c4b76e\\transformed\\foundation-release\\res\\values-de\\values-de.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,142",
-                        "endColumns": "86,89",
-                        "endOffsets": "137,227"
-                    },
-                    "to": {
-                        "startLines": "209,210",
-                        "startColumns": "4,4",
-                        "startOffsets": "20480,20567",
-                        "endColumns": "86,89",
-                        "endOffsets": "20562,20652"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\thebr\\.gradle\\caches\\transforms-4\\197c90127c800cd7ba7a9bfea7a49398\\transformed\\ui-release\\res\\values-de\\values-de.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,201,289,387,487,574,659,751,840,928,993,1057,1138,1222,1297,1376,1442",
-                        "endColumns": "95,87,97,99,86,84,91,88,87,64,63,80,83,74,78,65,119",
-                        "endOffsets": "196,284,382,482,569,654,746,835,923,988,1052,1133,1217,1292,1371,1437,1557"
-                    },
-                    "to": {
-                        "startLines": "50,51,71,72,73,80,81,196,197,198,199,201,202,204,206,207,208",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "4757,4853,7396,7494,7594,8223,8308,19404,19493,19581,19646,19792,19873,20039,20215,20294,20360",
-                        "endColumns": "95,87,97,99,86,84,91,88,87,64,63,80,83,74,78,65,119",
-                        "endOffsets": "4848,4936,7489,7589,7676,8303,8395,19488,19576,19641,19705,19868,19952,20109,20289,20355,20475"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\thebr\\.gradle\\caches\\transforms-4\\5b2cb86de1dacda9e853e0bdc7bca6d2\\transformed\\material3-release\\res\\values-de\\values-de.xml",
+                    "source": "/Users/theholisticfairy/.gradle/caches/transforms-4/5b2cb86de1dacda9e853e0bdc7bca6d2/transformed/material3-release/res/values-de/values-de.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -106,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\thebr\\.gradle\\caches\\transforms-4\\67aed5640c008e0c862e1a53a282ae88\\transformed\\material-1.10.0\\res\\values-de\\values-de.xml",
+                    "source": "/Users/theholisticfairy/.gradle/caches/transforms-4/67aed5640c008e0c862e1a53a282ae88/transformed/material-1.10.0/res/values-de/values-de.xml",
                     "from": {
                         "startLines": "2,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -125,7 +40,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\thebr\\.gradle\\caches\\transforms-4\\c55065fa3f17c5fb64083c1813194854\\transformed\\appcompat-1.6.1\\res\\values-de\\values-de.xml",
+                    "source": "/Users/theholisticfairy/.gradle/caches/transforms-4/c55065fa3f17c5fb64083c1813194854/transformed/appcompat-1.6.1/res/values-de/values-de.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -142,7 +57,58 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\thebr\\.gradle\\caches\\transforms-4\\74543d8f8e957e35b4a2e432737a9458\\transformed\\navigation-ui-2.6.0\\res\\values-de\\values-de.xml",
+                    "source": "/Users/theholisticfairy/.gradle/caches/transforms-4/23c95f7c438d7af2319f4e2e8c5e636c/transformed/credentials-1.2.0-rc01/res/values-de/values-de.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,167",
+                        "endColumns": "111,113",
+                        "endOffsets": "162,276"
+                    },
+                    "to": {
+                        "startLines": "33,34",
+                        "startColumns": "4,4",
+                        "startOffsets": "3060,3172",
+                        "endColumns": "111,113",
+                        "endOffsets": "3167,3281"
+                    }
+                },
+                {
+                    "source": "/Users/theholisticfairy/.gradle/caches/transforms-4/197c90127c800cd7ba7a9bfea7a49398/transformed/ui-release/res/values-de/values-de.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,201,289,387,487,574,659,751,840,928,993,1057,1138,1222,1297,1376,1442",
+                        "endColumns": "95,87,97,99,86,84,91,88,87,64,63,80,83,74,78,65,119",
+                        "endOffsets": "196,284,382,482,569,654,746,835,923,988,1052,1133,1217,1292,1371,1437,1557"
+                    },
+                    "to": {
+                        "startLines": "50,51,71,72,73,80,81,196,197,198,199,201,202,204,206,207,208",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "4757,4853,7396,7494,7594,8223,8308,19404,19493,19581,19646,19792,19873,20039,20215,20294,20360",
+                        "endColumns": "95,87,97,99,86,84,91,88,87,64,63,80,83,74,78,65,119",
+                        "endOffsets": "4848,4936,7489,7589,7676,8303,8395,19488,19576,19641,19705,19868,19952,20109,20289,20355,20475"
+                    }
+                },
+                {
+                    "source": "/Users/theholisticfairy/.gradle/caches/transforms-4/ba180f2a8120a6c1ec2189d75f0ba086/transformed/core-1.13.0/res/values-de/values-de.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,153,255,355,455,563,668,786",
+                        "endColumns": "97,101,99,99,107,104,117,100",
+                        "endOffsets": "148,250,350,450,558,663,781,882"
+                    },
+                    "to": {
+                        "startLines": "40,41,42,43,44,45,46,205",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "3722,3820,3922,4022,4122,4230,4335,20114",
+                        "endColumns": "97,101,99,99,107,104,117,100",
+                        "endOffsets": "3815,3917,4017,4117,4225,4330,4448,20210"
+                    }
+                },
+                {
+                    "source": "/Users/theholisticfairy/.gradle/caches/transforms-4/74543d8f8e957e35b4a2e432737a9458/transformed/navigation-ui-2.6.0/res/values-de/values-de.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -159,7 +125,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\thebr\\.gradle\\caches\\transforms-4\\ec8e650d02b3747f476555a6190f55a0\\transformed\\play-services-base-18.5.0\\res\\values-de\\values.xml",
+                    "source": "/Users/theholisticfairy/.gradle/caches/transforms-4/397191ebab0db2f6a0c075fe57153aae/transformed/browser-1.4.0/res/values-de/values-de.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,159,260,371",
+                        "endColumns": "103,100,110,99",
+                        "endOffsets": "154,255,366,466"
+                    },
+                    "to": {
+                        "startLines": "70,76,77,78",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "7292,7841,7942,8053",
+                        "endColumns": "103,100,110,99",
+                        "endOffsets": "7391,7937,8048,8148"
+                    }
+                },
+                {
+                    "source": "/Users/theholisticfairy/.gradle/caches/transforms-4/ec8e650d02b3747f476555a6190f55a0/transformed/play-services-base-18.5.0/res/values-de/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -176,20 +159,37 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\thebr\\.gradle\\caches\\transforms-4\\397191ebab0db2f6a0c075fe57153aae\\transformed\\browser-1.4.0\\res\\values-de\\values-de.xml",
+                    "source": "/Users/theholisticfairy/.gradle/caches/transforms-4/3439f9c59d72137724e9b9454df7822f/transformed/play-services-basement-18.4.0/res/values-de/values.xml",
                     "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,159,260,371",
-                        "endColumns": "103,100,110,99",
-                        "endOffsets": "154,255,366,466"
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "140",
+                        "endOffsets": "335"
                     },
                     "to": {
-                        "startLines": "70,76,77,78",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "7292,7841,7942,8053",
-                        "endColumns": "103,100,110,99",
-                        "endOffsets": "7391,7937,8048,8148"
+                        "startLines": "60",
+                        "startColumns": "4",
+                        "startOffsets": "6003",
+                        "endColumns": "144",
+                        "endOffsets": "6143"
+                    }
+                },
+                {
+                    "source": "/Users/theholisticfairy/.gradle/caches/transforms-4/19c13c1876784e21bc9a521136c4b76e/transformed/foundation-release/res/values-de/values-de.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,142",
+                        "endColumns": "86,89",
+                        "endOffsets": "137,227"
+                    },
+                    "to": {
+                        "startLines": "209,210",
+                        "startColumns": "4,4",
+                        "startOffsets": "20480,20567",
+                        "endColumns": "86,89",
+                        "endOffsets": "20562,20652"
                     }
                 }
             ]

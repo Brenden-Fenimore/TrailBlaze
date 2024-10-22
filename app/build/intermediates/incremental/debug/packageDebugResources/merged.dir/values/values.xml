@@ -17,6 +17,28 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/amethysta</item>
     </array>
+    <string-array name="termsOfConditions_table">
+        <item>TABLE OF CONTENTS</item>
+        <item>OUR SERVICES</item>
+        <item>INTELLECTUAL PROPERTY RIGHTS</item>
+        <item>USER REPRESENTATIONS</item>
+        <item>PROHIBITED ACTIVITIES</item>
+        <item>USER GENERATED CONTRIBUTIONS</item>
+        <item>CONTRIBUTION LICENSE</item>
+        <item>SERVICES MANAGEMENT</item>
+        <item>TERM AND TERMINATION</item>
+        <item>MODIFICATIONS AND INTERRUPTIONS</item>
+        <item>GOVERNING LAW</item>
+        <item>DISPUTE RESOLUTION</item>
+        <item>CORRECTIONS</item>
+        <item>DISCLAIMER</item>
+        <item>LIMITATIONS OF LIABILITY</item>
+        <item>INDEMNIFICATION</item>
+        <item>USER DATA</item>
+        <item>ELECTRONIC COMMUNICATIONS, TRANSACTIONS, AND SIGNATURES</item>
+        <item>MISCELLANEOUS</item>
+        <item>CONTACT US</item>
+    </string-array>
     <color name="black">#FF000000</color>
     <color name="custom_red">#FF0000</color>
     <color name="green">#4CAF50</color>
@@ -35,6 +57,7 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="accountTitle">Account</string>
     <string name="activityTitle">Settings</string>
     <string name="agree">You agree to our</string>
+    <string name="agreementToTerms">AGREEMENT TO OUR LEGAL TERMS</string>
     <string name="app_name">TrailBlaze</string>
     <string name="appearanceTitle">Appearance</string>
     <string name="aspects">What aspect/s of hiking do you like to experience most?</string>
@@ -93,6 +116,7 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="interaction4">I would like to be notified if someone is in danger or any potential danger is on a
         trail.
     </string>
+    <string name="lastUpdated_toc">Last updated October 15, 2024</string>
     <string name="leaderboard">Leaderboard</string>
     <string name="leaderboardPicture">Leaderboard Picture</string>
     <string name="location">TrailBlaze utilizes your location to provide personalized suggestions of nearby trails,
@@ -136,11 +160,13 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="notificationTitle">Notifications</string>
     <string name="ok">OK</string>
     <string name="options">Please select your preferences for each of the categories listed below.</string>
+    <string name="ourServices">The information provided when using the Services is not intended for distribution to or use by any person or entity in any jurisdiction or country where such distribution or use would be contrary to law or regulation which would subject us to any registration requirement within such jurisdiction or country. Accordingly, those persons who choose to access the Services from other locations do so on their own initiative and are solely responsible for compliance with local laws, if and to the extent local laws are applicable.</string>
     <string name="pace">Pace</string>
     <string name="passWord">Password</string>
     <string name="password2">Confirm Password</string>
     <string name="personalize">Lets Personalize your account</string>
     <string name="previous">Previous</string>
+    <string name="privacy">privacy</string>
     <string name="privacyTitle">Privacy and Security</string>
     <string name="privacy_policy1">Your privacy is important to us. It is TrailBlaze policy to respect your privacy
         regarding any information we may collect from you across our website, and other sites we own and operate.
@@ -161,6 +187,12 @@ With customization options, the latest updates on trails, and an expansive commu
     <string name="settings">Settings</string>
     <string name="submit">Submit</string>
     <string name="supportEmail">customersupport@trailblaze.com</string>
+    <string name="termsIntro">"We are TrailBlaze (“Company,” “we,” “our”), a company registered in State, United States at TBD, TBD, State TBD.
+        We operate the website http://www.trailblaze.com (the “Site”), the mobile application TrailBlaze (the “App”), as well as other related products and services that refer or link to these legal terms (the “Legal Terms”) (collectively, the “Services”).
+        You can contact us by email at email or by mail to address.
+        The Legal Terms constitute a legally binding agreement made between you, whether personally or on behalf of an entity (“you”), and blank, concerning your access to and use of the Services. You agree that by accessing the Services, you have read, understood, and agreed to be bound by all of these Legal Terms. IF YOU DO NOT AGREE WITH ALL OF THESE LEGAL TERMS, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SERVICES AND YOU MUST DISCONTINUE IMMEDIATELY.
+        Supplemental terms and conditions or documents that may be posted on the Services from time to time are hereby expressly incorporated by reference. We reserve the right, in our sole discretion, to make changes by modifications to these Legal Terms at any time and for any reason. We will alert you about any changes by updating the “Last Updated” date of these Legal Terms, and you waive any right to receive specific notice of each such change. It is your responsibility to periodically review these Legal Terms to stay informed of updates. You will be subject to, and will be deemed to have been made aware of and to have accepted, the changes in any revised Legal Terms by your continued use of the Services after the date such revised Legal Terms are posted.
+        We recommend that you print a copy of these Legal Terms for your records. "</string>
     <string name="titleBreaks">Breaks</string>
     <string name="titleContinue">Continue</string>
     <string name="titleEmail">Email Address</string>

@@ -4,6 +4,7 @@ array com_google_android_gms_fonts_certs
 array com_google_android_gms_fonts_certs_dev
 array com_google_android_gms_fonts_certs_prod
 array preloaded_fonts
+array termsOfConditions_table
 color black
 color custom_red
 color green
@@ -80,7 +81,6 @@ id LinearColumnterms
 id Login
 id Personalizehost
 id Register
-id Review
 id SecondFragment
 id Settings
 id about
@@ -91,6 +91,7 @@ id action_SecondFragment_to_FirstFragment
 id action_editProfileFragment_to_profileFragment
 id action_profileFragment_to_editProfileFragment
 id addFriend
+id agreement
 id appearance
 id aspectsTitle
 id backArrow
@@ -159,6 +160,7 @@ id interaction2
 id interaction3
 id interaction4
 id invitefriendslayout
+id lastupdated
 id linearColumnEmail
 id linearColumnPassword
 id linearColumnconfirmpw
@@ -214,7 +216,6 @@ id spinner3
 id spinner4
 id submit
 id termsOKbtn
-id termsandco
 id termsandconditions
 id terrain
 id textView
@@ -225,6 +226,25 @@ id toAppearance
 id toHelpandSupport
 id toNotifications
 id toPrivacy
+id toc_contLicense
+id toc_contactUs
+id toc_corrections
+id toc_dis_res
+id toc_disclaimer
+id toc_electronic_communitcations
+id toc_govLaw
+id toc_indemnification
+id toc_intellectualProperty
+id toc_liability_limitations
+id toc_misc
+id toc_mod_int
+id toc_prohActivities
+id toc_serManagement
+id toc_services
+id toc_term_term
+id toc_userData
+id toc_userGenCon
+id toc_userRep
 id toptrails
 id troubleshoot
 id txtBySigning
@@ -280,6 +300,7 @@ string aboutTitle
 string accountTitle
 string activityTitle
 string agree
+string agreementToTerms
 string app_name
 string appearanceTitle
 string aspects
@@ -334,6 +355,7 @@ string interaction1
 string interaction2
 string interaction3
 string interaction4
+string lastUpdated_toc
 string leaderboard
 string leaderboardPicture
 string location
@@ -346,11 +368,13 @@ string next
 string notificationTitle
 string ok
 string options
+string ourServices
 string pace
 string passWord
 string password2
 string personalize
 string previous
+string privacy
 string privacyTitle
 string privacy_policy1
 string privacy_policy2
@@ -364,6 +388,7 @@ string second_fragment_label
 string settings
 string submit
 string supportEmail
+string termsIntro
 string titleBreaks
 string titleContinue
 string titleEmail
