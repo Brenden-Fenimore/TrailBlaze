@@ -9,9 +9,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trailblaze.ThumbnailAdapter
 import com.example.trailblaze.databinding.FragmentHomeBinding
 import com.example.trailblaze.nps.NPSResponse
-import com.example.trailblaze.nps.ParksAdapter
+import com.example.trailblaze.nps.Park
 import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.settings.SettingsScreenActivity
 import com.example.trailblaze.ui.MenuActivity
@@ -37,9 +38,9 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
-
+    private lateinit var parksList: List<Park>
     private lateinit var parksRecyclerView: RecyclerView   // RecyclerView to display parks
-    private lateinit var parksAdapter: ParksAdapter         // Adapter for RecyclerView
+    private lateinit var thumbnailAdapter: ThumbnailAdapter          // Adapter for RecyclerView
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -71,20 +72,23 @@ class HomeFragment : Fragment() {
 
 
         // RecyclerView setup
-        parksRecyclerView = binding.parksRecyclerView
+        parksRecyclerView = binding.thumbnailRecyclerView
         parksRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-        // Initialize adapter with an empty list
-        parksAdapter = ParksAdapter(emptyList()) { park ->
-            // Handle park item clicks
-            val intent = Intent(context, ParkDetailActivity::class.java).apply {
-                putExtra("PARK_INDEX", parksAdapter.parksList.indexOf(park))
-            }
-            startActivity(intent)
-        }
+        // Initialize ThumbnailAdapter with an empty list
+        thumbnailAdapter = ThumbnailAdapter(emptyList()) { parkImage ->
+            // Find the index of the clicked park image
+            val parkIndex = parksList.indexOfFirst { it.images.firstOrNull()?.url == parkImage }
 
+            if (parkIndex != -1) {
+                val intent = Intent(context, ParkDetailActivity::class.java).apply {
+                    putExtra("PARK_INDEX", parkIndex)
+                }
+                startActivity(intent)
+            }
+        }
         // Set adapter to RecyclerView
-        parksRecyclerView.adapter = parksAdapter
+        parksRecyclerView.adapter = thumbnailAdapter
 
         // Fetch parks data
         fetchParksData()
@@ -140,12 +144,15 @@ class HomeFragment : Fragment() {
         RetrofitInstance.api.getParks(10).enqueue(object : Callback<NPSResponse> {
             override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
                 if (response.isSuccessful) {
-                    val parks = response.body()?.data // Update the RecyclerView with fetched parks data
-                    if (parks != null) {
-                        parksAdapter.updateData(parks) // Update the adapter with the fetched park data
-                    } else {
-                        Log.e("HomeFragment", "Parks data is null")
+                    parksList = response.body()?.data ?: emptyList()    // Save the parks list
+
+                    // Map the list of parks to their thumbnail URLs and names
+                    val parkData = parksList.map {
+                        Pair(it.images.firstOrNull()?.url ?: "", it.fullName)
                     }
+
+                    // Update the adapter with the park data (image URL + name)
+                    thumbnailAdapter.updateData(parkData)
                 } else {
                     Log.e("HomeFragment", "Response not successful: ${response.code()}")
                 }
