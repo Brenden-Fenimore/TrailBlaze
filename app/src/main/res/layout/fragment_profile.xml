@@ -146,7 +146,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/friends"
-                android:textSize="18sp"
+                android:textSize="20sp"
+                android:textColor="#4C662B"
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
                 android:paddingTop="16dp"/>
@@ -202,7 +203,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/leaderboard"
-                android:textSize="18sp"
+                android:textSize="20sp"
+                android:textColor="#4C662B"
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
                 android:paddingTop="16dp"/>
@@ -257,7 +259,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/userPhotos"
-                android:textSize="18sp"
+                android:textSize="20sp"
+                android:textColor="#4C662B"
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
                 android:paddingTop="16dp"/>
@@ -312,7 +315,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/userFavoriteTrails"
-                android:textSize="18sp"
+                android:textSize="20sp"
+                android:textColor="#4C662B"
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
                 android:paddingTop="16dp"/>
