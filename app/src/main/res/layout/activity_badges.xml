@@ -1,0 +1,84 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/swishLayout">
+
+        <!-- Custom Swish Background at the bottom layer -->
+        <com.example.trailblaze.view.SwishBackgroundView
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+        <ImageButton
+                app:srcCompat="@drawable/baseline_arrow_back_ios_new_24"
+                android:contentDescription="@string/btn_back"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:id="@+id/chevron_left"
+                android:background="@android:color/transparent"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+    <LinearLayout
+            android:id="@+id/titleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/swishLayout"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/badgesViewLayout"
+                android:layout_gravity="center_horizontal"
+                android:text="Your Badges"
+                android:textSize="40sp"
+                android:fontFamily="@font/amethysta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <!-- CardView wrapping the RecyclerView -->
+    <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_badges"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/titleLayout"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="8dp"
+            app:cardBackgroundColor="@android:color/white"
+            android:layout_margin="16dp">
+
+        <!-- RecyclerView to show earned badges -->
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_badges"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Sash to drag and drop badges -->
+    <FrameLayout
+            android:id="@+id/sashLayout"
+            android:layout_below="@id/card_view_badges"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/sash_background"> <!-- Adjust padding as needed -->
+
+    </FrameLayout>
+
+
+
+    <Button
+            android:text="Save"
+            android:layout_width="304dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/amethysta"
+            android:id="@+id/save"/>
+
+</RelativeLayout>

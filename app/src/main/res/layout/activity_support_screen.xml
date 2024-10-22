@@ -4,19 +4,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-    <ImageButton
-            android:layout_width="39dp"
-            android:layout_height="39dp"
-            app:srcCompat="@drawable/chevron_left"
-            android:background="@android:color/transparent"
-            android:id="@+id/chevron_left"
-            android:contentDescription="@string/description"/>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/swishLayout">
+
+        <!-- Custom Swish Background at the bottom layer -->
+        <com.example.trailblaze.view.SwishBackgroundView
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+        <ImageButton
+                app:srcCompat="@drawable/baseline_arrow_back_ios_new_24"
+                android:contentDescription="@string/btn_back"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:id="@+id/chevron_left"
+                android:background="@android:color/transparent"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"/>
+    </RelativeLayout>
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="150dp"
-            android:layout_below="@id/chevron_left"
+            android:layout_below="@id/swishLayout"
             android:orientation="vertical">
         <TextView
                 android:id="@+id/Settings"
@@ -133,4 +146,26 @@
                     android:layout_marginBottom="10dp"
                     android:background="@android:color/darker_gray"/>
         </LinearLayout>
+
+    <FrameLayout
+            android:id="@+id/frameStackorConnectw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="0dp">
+
+        <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="706dp"
+                android:layout_height="478dp"
+                android:layout_gravity="center_horizontal"
+                app:srcCompat="@drawable/flowers"
+                android:contentDescription="@string/description"/>
+        <LinearLayout
+                android:id="@+id/linearRowFacebookOne"
+                android:layout_gravity="top|center"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"/>
+    </FrameLayout>
 </RelativeLayout>

@@ -2,9 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools">
 
-    <!--Add internet permission to allow app to connect to the internet.-->
-    <uses-permission android:name="android.permission.INTERNET"/>
-
     <application
             android:allowBackup="true"
             android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,6 +12,33 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.TrailBlaze"
             tools:targetApi="31">
+
+        <activity
+                android:name=".ui.profile.UserListActivity"
+                android:exported="true"/>
+
+        <activity
+                android:name=".ui.achievements.BadgesActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".ui.achievements.Badge"
+                android:exported="true"/>
+        <activity
+                android:name=".ui.achievements.Achievement"
+                android:exported="true"/>
+        <activity
+                android:name=".ui.achievements.BadgesAdapter"
+                android:exported="true"/>
+        <activity
+                android:name=".ui.achievements.AchievementCategory"
+                android:exported="true"/>
+        <activity
+                android:name=".ui.achievements.AchievementsAdapter"
+                android:exported="true"/>
+        <activity
+                android:name=".ui.achievements.AchievementsFragment"
+                android:exported="true"/>
+
         <activity
                 android:name=".ui.parks.ParkDetailActivity"
                 android:exported="true"/>
@@ -25,13 +49,16 @@
                 android:name=".settings.SafetyActivity"
                 android:exported="false"/>
         <activity
-                android:name=".ui.profile.EditProfileActivity"
+                android:name=".ui.Map.MapFragment"
+                android:exported="false"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
+                android:name=".ui.profile.EditProfileFragment"
                 android:exported="false"
                 android:theme="@style/Theme.TrailBlaze"/>
         <activity
                 android:name=".ui.MenuActivity"
-                android:exported="false"
-                android:theme="@style/Base.Theme.TrailBlaze"/>
+                android:exported="false"/>
         <activity
                 android:name=".settings.AboutActivity"
                 android:exported="false"/>
@@ -54,7 +81,7 @@
                 android:exported="false"
                 android:theme="@style/Theme.TrailBlaze"/>
         <activity
-                android:name=".ui.profile.FriendsProfile"
+                android:name=".ui.profile.FriendsProfileActivity"
                 android:exported="false"/>
         <activity
                 android:name=".login.TermsActivity"
@@ -82,7 +109,8 @@
                 android:theme="@style/Theme.TrailBlaze"/>
         <activity
                 android:name=".MainActivity"
-                android:exported="true">
+                android:exported="true"
+                android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

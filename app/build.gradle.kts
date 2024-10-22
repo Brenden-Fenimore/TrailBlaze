@@ -49,6 +49,8 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    kotlinOptions {
+    }
 }
 
 dependencies {
@@ -71,6 +73,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.firestore.ktx)
+    implementation(libs.androidx.ui.text.google.fonts)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -93,6 +96,25 @@ dependencies {
     /** Adds Retrofit to Your Project */
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    //glide
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
+    implementation ("com.google.android.gms:play-services-maps:18.0.2")
+    implementation ("com.google.maps.android:android-maps-utils:2.2.0")
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.9.0"))
+    implementation("com.google.android.libraries.places:places:3.4.0")
+    implementation ("androidx.activity:activity-compose:1.6.1")
+
+    //for adding profile pics
+    implementation (platform("com.google.firebase:firebase-bom:33.4.0")) // Or your Firebase BOM version
+    implementation ("com.google.firebase:firebase-storage-ktx")
+
+    implementation ("com.google.android.gms:play-services-maps:18.0.2")
+    implementation ("com.google.maps.android:android-maps-utils:2.2.0")
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.9.0"))
+    implementation("com.google.android.libraries.places:places:4.0.0")
 
     implementation("com.google.firebase:firebase-storage")
 

@@ -1,68 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-    <!-- Custom Swish Background -->
-    <com.example.trailblaze.view.SwishBackgroundView
-            android:layout_width="match_parent"
-            android:layout_height="100dp" />
-
-    <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        <LinearLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/swishLayout">
 
-        <!-- Top bar with Back Button, Title, and Settings Button -->
-        <LinearLayout
+        <!-- Custom Swish Background at the bottom layer -->
+        <com.example.trailblaze.view.SwishBackgroundView
                 android:layout_width="match_parent"
+                android:layout_height="100dp" />
+        <!--    Hamburger menu in top left-->
+
+        <ImageButton
+                android:src="@drawable/chevron_left"
+                android:contentDescription="@string/settings"
+                android:layout_width="49dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:id="@+id/backButton"
+                android:background="@android:color/transparent"
+                android:layout_centerVertical="true"/>
+        <ImageButton
+                android:src="@drawable/baseline_settings_24"
+                android:contentDescription="@string/settings"
+                android:layout_width="49dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/settingsButton"
+                android:background="@android:color/transparent"
+                android:layout_centerVertical="true"/>
+
+
+    </RelativeLayout>
+<ScrollView
+        android:layout_width="match_parent"
+            android:layout_height="match_parent"
+        android:layout_below="@id/swishLayout">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+        <!-- Account Title -->
+        <TextView
+                android:id="@+id/account_title"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:text="@string/editProfile"
+                android:fontFamily="@font/amethysta"
+                android:textSize="40sp"
+                android:gravity="center" />
 
-            <!-- Back Button -->
-            <ImageButton
-                    android:id="@+id/backButton"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/chevron_left"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/backButton" />
-
-            <!-- Spacer to center the title -->
-            <View
-                    android:layout_width="0dp"
-                    android:layout_height="6dp"
-                    android:layout_weight="1"/>
-
-            <!-- Settings Button -->
-            <ImageButton
-                    android:id="@+id/settingsButton"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/baseline_settings_24"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/settings" />
-        </LinearLayout>
-
-            <!-- Edit Profile Title -->
-            <TextView
-                    android:id="@+id/account_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/editProfile"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:paddingBottom="16dp"
-                    android:paddingTop="42dp"/>
 
         <!-- Profile Image with Camera Icon -->
         <FrameLayout
@@ -73,31 +69,35 @@
                 android:layout_marginTop="16dp">
 
             <ImageView
-                    android:id="@+id/profile_image"
+                    android:id="@+id/profilePicture"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/account_circle"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/profilePicture" />
 
-            <ImageView
+            <ImageButton
                     android:id="@+id/camera_icon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="bottom|end"
+                    android:background="@android:color/transparent"
                     android:src="@drawable/camera"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/camera" />
 
         </FrameLayout>
-
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
         <!-- Username Field -->
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="16dp"
-                android:padding="16dp">
+                android:layout_marginTop="16dp">
 
             <ImageView
                     android:layout_width="24dp"
@@ -331,18 +331,43 @@
         </LinearLayout>
 
         <!-- Suggested Trails SeekBar -->
-        <TextView
-                android:id="@+id/suggested_trails_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/suggestedTrails"
-                android:layout_marginTop="16dp" />
 
-        <SeekBar
-                android:id="@+id/suggested_trails_seekbar"
-                android:layout_width="match_parent"
+        <LinearLayout
+                android:layout_width="305dp"
                 android:layout_height="wrap_content"
-                android:max="200" />
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:paddingEnd="9dp"
+                android:paddingStart="9dp">
+            <TextView
+                    android:id="@+id/suggested_trails_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/suggestedTrails"
+                    android:layout_marginTop="16dp" />
+
+            <TextView
+                    android:text="0"
+                    android:textSize="20sp"
+                    android:id="@+id/range"
+                    android:fontFamily="@font/amethysta"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+        <SeekBar
+                android:layout_gravity="center"
+                android:layout_width="305dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/seekBar"/>
+        <TextView
+                android:layout_gravity="center_horizontal"
+                android:text="  Range(miles)"
+                android:textSize="20sp"
+                android:fontFamily="@font/amethysta"
+                android:layout_width="305dp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_height="wrap_content"/>
 
         <!-- Leaderboard Switch -->
         <LinearLayout
@@ -442,8 +467,9 @@
         <!-- Update Profile Button -->
         <Button
                 android:id="@+id/update_profile_button"
-                android:layout_width="match_parent"
+                android:layout_width="304dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="32dp"
                 android:text="@string/updateProfile" />
         <!-- Spacer to add margin for navigation bar -->
@@ -453,7 +479,6 @@
 
     </LinearLayout>
 
-
+    </LinearLayout>
 </ScrollView>
-
-</FrameLayout>
+</RelativeLayout>

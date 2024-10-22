@@ -1,6 +1,9 @@
 package com.example.trailblaze.ui.achievements
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -10,10 +13,26 @@ class AchievementsActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var achievementsAdapter: AchievementsAdapter
+    private lateinit var yourBadges: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_achievements)
+
+        findViewById<ImageButton>(R.id.chevron_left).setOnClickListener{
+            onBackPressedDispatcher.onBackPressed()
+        }
+
+        // Initialize your button
+        yourBadges = findViewById(R.id.your_badges)
+
+        // Set the onClickListener for the button
+        yourBadges.setOnClickListener {
+            // Create an Intent to start BadgesActivity
+            val intent = Intent(this, BadgesActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            startActivity(intent)
+        }
 
         //list of achievement categories
         val categories = listOf(
@@ -25,7 +44,6 @@ class AchievementsActivity : AppCompatActivity() {
                     getString(R.string.mountainclimber),
                     getString(R.string.longdistancetrekker)
                 ),
-                progress = 75 // Example progress
             ),
             AchievementCategory(
                 title = "Frequency",
@@ -35,7 +53,6 @@ class AchievementsActivity : AppCompatActivity() {
                     getString(R.string.weekendwarrior),
                     getString(R.string.dailyadventurer)
                 ),
-                progress = 0
             ),
             AchievementCategory(
                 title = "Difficulty",
@@ -45,7 +62,6 @@ class AchievementsActivity : AppCompatActivity() {
                     getString(R.string.explorer),
                     getString(R.string.trailmaster),
                 ),
-                progress = 0
             ),
             AchievementCategory(
                 title = "Group Hiking",
@@ -55,7 +71,6 @@ class AchievementsActivity : AppCompatActivity() {
                     getString(R.string.teamplayer),
                     getString(R.string.communitybuilder),
                 ),
-                progress = 0
             ),
             AchievementCategory(
                 title = "Adventurer",
@@ -65,7 +80,6 @@ class AchievementsActivity : AppCompatActivity() {
                     getString(R.string.photographer),
                     getString(R.string.safteyexpert)
                 ),
-                progress = 0
             ),
             AchievementCategory(
                 title = "Goal Achiever",
@@ -75,7 +89,6 @@ class AchievementsActivity : AppCompatActivity() {
                     getString(R.string.badgecollector),
                     getString(R.string.leaderboardtip)
                 ),
-                progress = 40
             )
         )
 

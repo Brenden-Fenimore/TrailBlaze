@@ -36,7 +36,6 @@ class RegisterActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_register)
 
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
         //initialize Firestore and FirebaseAuth
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()

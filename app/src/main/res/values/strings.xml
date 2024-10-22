@@ -125,8 +125,28 @@
         you know the coast is clear. Be cautious when climbing rocks or picking up firewood. If you see a snake,
         maintain a distance of at least 6 feet. Most bites occur when people get too close or try to touch them.
     </string>
-
-    <string name="achievementsTitle">Achievements</string>
+    <string name="park_image">park_image</string>
+    <string name="latitude_heading">Latitude:</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="longitude_heading">Longitude:</string>
+    <string name="address_heading">Address:</string>
+    <string name="activities">Activities</string>
+    <string name="addresses">Addresses</string>
+    <string name="operating_hours">Operating Hours</string>
+    <string name="contacts">Contacts</string>
+    <string name="entrance_passes">Entrance Passes</string>
+    <string name="images">Images</string>
+    <string name="weather_info">Weather Info</string>
+    <string name="photos">Photos</string>
+    <string name="activities_heading">Available Activities:</string>
+    <string name="operating_hours_header">Hours of Operation:</string>
+    <string name="contact_heading">Contact Us:</string>
+    <string name="phone_number_heading">Phone Number:</string>
+    <string name="email_heading">Email:</string>
+    <string name="entrance_fee_heading">Entrance Fee:</string>
+    <string name="weather_info_heading">Yearly Weather Conditions:</string>
+    <string name="achievementsTitle">TrailBlaze Challenges</string>
     <string name="overallProgress">Overall Progress</string>
     <!-- badge tool tips-->
     <string name="trailblazer">Trailblazer: Complete a trail of a certain distance or elevation gain.</string>
@@ -150,6 +170,8 @@
     <string name="parkInfo">Park Information</string>
     <string name="parkName">Park Name</string>
     <string name="parkDescription">Park Description</string>
+    <string name="editSash">Edit Sash</string>
+    <string name="save">Save</string>
 
 
     <string name="lorem_ipsum">
@@ -296,6 +318,68 @@
     <string name="suggestedTrailsMiles">Suggested Trails: %1$d miles</string>
     <string name="bucketListTrails">Bucket List Trails</string>
     <string name="favoriteFriends">Favorite Friends</string>
+    <!-- Spinner options for terrain -->
+    <string-array name="terrain_options">
+        <item>Mountain</item>
+        <item>Forest</item>
+        <item>Desert</item>
+        <item>Beach</item>
+    </string-array>
+
+    <!-- Spinner options for fitness level -->
+    <string-array name="fitness_level_options">
+        <item>Beginner</item>
+        <item>Intermediate</item>
+        <item>Advanced</item>
+    </string-array>
+
+    <!-- Spinner options for difficulty level -->
+    <string-array name="difficulty_level_options">
+        <item>Easiest</item>
+        <item>Easy</item>
+        <item>Moderate</item>
+        <item>Moderate Difficult</item>
+        <item>Difficult</item>
+        <item>Extremely Difficult</item>
+    </string-array>
+
+    <!-- Spinner options for hike type -->
+    <string-array name="hike_type_options">
+        <item>Day Hike</item>
+        <item>Backpacking</item>
+        <item>Trail Running</item>
+        <item>Climbing</item>
+    </string-array>
+    <string name="camera">Edit Picture</string>
+
+    <string name="calendar">Calendar</string>
+    <string name="birthdate">Date of Birth MM/DD/YYYY</string>
+    <string name="userEmail">Users Email</string>
+    <string name="editUserEmail">Email Address</string>
+    <string name="userLocation">Location</string>
+    <string name="phoneIcon">Phone Icon</string>
+    <string name="userPhone">Phone Number</string>
+    <string name="terrainIcon">Terrain Icon</string>
+    <string name="terrain">Terrain</string>
+    <string name="fitnessLevelIcon">Fitness Level Icon</string>
+    <string name="fitnessLevel">Fitness Level</string>
+    <string name="difficultyLevel">Difficulty Level</string>
+    <string name="typeOfHikeIcon">Type of Hike Icon</string>
+    <string name="typeOfHike">Type of Hike</string>
+    <string name="suggestedTrails">Suggested Trails</string>
+    <string name="userLeaderboardSwitch">Leaderboard</string>
+    <string name="userPhotosSwitch">Photos</string>
+    <string name="userFavoriteTrailsSwitch">Favorite Trails</string>
+    <string name="userWatcherSwitch">Watcher</string>
+    <string name="userShareLocationSwitch">Share Location</string>
+    <string name="updateProfile">Update Profile</string>
+    <string name="suggestedTrailsMiles">Suggested Trails: %1$d miles</string>
+    <string name="bucketListTrails">Bucket List Trails</string>
+    <string name="favoriteFriends">Favorite Friends</string>
+    <string name="addAsTrusted">Add as trusted Contact</string>
+    <string name="friendsInCommon">Friends in Common</string>
+    <string name="meetTrailMates">Meet TrailMates</string>
+    <string name="map_search_hint">Search for a Trail</string>
     <!-- Spinner options for terrain -->
     <string-array name="terrain_options">
         <item>Mountain</item>

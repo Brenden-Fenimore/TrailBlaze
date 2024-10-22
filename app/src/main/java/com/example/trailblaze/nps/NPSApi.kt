@@ -10,6 +10,5 @@ interface NPSApi {
     fun getParks(
         @Query("limit") limit: Int,                // Query parameter to limit the number of results
         @Query("api_key") apiKey: String = "cQvtQCUyKgWjZQHWMJsXwXjDs7ZALBbUKTFgC9As"       // API key for authentication
-
     ): Call<NPSResponse>                           // Call that returns NPSResponse
 }

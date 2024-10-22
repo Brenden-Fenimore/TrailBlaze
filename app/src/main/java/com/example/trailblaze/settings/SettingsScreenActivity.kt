@@ -4,12 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.trailblaze.MainActivity
 import com.example.trailblaze.R
 import com.example.trailblaze.login.LoginActivity
-import com.example.trailblaze.ui.Map.MapFragment
-import com.example.trailblaze.ui.profile.EditProfileActivity
 
 
 class SettingsScreenActivity : AppCompatActivity() {
@@ -18,13 +16,10 @@ class SettingsScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings_screen)
 
-        //initialize views
-        val toAccount = findViewById<ImageButton>(R.id.toAccount)
-        val toNotification = findViewById<ImageButton>(R.id.toNotifications)
-        val toAppearance = findViewById<ImageButton>(R.id.toAppearance)
-        val toPrivacy = findViewById<ImageButton>(R.id.toPrivacy)
-        val toHelpAndSupport = findViewById<ImageButton>(R.id.toHelpandSupport)
-        val toAbout = findViewById<ImageButton>(R.id.toAbout)
+        val toNotification = findViewById<TextView>(R.id.notification)
+        val toAppearance = findViewById<TextView>(R.id.appearance)
+        val toPrivacy = findViewById<TextView>(R.id.privacyAndSecurity)
+        val toAbout = findViewById<TextView>(R.id.about)
         val logoutbtn = findViewById<Button>(R.id.logoutbtn)
 
 
@@ -47,20 +42,6 @@ class SettingsScreenActivity : AppCompatActivity() {
         //set the listener for the back button
         findViewById<ImageButton>(R.id.chevron_left).setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
-        }
-
-        //set the listener for the help and support button
-        toHelpAndSupport.setOnClickListener {
-            val intent = Intent(this, SupportScreenActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-        }
-
-        //set click listener for User Account
-        toAccount.setOnClickListener {
-            val intent = Intent(this, NotificationsActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
         }
 
         //set click listener for notification
@@ -91,11 +72,5 @@ class SettingsScreenActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Set click listener for account
-        toAccount.setOnClickListener {
-            val intent = Intent(this, EditProfileActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-        }
     }
 }
