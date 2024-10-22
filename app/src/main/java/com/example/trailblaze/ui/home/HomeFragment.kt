@@ -1,6 +1,5 @@
 package com.example.trailblaze.ui.home
 
-import ThumbnailAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trailblaze.ThumbnailAdapter
 import com.example.trailblaze.databinding.FragmentHomeBinding
 import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.Park
@@ -40,7 +40,7 @@ class HomeFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var parksList: List<Park>
     private lateinit var parksRecyclerView: RecyclerView   // RecyclerView to display parks
-    private lateinit var thumbnailAdapter: ThumbnailAdapter // Adapter for RecyclerView
+    private lateinit var thumbnailAdapter: ThumbnailAdapter          // Adapter for RecyclerView
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -87,7 +87,6 @@ class HomeFragment : Fragment() {
                 startActivity(intent)
             }
         }
-
         // Set adapter to RecyclerView
         parksRecyclerView.adapter = thumbnailAdapter
 
@@ -138,6 +137,8 @@ class HomeFragment : Fragment() {
             binding.homepageusername.text = "Not logged in"
         }
     }
+
+
 
     private fun fetchParksData() {
         RetrofitInstance.api.getParks(10).enqueue(object : Callback<NPSResponse> {

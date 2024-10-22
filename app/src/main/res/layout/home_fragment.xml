@@ -35,11 +35,14 @@
                 android:layout_centerVertical="true"/>
     </RelativeLayout>
 
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/swishLayout">
+
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-        android:layout_below="@id/swishLayout">
+                android:orientation="vertical">
             <TextView
                     android:id="@+id/homepagegreeting"
                     android:layout_width="match_parent"
@@ -107,21 +110,15 @@
                     </com.google.android.material.textfield.TextInputLayout>
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
-            <ScrollView android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_below="@id/swishLayout">
 
-            <LinearLayout
+            <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
+                    android:layout_height="wrap_content">
                 <LinearLayout
                         android:id="@+id/nearbytrailslayout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                android:paddingLeft="16dp">
+                        android:paddingLeft="16dp">
                     <!--        Top Trails Nearby-->
                     <TextView
                             android:id="@+id/toptrails"
@@ -134,21 +131,28 @@
                             android:layout_height="wrap_content"
                             android:textColor="#4C662B"
                             android:shadowColor="@color/black"/>
+                </LinearLayout>
+                <!--        Top Trails Nearby Images-->
+                <LinearLayout android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:id="@+id/recyclerViewlayout"
+                              android:paddingLeft="16dp"
+                              android:layout_below="@id/nearbytrailslayout">
 
                     <!-- RecyclerView for Nearby Trails -->
                     <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/thumbnailRecyclerView"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"/>
+                            android:layout_height="wrap_content"/>
+                    />
                 </LinearLayout>
+
 
                 <LinearLayout
                         android:id="@+id/browsedifficultylayout"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/recyclerViewlayout"
-                        android:orientation="vertical"
                         android:paddingLeft="16dp">
                     <!--        Browse By Difficulty-->
                     <TextView
@@ -161,7 +165,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#4C662B"
-                            android:shadowColor="@color/black"/>
+                            android:shadowColor="@color/black"/></LinearLayout>
                 <!--        Browse By Difficulty Images-->
                 <HorizontalScrollView
                         android:id="@+id/browsebydifficultyscroll"
@@ -174,13 +178,11 @@
                     <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="15dp">
+                            android:orientation="horizontal">
                         <ImageView
                                 android:layout_width="128dp"
                                 android:layout_height="128dp"
-                                app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"/>
+                                app:srcCompat="@drawable/no_image_available"/>
 
                         <ImageView
                                 android:layout_width="128dp"
@@ -204,16 +206,15 @@
                                 android:layout_marginStart="15dp"/>
                     </LinearLayout>
                 </HorizontalScrollView>
-                </LinearLayout>
                 <LinearLayout
                         android:id="@+id/invitefriendslayout"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/browsebydifficultyscroll">
+                        android:layout_below="@id/browsebydifficultyscroll"
+                        android:paddingLeft="15dp">
                     <TextView
                             android:id="@+id/hikewithfriends"
                             android:layout_marginTop="30dp"
-                            android:layout_marginStart="20dp"
                             android:text="@string/homepage_friends"
                             android:textSize="20sp"
                             android:textStyle="bold"
@@ -234,6 +235,13 @@
                             app:maxImageSize="24dp"
                             app:backgroundTint="#00FFFFFF" android:scaleX="2" android:scaleY="2"/>
                 </LinearLayout>
+                <LinearLayout
+                        android:id="@+id/userListLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/invitefriendslayout"
+                        android:orientation="vertical"
+                        android:paddingLeft="16dp">
 
                     <!-- RecyclerView for Users -->
                     <androidx.recyclerview.widget.RecyclerView
@@ -241,12 +249,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:nestedScrollingEnabled="false"/>
-
-                <!-- Spacer to add margin for navigation bar -->
-                <View
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp" />
-            </LinearLayout>
-            </ScrollView>
+                </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
