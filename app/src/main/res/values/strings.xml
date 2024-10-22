@@ -18,7 +18,7 @@
     <string name="previous">Previous</string>
     <string name="map_image">Map</string>
     <string name="profile">Profile</string>
-    <string name="contact_us">Contact Us</string>
+    <string name ="contact_us">Contact Us</string>
     <string name="favorites">Favorites</string>
     <string name="help_center">Help Center</string>
     <string name="username">Username</string>
@@ -61,7 +61,7 @@
     <string name="rememberPassword">Remember Password</string>
     <string name="personalize">Lets Personalize your account</string>
     <string name="userName">Username</string>
-    <string name="dob">Date of Birth mm/dd/yy</string>
+    <string name="dob">Date of Birth mm/dd/yyyy</string>
     <string name="password2">Confirm Password</string>
     <string name="agree">You agree to our</string>
     <string name="createAccount">Create Account</string>
@@ -73,6 +73,83 @@
     <string name="titleUphill">Uphill</string>
     <string name="pace">Pace</string>
     <string name="titleContinue">Continue</string>
+    <string name="menuTitle">Menu</string>
+    <string name="exploreTrails">Explore Trails</string>
+    <string name="trailChallenges">Trail Challenges</string>
+    <string name="safetyTips">Safety Tips</string>
+    <string name="phoneNumber">Phone Number</string>
+    <string name="water">Stay hydrated: Dehydration can be a serious health problem, so bring more water than you think
+        youll need. Use a durable water bottle to ensure you have access to clean water.
+    </string>
+    <string name="boots">Wear proper footwear: Wear quality closed-toe shoes with good cushioning and grip to avoid sore
+        feet and ankle injuries.
+    </string>
+    <string name="layers">Dress in layers: Wear clothes that work for the weather and avoid cotton.</string>
+    <string name="flashligh">Carry essentials: Bring a flashlight, matches, emergency shelter, and extra food and
+        water.
+    </string>
+    <string name="limits">Know your limits: Be aware of your physical abilities and listen to your body. Recognize signs
+        of fatigue or distress, such as shortness of breath or dizziness.
+    </string>
+    <string name="markedtrail">Stay on marked trails: Making shortcuts can lead to erosion and increase your chances of
+        getting lost.
+    </string>
+    <string name="waterfalls">Dont climb on waterfalls: Falls from waterfalls and wet rocks can cause serious injuries
+        and deaths.
+    </string>
+    <string name="whistle">Use a whistle: A whistle can be heard from far away and takes less energy than yelling.
+    </string>
+    <string name="phone">Dont rely on cell phones: Dont count on cell phones to work in the wilderness.</string>
+    <string name="animal">Never feed or touch wildlife: Do not approach or attempt to move sick or injured wildlife.
+        Please report any encounters with aggressive, sick or injured animals to a park staff.
+    </string>
+    <string name="bear">Wildlife lives in all state parks, even near urban areas: Although rare, black bears, mountain
+        lions and rattlesnakes may be seen. If you encounter wildlife on the trail, keep your distance, back away slowly
+        and do not run. Report your sightings to park staff.
+    </string>
+    <string name="ticks">Ticks: Tick populations can increase depending on the season. Take the following precautions
+        to avoid them:
+        Walk in the middle of trails. Use insect repellent. Tuck your pants into your socks. After taking off gear,
+        check for hitchhiking ticks. Always do a “tick check” with the help of a friend.
+    </string>
+    <string name="poisonivy">Poison oak: It is a common plant throughout much of California. Learn to identify its
+        shiny, three-leaf pattern, and avoid touching it. If you touch poison oak, wash immediately with water and mild
+        soap. Pat dry with a clean towel.
+    </string>
+    <string name="fun">But mostly have fun! Enjoy nature! Love yourself. And remember leave only footprints, and take
+        only memories!
+    </string>
+
+    <string name="snakes">Snakes: Always know where you are stepping. For example, if you must traverse a log that has
+        fallen across the trail, rather than just stepping over the log, first step up onto the log then step down once
+        you know the coast is clear. Be cautious when climbing rocks or picking up firewood. If you see a snake,
+        maintain a distance of at least 6 feet. Most bites occur when people get too close or try to touch them.
+    </string>
+
+    <string name="achievementsTitle">Achievements</string>
+    <string name="overallProgress">Overall Progress</string>
+    <!-- badge tool tips-->
+    <string name="trailblazer">Trailblazer: Complete a trail of a certain distance or elevation gain.</string>
+    <string name="mountainclimber">Mountain Climber: Reach a specific altitude or summit.</string>
+    <string name="longdistancetrekker">Long-Distance Trekker: Hike a certain number of miles in a single day or week</string>
+    <string name="habitualhiker">Habitual Hiker: Hike a certain number of times per week or month.</string>
+    <string name="weekendwarrior">Weekend Warrior: Complete a trail every weekend.</string>
+    <string name="dailyadventurer">Daily Adventurer: Hike at least once a day for a week.</string>
+    <string name="conqueror">Conqueror: Complete a challenging trail with a difficult rating.</string>
+    <string name="explorer">Explorer: Hike trails in various terrains (e.g., mountains, forests, deserts).</string>
+    <string name="trailmaster">Trail Master: Complete trails in all four seasons.</string>
+    <string name="socialbutterfly">Social Butterfly: Hike with a group of friends or family.</string>
+    <string name="teamplayer">Team Player: Complete a group challenge or relay race.</string>
+    <string name="safteyexpert">Safety Expert: Look at the safety tips.</string>
+    <string name="communitybuilder">Community Builder: Organize a group hike or event.</string>
+    <string name="wildlifewatcher">Wildlife Watcher: Spot a specific animal or bird on a hike.</string>
+    <string name="photographer">Photographer: Capture a stunning photo of a trail or landscape.</string>
+    <string name="goalsetter">Goal Setter: Set a personal hiking goal and achieve it.</string>
+    <string name="badgecollector">Badge Collector: Earn badges for completing specific challenges or achievements.</string>
+    <string name="leaderboardtip">Leaderboard Climber: Compete with friends or other users on a leaderboard.</string>
+    <string name="parkInfo">Park Information</string>
+    <string name="parkName">Park Name</string>
+    <string name="parkDescription">Park Description</string>
 
 
     <string name="lorem_ipsum">
@@ -111,7 +188,7 @@
     //User variables
     <string name="homepage_welcome_user">Good Afternoon,</string>
     <string name="homepage_searchbar_hint">Search</string>
-    <string name="homepage_nearby_trails">Top trails nearby:</string>
+    <string name="homepage_nearby_trails">Top parks nearby:</string>
     <string name="homepage_browse_by_difficulty">Browse by difficulty:</string>
     <string name="homepage_friends">Hike with friends!</string>
 
@@ -149,7 +226,7 @@
     <string name="bug">Report a Bug</string>
     <string name="emergency">I am in an emergency! (Dial 911)</string>
     <string name="contactTitle">If you are experiencing any issues, please let us know. We will try to solve them as
-        soon as possible.
+            soon as possible.
     </string>
     <string name="contactTitle2">Title</string>
     <string name="contactTitle3">Explain the problem</string>
@@ -167,4 +244,31 @@
     <string name="friend_s_profile">Friend\'s Profile</string>
     <string name="backarrow">backArrow</string>
     <string name="map_search_hint">Search for a Trail</string>
+    <string name="backArrow">backArrow</string>
+    <string name="title_activity_safety_tips">SafetyTipsActivity</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="activities">Activities</string>
+    <string name="addresses">Addresses</string>
+    <string name="operating_hours">Operating Hours</string>
+    <string name="contacts">Contacts</string>
+    <string name="entrance_passes">Entrance Passes</string>
+    <string name="images">Images</string>
+    <string name="weather_info">Weather Info</string>
+    <string name="photos">Photos</string>
+    <string name="favorite_trails">Favorite Trails</string>
+    <string name="park_image">park_image</string>
+    <string name="address_heading">Address:</string>
+    <string name="latitude_heading">Latitude:</string>
+    <string name="longitude_heading">Longitude:</string>
+    <string name="activities_heading">Available Activities:</string>
+    <string name="operating_hours_header">Hours of Operation:</string>
+    <string name="contact_heading">Contact Us:</string>
+    <string name="phone_number_heading">Phone Number:</string>
+    <string name="email_heading">Email:</string>
+    <string name="entrance_fee_heading">Entrance Fee:</string>
+    <string name="weather_info_heading">Yearly Weather Conditions:</string>
+    <string name="thumbnail">thumbnail</string>
+    <string name="homepage_friend_list">List of preferred friends</string>
+    <string name="search">Search</string>
 </resources>

@@ -13,13 +13,15 @@ import android.widget.Button
 import android.widget.Spinner
 import com.example.trailblaze.MainActivity
 import com.example.trailblaze.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class FourthPersonalizeFragment : Fragment() {
     //declaration
-    private lateinit var spinner1: Spinner
-    private lateinit var spinner2: Spinner
-    private lateinit var spinner3: Spinner
-    private lateinit var spinner4: Spinner
+    private lateinit var terrain: Spinner
+    private lateinit var fitnessLevel: Spinner
+    private lateinit var difficulty: Spinner
+    private lateinit var typeOfHike: Spinner
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,16 +62,17 @@ class FourthPersonalizeFragment : Fragment() {
         view.findViewById<Button>(R.id.finished).setOnClickListener {
             //navigate to MainActivity
             val intent = Intent(activity, MainActivity::class.java)
+            saveUserPreferences()
             //clear the activity stack so the user can't return to the fragments
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
             activity?.finish()
         }
         //initialize the Spinners
-        spinner1 = view.findViewById(R.id.spinner1)
-        spinner2 = view.findViewById(R.id.spinner2)
-        spinner3 = view.findViewById(R.id.spinner3)
-        spinner4 = view.findViewById(R.id.spinner4)
+        terrain = view.findViewById(R.id.spinner1)
+        fitnessLevel = view.findViewById(R.id.spinner2)
+        difficulty = view.findViewById(R.id.spinner3)
+        typeOfHike = view.findViewById(R.id.spinner4)
 
        //create function to populate the spinner with options
         fun populateSpinner(spinner: Spinner, options: Map<String, Int>) {
@@ -79,13 +82,13 @@ class FourthPersonalizeFragment : Fragment() {
         }
 
         //populate each spinner
-        populateSpinner(spinner1, optionsSpinner1)
-        populateSpinner(spinner2, optionsSpinner2)
-        populateSpinner(spinner3, optionsSpinner3)
-        populateSpinner(spinner4, optionsSpinner4)
+        populateSpinner(terrain, optionsSpinner1)
+        populateSpinner(fitnessLevel, optionsSpinner2)
+        populateSpinner(difficulty, optionsSpinner3)
+        populateSpinner(typeOfHike, optionsSpinner4)
 
         // Retrieve selected option and its ID
-        spinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        terrain.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 val selectedOption = parent.getItemAtPosition(position) as String
                 val selectedId = optionsSpinner1[selectedOption]
@@ -96,5 +99,43 @@ class FourthPersonalizeFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun saveUserPreferences() {
+
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+
+        // Get spinner selections
+        val selectedTerrain = terrain.selectedItem.toString()
+        val selectedFitnessLevel = fitnessLevel.selectedItem.toString()
+        val selectedDifficulty = difficulty.selectedItem.toString()
+        val selectedTypeOfHike = typeOfHike.selectedItem.toString()
+
+        if (userId != null) {
+            // Create a Firestore reference
+            val db = FirebaseFirestore.getInstance()
+            val userRef = db.collection("users").document(userId)
+
+            // Create a map to store the user preferences
+            val userPreferences = hashMapOf(
+                "terrain" to selectedTerrain,
+                "fitnessLevel" to selectedFitnessLevel,
+                "difficulty" to selectedDifficulty,
+                "typeOfHike" to selectedTypeOfHike
+            )
+
+            // Update the user document with the preferences
+            userRef.update(userPreferences as Map<String, Any>)
+                .addOnSuccessListener {
+                    // Data saved successfully
+                    Log.d("Firebase", "User preferences saved successfully")
+                    // Navigate to the next fragment
+                    // (activity as? PersonalizeActivity)?.loadFragment(ThirdPersonalizeFragment())
+                }
+                .addOnFailureListener { exception ->
+                    // Error saving data
+                    Log.w("Firebase", "Error saving user preferences", exception)
+                }
+        }
     }
 }

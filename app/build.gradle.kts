@@ -84,4 +84,18 @@ dependencies {
     implementation ("com.google.maps.android:android-maps-utils:2.2.0")
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.9.0"))
     implementation("com.google.android.libraries.places:places:4.0.0")
+
+    implementation ("com.google.firebase:firebase-firestore-ktx:24.0.1")
+
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1") // Use the latest version
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1") // Use the latest version
+
+    /** Adds Retrofit to Your Project */
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    implementation("com.google.firebase:firebase-storage")
+
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
 }

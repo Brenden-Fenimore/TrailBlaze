@@ -24,6 +24,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/aboutTitle"
                 android:textSize="40sp"
+                android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -38,7 +39,7 @@
             android:contentDescription="@string/description"
             android:id="@+id/imageView2"/>
 
-    <LinearLayout android:layout_width="337dp"
+    <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:layout_below="@id/imageView2"
                   android:layout_marginTop="45dp"
@@ -46,6 +47,7 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:textSize="18sp"
+                android:fontFamily="@font/amethysta"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/aboutContent"

@@ -6,22 +6,37 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 tools:context=".ui.home.HomeFragment">
+    <RelativeLayout
+            android:id="@+id/nav_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
     <!--    Hamburger menu in top left-->
     <ImageButton
-            android:id="@+id/hamburger"
-            android:src="@drawable/hamburger_menu"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:backgroundTint="#25FFFFFF"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp" android:scaleY="1" android:scaleX="1"/>
+            android:src="@drawable/baseline_settings_24"
+            android:contentDescription="@string/settings"
+            android:layout_width="49dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/settingsbtn"
+            android:background="@android:color/transparent"
+            android:layout_centerVertical="true"/>
+
+    <ImageButton
+            android:src="@drawable/three_line_menu"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/menuButton"
+            android:contentDescription="@string/menuTitle"/>
+
+</RelativeLayout>
 
     <!--    Good afternoon Greeting-->
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/hamburger"
+            android:layout_below="@id/nav_layout"
             android:layout_marginEnd="0dp">
         <TextView
                 android:id="@+id/homepagegreeting"
@@ -29,8 +44,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textSize="35sp"
-                android:text="@string/homepage_welcome_user" android:textColor="#000000"
-                android:fontFamily="@font/amethysta" android:textAlignment="center"/>
+                android:text="@string/homepage_welcome_user"
+                android:textColor="#000000"
+                android:fontFamily="@font/amethysta"
+                android:textAlignment="center"/>
 
         <!--        Username underneath greeting-->
         <LinearLayout
@@ -82,7 +99,7 @@
 
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Search"
+                            android:hint="@string/search"
                             android:textSize="18sp"
                             android:id="@+id/searchbar"
                             android:fontFamily="@font/amethysta"
@@ -111,71 +128,55 @@
                             android:layout_marginTop="30dp"
                             android:layout_marginStart="20dp"
                             android:text="@string/homepage_nearby_trails"
-                            android:textSize="20sp"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
                             android:fontFamily="@font/amethysta"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" android:textColor="#000000"/>
+                            android:layout_height="wrap_content"
+                            android:textColor="#4C662B"
+                            android:shadowColor="@color/black"/>
                 </LinearLayout>
+
+
                 <!--        Top Trails Nearby Images-->
-                <HorizontalScrollView
-                        android:id="@+id/nearbytrailscroll"
-                        android:layout_width="match_parent"
+            <LinearLayout
+                        android:id="@+id/recycler_view_layout"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:scrollbars="horizontal"
-                        android:scrollbarStyle="insideOverlay"
-                        android:layout_below="@id/nearbytrailslayout"
-                        android:scrollbarAlwaysDrawHorizontalTrack="true">
-                    <LinearLayout
+                        android:layout_marginStart="15dp"
+                        android:layout_below="@id/nearbytrailslayout" >
+
+                    <!-- RecyclerView for Nearby Trails -->
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/thumbnailRecyclerView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="15dp">
-                        <ImageView
-                                android:layout_width="128dp"
-                                android:layout_height="128dp"
-                                app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"/>
+                            android:layout_marginTop="16dp"/>
+                </LinearLayout>
 
-                        <ImageView
-                                android:layout_width="128dp"
-                                android:layout_height="128dp"
-                                app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"/>
-                        <ImageView
-                                android:layout_width="128dp"
-                                android:layout_height="128dp"
-                                app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"/>
-                        <ImageView
-                                android:layout_width="128dp"
-                                android:layout_height="128dp"
-                                app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"/>
-                        <ImageView
-                                android:layout_width="128dp"
-                                android:layout_height="128dp"
-                                app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"/>
-                    </LinearLayout>
-                </HorizontalScrollView>
-                <LinearLayout
+            <LinearLayout
                         android:id="@+id/browsedifficultylayout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/nearbytrailscroll">
+                        android:layout_below="@id/recycler_view_layout">
+                    
                     <!--        Browse By Difficulty-->
                     <TextView
                             android:id="@+id/browsedifficulty"
                             android:layout_marginTop="30dp"
                             android:layout_marginStart="20dp"
                             android:text="@string/homepage_browse_by_difficulty"
-                            android:textSize="20sp"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
                             android:fontFamily="@font/amethysta"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" android:textColor="#000000"/>
+                            android:layout_height="wrap_content"
+                            android:textColor="#4C662B"
+                            android:shadowColor="@color/black"/>
                 </LinearLayout>
+
                 <!--        Browse By Difficulty Images-->
-                <HorizontalScrollView
+            <HorizontalScrollView
                         android:id="@+id/browsebydifficultyscroll"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -192,31 +193,38 @@
                                 android:layout_width="128dp"
                                 android:layout_height="128dp"
                                 app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"/>
+                                android:layout_marginStart="15dp"
+                                android:contentDescription="@string/homepage_browse_by_difficulty"/>
 
                         <ImageView
                                 android:layout_width="128dp"
                                 android:layout_height="128dp"
                                 app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"/>
+                                android:layout_marginStart="15dp"
+                                android:contentDescription="@string/homepage_browse_by_difficulty"/>
                         <ImageView
                                 android:layout_width="128dp"
                                 android:layout_height="128dp"
                                 app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"/>
+                                android:layout_marginStart="15dp"
+                                android:contentDescription="@string/homepage_browse_by_difficulty"/>
                         <ImageView
                                 android:layout_width="128dp"
                                 android:layout_height="128dp"
                                 app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"/>
+                                android:layout_marginStart="15dp"
+                                android:contentDescription="@string/homepage_browse_by_difficulty"/>
                         <ImageView
                                 android:layout_width="128dp"
                                 android:layout_height="128dp"
                                 app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"/>
+                                android:layout_marginStart="15dp"
+                                android:contentDescription="@string/homepage_browse_by_difficulty"
+                        />
                     </LinearLayout>
                 </HorizontalScrollView>
-                <LinearLayout
+
+            <LinearLayout
                         android:id="@+id/invitefriendslayout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -227,23 +235,30 @@
                             android:layout_marginTop="30dp"
                             android:layout_marginStart="20dp"
                             android:text="@string/homepage_friends"
-                            android:textSize="20sp"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
                             android:fontFamily="@font/amethysta"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" android:textColor="#000000"/>
+                            android:layout_height="wrap_content"
+                            android:textColor="#4C662B"
+                            android:shadowColor="@color/black"/>
                     <ImageButton
                             android:layout_marginTop="15dp"
                             android:layout_marginStart="125dp"
+                            android:focusable="true"
                             android:src="@android:drawable/ic_menu_add"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:clickable="true"
                             android:id="@+id/floatingActionButton" app:maxImageSize="24dp"
-                            app:backgroundTint="#00FFFFFF" android:scaleX="2" android:scaleY="2"/>
-
+                            app:backgroundTint="#00FFFFFF"
+                            android:scaleX="2"
+                            android:scaleY="2"
+                            android:contentDescription="@string/homepage_friend_list"/>
                 </LinearLayout>
+
                 <!--        Browse By Difficulty Images-->
-                <HorizontalScrollView
+            <HorizontalScrollView
                         android:layout_width="match_parent"
                         android:layout_height="500dp"
                         android:scrollbars="horizontal"
@@ -259,28 +274,33 @@
                                 android:layout_width="98dp"
                                 android:layout_height="98dp"
                                 app:srcCompat="@drawable/profile_no_image_available"
-                                android:layout_marginStart="15dp"/>
+                                android:layout_marginStart="15dp"
+                                android:contentDescription="@string/homepage_friend_list"/>
 
                         <ImageView
                                 android:layout_width="98dp"
                                 android:layout_height="98dp"
                                 app:srcCompat="@drawable/profile_no_image_available"
-                                android:layout_marginStart="15dp"/>
+                                android:layout_marginStart="15dp"
+                                android:contentDescription="@string/homepage_friend_list"/>
                         <ImageView
                                 android:layout_width="98dp"
                                 android:layout_height="98dp"
                                 app:srcCompat="@drawable/profile_no_image_available"
-                                android:layout_marginStart="15dp"/>
+                                android:layout_marginStart="15dp"
+                                android:contentDescription="@string/homepage_friend_list"/>
                         <ImageView
                                 android:layout_width="98dp"
                                 android:layout_height="98dp"
                                 app:srcCompat="@drawable/profile_no_image_available"
-                                android:layout_marginStart="15dp"/>
+                                android:layout_marginStart="15dp"
+                                android:contentDescription="@string/homepage_friend_list"/>
                         <ImageView
                                 android:layout_width="98dp"
                                 android:layout_height="98dp"
                                 app:srcCompat="@drawable/profile_no_image_available"
-                                android:layout_marginStart="15dp"/>
+                                android:layout_marginStart="15dp"
+                                android:contentDescription="@string/homepage_friend_list"/>
                     </LinearLayout>
                 </HorizontalScrollView>
             </RelativeLayout>
