@@ -21,6 +21,7 @@ import com.google.android.gms.maps.GoogleMap.*
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.Task
@@ -32,6 +33,7 @@ import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRe
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsResponse
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.api.net.kotlin.awaitFindAutocompletePredictions
+import kotlinx.coroutines.processNextEventInCurrentThread
 import kotlinx.coroutines.tasks.await
 import java.util.*
 
@@ -53,7 +55,7 @@ OnMapReadyCallback {
     private var isCanceled = false
     private val FullSail : CameraPosition = CameraPosition.builder().target(LatLng(28.596472,-81.301472)).zoom(15f).build()
     var autocompletelist : List<AutocompletePrediction> = mutableListOf()
-    var autocompletelistString : MutableList<String> = mutableListOf("yo","bro","go","beep")
+    var autocompletelistString : MutableList<String> = mutableListOf()
     val autocompletePrimaryTypes = listOf("hiking_area", "park")
 
 
@@ -69,17 +71,18 @@ OnMapReadyCallback {
         var multiAutoCompleteTextView = _binding!!.mapSearch.findViewById<MultiAutoCompleteTextView>(R.id.map_search)
         var clearbutton = _binding!!.clearMapsearchtext.findViewById<ImageButton>(R.id.clear_mapsearchtext)
         //Initialize the SDK
-        Places.initializeWithNewPlacesApiEnabled(context, apiKey)
+        Places.initializeWithNewPlacesApiEnabled(this.context!!, apiKey)
 
         // Create a new PlacesClient instance
-        val placesClient = Places.createClient(context)
-
+        val placesClient = Places.createClient(this.context!!)
 
         //clear searchbar when clearbutton is clicked
         clearbutton?.setOnClickListener { multiAutoCompleteTextView?.text?.clear() }
 
+        //dropdown menu adapter for list
         var autoFillAdapter =
             context?.let { ArrayAdapter(it, android.R.layout.simple_list_item_1, autocompletelistString) }
+
         multiAutoCompleteTextView.setAdapter(autoFillAdapter)
         multiAutoCompleteTextView.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
         multiAutoCompleteTextView.threshold = 0
@@ -88,7 +91,8 @@ OnMapReadyCallback {
         multiAutoCompleteTextView?.addTextChangedListener{
 
             if(multiAutoCompleteTextView.text?.isNotEmpty()==true) {
-                UpdateMapDropDownMenu(multiAutoCompleteTextView.text.toString(), placesClient)
+                UpdateAutoCompletePredictions(autoFillAdapter!!, multiAutoCompleteTextView.text.toString(), placesClient)
+
             }
         }
 
@@ -106,16 +110,8 @@ OnMapReadyCallback {
         _binding = null
     }
 
-
-    fun UpdateMapDropDownMenu(string : String, placesClient: PlacesClient){
-
-        UpdateAutoCompletePredictions(string, placesClient)
-
-
-    }
-
     //function to update list of autocomplete suggestions
-    fun UpdateAutoCompletePredictions(string : String, placesClient : PlacesClient){
+    fun UpdateAutoCompletePredictions(adapter : ArrayAdapter<String>, string : String, placesClient : PlacesClient){
         val token = AutocompleteSessionToken.newInstance()
         val findAutocompletePredictionsRequest  =
             FindAutocompletePredictionsRequest.builder()
@@ -126,11 +122,18 @@ OnMapReadyCallback {
         placesClient.findAutocompletePredictions(findAutocompletePredictionsRequest).addOnSuccessListener{
             response ->
             autocompletelistString.clear()
+            autocompletelist = response.autocompletePredictions
             for (prediction in response.autocompletePredictions) {
-             autocompletelistString.add(prediction.toString())
-            }
-        }.addOnFailureListener {autocompletelistString.clear()
-            autocompletelistString.add("fail")}
+             autocompletelistString.add(prediction.getFullText(null).toString())
+                    adapter.clear()
+                    for(string in autocompletelistString) {
+                        adapter.add(string)
+                    }
+
+                }
+        }.addOnFailureListener {
+            autocompletelistString.clear()
+        }
     }
     override fun onCameraMoveStarted(p0: Int) {
         TODO("Not yet implemented")
