@@ -120,11 +120,13 @@ class HomeFragment : Fragment()
                 if (response.isSuccessful) {
                     parksList = response.body()?.data ?: emptyList()    // Save the parks list
 
-                    // Map the list of parks to their thumbnail URLs (first image URL in each park)
-                    val parkImages = parksList.map { it.images.firstOrNull()?.url ?: "" }
+                    // Map the list of parks to their thumbnail URLs and names
+                    val parkData = parksList.map {
+                        Pair(it.images.firstOrNull()?.url ?: "", it.fullName)
+                    }
 
-                    // Update the adapter with the thumbnail URLs
-                    thumbnailAdapter.updateData(parkImages)
+                    // Update the adapter with the park data (image URL + name)
+                    thumbnailAdapter.updateData(parkData)
                 } else {
                     Log.e("HomeFragment", "Response not successful: ${response.code()}")
                 }
@@ -132,7 +134,6 @@ class HomeFragment : Fragment()
 
             override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
                 Log.e("HomeFragment", "Error fetching parks: ${t.message}")
-                // Handle failure case (e.g., show a Toast message)
             }
         })
     }
