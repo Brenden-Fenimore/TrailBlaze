@@ -36,16 +36,15 @@
                 android:id="@+id/settingsbtn"
                 android:background="@android:color/transparent"
                 android:layout_centerVertical="true"/>
-
-
     </RelativeLayout>
 
     <!--    Good afternoon Greeting-->
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/swishLayout"
-            android:layout_marginEnd="0dp">
+            android:layout_marginEnd="0dp"
+            android:layout_below="@id/swishLayout">
+
         <TextView
                 android:id="@+id/homepagegreeting"
                 android:layout_width="match_parent"
