@@ -5,7 +5,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_gravity="center">
-
+<!--Terms and Conditions header-->
     <TextView
             android:ellipsize="end"
             android:id="@+id/termsandconditions"
@@ -17,14 +17,226 @@
             android:fontFamily="@font/amethysta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
+    <!--Last Updated Notice-->
     <TextView
             android:ellipsize="end"
-            android:id="@+id/Review"
+            android:id="@+id/lastupdated"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="50dp"
+            android:layout_gravity="center"
+            android:singleLine="true"
+            android:text="@string/lastUpdated_toc"
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+<!--table of contents-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/toc_services"
+                android:layout_width="95dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Our Services"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        <TextView
+                android:id="@+id/toc_intellectualProperty"
+                android:layout_width="95dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Intellectual Property Rights"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        <TextView
+                android:id="@+id/toc_userRep"
+                android:layout_width="95dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:text="User Representations"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                android:focusable="true"/>
+        <TextView
+                android:id="@+id/toc_prohActivities"
+                android:layout_width="95dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Prohibited Activities"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        <TextView
+                android:id="@+id/toc_userGenCon"
+                android:layout_width="95dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:text="User Generated Contributions"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        <TextView
+                android:id="@+id/toc_contLicense"
+                android:layout_width="95dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Contribution License"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        <TextView
+                android:id="@+id/toc_serManagement"
+                android:layout_width="95dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Services Management"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        <TextView
+                android:id="@+id/toc_term_term"
+                android:layout_width="95dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Term and Termination"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        <TextView
+                android:id="@+id/toc_mod_int"
+                android:layout_width="95dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Modifications and Interruptions"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        <TextView
+                android:id="@+id/toc_govLaw"
+                android:layout_width="95dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Governing Law"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        <TextView
+                android:id="@+id/toc_dis_res"
+                android:layout_width="95dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Dispute Resolution"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        <TextView
+                android:id="@+id/toc_corrections"
+                android:layout_width="95dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Corrections"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        <TextView
+                android:id="@+id/toc_disclaimer"
+                android:layout_width="95dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Disclaimer"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        <TextView
+                android:id="@+id/toc_liability_limitations"
+                android:layout_width="95dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Limitations of Liability"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        <TextView
+                android:id="@+id/toc_indemnification"
+                android:layout_width="95dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Indemnification"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        <TextView
+                android:id="@+id/toc_userData"
+                android:layout_width="95dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:text="User Data"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        <TextView
+                android:id="@+id/toc_electronic_communitcations"
+                android:layout_width="95dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Electronic Communications, Transactions, and Signatures"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        <TextView
+                android:id="@+id/toc_misc"
+                android:layout_width="95dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Miscellaneous"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        <TextView
+                android:id="@+id/toc_contactUs"
+                android:layout_width="95dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/contact_us"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                android:focusable="true"/>
+        <!--end of table of contents-->
+    </LinearLayout>
+
+
+    <TextView
+            android:ellipsize="end"
+            android:id="@+id/agreement"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_gravity="center_horizontal"
             android:singleLine="true"
-            android:text="@string/reviewTerms"
+            android:text="@string/agreementToTerms"
             android:textSize="15sp"
             android:fontFamily="@font/amethysta"
             android:layout_width="wrap_content"
@@ -39,33 +251,26 @@
             android:layout_marginBottom="10dp"
             android:orientation="vertical"
             android:gravity="center">
-        <TextView
-                android:id="@+id/termsandco"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/privacy_policy1"
-                android:gravity="center"
-                android:textSize="15sp"
-                android:fontFamily="@font/amethysta"
-                android:layout_width="298dp"
-                android:layout_marginBottom="20dp"
-                android:layout_height="wrap_content"/>
+
+
         <TextView
                 android:id="@+id/msg_termsandco2"
                 android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/privacy_policy2"
+                android:layout_gravity=""
+                android:text="@string/termsIntro"
                 android:gravity="center"
                 android:textSize="15sp"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="290dp"
+
                 android:layout_marginBottom="20dp"
                 android:layout_height="wrap_content"/>
+
         <TextView
                 android:id="@+id/msg_termsandco3"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/privacy_policy3"
+                android:text="@string/privacy"
                 android:gravity="center"
                 android:textSize="15sp"
                 android:fontFamily="@font/amethysta"
@@ -80,5 +285,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp">
     </Button>
+    <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
 </LinearLayout>
