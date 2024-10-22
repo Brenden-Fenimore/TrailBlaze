@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="gcm_defaultSenderId" translatable="false">1017354103686</string>
-    <string name="google_api_key" translatable="false">AIzaSyBUWF7u2Ek-DOZjOS0bMxIWPLNrJjiqhQ4</string>
-    <string name="google_app_id" translatable="false">1:1017354103686:android:16bf2db4495f7ab07eda07</string>
-    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBUWF7u2Ek-DOZjOS0bMxIWPLNrJjiqhQ4</string>
-    <string name="google_storage_bucket" translatable="false">trailblaze-48640.appspot.com</string>
-    <string name="project_id" translatable="false">trailblaze-48640</string>
-</resources>
