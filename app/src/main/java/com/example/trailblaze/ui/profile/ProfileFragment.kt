@@ -87,7 +87,7 @@ class ProfileFragment : Fragment() {
 
         achievementManager = AchievementManager(requireContext())
         badgesList = binding.badgesRecyclerView
-        badgesList.layoutManager = LinearLayoutManager(context)
+        badgesList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         return binding.root
     }
