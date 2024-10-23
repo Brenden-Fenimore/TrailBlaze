@@ -122,19 +122,42 @@ class FriendsProfileActivity : AppCompatActivity() {
         val currentUserId = auth.currentUser?.uid // Get the current user's ID
 
         if (currentUserId != null) {
-            // Create a HashMap to represent the user's document
-            val userUpdates = HashMap<String, Any>()
-            userUpdates["friends"] = FieldValue.arrayUnion(friendId) // Use arrayUnion to add the friend
+            // Reference to the current user's document
+            val userRef = firestore.collection("users").document(currentUserId)
 
-            // Update the current user's document in Firestore
-            firestore.collection("users").document(currentUserId)
-                .set(userUpdates, SetOptions.merge()) // Use merge to update the existing document
-                .addOnSuccessListener {
-                    Toast.makeText(this, "Friend added successfully!", Toast.LENGTH_SHORT).show()
+            // Fetch the current user's document to check their friends list
+            userRef.get()
+                .addOnSuccessListener { document ->
+                    if (document != null && document.exists()) {
+                        // Get the friends list from the document
+                        val friendsList = document.get("friends") as? List<String> ?: emptyList()
+
+                        // Check if the friendId is already in the friends list
+                        if (friendsList.contains(friendId)) {
+                            Toast.makeText(this, "This user is already your friend.", Toast.LENGTH_SHORT).show()
+                        } else {
+                            // Create a HashMap to represent the user's document
+                            val userUpdates = HashMap<String, Any>()
+                            userUpdates["friends"] = FieldValue.arrayUnion(friendId)
+
+                            // Update the current user's document in Firestore
+                            userRef.set(userUpdates, SetOptions.merge())
+                                .addOnSuccessListener {
+                                    Toast.makeText(this, "Friend added successfully!", Toast.LENGTH_SHORT).show()
+                                }
+                                .addOnFailureListener { exception ->
+                                    Log.e("FriendsProfileActivity", "Error adding friend: ", exception)
+                                    Toast.makeText(this, "Failed to add friend.", Toast.LENGTH_SHORT).show()
+                                }
+                        }
+                    } else {
+                        Log.e("FriendsProfileActivity", "User document does not exist")
+                        Toast.makeText(this, "User document not found.", Toast.LENGTH_SHORT).show()
+                    }
                 }
                 .addOnFailureListener { exception ->
-                    Log.e("FriendsProfileActivity", "Error adding friend: ", exception)
-                    Toast.makeText(this, "Failed to add friend.", Toast.LENGTH_SHORT).show()
+                    Log.e("FriendsProfileActivity", "Error fetching user document: ", exception)
+                    Toast.makeText(this, "Error fetching user data.", Toast.LENGTH_SHORT).show()
                 }
         } else {
             Log.e("FriendsProfileActivity", "Current user ID is null")
