@@ -210,7 +210,7 @@
     //User variables
     <string name="homepage_welcome_user">Good Afternoon,</string>
     <string name="homepage_searchbar_hint">Search</string>
-    <string name="homepage_nearby_trails">Top parks nearby:</string>
+    <string name="homepage_nearby_trails">Top trails nearby:</string>
     <string name="homepage_browse_by_difficulty">Browse by difficulty:</string>
     <string name="homepage_friends">Hike with friends!</string>
 
