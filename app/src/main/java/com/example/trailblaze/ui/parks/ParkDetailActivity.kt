@@ -71,8 +71,8 @@ class ParkDetailActivity : AppCompatActivity() {
                 val weatherInfo = park.weatherInfo ?: "No weather information available"
                 val firstOperatingHours = park.operatingHours.firstOrNull()
                 firstOperatingHours?.let {operatingHours ->
-                val standardHours = operatingHours.standardHours
-                val hoursText = """
+                    val standardHours = operatingHours.standardHours
+                    val hoursText = """
                     Sunday: ${standardHours.sunday}
                     Monday: ${standardHours.monday}
                     Tuesday: ${standardHours.tuesday}

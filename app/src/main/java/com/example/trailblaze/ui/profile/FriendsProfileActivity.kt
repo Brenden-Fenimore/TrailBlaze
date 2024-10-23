@@ -2,7 +2,9 @@ package com.example.trailblaze.ui.profile
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
 import com.example.trailblaze.databinding.ActivityFriendsProfileBinding
@@ -48,7 +50,9 @@ class FriendsProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         binding = ActivityFriendsProfileBinding.inflate(layoutInflater)
+        setContentView(binding.root) // Set the content view here
 
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
@@ -56,9 +60,13 @@ class FriendsProfileActivity : AppCompatActivity() {
         // Get the user ID from the intent extras
         userId = intent.getStringExtra("friendUserId") ?: return
 
-        loadFriendProfile()
-
+        // Set up the back button listener
+        binding.chevronLeft.setOnClickListener {
+            onBackPressed() // or finish() to close this activity
         }
+        loadFriendProfile()
+    }
+
     private fun loadFriendProfile() {
         firestore.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
@@ -73,12 +81,15 @@ class FriendsProfileActivity : AppCompatActivity() {
                     // Fetch and display badges (similar to your own profile)
                     val badges = document.get("badges") as? List<String> ?: emptyList()
                     updateBadgesList(badges)
+                } else {
+                    Log.e("FriendsProfileActivity", "Friend document does not exist")
                 }
             }
             .addOnFailureListener { exception ->
                 Log.e("FriendsProfileActivity", "Error fetching friend profile: ", exception)
             }
     }
+
     private fun updateBadgesList(badges: List<String>) {
         // Filter the list of all badges based on fetched user badges
         val unlockedBadges = allBadges.filter { badges.contains(it.id) }

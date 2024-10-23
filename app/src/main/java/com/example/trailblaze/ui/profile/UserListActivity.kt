@@ -30,6 +30,7 @@ class UserListActivity: AppCompatActivity(){
             // Handle user click
             val intent = Intent(this, FriendsProfileActivity::class.java)
             intent.putExtra("friendUserId", user.userId)
+            startActivity(intent)
         }
         binding.userRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.userRecyclerView.adapter = userAdapter

@@ -81,13 +81,23 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    //firebase
     implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation ("com.google.firebase:firebase-firestore-ktx:24.0.1")
+
+    //for adding profile pics
+    implementation ("com.google.firebase:firebase-storage-ktx")
+
+    //maps
     implementation ("com.google.android.gms:play-services-maps:18.0.2")
     implementation ("com.google.maps.android:android-maps-utils:2.2.0")
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.9.0"))
+
+
+    //places
     implementation("com.google.android.libraries.places:places:4.0.0")
-    implementation ("com.google.firebase:firebase-firestore-ktx:24.0.1")
+    implementation("com.google.android.libraries.places:places:3.4.0")
+
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1") // Use the latest version
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1") // Use the latest version
 
@@ -99,19 +109,14 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
 
-    implementation ("com.google.android.gms:play-services-maps:18.0.2")
-    implementation ("com.google.maps.android:android-maps-utils:2.2.0")
+    //jetbrains
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.9.0"))
-    implementation("com.google.android.libraries.places:places:3.4.0")
     implementation ("androidx.activity:activity-compose:1.6.1")
 
-    //for adding profile pics
-    implementation (platform("com.google.firebase:firebase-bom:33.4.0")) // Or your Firebase BOM version
-    implementation ("com.google.firebase:firebase-storage-ktx")
+
 
     implementation ("com.google.android.gms:play-services-maps:18.0.2")
     implementation ("com.google.maps.android:android-maps-utils:2.2.0")
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.9.0"))
     implementation("com.google.android.libraries.places:places:4.0.0")
 
     implementation("com.google.firebase:firebase-storage")
