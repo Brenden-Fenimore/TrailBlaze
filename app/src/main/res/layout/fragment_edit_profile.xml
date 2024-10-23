@@ -175,13 +175,60 @@
                     android:contentDescription="@string/locationIcon" />
 
             <EditText
-                    android:id="@+id/edit_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:hint="@string/userLocation"
-                    android:autofillHints="location"
-                    android:inputType="textPostalAddress" />
+                    android:inputType="textEmailAddress"
+                    android:layout_gravity="center"
+                    android:id="@+id/editCity"
+                    android:fontFamily="@font/amethysta"
+                    android:hint="City"/>
+        </LinearLayout>
+        <!-- Location Field -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+            <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/location"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/locationIcon" />
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:layout_gravity="center"
+                    android:id="@+id/editState"
+                    android:fontFamily="@font/amethysta"
+                    android:hint="State"/>
+        </LinearLayout>
+
+        <!-- Location Field -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+            <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/location"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/locationIcon" />
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:layout_gravity="center"
+                    android:id="@+id/editZip"
+                    android:fontFamily="@font/amethysta"
+                    android:hint="Zip"/>
         </LinearLayout>
 
         <!-- Phone Number Field -->
@@ -224,14 +271,17 @@
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/terrainIcon"
                     android:layout_marginEnd="8dp"/>
-
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
             <TextView
                     android:id="@+id/edit_terrain"
-                    android:layout_width="wrap_content"
+                    android:layout_width="141dp"
                     android:layout_height="wrap_content"
                     android:text="@string/terrain"
-                    android:textSize="16sp"
-                    android:layout_marginEnd="16dp" />
+                    android:textSize="20sp"
+                    android:layout_marginEnd="16dp"/>
 
 
             <Spinner
@@ -240,7 +290,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:entries="@array/terrain_options" />
+            </LinearLayout>
+
         </LinearLayout>
+
 
         <!-- Fitness Level -->
         <LinearLayout
@@ -259,18 +312,21 @@
 
             <TextView
                     android:id="@+id/edit_fitness"
-                    android:layout_width="wrap_content"
+                    android:layout_width="141dp"
                     android:layout_height="wrap_content"
                     android:text="@string/fitnessLevel"
-                    android:textSize="16sp"
-                    android:layout_marginEnd="16dp" />
+                    android:textSize="20sp"
+                    android:layout_marginEnd="16dp"/>
             <Spinner
                     android:id="@+id/fitness_level_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:entries="@array/fitness_level_options" />
+
         </LinearLayout>
+
+
 
         <!-- Difficulty Level -->
         <LinearLayout
@@ -289,11 +345,11 @@
 
             <TextView
                     android:id="@+id/edit_difficulty"
-                    android:layout_width="wrap_content"
+                    android:layout_width="141dp"
                     android:layout_height="wrap_content"
                     android:text="@string/difficultyLevel"
-                    android:textSize="16sp"
-                    android:layout_marginEnd="16dp" />
+                    android:textSize="20sp"
+                    android:layout_marginEnd="16dp"/>
             <Spinner
                     android:id="@+id/difficulty_spinner"
                     android:layout_width="match_parent"
@@ -301,6 +357,7 @@
                     android:layout_marginStart="8dp"
                     android:entries="@array/difficulty_level_options" />
         </LinearLayout>
+
 
         <!-- Type of Hike -->
         <LinearLayout
@@ -318,10 +375,10 @@
 
             <TextView
                     android:id="@+id/edit_type_Of_Hike"
-                    android:layout_width="wrap_content"
+                    android:layout_width="141dp"
                     android:layout_height="wrap_content"
                     android:text="@string/typeOfHike"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     android:layout_marginEnd="16dp" />
             <Spinner
                     android:id="@+id/type_of_hike_spinner"

@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import android.widget.SeekBar
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.trailblaze.firestore.ImageLoader
 import com.example.trailblaze.firestore.UserRepository
@@ -115,7 +116,9 @@ class EditProfileFragment : Fragment() {
                 binding.editUsername.setText(document.getString("username"))
                 binding.editEmail.setText(document.getString("email"))
                 binding.editDob.setText(document.getString("dateOfBirth"))
-                binding.editLocation.setText(document.getString("location"))
+                binding.editCity.setText(document.getString("city"))
+                binding.editState.setText(document.getString("state"))
+                binding.editZip.setText(document.getString("zip"))
                 binding.editPhone.setText(document.getString("phone"))
 
                 // For spinners, you can select the right value programmatically
@@ -204,6 +207,7 @@ class EditProfileFragment : Fragment() {
         // Initialize views
         binding.updateProfileButton.setOnClickListener {
             updateUserProfile()
+            Toast.makeText(context, "Profile updated successfully", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -215,7 +219,9 @@ class EditProfileFragment : Fragment() {
             "username" to binding.editUsername.text.toString(),
             "email" to binding.editEmail.text.toString(),
             "dob" to binding.editDob.text.toString(),
-            "location" to binding.editLocation.text.toString(),
+            "city" to binding.editCity.text.toString(),
+            "state" to binding.editState.text.toString(),
+            "zip" to binding.editZip.text.toString(),
             "phone" to binding.editPhone.text.toString(),
             "terrain" to binding.terrainSpinner.selectedItem.toString(),
             "fitnessLevel" to binding.fitnessLevelSpinner.selectedItem.toString(),
