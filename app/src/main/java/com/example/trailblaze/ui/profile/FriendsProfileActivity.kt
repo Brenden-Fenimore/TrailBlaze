@@ -2,7 +2,9 @@ package com.example.trailblaze.ui.profile
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +16,8 @@ import com.example.trailblaze.ui.achievements.BadgesAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.trailblaze.firestore.ImageLoader
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.SetOptions
 
 class FriendsProfileActivity : AppCompatActivity() {
 
@@ -25,6 +29,7 @@ class FriendsProfileActivity : AppCompatActivity() {
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
     private lateinit var userId: String
+    private lateinit var addFriendButton: ImageButton
 
     // Define all possible badges
     private val allBadges = listOf(
@@ -65,6 +70,13 @@ class FriendsProfileActivity : AppCompatActivity() {
             onBackPressed() // or finish() to close this activity
         }
         loadFriendProfile()
+
+        // Initialize the "Add" button
+        addFriendButton = binding.addFriendButton
+
+        addFriendButton.setOnClickListener {
+            addFriend(userId) // Call the function to add friend
+        }
     }
 
     private fun loadFriendProfile() {
@@ -103,6 +115,30 @@ class FriendsProfileActivity : AppCompatActivity() {
             binding.badgesRecyclerView.adapter = badgesAdapter
         } else {
             badgesAdapter.updateBadges(unlockedBadges)
+        }
+    }
+
+    private fun addFriend(friendId: String) {
+        val currentUserId = auth.currentUser?.uid // Get the current user's ID
+
+        if (currentUserId != null) {
+            // Create a HashMap to represent the user's document
+            val userUpdates = HashMap<String, Any>()
+            userUpdates["friends"] = FieldValue.arrayUnion(friendId) // Use arrayUnion to add the friend
+
+            // Update the current user's document in Firestore
+            firestore.collection("users").document(currentUserId)
+                .set(userUpdates, SetOptions.merge()) // Use merge to update the existing document
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Friend added successfully!", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener { exception ->
+                    Log.e("FriendsProfileActivity", "Error adding friend: ", exception)
+                    Toast.makeText(this, "Failed to add friend.", Toast.LENGTH_SHORT).show()
+                }
+        } else {
+            Log.e("FriendsProfileActivity", "Current user ID is null")
+            Toast.makeText(this, "You are not logged in.", Toast.LENGTH_SHORT).show()
         }
     }
 }

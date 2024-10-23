@@ -26,7 +26,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import com.example.trailblaze.ui.profile.UserAdapter
-import com.example.trailblaze.ui.profile.User
+import com.example.trailblaze.ui.profile.Friends
 
 
 
@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var usersRecyclerView: RecyclerView
     private lateinit var usersAdapter: UserAdapter
-    private var userList: List<User> = listOf()
+    private var friendsList: List<Friends> = listOf()
 
     private var _binding: FragmentHomeBinding? = null
     private lateinit var firestore: FirebaseFirestore
@@ -111,7 +111,7 @@ class HomeFragment : Fragment() {
         usersRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         // Set up the adapter
-        usersAdapter = UserAdapter(userList) { user ->
+        usersAdapter = UserAdapter(friendsList) { user ->
             val intent = Intent(context, FriendsProfileActivity::class.java)
             intent.putExtra("friendUserId", user.userId)
             startActivity(intent)
@@ -177,17 +177,17 @@ class HomeFragment : Fragment() {
     private fun fetchUsers() {
         firestore.collection("users").get()
             .addOnSuccessListener { documents ->
-                userList = documents.mapNotNull { document ->
+                friendsList = documents.mapNotNull { document ->
                     val userId = document.id
                     val username = document.getString("username")
                     val profileImageUrl = document.getString("profileImageUrl")
                     if (username != null) {
-                        User(userId, username, profileImageUrl) // Replace with your User model constructor
+                        Friends(userId, username, profileImageUrl) // Replace with your User model constructor
                     } else {
                         null
                     }
                 }
-                usersAdapter.updateUserList(userList) // Update the adapter with the fetched user list
+                usersAdapter.updateUserList(friendsList) // Update the adapter with the fetched user list
             }
             .addOnFailureListener { exception ->
                 Log.e("UserListActivity", "Error fetching users: ", exception)

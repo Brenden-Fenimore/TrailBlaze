@@ -12,7 +12,7 @@ class UserListActivity: AppCompatActivity(){
     private lateinit var binding: ActivityUserListBinding
     private lateinit var firestore: FirebaseFirestore
     private lateinit var userAdapter: UserAdapter
-    private lateinit var userList: List<User> // Replace User with your user data model class
+    private lateinit var friendsList: List<Friends> // Replace User with your user data model class
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,17 +42,17 @@ class UserListActivity: AppCompatActivity(){
     private fun fetchUsers() {
         firestore.collection("users").get()
             .addOnSuccessListener { documents ->
-                userList = documents.mapNotNull { document ->
+                friendsList = documents.mapNotNull { document ->
                     val userId = document.id
                     val username = document.getString("username")
                     val profileImageUrl = document.getString("profileImageUrl")
                     if (username != null) {
-                        User(userId, username, profileImageUrl) // Replace with your User model constructor
+                        Friends(userId, username, profileImageUrl) // Replace with your User model constructor
                     } else {
                         null
                     }
                 }
-                userAdapter.updateUserList(userList) // Update the adapter with the fetched user list
+                userAdapter.updateUserList(friendsList) // Update the adapter with the fetched user list
             }
             .addOnFailureListener { exception ->
                 Log.e("UserListActivity", "Error fetching users: ", exception)

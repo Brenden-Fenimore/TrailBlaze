@@ -27,6 +27,7 @@ object UserManager {
                         fitnessLevel = document.getString("fitnessLevel") ?: "",
                         phone = document.getString("phone") ?: "",
                         zip = document.getString("zip") ?: "",
+                        profileImageUrl = document.getString("profileImageUrl") ?: "",
                         distance = document.getDouble("distance") ?: 0.0,
                         email = document.getString("email") ?: ""
                     )

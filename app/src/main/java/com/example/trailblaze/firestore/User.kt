@@ -12,5 +12,5 @@ data class User(
     val fitnessLevel: String = "",
     val phone: String = "",
     val zip: String = "",
-
+    val profileImageUrl: String? = ""
 )
