@@ -22,7 +22,6 @@ data class Park(
     val stateCode: String,
     val weatherInfo: String,
     val operatingHours: List<OperatingHours>
-
 )
 
 data class Address(

@@ -26,9 +26,6 @@ import retrofit2.Response
 import com.example.trailblaze.ui.profile.UserAdapter
 import com.example.trailblaze.ui.profile.User
 
-
-
-
 class HomeFragment : Fragment() {
 
     private lateinit var usersRecyclerView: RecyclerView
@@ -69,8 +66,6 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-
-
         // RecyclerView setup
         parksRecyclerView = binding.thumbnailRecyclerView
         parksRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -86,17 +81,20 @@ class HomeFragment : Fragment() {
                 }
                 startActivity(intent)
             }
+
         }
+
         // Set adapter to RecyclerView
         parksRecyclerView.adapter = thumbnailAdapter
 
         // Fetch parks data
-        fetchParksData()
+        fetchParksByState(userState = "state")
 
         // Username fetching logic
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser != null) {
             fetchUsername()
+            fetchUserState()
         } else {
             binding.homepageusername.text = "<UserName>"
         }
@@ -125,6 +123,7 @@ class HomeFragment : Fragment() {
                     if (document != null && document.exists()) {
                         val username = document.getString("username") // Fetch the username
                         binding.homepageusername.text = username // Set the username in the TextView
+
                     } else {
                         // Handle the case where the document does not exist
                         binding.homepageusername.text = "Username not found"
@@ -137,8 +136,6 @@ class HomeFragment : Fragment() {
             binding.homepageusername.text = "Not logged in"
         }
     }
-
-
 
     private fun fetchParksData() {
         RetrofitInstance.api.getParks(10).enqueue(object : Callback<NPSResponse> {
@@ -182,8 +179,48 @@ class HomeFragment : Fragment() {
             }
     }
 
+    private fun fetchParksByState(userState: String) {
+        RetrofitInstance.api.getParksbyQuery(userState).enqueue(object : Callback<NPSResponse> {
+            override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
+                if (response.isSuccessful) {
+                    parksList = response.body()?.data ?: emptyList()
 
+                    // Map the list of parks to their thumbnail URLs and names
+                    val parkData = parksList.map {
+                        Pair(it.images.firstOrNull()?.url ?: "", it.fullName)
+                    }
 
+                    // Update the adapter with the park data (image URL + name)
+                    thumbnailAdapter.updateData(parkData)
+                } else {
+                    Log.e("HomeFragment", "Response not successful: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
+                Log.e("HomeFragment", "Error fetching parks: ${t.message}")
+            }
+        })
+    }
+
+    private fun fetchUserState() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid // Get the current user's ID
+
+        if (userId != null) {
+            firestore.collection("users").document(userId).get()
+                .addOnSuccessListener { document ->
+                    if (document != null && document.exists()) {
+                        val userState = document.getString("state") ?: "No State Found"// Fetch the username
+                        fetchParksByState(userState)
+                    }
+                }
+                .addOnFailureListener {
+                }
+        } else {
+            // Handle the case where userId is null (not logged in)
+            binding.homepageusername.text = "Not logged in"
+        }
+    }
 
     override fun onDestroyView()
     {
