@@ -299,29 +299,28 @@
     <string name="suggestedTrailsMiles">Suggested Trails: %1$d miles</string>
     <string name="bucketListTrails">Bucket List Trails</string>
     <string name="favoriteFriends">Favorite Friends</string>
+    <string name="rangeMiles">  Range(miles)</string>
     <!-- Spinner options for terrain -->
     <string-array name="terrain_options">
-        <item>Mountain</item>
-        <item>Forest</item>
-        <item>Desert</item>
-        <item>Beach</item>
+        <item>Foot Trails</item>
+        <item>Nature Trails</item>
+        <item>Rock Trails</item>
     </string-array>
 
     <!-- Spinner options for fitness level -->
     <string-array name="fitness_level_options">
-        <item>Beginner</item>
-        <item>Intermediate</item>
-        <item>Advanced</item>
+        <item>Low-Intensity</item>
+        <item>Moderate-Intensity</item>
+        <item>High-Intensity</item>
     </string-array>
 
     <!-- Spinner options for difficulty level -->
     <string-array name="difficulty_level_options">
         <item>Easiest</item>
-        <item>Easy</item>
         <item>Moderate</item>
-        <item>Moderate Difficult</item>
-        <item>Difficult</item>
-        <item>Extremely Difficult</item>
+        <item>Moderately Strenuous</item>
+        <item>Strenuous</item>
+        <item>Very Strenuous</item>
     </string-array>
 
     <!-- Spinner options for hike type -->

@@ -1,6 +1,8 @@
 package com.example.trailblaze.ui.profile
 
-data class Friends(
+import com.example.trailblaze.nps.PhoneNumber
+
+data class User(
     val userId: String = "",
     val username: String = "",
     val profileImageUrl: String? = "",

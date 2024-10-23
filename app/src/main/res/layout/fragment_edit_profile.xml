@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -18,7 +17,7 @@
 
         <ImageButton
                 android:src="@drawable/chevron_left"
-                android:contentDescription="@string/settings"
+                android:contentDescription="@string/backButton"
                 android:layout_width="49dp"
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
@@ -70,19 +69,17 @@
 
             <ImageView
                     android:id="@+id/profilePicture"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:src="@drawable/account_circle"
-                    android:scaleType="centerCrop"
-                    android:contentDescription="@string/profilePicture" />
-
+                    android:contentDescription="@string/profilePicture"/>
             <ImageButton
                     android:id="@+id/camera_icon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="bottom|end"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/camera"
+                    android:src="@drawable/camera2"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/camera" />
 
@@ -238,6 +235,7 @@
 
 
             <Spinner
+                    android:id="@+id/terrain_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -267,6 +265,7 @@
                     android:textSize="16sp"
                     android:layout_marginEnd="16dp" />
             <Spinner
+                    android:id="@+id/fitness_level_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -296,6 +295,7 @@
                     android:textSize="16sp"
                     android:layout_marginEnd="16dp" />
             <Spinner
+                    android:id="@+id/difficulty_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -324,6 +324,7 @@
                     android:textSize="16sp"
                     android:layout_marginEnd="16dp" />
             <Spinner
+                    android:id="@+id/type_of_hike_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -362,7 +363,7 @@
                 android:id="@+id/seekBar"/>
         <TextView
                 android:layout_gravity="center_horizontal"
-                android:text="  Range(miles)"
+                android:text="@string/rangeMiles"
                 android:textSize="20sp"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="305dp"

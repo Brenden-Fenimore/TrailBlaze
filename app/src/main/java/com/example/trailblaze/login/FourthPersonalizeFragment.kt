@@ -46,16 +46,17 @@ class FourthPersonalizeFragment : Fragment() {
 
         val optionsSpinner3 = mapOf(
             "Easiest" to 1,
-            "Easy" to 2,
-            "Moderate" to 3,
-            "Difficult" to 4,
-            "Extremely Difficulty" to 5,
+            "Moderate" to 2,
+            "Moderately Strenuous" to 3,
+            "Strenuous" to 4,
+            "Very Strenuous" to 5,
         )
 
         val optionsSpinner4 = mapOf(
             "Day Hike" to 1,
-            "Long Distance" to 2,
-            "Peek Bagging" to 3
+            "Backpacking" to 2,
+            "Trail Running" to 3,
+            "Climbing" to 4,
         )
 
         //set up the finished button
