@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.ThumbnailAdapter
 import com.example.trailblaze.databinding.FragmentHomeBinding
+import com.example.trailblaze.firestore.UserManager
 import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.Park
 import com.example.trailblaze.nps.RetrofitInstance
@@ -113,6 +114,7 @@ class HomeFragment : Fragment() {
 
         // Load users (you would need to implement this)
         loadUsers()
+        fetchCurrentUser()
         return root
     }
 
@@ -182,8 +184,16 @@ class HomeFragment : Fragment() {
             }
     }
 
-
-
+    private fun fetchCurrentUser() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+            UserManager.fetchUserData(userId, firestore) { user ->
+                if (user != null) {
+                } else {
+                }
+            }
+        }
+    }
 
     override fun onDestroyView()
     {
