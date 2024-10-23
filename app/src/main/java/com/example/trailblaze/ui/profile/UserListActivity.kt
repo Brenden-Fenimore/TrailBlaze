@@ -11,7 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 class UserListActivity: AppCompatActivity(){
     private lateinit var binding: ActivityUserListBinding
     private lateinit var firestore: FirebaseFirestore
-    private lateinit var userAdapter: UserAdapter
+    private lateinit var friendAdapter: FriendAdapter
     private lateinit var friendsList: List<Friends> // Replace User with your user data model class
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,14 +26,14 @@ class UserListActivity: AppCompatActivity(){
         firestore = FirebaseFirestore.getInstance()
 
         // Setup RecyclerView
-        userAdapter = UserAdapter(emptyList()) { user ->
+        friendAdapter = FriendAdapter(emptyList()) { user ->
             // Handle user click
             val intent = Intent(this, FriendsProfileActivity::class.java)
             intent.putExtra("friendUserId", user.userId)
             startActivity(intent)
         }
         binding.userRecyclerView.layoutManager = LinearLayoutManager(this)
-        binding.userRecyclerView.adapter = userAdapter
+        binding.userRecyclerView.adapter = friendAdapter
 
         // Fetch users from Firestore
         fetchUsers()
@@ -52,7 +52,7 @@ class UserListActivity: AppCompatActivity(){
                         null
                     }
                 }
-                userAdapter.updateUserList(friendsList) // Update the adapter with the fetched user list
+                friendAdapter.updateUserList(friendsList) // Update the adapter with the fetched user list
             }
             .addOnFailureListener { exception ->
                 Log.e("UserListActivity", "Error fetching users: ", exception)

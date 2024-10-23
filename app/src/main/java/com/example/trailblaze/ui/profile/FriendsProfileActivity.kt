@@ -2,11 +2,13 @@ package com.example.trailblaze.ui.profile
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
 import com.example.trailblaze.databinding.ActivityFriendsProfileBinding
@@ -16,6 +18,9 @@ import com.example.trailblaze.ui.achievements.BadgesAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.trailblaze.firestore.ImageLoader
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.tasks.Tasks
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.SetOptions
 
@@ -30,6 +35,10 @@ class FriendsProfileActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var userId: String
     private lateinit var addFriendButton: ImageButton
+
+    private lateinit var friendsInCommonRecyclerView: RecyclerView
+    private lateinit var friendsInCommonAdapter: FriendAdapter
+    private lateinit var friendsInCommonList: MutableList<Friends>
 
     // Define all possible badges
     private val allBadges = listOf(
@@ -62,6 +71,17 @@ class FriendsProfileActivity : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
 
+// Initialize the RecyclerView for friends in common
+        friendsInCommonList = mutableListOf()
+        friendsInCommonAdapter = FriendAdapter(friendsInCommonList) { friend ->
+            // Handle friend click here if needed
+        }
+
+        friendsInCommonRecyclerView = binding.friendsInCommonRecyclerView
+        friendsInCommonRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        friendsInCommonRecyclerView.adapter = friendsInCommonAdapter
+
+
         // Get the user ID from the intent extras
         userId = intent.getStringExtra("friendUserId") ?: return
 
@@ -70,6 +90,7 @@ class FriendsProfileActivity : AppCompatActivity() {
             onBackPressed() // or finish() to close this activity
         }
         loadFriendProfile()
+        fetchFriendsInCommon()
 
         // Initialize the "Add" button
         addFriendButton = binding.addFriendButton
@@ -162,6 +183,66 @@ class FriendsProfileActivity : AppCompatActivity() {
         } else {
             Log.e("FriendsProfileActivity", "Current user ID is null")
             Toast.makeText(this, "You are not logged in.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun fetchFriendsInCommon() {
+        val currentUserId = auth.currentUser?.uid ?: return
+
+        // Get the friends list of the current user
+        firestore.collection("users").document(currentUserId).get()
+            .addOnSuccessListener { currentUserDocument ->
+                if (currentUserDocument.exists()) {
+                    val currentUserFriends = currentUserDocument.get("friends") as? List<String> ?: emptyList()
+
+                    // Now get the friends list of the friend whose profile is being viewed
+                    firestore.collection("users").document(userId).get()
+                        .addOnSuccessListener { friendDocument ->
+                            if (friendDocument.exists()) {
+                                val friendFriends = friendDocument.get("friends") as? List<String> ?: emptyList()
+
+                                // Find common friends
+                                val commonFriendsIds = currentUserFriends.intersect(friendFriends).toList()
+
+                                // Fetch the details of common friends
+                                loadCommonFriendsData(commonFriendsIds)
+                            }
+                        }
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("FriendsProfileActivity", "Error fetching current user friends: ", exception)
+            }
+    }
+
+    private fun loadCommonFriendsData(commonFriendsIds: List<String>) {
+        val commonFriends = mutableListOf<Friends>()
+        val tasks = mutableListOf<Task<DocumentSnapshot>>()
+
+        for (friendId in commonFriendsIds) {
+            tasks.add(firestore.collection("users").document(friendId).get().addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val friend = Friends(
+                        userId = friendId,
+                        username = document.getString("username") ?: "Unknown",
+                        profileImageUrl = document.getString("profileImageUrl")
+                    )
+                    commonFriends.add(friend)
+                }
+            })
+        }
+
+        // Wait until all tasks are completed
+        Tasks.whenAllSuccess<DocumentSnapshot>(tasks).addOnSuccessListener {
+            if (commonFriends.isNotEmpty()) {
+                // Update the adapter with common friends data
+                friendsInCommonAdapter.updateUserList(commonFriends)
+                binding.friendsInCommonRecyclerView.visibility = View.VISIBLE // Show the RecyclerView
+            } else {
+                binding.friendsInCommonRecyclerView.visibility = View.GONE // Hide if no common friends
+            }
+        }.addOnFailureListener { exception ->
+            Log.e("FriendsProfileActivity", "Error fetching common friends: ", exception)
         }
     }
 }

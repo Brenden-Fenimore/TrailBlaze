@@ -12,5 +12,6 @@ data class User(
     val fitnessLevel: String = "",
     val phone: String = "",
     val zip: String = "",
-    val profileImageUrl: String? = ""
+    val profileImageUrl: String? = "",
+    val friends: List<String> = emptyList()
 )

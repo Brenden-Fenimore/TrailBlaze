@@ -1,6 +1,7 @@
 package com.example.trailblaze.firestore
 
 import android.util.Log
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class UserRepository(private val firestore: FirebaseFirestore) {
@@ -21,4 +22,5 @@ class UserRepository(private val firestore: FirebaseFirestore) {
                 onComplete(null) // Handle error case
             }
     }
+
 }

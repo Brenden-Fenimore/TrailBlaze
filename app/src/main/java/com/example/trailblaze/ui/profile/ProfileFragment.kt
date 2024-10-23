@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.trailblaze.R
 import com.example.trailblaze.databinding.FragmentProfileBinding
 import com.example.trailblaze.firestore.UserRepository
@@ -18,6 +19,10 @@ import com.example.trailblaze.ui.achievements.Badge
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.trailblaze.firestore.ImageLoader
+import com.example.trailblaze.firestore.UserManager
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.tasks.Tasks
+import com.google.firebase.firestore.DocumentSnapshot
 
 class ProfileFragment : Fragment() {
 
@@ -31,6 +36,11 @@ class ProfileFragment : Fragment() {
     private lateinit var achievementManager: AchievementManager
     private lateinit var badgesList: RecyclerView
     private lateinit var badgesAdapter: BadgesAdapter
+
+    private lateinit var userManager: UserManager
+
+    private lateinit var friendAdapter: FriendAdapter
+    private lateinit var friendsList: MutableList<Friends>
 
     // Define all possible badges
     private val allBadges = listOf(
@@ -53,38 +63,38 @@ class ProfileFragment : Fragment() {
         Badge("badgecollector", "Badge Collector", R.drawable.badgecollector),
         Badge("leaderboard", "Leaderboard", R.drawable.leaderboard),
     )
-        override fun onCreateView(
+
+    override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-            // Initialize the binding
-            _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        // Initialize the binding
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        binding.editbutton.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
-        }
-
-        //set click listener
-        binding.chevronLeft.setOnClickListener {
-            findNavController().navigateUp()
-        }
-
-        // Initialize Firestore
+        // Initialize Firebase components
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
-            userRepository = UserRepository(firestore)
-            loadProfilePicture()
+        userRepository = UserRepository(firestore)
 
-        // Username fetching logic
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        if (currentUser != null) {
-            fetchUsername()
-            fetchUserBadges()
-        } else {
-            binding.username.text = "Not logged in"
+        // Initialize the RecyclerView
+        friendsList = mutableListOf()
+
+        friendAdapter = FriendAdapter(friendsList) { friend ->
         }
+        binding.friendsRecyclerView.adapter = friendAdapter
 
+
+        // Initialize UserManager
+        userManager = UserManager
+
+        // Set up UI event listeners
+        setupUIEventListeners()
+
+        // Load current user's data
+        loadCurrentUserData()
+
+        // Initialize achievement manager and badges list
         achievementManager = AchievementManager(requireContext())
         badgesList = binding.badgesRecyclerView
         badgesList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -92,26 +102,74 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
-    private fun fetchUsername() {
-        val userId = FirebaseAuth.getInstance().currentUser?.uid // Get the current user's ID
+    private fun setupUIEventListeners() {
+        binding.editbutton.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
+        }
 
+        // Set click listener for the back button
+        binding.chevronLeft.setOnClickListener {
+            findNavController().navigateUp()
+        }
+    }
+
+    private fun loadCurrentUserData() {
+        // Fetch the current user from UserManager
+        val currentUser = userManager.getCurrentUser()
+
+        if (currentUser != null) {
+            // Set the username in the TextView
+            binding.username.text = currentUser.username
+
+            // Load the user's badges
+            fetchUserBadges()
+
+            // Load the user's profile picture
+            loadProfilePicture()
+
+            // Fetch friends when current user data is loaded
+            fetchUserFriends()
+        } else {
+            binding.username.text = "Not logged in"
+        }
+    }
+
+    private fun fetchUserFriends() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
             firestore.collection("users").document(userId).get()
                 .addOnSuccessListener { document ->
-                    if (document != null && document.exists()) {
-                        val username = document.getString("username") // Fetch the username
-                        binding.username.text = username // Set the username in the TextView
-                    } else {
-                        // Handle the case where the document does not exist
-                        binding.username.text = "Username not found"
+                    if (document.exists()) {
+                        val friendsIds = document.get("friends") as? List<String> ?: emptyList()
+                        loadFriendsData(friendsIds)
                     }
                 }
-                .addOnFailureListener { exception ->
-                    // Handle any errors
+                .addOnFailureListener { e ->
+                    Log.e("Firestore", "Error fetching friends: ", e)
                 }
-        } else {
-            // Handle the case where userId is null (not logged in)
-            binding.username.text = "<UserName>"
+        }
+    }
+
+    private fun loadFriendsData(friendIds: List<String>) {
+        val tasks = mutableListOf<Task<DocumentSnapshot>>()
+
+        for (friendId in friendIds) {
+            tasks.add(firestore.collection("users").document(friendId).get().addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val friend = Friends(
+                        userId  = friendId,
+                        username = document.getString("username") ?: "Unknown",
+                        profileImageUrl = document.getString("profileImageUrl")
+                    )
+                    friendsList.add(friend) // Add friend to the list
+                }
+            })
+        }
+
+        // Wait until all friend data is fetched
+        Tasks.whenAllSuccess<DocumentSnapshot>(tasks).addOnSuccessListener {
+            // Update the RecyclerView with the fetched friends
+            friendAdapter.updateUserList(friendsList)
         }
     }
 
@@ -131,7 +189,6 @@ class ProfileFragment : Fragment() {
                 }
         }
     }
-
     private fun updateBadgesList(badges: List<String>) {
         // Filter the list of all badges based on fetched user badges
         val unlockedBadges = allBadges.filter { badges.contains(it.id) }
@@ -153,10 +210,5 @@ class ProfileFragment : Fragment() {
         userRepository.getUserProfileImage(userId) { imageUrl ->
             ImageLoader.loadProfilePicture(requireContext(), binding.profilePicture, imageUrl)
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

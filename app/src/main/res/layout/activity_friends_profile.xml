@@ -137,50 +137,12 @@
                 android:paddingTop="16dp"
                 android:paddingBottom="8dp"/>
 
-        <HorizontalScrollView
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/friendsInCommonRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="horizontal">
-
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                <!-- Placeholder for friend avatars -->
-                <ImageButton
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/userperson"
-                        android:contentDescription="@string/friendProfilePicture"/>
-                <ImageButton
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/userperson"
-                        android:contentDescription="@string/friendProfilePicture"/>
-                <ImageButton
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/userperson"
-                        android:contentDescription="@string/friendProfilePicture"/>
-                <ImageButton
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/userperson"
-                        android:contentDescription="@string/friendProfilePicture"/>
-                <ImageButton
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/userperson"
-                        android:contentDescription="@string/friendProfilePicture"/>
-                <!-- Repeat as necessary for other friends -->
-            </LinearLayout>
-        </HorizontalScrollView>
+                app:layoutManager="LinearLayoutManager"
+                android:orientation="horizontal"/>
 
         <!-- Leaderboard Section -->
         <TextView

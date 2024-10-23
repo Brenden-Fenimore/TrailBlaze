@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.databinding.ItemUserBinding
 import com.example.trailblaze.firestore.ImageLoader
 
-class UserAdapter(
+class FriendAdapter(
     private var friends: List<Friends>, // Replace User with your user data model class
     private val onClick: (Friends) -> Unit,
-) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+) : RecyclerView.Adapter<FriendAdapter.UserViewHolder>() {
 
     inner class UserViewHolder(private val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(friends: Friends) {

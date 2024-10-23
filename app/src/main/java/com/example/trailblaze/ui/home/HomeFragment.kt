@@ -25,7 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import com.example.trailblaze.ui.profile.UserAdapter
+import com.example.trailblaze.ui.profile.FriendAdapter
 import com.example.trailblaze.ui.profile.Friends
 
 
@@ -34,7 +34,7 @@ import com.example.trailblaze.ui.profile.Friends
 class HomeFragment : Fragment() {
 
     private lateinit var usersRecyclerView: RecyclerView
-    private lateinit var usersAdapter: UserAdapter
+    private lateinit var usersAdapter: FriendAdapter
     private var friendsList: List<Friends> = listOf()
 
     private var _binding: FragmentHomeBinding? = null
@@ -111,7 +111,7 @@ class HomeFragment : Fragment() {
         usersRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         // Set up the adapter
-        usersAdapter = UserAdapter(friendsList) { user ->
+        usersAdapter = FriendAdapter(friendsList) { user ->
             val intent = Intent(context, FriendsProfileActivity::class.java)
             intent.putExtra("friendUserId", user.userId)
             startActivity(intent)
