@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -89,6 +90,15 @@ class ProfileFragment : Fragment() {
         badgesList = binding.badgesRecyclerView
         badgesList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
+            // Initialize the icons
+            binding.iconLocation.setOnClickListener {
+                fetchCurrentUserLocation()
+            }
+
+            binding.iconDifficulty.setOnClickListener {
+                fetchCurrentUserDifficulty()
+            }
+
         return binding.root
     }
 
@@ -153,6 +163,51 @@ class ProfileFragment : Fragment() {
         userRepository.getUserProfileImage(userId) { imageUrl ->
             ImageLoader.loadProfilePicture(requireContext(), binding.profilePicture, imageUrl)
         }
+    }
+
+    // Fetches users current location from Firestore
+    private fun fetchCurrentUserLocation() {
+        val userId = auth.currentUser?.uid ?: return
+
+        firestore.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val location = document.getString("location") ?: "Location not found"
+                    showMessage("Location", location)
+                } else {
+                    showMessage("Location", "Location not found")
+                }
+            }
+            .addOnFailureListener {
+                showMessage("Location", "Error fetching location")
+            }
+    }
+
+    // Fetches users current Difficulty from Firestore
+    private fun fetchCurrentUserDifficulty() {
+        val userId = auth.currentUser?.uid ?: return
+
+        firestore.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val difficulty = document.getString("difficulty") ?: "Difficulty not found"
+                    showMessage("Difficulty", difficulty)
+                } else {
+                    showMessage("Difficulty", "Difficulty not found")
+                }
+            }
+            .addOnFailureListener {
+                showMessage("Difficulty", "Error fetching difficulty")
+            }
+    }
+
+    // Helper function to show a message
+    private fun showMessage(title: String, message: String) {
+        val dialogBuilder = AlertDialog.Builder(requireContext())
+        dialogBuilder.setTitle(title)
+        dialogBuilder.setMessage(message)
+        dialogBuilder.setPositiveButton("OK", null)
+        dialogBuilder.show()
     }
 
     override fun onDestroyView() {
