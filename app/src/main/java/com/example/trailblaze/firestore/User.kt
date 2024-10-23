@@ -1,4 +1,5 @@
 package com.example.trailblaze.firestore
+
 data class User(
     val uid: String = "",
     val username: String = "",
@@ -11,4 +12,6 @@ data class User(
     val fitnessLevel: String = "",
     val phone: String = "",
     val zip: String = "",
+    val profileImageUrl: String? = "",
+    val friends: List<String> = emptyList()
 )

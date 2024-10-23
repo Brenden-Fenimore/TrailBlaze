@@ -11,20 +11,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.ThumbnailAdapter
 import com.example.trailblaze.databinding.FragmentHomeBinding
+import com.example.trailblaze.firestore.UserManager
 import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.Park
 import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.settings.SettingsScreenActivity
 import com.example.trailblaze.ui.MenuActivity
 import com.example.trailblaze.ui.parks.ParkDetailActivity
+import com.example.trailblaze.ui.profile.FriendsProfileActivity
 import com.example.trailblaze.ui.profile.UserListActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import com.example.trailblaze.ui.profile.UserAdapter
-import com.example.trailblaze.ui.profile.User
+import com.example.trailblaze.ui.profile.FriendAdapter
+import com.example.trailblaze.ui.profile.Friends
 
 
 
@@ -32,8 +34,8 @@ import com.example.trailblaze.ui.profile.User
 class HomeFragment : Fragment() {
 
     private lateinit var usersRecyclerView: RecyclerView
-    private lateinit var usersAdapter: UserAdapter
-    private var userList: List<User> = listOf()
+    private lateinit var usersAdapter: FriendAdapter
+    private var friendsList: List<Friends> = listOf()
 
     private var _binding: FragmentHomeBinding? = null
     private lateinit var firestore: FirebaseFirestore
@@ -91,6 +93,9 @@ class HomeFragment : Fragment() {
         parksRecyclerView.adapter = thumbnailAdapter
 
         // Fetch parks data
+        fetchParksByState(userState = "state")
+
+        // Fetch parks data
         fetchParksData()
 
         // Username fetching logic
@@ -106,13 +111,17 @@ class HomeFragment : Fragment() {
         usersRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         // Set up the adapter
-        usersAdapter = UserAdapter(userList) { user ->
-            // Handle user click, for example: navigate to user profile
+        usersAdapter = FriendAdapter(friendsList) { user ->
+            val intent = Intent(context, FriendsProfileActivity::class.java)
+            intent.putExtra("friendUserId", user.userId)
+            startActivity(intent)
         }
         usersRecyclerView.adapter = usersAdapter
 
         // Load users (you would need to implement this)
-        loadUsers()
+        fetchUsers()
+        fetchCurrentUser()
+        fetchUserState()
         return root
     }
 
@@ -164,24 +173,79 @@ class HomeFragment : Fragment() {
             }
         })
     }
-    private fun loadUsers() {
-        firestore.collection("users")
-            .get()
+
+    private fun fetchUsers() {
+        firestore.collection("users").get()
             .addOnSuccessListener { documents ->
-                val users = mutableListOf<User>()
-                for (document in documents) {
-                    val user = document.toObject(User::class.java)
-                    users.add(user) // Add the user to the list
+                friendsList = documents.mapNotNull { document ->
+                    val userId = document.id
+                    val username = document.getString("username")
+                    val profileImageUrl = document.getString("profileImageUrl")
+                    if (username != null) {
+                        Friends(userId, username, profileImageUrl) // Replace with your User model constructor
+                    } else {
+                        null
+                    }
                 }
-                // Update the adapter with the fetched users
-                usersAdapter.updateUserList(users)
+                usersAdapter.updateUserList(friendsList) // Update the adapter with the fetched user list
             }
             .addOnFailureListener { exception ->
-                Log.e("HomeFragment", "Error fetching users: ${exception.message}")
-                // Handle the error (e.g., show a Toast message)
+                Log.e("UserListActivity", "Error fetching users: ", exception)
             }
     }
 
+    private fun fetchCurrentUser() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+            UserManager.fetchUserData(userId, firestore) { user ->
+                if (user != null) {
+                } else {
+                }
+            }
+        }
+    }
+    private fun fetchParksByState(userState: String) {
+        RetrofitInstance.api.getParksbyQuery(userState).enqueue(object : Callback<NPSResponse> {
+            override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
+                if (response.isSuccessful) {
+                    parksList = response.body()?.data ?: emptyList()
+
+                    // Map the list of parks to their thumbnail URLs and names
+                    val parkData = parksList.map {
+                        Pair(it.images.firstOrNull()?.url ?: "", it.fullName)
+                    }
+
+                    // Update the adapter with the park data (image URL + name)
+                    thumbnailAdapter.updateData(parkData)
+                } else {
+                    Log.e("HomeFragment", "Response not successful: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
+                Log.e("HomeFragment", "Error fetching parks: ${t.message}")
+            }
+        })
+    }
+
+    private fun fetchUserState() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid // Get the current user's ID
+
+        if (userId != null) {
+            firestore.collection("users").document(userId).get()
+                .addOnSuccessListener { document ->
+                    if (document != null && document.exists()) {
+                        val userState = document.getString("state") ?: "No State Found"// Fetch the username
+                        fetchParksByState(userState)
+                    }
+                }
+                .addOnFailureListener {
+                }
+        } else {
+            // Handle the case where userId is null (not logged in)
+            binding.homepageusername.text = "Not logged in"
+        }
+    }
 
 
 
