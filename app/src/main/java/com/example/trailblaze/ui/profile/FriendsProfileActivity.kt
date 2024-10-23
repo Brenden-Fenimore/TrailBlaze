@@ -40,6 +40,7 @@ class FriendsProfileActivity : AppCompatActivity() {
     private lateinit var friendsInCommonAdapter: FriendAdapter
     private lateinit var friendsInCommonList: MutableList<Friends>
 
+
     // Define all possible badges
     private val allBadges = listOf(
         Badge("safetyexpert", "Safety Expert", R.drawable.safetyexpert),
@@ -71,7 +72,8 @@ class FriendsProfileActivity : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
 
-// Initialize the RecyclerView for friends in common
+
+        // Initialize the RecyclerView for friends in common
         friendsInCommonList = mutableListOf()
         friendsInCommonAdapter = FriendAdapter(friendsInCommonList) { friend ->
             // Handle friend click here if needed
@@ -81,6 +83,11 @@ class FriendsProfileActivity : AppCompatActivity() {
         friendsInCommonRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         friendsInCommonRecyclerView.adapter = friendsInCommonAdapter
 
+        badgesList = binding.badgesRecyclerView
+        badgesList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        badgesAdapter = BadgesAdapter(emptyList()){badge->
+        }
+        badgesList.adapter = badgesAdapter
 
         // Get the user ID from the intent extras
         userId = intent.getStringExtra("friendUserId") ?: return
