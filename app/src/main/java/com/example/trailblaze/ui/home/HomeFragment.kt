@@ -210,8 +210,15 @@ class HomeFragment : Fragment() {
                 if (response.isSuccessful) {
                     parksList = response.body()?.data ?: emptyList()
 
+                    // Filter parks to include only those with hiking activities
+                    val hikingParks = parksList.filter { park ->
+                        park.activities.any { activity ->
+                            activity.name.equals("Hiking", ignoreCase = true)
+                        }
+                    }
+
                     // Map the list of parks to their thumbnail URLs and names
-                    val parkData = parksList.map {
+                    val parkData = hikingParks.map {
                         Pair(it.images.firstOrNull()?.url ?: "", it.fullName)
                     }
 
