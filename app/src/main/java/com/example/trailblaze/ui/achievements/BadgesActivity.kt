@@ -22,6 +22,7 @@ class BadgesActivity : AppCompatActivity() {
     private var userBadges: MutableList<Badge> = mutableListOf()
     private lateinit var achievementManager: AchievementManager
     private val addedBadgeIds: MutableSet<String> = mutableSetOf()
+    private val addedBadgeTypes: MutableSet<String> = mutableSetOf()
 
     private val allBadges: List<Badge> = listOf(
         Badge("safetyexpert", "Safety Expert", R.drawable.safetyexpert),
@@ -98,6 +99,7 @@ class BadgesActivity : AppCompatActivity() {
 
         // Fetch the user's unlocked badges from Firestore
         fetchUserBadges()
+        fetchSashedBadges()
     }
 
     private fun fetchUserBadges() {
@@ -132,82 +134,6 @@ class BadgesActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun addBadgeToSash(drawableResId: Int, x: Float, y: Float) {
-        val badge = ImageView(this)
-        badge.setImageResource(drawableResId)
-
-        // Set the size of the badge (adjust as necessary)
-        val badgeSize = 100
-        val params = FrameLayout.LayoutParams(badgeSize, badgeSize)
-
-        // Position the badge based on drop coordinates
-        params.leftMargin = (x - badgeSize / 2).toInt()
-        params.topMargin = (y - badgeSize / 2).toInt()
-
-        Log.d("BadgesActivity", "Adding badge with resource ID: $drawableResId at x: ${params.leftMargin}, y: ${params.topMargin}")
-
-        // Get the resource name from the drawable resource ID
-        val resourceName = resources.getResourceEntryName(drawableResId)
-
-        // Generate a unique badge ID using current timestamp
-        val uniqueBadgeId = "${resourceName}_${System.currentTimeMillis()}"
-
-        // Save the badge to Firestore with the resource name instead of the drawableResId
-        saveBadgeToFirestore(uniqueBadgeId, resourceName, params.leftMargin, params.topMargin)
-
-        // Set the tag to store the unique badge ID
-        badge.tag = uniqueBadgeId
-
-        // Check if the badge has already been added
-        if (!addedBadgeIds.contains(uniqueBadgeId)) {
-            addedBadgeIds.add(uniqueBadgeId) // Mark the badge as added
-            // Save the badge to Firestore
-        } else {
-            Log.d("BadgesActivity", "Badge already added: $uniqueBadgeId")
-        }
-
-        // Set up touch listener for dragging
-        badge.setOnTouchListener { view, event ->
-            when (event.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    // Capture the initial touch position
-                    view.performClick() // Important for accessibility
-                    true // Indicate that we are handling the touch event
-                }
-                MotionEvent.ACTION_MOVE -> {
-                    // Update the badge position while dragging
-                    // Get the parent view's location on the screen
-                    val location = IntArray(2)
-                    sash.getLocationOnScreen(location)
-
-                    // Calculate the new margins based on the touch event
-                    val layoutParams = view.layoutParams as FrameLayout.LayoutParams
-                    layoutParams.leftMargin = (event.rawX - location[0] - badgeSize / 2).toInt()
-                    layoutParams.topMargin = (event.rawY - location[1] - badgeSize / 2).toInt()
-                    view.layoutParams = layoutParams
-                    view.requestLayout()
-                    true // Indicate that we are handling the move event
-                }
-                MotionEvent.ACTION_UP -> {
-                    // Save the new coordinates when the drag is released
-                    val layoutParams = view.layoutParams as FrameLayout.LayoutParams
-                    val newX = layoutParams.leftMargin.toFloat()
-                    val newY = layoutParams.topMargin.toFloat()
-
-                    true // Indicate that we are handling the touch event
-                }
-                else -> false // Indicate that we are not handling other events
-            }
-        }
-
-        // Add the badge to the sash (FrameLayout)
-        sash.addView(badge)
-        badge.layoutParams = params // Set the layout parameters after adding
-        badge.requestLayout() // Request layout update
-        Log.d("BadgesActivity", "Added badge with resource ID: $drawableResId to sash at x: $x, y: $y")
-    }
-
     private fun saveBadgeToFirestore(badgeId: String, resourceName: String, x: Int, y: Int) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
@@ -227,4 +153,153 @@ class BadgesActivity : AppCompatActivity() {
                 }
         }
     }
+
+    private fun addBadgeToSash(drawableResId: Int, x: Float, y: Float) {
+        // Get the resource name from the drawable resource ID
+        val resourceName = resources.getResourceEntryName(drawableResId)
+
+        // Check if the badge type is already placed on the sash
+        if (addedBadgeTypes.contains(resourceName)) {
+            Toast.makeText(this, "You can only place one $resourceName badge on your sash.", Toast.LENGTH_SHORT).show()
+            return // Exit the function if the badge type already exists
+        }
+
+        val badge = ImageView(this)
+        badge.setImageResource(drawableResId)
+
+        // Set the size of the badge (adjust as necessary)
+        val badgeSize = 100
+        val params = FrameLayout.LayoutParams(badgeSize, badgeSize)
+
+        // Position the badge based on drop coordinates
+        params.leftMargin = (x - badgeSize / 2).toInt()
+        params.topMargin = (y - badgeSize / 2).toInt()
+
+        Log.d("BadgesActivity", "Adding badge with resource ID: $drawableResId at x: ${params.leftMargin}, y: ${params.topMargin}")
+
+        // Generate a unique badge ID using current timestamp
+        val uniqueBadgeId = "${resourceName}_${System.currentTimeMillis()}"
+
+        // Save the badge to Firestore with the resource name instead of the drawableResId
+        saveBadgeToFirestore(uniqueBadgeId, resourceName, params.leftMargin, params.topMargin)
+
+        // Mark this badge type as added
+        addedBadgeTypes.add(resourceName) // Add the badge type to the set
+
+        // Set the tag to store the unique badge ID
+        badge.tag = uniqueBadgeId
+
+        badge.setOnTouchListener { view, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    view.performClick() // Important for accessibility
+                    true // Indicate that we are handling the touch event
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    // Update the badge position while dragging
+                    // Get the parent view's location on the screen
+                    val location = IntArray(2)
+                    sash.getLocationOnScreen(location)
+
+                    // Calculate the new margins based on the touch event
+                    val layoutParams = view.layoutParams as FrameLayout.LayoutParams
+                    layoutParams.leftMargin = (event.rawX - location[0] - badgeSize / 2).toInt()
+                    layoutParams.topMargin = (event.rawY - location[1] - badgeSize / 2).toInt()
+                    view.layoutParams = layoutParams
+                    view.requestLayout()
+                    true // Indicate that we are handling the move event
+                }
+                MotionEvent.ACTION_UP -> {
+                    // Finalize the position of the badge on release
+                    // No removal logic here, simply return true
+                    true
+                }
+                else -> false // Indicate that we are not handling other events
+            }
+        }
+
+
+        // Add the badge to the sash (FrameLayout)
+        sash.addView(badge)
+        badge.layoutParams = params // Set the layout parameters after adding
+        badge.requestLayout() // Request layout update
+        Log.d("BadgesActivity", "Added badge with resource ID: $drawableResId to sash at x: $x, y: $y")
+    }
+
+    private fun fetchSashedBadges() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+            firestore.collection("users").document(userId).get()
+                .addOnSuccessListener { document ->
+                    if (document.exists()) {
+                        // Get the sashed badges from Firestore
+                        val sashedBadges = document.get("sashedBadges") as? List<Map<String, Any>> ?: emptyList()
+                        displaySashedBadges(sashedBadges)
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Log.e("Firestore", "Error fetching sashed badges: ", e)
+                }
+        }
+    }
+
+    private fun displaySashedBadges(sashedBadges: List<Map<String, Any>>) {
+        for (badgeData in sashedBadges) {
+            val badgeId = badgeData["badgeId"] as? String ?: continue
+            val resourceName = badgeData["resourceName"] as? String ?: continue
+            val x = (badgeData["x"] as? Number)?.toFloat() ?: continue
+            val y = (badgeData["y"] as? Number)?.toFloat() ?: continue
+
+            // Get the drawable resource ID from the resource name
+            val drawableResId = resources.getIdentifier(resourceName, "drawable", packageName)
+
+            // Create a new ImageView for the badge
+            val badge = ImageView(this)
+            badge.setImageResource(drawableResId)
+
+            // Set the size of the badge (adjust as necessary)
+            val badgeSize = 100
+            val params = FrameLayout.LayoutParams(badgeSize, badgeSize)
+
+            // Position the badge based on the fetched coordinates
+            params.leftMargin = (x - badgeSize / 2).toInt()
+            params.topMargin = (y - badgeSize / 2).toInt()
+
+            // Set the layout parameters and add the badge to the sash
+            badge.layoutParams = params
+            sash.addView(badge)
+
+            // Set up the drag functionality for the badge
+            badge.setOnTouchListener { view, event ->
+                when (event.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        view.performClick() // Important for accessibility
+                        true
+                    }
+                    MotionEvent.ACTION_MOVE -> {
+                        // Update the badge position while dragging
+                        // Get the parent view's location on the screen
+                        val location = IntArray(2)
+                        sash.getLocationOnScreen(location)
+
+                        // Calculate the new margins based on the touch event
+                        val layoutParams = view.layoutParams as FrameLayout.LayoutParams
+                        layoutParams.leftMargin = (event.rawX - location[0] - badgeSize / 2).toInt()
+                        layoutParams.topMargin = (event.rawY - location[1] - badgeSize / 2).toInt()
+                        view.layoutParams = layoutParams
+                        view.requestLayout()
+                        true // Indicate that we are handling the move event
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        true // Indicate that we are handling the up event
+                    }
+                    else -> false // Indicate that we are not handling other events
+                }
+            }
+
+            // Mark this badge type as added to prevent duplicates
+            addedBadgeTypes.add(resourceName)
+        }
+    }
+
 }
