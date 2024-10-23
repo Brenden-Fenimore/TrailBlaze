@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import android.widget.SeekBar
+import android.widget.Spinner
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.trailblaze.firestore.ImageLoader
@@ -46,6 +47,14 @@ class EditProfileFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         userRepository = UserRepository(firestore)
         loadProfilePicture()
+
+        // Fetch and display current user data
+        loadUserProfile()
+
+        // Setup other views and buttons
+        setupUI()
+
+
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         storageReference = FirebaseStorage.getInstance().reference.child("profile_pictures")
 
@@ -94,6 +103,50 @@ class EditProfileFragment : Fragment() {
             }
         })
     }
+
+    private fun loadUserProfile() {
+        val userId = auth.currentUser?.uid ?: return
+        val userRef = firestore.collection("users").document(userId)
+
+        userRef.get().addOnSuccessListener { document ->
+            if (document.exists()) {
+
+                // Populate the EditText fields with current user data
+                binding.editUsername.setText(document.getString("username"))
+                binding.editEmail.setText(document.getString("email"))
+                binding.editDob.setText(document.getString("dateOfBirth"))
+                binding.editLocation.setText(document.getString("location"))
+                binding.editPhone.setText(document.getString("phone"))
+
+                // For spinners, you can select the right value programmatically
+                val terrain = document.getString("terrain") ?: ""
+                setSpinnerSelection(binding.terrainSpinner, terrain)
+
+                val fitnessLevel = document.getString("fitnessLevel") ?: ""
+                setSpinnerSelection(binding.fitnessLevelSpinner, fitnessLevel)
+
+                val difficulty = document.getString("difficulty") ?: ""
+                setSpinnerSelection(binding.difficultySpinner, difficulty)
+
+                val distance = document.getDouble("distance") ?: 0.0
+                binding.seekBar.progress = distance.toInt().coerceIn(0, binding.seekBar.max)
+                binding.range.text = distance.toString()
+            }
+        }.addOnFailureListener { exception ->
+            Log.e("EditProfile", "Error loading user data: ${exception.message}")
+        }
+    }
+
+    private fun setSpinnerSelection(spinner: Spinner, value: String) {
+        val adapter = spinner.adapter
+        for (i in 0 until adapter.count) {
+            if (adapter.getItem(i).toString().equals(value, ignoreCase = true)) {
+                spinner.setSelection(i)
+                break
+            }
+        }
+    }
+
     private fun selectImage() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
@@ -147,6 +200,13 @@ class EditProfileFragment : Fragment() {
             .into(binding.profilePicture) // Assuming you have an ImageView with this ID in your layout
     }
 
+    private fun setupUI() {
+        // Initialize views
+        binding.updateProfileButton.setOnClickListener {
+            updateUserProfile()
+        }
+    }
+
     private fun updateUserProfile() {
         val userId = auth.currentUser?.uid ?: return
 
@@ -161,7 +221,7 @@ class EditProfileFragment : Fragment() {
             "fitnessLevel" to binding.fitnessLevelSpinner.selectedItem.toString(),
             "difficulty" to binding.difficultySpinner.selectedItem.toString(),
             "typeOfHike" to binding.typeOfHikeSpinner.selectedItem.toString(),
-            "distance" to binding.suggestedTrailsValue.text.toString(),
+            "distance" to selectedFilterValue
 
         )
 
