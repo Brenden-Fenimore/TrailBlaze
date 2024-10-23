@@ -75,6 +75,7 @@ class EditProfileFragment : Fragment() {
         return view
     }
 
+
     private fun setupSeekBarListener() {
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -145,6 +146,38 @@ class EditProfileFragment : Fragment() {
             .error(R.drawable.account_circle) // Error image if the load fails
             .into(binding.profilePicture) // Assuming you have an ImageView with this ID in your layout
     }
+
+    private fun updateUserProfile() {
+        val userId = auth.currentUser?.uid ?: return
+
+        // Collect updated profile data from input fields
+        val updatedUserData = mapOf(
+            "username" to binding.editUsername.text.toString(),
+            "email" to binding.editEmail.text.toString(),
+            "dob" to binding.editDob.text.toString(),
+            "location" to binding.editLocation.text.toString(),
+            "phone" to binding.editPhone.text.toString(),
+            "terrain" to binding.terrainSpinner.selectedItem.toString(),
+            "fitnessLevel" to binding.fitnessLevelSpinner.selectedItem.toString(),
+            "difficulty" to binding.difficultySpinner.selectedItem.toString(),
+            "typeOfHike" to binding.typeOfHikeSpinner.selectedItem.toString(),
+            "distance" to binding.suggestedTrailsValue.text.toString(),
+
+        )
+
+        // Call repository to update Firestore
+        userRepository.updateUserProfile(userId, updatedUserData) { success ->
+            if (success) {
+                // Profile updated successfully
+                Log.d("EditProfile", "Profile updated successfully")
+                // Optionally, navigate back or show a success message
+            } else {
+                // Handle failure
+                Log.e("EditProfile", "Failed to update profile")
+            }
+        }
+    }
+
 
     private fun loadProfilePicture() {
         val userId = auth.currentUser?.uid ?: return
