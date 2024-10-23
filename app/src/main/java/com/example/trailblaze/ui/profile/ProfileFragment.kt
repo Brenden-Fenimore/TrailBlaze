@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -88,6 +89,14 @@ class ProfileFragment : Fragment() {
         }
         binding.friendsRecyclerView.adapter = friendAdapter
 
+        // Initialize the icons
+        binding.iconLocation.setOnClickListener {
+            fetchCurrentUserLocation()
+        }
+
+        binding.iconDifficulty.setOnClickListener {
+            fetchCurrentUserDifficulty()
+        }
 
         // Initialize UserManager
         userManager = UserManager
@@ -141,16 +150,6 @@ class ProfileFragment : Fragment() {
         badgesList = binding.badgesRecyclerView
         badgesList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-            // Initialize the icons
-            binding.iconLocation.setOnClickListener {
-                fetchCurrentUserLocation()
-            }
-
-            binding.iconDifficulty.setOnClickListener {
-                fetchCurrentUserDifficulty()
-            }
-
-        return binding.root
     }
 
     private fun fetchUserFriends() {
@@ -238,7 +237,12 @@ class ProfileFragment : Fragment() {
         firestore.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
-                    val location = document.getString("location") ?: "Location not found"
+                    val city = document.getString("city") ?: "City not found"
+                    val state = document.getString("state") ?: "State not found"
+                    val zip = document.getString("zip") ?: "Zip not found"
+
+                    // Combine city, state, and zip into a single string
+                    val location = "$city, $state $zip"
                     showMessage("Location", location)
                 } else {
                     showMessage("Location", "Location not found")
