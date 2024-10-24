@@ -72,6 +72,9 @@ class FriendsProfileActivity : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
 
+        // Initialize the achievement manager
+        achievementManager = AchievementManager(this)
+
 
         // Initialize the RecyclerView for friends in common
         friendsInCommonList = mutableListOf()
@@ -104,6 +107,7 @@ class FriendsProfileActivity : AppCompatActivity() {
 
         addFriendButton.setOnClickListener {
             addFriend(userId) // Call the function to add friend
+
         }
     }
 
@@ -132,15 +136,16 @@ class FriendsProfileActivity : AppCompatActivity() {
 
     private fun updateBadgesList(badges: List<String>) {
         // Filter the list of all badges based on fetched user badges
-        val unlockedBadges = allBadges.filter { badges.contains(it.id) }
+        val unlockedBadges = allBadges.filter { badge -> badges.contains(badge.id) }
+        Log.d("ProfileFragment", "Unlocked badges: $unlockedBadges") // Log for debugging
 
         // Initialize or update the adapter
         if (!::badgesAdapter.isInitialized) {
-            badgesAdapter = BadgesAdapter(unlockedBadges, itemClickListener = { badge ->
+            badgesAdapter = BadgesAdapter(unlockedBadges) { badge ->
                 // Handle badge click
-            })
-
+            }
             binding.badgesRecyclerView.adapter = badgesAdapter
+            Log.d("ProfileFragment", "BadgesAdapter initialized with ${unlockedBadges.size} badges.")
         } else {
             badgesAdapter.updateBadges(unlockedBadges)
         }
@@ -172,6 +177,8 @@ class FriendsProfileActivity : AppCompatActivity() {
                             userRef.set(userUpdates, SetOptions.merge())
                                 .addOnSuccessListener {
                                     Toast.makeText(this, "Friend added successfully!", Toast.LENGTH_SHORT).show()
+
+                                    achievementManager.checkAndGrantSocialButterflyBadge(currentUserId)
                                 }
                                 .addOnFailureListener { exception ->
                                     Log.e("FriendsProfileActivity", "Error adding friend: ", exception)

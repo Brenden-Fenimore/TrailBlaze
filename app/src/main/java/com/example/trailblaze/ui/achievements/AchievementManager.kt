@@ -57,6 +57,33 @@ class AchievementManager(context: Context) {
         }
     }
 
+    fun checkAndGrantSocialButterflyBadge(userId: String) {
+        // Reference to the user's document
+        val userRef = firestore.collection("users").document(userId)
+
+        userRef.get().addOnSuccessListener { document ->
+            if (document != null && document.exists()) {
+                // Get the list of friends
+                val friendsList = document.get("friends") as? List<String> ?: emptyList()
+
+                // Check if the user has at least 5 friends
+                if (friendsList.size >= 1) { // Adjust the threshold if needed
+                    isAchievementUnlocked("socialbutterfly") { hasSocialButterflyBadge ->
+                        if (!hasSocialButterflyBadge) {
+                            // Grant the badge and update Firestore
+                            grantBadge("socialbutterfly")
+                            unlockAchievement("socialbutterfly")
+                        } else {
+                            Log.d("AchievementManager", "Social Butterfly badge already unlocked.")
+                        }
+                    }
+                }
+            }
+        }.addOnFailureListener { exception ->
+            Log.e("AchievementManager", "Error fetching user document: ", exception)
+        }
+    }
+
 
     // Check and grant the Photographer badge
     fun checkAndGrantPhotographerBadge() {
