@@ -2,6 +2,7 @@ package com.example.trailblaze.firestore
 
 import com.google.firebase.firestore.FirebaseFirestore
 
+
 object UserManager {
     private var currentUser: User? = null
 
@@ -27,8 +28,11 @@ object UserManager {
                         fitnessLevel = document.getString("fitnessLevel") ?: "",
                         phone = document.getString("phone") ?: "",
                         zip = document.getString("zip") ?: "",
+                        profileImageUrl = document.getString("profileImageUrl") ?: "",
                         distance = document.getDouble("distance") ?: 0.0,
-                        email = document.getString("email") ?: ""
+                        email = document.getString("email") ?: "",
+                        friends = document.get("friends") as? List<String> ?: emptyList(),
+                        badges = document.get("badges") as? List<String> ?: emptyList(),
                     )
                     setCurrentUser(user)
                     callback(user)

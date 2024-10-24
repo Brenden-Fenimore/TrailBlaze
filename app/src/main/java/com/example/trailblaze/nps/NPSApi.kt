@@ -12,10 +12,9 @@ interface NPSApi {
         @Query("api_key") apiKey: String = "cQvtQCUyKgWjZQHWMJsXwXjDs7ZALBbUKTFgC9As"       // API key for authentication
     ): Call<NPSResponse>                           // Call that returns NPSResponse
 
-    @GET("parks")
-    fun getParksbyState(
-        @Query("state") state: String,
-        @Query("limit") limit: Int = 10,
+    @GET("parks") // Change this line to use the parkCode as a path variable
+    fun getParkDetails(
+        @Query("parkCode") parkCode: String, // Use @Path instead of @Query
         @Query("api_key") apiKey: String = "cQvtQCUyKgWjZQHWMJsXwXjDs7ZALBbUKTFgC9As"
     ): Call<NPSResponse>
 

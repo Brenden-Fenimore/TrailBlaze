@@ -14,9 +14,6 @@ class BadgesAdapter(
     private val itemClickListener: ((Badge) -> Unit)
 ) : RecyclerView.Adapter<BadgesAdapter.ViewHolder>() {
 
-    // Property to hold the current badges
-    var currentBadges: List<Badge> = badges
-
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val badgeImage: ImageView = view.findViewById(R.id.badge_image)
 
@@ -33,14 +30,8 @@ class BadgesAdapter(
             }
         }
 
-
         fun bind(badge: Badge) {
             badgeImage.setImageResource(badge.resourceId)
-
-            // Set click listener for the badge
-            itemView.setOnClickListener {
-                itemClickListener.invoke(badge)
-            }
 
             // Start drag on touch
             badgeImage.setOnTouchListener { v, event ->
@@ -72,13 +63,9 @@ class BadgesAdapter(
 
     override fun getItemCount(): Int = badges.size
 
-
     // Update the badges list
     fun updateBadges(newBadges: List<Badge>) {
         this.badges = newBadges
-        this.currentBadges = newBadges // Update current badges to the new list
         notifyDataSetChanged() // Notify the adapter that the data has changed
     }
-
-
 }

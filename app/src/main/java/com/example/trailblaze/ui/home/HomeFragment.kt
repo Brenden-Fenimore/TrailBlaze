@@ -9,35 +9,38 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.trailblaze.ThumbnailAdapter
 import com.example.trailblaze.databinding.FragmentHomeBinding
+import com.example.trailblaze.firestore.UserManager
 import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.Park
 import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.settings.SettingsScreenActivity
 import com.example.trailblaze.ui.MenuActivity
 import com.example.trailblaze.ui.parks.ParkDetailActivity
+import com.example.trailblaze.ui.parks.ThumbnailAdapter
+import com.example.trailblaze.ui.profile.FriendAdapter
+import com.example.trailblaze.ui.profile.Friends
+import com.example.trailblaze.ui.profile.FriendsProfileActivity
 import com.example.trailblaze.ui.profile.UserListActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import com.example.trailblaze.ui.profile.UserAdapter
-import com.example.trailblaze.ui.profile.User
+
 
 class HomeFragment : Fragment() {
 
     private lateinit var usersRecyclerView: RecyclerView
-    private lateinit var usersAdapter: UserAdapter
-    private var userList: List<User> = listOf()
+    private lateinit var usersAdapter: FriendAdapter
+    private var friendsList: List<Friends> = listOf()
 
     private var _binding: FragmentHomeBinding? = null
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
-    private lateinit var parksList: List<Park>
+    private var parksList: List<Park> = listOf()
     private lateinit var parksRecyclerView: RecyclerView   // RecyclerView to display parks
-    private lateinit var thumbnailAdapter: ThumbnailAdapter          // Adapter for RecyclerView
+    private lateinit var thumbnailAdapter: ThumbnailAdapter        // Adapter for RecyclerView
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -66,22 +69,19 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+
+
         // RecyclerView setup
         parksRecyclerView = binding.thumbnailRecyclerView
         parksRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-        // Initialize ThumbnailAdapter with an empty list
-        thumbnailAdapter = ThumbnailAdapter(emptyList()) { parkImage ->
-            // Find the index of the clicked park image
-            val parkIndex = parksList.indexOfFirst { it.images.firstOrNull()?.url == parkImage }
-
-            if (parkIndex != -1) {
-                val intent = Intent(context, ParkDetailActivity::class.java).apply {
-                    putExtra("PARK_INDEX", parkIndex)
-                }
-                startActivity(intent)
+        // Initialize the adapter with an empty list to start
+        thumbnailAdapter = ThumbnailAdapter(emptyList(), emptyList()) { parkCode ->
+            // Start the ParkDetailActivity with the park's parkCode
+            val intent = Intent(context, ParkDetailActivity::class.java).apply {
+                putExtra("PARK_CODE", parkCode) // Pass the park code directly
             }
-
+            startActivity(intent)
         }
 
         // Set adapter to RecyclerView
@@ -90,11 +90,13 @@ class HomeFragment : Fragment() {
         // Fetch parks data
         fetchParksByState(userState = "state")
 
+        // Fetch parks data
+        fetchParksData()
+
         // Username fetching logic
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser != null) {
             fetchUsername()
-            fetchUserState()
         } else {
             binding.homepageusername.text = "<UserName>"
         }
@@ -104,13 +106,17 @@ class HomeFragment : Fragment() {
         usersRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         // Set up the adapter
-        usersAdapter = UserAdapter(userList) { user ->
-            // Handle user click, for example: navigate to user profile
+        usersAdapter = FriendAdapter(friendsList) { user ->
+            val intent = Intent(context, FriendsProfileActivity::class.java)
+            intent.putExtra("friendUserId", user.userId)
+            startActivity(intent)
         }
         usersRecyclerView.adapter = usersAdapter
 
         // Load users (you would need to implement this)
-        loadUsers()
+        fetchUsers()
+        fetchCurrentUser()
+        fetchUserState()
         return root
     }
 
@@ -123,7 +129,6 @@ class HomeFragment : Fragment() {
                     if (document != null && document.exists()) {
                         val username = document.getString("username") // Fetch the username
                         binding.homepageusername.text = username // Set the username in the TextView
-
                     } else {
                         // Handle the case where the document does not exist
                         binding.homepageusername.text = "Username not found"
@@ -137,19 +142,21 @@ class HomeFragment : Fragment() {
         }
     }
 
+
+
     private fun fetchParksData() {
         RetrofitInstance.api.getParks(10).enqueue(object : Callback<NPSResponse> {
             override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
                 if (response.isSuccessful) {
-                    parksList = response.body()?.data ?: emptyList()    // Save the parks list
+                    parksList = response.body()?.data ?: emptyList() // Save the parks list
 
-                    // Map the list of parks to their thumbnail URLs and names
-                    val parkData = parksList.map {
-                        Pair(it.images.firstOrNull()?.url ?: "", it.fullName)
+                    // Log park codes in parksList for debugging
+                    parksList.forEach { park ->
+                        Log.d("HomeFragment", "Fetched park code: ${park.parkCode.trim()}") // Use trim to log
                     }
 
-                    // Update the adapter with the park data (image URL + name)
-                    thumbnailAdapter.updateData(parkData)
+                    // Update the adapter with the park data
+                    thumbnailAdapter.updateData(parksList)
                 } else {
                     Log.e("HomeFragment", "Response not successful: ${response.code()}")
                 }
@@ -157,28 +164,40 @@ class HomeFragment : Fragment() {
 
             override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
                 Log.e("HomeFragment", "Error fetching parks: ${t.message}")
-                // Handle failure case (e.g., show a Toast message)
             }
         })
     }
-    private fun loadUsers() {
-        firestore.collection("users")
-            .get()
+
+    private fun fetchUsers() {
+        firestore.collection("users").get()
             .addOnSuccessListener { documents ->
-                val users = mutableListOf<User>()
-                for (document in documents) {
-                    val user = document.toObject(User::class.java)
-                    users.add(user) // Add the user to the list
+                friendsList = documents.mapNotNull { document ->
+                    val userId = document.id
+                    val username = document.getString("username")
+                    val profileImageUrl = document.getString("profileImageUrl")
+                    if (username != null) {
+                        Friends(userId, username, profileImageUrl) // Replace with your User model constructor
+                    } else {
+                        null
+                    }
                 }
-                // Update the adapter with the fetched users
-                usersAdapter.updateUserList(users)
+                usersAdapter.updateUserList(friendsList) // Update the adapter with the fetched user list
             }
             .addOnFailureListener { exception ->
-                Log.e("HomeFragment", "Error fetching users: ${exception.message}")
-                // Handle the error (e.g., show a Toast message)
+                Log.e("UserListActivity", "Error fetching users: ", exception)
             }
     }
 
+    private fun fetchCurrentUser() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+            UserManager.fetchUserData(userId, firestore) { user ->
+                if (user != null) {
+                } else {
+                }
+            }
+        }
+    }
     private fun fetchParksByState(userState: String) {
         RetrofitInstance.api.getParksbyQuery(userState).enqueue(object : Callback<NPSResponse> {
             override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
@@ -191,7 +210,7 @@ class HomeFragment : Fragment() {
                     }
 
                     // Update the adapter with the park data (image URL + name)
-                    thumbnailAdapter.updateData(parkData)
+                    thumbnailAdapter.updateData(parksList)
                 } else {
                     Log.e("HomeFragment", "Response not successful: ${response.code()}")
                 }
@@ -221,6 +240,8 @@ class HomeFragment : Fragment() {
             binding.homepageusername.text = "Not logged in"
         }
     }
+
+
 
     override fun onDestroyView()
     {

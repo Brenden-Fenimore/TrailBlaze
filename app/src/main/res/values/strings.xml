@@ -158,15 +158,15 @@
     <string name="conqueror">Conqueror: Complete a challenging trail with a difficult rating.</string>
     <string name="explorer">Explorer: Hike trails in various terrains (e.g., mountains, forests, deserts).</string>
     <string name="trailmaster">Trail Master: Complete trails in all four seasons.</string>
-    <string name="socialbutterfly">Social Butterfly: Hike with a group of friends or family.</string>
+    <string name="socialbutterfly">Social Butterfly: Add at least 2 TrailMates.</string>
     <string name="teamplayer">Team Player: Complete a group challenge or relay race.</string>
     <string name="safteyexpert">Safety Expert: Look at the safety tips.</string>
     <string name="communitybuilder">Community Builder: Organize a group hike or event.</string>
     <string name="wildlifewatcher">Wildlife Watcher: Spot a specific animal or bird on a hike.</string>
-    <string name="photographer">Photographer: Capture a stunning photo of a trail or landscape.</string>
+    <string name="photographer">Photographer: Upload a picture to your TrailBlaze.</string>
     <string name="goalsetter">Goal Setter: Set a personal hiking goal and achieve it.</string>
     <string name="badgecollector">Badge Collector: Earn badges for completing specific challenges or achievements.</string>
-    <string name="leaderboardtip">Leaderboard Climber: Compete with friends or other users on a leaderboard.</string>
+    <string name="leaderboardtip">Leaderboard Climber: Get at least 2 badges.</string>
     <string name="parkInfo">Park Information</string>
     <string name="parkName">Park Name</string>
     <string name="parkDescription">Park Description</string>
@@ -299,29 +299,28 @@
     <string name="suggestedTrailsMiles">Suggested Trails: %1$d miles</string>
     <string name="bucketListTrails">Bucket List Trails</string>
     <string name="favoriteFriends">Favorite Friends</string>
+    <string name="rangeMiles">  Range(miles)</string>
     <!-- Spinner options for terrain -->
     <string-array name="terrain_options">
-        <item>Mountain</item>
-        <item>Forest</item>
-        <item>Desert</item>
-        <item>Beach</item>
+        <item>Foot Trails</item>
+        <item>Nature Trails</item>
+        <item>Rock Trails</item>
     </string-array>
 
     <!-- Spinner options for fitness level -->
     <string-array name="fitness_level_options">
-        <item>Beginner</item>
-        <item>Intermediate</item>
-        <item>Advanced</item>
+        <item>Low-Intensity</item>
+        <item>Moderate-Intensity</item>
+        <item>High-Intensity</item>
     </string-array>
 
     <!-- Spinner options for difficulty level -->
     <string-array name="difficulty_level_options">
         <item>Easiest</item>
-        <item>Easy</item>
         <item>Moderate</item>
-        <item>Moderate Difficult</item>
-        <item>Difficult</item>
-        <item>Extremely Difficult</item>
+        <item>Moderately Strenuous</item>
+        <item>Strenuous</item>
+        <item>Very Strenuous</item>
     </string-array>
 
     <!-- Spinner options for hike type -->

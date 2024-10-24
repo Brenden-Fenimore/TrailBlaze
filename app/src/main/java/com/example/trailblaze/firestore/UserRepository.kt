@@ -1,6 +1,7 @@
 package com.example.trailblaze.firestore
 
 import android.util.Log
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class UserRepository(private val firestore: FirebaseFirestore) {
@@ -19,6 +20,19 @@ class UserRepository(private val firestore: FirebaseFirestore) {
             .addOnFailureListener { exception ->
                 Log.e("Firestore", "Error getting user profile image: ${exception.message}")
                 onComplete(null) // Handle error case
+            }
+    }
+
+    fun updateUserProfile(userId: String, updatedUserData: Map<String, Any>, onComplete: (Boolean) -> Unit) {
+        val userRef = firestore.collection("users").document(userId)
+        userRef.update(updatedUserData)
+            .addOnSuccessListener {
+                Log.d("Firestore", "User profile updated successfully")
+                onComplete(true)
+            }
+            .addOnFailureListener { exception ->
+                Log.e("Firestore", "Error updating user profile: ${exception.message}")
+                onComplete(false)
             }
     }
 }
