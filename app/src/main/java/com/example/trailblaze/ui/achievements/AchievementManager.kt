@@ -94,6 +94,7 @@ class AchievementManager(context: Context) {
 
                 // Update Firestore
                 unlockAchievement("photographer")
+
             } else {
                 Log.d("AchievementManager", "Photographer badge already unlocked.")
             }
@@ -109,9 +110,43 @@ class AchievementManager(context: Context) {
 
                 // Update Firestore
                 unlockAchievement("safetyexpert")
+
+                checkAndGrantLeaderboardBadge()
             } else {
                 Log.d("AchievementManager", "Safety Expert badge already unlocked.")
             }
+        }
+    }
+
+    // Check and grant the Leaderboard badge
+    fun checkAndGrantLeaderboardBadge() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+            val userRef = firestore.collection("users").document(userId)
+
+            userRef.get().addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    // Get the list of badges
+                    val badgesList = document.get("badges") as? List<String> ?: emptyList()
+
+                    // Check if the user has at least 2 badges
+                    if (badgesList.size >= 2) {
+                        isAchievementUnlocked("leaderboard") { hasLeaderboardBadge ->
+                            if (!hasLeaderboardBadge) {
+                                // Grant the badge and update Firestore
+                                grantBadge("leaderboard")
+                                unlockAchievement("leaderboard")
+                            } else {
+                                Log.d("AchievementManager", "Leaderboard badge already unlocked.")
+                            }
+                        }
+                    }
+                }
+            }.addOnFailureListener { exception ->
+                Log.e("AchievementManager", "Error fetching user document: ", exception)
+            }
+        } else {
+            Log.e("Firestore", "User not logged in")
         }
     }
 

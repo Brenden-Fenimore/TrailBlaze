@@ -49,6 +49,7 @@ class EditProfileFragment : Fragment() {
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
         userRepository = UserRepository(firestore)
+        achievementManager = AchievementManager(requireContext())
         loadProfilePicture()
 
         // Fetch and display current user data
@@ -188,6 +189,8 @@ class EditProfileFragment : Fragment() {
                             Log.d("Firestore", "Profile picture URL updated successfully")
                             achievementManager.checkAndGrantPhotographerBadge()
                             achievementManager.saveBadgeToUserProfile("photographer")
+
+                            achievementManager.checkAndGrantLeaderboardBadge()
                         }
                         .addOnFailureListener { exception ->
                             Log.e("Firestore", "Error updating profile picture URL: ${exception.message}")

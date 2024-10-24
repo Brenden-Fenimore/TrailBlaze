@@ -17,7 +17,7 @@ import retrofit2.Response
 
 class ParkDetailActivity : AppCompatActivity() {
 
-    private var parkIndex: Int = -1 // Default to -1 if not found
+    private lateinit var parkCode: String // Default to -1 if not found
     private lateinit var parkNameTextView: TextView
     private lateinit var parkDescriptionTextView: TextView
     private lateinit var parkLatitudeTextView: TextView
@@ -39,8 +39,10 @@ class ParkDetailActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        // Retrieve the park index from the intent
-        parkIndex = intent.getIntExtra("PARK_INDEX", -1) // Default to -1 if not found
+        // Get the park code from the intent
+        parkCode = intent.getStringExtra("PARK_CODE") ?: ""
+
+        fetchParkDetails(parkCode)
 
         // Initialize views
         parkNameTextView = findViewById(R.id.parkNameTextView)
@@ -59,79 +61,97 @@ class ParkDetailActivity : AppCompatActivity() {
         parkImagesRecyclerView = findViewById(R.id.parkImagesRecyclerView)
         parkImagesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-
-        // Fetch parks data again or use a shared data source
-        fetchParksData { parksList ->
-            if (parkIndex >= 0 && parkIndex < parksList.size) {
-                val park = parksList[parkIndex] // Get the park using the index
-                val address = park.addresses.joinToString("\n") { "${it.line1}, ${it.line2}, ${it.line3}, ${it.city}, ${it.postalCode}, ${it.stateCode}" }
-                val contactNumber = park.contacts.phoneNumbers.joinToString("\n"){ it.phoneNumber }
-                val contactEmail = park.contacts.emailAddresses.joinToString("\n"){ it.emailAddress }
-                val entrancePass = park.entrancePasses.joinToString("\n") {"${it.cost}, ${it.description}, ${it.title}"   }
-                val weatherInfo = park.weatherInfo ?: "No weather information available"
-                val firstOperatingHours = park.operatingHours.firstOrNull()
-                firstOperatingHours?.let {operatingHours ->
-                    val standardHours = operatingHours.standardHours
-                    val hoursText = """
-                    Sunday: ${standardHours.sunday}
-                    Monday: ${standardHours.monday}
-                    Tuesday: ${standardHours.tuesday}
-                    Wednesday: ${standardHours.wednesday}
-                    Thursday: ${standardHours.thursday}
-                    Friday: ${standardHours.friday}
-                    Saturday: ${standardHours.saturday}
-                """.trimIndent()
-                    parkOperatingHoursTextView.text = hoursText} ?: run{parkOperatingHoursTextView.text = "Operating hours not available"}
-                val activity = park.activities.joinToString("\n") { it.name }
-
-                parkNameTextView.text = park.fullName
-                parkDescriptionTextView.text = park.description
-                parkLatitudeTextView.text = park.latitude ?: "N/A"
-                parkLongitudeTextView.text = park.longitude ?: "N/A"
-                parkAddressTextView.text = address
-                parkActivitiesTextView.text = activity
-                parkContactsPhoneTextView.text = contactNumber
-                parkContactsEmailTextView.text = contactEmail
-                parkWeatherInfoTextView.text = weatherInfo
-                if (entrancePass.isNotEmpty()) {
-                    parkEntrancePassesTextView.text = entrancePass
-                } else {
-                    parkEntrancePassesTextView.text = "No entrance fee information available."
-                }
-
-                // Debugging: Log image URLs list size
-                Log.d("ParkDetailActivity", "Image List Size: ${park.images.size}")
-
-                // Set up the images RecyclerView
-                if (park.images.isNotEmpty()) {
-                    val imagesAdapter = ImagesAdapter(park.images.map { it.url }) // Ensure only URLs are passed
-                    parkImagesRecyclerView.adapter = imagesAdapter
-                } else {
-                    Toast.makeText(this, "No images available for this park", Toast.LENGTH_SHORT).show()
-                }
-
-
-                // Optionally load the park image if you have an ImageView for it
-            } else {
-                Toast.makeText(this, "Invalid park index", Toast.LENGTH_SHORT).show()
-            }
-        }
+        fetchParkDetails(parkCode)
     }
 
-    private fun fetchParksData(onDataFetched: (List<Park>) -> Unit) {
-        RetrofitInstance.api.getParks(10).enqueue(object : Callback<NPSResponse> {
+    private fun fetchParkDetails(parkCode: String) {
+        Log.d("ParkDetailActivity", "Fetching details for park code: $parkCode")
+        RetrofitInstance.api.getParkDetails(parkCode).enqueue(object : Callback<NPSResponse> {
             override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
                 if (response.isSuccessful) {
-                    val parks = response.body()?.data ?: emptyList()
-                    onDataFetched(parks) // Return the parks list to the caller
+                    response.body()?.let { npsResponse ->
+                        // Assuming the park details are in the data field of the response
+                        val park = npsResponse.data.firstOrNull() // Adjust based on actual response structure
+                        park?.let {
+                            populateParkDetails(it) // Pass the park object to populate the UI
+                        } ?: run {
+                            Toast.makeText(this@ParkDetailActivity, "Park details not found", Toast.LENGTH_SHORT).show()
+                        }
+                    } ?: run {
+                        Toast.makeText(this@ParkDetailActivity, "Park details not found", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
-                    Toast.makeText(this@ParkDetailActivity, "Failed to fetch parks", Toast.LENGTH_SHORT).show()
+                    Log.e("ParkDetailActivity", "Response not successful: ${response.code()}")
                 }
             }
 
             override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
-                Toast.makeText(this@ParkDetailActivity, "Error fetching parks: ${t.message}", Toast.LENGTH_SHORT).show()
+                Log.e("ParkDetailActivity", "Error fetching park details: ${t.message}")
             }
         })
+    }
+
+
+
+    private fun populateParkDetails(park: Park) {
+        // Populate UI elements with park details
+        parkNameTextView.text = park.fullName
+        parkDescriptionTextView.text = park.description
+        parkLatitudeTextView.text = park.latitude?.toString() ?: "N/A"
+        parkLongitudeTextView.text = park.longitude?.toString() ?: "N/A"
+
+        // Format the address
+        val address = park.addresses.joinToString("\n") {
+            "${it.line1}, ${it.line2 ?: ""}, ${it.line3 ?: ""}, ${it.city}, ${it.postalCode}, ${it.stateCode}"
+        }.trim().replace(", ,", ",") // Remove empty lines
+        parkAddressTextView.text = address
+
+        // Populate activities
+        val activities = park.activities.joinToString("\n") { it.name }
+        parkActivitiesTextView.text = activities.ifEmpty { "No activities available." }
+
+        // Populate contact information
+        val contactNumber = park.contacts.phoneNumbers.joinToString("\n") { it.phoneNumber }
+        parkContactsPhoneTextView.text = contactNumber.ifEmpty { "No contact number available." }
+
+        val contactEmail = park.contacts.emailAddresses.joinToString("\n") { it.emailAddress }
+        parkContactsEmailTextView.text = contactEmail.ifEmpty { "No contact email available." }
+
+        // Populate weather information
+        parkWeatherInfoTextView.text = park.weatherInfo ?: "No weather information available."
+
+        // Populate entrance passes
+        val entrancePass = park.entrancePasses.joinToString("\n") { "${it.cost}, ${it.description}, ${it.title}" }
+        parkEntrancePassesTextView.text = if (entrancePass.isNotEmpty()) {
+            entrancePass
+        } else {
+            "No entrance fee information available."
+        }
+
+        // Handle operating hours
+        val firstOperatingHours = park.operatingHours.firstOrNull()
+        firstOperatingHours?.let { operatingHours ->
+            val standardHours = operatingHours.standardHours
+            val hoursText = """
+            Sunday: ${standardHours.sunday}
+            Monday: ${standardHours.monday}
+            Tuesday: ${standardHours.tuesday}
+            Wednesday: ${standardHours.wednesday}
+            Thursday: ${standardHours.thursday}
+            Friday: ${standardHours.friday}
+            Saturday: ${standardHours.saturday}
+        """.trimIndent()
+            parkOperatingHoursTextView.text = hoursText
+        } ?: run {
+            parkOperatingHoursTextView.text = "Operating hours not available"
+        }
+
+        // Set up the images RecyclerView if there are images
+        if (park.images.isNotEmpty()) {
+            val imagesAdapter = ImagesAdapter(park.images.map { it.url }) // Ensure only URLs are passed
+            parkImagesRecyclerView.adapter = imagesAdapter
+        } else {
+            Toast.makeText(this, "No images available for this park", Toast.LENGTH_SHORT).show()
+        }
     }
 }
