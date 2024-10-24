@@ -57,6 +57,22 @@ class AchievementManager(context: Context) {
         }
     }
 
+
+    // Check and grant the Photographer badge
+    fun checkAndGrantPhotographerBadge() {
+        isAchievementUnlocked("photographer") { hasPhotographerBadge ->
+            if (!hasPhotographerBadge) {
+                // Grant the badge
+                grantBadge("photographer")
+
+                // Update Firestore
+                unlockAchievement("photographer")
+            } else {
+                Log.d("AchievementManager", "Photographer badge already unlocked.")
+            }
+        }
+    }
+
     // Check and grant the Safety Expert badge
     fun checkAndGrantSafetyExpertBadge() {
         isAchievementUnlocked("safetyexpert") { hasSafetyExpertBadge ->

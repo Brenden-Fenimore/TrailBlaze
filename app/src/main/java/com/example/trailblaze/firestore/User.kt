@@ -13,5 +13,6 @@ data class User(
     val phone: String = "",
     val zip: String = "",
     val profileImageUrl: String? = "",
-    val friends: List<String> = emptyList()
+    val friends: List<String> = emptyList(),
+    val badges: List<String> = emptyList()
 )

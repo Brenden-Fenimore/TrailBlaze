@@ -19,6 +19,7 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.trailblaze.firestore.ImageLoader
 import com.example.trailblaze.firestore.UserRepository
+import com.example.trailblaze.ui.achievements.AchievementManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -35,6 +36,7 @@ class EditProfileFragment : Fragment() {
     private lateinit var storageReference: StorageReference
     private lateinit var firestore: FirebaseFirestore
     private lateinit var userRepository: UserRepository
+    private lateinit var achievementManager: AchievementManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -184,6 +186,8 @@ class EditProfileFragment : Fragment() {
                     userRef.update("profileImageUrl", downloadUri.toString())
                         .addOnSuccessListener {
                             Log.d("Firestore", "Profile picture URL updated successfully")
+                            achievementManager.checkAndGrantPhotographerBadge()
+                            achievementManager.saveBadgeToUserProfile("photographer")
                         }
                         .addOnFailureListener { exception ->
                             Log.e("Firestore", "Error updating profile picture URL: ${exception.message}")
@@ -192,7 +196,6 @@ class EditProfileFragment : Fragment() {
                 }
             }
     }
-
 
     // Create a method to load the image into the ImageView
     private fun updateProfilePicture(imageUrl: String) {

@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.trailblaze.R
 import com.example.trailblaze.databinding.FragmentProfileBinding
 import com.example.trailblaze.firestore.UserRepository
@@ -178,13 +177,14 @@ class ProfileFragment : Fragment() {
     }
 
     private fun fetchUserBadges() {
-        // Fetching badges logic here
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
             firestore.collection("users").document(userId).get()
                 .addOnSuccessListener { document ->
                     if (document.exists()) {
+                        // Retrieve the badges as a List<String>
                         val badges = document.get("badges") as? List<String> ?: emptyList()
+                        Log.d("ProfileFragment", "Fetched badges: $badges") // Log for debugging
                         updateBadgesList(badges)
                     }
                 }
@@ -195,15 +195,16 @@ class ProfileFragment : Fragment() {
     }
     private fun updateBadgesList(badges: List<String>) {
         // Filter the list of all badges based on fetched user badges
-        val unlockedBadges = allBadges.filter { badges.contains(it.id) }
+        val unlockedBadges = allBadges.filter { badge -> badges.contains(badge.id) }
+        Log.d("ProfileFragment", "Unlocked badges: $unlockedBadges") // Log for debugging
 
         // Initialize or update the adapter
         if (!::badgesAdapter.isInitialized) {
-            badgesAdapter = BadgesAdapter(unlockedBadges, itemClickListener = { badge ->
+            badgesAdapter = BadgesAdapter(unlockedBadges) { badge ->
                 // Handle badge click
-            })
-
+            }
             binding.badgesRecyclerView.adapter = badgesAdapter
+            Log.d("ProfileFragment", "BadgesAdapter initialized with ${unlockedBadges.size} badges.")
         } else {
             badgesAdapter.updateBadges(unlockedBadges)
         }
