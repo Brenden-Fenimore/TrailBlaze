@@ -101,7 +101,7 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/userperson"
+                    android:src="@drawable/usericon2"
                     android:contentDescription="@string/profilePicture" />
 
             <EditText

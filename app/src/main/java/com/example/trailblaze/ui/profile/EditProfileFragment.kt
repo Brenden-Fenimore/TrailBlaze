@@ -240,12 +240,20 @@ class EditProfileFragment : Fragment() {
         // Call repository to update Firestore
         userRepository.updateUserProfile(userId, updatedUserData) { success ->
             if (success) {
+
                 // Profile updated successfully
                 Log.d("EditProfile", "Profile updated successfully")
+
+                Toast.makeText(requireContext(), "Profile Updated", Toast.LENGTH_SHORT).show()
+
+                // Navigate back to the profile screen
+                findNavController().navigate(R.id.action_editProfileFragment_to_navigation_profile)
+
                 // Optionally, navigate back or show a success message
             } else {
                 // Handle failure
                 Log.e("EditProfile", "Failed to update profile")
+                Toast.makeText(requireContext(), "Failed to update profile", Toast.LENGTH_SHORT).show()
             }
         }
     }
