@@ -11,6 +11,9 @@ import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.Park
 import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,6 +33,8 @@ class ParkDetailActivity : AppCompatActivity() {
     private lateinit var parkWeatherInfoTextView: TextView
     private lateinit var parkEntrancePassesTextView: TextView
     private lateinit var parkImagesRecyclerView: RecyclerView
+    private lateinit var favoriteButton: ImageButton            // Declare button variables
+    private val firestore = FirebaseFirestore.getInstance()     // Declare Firestore instance
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +67,13 @@ class ParkDetailActivity : AppCompatActivity() {
         parkImagesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         fetchParkDetails(parkCode)
+
+        // Initialize the favorite button and set up its click listener
+        favoriteButton = findViewById(R.id.favorite_park_btn)
+        favoriteButton.setOnClickListener {
+            addParkToFavorites(parkCode) // Call function to save this park as a favorite (assuming parkCode is set)
+        }
+
     }
 
     private fun fetchParkDetails(parkCode: String) {
@@ -152,4 +164,25 @@ class ParkDetailActivity : AppCompatActivity() {
             Toast.makeText(this, "No images available for this park", Toast.LENGTH_SHORT).show()
         }
     }
+
+    // Function to add the current park to the user's favorites in Firestore
+    private fun addParkToFavorites(parkCode: String) {
+        // Get the user's unique ID
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+
+            // Reference to the user's document in Firestore
+            val userDocRef = firestore.collection("users").document(userId)
+
+            // Update the favoriteParks list field using arrayUnion to avoid duplicate entries
+            userDocRef.update("favoriteParks", FieldValue.arrayUnion(parkCode))
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show()       // Show success message
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(this, "Failed to add to favorites: ${e.message}", Toast.LENGTH_SHORT).show()         // Show failure message
+                }
+        }
+    }
+
 }
