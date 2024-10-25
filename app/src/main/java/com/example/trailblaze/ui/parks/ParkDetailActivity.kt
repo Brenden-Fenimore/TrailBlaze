@@ -91,8 +91,6 @@ class ParkDetailActivity : AppCompatActivity() {
         })
     }
 
-
-
     private fun populateParkDetails(park: Park) {
         // Populate UI elements with park details
         parkNameTextView.text = park.fullName

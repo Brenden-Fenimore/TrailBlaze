@@ -142,8 +142,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-
-
     private fun fetchParksData() {
         RetrofitInstance.api.getParks(10).enqueue(object : Callback<NPSResponse> {
             override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
@@ -198,6 +196,7 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
     private fun fetchParksByState(userState: String) {
         RetrofitInstance.api.getParksbyQuery(userState).enqueue(object : Callback<NPSResponse> {
             override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
