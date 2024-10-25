@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.trailblaze.firestore.ImageLoader
 import com.example.trailblaze.firestore.UserManager
+import com.example.trailblaze.ui.MenuActivity
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.DocumentSnapshot
@@ -120,9 +121,9 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
         }
 
-        // Set click listener for the back button
-        binding.chevronLeft.setOnClickListener {
-            findNavController().navigateUp()
+        binding.menuButton.setOnClickListener {
+            val intent = Intent(activity, MenuActivity::class.java)
+            startActivity(intent)
         }
     }
 

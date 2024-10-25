@@ -37,7 +37,6 @@
                 android:layout_centerVertical="true"/>
     </RelativeLayout>
 
-
     <!-- Favorites Title -->
         <TextView
                 android:id="@+id/title"
@@ -82,7 +81,7 @@
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="strSearch"
+                        android:hint="@string/search"
                         android:textSize="18sp"
                         android:id="@+id/searchbar"
                         android:fontFamily="@font/amethysta"
@@ -283,7 +282,6 @@
         </LinearLayout>
     </HorizontalScrollView>
 </LinearLayout>
-
 
     <!-- Spacer to add margin for navigation bar -->
     <View

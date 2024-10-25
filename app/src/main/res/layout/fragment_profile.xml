@@ -16,12 +16,12 @@
         <!--    Hamburger menu in top left-->
 
         <ImageButton
-                app:srcCompat="@drawable/chevron_left"
+                app:srcCompat="@drawable/three_line_menu"
                 android:contentDescription="@string/backButton"
                 android:layout_width="49dp"
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
-                android:id="@+id/chevron_left"
+                android:id="@+id/menuButton"
                 android:background="@android:color/transparent"
                 android:layout_centerVertical="true"/>
         <ImageButton
@@ -59,7 +59,7 @@
             <!-- Location Icon on the Left -->
             <ImageButton
                     android:id="@+id/icon_location"
-                    android:layout_width="48dp"
+                    android:layout_width= "48dp"
                     android:layout_height="48dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/location"
@@ -79,8 +79,8 @@
             <!-- Difficulty Icon on the Right -->
             <ImageButton
                     android:id="@+id/icon_difficulty"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/difficulty"
                     android:background="@android:color/transparent"
