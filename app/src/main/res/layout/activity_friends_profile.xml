@@ -75,8 +75,8 @@
             <!-- Difficulty Icon on the Right -->
             <ImageButton
                     android:id="@+id/icon_difficulty"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/difficulty"
                     android:background="@android:color/transparent"
