@@ -6,7 +6,9 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -75,6 +77,14 @@ class FriendsProfileActivity : AppCompatActivity() {
         // Initialize the achievement manager
         achievementManager = AchievementManager(this)
 
+        binding.iconLocation.setOnClickListener {
+            fetchCurrentUserLocation()
+        }
+
+        binding.iconDifficulty.setOnClickListener {
+            fetchCurrentUserDifficulty()
+        }
+
 
         // Initialize the RecyclerView for friends in common
         friendsInCommonList = mutableListOf()
@@ -107,7 +117,6 @@ class FriendsProfileActivity : AppCompatActivity() {
 
         addFriendButton.setOnClickListener {
             addFriend(userId) // Call the function to add friend
-
         }
     }
 
@@ -116,7 +125,8 @@ class FriendsProfileActivity : AppCompatActivity() {
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
                     val username = document.getString("username")
-                    val imageUrl = document.getString("profileImageUrl") // Adjust based on your Firestore structure
+                    val imageUrl = document.getString("profileImageUrl")
+                    // Adjust based on your Firestore structure
 
                     binding.username.text = username
                     // Load the profile picture using your ImageLoader utility
@@ -258,5 +268,51 @@ class FriendsProfileActivity : AppCompatActivity() {
         }.addOnFailureListener { exception ->
             Log.e("FriendsProfileActivity", "Error fetching common friends: ", exception)
         }
+    }
+
+    // Fetches users current location from Firestore
+    private fun fetchCurrentUserLocation() {
+        firestore.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val city = document.getString("city") ?: "City not found"
+                    val state = document.getString("state") ?: "State not found"
+                    val zip = document.getString("zip") ?: "Zip not found"
+
+                    // Combine city, state, and zip into a single string
+                    val location = "$city, $state $zip"
+                    showMessage("Location", location)
+                } else {
+                    showMessage("Location", "Location not found")
+                }
+            }
+            .addOnFailureListener {
+                showMessage("Location", "Error fetching location")
+            }
+    }
+
+    // Fetches users current Difficulty from Firestore
+    private fun fetchCurrentUserDifficulty() {
+        firestore.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val difficulty = document.getString("difficulty") ?: "Difficulty not found"
+                    showMessage("Difficulty", difficulty)
+                } else {
+                    showMessage("Difficulty", "Difficulty not found")
+                }
+            }
+            .addOnFailureListener {
+                showMessage("Difficulty", "Error fetching difficulty")
+            }
+    }
+
+    // Helper function to show a message
+    private fun showMessage(title: String, message: String) {
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder.setTitle(title)
+        dialogBuilder.setMessage(message)
+        dialogBuilder.setPositiveButton("OK", null)
+        dialogBuilder.show()
     }
 }
