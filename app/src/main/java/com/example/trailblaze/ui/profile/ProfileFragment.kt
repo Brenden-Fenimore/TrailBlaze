@@ -115,6 +115,7 @@ class ProfileFragment : Fragment() {
 
         fetchFavoriteParks()
 
+
         // Initialize the icons
         binding.iconLocation.setOnClickListener {
             fetchCurrentUserLocation()
@@ -145,11 +146,11 @@ class ProfileFragment : Fragment() {
         binding.editbutton.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
         }
-
         binding.menuButton.setOnClickListener {
             val intent = Intent(activity, MenuActivity::class.java)
             startActivity(intent)
         }
+
     }
 
     private fun loadCurrentUserData() {
@@ -219,6 +220,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun fetchUserBadges() {
+        // Fetching badges logic here
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
             firestore.collection("users").document(userId).get()
@@ -300,6 +302,15 @@ class ProfileFragment : Fragment() {
             }
     }
 
+    // Helper function to show a message
+    private fun showMessage(title: String, message: String) {
+        val dialogBuilder = AlertDialog.Builder(requireContext())
+        dialogBuilder.setTitle(title)
+        dialogBuilder.setMessage(message)
+        dialogBuilder.setPositiveButton("OK", null)
+        dialogBuilder.show()
+    }
+
     private fun fetchFavoriteParks() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
         firestore.collection("users").document(userId).get()
@@ -359,14 +370,6 @@ class ProfileFragment : Fragment() {
         favoritesAdapter.updateData(parks) // Update the adapter with the fetched parks
     }
 
-    // Helper function to show a message
-    private fun showMessage(title: String, message: String) {
-        val dialogBuilder = AlertDialog.Builder(requireContext())
-        dialogBuilder.setTitle(title)
-        dialogBuilder.setMessage(message)
-        dialogBuilder.setPositiveButton("OK", null)
-        dialogBuilder.show()
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
