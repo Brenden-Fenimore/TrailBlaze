@@ -1,5 +1,6 @@
 package com.example.trailblaze.firestore
 
+import com.example.trailblaze.nps.Park
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -33,6 +34,7 @@ object UserManager {
                         email = document.getString("email") ?: "",
                         friends = document.get("friends") as? List<String> ?: emptyList(),
                         badges = document.get("badges") as? List<String> ?: emptyList(),
+                        favoriteParks = document.get("favoriteParks") as? List<Park> ?: emptyList(),
                     )
                     setCurrentUser(user)
                     callback(user)
