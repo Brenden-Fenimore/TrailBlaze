@@ -157,6 +157,7 @@
                 android:paddingBottom="8dp"/>
 
         <HorizontalScrollView
+                android:id="@+id/leaderboardSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="horizontal">
@@ -214,6 +215,7 @@
                 android:paddingBottom="8dp"/>
 
         <HorizontalScrollView
+                android:id="@+id/photosSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="horizontal">
@@ -271,6 +273,7 @@
                 android:paddingBottom="8dp"/>
 
         <HorizontalScrollView
+                android:id="@+id/favoriteTrailsSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="horizontal">
