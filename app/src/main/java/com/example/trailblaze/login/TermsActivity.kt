@@ -1,5 +1,6 @@
 package com.example.trailblaze.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -32,6 +33,8 @@ class TermsActivity : AppCompatActivity() {
         //set click listener for acceptableUseBtn
         acceptableUseButton.setOnClickListener{
             // open Acceptable Use Policy
+            val intent = Intent(this, AcceptableActivity::class.java)
+            startActivity(intent)
         }
 
         //set click listener for privacyPolicyBtn
