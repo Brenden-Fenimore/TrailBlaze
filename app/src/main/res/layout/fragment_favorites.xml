@@ -39,6 +39,16 @@
                 android:layout_centerVertical="true"/>
     </RelativeLayout>
 
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/swishLayout">
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
     <!-- Favorites Title -->
         <TextView
                 android:id="@+id/title"
@@ -251,10 +261,12 @@
     </HorizontalScrollView>
 
 </LinearLayout>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp" />
+        </LinearLayout>
+    </ScrollView>
 
     <!-- Spacer to add margin for navigation bar -->
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="75dp" />
 
 </LinearLayout>
