@@ -146,6 +146,7 @@
 
         <!-- Leaderboard Section -->
         <TextView
+                android:id="@+id/leaderboardHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/leaderboard"
@@ -204,6 +205,7 @@
 
         <!-- Photos Section -->
         <TextView
+                android:id="@+id/photosHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/userPhotos"
@@ -262,6 +264,7 @@
 
         <!-- Favorite Trails Section -->
         <TextView
+                android:id="@+id/favoriteTrailsHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/userFavoriteTrails"

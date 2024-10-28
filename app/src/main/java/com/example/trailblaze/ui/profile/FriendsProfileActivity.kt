@@ -138,10 +138,15 @@ class FriendsProfileActivity : AppCompatActivity() {
 
                     // Set visibility based on the privacy settings
                     binding.leaderboardSection.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
+                    binding.leaderboardHeader.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
+
                     binding.photosSection.visibility = if (isPhotosVisible) View.VISIBLE else View.GONE
+                    binding.photosHeader.visibility = if (isPhotosVisible) View.VISIBLE else View.GONE
+
                     binding.favoriteTrailsSection.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
+                    binding.favoriteTrailsHeader.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
+
                     binding.watcherMember.visibility = if (isWatcherVisible) View.VISIBLE else View.GONE
-                    binding.iconLocation.visibility = if (isShareLocationVisible) View.VISIBLE else View.GONE
 
                     // Fetch and display badges (similar to your own profile)
                     val badges = document.get("badges") as? List<String> ?: emptyList()
@@ -283,13 +288,18 @@ class FriendsProfileActivity : AppCompatActivity() {
         firestore.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
-                    val city = document.getString("city") ?: "City not found"
-                    val state = document.getString("state") ?: "State not found"
-                    val zip = document.getString("zip") ?: "Zip not found"
+                    val isShareLocationVisible = document.getBoolean("shareLocationVisible") ?: true
 
-                    // Combine city, state, and zip into a single string
-                    val location = "$city, $state $zip"
-                    showMessage("Location", location)
+                    if (isShareLocationVisible) {
+                        val city = document.getString("city") ?: "City not found"
+                        val state = document.getString("state") ?: "State not found"
+                        val zip = document.getString("zip") ?: "Zip not found"
+                        val location = "$city, $state $zip"
+
+                        showMessage("Location", location)
+                    } else {
+                        showMessage("Location", "Private")
+                    }
                 } else {
                     showMessage("Location", "Location not found")
                 }
