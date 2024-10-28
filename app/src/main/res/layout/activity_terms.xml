@@ -11,11 +11,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            tools:layout_editor_absoluteX="0dp" app:layout_constraintBottom_toBottomOf="parent">
+            tools:layout_editor_absoluteX="0dp"
+            app:layout_constraintBottom_toBottomOf="parent">
 
         <com.example.trailblaze.view.SwishBackgroundView
                 android:layout_width="match_parent"
-                android:layout_height="100dp" android:id="@+id/swishBackgroundView"/>
+                android:layout_height="100dp"
+                android:id="@+id/swishBackgroundView"/>
 
         <!--Terms and Conditions header-->
 
@@ -30,8 +32,7 @@
                 android:textSize="30sp"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"/>
+                android:layout_height="wrap_content"/>
         <TextView
                 android:ellipsize="end"
                 android:id="@+id/lastUpdated"
@@ -42,8 +43,7 @@
                 android:text="@string/lastUpdated_toc"
                 android:textSize="15sp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="3dp"/>
+                android:layout_height="wrap_content"/>
 
         <!-- Agreement to Terms Header-->
 
@@ -53,22 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/agreement_toc"
-                android:textSize="18sp"
-                android:padding="8dp" android:layout_marginTop="0dp"/>
-        <Button
-                android:text="@string/ok"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/termsOKbtn"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp">
-        </Button>
-        <Button
-                android:text="@string/acceptableUse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/acceptableUseBtn"/>
-
+                android:textSize="18sp"/>
 
         <!-- Scroll Portion *Terms and Conditions Body*-->
 
@@ -97,6 +82,29 @@
 
             </LinearLayout>
         </ScrollView>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="50dp">
+
+            <Button
+                    android:text="@string/ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/termsOKbtn"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp">
+        </Button>
+
+        <Button
+                android:text="@string/acceptableUse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/acceptableUseBtn">
+        </Button>
+</LinearLayout>
 
     </LinearLayout>
 
