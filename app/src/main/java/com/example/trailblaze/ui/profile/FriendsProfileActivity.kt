@@ -1,5 +1,6 @@
 package com.example.trailblaze.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -20,11 +21,19 @@ import com.example.trailblaze.ui.achievements.BadgesAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.trailblaze.firestore.ImageLoader
+import com.example.trailblaze.nps.NPSResponse
+import com.example.trailblaze.nps.Park
+import com.example.trailblaze.nps.ParksAdapter
+import com.example.trailblaze.nps.RetrofitInstance
+import com.example.trailblaze.ui.parks.ParkDetailActivity
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.SetOptions
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class FriendsProfileActivity : AppCompatActivity() {
 
@@ -41,6 +50,10 @@ class FriendsProfileActivity : AppCompatActivity() {
     private lateinit var friendsInCommonRecyclerView: RecyclerView
     private lateinit var friendsInCommonAdapter: FriendAdapter
     private lateinit var friendsInCommonList: MutableList<Friends>
+
+    private lateinit var favoritesRecyclerView: RecyclerView
+    private lateinit var favoritesAdapter: ParksAdapter
+    private var favoriteParks: MutableList<Park> = mutableListOf()
 
 
     // Define all possible badges
@@ -111,6 +124,7 @@ class FriendsProfileActivity : AppCompatActivity() {
         }
         loadFriendProfile()
         fetchFriendsInCommon()
+        loadFavoriteParks()
 
         // Initialize the "Add" button
         addFriendButton = binding.addFriendButton
@@ -118,6 +132,17 @@ class FriendsProfileActivity : AppCompatActivity() {
         addFriendButton.setOnClickListener {
             addFriend(userId) // Call the function to add friend
         }
+
+        favoritesRecyclerView = binding.favoriteTrailsSection
+        favoritesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+        favoritesAdapter = ParksAdapter(emptyList()) { park ->
+            val intent = Intent(this, ParkDetailActivity::class.java).apply {
+                putExtra("PARK_CODE", park.parkCode)
+            }
+            startActivity(intent)
+        }
+        favoritesRecyclerView.adapter = favoritesAdapter
     }
 
     private fun loadFriendProfile() {
@@ -126,6 +151,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                 if (document != null && document.exists()) {
                     val username = document.getString("username")
                     val imageUrl = document.getString("profileImageUrl")
+                    val favoritePark = document.get("favoriteParks")
                     // Adjust based on your Firestore structure
 
                     binding.username.text = username
@@ -339,4 +365,62 @@ class FriendsProfileActivity : AppCompatActivity() {
         dialogBuilder.setPositiveButton("OK", null)
         dialogBuilder.show()
     }
+
+    private fun loadFavoriteParks() {
+        firestore.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val favoriteParksList = document.get("favoriteParks") as? List<String> ?: emptyList()
+
+                    // Assuming you have a function to fetch park details based on park IDs
+                    fetchParksDetails(favoriteParksList)
+                } else {
+                    Log.e("FriendsProfileActivity", "Friend document does not exist")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("FriendsProfileActivity", "Error fetching friend's favorite parks: ", exception)
+            }
+    }
+    private fun fetchParksDetails(parkCodes: List<String>) {
+        val tasks = parkCodes.map { parkCode ->
+            RetrofitInstance.api.getParkDetails(parkCode)
+        }
+
+        // Track the number of responses
+        var completedRequests = 0
+
+        tasks.forEach { call ->
+            call.enqueue(object : Callback<NPSResponse> {
+                override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
+                    if (response.isSuccessful && response.body() != null) {
+                        val park = response.body()?.data?.firstOrNull()
+                        park?.let {
+                            favoriteParks.add(it) // Add the park to the list
+                        }
+                    }
+                    completedRequests++
+                    // Check if all requests are completed
+                    if (completedRequests == parkCodes.size) {
+                        updateParksRecyclerView(favoriteParks)
+                    }
+                }
+
+                override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
+                    Log.e("FavoritesFragment", "Error fetching park details: ${t.message}")
+                    completedRequests++
+                    // Check if all requests are completed, even on failure
+                    if (completedRequests == parkCodes.size) {
+                        updateParksRecyclerView(favoriteParks)
+                    }
+                }
+            })
+        }
+    }
+
+    private fun updateParksRecyclerView(parks: List<Park>) {
+        favoritesAdapter.updateData(parks) // Update the adapter with the fetched parks
+    }
+
+
 }
