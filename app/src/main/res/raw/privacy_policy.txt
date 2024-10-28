@@ -1,8 +1,3 @@
-
-PRIVACY POLICY
-
-Last updated October 24, 2024
-
 This Privacy Notice for TrailBlaze ("we," "us," or "our"), describes how and why we might access, collect, store, use, and/or share ("process") your personal information when you use our services ("Services"), including when you:
 * Visit our website at https://www.trailblaze.com, or any website of ours that links to this Privacy Notice
 * Download and use our mobile application (TrailBlaze), or any other application of ours that links to this Privacy Notice
@@ -24,10 +19,6 @@ However, no electronic transmission over the internet or information storage tec
 What are your rights? Depending on where you are located geographically, the applicable privacy law may mean you have certain rights regarding your personal information. Learn more about your privacy rights.
 How do you exercise your rights? The easiest way to exercise your rights is by submitting a data subject access request, or by contacting us. We will consider and act upon any request in accordance with applicable data protection laws.
 Want to learn more about what we do with any information we collect? Review the Privacy Notice in full.
-
-
-
-
 
 
 TABLE OF CONTENTS
@@ -52,12 +43,14 @@ FROM YOU?
 
 
 1. WHAT INFORMATION DO WE COLLECT?
+
 Personal information you disclose to us
 In Short: We collect personal information that you provide to us.
 We collect personal information that you voluntarily provide to us when you register on the Services, express an interest in obtaining information about us or our products and Services, when you participate in activities on the Services, or otherwise when you contact us.
+
 Personal Information Provided by You. The personal information that we collect depends on the context of your interactions with us and the Services, the choices you make, and the products and features you use. The personal information we collect may include the following:
 * names
-*  email addresses
+* email addresses
 * phone numbers
 * mailing addresses
 * usernames
@@ -66,6 +59,7 @@ Personal Information Provided by You. The personal information that we collect d
 * contact or authentication data
 * billing addresses
 * debit/credit card numbers
+
 Sensitive Information. When necessary, with your consent or as otherwise permitted by applicable law, we process the following categories of sensitive information:
 * financial data
 * biometric data

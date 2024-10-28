@@ -40,6 +40,8 @@ class TermsActivity : AppCompatActivity() {
         //set click listener for privacyPolicyBtn
         privacyPolicyButton.setOnClickListener{
             // open Privacy Policy
+            val intent = Intent(this, PrivacyActivity::class.java)
+            startActivity(intent)
         }
     }
    private fun readTextFileFromRaw(): String {
