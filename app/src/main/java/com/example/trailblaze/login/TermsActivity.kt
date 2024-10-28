@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.text.HtmlCompat
 import com.example.trailblaze.R
 import android.text.Html
 import java.io.BufferedReader
@@ -22,9 +21,7 @@ class TermsActivity : AppCompatActivity() {
         // Reference the Terms and Conditions Body Textview
 val termsTextView: TextView = findViewById(R.id.termsTextView)
 
-        // Load the HTML content from TrailBlaze_termsConditionsPolicy.html
-val htmlStream = resources.openRawResource(R.raw.terms_conditions_policy)
-val htmlContent = htmlStream.bufferedReader().use {it.readText()}
+
 
         // Set the HTML Content to the Textview (convert to rich)
         termsTextView.text = Html.fromHtml(htmlText, Html.FROM_HTML_MODE_LEGACY)
