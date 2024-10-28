@@ -132,6 +132,20 @@ class FriendsProfileActivity : AppCompatActivity() {
                     // Load the profile picture using your ImageLoader utility
                     ImageLoader.loadProfilePicture(this, binding.profilePicture, imageUrl)
 
+                    // Retrieve visibility settings
+                    val isLeaderboardVisible = document.getBoolean("leaderboardVisible") ?: true
+                    val isPhotosVisible = document.getBoolean("photosVisible") ?: true
+                    val isFavoriteTrailsVisible = document.getBoolean("favoriteTrailsVisible") ?: true
+                    val isWatcherVisible = document.getBoolean("watcherVisible") ?: true
+                    val isShareLocationVisible = document.getBoolean("shareLocationVisible") ?: true
+
+                    // Set visibility based on the privacy settings
+                    binding.leaderboardSection.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
+                    binding.photosSection.visibility = if (isPhotosVisible) View.VISIBLE else View.GONE
+                    binding.favoriteTrailsSection.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
+                    binding.watcherMember.visibility = if (isWatcherVisible) View.VISIBLE else View.GONE
+                    binding.iconLocation.visibility = if (isShareLocationVisible) View.VISIBLE else View.GONE
+
                     // Fetch and display badges (similar to your own profile)
                     val badges = document.get("badges") as? List<String> ?: emptyList()
                     updateBadgesList(badges)

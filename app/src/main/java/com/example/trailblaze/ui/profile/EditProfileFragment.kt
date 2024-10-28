@@ -22,6 +22,7 @@ import com.example.trailblaze.firestore.UserRepository
 import com.example.trailblaze.ui.achievements.AchievementManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
@@ -55,6 +56,9 @@ class EditProfileFragment : Fragment() {
         // Fetch and display current user data
         loadUserProfile()
 
+        // Load saved visibility settings from Firebase
+        loadVisibilitySettings()
+
         // Setup other views and buttons
         setupUI()
 
@@ -85,6 +89,12 @@ class EditProfileFragment : Fragment() {
             findNavController().navigate(R.id.action_editProfileFragment_to_settingsScreenActivity)
         }
 
+        binding.leaderboardSwitch.setOnCheckedChangeListener { _, _ -> updateVisibilitySettings() }
+        binding.photosSwitch.setOnCheckedChangeListener { _, _ -> updateVisibilitySettings() }
+        binding.favoritetrailsSwitch.setOnCheckedChangeListener { _, _ -> updateVisibilitySettings() }
+        binding.watcherSwitch.setOnCheckedChangeListener { _, _ -> updateVisibilitySettings() }
+        binding.sharelocationSwitch.setOnCheckedChangeListener { _, _ -> updateVisibilitySettings() }
+
         return view
     }
 
@@ -92,19 +102,13 @@ class EditProfileFragment : Fragment() {
     private fun setupSeekBarListener() {
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                //update the TextView with the current progress/value of the seekBar
+                // Update the TextView with the current progress/value of the SeekBar
                 selectedValueTextView.text = progress.toString()
+                selectedFilterValue = progress.toDouble()
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                // Optional: Do something when the user starts dragging the SeekBar
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                //get the progress value when the user stops dragging the SeekBar
-                selectedFilterValue = (seekBar?.progress ?: 0.0).toDouble()
-
-            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
     }
 
@@ -137,6 +141,12 @@ class EditProfileFragment : Fragment() {
                 val distance = document.getDouble("distance") ?: 0.0
                 binding.seekBar.progress = distance.toInt().coerceIn(0, binding.seekBar.max)
                 binding.range.text = distance.toString()
+
+                binding.leaderboardSwitch.isChecked = document.getBoolean("showLeaderboard") == true
+                binding.photosSwitch.isChecked = document.getBoolean("showPhotos") == true
+                binding.favoritetrailsSwitch.isChecked = document.getBoolean("showFavoriteTrails") == true
+                binding.watcherSwitch.isChecked = document.getBoolean("showWatcher") == true
+                binding.sharelocationSwitch.isChecked = document.getBoolean("showLocation") == true
             }
         }.addOnFailureListener { exception ->
             Log.e("EditProfile", "Error loading user data: ${exception.message}")
@@ -258,7 +268,6 @@ class EditProfileFragment : Fragment() {
         }
     }
 
-
     private fun loadProfilePicture() {
         val userId = auth.currentUser?.uid ?: return
         userRepository.getUserProfileImage(userId) { imageUrl ->
@@ -268,6 +277,48 @@ class EditProfileFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun updateVisibilitySettings() {
+        val currentUserId = auth.currentUser?.uid ?: return
+        val updates = hashMapOf<String, Any>(
+            "leaderboardVisible" to binding.leaderboardSwitch.isChecked,
+            "photosVisible" to binding.photosSwitch.isChecked,
+            "favoriteTrailsVisible" to binding.favoritetrailsSwitch.isChecked,
+            "watcherVisible" to binding.watcherSwitch.isChecked,
+            "shareLocationVisible" to binding.sharelocationSwitch.isChecked
+        )
+
+        firestore.collection("users").document(currentUserId)
+            .set(updates, SetOptions.merge())
+            .addOnSuccessListener {
+                Toast.makeText(requireContext(), "Visibility settings updated!", Toast.LENGTH_SHORT).show()
+                requireActivity().setResult(Activity.RESULT_OK) // Indicate success
+            }
+            .addOnFailureListener { exception ->
+                Log.e("EditProfileFragment", "Error updating visibility settings: ", exception)
+                Toast.makeText(requireContext(), "Failed to update settings.", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun loadVisibilitySettings() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val firestore = FirebaseFirestore.getInstance()
+
+        firestore.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    // Retrieve each visibility setting from Firebase and set the switch states
+                    binding.leaderboardSwitch.isChecked = document.getBoolean("leaderboardVisible") ?: false
+                    binding.photosSwitch.isChecked = document.getBoolean("photosVisible") ?: false
+                    binding.favoritetrailsSwitch.isChecked = document.getBoolean("favoriteTrailsVisible") ?: false
+                    binding.watcherSwitch.isChecked = document.getBoolean("watcherVisible") ?: false
+                    binding.sharelocationSwitch.isChecked = document.getBoolean("shareLocationVisible") ?: false
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("EditProfileFragment", "Error loading visibility settings", exception)
+            }
     }
 }
 
