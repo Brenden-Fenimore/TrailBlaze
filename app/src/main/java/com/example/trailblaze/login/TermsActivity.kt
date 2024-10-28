@@ -5,7 +5,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trailblaze.R
-import android.text.Html
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
@@ -15,16 +14,10 @@ class TermsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_terms)
 
-// Load the HTML content from the raw resource
-        val htmlText = loadHtmlFromRawResource(R.raw.terms_conditions_policy)
-
-        // Reference the Terms and Conditions Body Textview
-val termsTextView: TextView = findViewById(R.id.termsTextView)
-
-
-
-        // Set the HTML Content to the Textview (convert to rich)
-        termsTextView.text = Html.fromHtml(htmlText, Html.FROM_HTML_MODE_LEGACY)
+// Reference and read terms_cons_policy.txt
+        val termsTextView = findViewById<TextView>(R.id.termsTextView)
+        val termsContent = readTextFileFromRaw()
+        termsTextView.text = termsContent
 
         //find ok button id
         val okButton = findViewById<Button>(R.id.termsOKbtn)
@@ -46,9 +39,14 @@ val termsTextView: TextView = findViewById(R.id.termsTextView)
             // open Privacy Policy
         }
     }
-    private fun loadHtmlFromRawResource(resourceId: Int): String {
-        val inputStream = resources.openRawResource(resourceId)
-        val reader = BufferedReader(InputStreamReader(inputStream))
-        return reader.use { it.readText() }
-    }
+   private fun readTextFileFromRaw(): String {
+       val inputStream = resources.openRawResource(R.raw.terms_cons_policy)
+       val reader = BufferedReader(InputStreamReader(inputStream))
+       val content = StringBuilder()
+       reader.forEachLine {line->
+           content.append(line).append("\n")
+       }
+       inputStream.close()
+       return content.toString()
+   }
 }
