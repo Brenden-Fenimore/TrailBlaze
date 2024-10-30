@@ -68,47 +68,7 @@
                         android:layout_weight="1"
                         android:textAlignment="center"/>
             </LinearLayout>
-            <LinearLayout
-                    android:id="@+id/searchbarlayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                    <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/searchbartextfield"
-                            android:layout_width="380dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-                            app:boxStrokeWidth="2dp"
-                            app:boxStrokeWidthFocused="2dp"
-                            app:boxCornerRadiusBottomStart="10dp"
-                            app:boxCornerRadiusBottomEnd="10dp"
-                            app:boxCornerRadiusTopEnd="10dp"
-                            app:boxCornerRadiusTopStart="10dp"
-                            app:startIconDrawable="@drawable/magnifying_glass_small"
-                            app:endIconMode="custom"
-                            app:endIconDrawable="@drawable/mic_small"
-                            app:boxBackgroundColor="#E4E2E2"
-                            app:boxStrokeColor="#0386D0"
-                            app:cursorColor="#0386D0"
-                            app:hintTextColor="#0386D0">
-
-                        <com.google.android.material.textfield.TextInputEditText
-
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Search"
-                                android:textSize="18sp"
-                                android:id="@+id/searchbar"
-                                android:fontFamily="@font/amethysta"
-                                android:textColor="#000000"
-                                android:singleLine="true"/>
-                    </com.google.android.material.textfield.TextInputLayout>
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
             <ScrollView android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
