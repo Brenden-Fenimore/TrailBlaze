@@ -62,7 +62,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:textSize="27sp"
-                        android:text="@string/username" android:textColor="#000000"
+                        android:text="@string/username"
+                        android:textColor="#000000"
                         android:fontFamily="@font/amethysta"
                         android:layout_weight="1"
                         android:textAlignment="center"/>

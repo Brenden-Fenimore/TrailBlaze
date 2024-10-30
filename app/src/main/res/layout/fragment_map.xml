@@ -2,7 +2,7 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" tools:ignore="ExtraText">
 
     <FrameLayout
             android:layout_width="match_parent"
@@ -13,10 +13,16 @@
                 class="com.google.android.gms.maps.SupportMapFragment"
                 android:id="@+id/map_fragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
+                android:layout_height="783dp"/>
 
     </FrameLayout>
+
+    <Button
+            android:text="FullSail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fullsail"/>
+
     <MultiAutoCompleteTextView
             android:layout_marginTop="25dp"
             android:layout_marginStart="85dp"
@@ -31,13 +37,117 @@
             android:dropDownHeight="wrap_content"/>
 
     <ImageButton
-            android:layout_marginStart="350dp"
+            android:layout_marginStart="285dp"
             android:layout_marginTop="42dp"
             android:layout_width="10dp"
             android:layout_height="10dp"
             android:id="@+id/clear_mapsearchtext"
             app:srcCompat="@drawable/x"
-            android:clickable="true"
-            android:contentDescription="@string/description"/>
+            android:clickable="true"/>
+
+
+    //roadmap button layout
+    <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:translationX="335dp"
+            android:translationY="130dp"
+            android:id="@+id/roadmap"
+            android:clickable="true">
+        <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/green_circle"/>
+
+        <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:translationX="15dp"
+                android:translationY="7dp"
+                android:src="@drawable/highway_white"/>
+        <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Roads"
+                android:translationX="15dp"
+                android:translationY="35dp"
+                android:fontFamily="@font/amethysta"
+                android:textSize="10dp"
+                android:textColor="@color/white">
+
+        </TextView>
+        //end of road button
+    </RelativeLayout>
+
+
+    //satellite button layout
+    <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:translationX="335dp"
+            android:translationY="200dp"
+            android:id="@+id/satellite"
+            android:clickable="true">
+        <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/green_circle"/>
+
+        <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:translationX="19dp"
+                android:translationY="7dp"
+                android:src="@drawable/satellite_white"/>
+        <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Satellite"
+                android:translationX="10dp"
+                android:translationY="35dp"
+                android:fontFamily="@font/amethysta"
+                android:textSize="10dp"
+                android:textColor="@color/white">
+
+        </TextView>
+        //end of satellite button
+    </RelativeLayout>
+
+    //terrain button layout
+    <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:translationX="335dp"
+            android:translationY="270dp"
+            android:id="@+id/terrain"
+            android:clickable="true">
+        <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/green_circle"/>
+
+        <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:translationX="10dp"
+                android:translationY="2dp"
+                android:src="@drawable/mountain_white"/>
+        <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Terrain"
+                android:translationX="13dp"
+                android:translationY="35dp"
+                android:fontFamily="@font/amethysta"
+                android:textSize="10dp"
+                android:textColor="@color/white">
+
+        </TextView>
+        //end of terrain button
+    </RelativeLayout>
+
 
 </RelativeLayout>
