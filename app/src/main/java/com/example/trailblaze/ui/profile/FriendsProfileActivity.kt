@@ -194,39 +194,38 @@ class FriendsProfileActivity : AppCompatActivity() {
                     val friendsList = document.get("friends") as? List<String> ?: emptyList()
                     val favoriteFriendsList = document.get("favoriteFriends") as? List<String> ?: emptyList()
 
-                    // Check if the friendId exists in the friends list
+                    // Check if the friend is already in the friends list
                     if (friendsList.contains(friendId)) {
-                        // They are friends, show favorite button and hide add friend button
-                        binding.favoriteFriendBtn.visibility = View.VISIBLE // Show favorite icon
                         binding.addFriendButton.visibility = View.GONE // Hide add friend button
+                        binding.favoriteFriendBtn.visibility = View.VISIBLE // Show favorite button
+                        // Check if the friend is in favorites
+                        if (favoriteFriendsList.contains(friendId)) {
+                            binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled) // Set filled icon
+                        } else {
+                            binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Set outline icon
+                        }
                     } else {
-                        // They are not friends, show add friend button and hide favorite button
-                        binding.favoriteFriendBtn.visibility = View.GONE // Hide favorite icon
                         binding.addFriendButton.visibility = View.VISIBLE // Show add friend button
-                    }
-
-                    // Check if the friend is already in the favorites list
-                    if (favoriteFriendsList.contains(friendId)) {
-                        Toast.makeText(this, "Friend added to favorites successfully!", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(this, "Friend already a favorite friend.", Toast.LENGTH_SHORT).show()
+                        binding.favoriteFriendBtn.visibility = View.GONE // Hide favorite button
                     }
 
                     // Set up click listener for the favorite button
                     binding.favoriteFriendBtn.setOnClickListener {
                         if (favoriteFriendsList.contains(friendId)) {
-                            Toast.makeText(this, "This friend is already in your favorites.", Toast.LENGTH_SHORT).show()
+                            // Friend is already a favorite, remove them from favorites
+                            removeFavoriteFriend(currentUserId, friendId)
                         } else {
+                            // Friend is not a favorite, add them to favorites
                             addFavoriteFriend(currentUserId, friendId)
                         }
                     }
-
                 }
             }
             .addOnFailureListener { exception ->
                 Log.e("FriendsProfileActivity", "Error fetching user friends: ", exception)
             }
     }
+
 
     private fun addFavoriteFriend(currentUserId: String, friendId: String) {
         val userRef = firestore.collection("users").document(currentUserId)
@@ -248,6 +247,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                     userRef.set(userUpdates, SetOptions.merge())
                         .addOnSuccessListener {
                             Toast.makeText(this, "Friend added to favorites successfully!", Toast.LENGTH_SHORT).show()
+                            binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled) // Change to filled icon
                         }
                         .addOnFailureListener { exception ->
                             Log.e("FriendsProfileActivity", "Error adding friend to favorites: ", exception)
@@ -263,6 +263,44 @@ class FriendsProfileActivity : AppCompatActivity() {
             Toast.makeText(this, "Error fetching user data.", Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun removeFavoriteFriend(currentUserId: String, friendId: String) {
+        val userRef = firestore.collection("users").document(currentUserId)
+
+        userRef.get().addOnSuccessListener { document ->
+            if (document != null && document.exists()) {
+                // Get the favorite friends list from the document
+                val favoriteFriendsList = document.get("favoriteFriends") as? List<String> ?: emptyList()
+
+                // Check if the friendId is already in the favorites list
+                if (!favoriteFriendsList.contains(friendId)) {
+                    Toast.makeText(this, "This friend is not in your favorites.", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Create a HashMap to represent the user's document
+                    val userUpdates = HashMap<String, Any>()
+                    userUpdates["favoriteFriends"] = FieldValue.arrayRemove(friendId) // Remove friendId from the array
+
+                    // Update the current user's document in Firestore
+                    userRef.set(userUpdates, SetOptions.merge())
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Friend removed from favorites successfully!", Toast.LENGTH_SHORT).show()
+                            binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Change to outline icon
+                        }
+                        .addOnFailureListener { exception ->
+                            Log.e("FriendsProfileActivity", "Error removing friend from favorites: ", exception)
+                            Toast.makeText(this, "Failed to remove friend from favorites.", Toast.LENGTH_SHORT).show()
+                        }
+                }
+            } else {
+                Log.e("FriendsProfileActivity", "User document does not exist")
+                Toast.makeText(this, "User document not found.", Toast.LENGTH_SHORT).show()
+            }
+        }.addOnFailureListener { exception ->
+            Log.e("FriendsProfileActivity", "Error fetching user document: ", exception)
+            Toast.makeText(this, "Error fetching user data.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
     private fun updateBadgesList(badges: List<String>) {
         // Filter the list of all badges based on fetched user badges
@@ -301,13 +339,19 @@ class FriendsProfileActivity : AppCompatActivity() {
                         } else {
                             // Create a HashMap to represent the user's document
                             val userUpdates = HashMap<String, Any>()
-                            userUpdates["friends"] = FieldValue.arrayUnion(friendId)
+                            userUpdates["friends"] = FieldValue.arrayUnion(friendId) // Add friendId to the friends array
 
                             // Update the current user's document in Firestore
                             userRef.set(userUpdates, SetOptions.merge())
                                 .addOnSuccessListener {
                                     Toast.makeText(this, "Friend added successfully!", Toast.LENGTH_SHORT).show()
 
+                                    // Hide add friend button and show favorite button
+                                    binding.addFriendButton.visibility = View.GONE
+                                    binding.favoriteFriendBtn.visibility = View.VISIBLE
+                                    binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Set outline icon
+
+                                    // Optionally, grant an achievement for adding a friend
                                     achievementManager.checkAndGrantSocialButterflyBadge(currentUserId)
                                 }
                                 .addOnFailureListener { exception ->
