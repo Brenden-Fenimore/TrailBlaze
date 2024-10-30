@@ -93,7 +93,7 @@ class FavoritesFragment : Fragment() {
 
         // initialize favorite friends recyclerView
         favoriteFriendsRecyclerView = binding.favoriteFriendsRecyclerView
-        favoriteFriendsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        favoriteFriendsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         // Set up the adapter for favorite friends, with an empty list to start
         favoriteFriendsAdapter = FriendAdapter(emptyList()) { friend ->
