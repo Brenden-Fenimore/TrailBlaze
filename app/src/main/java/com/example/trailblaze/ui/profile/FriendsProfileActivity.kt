@@ -192,6 +192,7 @@ class FriendsProfileActivity : AppCompatActivity() {
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
                     val friendsList = document.get("friends") as? List<String> ?: emptyList()
+                    val favoriteFriendsList = document.get("favoriteFriends") as? List<String> ?: emptyList()
 
                     // Check if the friendId exists in the friends list
                     if (friendsList.contains(friendId)) {
@@ -203,11 +204,64 @@ class FriendsProfileActivity : AppCompatActivity() {
                         binding.favoriteFriendBtn.visibility = View.GONE // Hide favorite icon
                         binding.addFriendButton.visibility = View.VISIBLE // Show add friend button
                     }
+
+                    // Check if the friend is already in the favorites list
+                    if (favoriteFriendsList.contains(friendId)) {
+                        Toast.makeText(this, "Friend added to favorites successfully!", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, "Friend already a favorite friend.", Toast.LENGTH_SHORT).show()
+                    }
+
+                    // Set up click listener for the favorite button
+                    binding.favoriteFriendBtn.setOnClickListener {
+                        if (favoriteFriendsList.contains(friendId)) {
+                            Toast.makeText(this, "This friend is already in your favorites.", Toast.LENGTH_SHORT).show()
+                        } else {
+                            addFavoriteFriend(currentUserId, friendId)
+                        }
+                    }
+
                 }
             }
             .addOnFailureListener { exception ->
                 Log.e("FriendsProfileActivity", "Error fetching user friends: ", exception)
             }
+    }
+
+    private fun addFavoriteFriend(currentUserId: String, friendId: String) {
+        val userRef = firestore.collection("users").document(currentUserId)
+
+        userRef.get().addOnSuccessListener { document ->
+            if (document != null && document.exists()) {
+                // Get the favorite friends list from the document
+                val favoriteFriendsList = document.get("favoriteFriends") as? List<String> ?: emptyList()
+
+                // Check if the friendId is already in the favorites list
+                if (favoriteFriendsList.contains(friendId)) {
+                    Toast.makeText(this, "This friend is already in your favorites.", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Create a HashMap to represent the user's document
+                    val userUpdates = HashMap<String, Any>()
+                    userUpdates["favoriteFriends"] = FieldValue.arrayUnion(friendId) // Add friendId to the array
+
+                    // Update the current user's document in Firestore
+                    userRef.set(userUpdates, SetOptions.merge())
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Friend added to favorites successfully!", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener { exception ->
+                            Log.e("FriendsProfileActivity", "Error adding friend to favorites: ", exception)
+                            Toast.makeText(this, "Failed to add friend to favorites.", Toast.LENGTH_SHORT).show()
+                        }
+                }
+            } else {
+                Log.e("FriendsProfileActivity", "User document does not exist")
+                Toast.makeText(this, "User document not found.", Toast.LENGTH_SHORT).show()
+            }
+        }.addOnFailureListener { exception ->
+            Log.e("FriendsProfileActivity", "Error fetching user document: ", exception)
+            Toast.makeText(this, "Error fetching user data.", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun updateBadgesList(badges: List<String>) {

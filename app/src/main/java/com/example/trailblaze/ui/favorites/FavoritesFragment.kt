@@ -14,8 +14,6 @@ import com.example.trailblaze.nps.Park
 import com.example.trailblaze.settings.SettingsScreenActivity
 import com.example.trailblaze.ui.MenuActivity
 import com.example.trailblaze.ui.parks.ParkDetailActivity
-import com.example.trailblaze.ui.parks.ThumbnailAdapter
-import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import retrofit2.Call
@@ -24,6 +22,9 @@ import retrofit2.Response
 import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.ParksAdapter
+import com.example.trailblaze.ui.profile.FriendAdapter
+import com.example.trailblaze.ui.profile.FriendsProfileActivity
+import com.example.trailblaze.ui.profile.Friends
 
 
 class FavoritesFragment : Fragment() {
@@ -39,6 +40,9 @@ class FavoritesFragment : Fragment() {
     private lateinit var bucketListParksAdapter: ParksAdapter
     private var bucketListParks: MutableList<Park> = mutableListOf() // Use a mutable list
 
+    private lateinit var favoriteFriendsRecyclerView: RecyclerView
+    private lateinit var favoriteFriendsAdapter: FriendAdapter
+    private var favoriteFriends: MutableList<Friends> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -86,6 +90,26 @@ class FavoritesFragment : Fragment() {
             val intent = Intent(activity, MenuActivity::class.java)
             startActivity(intent)
         }
+
+        // initialize favorite friends recyclerView
+        favoriteFriendsRecyclerView = binding.favoriteFriendsRecyclerView
+        favoriteFriendsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
+        // Set up the adapter for favorite friends, with an empty list to start
+        favoriteFriendsAdapter = FriendAdapter(emptyList()) { friend ->
+            // Handle click event to open FriendDetailActivity with the selected friend's ID
+            val intent = Intent(context, FriendsProfileActivity::class.java).apply {
+                putExtra("FRIEND_ID", friend.userId)
+            }
+            startActivity(intent)
+        }
+        // Attach the adapter to the RecyclerView for favorite friends
+        favoriteFriendsRecyclerView.adapter = favoriteFriendsAdapter
+
+        fetchFavoriteParks() // Fetch and display favorite parks
+        fetchBucketListParks() // Fetch and display bucket list parks
+        fetchFavoriteFriends() // Fetch and display favorite friends
+
 
         binding.settingsbtn.setOnClickListener {
             val intent = Intent(activity, SettingsScreenActivity::class.java)
@@ -214,6 +238,30 @@ class FavoritesFragment : Fragment() {
             })
         }
     }
+
+    private fun fetchFavoriteFriends() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        firestore.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val favoriteFriendIds = document.get("favoriteFriends") as? List<String> ?: emptyList()
+                    // Call the utility function to fetch friend details
+                    FriendUtils.fetchFriendsDetails(favoriteFriendIds, firestore) { friends ->
+                        updateFriendsRecyclerView(friends)
+                    }
+                } else {
+                    Log.d("FavoritesFragment", "User document does not exist or is null.")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("FavoritesFragment", "Failed to retrieve user document: ${exception.message}")
+            }
+    }
+
+    private fun updateFriendsRecyclerView(friends: List<Friends>) {
+        favoriteFriendsAdapter.updateData(friends) // Update the adapter with the fetched friends
+    }
+
 
 
 }

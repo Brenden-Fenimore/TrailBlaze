@@ -38,4 +38,9 @@ class FriendAdapter(
         friends = newFriends
         notifyDataSetChanged()
     }
+
+    fun updateData(newFriends: List<Friends>) {
+        friends = newFriends
+        notifyDataSetChanged() // Notify the adapter to refresh the data
+    }
 }
