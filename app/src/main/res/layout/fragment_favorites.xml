@@ -131,55 +131,11 @@
             android:fontFamily="@font/amethysta"
             android:paddingTop="25dp"/>
 
-    <HorizontalScrollView
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/favoriteFriendsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="horizontal">
-
-        <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-            <!-- Placeholder for favorite friends profile pictures -->
-            <ImageButton
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
-                    android:layout_marginEnd="25dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/userperson"
-                    android:contentDescription="@string/favoriteFriends" />
-            <ImageButton
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
-                    android:layout_marginEnd="25dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/userperson"
-                    android:contentDescription="@string/favoriteFriends" />
-            <ImageButton
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
-                    android:layout_marginEnd="25dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/userperson"
-                    android:contentDescription="@string/favoriteFriends" />
-            <ImageButton
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
-                    android:layout_marginEnd="25dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/userperson"
-                    android:contentDescription="@string/favoriteFriends" />
-            <ImageButton
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
-                    android:layout_marginEnd="25dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/userperson"
-                    android:contentDescription="@string/favoriteFriends" />
-            <!-- Repeat as necessary for other friends -->
-        </LinearLayout>
-    </HorizontalScrollView>
+            android:layout_marginTop="16dp"/>
 
 </LinearLayout>
             <View
