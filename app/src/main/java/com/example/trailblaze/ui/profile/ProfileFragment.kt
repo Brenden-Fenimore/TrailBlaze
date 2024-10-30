@@ -11,7 +11,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.trailblaze.R
 import com.example.trailblaze.databinding.FragmentProfileBinding
 import com.example.trailblaze.firestore.UserRepository
@@ -22,10 +21,18 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.trailblaze.firestore.ImageLoader
 import com.example.trailblaze.firestore.UserManager
+import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.ui.MenuActivity
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.DocumentSnapshot
+import com.example.trailblaze.nps.Park
+import com.example.trailblaze.nps.ParksAdapter
+import com.example.trailblaze.nps.RetrofitInstance
+import com.example.trailblaze.ui.parks.ParkDetailActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ProfileFragment : Fragment() {
 
@@ -44,6 +51,10 @@ class ProfileFragment : Fragment() {
 
     private lateinit var friendAdapter: FriendAdapter
     private lateinit var friendsList: MutableList<Friends>
+
+    private lateinit var favoritesRecyclerView: RecyclerView
+    private lateinit var favoritesAdapter: ParksAdapter
+    private var favoriteParks: MutableList<Park> = mutableListOf()
 
     // Define all possible badges
     private val allBadges = listOf(
@@ -90,6 +101,21 @@ class ProfileFragment : Fragment() {
         }
         binding.friendsRecyclerView.adapter = friendAdapter
 
+
+        favoritesRecyclerView = binding.favoriteParksRecyclerView
+        favoritesRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+        favoritesAdapter = ParksAdapter(emptyList()) { park ->
+            val intent = Intent(context, ParkDetailActivity::class.java).apply {
+                putExtra("PARK_CODE", park.parkCode)
+            }
+            startActivity(intent)
+        }
+        favoritesRecyclerView.adapter = favoritesAdapter
+
+        fetchFavoriteParks()
+
+
         // Initialize the icons
         binding.iconLocation.setOnClickListener {
             fetchCurrentUserLocation()
@@ -120,11 +146,11 @@ class ProfileFragment : Fragment() {
         binding.editbutton.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
         }
-
         binding.menuButton.setOnClickListener {
             val intent = Intent(activity, MenuActivity::class.java)
             startActivity(intent)
         }
+
     }
 
     private fun loadCurrentUserData() {
@@ -143,6 +169,7 @@ class ProfileFragment : Fragment() {
 
             // Fetch friends when current user data is loaded
             fetchUserFriends()
+
         } else {
             binding.username.text = "Not logged in"
         }
@@ -199,7 +226,9 @@ class ProfileFragment : Fragment() {
             firestore.collection("users").document(userId).get()
                 .addOnSuccessListener { document ->
                     if (document.exists()) {
+                        // Retrieve the badges as a List<String>
                         val badges = document.get("badges") as? List<String> ?: emptyList()
+                        Log.d("ProfileFragment", "Fetched badges: $badges") // Log for debugging
                         updateBadgesList(badges)
                     }
                 }
@@ -210,15 +239,16 @@ class ProfileFragment : Fragment() {
     }
     private fun updateBadgesList(badges: List<String>) {
         // Filter the list of all badges based on fetched user badges
-        val unlockedBadges = allBadges.filter { badges.contains(it.id) }
+        val unlockedBadges = allBadges.filter { badge -> badges.contains(badge.id) }
+        Log.d("ProfileFragment", "Unlocked badges: $unlockedBadges") // Log for debugging
 
         // Initialize or update the adapter
         if (!::badgesAdapter.isInitialized) {
-            badgesAdapter = BadgesAdapter(unlockedBadges, itemClickListener = { badge ->
+            badgesAdapter = BadgesAdapter(unlockedBadges) { badge ->
                 // Handle badge click
-            })
-
+            }
             binding.badgesRecyclerView.adapter = badgesAdapter
+            Log.d("ProfileFragment", "BadgesAdapter initialized with ${unlockedBadges.size} badges.")
         } else {
             badgesAdapter.updateBadges(unlockedBadges)
         }
@@ -280,6 +310,66 @@ class ProfileFragment : Fragment() {
         dialogBuilder.setPositiveButton("OK", null)
         dialogBuilder.show()
     }
+
+    private fun fetchFavoriteParks() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        firestore.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    Log.d("FavoritesFragment", "User document retrieved successfully.")
+                    val favoriteParkCodes = document.get("favoriteParks") as? List<String> ?: emptyList()
+                    Log.d("FavoritesFragment", "Favorite park codes: $favoriteParkCodes")
+
+                    fetchParksDetails(favoriteParkCodes)
+                } else {
+                    Log.d("FavoritesFragment", "User document does not exist or is null.")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("FavoritesFragment", "Failed to retrieve user document: ${exception.message}")
+            }
+    }
+
+    private fun fetchParksDetails(parkCodes: List<String>) {
+        val tasks = parkCodes.map { parkCode ->
+            RetrofitInstance.api.getParkDetails(parkCode)
+        }
+
+        // Track the number of responses
+        var completedRequests = 0
+
+        tasks.forEach { call ->
+            call.enqueue(object : Callback<NPSResponse> {
+                override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
+                    if (response.isSuccessful && response.body() != null) {
+                        val park = response.body()?.data?.firstOrNull()
+                        park?.let {
+                            favoriteParks.add(it) // Add the park to the list
+                        }
+                    }
+                    completedRequests++
+                    // Check if all requests are completed
+                    if (completedRequests == parkCodes.size) {
+                        updateParksRecyclerView(favoriteParks)
+                    }
+                }
+
+                override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
+                    Log.e("FavoritesFragment", "Error fetching park details: ${t.message}")
+                    completedRequests++
+                    // Check if all requests are completed, even on failure
+                    if (completedRequests == parkCodes.size) {
+                        updateParksRecyclerView(favoriteParks)
+                    }
+                }
+            })
+        }
+    }
+
+    private fun updateParksRecyclerView(parks: List<Park>) {
+        favoritesAdapter.updateData(parks) // Update the adapter with the fetched parks
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

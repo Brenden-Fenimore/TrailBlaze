@@ -16,21 +16,23 @@
         <!--    Hamburger menu in top left-->
 
         <ImageButton
-                app:srcCompat="@drawable/three_line_menu"
+                app:srcCompat="@drawable/navmenu"
                 android:contentDescription="@string/backButton"
                 android:layout_width="49dp"
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
                 android:id="@+id/menuButton"
+                android:tint="#CDEDA3"
                 android:background="@android:color/transparent"
                 android:layout_centerVertical="true"/>
         <ImageButton
                 app:srcCompat="@drawable/edit2"
                 android:contentDescription="@string/settings"
-                android:layout_width="49dp"
+                android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
                 android:id="@+id/editbutton"
+                android:tint="#CDEDA3"
                 android:background="@android:color/transparent"
                 android:layout_centerVertical="true"/>
 
@@ -113,7 +115,10 @@
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/badgesRecyclerView"
                     android:layout_width="180dp"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    app:layoutManager="LinearLayoutManager"
+                    android:orientation="horizontal"/>
+
         </androidx.cardview.widget.CardView>
 
         <!-- Watcher Member -->
@@ -275,57 +280,12 @@
                 android:textStyle="bold"
                 android:paddingTop="16dp"/>
 
-        <HorizontalScrollView
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/favoriteParksRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="horizontal">
-
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                <!-- Placeholder for favorite trails -->
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/userFavoriteTrailsPictures" />
-
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/userFavoriteTrailsPictures" />
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/userFavoriteTrailsPictures" />
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/userFavoriteTrailsPictures" />
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/userFavoriteTrailsPictures" />
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/userFavoriteTrailsPictures" />
-                <!-- Add more favorite trail placeholders -->
-            </LinearLayout>
-        </HorizontalScrollView>
+                app:layoutManager="LinearLayoutManager"
+                android:orientation="horizontal"/>
 
         <!-- Spacer to add margin for navigation bar -->
         <View

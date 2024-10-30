@@ -11,13 +11,16 @@ import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.Park
 import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ParkDetailActivity : AppCompatActivity() {
 
-    private var parkIndex: Int = -1 // Default to -1 if not found
+    private lateinit var parkCode: String // Default to -1 if not found
     private lateinit var parkNameTextView: TextView
     private lateinit var parkDescriptionTextView: TextView
     private lateinit var parkLatitudeTextView: TextView
@@ -30,17 +33,22 @@ class ParkDetailActivity : AppCompatActivity() {
     private lateinit var parkWeatherInfoTextView: TextView
     private lateinit var parkEntrancePassesTextView: TextView
     private lateinit var parkImagesRecyclerView: RecyclerView
+    private lateinit var favoriteButton: ImageButton            // Declare button variables
+    private val firestore = FirebaseFirestore.getInstance()     // Declare Firestore instance
+    private lateinit var bucketListButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_park_detail)
 
-        findViewById<ImageButton>(R.id.chevron_left).setOnClickListener{
+        findViewById<ImageButton>(R.id.chevron_left).setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        // Retrieve the park index from the intent
-        parkIndex = intent.getIntExtra("PARK_INDEX", -1) // Default to -1 if not found
+        // Get the park code from the intent
+        parkCode = intent.getStringExtra("PARK_CODE") ?: ""
+
+        fetchParkDetails(parkCode)
 
         // Initialize views
         parkNameTextView = findViewById(R.id.parkNameTextView)
@@ -59,79 +67,182 @@ class ParkDetailActivity : AppCompatActivity() {
         parkImagesRecyclerView = findViewById(R.id.parkImagesRecyclerView)
         parkImagesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
+        fetchParkDetails(parkCode)
 
-        // Fetch parks data again or use a shared data source
-        fetchParksData { parksList ->
-            if (parkIndex >= 0 && parkIndex < parksList.size) {
-                val park = parksList[parkIndex] // Get the park using the index
-                val address = park.addresses.joinToString("\n") { "${it.line1}, ${it.line2}, ${it.line3}, ${it.city}, ${it.postalCode}, ${it.stateCode}" }
-                val contactNumber = park.contacts.phoneNumbers.joinToString("\n"){ it.phoneNumber }
-                val contactEmail = park.contacts.emailAddresses.joinToString("\n"){ it.emailAddress }
-                val entrancePass = park.entrancePasses.joinToString("\n") {"${it.cost}, ${it.description}, ${it.title}"   }
-                val weatherInfo = park.weatherInfo ?: "No weather information available"
-                val firstOperatingHours = park.operatingHours.firstOrNull()
-                firstOperatingHours?.let {operatingHours ->
-                    val standardHours = operatingHours.standardHours
-                    val hoursText = """
-                    Sunday: ${standardHours.sunday}
-                    Monday: ${standardHours.monday}
-                    Tuesday: ${standardHours.tuesday}
-                    Wednesday: ${standardHours.wednesday}
-                    Thursday: ${standardHours.thursday}
-                    Friday: ${standardHours.friday}
-                    Saturday: ${standardHours.saturday}
-                """.trimIndent()
-                    parkOperatingHoursTextView.text = hoursText} ?: run{parkOperatingHoursTextView.text = "Operating hours not available"}
-                val activity = park.activities.joinToString("\n") { it.name }
-
-                parkNameTextView.text = park.fullName
-                parkDescriptionTextView.text = park.description
-                parkLatitudeTextView.text = park.latitude ?: "N/A"
-                parkLongitudeTextView.text = park.longitude ?: "N/A"
-                parkAddressTextView.text = address
-                parkActivitiesTextView.text = activity
-                parkContactsPhoneTextView.text = contactNumber
-                parkContactsEmailTextView.text = contactEmail
-                parkWeatherInfoTextView.text = weatherInfo
-                if (entrancePass.isNotEmpty()) {
-                    parkEntrancePassesTextView.text = entrancePass
-                } else {
-                    parkEntrancePassesTextView.text = "No entrance fee information available."
-                }
-
-                // Debugging: Log image URLs list size
-                Log.d("ParkDetailActivity", "Image List Size: ${park.images.size}")
-
-                // Set up the images RecyclerView
-                if (park.images.isNotEmpty()) {
-                    val imagesAdapter = ImagesAdapter(park.images.map { it.url }) // Ensure only URLs are passed
-                    parkImagesRecyclerView.adapter = imagesAdapter
-                } else {
-                    Toast.makeText(this, "No images available for this park", Toast.LENGTH_SHORT).show()
-                }
-
-
-                // Optionally load the park image if you have an ImageView for it
-            } else {
-                Toast.makeText(this, "Invalid park index", Toast.LENGTH_SHORT).show()
-            }
+        // Initialize the favorite button and set up its click listener
+        favoriteButton = findViewById(R.id.favorite_park_btn)
+        favoriteButton.setOnClickListener {
+            addParkToFavorites(parkCode) // Call function to save this park as a favorite (assuming parkCode is set)
         }
+
+        // Initialize the bucket list button and set up its click listener
+        bucketListButton = findViewById(R.id.bucket_list_btn)
+        bucketListButton.setOnClickListener {
+            addToBucketList(parkCode)   // Call function to add park to bucket list
+        }
+
     }
 
-    private fun fetchParksData(onDataFetched: (List<Park>) -> Unit) {
-        RetrofitInstance.api.getParks(10).enqueue(object : Callback<NPSResponse> {
+    private fun fetchParkDetails(parkCode: String) {
+        Log.d("ParkDetailActivity", "Fetching details for park code: $parkCode")
+        RetrofitInstance.api.getParkDetails(parkCode).enqueue(object : Callback<NPSResponse> {
             override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
                 if (response.isSuccessful) {
-                    val parks = response.body()?.data ?: emptyList()
-                    onDataFetched(parks) // Return the parks list to the caller
+                    response.body()?.let { npsResponse ->
+                        // Assuming the park details are in the data field of the response
+                        val park = npsResponse.data.firstOrNull() // Adjust based on actual response structure
+                        park?.let {
+                            populateParkDetails(it) // Pass the park object to populate the UI
+                        } ?: run {
+                            Toast.makeText(this@ParkDetailActivity, "Park details not found", Toast.LENGTH_SHORT).show()
+                        }
+                    } ?: run {
+                        Toast.makeText(this@ParkDetailActivity, "Park details not found", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
-                    Toast.makeText(this@ParkDetailActivity, "Failed to fetch parks", Toast.LENGTH_SHORT).show()
+                    Log.e("ParkDetailActivity", "Response not successful: ${response.code()}")
                 }
             }
 
             override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
-                Toast.makeText(this@ParkDetailActivity, "Error fetching parks: ${t.message}", Toast.LENGTH_SHORT).show()
+                Log.e("ParkDetailActivity", "Error fetching park details: ${t.message}")
             }
         })
     }
+
+    private fun populateParkDetails(park: Park) {
+        // Populate UI elements with park details
+        parkNameTextView.text = park.fullName
+        parkDescriptionTextView.text = park.description
+        parkLatitudeTextView.text = park.latitude?.toString() ?: "N/A"
+        parkLongitudeTextView.text = park.longitude?.toString() ?: "N/A"
+
+        // Format the address
+        val address = park.addresses.joinToString("\n") {
+            "${it.line1}, ${it.line2 ?: ""}, ${it.line3 ?: ""}, ${it.city}, ${it.postalCode}, ${it.stateCode}"
+        }.trim().replace(", ,", ",") // Remove empty lines
+        parkAddressTextView.text = address
+
+        // Populate activities
+        val activities = park.activities.joinToString("\n") { it.name }
+        parkActivitiesTextView.text = activities.ifEmpty { "No activities available." }
+
+        // Populate contact information
+        val contactNumber = park.contacts.phoneNumbers.joinToString("\n") { it.phoneNumber }
+        parkContactsPhoneTextView.text = contactNumber.ifEmpty { "No contact number available." }
+
+        val contactEmail = park.contacts.emailAddresses.joinToString("\n") { it.emailAddress }
+        parkContactsEmailTextView.text = contactEmail.ifEmpty { "No contact email available." }
+
+        // Populate weather information
+        parkWeatherInfoTextView.text = park.weatherInfo ?: "No weather information available."
+
+        // Populate entrance passes
+        val entrancePass = park.entrancePasses.joinToString("\n") { "${it.cost}, ${it.description}, ${it.title}" }
+        parkEntrancePassesTextView.text = if (entrancePass.isNotEmpty()) {
+            entrancePass
+        } else {
+            "No entrance fee information available."
+        }
+
+        // Handle operating hours
+        val firstOperatingHours = park.operatingHours.firstOrNull()
+        firstOperatingHours?.let { operatingHours ->
+            val standardHours = operatingHours.standardHours
+            val hoursText = """
+            Sunday: ${standardHours.sunday}
+            Monday: ${standardHours.monday}
+            Tuesday: ${standardHours.tuesday}
+            Wednesday: ${standardHours.wednesday}
+            Thursday: ${standardHours.thursday}
+            Friday: ${standardHours.friday}
+            Saturday: ${standardHours.saturday}
+        """.trimIndent()
+            parkOperatingHoursTextView.text = hoursText
+        } ?: run {
+            parkOperatingHoursTextView.text = "Operating hours not available"
+        }
+
+        // Set up the images RecyclerView if there are images
+        if (park.images.isNotEmpty()) {
+            val imagesAdapter = ImagesAdapter(park.images.map { it.url }) // Ensure only URLs are passed
+            parkImagesRecyclerView.adapter = imagesAdapter
+        } else {
+            Toast.makeText(this, "No images available for this park", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    // Function to add the current park to the user's favorites in Firestore
+    private fun addParkToFavorites(parkCode: String) {
+        // Get the user's unique ID
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+            // Reference to the user's document in Firestore
+            val userDocRef = firestore.collection("users").document(userId)
+
+            // Retrieve the current favoriteParks list
+            userDocRef.get()
+                .addOnSuccessListener { document ->
+                    // Check if the document exists and retrieve the list of favorite parks
+                    if (document != null) {
+                        // Attempt to get "favoriteParks" list as a List of Strings, or default to an empty list if not present
+                        val favoriteParks = document.get("favoriteParks") as? List<String> ?: emptyList()
+                        // Check if the park is already in the favorites list
+                        if (favoriteParks.contains(parkCode)) {
+                            // If park already exists in the list, show a message to the user
+                            Toast.makeText(this, "Park already in your favorites", Toast.LENGTH_SHORT).show()
+                        } else {
+                            // If the park is not in favorites, add it using arrayUnion to avoid duplicates
+                            userDocRef.update("favoriteParks", FieldValue.arrayUnion(parkCode))
+                                .addOnSuccessListener {
+                                    // Display success message when the park is successfully added to favorites
+                                    Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show()
+                                }
+                                .addOnFailureListener { e ->
+                                    // Display failure message if adding to favorites fails
+                                    Toast.makeText(this, "Failed to add to favorites: ${e.message}", Toast.LENGTH_SHORT)
+                                        .show()
+                                }
+                        }
+                    }
+                }
+                .addOnFailureListener { e ->
+                    // If retrieving the document fails, show an error message
+                    Toast.makeText(this, "Failed to retrieve favorites: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+        }
+    }
+
+    private fun addToBucketList(parkCode: String) {
+        // Get the user's unique ID
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        // Reference to the user's document in Firestore
+        val userDocRef = firestore.collection("users").document(userId)
+
+        // Retrieve the current bucketListParks list
+        userDocRef.get().addOnSuccessListener { document ->
+            // Check if the document exists and retrieve the list of bucket list parks
+            val bucketListParks = document.get("bucketListParks") as? List<String> ?: emptyList()
+            // Check if the park is already in the bucket list
+            if (bucketListParks.contains(parkCode)) {
+                // If the park already exists in the list, show a message to the user
+                Toast.makeText(this, "Park already in your bucket list", Toast.LENGTH_SHORT).show()
+            } else {
+                // If the park is not in the bucket list, add it using arrayUnion to avoid duplicates
+                userDocRef.update("bucketListParks", FieldValue.arrayUnion(parkCode))
+                    .addOnSuccessListener {
+                        // Display success message when the park is successfully added to the bucket list
+                        Toast.makeText(this, "Added to bucket list", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener { e ->
+                        // Display failure message if adding to the bucket list fails
+                        Toast.makeText(this, "Failed to add to bucket list: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+            }
+        }.addOnFailureListener { e ->
+            // If retrieving the document fails, show an error message
+            Toast.makeText(this, "Failed to retrieve bucket list: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 }

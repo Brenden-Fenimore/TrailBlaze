@@ -1,5 +1,6 @@
 package com.example.trailblaze.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -20,11 +21,19 @@ import com.example.trailblaze.ui.achievements.BadgesAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.trailblaze.firestore.ImageLoader
+import com.example.trailblaze.nps.NPSResponse
+import com.example.trailblaze.nps.Park
+import com.example.trailblaze.nps.ParksAdapter
+import com.example.trailblaze.nps.RetrofitInstance
+import com.example.trailblaze.ui.parks.ParkDetailActivity
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.SetOptions
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class FriendsProfileActivity : AppCompatActivity() {
 
@@ -41,6 +50,10 @@ class FriendsProfileActivity : AppCompatActivity() {
     private lateinit var friendsInCommonRecyclerView: RecyclerView
     private lateinit var friendsInCommonAdapter: FriendAdapter
     private lateinit var friendsInCommonList: MutableList<Friends>
+
+    private lateinit var favoritesRecyclerView: RecyclerView
+    private lateinit var favoritesAdapter: ParksAdapter
+    private var favoriteParks: MutableList<Park> = mutableListOf()
 
 
     // Define all possible badges
@@ -73,6 +86,9 @@ class FriendsProfileActivity : AppCompatActivity() {
 
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
+
+        // Initialize the achievement manager
+        achievementManager = AchievementManager(this)
 
         binding.iconLocation.setOnClickListener {
             fetchCurrentUserLocation()
@@ -108,6 +124,7 @@ class FriendsProfileActivity : AppCompatActivity() {
         }
         loadFriendProfile()
         fetchFriendsInCommon()
+        loadFavoriteParks()
 
         // Initialize the "Add" button
         addFriendButton = binding.addFriendButton
@@ -115,18 +132,30 @@ class FriendsProfileActivity : AppCompatActivity() {
         addFriendButton.setOnClickListener {
             addFriend(userId) // Call the function to add friend
         }
+
+        favoritesRecyclerView = binding.favoriteTrailsSection
+        favoritesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+        favoritesAdapter = ParksAdapter(emptyList()) { park ->
+            val intent = Intent(this, ParkDetailActivity::class.java).apply {
+                putExtra("PARK_CODE", park.parkCode)
+            }
+            startActivity(intent)
+        }
+        favoritesRecyclerView.adapter = favoritesAdapter
     }
 
     private fun loadFriendProfile() {
+        val currentUserId = auth.currentUser?.uid ?: return // Get the current user's ID
+
         firestore.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
                     val username = document.getString("username")
                     val imageUrl = document.getString("profileImageUrl")
-                    // Adjust based on your Firestore structure
+                    val favoritePark = document.get("favoriteParks")
 
                     binding.username.text = username
-                    // Load the profile picture using your ImageLoader utility
                     ImageLoader.loadProfilePicture(this, binding.profilePicture, imageUrl)
 
                     // Retrieve visibility settings
@@ -137,17 +166,14 @@ class FriendsProfileActivity : AppCompatActivity() {
 
                     // Set visibility based on the privacy settings
                     binding.leaderboardSection.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
-                    binding.leaderboardHeader.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
-
                     binding.photosSection.visibility = if (isPhotosVisible) View.VISIBLE else View.GONE
-                    binding.photosHeader.visibility = if (isPhotosVisible) View.VISIBLE else View.GONE
-
                     binding.favoriteTrailsSection.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
-                    binding.favoriteTrailsHeader.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
-
                     binding.watcherMember.visibility = if (isWatcherVisible) View.VISIBLE else View.GONE
 
-                    // Fetch and display badges (similar to your own profile)
+                    // Check if the current user is friends with this friend
+                    checkFriendshipStatus(currentUserId, userId)
+
+                    // Fetch and display badges
                     val badges = document.get("badges") as? List<String> ?: emptyList()
                     updateBadgesList(badges)
                 } else {
@@ -159,17 +185,42 @@ class FriendsProfileActivity : AppCompatActivity() {
             }
     }
 
+
+    private fun checkFriendshipStatus(currentUserId: String, friendId: String) {
+        firestore.collection("users").document(currentUserId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val friendsList = document.get("friends") as? List<String> ?: emptyList()
+
+                    // Check if the friendId exists in the friends list
+                    if (friendsList.contains(friendId)) {
+                        // They are friends, show favorite button and hide add friend button
+                        binding.favoriteFriendBtn.visibility = View.VISIBLE // Show favorite icon
+                        binding.addFriendButton.visibility = View.GONE // Hide add friend button
+                    } else {
+                        // They are not friends, show add friend button and hide favorite button
+                        binding.favoriteFriendBtn.visibility = View.GONE // Hide favorite icon
+                        binding.addFriendButton.visibility = View.VISIBLE // Show add friend button
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("FriendsProfileActivity", "Error fetching user friends: ", exception)
+            }
+    }
+
     private fun updateBadgesList(badges: List<String>) {
         // Filter the list of all badges based on fetched user badges
-        val unlockedBadges = allBadges.filter { badges.contains(it.id) }
+        val unlockedBadges = allBadges.filter { badge -> badges.contains(badge.id) }
+        Log.d("ProfileFragment", "Unlocked badges: $unlockedBadges") // Log for debugging
 
         // Initialize or update the adapter
         if (!::badgesAdapter.isInitialized) {
-            badgesAdapter = BadgesAdapter(unlockedBadges, itemClickListener = { badge ->
+            badgesAdapter = BadgesAdapter(unlockedBadges) { badge ->
                 // Handle badge click
-            })
-
+            }
             binding.badgesRecyclerView.adapter = badgesAdapter
+            Log.d("ProfileFragment", "BadgesAdapter initialized with ${unlockedBadges.size} badges.")
         } else {
             badgesAdapter.updateBadges(unlockedBadges)
         }
@@ -201,6 +252,8 @@ class FriendsProfileActivity : AppCompatActivity() {
                             userRef.set(userUpdates, SetOptions.merge())
                                 .addOnSuccessListener {
                                     Toast.makeText(this, "Friend added successfully!", Toast.LENGTH_SHORT).show()
+
+                                    achievementManager.checkAndGrantSocialButterflyBadge(currentUserId)
                                 }
                                 .addOnFailureListener { exception ->
                                     Log.e("FriendsProfileActivity", "Error adding friend: ", exception)
@@ -332,4 +385,62 @@ class FriendsProfileActivity : AppCompatActivity() {
         dialogBuilder.setPositiveButton("OK", null)
         dialogBuilder.show()
     }
+
+    private fun loadFavoriteParks() {
+        firestore.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val favoriteParksList = document.get("favoriteParks") as? List<String> ?: emptyList()
+
+                    // Assuming you have a function to fetch park details based on park IDs
+                    fetchParksDetails(favoriteParksList)
+                } else {
+                    Log.e("FriendsProfileActivity", "Friend document does not exist")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("FriendsProfileActivity", "Error fetching friend's favorite parks: ", exception)
+            }
+    }
+    private fun fetchParksDetails(parkCodes: List<String>) {
+        val tasks = parkCodes.map { parkCode ->
+            RetrofitInstance.api.getParkDetails(parkCode)
+        }
+
+        // Track the number of responses
+        var completedRequests = 0
+
+        tasks.forEach { call ->
+            call.enqueue(object : Callback<NPSResponse> {
+                override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
+                    if (response.isSuccessful && response.body() != null) {
+                        val park = response.body()?.data?.firstOrNull()
+                        park?.let {
+                            favoriteParks.add(it) // Add the park to the list
+                        }
+                    }
+                    completedRequests++
+                    // Check if all requests are completed
+                    if (completedRequests == parkCodes.size) {
+                        updateParksRecyclerView(favoriteParks)
+                    }
+                }
+
+                override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
+                    Log.e("FavoritesFragment", "Error fetching park details: ${t.message}")
+                    completedRequests++
+                    // Check if all requests are completed, even on failure
+                    if (completedRequests == parkCodes.size) {
+                        updateParksRecyclerView(favoriteParks)
+                    }
+                }
+            })
+        }
+    }
+
+    private fun updateParksRecyclerView(parks: List<Park>) {
+        favoritesAdapter.updateData(parks) // Update the adapter with the fetched parks
+    }
+
+
 }

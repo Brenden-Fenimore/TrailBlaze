@@ -20,21 +20,37 @@
                 android:layout_width="39dp"
                 android:layout_height="39dp"
                 android:id="@+id/chevron_left"
+                android:tint="#CDEDA3"
                 android:background="@android:color/transparent"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"/>
 
         <ImageButton
-                android:src="@drawable/add_circle"
-                android:contentDescription="@string/settings"
+                android:src="@drawable/favorite"
+                android:contentDescription="@string/favorites"
                 android:layout_width="39dp"
                 android:layout_height="39dp"
+                android:id="@+id/favorite_friend_btn"
+                android:tint="#CDEDA3"
+                android:background="@android:color/transparent"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+
+        <ImageButton
+                android:src="@drawable/add_circle"
+                android:contentDescription="@string/settings"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:id="@+id/addFriendButton"
+                android:tint="#CDEDA3"
                 android:background="@android:color/transparent"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"/>
     </RelativeLayout>
-
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/swishLayout">
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -275,58 +291,12 @@
                 android:paddingTop="16dp"
                 android:paddingBottom="8dp"/>
 
-        <HorizontalScrollView
+        <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/favoriteTrailsSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="horizontal">
-
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                <!-- Placeholder for favorite trails -->
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/userFavoriteTrailsPictures"/>
-
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/userFavoriteTrailsPictures"/>
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/userFavoriteTrailsPictures"/>
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/userFavoriteTrailsPictures"/>
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/userFavoriteTrailsPictures"/>
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/userFavoriteTrailsPictures"/>
-                <!-- Add more favorite trail placeholders -->
-            </LinearLayout>
-        </HorizontalScrollView>
+                app:layoutManager="LinearLayoutManager"
+                android:orientation="horizontal"/>
 
         <!-- Spacer to add margin for navigation bar -->
         <View
@@ -334,4 +304,5 @@
                 android:layout_height="75dp"/>
 
     </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

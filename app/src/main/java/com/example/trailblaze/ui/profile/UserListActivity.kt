@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trailblaze.databinding.ActivityUserListBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class UserListActivity: AppCompatActivity(){
@@ -40,13 +41,17 @@ class UserListActivity: AppCompatActivity(){
     }
 
     private fun fetchUsers() {
+        val currentUserId = FirebaseAuth.getInstance().currentUser?.uid // Get the current user's ID
+
         firestore.collection("users").get()
             .addOnSuccessListener { documents ->
                 friendsList = documents.mapNotNull { document ->
                     val userId = document.id
                     val username = document.getString("username")
                     val profileImageUrl = document.getString("profileImageUrl")
-                    if (username != null) {
+
+                    // Check for null username and ensure the user is not the current user
+                    if (username != null && userId != currentUserId) {
                         Friends(userId, username, profileImageUrl) // Replace with your User model constructor
                     } else {
                         null
