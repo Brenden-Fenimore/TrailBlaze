@@ -17,5 +17,6 @@ data class User(
     val profileImageUrl: String? = "",
     val friends: List<String> = emptyList(),
     val badges: List<String> = emptyList(),
-    val favoriteParks: List<Park> = emptyList()
+    val favoriteParks: List<Park> = emptyList(),
+    val bucketListParks: List<Park> = emptyList()
 )

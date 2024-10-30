@@ -35,6 +35,7 @@ object UserManager {
                         friends = document.get("friends") as? List<String> ?: emptyList(),
                         favoriteParks = document.get("favoriteParks") as? List<Park> ?: emptyList(),
                         badges = document.get("badges") as? List<String> ?: emptyList(),
+                        bucketListParks = document.get("bucketList") as? List<Park> ?: emptyList(),
                     )
                     setCurrentUser(user)
                     callback(user)
