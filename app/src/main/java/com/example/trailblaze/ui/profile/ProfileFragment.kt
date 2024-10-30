@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +33,9 @@ import com.example.trailblaze.nps.Park
 import com.example.trailblaze.nps.ParksAdapter
 import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.ui.parks.ParkDetailActivity
+import com.google.firebase.appcheck.internal.util.Logger.TAG
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.Query
 import com.google.firebase.storage.FirebaseStorage
 import retrofit2.Call
 import retrofit2.Callback
@@ -61,6 +65,10 @@ class ProfileFragment : Fragment() {
     private var favoriteParks: MutableList<Park> = mutableListOf()
 
     private val PICK_IMAGE_REQUEST = 1
+    private var selectedImageUri: Uri? = null
+
+    private val photoUrls = mutableListOf<String>()
+    private lateinit var photosAdapter: PhotosAdapter
 
     // Define all possible badges
     private val allBadges = listOf(
@@ -384,25 +392,82 @@ class ProfileFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
-            val imageUri = data?.data
-            if (imageUri != null) {
-                uploadImageToFirebase(imageUri)
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
+            selectedImageUri = data.data  // Assign the URI to the property
+            uploadImageToFirebase() // Call the upload function
+        }
+    }
+
+    private fun uploadImageToFirebase() {
+        val storageRef = FirebaseStorage.getInstance().reference
+        val photoRef = storageRef.child("profilePhotos/${UUID.randomUUID()}.jpg")
+
+        selectedImageUri?.let { uri ->
+            photoRef.putFile(uri).addOnSuccessListener {
+                photoRef.downloadUrl.addOnSuccessListener { downloadUri ->
+                    savePhotoToFirestore(downloadUri.toString())  // Save the URL to Firestore
+                }
+            }.addOnFailureListener {
+                // Handle any errors here
             }
         }
     }
 
-    private fun uploadImageToFirebase(imageUri: Uri) {
-        val storageRef = FirebaseStorage.getInstance().reference
-        val photoRef = storageRef.child("profilePhotos/${UUID.randomUUID()}.jpg")
+    private fun savePhotoToFirestore(photoUrl: String) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+            val firestore = FirebaseFirestore.getInstance()
+            val photoData = hashMapOf("url" to photoUrl, "timestamp" to FieldValue.serverTimestamp())
 
-        photoRef.putFile(imageUri)
-            .addOnSuccessListener {
-                // Handle success (retrieve URL and add to Photos section)
-            }
-            .addOnFailureListener {
-                // Handle failure
-            }
+            firestore.collection("users")
+                .document(userId)
+                .collection("photos")
+                .add(photoData)
+                .addOnSuccessListener {
+                    Log.d("ProfileFragment", "Photo successfully added to Firestore!")
+                }
+                .addOnFailureListener { e ->
+                    Log.w("ProfileFragment", "Error adding photo to Firestore", e)
+                }
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val recyclerView: RecyclerView = view.findViewById(R.id.photosRecyclerView)
+        photosAdapter = PhotosAdapter(photoUrls)
+        recyclerView.adapter = photosAdapter
+
+        fetchPhotos()
+    }
+
+    private fun fetchPhotos() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        val firestore = FirebaseFirestore.getInstance()
+
+        userId?.let {
+            firestore.collection("users").document(it)
+                .collection("photos")
+                .orderBy("timestamp", Query.Direction.DESCENDING)
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    val photoUrls = mutableListOf<String>()
+                    for (document in querySnapshot.documents) {
+                        val url = document.getString("url")
+                        if (url != null) {
+                            photoUrls.add(url)
+                        }
+                    }
+
+                    // Update the adapter with the new photo URLs
+                    photosAdapter.updatePhotos(photoUrls)
+
+                }
+                .addOnFailureListener { e ->
+                    Log.w(TAG, "Error fetching photos", e)
+                }
+        }
     }
 
     override fun onDestroyView() {
