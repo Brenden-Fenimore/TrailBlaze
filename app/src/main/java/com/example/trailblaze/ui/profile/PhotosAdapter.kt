@@ -34,6 +34,7 @@ class PhotosAdapter(private var photoUrls: MutableList<String>) : RecyclerView.A
 
     // Function to update the list of photos
     fun updatePhotos(newPhotoUrls: List<String>) {
+        photoUrls.clear() // CLear existing photos
         photoUrls.addAll(newPhotoUrls) // Add new photos
         notifyDataSetChanged() // Notify the adapter to refresh the RecyclerView
     }
