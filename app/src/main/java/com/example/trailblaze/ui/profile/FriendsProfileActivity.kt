@@ -146,16 +146,16 @@ class FriendsProfileActivity : AppCompatActivity() {
     }
 
     private fun loadFriendProfile() {
+        val currentUserId = auth.currentUser?.uid ?: return // Get the current user's ID
+
         firestore.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
                     val username = document.getString("username")
                     val imageUrl = document.getString("profileImageUrl")
                     val favoritePark = document.get("favoriteParks")
-                    // Adjust based on your Firestore structure
 
                     binding.username.text = username
-                    // Load the profile picture using your ImageLoader utility
                     ImageLoader.loadProfilePicture(this, binding.profilePicture, imageUrl)
 
                     // Retrieve visibility settings
@@ -167,17 +167,14 @@ class FriendsProfileActivity : AppCompatActivity() {
 
                     // Set visibility based on the privacy settings
                     binding.leaderboardSection.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
-                    binding.leaderboardHeader.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
-
                     binding.photosSection.visibility = if (isPhotosVisible) View.VISIBLE else View.GONE
-                    binding.photosHeader.visibility = if (isPhotosVisible) View.VISIBLE else View.GONE
-
                     binding.favoriteTrailsSection.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
-                    binding.favoriteTrailsHeader.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
-
                     binding.watcherMember.visibility = if (isWatcherVisible) View.VISIBLE else View.GONE
 
-                    // Fetch and display badges (similar to your own profile)
+                    // Check if the current user is friends with this friend
+                    checkFriendshipStatus(currentUserId, userId)
+
+                    // Fetch and display badges
                     val badges = document.get("badges") as? List<String> ?: emptyList()
                     updateBadgesList(badges)
                 } else {
@@ -186,6 +183,30 @@ class FriendsProfileActivity : AppCompatActivity() {
             }
             .addOnFailureListener { exception ->
                 Log.e("FriendsProfileActivity", "Error fetching friend profile: ", exception)
+            }
+    }
+
+
+    private fun checkFriendshipStatus(currentUserId: String, friendId: String) {
+        firestore.collection("users").document(currentUserId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val friendsList = document.get("friends") as? List<String> ?: emptyList()
+
+                    // Check if the friendId exists in the friends list
+                    if (friendsList.contains(friendId)) {
+                        // They are friends, show favorite button and hide add friend button
+                        binding.favoriteFriendBtn.visibility = View.VISIBLE // Show favorite icon
+                        binding.addFriendButton.visibility = View.GONE // Hide add friend button
+                    } else {
+                        // They are not friends, show add friend button and hide favorite button
+                        binding.favoriteFriendBtn.visibility = View.GONE // Hide favorite icon
+                        binding.addFriendButton.visibility = View.VISIBLE // Show add friend button
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("FriendsProfileActivity", "Error fetching user friends: ", exception)
             }
     }
 
