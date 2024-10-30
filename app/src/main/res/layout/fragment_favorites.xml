@@ -128,6 +128,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+        <!-- Favorite Parks RecyclerViewer Section -->
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/favoritesRecyclerView"
                 android:layout_width="match_parent"
@@ -149,55 +150,21 @@
             android:textStyle="bold"
             android:paddingTop="25dp"/>
 
-    <HorizontalScrollView
-            android:layout_width="match_parent"
+    <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scrollbars="horizontal">
+            android:orientation="horizontal">
 
-        <LinearLayout
-                android:layout_width="wrap_content"
+        <!-- Bucket List Parks RecyclerViewer Section -->
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/bucketListParksRecyclerView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:scrollbars="horizontal" />
 
-            <!-- Placeholder for bucket list trails images -->
-            <ImageButton
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
-                    android:layout_marginEnd="25dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/profile_no_image_available"
-                    android:contentDescription="@string/bucketListTrails" />
-            <ImageButton
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
-                    android:layout_marginEnd="25dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/profile_no_image_available"
-                    android:contentDescription="@string/bucketListTrails" />
-            <ImageButton
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
-                    android:layout_marginEnd="25dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/profile_no_image_available"
-                    android:contentDescription="@string/bucketListTrails" />
-            <ImageButton
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
-                    android:layout_marginEnd="25dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/profile_no_image_available"
-                    android:contentDescription="@string/bucketListTrails" />
-            <ImageButton
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
-                    android:layout_marginEnd="25dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/profile_no_image_available"
-                    android:contentDescription="@string/bucketListTrails" />
-            <!-- Repeat as necessary for other trails -->
-        </LinearLayout>
-    </HorizontalScrollView>
+    </LinearLayout>
 
     <!-- Favorite Friends Section -->
     <TextView

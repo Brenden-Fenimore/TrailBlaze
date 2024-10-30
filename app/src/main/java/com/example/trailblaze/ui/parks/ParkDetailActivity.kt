@@ -35,6 +35,7 @@ class ParkDetailActivity : AppCompatActivity() {
     private lateinit var parkImagesRecyclerView: RecyclerView
     private lateinit var favoriteButton: ImageButton            // Declare button variables
     private val firestore = FirebaseFirestore.getInstance()     // Declare Firestore instance
+    private lateinit var bucketListButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +73,12 @@ class ParkDetailActivity : AppCompatActivity() {
         favoriteButton = findViewById(R.id.favorite_park_btn)
         favoriteButton.setOnClickListener {
             addParkToFavorites(parkCode) // Call function to save this park as a favorite (assuming parkCode is set)
+        }
+
+        // Initialize the bucket list button and set up its click listener
+        bucketListButton = findViewById(R.id.bucket_list_btn)
+        bucketListButton.setOnClickListener {
+            addToBucketList(parkCode)   // Call function to add park to bucket list
         }
 
     }
@@ -205,4 +212,37 @@ class ParkDetailActivity : AppCompatActivity() {
                 }
         }
     }
+
+    private fun addToBucketList(parkCode: String) {
+        // Get the user's unique ID
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        // Reference to the user's document in Firestore
+        val userDocRef = firestore.collection("users").document(userId)
+
+        // Retrieve the current bucketListParks list
+        userDocRef.get().addOnSuccessListener { document ->
+            // Check if the document exists and retrieve the list of bucket list parks
+            val bucketListParks = document.get("bucketListParks") as? List<String> ?: emptyList()
+            // Check if the park is already in the bucket list
+            if (bucketListParks.contains(parkCode)) {
+                // If the park already exists in the list, show a message to the user
+                Toast.makeText(this, "Park already in your bucket list", Toast.LENGTH_SHORT).show()
+            } else {
+                // If the park is not in the bucket list, add it using arrayUnion to avoid duplicates
+                userDocRef.update("bucketListParks", FieldValue.arrayUnion(parkCode))
+                    .addOnSuccessListener {
+                        // Display success message when the park is successfully added to the bucket list
+                        Toast.makeText(this, "Added to bucket list", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener { e ->
+                        // Display failure message if adding to the bucket list fails
+                        Toast.makeText(this, "Failed to add to bucket list: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+            }
+        }.addOnFailureListener { e ->
+            // If retrieving the document fails, show an error message
+            Toast.makeText(this, "Failed to retrieve bucket list: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 }
