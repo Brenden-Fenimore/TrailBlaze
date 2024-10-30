@@ -101,6 +101,7 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:tint="#4C662B"
                     android:src="@drawable/usericon2"
                     android:contentDescription="@string/profilePicture" />
 
@@ -124,6 +125,7 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:tint="#4C662B"
                     android:src="@drawable/calendar"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/calendar" />
@@ -148,6 +150,7 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:tint="#4C662B"
                     android:src="@drawable/baseline_contact_mail_24"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/userEmail" />
@@ -172,6 +175,7 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:tint="#4C662B"
                     android:src="@drawable/location"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/locationIcon" />
@@ -195,6 +199,7 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:tint="#4C662B"
                     android:src="@drawable/location"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/locationIcon" />
@@ -219,6 +224,7 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:tint="#4C662B"
                     android:src="@drawable/location"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/locationIcon" />
@@ -249,6 +255,7 @@
 
             <EditText
                     android:id="@+id/edit_phone"
+                    android:tint="#4C662B"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -270,6 +277,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/map"
+                    android:tint="#4C662B"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/terrainIcon"
                     android:layout_marginEnd="8dp"/>
@@ -307,6 +315,7 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:tint="#4C662B"
                     android:src="@drawable/directions_walk"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/fitnessLevelIcon"
@@ -340,6 +349,7 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:tint="#4C662B"
                     android:src="@drawable/difficulty"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/difficultyIcon"
@@ -371,6 +381,7 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:tint="#4C662B"
                     android:src="@drawable/map"
                     android:contentDescription="@string/typeOfHikeIcon"
                     android:layout_marginEnd="8dp"/>
