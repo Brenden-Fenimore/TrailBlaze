@@ -1,6 +1,8 @@
 package com.example.trailblaze.ui.profile
 
+import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -30,9 +32,11 @@ import com.example.trailblaze.nps.Park
 import com.example.trailblaze.nps.ParksAdapter
 import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.ui.parks.ParkDetailActivity
+import com.google.firebase.storage.FirebaseStorage
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class ProfileFragment : Fragment() {
 
@@ -55,6 +59,8 @@ class ProfileFragment : Fragment() {
     private lateinit var favoritesRecyclerView: RecyclerView
     private lateinit var favoritesAdapter: ParksAdapter
     private var favoriteParks: MutableList<Park> = mutableListOf()
+
+    private val PICK_IMAGE_REQUEST = 1
 
     // Define all possible badges
     private val allBadges = listOf(
@@ -123,6 +129,12 @@ class ProfileFragment : Fragment() {
 
         binding.iconDifficulty.setOnClickListener {
             fetchCurrentUserDifficulty()
+        }
+
+        binding.uploadPhotoButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, PICK_IMAGE_REQUEST)
         }
 
         // Initialize UserManager
@@ -370,6 +382,28 @@ class ProfileFragment : Fragment() {
         favoritesAdapter.updateData(parks) // Update the adapter with the fetched parks
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
+            val imageUri = data?.data
+            if (imageUri != null) {
+                uploadImageToFirebase(imageUri)
+            }
+        }
+    }
+
+    private fun uploadImageToFirebase(imageUri: Uri) {
+        val storageRef = FirebaseStorage.getInstance().reference
+        val photoRef = storageRef.child("profilePhotos/${UUID.randomUUID()}.jpg")
+
+        photoRef.putFile(imageUri)
+            .addOnSuccessListener {
+                // Handle success (retrieve URL and add to Photos section)
+            }
+            .addOnFailureListener {
+                // Handle failure
+            }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

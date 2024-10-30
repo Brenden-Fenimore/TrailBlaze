@@ -215,6 +215,7 @@
 
         <!-- Photos Section -->
         <TextView
+                android:id="@+id/userPhotosTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/userPhotos"
@@ -223,6 +224,17 @@
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
                 android:paddingTop="16dp"/>
+
+        <ImageButton
+                android:id="@+id/uploadPhotoButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/userPhotosTextView"
+                android:layout_toEndOf="@id/userPhotosTextView"
+                android:layout_marginStart="8dp"
+                app:srcCompat="@drawable/add_circle"
+                android:contentDescription="@string/uploadPhoto"
+                android:background="@android:color/transparent" />
 
         <HorizontalScrollView
                 android:layout_width="match_parent"

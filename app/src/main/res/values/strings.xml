@@ -300,6 +300,7 @@
     <string name="bucketListTrails">Bucket List Trails</string>
     <string name="favoriteFriends">Favorite Friends</string>
     <string name="rangeMiles">  Range(miles)</string>
+    <string name="uploadPhoto">Upload Photo</string>
     <!-- Spinner options for terrain -->
     <string-array name="terrain_options">
         <item>Foot Trails</item>
