@@ -292,8 +292,6 @@ class EditProfileFragment : Fragment() {
         firestore.collection("users").document(currentUserId)
             .set(updates, SetOptions.merge())
             .addOnSuccessListener {
-                Toast.makeText(requireContext(), "Visibility settings updated!", Toast.LENGTH_SHORT).show()
-                requireActivity().setResult(Activity.RESULT_OK) // Indicate success
             }
             .addOnFailureListener { exception ->
                 Log.e("EditProfileFragment", "Error updating visibility settings: ", exception)

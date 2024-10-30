@@ -163,7 +163,6 @@ class FriendsProfileActivity : AppCompatActivity() {
                     val isPhotosVisible = document.getBoolean("photosVisible") ?: true
                     val isFavoriteTrailsVisible = document.getBoolean("favoriteTrailsVisible") ?: true
                     val isWatcherVisible = document.getBoolean("watcherVisible") ?: true
-                    val isShareLocationVisible = document.getBoolean("shareLocationVisible") ?: true
 
                     // Set visibility based on the privacy settings
                     binding.leaderboardSection.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
