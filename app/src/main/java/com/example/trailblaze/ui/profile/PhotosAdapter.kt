@@ -23,6 +23,8 @@ class PhotosAdapter(private var photoUrls: MutableList<String>) : RecyclerView.A
         val imageUrl = photoUrls[position]
         Glide.with(holder.imageView.context)
             .load(imageUrl)
+            .override(120, 120)
+            .centerCrop()
             .into(holder.imageView)
     }
 
@@ -32,7 +34,6 @@ class PhotosAdapter(private var photoUrls: MutableList<String>) : RecyclerView.A
 
     // Function to update the list of photos
     fun updatePhotos(newPhotoUrls: List<String>) {
-        photoUrls.clear() // Clear the old list
         photoUrls.addAll(newPhotoUrls) // Add new photos
         notifyDataSetChanged() // Notify the adapter to refresh the RecyclerView
     }
