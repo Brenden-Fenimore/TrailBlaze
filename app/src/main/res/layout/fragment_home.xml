@@ -187,9 +187,9 @@
                             android:shadowColor="@color/black"/>
 
                     <ImageButton
-                            android:layout_marginTop="15dp"
-                            android:layout_marginStart="125dp"
-                            android:src="@android:drawable/ic_menu_add"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="20dp"
+                            app:srcCompat="@drawable/add_circle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:clickable="true"
@@ -197,7 +197,6 @@
                             android:focusable="true"
                             app:maxImageSize="24dp"
                             app:backgroundTint="#00FFFFFF"
-                            android:scaleX="2" android:scaleY="2"
                             android:contentDescription="@string/description"/>
                 </LinearLayout>
 
