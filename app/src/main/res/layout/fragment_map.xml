@@ -22,6 +22,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/fullsail"/>
+    <Button
+            android:layout_marginTop="725dp"
+            android:text="Find Trails Near Me"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/nearbysearch"/>
 
     <MultiAutoCompleteTextView
             android:layout_marginTop="25dp"
@@ -55,6 +62,7 @@
             android:id="@+id/roadmap"
             android:clickable="true">
         <ImageView
+                android:id="@+id/roadmap_image"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/green_circle"/>
@@ -90,9 +98,10 @@
             android:id="@+id/satellite"
             android:clickable="true">
         <ImageView
+                android:id="@+id/satellite_image"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/green_circle"/>
+                android:src="@drawable/grey_circle"/>
 
         <ImageView
                 android:layout_width="25dp"
@@ -124,9 +133,10 @@
             android:id="@+id/terrain"
             android:clickable="true">
         <ImageView
+                android:id="@+id/terrain_image"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/green_circle"/>
+                android:src="@drawable/grey_circle"/>
 
         <ImageView
                 android:layout_width="40dp"
