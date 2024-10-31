@@ -383,5 +383,10 @@
 
     <string name="darkMode">Dark Mode</string>
     <string name="metricUnits">Metric Units</string>
+    <string name="watcherReminder">Watcher Reminder</string>
+    <string name="photoOpp">Photo Opportunities</string>
+    <string name="friendRequest">Friend Requests</string>
+    <string name="notifications">Notifications</string>
+    <string name="trailUpdates">Trail Updates</string>
     <!-- SETTINGS STRINGS-->
 </resources>
