@@ -249,13 +249,13 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:tint="#4C662B"
                     android:src="@drawable/phone"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/phoneIcon" />
 
             <EditText
                     android:id="@+id/edit_phone"
-                    android:tint="#4C662B"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"

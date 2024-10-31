@@ -48,6 +48,8 @@ class BadgesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_badges)
+        // Hide the ActionBar
+        supportActionBar?.hide()
 
         // Initialize Firestore and Auth
         firestore = FirebaseFirestore.getInstance()

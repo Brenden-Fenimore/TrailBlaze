@@ -20,6 +20,8 @@ class SupportScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_support_screen)
+        // Hide the ActionBar
+        supportActionBar?.hide()
 
         //initialize var
         contactUsTxt = findViewById(R.id.contactUs)

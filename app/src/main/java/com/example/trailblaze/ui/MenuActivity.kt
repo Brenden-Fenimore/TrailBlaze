@@ -33,6 +33,8 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        // Hide the ActionBar
+        supportActionBar?.hide()
 
         val toAbout = findViewById<TextView>(R.id.about)
 

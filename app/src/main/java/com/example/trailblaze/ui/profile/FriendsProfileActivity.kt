@@ -79,6 +79,8 @@ class FriendsProfileActivity : AppCompatActivity() {
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Hide the ActionBar
+        supportActionBar?.hide()
 
 
         binding = ActivityFriendsProfileBinding.inflate(layoutInflater)
