@@ -55,7 +55,7 @@
         <Switch
                 android:text="@string/darkMode"
                 android:textSize="18sp"
-                android:layout_width="match_parent"
+                android:layout_width="320dp"
                 android:layout_height="63dp"
                 android:fontFamily="@font/amethysta"
                 android:layout_gravity="center_horizontal"
@@ -63,7 +63,7 @@
         <Switch
                 android:text="@string/metricUnits"
                 android:textSize="18sp"
-                android:layout_width="match_parent"
+                android:layout_width="320dp"
                 android:fontFamily="@font/amethysta"
                 android:layout_height="63dp"
                 android:layout_gravity="center_horizontal"
@@ -79,8 +79,8 @@
 
         <ImageView
                 android:id="@+id/imageView8"
-                android:layout_width="449dp"
-                android:layout_height="324dp"
+                android:layout_width="match_parent"
+                android:layout_height="284dp"
                 android:layout_gravity="center_horizontal"
                 app:srcCompat="@drawable/flowers"
                 android:contentDescription="@string/description"/>
@@ -90,6 +90,17 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:orientation="horizontal"/>
+        <Button
+                android:id="@+id/saveBtn"
+                android:layout_width="220dp"
+                android:layout_height="50dp"
+                android:focusable="true"
+                android:text="@string/save"
+                android:layout_marginTop="0dp"
+                android:layout_gravity="top|center"
+                android:clickable="true"/>
+
     </FrameLayout>
+
 
 </RelativeLayout>

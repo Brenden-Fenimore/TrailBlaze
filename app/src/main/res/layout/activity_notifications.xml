@@ -29,13 +29,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="150dp"
-            android:layout_below="@id/swishLayout"
             android:orientation="vertical">
         <TextView
                 android:id="@+id/Settings"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/notificationTitle"
                 android:textSize="40sp"
+                android:padding="10dp"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -45,7 +45,7 @@
                    android:layout_height="wrap_content"
                    android:orientation="vertical"
                    android:layout_marginTop="-151dp"
-                   android:padding="50dp">
+                   android:padding="10dp">
         <Switch
                 android:text="@string/notifications"
                 android:textSize="18sp"
@@ -64,14 +64,6 @@
                 android:layout_gravity="center_horizontal"
                 />
         <Switch
-                android:text="@string/friendRequest"
-                android:textSize="18sp"
-                android:layout_width="320dp"
-                android:fontFamily="@font/amethysta"
-                android:layout_height="63dp"
-                android:layout_gravity="center_horizontal"
-        />
-        <Switch
                 android:text="@string/watcherReminder"
                 android:textSize="18sp"
                 android:layout_width="320dp"
@@ -87,6 +79,16 @@
                 android:layout_height="63dp"
                 android:layout_gravity="center_horizontal"
         />
+        <Button
+                android:id="@+id/saveBtn"
+                android:layout_width="220dp"
+                android:layout_height="50dp"
+                android:focusable="true"
+                android:text="@string/save"
+                android:layout_marginTop="0dp"
+                android:layout_gravity="top|center"
+                android:clickable="true"/>
+
     </LinearLayout>
     <ImageView
             android:id="@+id/imageView8"
@@ -108,6 +110,9 @@
                 android:layout_gravity="top|center"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:orientation="horizontal"/>
+                android:orientation="horizontal"
+                />
+
     </FrameLayout>
+
 </LinearLayout>
