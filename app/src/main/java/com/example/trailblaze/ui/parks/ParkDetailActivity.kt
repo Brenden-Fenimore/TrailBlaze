@@ -213,6 +213,7 @@ class ParkDetailActivity : AppCompatActivity() {
         }
     }
 
+    // Function to add the current park to the user's bucket list in Firestore
     private fun addToBucketList(parkCode: String) {
         // Get the user's unique ID
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
