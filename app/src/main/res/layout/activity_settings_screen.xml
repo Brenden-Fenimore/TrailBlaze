@@ -49,76 +49,27 @@
             android:layout_centerInParent="true"
             android:layout_height="wrap_content">
 
+        <!-- Leaderboard Switch -->
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
                 android:orientation="horizontal"
-                android:paddingEnd="9dp"
-                android:paddingStart="9dp">
+                android:layout_marginTop="16dp"
+                android:layout_margin="10dp">
 
             <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:textSize="20sp"
-                    android:gravity="center"
-                    android:fontFamily="@font/amethysta"
-                    android:id="@+id/notification"
-                    android:text="@string/notificationTitle"/>
+                    android:text="@string/notificationTitle" />
 
-
-
+            <Switch
+                    android:id="@+id/notifications_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
         </LinearLayout>
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:background="@android:color/darker_gray"/>
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:orientation="horizontal"
-                android:paddingEnd="9dp"
-                android:paddingStart="9dp">
 
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:fontFamily="@font/amethysta"
-                    android:id="@+id/appearance"
-                    android:text="@string/appearanceTitle"
-                    android:contentDescription="@string/description"/>
-
-
-        </LinearLayout>
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:background="@android:color/darker_gray"/>
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:orientation="horizontal"
-                android:paddingEnd="9dp"
-                android:paddingStart="9dp">
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/amethysta"
-                    android:gravity="center"
-                    android:id="@+id/privacyAndSecurity"
-                    android:text="@string/privacyTitle"
-                    android:contentDescription="@string/description"/>
-
-
-        </LinearLayout>
         <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -129,27 +80,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingBottom="8dp"
-                android:paddingEnd="9dp"
-                android:paddingStart="9dp">
+                android:layout_marginTop="16dp"
+                android:layout_margin="10dp">
 
             <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:textSize="20sp"
-                    android:fontFamily="@font/amethysta"
-                    android:gravity="center"
-                    android:id="@+id/about"
-                    android:text="@string/aboutTitle"
-                    android:contentDescription="@string/description"/>
+                    android:text="@string/darkMode" />
 
-
-
+            <Switch
+                    android:id="@+id/leaderboard_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
         </LinearLayout>
         <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
                 android:background="@android:color/darker_gray"/>
+
+
+
+
 
     </LinearLayout>
     <FrameLayout

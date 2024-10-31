@@ -3,12 +3,14 @@ package com.example.trailblaze.ui
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trailblaze.R
 import com.example.trailblaze.databinding.ActivityMenuBinding
 import com.example.trailblaze.firestore.ImageLoader
 import com.example.trailblaze.firestore.UserRepository
 import com.example.trailblaze.login.LoginActivity
+import com.example.trailblaze.settings.AboutActivity
 import com.example.trailblaze.settings.SafetyActivity
 import com.example.trailblaze.settings.SettingsScreenActivity
 import com.example.trailblaze.settings.SupportScreenActivity
@@ -31,6 +33,9 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val toAbout = findViewById<TextView>(R.id.about)
+
 
         // Initialize AchievementManager
         achievementManager = AchievementManager(this)
@@ -88,7 +93,16 @@ class MenuActivity : AppCompatActivity() {
             val intent = Intent(this, AchievementsActivity::class.java)
             startActivity(intent)
         }
+
+        //set click listener for about
+        toAbout.setOnClickListener {
+            val intent = Intent(this, AboutActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
     }
+
+
 
     private fun loadProfilePicture() {
         val userId = auth.currentUser?.uid ?: return
