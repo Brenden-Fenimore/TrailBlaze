@@ -378,4 +378,10 @@
         We recommend that you print a copy of these Legal Terms for your records. \n "</string>
 
     <!--LEGAL STRINGS-->
+
+    <!-- SETTINGS STRINGS-->
+
+    <string name="darkMode">Dark Mode</string>
+    <string name="metricUnits">Metric Units</string>
+    <!-- SETTINGS STRINGS-->
 </resources>
