@@ -30,7 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="150dp"
             android:layout_below="@id/swishLayout"
-            android:orientation="vertical" android:id="@+id/linearLayout">
+            android:orientation="vertical"
+            android:id="@+id/linearLayout">
         <TextView
                 android:id="@+id/Settings"
                 android:layout_gravity="center_horizontal"
@@ -39,8 +40,7 @@
                 android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="30dp"
-                android:paddingTop="30dp"/>
+                android:padding="20dp"/>
 
 
     </LinearLayout>

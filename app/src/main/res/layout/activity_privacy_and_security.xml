@@ -35,6 +35,7 @@
                 android:id="@+id/Settings"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/privacyTitle"
+                android:padding="10dp"
                 android:textSize="34sp"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
