@@ -299,7 +299,7 @@
     <string name="suggestedTrailsMiles">Suggested Trails: %1$d miles</string>
     <string name="bucketListTrails">Bucket List Trails</string>
     <string name="favoriteFriends">Favorite Friends</string>
-    <string name="rangeMiles">  Range(miles)</string>
+    <string name="rangeMiles">  Range</string>
     <string name="uploadPhoto">Upload Photo</string>
     <!-- Spinner options for terrain -->
     <string-array name="terrain_options">
