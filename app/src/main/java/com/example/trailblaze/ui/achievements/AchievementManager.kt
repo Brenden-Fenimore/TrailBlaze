@@ -144,6 +144,20 @@ class AchievementManager(context: Context) {
         }
     }
 
+    // Check and grant the Badge Collector badge
+    fun checkAndGrantConquerorBadge() {
+        isAchievementUnlocked("conqueror") { hasBadgeCollectorBadge ->
+            if (!hasBadgeCollectorBadge) {
+                // Grant the Badge Collector badge
+                grantBadge("conqueror")
+                // Update Firestore
+                unlockAchievement("conqueror")
+            } else {
+                Log.d("AchievementManager", "Conqueror Badge already unlocked.")
+            }
+        }
+    }
+
     // Check and grant the Leaderboard badge
     fun checkAndGrantLeaderboardBadge() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid

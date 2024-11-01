@@ -1,6 +1,7 @@
 package com.example.trailblaze.ui.parks
 
 import ImagesAdapter
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
@@ -47,10 +48,18 @@ class ParkDetailActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
+
         // Get the park code from the intent
         parkCode = intent.getStringExtra("PARK_CODE") ?: ""
 
         fetchParkDetails(parkCode)
+
+        val hikeButton: ImageButton = findViewById(R.id.hike_btn)
+        hikeButton.setOnClickListener {
+            val intent = Intent(this, AttemptTrailActivity::class.java)
+            intent.putExtra("PARK_CODE", parkCode)
+            startActivity(intent)
+        }
 
         // Initialize views
         parkNameTextView = findViewById(R.id.parkNameTextView)
@@ -91,18 +100,13 @@ class ParkDetailActivity : AppCompatActivity() {
             override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
                 if (response.isSuccessful) {
                     response.body()?.let { npsResponse ->
-                        // Assuming the park details are in the data field of the response
-                        val park = npsResponse.data.firstOrNull() // Adjust based on actual response structure
+                        val park = npsResponse.data.firstOrNull() // Assuming the first park in the response
                         park?.let {
-                            populateParkDetails(it) // Pass the park object to populate the UI
+                            populateParkDetails(it)
                         } ?: run {
                             Toast.makeText(this@ParkDetailActivity, "Park details not found", Toast.LENGTH_SHORT).show()
                         }
-                    } ?: run {
-                        Toast.makeText(this@ParkDetailActivity, "Park details not found", Toast.LENGTH_SHORT).show()
                     }
-                } else {
-                    Log.e("ParkDetailActivity", "Response not successful: ${response.code()}")
                 }
             }
 

@@ -391,5 +391,11 @@
     <string name="privateAccount">Make Account Private</string>
 
 
-    <!-- SETTINGS STRINGS-->
+    <!-- Attempt Trail STRINGS-->
+
+    <string name="attemptTitle">You are about to attempt a trail/park. For your safety in the event of a disaster
+    or no return, please input your party information.</string>
+    <string name="solo">Is this a solo journey?</string>
+    <string name="start">Start Trail</string>
+
 </resources>

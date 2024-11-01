@@ -20,6 +20,10 @@
             android:enableOnBackInvokedCallback="true">
 
         <activity
+                android:name=".ui.parks.AttemptTrailActivity"
+                android:exported="true"/>
+
+        <activity
                 android:name=".ui.profile.UserListActivity"
                 android:exported="true"/>
 

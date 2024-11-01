@@ -46,6 +46,17 @@
                 android:background="@android:color/transparent"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"/>
+
+        <ImageButton
+                android:src="@drawable/directions_walk"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:id="@+id/hike_btn"
+                android:tint="#CDEDA3"
+                android:background="@android:color/transparent"
+                android:layout_toStartOf="@id/bucket_list_btn"
+                android:layout_centerVertical="true"/>
+
     </RelativeLayout>
 <ScrollView
         android:layout_width="match_parent"

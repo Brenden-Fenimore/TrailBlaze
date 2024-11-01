@@ -82,9 +82,10 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     //firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
+    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
     implementation("com.google.firebase:firebase-analytics")
     implementation ("com.google.firebase:firebase-firestore-ktx:24.0.1")
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
 
     //for adding profile pics
     implementation ("com.google.firebase:firebase-storage-ktx")

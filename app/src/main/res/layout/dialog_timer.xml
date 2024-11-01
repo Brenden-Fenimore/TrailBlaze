@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:padding="16dp">
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:padding="16dp"
+            app:cardElevation="4dp">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/timer_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00:00"
+                    android:textSize="30sp"
+                    android:layout_gravity="center"/>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
+
+                <Button
+                        android:id="@+id/start_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Start"/>
+
+                <Button
+                        android:id="@+id/stop_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Stop"
+                        android:layout_marginStart="16dp"/> <!-- Optional margin for spacing -->
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+            android:id="@+id/save_time_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save My Time" />
+
+    <Button
+            android:id="@+id/notify_watchers_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Notify Watchers" />
+
+    <Button
+            android:id="@+id/emergency_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="I'm in an emergency, dial 911" android:backgroundTint="@color/md_theme_error"/>
+</LinearLayout>

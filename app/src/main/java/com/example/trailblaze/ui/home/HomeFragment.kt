@@ -69,8 +69,6 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-
-
         // RecyclerView setup
         parksRecyclerView = binding.thumbnailRecyclerView
         parksRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
