@@ -1,6 +1,7 @@
 package com.example.trailblaze.ui.parks
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -17,6 +18,7 @@ import com.example.trailblaze.ui.achievements.AchievementManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import nl.dionsegijn.konfetti.KonfettiView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -126,6 +128,8 @@ class AttemptTrailActivity : AppCompatActivity() {
 
             // Save the record to Firestore
             saveTimeToFirestore(timeRecord)
+
+            showConfetti()
             Toast.makeText(this, "Time saved: $elapsedTimeString for park: $parkName", Toast.LENGTH_SHORT).show()
         }
 
@@ -142,6 +146,29 @@ class AttemptTrailActivity : AppCompatActivity() {
 
         // Show the dialog
         dialog.show()
+    }
+
+    private fun showConfetti() {
+        // Get the KonfettiView from the layout
+        val konfettiView = findViewById<KonfettiView>(R.id.konfettiView)
+
+        // Set the view to visible
+        konfettiView.visibility = View.VISIBLE
+
+        // Show confetti
+        konfettiView.build()
+            .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA, Color.CYAN)
+            .setDirection(0.0, 359.0) // Allow confetti to fall in all directions
+            .setSpeed(1f, 5f)
+            .setTimeToLive(3000L) // Increase the time to live to allow for longer fall
+            // Set the position to emit from the right side and farther down
+            .setPosition(konfettiView.width + 50f, konfettiView.width + 50f, -100f, -50f)
+            .stream(300, 3000L) // Stream 300 particles for 3000 milliseconds (3 seconds)
+
+        // Optionally hide the konfetti view after some time
+        konfettiView.postDelayed({
+            konfettiView.visibility = View.GONE
+        }, 6000) // Hide after 6 seconds
     }
 
     private fun saveTimeToFirestore(timeRecord: TimeRecord) {
