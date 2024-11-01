@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-    <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/swishLayout">
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/swishLayout">
 
-        <!-- Custom Swish Background at the bottom layer -->
-        <com.example.trailblaze.view.SwishBackgroundView
-                android:layout_width="match_parent"
-                android:layout_height="100dp" />
+                <!-- Custom Swish Background at the bottom layer -->
+                <com.example.trailblaze.view.SwishBackgroundView
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp" />
 
         <ImageButton
                 app:srcCompat="@drawable/baseline_arrow_back_ios_new_24"
@@ -232,51 +232,21 @@
                 android:paddingTop="16dp"
                 android:paddingBottom="8dp"/>
 
-        <HorizontalScrollView
-                android:id="@+id/photosSection"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="horizontal">
-
             <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                <!-- Placeholder for photos -->
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/userPhotoPictures"/>
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/userPhotoPictures"/>
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/userPhotoPictures"/>
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/userPhotoPictures"/>
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/userPhotoPictures"/>
-                <!-- Add more photo placeholders -->
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/photosRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layoutManager="LinearLayoutManager"
+                        android:orientation="horizontal"
+                        android:paddingBottom="8dp"/>
+
             </LinearLayout>
-        </HorizontalScrollView>
 
         <!-- Favorite Trails Section -->
         <TextView
