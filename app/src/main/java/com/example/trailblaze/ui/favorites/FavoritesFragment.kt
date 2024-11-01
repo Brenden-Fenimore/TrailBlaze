@@ -96,11 +96,10 @@ class FavoritesFragment : Fragment() {
         favoriteFriendsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         // Set up the adapter for favorite friends, with an empty list to start
-        favoriteFriendsAdapter = FriendAdapter(emptyList()) { friend ->
+        favoriteFriendsAdapter = FriendAdapter(emptyList()) { user ->
             // Handle click event to open FriendDetailActivity with the selected friend's ID
-            val intent = Intent(context, FriendsProfileActivity::class.java).apply {
-                putExtra("FRIEND_ID", friend.userId)
-            }
+            val intent = Intent(context, FriendsProfileActivity::class.java)
+            intent.putExtra("friendUserId", user.userId)
             startActivity(intent)
         }
         // Attach the adapter to the RecyclerView for favorite friends
@@ -124,6 +123,9 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun fetchFavoriteParks() {
+        // Clear the existing list to avoid duplicates
+        favoriteParks.clear()
+
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
         firestore.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
@@ -147,7 +149,6 @@ class FavoritesFragment : Fragment() {
             RetrofitInstance.api.getParkDetails(parkCode)
         }
 
-        // Track the number of responses
         var completedRequests = 0
 
         tasks.forEach { call ->
@@ -156,11 +157,13 @@ class FavoritesFragment : Fragment() {
                     if (response.isSuccessful && response.body() != null) {
                         val park = response.body()?.data?.firstOrNull()
                         park?.let {
-                            favoriteParks.add(it) // Add the park to the list
+                            // Check if the park is already in the list before adding
+                            if (!favoriteParks.contains(it)) {
+                                favoriteParks.add(it)
+                            }
                         }
                     }
                     completedRequests++
-                    // Check if all requests are completed
                     if (completedRequests == parkCodes.size) {
                         updateParksRecyclerView(favoriteParks)
                     }
@@ -169,7 +172,6 @@ class FavoritesFragment : Fragment() {
                 override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
                     Log.e("FavoritesFragment", "Error fetching park details: ${t.message}")
                     completedRequests++
-                    // Check if all requests are completed, even on failure
                     if (completedRequests == parkCodes.size) {
                         updateParksRecyclerView(favoriteParks)
                     }
@@ -202,22 +204,22 @@ class FavoritesFragment : Fragment() {
 
     // Function to fetch detailed information for each park in the bucket list using the NPS API
     private fun fetchBucketListParksDetails(parkCodes: List<String>) {
-        // Create a list of API call tasks for each park code
         val tasks = parkCodes.map { parkCode ->
             RetrofitInstance.api.getParkDetails(parkCode)
         }
 
-        // Track the number of completed requests
         var completedRequests = 0
         tasks.forEach { call ->
-            // Enqueue each API call
             call.enqueue(object : Callback<NPSResponse> {
                 override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
-                    // Check if the response is successful and has a body
                     if (response.isSuccessful && response.body() != null) {
-                        // Extract the park from the response and add it to the bucket list if it exists
                         val park = response.body()?.data?.firstOrNull()
-                        park?.let { bucketListParks.add(it) }
+                        park?.let {
+                            // Check if the park is already in the list before adding
+                            if (!bucketListParks.contains(it)) {
+                                bucketListParks.add(it)
+                            }
+                        }
                     }
                     completedRequests++
                     // If all requests are completed, update the adapter with the fetched parks
@@ -227,7 +229,6 @@ class FavoritesFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
-                    // Log any error that occurs during the API call
                     Log.e("FavoritesFragment", "Error fetching bucket list park details: ${t.message}")
                     completedRequests++
                     // Update the adapter once all requests have completed, even if some failed
