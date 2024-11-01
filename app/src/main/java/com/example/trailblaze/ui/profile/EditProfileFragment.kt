@@ -220,10 +220,7 @@ class EditProfileFragment : Fragment() {
                     userRef.update("profileImageUrl", downloadUri.toString())
                         .addOnSuccessListener {
                             Log.d("Firestore", "Profile picture URL updated successfully")
-                            achievementManager.checkAndGrantPhotographerBadge()
-                            achievementManager.saveBadgeToUserProfile("photographer")
 
-                            achievementManager.checkAndGrantLeaderboardBadge()
                         }
                         .addOnFailureListener { exception ->
                             Log.e("Firestore", "Error updating profile picture URL: ${exception.message}")

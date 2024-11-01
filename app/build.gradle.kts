@@ -126,5 +126,4 @@ dependencies {
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.21")
     implementation ("nl.dionsegijn:konfetti:1.2.6")
 
-
 }

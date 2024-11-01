@@ -1,5 +1,6 @@
 package com.example.trailblaze.ui.achievements
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -11,6 +12,7 @@ import com.example.trailblaze.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import nl.dionsegijn.konfetti.KonfettiView
 
 class BadgesActivity : AppCompatActivity() {
 
@@ -61,6 +63,7 @@ class BadgesActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.save).setOnClickListener {
             Toast.makeText(this, "Badges saved successfully", Toast.LENGTH_SHORT).show()
+            showConfetti()
         }
 
         badgesRecyclerView = findViewById(R.id.recycler_view_badges)
@@ -113,6 +116,11 @@ class BadgesActivity : AppCompatActivity() {
                     if (document.exists()) {
                         val badges = document.get("badges") as? List<String> ?: emptyList()
                         updateBadgesList(badges)
+
+                        achievementManager.checkAndGrantBadgeCollectorBadge()
+
+                        // Save to Firebase
+                        achievementManager.saveBadgeToUserProfile("badgecollector")
                     }
                 }
                 .addOnFailureListener { e ->
@@ -302,6 +310,29 @@ class BadgesActivity : AppCompatActivity() {
             // Mark this badge type as added to prevent duplicates
             addedBadgeTypes.add(resourceName)
         }
+    }
+
+    private fun showConfetti() {
+        // Get the KonfettiView from the layout
+        val konfettiView = findViewById<KonfettiView>(R.id.konfettiView)
+
+        // Set the view to visible
+        konfettiView.visibility = View.VISIBLE
+
+        // Show confetti
+        konfettiView.build()
+            .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA, Color.CYAN)
+            .setDirection(0.0, 359.0) // Allow confetti to fall in all directions
+            .setSpeed(1f, 5f)
+            .setTimeToLive(3000L) // Increase the time to live to allow for longer fall
+            // Set the position to emit from the right side and farther down
+            .setPosition(konfettiView.width + 50f, konfettiView.width + 50f, -100f, -50f)
+            .stream(300, 3000L) // Stream 300 particles for 3000 milliseconds (3 seconds)
+
+        // Optionally hide the konfetti view after some time
+        konfettiView.postDelayed({
+            konfettiView.visibility = View.GONE
+        }, 6000) // Hide after 6 seconds
     }
 
 }

@@ -1,7 +1,9 @@
 package com.example.trailblaze.ui
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -18,9 +20,9 @@ import com.example.trailblaze.ui.achievements.AchievementManager
 import com.example.trailblaze.ui.achievements.AchievementsActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import nl.dionsegijn.konfetti.KonfettiView
 
 
-@Suppress("DEPRECATION")
 class MenuActivity : AppCompatActivity() {
 
     private lateinit var achievementManager: AchievementManager
@@ -85,8 +87,6 @@ class MenuActivity : AppCompatActivity() {
             // Save to Firebase
             achievementManager.saveBadgeToUserProfile("safetyexpert")
 
-
-
             val intent = Intent(this, SafetyActivity::class.java)
             startActivity(intent)
         }
@@ -112,4 +112,7 @@ class MenuActivity : AppCompatActivity() {
             ImageLoader.loadProfilePicture(this, binding.profilePicture, imageUrl)
         }
     }
+
+
+
 }

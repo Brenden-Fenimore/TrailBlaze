@@ -289,6 +289,11 @@ class FriendsProfileActivity : AppCompatActivity() {
                             // Show confetti
                             showConfetti()
 
+                            achievementManager.checkAndGrantCommunityBuilderBadge()
+
+                            // Save to Firebase
+                            achievementManager.saveBadgeToUserProfile("communitybuilder")
+
                             Toast.makeText(this, "Friend added to favorites successfully!", Toast.LENGTH_SHORT).show()
                             binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled)
                         }
@@ -321,7 +326,7 @@ class FriendsProfileActivity : AppCompatActivity() {
             .setSpeed(1f, 5f)
             .setTimeToLive(3000L) // Increase the time to live to allow for longer fall
             // Set the position to emit from the right side and farther down
-            .setPosition(konfettiView.width + 50f, konfettiView.width + 50f, -100f, -50f) // Emit from right side, lower starting point
+            .setPosition(konfettiView.width + 50f, konfettiView.width + 50f, -100f, -50f)
             .stream(300, 3000L) // Stream 300 particles for 3000 milliseconds (3 seconds)
 
         // Optionally hide the konfetti view after some time

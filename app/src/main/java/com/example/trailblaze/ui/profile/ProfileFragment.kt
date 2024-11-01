@@ -430,6 +430,12 @@ class ProfileFragment : Fragment() {
                 .add(photoData)
                 .addOnSuccessListener {
                     Log.d("ProfileFragment", "Photo successfully added to Firestore!")
+
+                    achievementManager.checkAndGrantPhotographerBadge()
+                    achievementManager.saveBadgeToUserProfile("photographer")
+
+                    achievementManager.checkAndGrantLeaderboardBadge()
+
                     fetchPhotos() // Call fetchPhotos after successfully saving
                 }
                 .addOnFailureListener { e ->
