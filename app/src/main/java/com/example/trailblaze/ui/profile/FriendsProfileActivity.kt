@@ -53,9 +53,14 @@ class FriendsProfileActivity : AppCompatActivity() {
     private lateinit var friendsInCommonAdapter: FriendAdapter
     private lateinit var friendsInCommonList: MutableList<Friends>
 
+    private lateinit var photosAdapter: PhotosAdapter
+    private val photoUrls = mutableListOf<String>()
+
     private lateinit var favoritesRecyclerView: RecyclerView
     private lateinit var favoritesAdapter: ParksAdapter
     private var favoriteParks: MutableList<Park> = mutableListOf()
+
+
 
 
     // Define all possible badges
@@ -134,6 +139,12 @@ class FriendsProfileActivity : AppCompatActivity() {
         // Fetch leaderboard data
         fetchLeaderboard()
 
+        // Initialize RecyclerView and Adapter
+        val recyclerView = findViewById<RecyclerView>(R.id.photosRecyclerView)
+        photosAdapter = PhotosAdapter(photoUrls)
+        recyclerView.adapter = photosAdapter
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
         // Initialize the "Add" button
         addFriendButton = binding.addFriendButton
 
@@ -176,7 +187,15 @@ class FriendsProfileActivity : AppCompatActivity() {
                     // Set visibility based on the privacy settings
                     binding.leaderRecyclerView.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
                     binding.photosSection.visibility = if (isPhotosVisible) View.VISIBLE else View.GONE
+                    binding.leaderboardSection.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
+                    binding.leaderboardHeader.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
+
+                    binding.photosRecyclerView.visibility = if (isPhotosVisible) View.VISIBLE else View.GONE
+                    binding.photosHeader.visibility = if (isPhotosVisible) View.VISIBLE else View.GONE
+
                     binding.favoriteTrailsSection.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
+                    binding.favoriteTrailsHeader.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
+
                     binding.watcherMember.visibility = if (isWatcherVisible) View.VISIBLE else View.GONE
 
                     // Check if the account is private
@@ -194,6 +213,11 @@ class FriendsProfileActivity : AppCompatActivity() {
                     // Fetch and display badges
                     val badges = document.get("badges") as? List<String> ?: emptyList()
                     updateBadgesList(badges)
+
+                    // Fetch and display the friend's photos if the photos section is visible
+                    if (isPhotosVisible) {
+                        fetchFriendPhotos(userId)
+                    }
                 } else {
                     Log.e("FriendsProfileActivity", "Friend document does not exist")
                 }
@@ -650,4 +674,25 @@ class FriendsProfileActivity : AppCompatActivity() {
     }
 
 
+    // Fetches the friend's photos based on their userId
+    private fun fetchFriendPhotos(friendUserId: String) {
+        firestore.collection("users").document(friendUserId)
+            .collection("photos")
+            .orderBy("timestamp", Query.Direction.DESCENDING)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                val newPhotoUrls = mutableListOf<String>()
+                for (document in querySnapshot.documents) {
+                    val url = document.getString("url")
+                    if (url != null) {
+                        newPhotoUrls.add(url)
+                    }
+                }
+                photosAdapter.updatePhotos(newPhotoUrls)
+            }
+            .addOnFailureListener { e ->
+                Log.e("FriendsProfileActivity", "Error fetching photos", e)
+            }
+    }
 }
+
