@@ -1,6 +1,7 @@
 package com.example.trailblaze.ui.profile
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -31,6 +32,7 @@ import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.SetOptions
+import nl.dionsegijn.konfetti.KonfettiView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -103,8 +105,10 @@ class FriendsProfileActivity : AppCompatActivity() {
 
         // Initialize the RecyclerView for friends in common
         friendsInCommonList = mutableListOf()
-        friendsInCommonAdapter = FriendAdapter(friendsInCommonList) { friend ->
-            // Handle friend click here if needed
+        friendsInCommonAdapter = FriendAdapter(friendsInCommonList) { user ->
+            val intent = Intent(this, FriendsProfileActivity::class.java)
+            intent.putExtra("friendUserId", user.userId)
+            startActivity(intent)
         }
 
         friendsInCommonRecyclerView = binding.friendsInCommonRecyclerView
@@ -270,22 +274,21 @@ class FriendsProfileActivity : AppCompatActivity() {
 
         userRef.get().addOnSuccessListener { document ->
             if (document != null && document.exists()) {
-                // Get the favorite friends list from the document
                 val favoriteFriendsList = document.get("favoriteFriends") as? List<String> ?: emptyList()
 
-                // Check if the friendId is already in the favorites list
                 if (favoriteFriendsList.contains(friendId)) {
                     Toast.makeText(this, "This friend is already in your favorites.", Toast.LENGTH_SHORT).show()
                 } else {
-                    // Create a HashMap to represent the user's document
                     val userUpdates = HashMap<String, Any>()
-                    userUpdates["favoriteFriends"] = FieldValue.arrayUnion(friendId) // Add friendId to the array
+                    userUpdates["favoriteFriends"] = FieldValue.arrayUnion(friendId)
 
-                    // Update the current user's document in Firestore
                     userRef.set(userUpdates, SetOptions.merge())
                         .addOnSuccessListener {
+                            // Show confetti
+                            showConfetti()
+
                             Toast.makeText(this, "Friend added to favorites successfully!", Toast.LENGTH_SHORT).show()
-                            binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled) // Change to filled icon
+                            binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled)
                         }
                         .addOnFailureListener { exception ->
                             Log.e("FriendsProfileActivity", "Error adding friend to favorites: ", exception)
@@ -301,6 +304,32 @@ class FriendsProfileActivity : AppCompatActivity() {
             Toast.makeText(this, "Error fetching user data.", Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun showConfetti() {
+        // Get the KonfettiView from the layout
+        val konfettiView = findViewById<KonfettiView>(R.id.konfettiView)
+
+        // Set the view to visible
+        konfettiView.visibility = View.VISIBLE
+
+        // Show confetti
+        konfettiView.build()
+            .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA, Color.CYAN)
+            .setDirection(0.0, 359.0) // Allow confetti to fall in all directions
+            .setSpeed(1f, 5f)
+            .setTimeToLive(3000L) // Increase the time to live to allow for longer fall
+            // Set the position to emit from the right side and farther down
+            .setPosition(konfettiView.width + 50f, konfettiView.width + 50f, -100f, -50f) // Emit from right side, lower starting point
+            .stream(300, 3000L) // Stream 300 particles for 3000 milliseconds (3 seconds)
+
+        // Optionally hide the konfetti view after some time
+        konfettiView.postDelayed({
+            konfettiView.visibility = View.GONE
+        }, 6000) // Hide after 6 seconds
+    }
+
+
+
 
     private fun removeFavoriteFriend(currentUserId: String, friendId: String) {
         val userRef = firestore.collection("users").document(currentUserId)
