@@ -131,6 +131,8 @@ class FriendsProfileActivity : AppCompatActivity() {
         loadFriendProfile()
         fetchFriendsInCommon()
         loadFavoriteParks()
+        // Fetch leaderboard data
+        fetchLeaderboard()
 
         // Initialize the "Add" button
         addFriendButton = binding.addFriendButton
@@ -172,7 +174,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                     val isWatcherVisible = document.getBoolean("watcherVisible") ?: true
 
                     // Set visibility based on the privacy settings
-                    binding.leaderboardSection.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
+                    binding.leaderRecyclerView.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
                     binding.photosSection.visibility = if (isPhotosVisible) View.VISIBLE else View.GONE
                     binding.favoriteTrailsSection.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
                     binding.watcherMember.visibility = if (isWatcherVisible) View.VISIBLE else View.GONE
@@ -202,7 +204,7 @@ class FriendsProfileActivity : AppCompatActivity() {
     }
     private fun hideUserInformation() {
         // Hide sections that should not be visible for a private account
-        binding.leaderboardSection.visibility = View.GONE
+        binding.leaderRecyclerView.visibility = View.GONE
         binding.photosSection.visibility = View.GONE
         binding.favoriteTrailsSection.visibility = View.GONE
         binding.watcherMember.visibility = View.GONE
@@ -216,7 +218,7 @@ class FriendsProfileActivity : AppCompatActivity() {
         val isWatcherVisible = document.getBoolean("watcherVisible") ?: true
 
         // Set visibility based on the privacy settings
-        binding.leaderboardSection.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
+        binding.leaderRecyclerView.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
         binding.photosSection.visibility = if (isPhotosVisible) View.VISIBLE else View.GONE
         binding.favoriteTrailsSection.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
         binding.watcherMember.visibility = if (isWatcherVisible) View.VISIBLE else View.GONE
@@ -606,6 +608,40 @@ class FriendsProfileActivity : AppCompatActivity() {
 
     private fun updateParksRecyclerView(parks: List<Park>) {
         favoritesAdapter.updateData(parks) // Update the adapter with the fetched parks
+    }
+
+    private fun fetchLeaderboard() {
+        firestore.collection("users").get()
+            .addOnSuccessListener { querySnapshot ->
+                val leaderboardEntries = mutableListOf<LeaderboardEntry>()
+
+                for (document in querySnapshot.documents) {
+                    val userId = document.id
+                    val username = document.getString("username") ?: "Unknown"
+                    val badges = document.get("badges") as? List<String> ?: emptyList()
+                    val badgeCount = badges.size
+
+                    // Get the profile image URL
+                    val profileImageUrl = document.getString("profileImageUrl") // Assuming this field exists
+
+                    // Add to leaderboard entries
+                    leaderboardEntries.add(LeaderboardEntry(userId, username, badgeCount, profileImageUrl))
+                }
+
+                // Sort the leaderboard entries by badge count in descending order
+                leaderboardEntries.sortByDescending { it.badgeCount }
+
+                // Update the RecyclerView with the sorted leaderboard
+                updateLeaderboardRecyclerView(leaderboardEntries)
+            }
+            .addOnFailureListener { e ->
+                Log.e("ProfileFragment", "Error fetching leaderboard: ", e)
+            }
+    }
+
+    private fun updateLeaderboardRecyclerView(entries: List<LeaderboardEntry>) {
+        val leaderboardAdapter = LeaderboardAdapter(entries)
+        binding.leaderRecyclerView.adapter = leaderboardAdapter
     }
 
 

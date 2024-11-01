@@ -182,51 +182,14 @@
                 android:paddingTop="16dp"
                 android:paddingBottom="8dp"/>
 
-        <HorizontalScrollView
-                android:id="@+id/leaderboardSection"
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/leaderRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="horizontal">
-
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                <!-- Placeholder for leaderboard items -->
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/leaderboardPicture"/>
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/leaderboardPicture"/>
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/leaderboardPicture"/>
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/leaderboardPicture"/>
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/leaderboardPicture"/>
-                <!-- Add more leaderboard items here -->
-            </LinearLayout>
-        </HorizontalScrollView>
+                android:padding="0dp"
+                android:layout_margin="0dp"
+                app:layoutManager="LinearLayoutManager"
+                android:orientation="horizontal" />
 
         <!-- Photos Section -->
         <TextView

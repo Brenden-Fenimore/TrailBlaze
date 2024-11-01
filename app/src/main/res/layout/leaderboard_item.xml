@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:padding="16dp"
+              android:background="?attr/selectableItemBackground">
+
+    <!-- User Profile Picture -->
+    <ImageView
+            android:id="@+id/profileImageView"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile_no_image_available" /> <!-- Set a default profile picture -->
+
+
+        <!-- Username TextView -->
+        <TextView
+                android:id="@+id/usernameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:ellipsize="end"
+                android:maxLines="1" />
+
+        <!-- Badge Count TextView -->
+    <TextView
+            android:id="@+id/badgeCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginStart="8dp"/>
+</LinearLayout>

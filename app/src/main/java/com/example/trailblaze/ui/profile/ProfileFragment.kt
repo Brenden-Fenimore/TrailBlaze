@@ -161,6 +161,9 @@ class ProfileFragment : Fragment() {
         badgesList = binding.badgesRecyclerView
         badgesList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
+        // Fetch leaderboard data
+        fetchLeaderboard()
+
         return binding.root
     }
 
@@ -471,6 +474,40 @@ class ProfileFragment : Fragment() {
                     Log.w(TAG, "Error fetching photos", e)
                 }
         }
+    }
+
+    private fun fetchLeaderboard() {
+        firestore.collection("users").get()
+            .addOnSuccessListener { querySnapshot ->
+                val leaderboardEntries = mutableListOf<LeaderboardEntry>()
+
+                for (document in querySnapshot.documents) {
+                    val userId = document.id
+                    val username = document.getString("username") ?: "Unknown"
+                    val badges = document.get("badges") as? List<String> ?: emptyList()
+                    val badgeCount = badges.size
+
+                    // Get the profile image URL
+                    val profileImageUrl = document.getString("profileImageUrl") // Assuming this field exists
+
+                    // Add to leaderboard entries
+                    leaderboardEntries.add(LeaderboardEntry(userId, username, badgeCount, profileImageUrl))
+                }
+
+                // Sort the leaderboard entries by badge count in descending order
+                leaderboardEntries.sortByDescending { it.badgeCount }
+
+                // Update the RecyclerView with the sorted leaderboard
+                updateLeaderboardRecyclerView(leaderboardEntries)
+            }
+            .addOnFailureListener { e ->
+                Log.e("ProfileFragment", "Error fetching leaderboard: ", e)
+            }
+    }
+
+    private fun updateLeaderboardRecyclerView(entries: List<LeaderboardEntry>) {
+        val leaderboardAdapter = LeaderboardAdapter(entries)
+        binding.leaderRecyclerView.adapter = leaderboardAdapter
     }
 
     override fun onDestroyView() {
