@@ -1,7 +1,9 @@
 package com.example.trailblaze.ui.profile
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -11,11 +13,8 @@ import android.view.LayoutInflater
 import com.example.trailblaze.databinding.FragmentEditProfileBinding
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
 import androidx.navigation.fragment.findNavController
-import android.widget.SeekBar
-import android.widget.Spinner
-import android.widget.TextView
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.trailblaze.firestore.ImageLoader
 import com.example.trailblaze.firestore.UserRepository
@@ -38,6 +37,9 @@ class EditProfileFragment : Fragment() {
     private lateinit var firestore: FirebaseFirestore
     private lateinit var userRepository: UserRepository
     private lateinit var achievementManager: AchievementManager
+    private lateinit var sharedPreferences: SharedPreferences
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +47,9 @@ class EditProfileFragment : Fragment() {
     ): View {
         _binding = FragmentEditProfileBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        // Initialize SharedPreferences
+        sharedPreferences = requireActivity().getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
 
         //setup firestore instance
         firestore = FirebaseFirestore.getInstance()
@@ -98,18 +103,36 @@ class EditProfileFragment : Fragment() {
         return view
     }
 
+    override fun onResume() {
+        super.onResume()
+        // Check and update the SeekBar label when the fragment resumes
+        val isMetric = sharedPreferences.getBoolean("isMetricUnits", true)
+        updateSeekBarLabel(binding.seekBar.progress) // Update label based on current SeekBar progress
+    }
+
 
     private fun setupSeekBarListener() {
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                // Update the TextView with the current progress/value of the SeekBar
-                selectedValueTextView.text = progress.toString()
                 selectedFilterValue = progress.toDouble()
+                updateSeekBarLabel(progress)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
+    }
+
+    private fun updateSeekBarLabel(progress: Int) {
+        // Check if metric units are selected
+        val isMetric = sharedPreferences.getBoolean("isMetricUnits", true)
+
+        // Update the TextView with the current progress/value of the SeekBar
+        selectedValueTextView.text = if (isMetric) {
+            "${progress} km" // Assuming the progress represents kilometers
+        } else {
+            "${(progress * 0.621371).toInt()} miles" // Convert to miles if imperial
+        }
     }
 
     private fun loadUserProfile() {

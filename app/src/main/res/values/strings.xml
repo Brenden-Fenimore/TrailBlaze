@@ -388,6 +388,8 @@
     <string name="friendRequest">Friend Requests</string>
     <string name="notifications">Notifications</string>
     <string name="trailUpdates">Trail Updates</string>
+    <string name="privateAccount">Make Account Private</string>
+
 
     <!-- SETTINGS STRINGS-->
 </resources>

@@ -5,42 +5,29 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
-import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import com.example.trailblaze.R
 import com.example.trailblaze.login.LoginActivity
+import com.example.trailblaze.login.TermsActivity
 
 
 class SettingsScreenActivity : AppCompatActivity() {
 
-    private lateinit var darkModeSwitch: Switch
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings_screen)
+
         // Hide the ActionBar
         supportActionBar?.hide()
 
         // Initialize SharedPreferences
-        sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
-
-        // Check current dark mode setting and apply it
-        val isDarkModeEnabled = sharedPreferences.getBoolean("isDarkModeEnabled", false)
-        AppCompatDelegate.setDefaultNightMode(
-            if (isDarkModeEnabled) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
-        )
-
-        // Find views
-        darkModeSwitch = findViewById(R.id.leaderboard_switch) // Assuming you have the correct ID
-        val logoutbtn = findViewById<Button>(R.id.logoutbtn)
-
-        // Set the initial state of the switch
-        darkModeSwitch.isChecked = isDarkModeEnabled
+        sharedPreferences = getSharedPreferences("your_shared_preferences_name", MODE_PRIVATE)
 
         // Set click listener for the logout button
+        val logoutbtn = findViewById<Button>(R.id.logoutbtn)
         logoutbtn.setOnClickListener {
             val editor = sharedPreferences.edit()
             editor.putBoolean("isLoggedIn", false)
@@ -59,23 +46,18 @@ class SettingsScreenActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        // Set the listener for the dark mode switch
-        darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                // Enable dark mode
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                saveDarkModePreference(true)
-            } else {
-                // Disable dark mode
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                saveDarkModePreference(false)
-            }
+        // Set click listeners for the TextViews
+        findViewById<TextView>(R.id.notification).setOnClickListener {
+            startActivity(Intent(this, NotificationsActivity::class.java))
         }
-    }
 
-    private fun saveDarkModePreference(isEnabled: Boolean) {
-        val editor = sharedPreferences.edit()
-        editor.putBoolean("isDarkModeEnabled", isEnabled)
-        editor.apply()
+        findViewById<TextView>(R.id.appearance).setOnClickListener {
+            startActivity(Intent(this, AppearanceActivity::class.java))
+        }
+
+        findViewById<TextView>(R.id.privacyAndSecurity).setOnClickListener {
+            startActivity(Intent(this, PrivacyAndSecurityActivity::class.java))
+        }
+
     }
 }

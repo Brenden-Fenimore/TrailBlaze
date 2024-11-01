@@ -42,6 +42,88 @@
 
     </LinearLayout>
 
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="375dp"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content">
+
+        <!-- Leaderboard Switch -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_margin="10dp">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:text="@string/watcherMember"/>
+            <Switch
+                    android:id="@+id/watcherSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_margin="10dp">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:text="@string/privateAccount" />
+
+            <Switch
+                    android:id="@+id/dprivateSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/darker_gray"/>
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_margin="10dp">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/amethysta"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:id="@+id/termsAndCon"
+                    android:text="@string/titleTerms"
+                    android:contentDescription="@string/description"/>
+        </LinearLayout>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+    </LinearLayout>
+
     <FrameLayout
             android:id="@+id/frameStackorConnectw"
             android:layout_width="match_parent"
@@ -51,8 +133,8 @@
 
         <ImageView
                 android:id="@+id/imageView8"
-                android:layout_width="449dp"
-                android:layout_height="324dp"
+                android:layout_width="712dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 app:srcCompat="@drawable/flowers"
                 android:contentDescription="@string/description"/>
@@ -62,14 +144,6 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:orientation="horizontal"/>
-        <Button
-                android:id="@+id/saveBtn"
-                android:layout_width="220dp"
-                android:layout_height="50dp"
-                android:focusable="true"
-                android:text="@string/save"
-                android:layout_marginTop="0dp"
-                android:layout_gravity="top|center"
-                android:clickable="true"/>
+
     </FrameLayout>
 </RelativeLayout>

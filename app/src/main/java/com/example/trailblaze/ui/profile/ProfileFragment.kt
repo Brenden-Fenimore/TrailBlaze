@@ -69,6 +69,8 @@ class ProfileFragment : Fragment() {
     private val photoUrls = mutableListOf<String>()
     private lateinit var photosAdapter: PhotosAdapter
 
+
+
     // Define all possible badges
     private val allBadges = listOf(
         Badge("safetyexpert", "Safety Expert", R.drawable.safetyexpert),
@@ -96,6 +98,7 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         // Initialize the binding
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 

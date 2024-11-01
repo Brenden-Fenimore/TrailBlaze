@@ -156,6 +156,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                     val username = document.getString("username")
                     val imageUrl = document.getString("profileImageUrl")
                     val favoritePark = document.get("favoriteParks")
+                    val isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
 
                     binding.username.text = username
                     ImageLoader.loadProfilePicture(this, binding.profilePicture, imageUrl)
@@ -172,6 +173,15 @@ class FriendsProfileActivity : AppCompatActivity() {
                     binding.favoriteTrailsSection.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
                     binding.watcherMember.visibility = if (isWatcherVisible) View.VISIBLE else View.GONE
 
+                    // Check if the account is private
+                    if (isPrivateAccount) {
+                        // Hide all user information
+                        hideUserInformation()
+                    } else {
+                        // Load and display other information
+                        loadUserOtherInformation(document)
+                    }
+
                     // Check if the current user is friends with this friend
                     checkFriendshipStatus(currentUserId, userId)
 
@@ -186,7 +196,34 @@ class FriendsProfileActivity : AppCompatActivity() {
                 Log.e("FriendsProfileActivity", "Error fetching friend profile: ", exception)
             }
     }
+    private fun hideUserInformation() {
+        // Hide sections that should not be visible for a private account
+        binding.leaderboardSection.visibility = View.GONE
+        binding.photosSection.visibility = View.GONE
+        binding.favoriteTrailsSection.visibility = View.GONE
+        binding.watcherMember.visibility = View.GONE
+    }
 
+    private fun loadUserOtherInformation(document: DocumentSnapshot) {
+        // Retrieve visibility settings from the document
+        val isLeaderboardVisible = document.getBoolean("leaderboardVisible") ?: true
+        val isPhotosVisible = document.getBoolean("photosVisible") ?: true
+        val isFavoriteTrailsVisible = document.getBoolean("favoriteTrailsVisible") ?: true
+        val isWatcherVisible = document.getBoolean("watcherVisible") ?: true
+
+        // Set visibility based on the privacy settings
+        binding.leaderboardSection.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
+        binding.photosSection.visibility = if (isPhotosVisible) View.VISIBLE else View.GONE
+        binding.favoriteTrailsSection.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
+        binding.watcherMember.visibility = if (isWatcherVisible) View.VISIBLE else View.GONE
+
+        // Optionally load other information like badges or favorite parks
+        val badges = document.get("badges") as? List<String> ?: emptyList()
+        updateBadgesList(badges)
+
+        // Load favorite parks or any other relevant information
+        loadFavoriteParks()
+    }
 
     private fun checkFriendshipStatus(currentUserId: String, friendId: String) {
         firestore.collection("users").document(currentUserId).get()
