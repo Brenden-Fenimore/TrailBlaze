@@ -79,6 +79,7 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:scaleType="centerCrop"
+                    android:tint="#4C662B"
                     android:src="@drawable/location"
                     android:contentDescription="@string/locationIcon"
                     android:background="@android:color/transparent"
@@ -100,6 +101,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:scaleType="centerCrop"
+                    android:tint="#4C662B"
                     android:src="@drawable/difficulty"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/difficultyIcon"
@@ -202,6 +204,7 @@
                 android:paddingBottom="8dp"/>
 
             <LinearLayout
+                    android:id="@+id/photoSection"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">

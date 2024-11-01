@@ -20,7 +20,6 @@ import com.example.trailblaze.ui.achievements.AchievementManager
 import com.example.trailblaze.ui.achievements.Badge
 import com.example.trailblaze.ui.achievements.BadgesAdapter
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.example.trailblaze.firestore.ImageLoader
 import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.Park
@@ -29,9 +28,7 @@ import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.ui.parks.ParkDetailActivity
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.FieldValue
-import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.*
 import nl.dionsegijn.konfetti.KonfettiView
 import retrofit2.Call
 import retrofit2.Callback
@@ -186,8 +183,6 @@ class FriendsProfileActivity : AppCompatActivity() {
 
                     // Set visibility based on the privacy settings
                     binding.leaderRecyclerView.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
-                    binding.photosSection.visibility = if (isPhotosVisible) View.VISIBLE else View.GONE
-                    binding.leaderboardSection.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
                     binding.leaderboardHeader.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
 
                     binding.photosRecyclerView.visibility = if (isPhotosVisible) View.VISIBLE else View.GONE
@@ -229,7 +224,6 @@ class FriendsProfileActivity : AppCompatActivity() {
     private fun hideUserInformation() {
         // Hide sections that should not be visible for a private account
         binding.leaderRecyclerView.visibility = View.GONE
-        binding.photosSection.visibility = View.GONE
         binding.favoriteTrailsSection.visibility = View.GONE
         binding.watcherMember.visibility = View.GONE
     }
@@ -243,7 +237,6 @@ class FriendsProfileActivity : AppCompatActivity() {
 
         // Set visibility based on the privacy settings
         binding.leaderRecyclerView.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
-        binding.photosSection.visibility = if (isPhotosVisible) View.VISIBLE else View.GONE
         binding.favoriteTrailsSection.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
         binding.watcherMember.visibility = if (isWatcherVisible) View.VISIBLE else View.GONE
 
