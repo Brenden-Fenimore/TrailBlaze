@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.trailblaze.R
@@ -21,12 +22,22 @@ class PhotosAdapter(private var photoUrls: MutableList<String>) : RecyclerView.A
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
         val imageUrl = photoUrls[position]
+
+        // Load image with Glide
         Glide.with(holder.imageView.context)
             .load(imageUrl)
             .override(120, 120)
             .centerCrop()
             .into(holder.imageView)
+
+        // Set up click listener for full-screen view
+        holder.itemView.setOnClickListener {
+            val fragmentManager = (holder.itemView.context as AppCompatActivity).supportFragmentManager
+            FullscreenImageDialogFragment.newInstance(photoUrls, position)
+                .show(fragmentManager, "fullscreenDialog")
+        }
     }
+
 
     override fun getItemCount(): Int {
         return photoUrls.size
