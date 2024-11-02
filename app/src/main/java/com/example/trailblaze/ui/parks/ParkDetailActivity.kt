@@ -180,47 +180,64 @@ class ParkDetailActivity : AppCompatActivity() {
         }
     }
 
+    // Initializes and sets the favorite status of a park when the activity loads.
     private fun checkFavoriteStatus() {
+        // Retrieve the current user's ID; if unavailable, exit the function
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        // Reference to the user's Firestore document
         val userDocRef = firestore.collection("users").document(userId)
 
+        // Retrieve user's document to check if the current park is in their favorites
         userDocRef.get().addOnSuccessListener { document ->
+            // Retrieve favorite parks list; if it's missing, use an empty list
             val favoriteParks = document.get("favoriteParks") as? List<String> ?: emptyList()
 
-            // Set the button image based on whether the park is in favorites
+            // Update the favorite button icon based on whether the park is in the user's favorites
             if (favoriteParks.contains(parkCode)) {
-                favoriteButton.setImageResource(R.drawable.favorite_filled)  // Filled icon
+                // Show filled heart icon if park is a favorite
+                favoriteButton.setImageResource(R.drawable.favorite_filled)
             } else {
-                favoriteButton.setImageResource(R.drawable.favorite)  // Outline icon
+                // Show outline heart icon if park is not a favorite
+                favoriteButton.setImageResource(R.drawable.favorite)
             }
         }
     }
 
+    // Toggles the favorite status of a park: adds it if not in favorites, or removes it if already a favorite
     private fun toggleFavoriteStatus() {
+        // Retrieve the current user's ID; if unavailable, exit the function
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        // Reference to the user's Firestore document
         val userDocRef = firestore.collection("users").document(userId)
 
+        // Get user's favorite parks list and check if the park is already a favorite
         userDocRef.get().addOnSuccessListener { document ->
             val favoriteParks = document.get("favoriteParks") as? List<String> ?: emptyList()
 
             if (favoriteParks.contains(parkCode)) {
-                // Remove from favorites
-                userDocRef.update("favoriteParks", FieldValue.arrayRemove(parkCode))
+                // Park is already a favorite; proceed to remove it
+                userDocRef.update("favoriteParks", FieldValue.arrayRemove(parkCode))        // Remove park from favorites
                     .addOnSuccessListener {
+                        // Notify user of success
                         Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show()
-                        favoriteButton.setImageResource(R.drawable.favorite)  // Update to outline icon
+                        // Update to outline icon to reflect removal
+                        favoriteButton.setImageResource(R.drawable.favorite)
                     }
                     .addOnFailureListener { e ->
+                        // Notify user of failure
                         Toast.makeText(this, "Failed to remove from favorites: ${e.message}", Toast.LENGTH_SHORT).show()
                     }
             } else {
-                // Add to favorites
-                userDocRef.update("favoriteParks", FieldValue.arrayUnion(parkCode))
+                // Park is not a favorite; proceed to add it
+                userDocRef.update("favoriteParks", FieldValue.arrayUnion(parkCode))     // Add park to favorites
                     .addOnSuccessListener {
+                        // Notify user of success
                         Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show()
-                        favoriteButton.setImageResource(R.drawable.favorite_filled)  // Update to filled icon
+                        // Update to filled icon to reflect addition
+                        favoriteButton.setImageResource(R.drawable.favorite_filled)
                     }
                     .addOnFailureListener { e ->
+                        // Notify user of failure
                         Toast.makeText(this, "Failed to add to favorites: ${e.message}", Toast.LENGTH_SHORT).show()
                     }
             }
