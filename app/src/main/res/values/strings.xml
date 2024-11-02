@@ -397,8 +397,5 @@
     or no return, please input your party information.</string>
     <string name="solo">Is this a solo journey?</string>
     <string name="start">Start Trail</string>
-
-        Supplemental terms and conditions or documents that may be posted on the Services from time to time are hereby expressly incorporated by reference. We reserve the right, in our sole discretion, to make changes by modifications to these Legal Terms at any time and for any reason. We will alert you about any changes by updating the “Last Updated” date of these Legal Terms, and you waive any right to receive specific notice of each such change. It is your responsibility to periodically review these Legal Terms to stay informed of updates. You will be subject to, and will be deemed to have been made aware of and to have accepted, the changes in any revised Legal Terms by your continued use of the Services after the date such revised Legal Terms are posted.
-        We recommend that you print a copy of these Legal Terms for your records. "</string>
     <string name="bucket_list_description">Adds current park to user\'s bucket list</string>
 </resources>
