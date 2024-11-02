@@ -82,8 +82,10 @@ class ParkDetailActivity : AppCompatActivity() {
 
         // Initialize the favorite button and set up its click listener
         favoriteButton = findViewById(R.id.favorite_park_btn)
+        checkFavoriteStatus()       // Check if the park is already in favorites and update the button
+
         favoriteButton.setOnClickListener {
-            addParkToFavorites(parkCode) // Call function to save this park as a favorite (assuming parkCode is set)
+            toggleFavoriteStatus()  // Toggle the favorite status
         }
 
         // Initialize the bucket list button and set up its click listener
@@ -178,44 +180,50 @@ class ParkDetailActivity : AppCompatActivity() {
         }
     }
 
-    // Function to add the current park to the user's favorites in Firestore
-    private fun addParkToFavorites(parkCode: String) {
-        // Get the user's unique ID
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
-        if (userId != null) {
-            // Reference to the user's document in Firestore
-            val userDocRef = firestore.collection("users").document(userId)
+    private fun checkFavoriteStatus() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val userDocRef = firestore.collection("users").document(userId)
 
-            // Retrieve the current favoriteParks list
-            userDocRef.get()
-                .addOnSuccessListener { document ->
-                    // Check if the document exists and retrieve the list of favorite parks
-                    if (document != null) {
-                        // Attempt to get "favoriteParks" list as a List of Strings, or default to an empty list if not present
-                        val favoriteParks = document.get("favoriteParks") as? List<String> ?: emptyList()
-                        // Check if the park is already in the favorites list
-                        if (favoriteParks.contains(parkCode)) {
-                            // If park already exists in the list, show a message to the user
-                            Toast.makeText(this, "Park already in your favorites", Toast.LENGTH_SHORT).show()
-                        } else {
-                            // If the park is not in favorites, add it using arrayUnion to avoid duplicates
-                            userDocRef.update("favoriteParks", FieldValue.arrayUnion(parkCode))
-                                .addOnSuccessListener {
-                                    // Display success message when the park is successfully added to favorites
-                                    Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show()
-                                }
-                                .addOnFailureListener { e ->
-                                    // Display failure message if adding to favorites fails
-                                    Toast.makeText(this, "Failed to add to favorites: ${e.message}", Toast.LENGTH_SHORT)
-                                        .show()
-                                }
-                        }
+        userDocRef.get().addOnSuccessListener { document ->
+            val favoriteParks = document.get("favoriteParks") as? List<String> ?: emptyList()
+
+            // Set the button image based on whether the park is in favorites
+            if (favoriteParks.contains(parkCode)) {
+                favoriteButton.setImageResource(R.drawable.favorite_filled)  // Filled icon
+            } else {
+                favoriteButton.setImageResource(R.drawable.favorite)  // Outline icon
+            }
+        }
+    }
+
+    private fun toggleFavoriteStatus() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val userDocRef = firestore.collection("users").document(userId)
+
+        userDocRef.get().addOnSuccessListener { document ->
+            val favoriteParks = document.get("favoriteParks") as? List<String> ?: emptyList()
+
+            if (favoriteParks.contains(parkCode)) {
+                // Remove from favorites
+                userDocRef.update("favoriteParks", FieldValue.arrayRemove(parkCode))
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show()
+                        favoriteButton.setImageResource(R.drawable.favorite)  // Update to outline icon
                     }
-                }
-                .addOnFailureListener { e ->
-                    // If retrieving the document fails, show an error message
-                    Toast.makeText(this, "Failed to retrieve favorites: ${e.message}", Toast.LENGTH_SHORT).show()
-                }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Failed to remove from favorites: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+            } else {
+                // Add to favorites
+                userDocRef.update("favoriteParks", FieldValue.arrayUnion(parkCode))
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show()
+                        favoriteButton.setImageResource(R.drawable.favorite_filled)  // Update to filled icon
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Failed to add to favorites: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+            }
         }
     }
 
