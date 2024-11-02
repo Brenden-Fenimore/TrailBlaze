@@ -58,7 +58,7 @@
                 android:id="@+id/hike_btn"
                 android:tint="#CDEDA3"
                 android:background="@android:color/transparent"
-                android:layout_toStartOf="@id/bucket_list_btn"
+                android:layout_toEndOf="@id/chevron_left"
                 android:layout_centerVertical="true"/>
 
     </RelativeLayout>
