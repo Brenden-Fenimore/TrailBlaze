@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,6 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 
 class HomeFragment : Fragment() {
@@ -46,6 +48,8 @@ class HomeFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private lateinit var greetingTextView: TextView
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -53,6 +57,9 @@ class HomeFragment : Fragment() {
         // Initialize Firestore
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
+
+        greetingTextView = binding.homepagegreeting
+        updateGreeting()
 
         binding.menuButton.setOnClickListener {
             val intent = Intent(activity, MenuActivity::class.java)
@@ -68,6 +75,7 @@ class HomeFragment : Fragment() {
             val intent = Intent(activity, UserListActivity::class.java)
             startActivity(intent)
         }
+
 
         // RecyclerView setup
         parksRecyclerView = binding.thumbnailRecyclerView
@@ -116,6 +124,20 @@ class HomeFragment : Fragment() {
         fetchCurrentUser()
         fetchUserState()
         return root
+    }
+
+    private fun updateGreeting() {
+        val calendar = Calendar.getInstance()
+        val hourOfDay = calendar.get(Calendar.HOUR_OF_DAY)
+
+        val greeting: String =
+            when {
+            hourOfDay in 5..11 -> "Good Morning"
+            hourOfDay in 12..17 -> "Good Afternoon"
+            else -> "Good Evening"
+        }
+
+        greetingTextView.text = greeting
     }
 
     private fun fetchUsername() {
