@@ -18,6 +18,7 @@
                 android:gravity="center"
                 android:text="@string/aspects"
                 android:textSize="20sp"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="305dp"
                 android:layout_height="wrap_content"/>
@@ -53,6 +54,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/titleNature"
+                            android:textColor="?attr/colorPrimary"
                             android:gravity="center"
                             android:textSize="16sp"
                             android:fontFamily="@font/amethysta" />
@@ -76,6 +78,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/titleBreaks"
+                            android:textColor="?attr/colorPrimary"
                             android:gravity="center"
                             android:textSize="16sp"
                             android:fontFamily="@font/amethysta" />
@@ -107,6 +110,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/titleUphill"
+                            android:textColor="?attr/colorPrimary"
                             android:gravity="center"
                             android:textSize="16sp"
                             android:fontFamily="@font/amethysta" />
@@ -130,6 +134,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/pace"
+                            android:textColor="?attr/colorPrimary"
                             android:gravity="center"
                             android:textSize="16sp"
                             android:fontFamily="@font/amethysta" />

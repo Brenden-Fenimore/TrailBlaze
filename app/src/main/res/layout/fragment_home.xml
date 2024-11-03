@@ -49,7 +49,7 @@
                     android:layout_marginTop="10dp"
                     android:textSize="40sp"
                     android:text="@string/homepage_welcome_user"
-                    android:textColor="#4C662B"
+                    android:textColor="?attr/colorPrimary"
                     android:fontFamily="@font/amethysta"
                     android:textAlignment="center"/>
             <LinearLayout
@@ -63,7 +63,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="27sp"
                         android:text="@string/username"
-                        android:textColor="#4C662B"
+                        android:textColor="?attr/colorPrimary"
                         android:fontFamily="@font/amethysta"
                         android:layout_weight="1"
                         android:textAlignment="center"/>
@@ -93,7 +93,7 @@
                             android:fontFamily="@font/amethysta"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="#4C662B"
+                            android:textColor="?attr/colorPrimary"
                             android:shadowColor="@color/black"/>
 
                     <!-- RecyclerView for Nearby Trails -->
@@ -120,7 +120,7 @@
                             android:fontFamily="@font/amethysta"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="#4C662B"
+                            android:textColor="?attr/colorPrimary"
                             android:shadowColor="@color/black"/>
                 <!--        Browse By Difficulty Images-->
                 <HorizontalScrollView
@@ -183,7 +183,7 @@
                             android:fontFamily="@font/amethysta"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="#4C662B"
+                            android:textColor="?attr/colorPrimary"
                             android:shadowColor="@color/black"/>
 
                     <ImageButton
@@ -197,7 +197,7 @@
                             android:focusable="true"
                             app:maxImageSize="24dp"
                             app:backgroundTint="#00FFFFFF"
-                            android:textColor="#4C662B"
+                            android:textColor="?attr/colorPrimary"
                             android:contentDescription="@string/description"/>
                 </LinearLayout>
 

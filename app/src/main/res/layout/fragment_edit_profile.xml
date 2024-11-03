@@ -55,6 +55,7 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="?attr/colorPrimary"
                 android:text="@string/editProfile"
                 android:fontFamily="@font/amethysta"
                 android:textSize="40sp"
@@ -110,6 +111,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:textColor="?attr/colorPrimary"
                     android:hint="@string/username"
                     android:autofillHints="username"
                     android:inputType="textPersonName" />
@@ -135,6 +137,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:textColor="?attr/colorPrimary"
                     android:hint="@string/birthdate"
                     android:autofillHints="dateOfBirth"
                     android:inputType="date" />
@@ -160,6 +163,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:textColor="?attr/colorPrimary"
                     android:hint="@string/editUserEmail"
                     android:autofillHints="emailAddress"
                     android:inputType="textEmailAddress" />
@@ -185,6 +189,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:layout_gravity="center"
+                    android:textColor="?attr/colorPrimary"
                     android:id="@+id/editCity"
                     android:fontFamily="@font/amethysta"
                     android:hint="City"/>
@@ -209,6 +214,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:layout_gravity="center"
+                    android:textColor="?attr/colorPrimary"
                     android:id="@+id/editState"
                     android:fontFamily="@font/amethysta"
                     android:hint="State"/>
@@ -234,6 +240,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:layout_gravity="center"
+                    android:textColor="?attr/colorPrimary"
                     android:id="@+id/editZip"
                     android:fontFamily="@font/amethysta"
                     android:hint="Zip"/>
@@ -259,6 +266,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:textColor="?attr/colorPrimary"
                     android:hint="@string/userPhone"
                     android:autofillHints="phone"
                     android:inputType="phone" />
@@ -290,6 +298,7 @@
                     android:layout_width="141dp"
                     android:layout_height="wrap_content"
                     android:text="@string/terrain"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="20sp"
                     android:layout_marginEnd="16dp"/>
 
@@ -326,6 +335,7 @@
                     android:layout_width="141dp"
                     android:layout_height="wrap_content"
                     android:text="@string/fitnessLevel"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="20sp"
                     android:layout_marginEnd="16dp"/>
             <Spinner
@@ -360,6 +370,7 @@
                     android:layout_width="141dp"
                     android:layout_height="wrap_content"
                     android:text="@string/difficultyLevel"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="20sp"
                     android:layout_marginEnd="16dp"/>
             <Spinner
@@ -391,6 +402,7 @@
                     android:layout_width="141dp"
                     android:layout_height="wrap_content"
                     android:text="@string/typeOfHike"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="20sp"
                     android:layout_marginEnd="16dp" />
             <Spinner
@@ -415,6 +427,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/suggestedTrails"
+                    android:textColor="?attr/colorPrimary"
                     android:layout_marginTop="16dp" />
 
             <TextView
@@ -422,6 +435,7 @@
                     android:textSize="20sp"
                     android:id="@+id/range"
                     android:fontFamily="@font/amethysta"
+                    android:textColor="?attr/colorPrimary"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"/>
 
@@ -437,7 +451,7 @@
                 android:textSize="20sp"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="305dp"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="?attr/colorPrimary"
                 android:layout_height="wrap_content"/>
 
         <!-- Leaderboard Switch -->
@@ -451,7 +465,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/userLeaderboardSwitch" />
+                    android:text="@string/userLeaderboardSwitch"
+                    android:textColor="?attr/colorPrimary"/>
+
 
             <Switch
                     android:id="@+id/leaderboard_switch"
@@ -470,7 +486,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="?attr/colorPrimary"
                     android:text="@string/userPhotosSwitch" />
+
 
             <Switch
                     android:id="@+id/photos_switch"
@@ -489,7 +507,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="?attr/colorPrimary"
                     android:text="@string/userFavoriteTrailsSwitch" />
+
 
             <Switch
                     android:id="@+id/favoritetrails_switch"
@@ -508,12 +528,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="?attr/colorPrimary"
                     android:text="@string/userWatcherSwitch" />
+
 
             <Switch
                     android:id="@+id/watcher_switch"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"/>
+
         </LinearLayout>
 
         <!-- Share Location Switch -->
@@ -527,7 +550,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="?attr/colorPrimary"
                     android:text="@string/userShareLocationSwitch" />
+
 
             <Switch
                     android:id="@+id/sharelocation_switch"

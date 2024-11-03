@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/favorites"
-                android:textColor="#4C662B"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="40sp"
                 android:fontFamily="@font/amethysta"
                 android:layout_marginStart="16dp" />
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:text="@string/userFavoriteTrails"
             android:textSize="20sp"
-            android:textColor="#4C662B"
+            android:textColor="?attr/colorPrimary"
             android:fontFamily="@font/amethysta"
             android:textStyle="bold"
             android:paddingTop="35dp"/>
@@ -100,7 +100,7 @@
             android:layout_height="wrap_content"
             android:text="@string/bucketListTrails"
             android:textSize="20sp"
-            android:textColor="#4C662B"
+            android:textColor="?attr/colorPrimary"
             android:fontFamily="@font/amethysta"
             android:textStyle="bold"
             android:paddingTop="25dp"/>
@@ -127,7 +127,7 @@
             android:layout_height="wrap_content"
             android:text="@string/favoriteFriends"
             android:textSize="20sp"
-            android:textColor="#4C662B"
+            android:textColor="?attr/colorPrimary"
             android:textStyle="bold"
             android:fontFamily="@font/amethysta"
             android:paddingTop="25dp"/>

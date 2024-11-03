@@ -65,7 +65,7 @@
                     android:layout_height="48dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/location"
-                    android:tint="#4C662B"
+                    android:tint="?attr/colorPrimary"
                     android:contentDescription="@string/locationIcon"
                     android:background="@android:color/transparent"
                     android:layout_marginEnd="16dp" />
@@ -85,7 +85,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:scaleType="centerCrop"
-                    android:tint="#4C662B"
+                    android:tint="?attr/colorPrimary"
                     android:src="@drawable/difficulty"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/difficultyIcon"
@@ -100,6 +100,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/username"
                 android:textSize="27sp"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:layout_gravity="center"
                 android:paddingTop="8dp" />
@@ -146,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/friends"
                 android:textSize="20sp"
-                android:textColor="#4C662B"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
                 android:paddingTop="16dp"/>
@@ -165,7 +166,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/leaderboard"
                 android:textSize="20sp"
-                android:textColor="#4C662B"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
                 android:paddingTop="16dp"/>
@@ -193,7 +194,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/userPhotos"
                 android:textSize="20sp"
-                android:textColor="#4C662B"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
                 android:paddingTop="16dp"/>
@@ -226,7 +227,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/userFavoriteTrails"
                 android:textSize="20sp"
-                android:textColor="#4C662B"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
                 android:paddingTop="16dp"/>
