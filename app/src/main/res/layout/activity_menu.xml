@@ -54,6 +54,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/menuTitle"
                 android:textSize="40sp"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -97,6 +98,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:textSize="20sp"
+                        android:textColor="?attr/colorPrimary"
                         android:fontFamily="@font/amethysta"
                         android:paddingBottom="8dp"/>
 
@@ -120,6 +122,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:textSize="20sp"
+                        android:textColor="?attr/colorPrimary"
                         android:fontFamily="@font/amethysta"
                         android:paddingBottom="8dp"/>
 
@@ -143,6 +146,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:textSize="20sp"
+                        android:textColor="?attr/colorPrimary"
                         android:fontFamily="@font/amethysta"
                         android:paddingBottom="8dp"/>
 
@@ -170,6 +174,7 @@
                         android:gravity="center"
                         android:id="@+id/about"
                         android:text="@string/aboutTitle"
+                        android:textColor="?attr/colorPrimary"
                         android:contentDescription="@string/description"/>
 
             </LinearLayout>

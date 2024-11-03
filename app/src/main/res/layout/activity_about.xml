@@ -38,6 +38,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/aboutTitle"
                 android:textSize="40sp"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -63,6 +64,7 @@
                 android:textSize="18sp"
                 android:fontFamily="@font/amethysta"
                 android:layout_height="wrap_content"
+                android:textColor="?attr/colorPrimary"
                 android:gravity="center"
                 android:text="@string/aboutContent"
         />

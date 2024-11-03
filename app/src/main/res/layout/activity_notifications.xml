@@ -37,6 +37,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/notificationTitle"
                 android:textSize="40sp"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -63,6 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="20sp"
+                    android:textColor="?attr/colorPrimary"
                     android:text="@string/notificationTitle" />
 
             <Switch
@@ -89,6 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="20sp"
+                    android:textColor="?attr/colorPrimary"
                     android:text="@string/trailUpdates" />
 
             <Switch
@@ -114,6 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="20sp"
+                    android:textColor="?attr/colorPrimary"
                     android:text="@string/watcherMember" />
 
             <Switch
@@ -138,6 +142,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="20sp"
+                    android:textColor="?attr/colorPrimary"
                     android:text="@string/photoOpp" />
 
             <Switch

@@ -48,7 +48,7 @@
                 android:textStyle="bold"
                 android:gravity="center_horizontal"
                 android:layout_gravity="center_horizontal"
-                android:textColor="#000000"
+                android:textColor="?attr/colorPrimary"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/parkName" />
@@ -74,6 +74,7 @@
             android:id="@+id/solo_journey_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="?attr/colorPrimary"
             android:text="@string/solo"
             android:checked="true"
             android:layout_gravity="center"/>

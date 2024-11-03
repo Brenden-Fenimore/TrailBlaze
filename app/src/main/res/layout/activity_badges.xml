@@ -44,6 +44,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="Your Badges"
                 android:textSize="40sp"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

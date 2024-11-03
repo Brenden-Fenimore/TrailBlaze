@@ -196,6 +196,7 @@
                             android:id="@+id/addFriend"
                             android:focusable="true"
                             app:maxImageSize="24dp"
+                            android:tint="?attr/colorPrimary"
                             app:backgroundTint="#00FFFFFF"
                             android:textColor="?attr/colorPrimary"
                             android:contentDescription="@string/description"/>
