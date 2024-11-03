@@ -56,6 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/favorites"
+                android:textColor="#4C662B"
                 android:textSize="40sp"
                 android:fontFamily="@font/amethysta"
                 android:layout_marginStart="16dp" />
