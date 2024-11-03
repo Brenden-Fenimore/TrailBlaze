@@ -36,6 +36,7 @@
                 android:id="@+id/Appearance"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/appearanceTitle"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="40sp"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
@@ -62,6 +63,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="20sp"
                     android:text="@string/metricUnits" />
 
@@ -88,6 +90,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="20sp"
                     android:text="@string/darkMode" />
 
