@@ -12,6 +12,7 @@ class PrivacyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_privacy)
+        supportActionBar?.hide()
 
 // Reference and read terms_cons_policy.txt
         val privacyTextView = findViewById<TextView>(R.id.privacyTextView)

@@ -37,6 +37,7 @@ class AttemptTrailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_attempt_trail)
+        supportActionBar?.hide()
 
         firestore = FirebaseFirestore.getInstance()
 

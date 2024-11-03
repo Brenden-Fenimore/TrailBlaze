@@ -14,6 +14,7 @@ class TermsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_terms)
+        supportActionBar?.hide()
 
 // Reference and read terms_cons_policy.txt
         val termsTextView = findViewById<TextView>(R.id.termsTextView)

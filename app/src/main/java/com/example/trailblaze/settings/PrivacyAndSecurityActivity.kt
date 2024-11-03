@@ -20,6 +20,7 @@ class PrivacyAndSecurityActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_privacy_and_security)
+        supportActionBar?.hide()
 
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
