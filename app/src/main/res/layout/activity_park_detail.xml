@@ -58,7 +58,7 @@
                 android:id="@+id/hike_btn"
                 android:tint="#CDEDA3"
                 android:background="@android:color/transparent"
-                android:layout_toStartOf="@id/bucket_list_btn"
+                android:layout_toEndOf="@id/chevron_left"
                 android:layout_centerVertical="true"/>
 
     </RelativeLayout>
@@ -81,6 +81,7 @@
                 android:id="@+id/Settings"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/parkInfo"
+                android:textColor="#4C662B"
                 android:textSize="36sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/amethysta"
@@ -102,7 +103,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_gravity="center_horizontal"
-                android:textColor="#000000"
+                android:textColor="#4C662B"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/parkName" />
@@ -134,7 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:textColor="#333333"
+                android:textColor="#4C662B"
                 android:layout_marginTop="8dp"
                 android:text="@string/parkDescription"
                 android:layout_marginBottom="16dp"/>
@@ -151,6 +152,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/latitude_heading"
+                android:textColor="#4C662B"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"/>
@@ -161,6 +163,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/latitude"
+                android:textColor="#4C662B"
                 android:textSize="16sp"/>
 
         <!-- Longitude Header-->
@@ -169,6 +172,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/longitude_heading"
+                android:textColor="#4C662B"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"/>
@@ -179,6 +183,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/longitude"
+                android:textColor="#4C662B"
                 android:textSize="16sp"
                 android:layout_marginBottom="16dp"/>
 
@@ -194,6 +199,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/address_heading"
+                android:textColor="#4C662B"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"/>
@@ -204,6 +210,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/addresses"
+                android:textColor="#4C662B"
                 android:textSize="16sp"
                 android:textStyle="italic"
                 android:layout_marginBottom="16dp"/>
@@ -220,6 +227,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/activities_heading"
+                android:textColor="#4C662B"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"/>
@@ -230,6 +238,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/activities"
+                android:textColor="#4C662B"
                 android:textSize="16sp"
                 android:layout_marginBottom="16dp"/>
 
@@ -245,6 +254,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/operating_hours_header"
+                android:textColor="#4C662B"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"/>
@@ -255,6 +265,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/operating_hours"
+                android:textColor="#4C662B"
                 android:textSize="16sp"
                 android:layout_marginBottom="16dp"/>
 
@@ -270,6 +281,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/phone_number_heading"
+                android:textColor="#4C662B"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"/>
@@ -280,6 +292,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/contacts"
+                android:textColor="#4C662B"
                 android:textSize="16sp"
                 android:layout_marginBottom="16dp"/>
 
@@ -289,6 +302,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/email_heading"
+                android:textColor="#4C662B"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"/>
@@ -299,6 +313,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/contacts"
+                android:textColor="#4C662B"
                 android:textSize="16sp"
                 android:layout_marginBottom="16dp"/>
 
@@ -314,6 +329,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/entrance_fee_heading"
+                android:textColor="#4C662B"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"/>
@@ -324,6 +340,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/entrance_passes"
+                android:textColor="#4C662B"
                 android:textSize="16sp"
                 android:layout_marginBottom="16dp"/>
 
@@ -339,6 +356,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/weather_info_heading"
+                android:textColor="#4C662B"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"/>
@@ -349,6 +367,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/weather_info"
+                android:textColor="#4C662B"
                 android:textSize="16sp"
                 android:layout_marginBottom="16dp"/>
 

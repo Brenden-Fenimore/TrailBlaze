@@ -49,6 +49,7 @@
                     android:layout_marginTop="10dp"
                     android:textSize="40sp"
                     android:text="@string/homepage_welcome_user"
+                    android:textColor="#4C662B"
                     android:fontFamily="@font/amethysta"
                     android:textAlignment="center"/>
             <LinearLayout
@@ -62,6 +63,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="27sp"
                         android:text="@string/username"
+                        android:textColor="#4C662B"
                         android:fontFamily="@font/amethysta"
                         android:layout_weight="1"
                         android:textAlignment="center"/>
