@@ -100,6 +100,8 @@ class EditProfileFragment : Fragment() {
         binding.watcherSwitch.setOnCheckedChangeListener { _, _ -> updateVisibilitySettings() }
         binding.sharelocationSwitch.setOnCheckedChangeListener { _, _ -> updateVisibilitySettings() }
 
+        setupSpinners()
+
         return view
     }
 
@@ -110,6 +112,51 @@ class EditProfileFragment : Fragment() {
         updateSeekBarLabel(binding.seekBar.progress) // Update label based on current SeekBar progress
     }
 
+    private fun setupSpinners() {
+        // Set up a theme-aware custom adapter for the Terrain spinner
+        // Load the array of terrain options from resources
+        val terrainOptions = resources.getStringArray(R.array.terrain_options)
+        // Apply the custom adapter to display each option in a theme-aware way
+        binding.terrainSpinner.adapter = ArrayAdapter(
+            requireContext(),
+            // Custom layout for consistent text color based on theme
+            R.layout.spinner_item,
+            terrainOptions
+        )
+
+        // Set up the Fitness Level spinner with theme-aware styling
+        // Load the array of fitness level options from resources
+        val fitnessLevelOptions = resources.getStringArray(R.array.fitness_level_options)
+        // Apply the custom adapter to the spinner for fitness levels
+        binding.fitnessLevelSpinner.adapter = ArrayAdapter(
+            requireContext(),
+            // Custom layout for consistent text color based on theme
+            R.layout.spinner_item,
+            fitnessLevelOptions
+        )
+
+        // Set up the Difficulty Level spinner with theme-aware styling
+        // Load the array of difficulty level options from resources
+        val difficultyOptions = resources.getStringArray(R.array.difficulty_level_options)
+        // Apply the custom adapter to the spinner for difficulty levels
+        binding.difficultySpinner.adapter = ArrayAdapter(
+            requireContext(),
+            // Custom layout for consistent text color based on theme
+            R.layout.spinner_item,
+            difficultyOptions
+        )
+
+        // Set up the Type of Hike spinner with theme-aware styling
+        // Load the array of hike type options from resources
+        val hikeTypeOptions = resources.getStringArray(R.array.hike_type_options)
+        // Apply the custom adapter to the spinner for hike types
+        binding.typeOfHikeSpinner.adapter = ArrayAdapter(
+            requireContext(),
+            // Custom layout for consistent text color based on theme
+            R.layout.spinner_item,
+            hikeTypeOptions
+        )
+    }
 
     private fun setupSeekBarListener() {
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
