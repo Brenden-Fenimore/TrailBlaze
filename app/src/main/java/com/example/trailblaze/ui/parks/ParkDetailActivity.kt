@@ -2,8 +2,10 @@ package com.example.trailblaze.ui.parks
 
 import ImagesAdapter
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +17,7 @@ import com.example.trailblaze.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import nl.dionsegijn.konfetti.KonfettiView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -231,6 +234,8 @@ class ParkDetailActivity : AppCompatActivity() {
                 // Park is not a favorite; proceed to add it
                 userDocRef.update("favoriteParks", FieldValue.arrayUnion(parkCode))     // Add park to favorites
                     .addOnSuccessListener {
+                        // Show confetti when adding to favorites
+                        showConfetti()
                         // Notify user of success
                         Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show()
                         // Update to filled icon to reflect addition
@@ -277,4 +282,33 @@ class ParkDetailActivity : AppCompatActivity() {
         }
     }
 
+    // Displays a confetti animation on the screen for a celebratory effect
+    private fun showConfetti() {
+        // Get the KonfettiView from the layout
+        val konfettiView = findViewById<KonfettiView>(R.id.konfettiView)
+
+        // Set the view to visible
+        konfettiView.visibility = View.VISIBLE
+
+        // Configure the confetti animation properties
+        konfettiView.build()
+            // Define confetti colors
+            .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA, Color.CYAN)
+            // Allow confetti to fall in all directions
+            .setDirection(0.0, 359.0)
+            // Define speed range for confetti particles
+            .setSpeed(1f, 5f)
+            // Set the duration each confetti particle remains on screen (3 seconds)
+            .setTimeToLive(3000L) // Increase the time to live to allow for longer fall
+            // Set the position to emit from the right side and farther down
+            .setPosition(konfettiView.width + 50f, konfettiView.width + 50f, -100f, -50f)
+            // Stream 300 particles for 3000 milliseconds (3 seconds)
+            .stream(300, 3000L)
+
+        // Hide the konfetti view after a delay to stop the animation gracefully
+        konfettiView.postDelayed({
+            konfettiView.visibility = View.GONE
+            // Hide after 6 seconds
+        }, 6000)
+    }
 }

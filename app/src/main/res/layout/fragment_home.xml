@@ -197,6 +197,7 @@
                             android:focusable="true"
                             app:maxImageSize="24dp"
                             app:backgroundTint="#00FFFFFF"
+                            android:textColor="#4C662B"
                             android:contentDescription="@string/description"/>
                 </LinearLayout>
 
