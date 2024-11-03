@@ -16,6 +16,7 @@
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:text="@string/location"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="20sp"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="305dp"
@@ -59,6 +60,7 @@
                     android:layout_gravity="center_horizontal"
                     android:gravity="center"
                     android:text="@string/distance"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="20sp"
                     android:fontFamily="@font/amethysta"
                     android:layout_width="305dp"
@@ -76,6 +78,7 @@
             <TextView
                     android:text="0"
                     android:textSize="20sp"
+                    android:textColor="?attr/colorPrimary"
                     android:id="@+id/range"
                     android:fontFamily="@font/amethysta"
                     android:layout_width="250dp"
@@ -93,7 +96,7 @@
                 android:textSize="20sp"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="305dp"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="?attr/colorPrimary"
                 android:layout_height="wrap_content"/>
     </LinearLayout>
 
