@@ -303,9 +303,9 @@ class ParkDetailActivity : AppCompatActivity() {
             // Set the duration each confetti particle remains on screen (3 seconds)
             .setTimeToLive(3000L) // Increase the time to live to allow for longer fall
             .addShapes(Shape.Circle)
-            .addSizes(Size(6))
+            .addSizes(Size(8))
             // Set the position to emit from the right side and farther down
-            .setPosition(konfettiView.width + 50f, konfettiView.width + 50f, -100f, -50f)
+            .setPosition(konfettiView.width + 400f, konfettiView.width + 400f, -100f, -50f)
             // Stream 300 particles for 3000 milliseconds (3 seconds)
             .stream(300, 3000L)
 
@@ -316,3 +316,6 @@ class ParkDetailActivity : AppCompatActivity() {
         }, 6000)
     }
 }
+
+
+
