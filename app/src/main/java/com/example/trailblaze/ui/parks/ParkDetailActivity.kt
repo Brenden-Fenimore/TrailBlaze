@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import nl.dionsegijn.konfetti.KonfettiView
+import nl.dionsegijn.konfetti.models.Shape
+import nl.dionsegijn.konfetti.models.Size
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -300,6 +302,8 @@ class ParkDetailActivity : AppCompatActivity() {
             .setSpeed(1f, 5f)
             // Set the duration each confetti particle remains on screen (3 seconds)
             .setTimeToLive(3000L) // Increase the time to live to allow for longer fall
+            .addShapes(Shape.Circle)
+            .addSizes(Size(6))
             // Set the position to emit from the right side and farther down
             .setPosition(konfettiView.width + 50f, konfettiView.width + 50f, -100f, -50f)
             // Stream 300 particles for 3000 milliseconds (3 seconds)
