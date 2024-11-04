@@ -426,4 +426,5 @@
     <string name="chevronBack"> Return to previous screen</string>
     <string name="watcherMemPhoto"> Watcher member profile photo</string>
     <string name="watcherLogo"> Watcher Logo</string>
+    <string name="usernameLabel">Username</string>
 </resources>
