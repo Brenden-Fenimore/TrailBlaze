@@ -425,4 +425,5 @@
     <string name="watcherMemberLoc">Location</string>
     <string name="chevronBack"> Return to previous screen</string>
     <string name="watcherMemPhoto"> Watcher member profile photo</string>
+    <string name="watcherLogo"> Watcher Logo</string>
 </resources>

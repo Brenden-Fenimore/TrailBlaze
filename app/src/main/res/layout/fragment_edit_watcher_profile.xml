@@ -36,7 +36,7 @@
             app:layout_constraintTop_toBottomOf="@+id/swishBackgroundView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="9dp"/>
+            android:layout_marginTop="0dp"/>
 
     <ImageButton
             android:id="@+id/camera_icon"
@@ -77,7 +77,7 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
     <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="333dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="16dp"
@@ -94,17 +94,18 @@
 
         <EditText
                 android:id="@+id/edit_phone"
-                android:layout_width="match_parent"
+                android:layout_width="333dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="8dp"
                 android:hint="@string/userPhone"
                 android:autofillHints="phone"
-                android:inputType="phone" />
+                android:inputType="phone"
+                android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 
     <!-- Email Field -->
     <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="333dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="16dp"
@@ -121,12 +122,13 @@
 
         <EditText
                 android:id="@+id/edit_email"
-                android:layout_width="match_parent"
+                android:layout_width="333dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="8dp"
                 android:hint="@string/editUserEmail"
                 android:autofillHints="emailAddress"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 
     <!-- TrailBlaze User Checkbox -->
@@ -142,6 +144,7 @@
 
 
     <!-- Notification Preferences -->
+
     <TextView
             android:id="@+id/notificationPreferencesLabel"
             android:layout_width="wrap_content"
@@ -151,38 +154,69 @@
             app:layout_constraintTop_toBottomOf="@id/isTrailBlazeUser"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="18dp" />
+
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/notificationPreferencesLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginBottom="18dp">
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="0dp"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                      android:layout_marginTop="16dp"
+                      app:layout_constraintTop_toBottomOf="@+id/phoneNumber"
+                      app:layout_constraintStart_toStartOf="@+id/phoneNumber">
+
 
     <!-- Preferences Switches -->
     <Switch
             android:id="@+id/receiveMessagesSwitch"
-            android:layout_width="match_parent"
+            android:layout_width="320dp"
             android:layout_height="48dp"
             android:text="@string/messages"
             app:layout_constraintTop_toBottomOf="@id/notificationPreferencesLabel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="center_horizontal"/>
 
     <Switch
             android:id="@+id/receiveEmailSwitch"
-            android:layout_width="0dp"
+            android:layout_width="320dp"
             android:layout_height="48dp"
             android:text="@string/email_heading"
             app:layout_constraintTop_toBottomOf="@id/receiveMessagesSwitch"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="center_horizontal"/>
 
     <Switch
             android:id="@+id/emergencyNotificationsSwitch"
-            android:layout_width="0dp"
+            android:layout_width="320dp"
             android:layout_height="48dp"
             android:text="@string/watcherMemberLoc"
             app:layout_constraintTop_toBottomOf="@id/receiveEmailSwitch"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center_horizontal"/>
+
+            <!-- Watcher Logo-->
+            <ImageView
+                    android:id="@+id/watcherLogo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/profilePicture"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:src="@drawable/watcherslogo"
+                    android:contentDescription="@string/watcherLogo"
+                    android:layout_gravity="center_horizontal"/>
 
     <!-- Save Button -->
     <Button
@@ -193,5 +227,9 @@
             app:layout_constraintTop_toBottomOf="@id/emergencyNotificationsSwitch"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
