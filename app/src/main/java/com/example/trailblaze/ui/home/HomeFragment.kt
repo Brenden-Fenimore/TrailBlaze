@@ -288,11 +288,10 @@ class HomeFragment : Fragment() {
                     val timeRecords = timeRecordsData?.map { record ->
                         val parkName = record["parkName"] as? String ?: return@map null
                         val elapsedTime = record["elapsedTime"] as? String ?: return@map null
-                        val parkCode = record["parkCode"] as? String ?: return@map null // Get park code
                         val imageUrl = record["imageUrl"] as? String ?: return@map null
 
                         // Create a TimeRecord object
-                        TimeRecord(parkName, elapsedTime, parkCode, imageUrl)
+                        TimeRecord(parkName, elapsedTime, imageUrl)
                     }?.filterNotNull() ?: emptyList() // Filter out any null items
 
                     // Update the adapter with fetched data using updateData method

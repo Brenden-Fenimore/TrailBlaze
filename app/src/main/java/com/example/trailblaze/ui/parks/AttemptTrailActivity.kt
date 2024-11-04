@@ -125,7 +125,7 @@ class AttemptTrailActivity : AppCompatActivity() {
             val elapsedTimeString = timerTextView.text.toString()
 
             // Create a TimeRecord object with parkImageUrl
-            val timeRecord = TimeRecord(parkName, elapsedTimeString, parkCode, parkImageUrl)
+            val timeRecord = TimeRecord(parkName, elapsedTimeString, parkImageUrl)
 
             // Save the record to Firestore
             saveTimeToFirestore(timeRecord)
