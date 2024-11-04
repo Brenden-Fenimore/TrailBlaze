@@ -27,7 +27,6 @@
 
     <!--Profile Picture-->
 
-    <!--Name Field-->
     <ImageView
             android:id="@+id/profilePicture"
             android:layout_width="120dp"
@@ -50,6 +49,8 @@
             tools:layout_editor_absoluteY="165dp"
             tools:layout_editor_absoluteX="264dp"
             tools:ignore="MissingConstraints"/>
+
+    <!--Name Field-->
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
