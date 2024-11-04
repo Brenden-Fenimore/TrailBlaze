@@ -289,9 +289,7 @@ class HomeFragment : Fragment() {
                         val parkName = record["parkName"] as? String ?: return@map null
                         val elapsedTime = record["elapsedTime"] as? String ?: return@map null
                         val parkCode = record["parkCode"] as? String ?: return@map null // Get park code
-
-                        // Fetch the park image URL using the park code
-                        val imageUrl = fetchParkImageUrl(parkCode)
+                        val imageUrl = record["imageUrl"] as? String ?: return@map null
 
                         // Create a TimeRecord object
                         TimeRecord(parkName, elapsedTime, parkCode, imageUrl)
@@ -305,12 +303,6 @@ class HomeFragment : Fragment() {
                 Log.e("HomeFragment", "Error fetching time records: ${e.message}")
             }
     }
-
-    private fun fetchParkImageUrl(parkCode: String): String? {
-        // Assuming you have a way to retrieve the parks list either from local data or an API
-        return parksList.firstOrNull { it.parkCode == parkCode }?.images?.firstOrNull()?.url
-    }
-
 
     override fun onDestroyView()
     {
