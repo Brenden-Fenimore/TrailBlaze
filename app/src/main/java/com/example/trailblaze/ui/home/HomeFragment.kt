@@ -139,6 +139,10 @@ class HomeFragment : Fragment() {
         fetchTimeRecords()
         return root
     }
+    override fun onResume() {
+        super.onResume()
+        fetchUserState() // Fetch the user state to update parks
+    }
 
     private fun updateGreeting() {
         val calendar = Calendar.getInstance()
@@ -266,11 +270,12 @@ class HomeFragment : Fragment() {
             firestore.collection("users").document(userId).get()
                 .addOnSuccessListener { document ->
                     if (document != null && document.exists()) {
-                        val userState = document.getString("state") ?: "No State Found"// Fetch the username
-                        fetchParksByState(userState)
+                        val userState = document.getString("state") ?: "No State Found" // Fetch the state
+                        fetchParksByState(userState) // Fetch parks based on the state
                     }
                 }
                 .addOnFailureListener {
+                    Log.e("HomeFragment", "Error fetching user state: ${it.message}")
                 }
         } else {
             // Handle the case where userId is null (not logged in)
