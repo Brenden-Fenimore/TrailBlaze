@@ -30,6 +30,8 @@ import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.*
 import nl.dionsegijn.konfetti.KonfettiView
+import nl.dionsegijn.konfetti.models.Shape
+import nl.dionsegijn.konfetti.models.Size
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -342,6 +344,8 @@ class FriendsProfileActivity : AppCompatActivity() {
             .setDirection(0.0, 359.0) // Allow confetti to fall in all directions
             .setSpeed(1f, 5f)
             .setTimeToLive(3000L) // Increase the time to live to allow for longer fall
+            .addShapes(Shape.Circle)
+            .addSizes(Size(6))
             // Set the position to emit from the right side and farther down
             .setPosition(konfettiView.width + 50f, konfettiView.width + 50f, -100f, -50f)
             .stream(300, 3000L) // Stream 300 particles for 3000 milliseconds (3 seconds)
