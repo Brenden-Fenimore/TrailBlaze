@@ -19,6 +19,8 @@ import com.example.trailblaze.settings.SettingsScreenActivity
 import com.example.trailblaze.ui.MenuActivity
 import com.example.trailblaze.ui.parks.ParkDetailActivity
 import com.example.trailblaze.ui.parks.ThumbnailAdapter
+import com.example.trailblaze.ui.parks.TimeRecordAdapter
+import com.example.trailblaze.ui.parks.TimeRecordItem
 import com.example.trailblaze.ui.profile.FriendAdapter
 import com.example.trailblaze.ui.profile.Friends
 import com.example.trailblaze.ui.profile.FriendsProfileActivity
@@ -41,8 +43,11 @@ class HomeFragment : Fragment() {
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
     private var parksList: List<Park> = listOf()
-    private lateinit var parksRecyclerView: RecyclerView   // RecyclerView to display parks
+    private lateinit var parksRecyclerView: RecyclerView           // RecyclerView to display parks
     private lateinit var thumbnailAdapter: ThumbnailAdapter        // Adapter for RecyclerView
+    private lateinit var timeRecordsRecyclerView: RecyclerView
+    private lateinit var timeRecordAdapter: TimeRecordAdapter
+
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -119,10 +124,19 @@ class HomeFragment : Fragment() {
         }
         usersRecyclerView.adapter = usersAdapter
 
+        // Initialize RecyclerView for time records
+        timeRecordsRecyclerView = binding.timeRecordsRecyclerView
+        timeRecordsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+        // Initialize adapter with an empty list and set it on the RecyclerView
+        timeRecordAdapter = TimeRecordAdapter(mutableListOf())
+        timeRecordsRecyclerView.adapter = timeRecordAdapter
+
         // Load users (you would need to implement this)
         fetchUsers()
         fetchCurrentUser()
         fetchUserState()
+        fetchTimeRecords()
         return root
     }
 
@@ -264,6 +278,29 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun fetchTimeRecords() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+
+        firestore.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val timeRecordsData = document.get("timeRecords") as? List<Map<String, Any>>
+                    val timeRecords = timeRecordsData?.map {
+                        TimeRecordItem(
+                            parkName = it["parkName"] as String,
+                            elapsedTime = it["elapsedTime"] as String,
+                            imageUrl = it["imageUrl"] as String? // Retrieve image URL if available
+                        )
+                    } ?: emptyList()
+
+                    // Update the adapter with fetched data using updateData method
+                    timeRecordAdapter.updateData(timeRecords)
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("HomeFragment", "Error fetching time records: ${e.message}")
+            }
+    }
 
 
     override fun onDestroyView()
