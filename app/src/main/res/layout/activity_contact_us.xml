@@ -83,7 +83,7 @@
                     android:fontFamily="@font/amethysta"
                     android:background="@drawable/edittext_background"
                     android:padding="12dp"
-                    android:textColor="?attr/colorPrimary"/>
+                    android:textColorHint="?attr/colorPrimary"/>
 
         </LinearLayout>
         <LinearLayout
@@ -109,7 +109,7 @@
                     android:padding="12dp"
                     android:scrollbars="vertical"
                     android:gravity="top|start"
-                    android:textColor="?attr/colorPrimary"/>
+                    android:textColorHint="?attr/colorPrimary"/>
         </LinearLayout>
     </LinearLayout>
 
