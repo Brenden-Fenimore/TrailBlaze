@@ -147,7 +147,6 @@
 
     <!-- TrailBlaze Username Field -->
 
-    <!-- Notification Preferences -->
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -164,7 +163,11 @@
             android:layout_marginStart="192dp"
             android:layout_marginTop="16dp"
             android:padding="12dp"
-            app:layout_constraintHorizontal_bias="0.423" app:layout_constraintVertical_bias="1.0"/>
+            app:layout_constraintHorizontal_bias="0.423"
+            app:layout_constraintVertical_bias="1.0"/>
+
+    <!-- Notification Preferences -->
+
     <TextView
             android:id="@+id/notificationPreferencesLabel"
             android:layout_width="wrap_content"
@@ -216,7 +219,7 @@
             android:layout_gravity="center_horizontal"/>
 
     <Switch
-            android:id="@+id/emergencyNotificationsSwitch"
+            android:id="@+id/receiveLocationSwitch"
             android:layout_width="320dp"
             android:layout_height="48dp"
             android:text="@string/watcherMemberLoc"
@@ -232,7 +235,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@id/profilePicture"
+                    app:layout_constraintTop_toBottomOf="@id/receiveLocationSwitch"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:src="@drawable/watcherslogo"

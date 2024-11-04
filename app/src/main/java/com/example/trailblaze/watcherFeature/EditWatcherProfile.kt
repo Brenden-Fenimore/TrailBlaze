@@ -2,6 +2,7 @@ package com.example.trailblaze.watcherFeature
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Switch
@@ -22,8 +23,9 @@ class EditWatcherProfile : AppCompatActivity() {
     private lateinit var trailBlazeUsernameField: EditText
     private lateinit var receiveMessagesSwitch: Switch
     private lateinit var receiveEmailSwitch: Switch
-    private lateinit var emergencyNotificationsSwitch: Switch
+    private lateinit var receiveLocationSwitch: Switch
     private lateinit var updateButton: Button
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,11 +38,13 @@ class EditWatcherProfile : AppCompatActivity() {
         phoneNumberField = findViewById(R.id.edit_phone)
         emailField = findViewById(R.id.edit_email)
         trailBlazeUserCheckbox = findViewById(R.id.isTrailBlazeUser)
-        trailBlazeUsernameField = findViewById(R.id.usernameLabel) // Make sure this ID exists
+        trailBlazeUsernameField = findViewById(R.id.usernameLabel)
         receiveMessagesSwitch = findViewById(R.id.receiveMessagesSwitch)
         receiveEmailSwitch = findViewById(R.id.receiveEmailSwitch)
-        emergencyNotificationsSwitch = findViewById(R.id.emergencyNotificationsSwitch)
+        receiveLocationSwitch = findViewById(R.id.receiveLocationSwitch)
         updateButton = findViewById(R.id.saveWatcherProfile)
+
+        trailBlazeUsernameField.visibility = View.GONE
 
         // Set up listeners
         setupListeners()
@@ -50,12 +54,15 @@ class EditWatcherProfile : AppCompatActivity() {
         // Listener for TrailBlaze user checkbox
         trailBlazeUserCheckbox.setOnCheckedChangeListener { _, isChecked ->
             trailBlazeUsernameField.isEnabled = isChecked
-            if (!isChecked) {
+            if (isChecked) {
+                trailBlazeUsernameField.visibility = View.VISIBLE
+            } else {
+                trailBlazeUsernameField.visibility = View.GONE
                 trailBlazeUsernameField.text.clear() // Clear if checkbox is deselected
             }
         }
 
-        // Update button listener
+            // Update button listener
         updateButton.setOnClickListener {
             saveWatcherProfile()
         }
@@ -69,7 +76,7 @@ class EditWatcherProfile : AppCompatActivity() {
         val trailBlazeUsername = trailBlazeUsernameField.text.toString()
         val receiveMessages = receiveMessagesSwitch.isChecked
         val receiveEmail = receiveEmailSwitch.isChecked
-        val emergencyNotifications = emergencyNotificationsSwitch.isChecked
+        val receiveLocation = receiveLocationSwitch.isChecked
 
         // Check if name and one contact method (phone or email) are provided
         if (name.isBlank()) {
