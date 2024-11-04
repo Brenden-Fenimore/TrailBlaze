@@ -9,13 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.trailblaze.R
 
-data class TimeRecordItem(
-    val parkName: String,
-    val elapsedTime: String,
-    val imageUrl: String? = null
-)
-
-class TimeRecordAdapter(private val timeRecords: MutableList<TimeRecordItem>) :
+class TimeRecordAdapter(private val timeRecords: MutableList<TimeRecord>) :
     RecyclerView.Adapter<TimeRecordAdapter.TimeRecordViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeRecordViewHolder {
@@ -41,7 +35,7 @@ class TimeRecordAdapter(private val timeRecords: MutableList<TimeRecordItem>) :
     override fun getItemCount(): Int = timeRecords.size
 
     // Method to update data in the adapter
-    fun updateData(newTimeRecords: List<TimeRecordItem>) {
+    fun updateData(newTimeRecords: List<TimeRecord>) {
         timeRecords.clear()
         timeRecords.addAll(newTimeRecords)
         notifyDataSetChanged()

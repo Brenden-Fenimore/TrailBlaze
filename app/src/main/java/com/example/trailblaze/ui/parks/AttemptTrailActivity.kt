@@ -27,6 +27,7 @@ class AttemptTrailActivity : AppCompatActivity() {
 
     private lateinit var parkCode: String
     private lateinit var parkName: String // Store the park name
+    private lateinit var parkImageUrl: String
     private lateinit var parkNameTextView: TextView
     private lateinit var soloJourneyCheckBox: CheckBox
     private lateinit var partyInfoLayout: LinearLayout
@@ -119,13 +120,12 @@ class AttemptTrailActivity : AppCompatActivity() {
             isRunning = false // Pause the timer
         }
 
-        // Save time button click listener
         saveTimeButton.setOnClickListener {
             // Get the elapsed time as a String
             val elapsedTimeString = timerTextView.text.toString()
 
-            // Create a TimeRecord object
-            val timeRecord = TimeRecord(parkName, elapsedTimeString)
+            // Create a TimeRecord object with parkImageUrl
+            val timeRecord = TimeRecord(parkName, elapsedTimeString, parkCode, parkImageUrl)
 
             // Save the record to Firestore
             saveTimeToFirestore(timeRecord)
@@ -241,5 +241,6 @@ class AttemptTrailActivity : AppCompatActivity() {
         // Populate UI elements with park details
         parkNameTextView.text = park.fullName
         parkName = park.fullName // Store the park name
+        parkImageUrl = park.images.firstOrNull()?.url ?: ""
     }
 }

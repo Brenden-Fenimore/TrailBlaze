@@ -20,7 +20,7 @@ import com.example.trailblaze.ui.MenuActivity
 import com.example.trailblaze.ui.parks.ParkDetailActivity
 import com.example.trailblaze.ui.parks.ThumbnailAdapter
 import com.example.trailblaze.ui.parks.TimeRecordAdapter
-import com.example.trailblaze.ui.parks.TimeRecordItem
+import com.example.trailblaze.ui.parks.TimeRecord
 import com.example.trailblaze.ui.profile.FriendAdapter
 import com.example.trailblaze.ui.profile.Friends
 import com.example.trailblaze.ui.profile.FriendsProfileActivity
@@ -285,13 +285,17 @@ class HomeFragment : Fragment() {
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
                     val timeRecordsData = document.get("timeRecords") as? List<Map<String, Any>>
-                    val timeRecords = timeRecordsData?.map {
-                        TimeRecordItem(
-                            parkName = it["parkName"] as String,
-                            elapsedTime = it["elapsedTime"] as String,
-                            imageUrl = it["imageUrl"] as String? // Retrieve image URL if available
-                        )
-                    } ?: emptyList()
+                    val timeRecords = timeRecordsData?.map { record ->
+                        val parkName = record["parkName"] as? String ?: return@map null
+                        val elapsedTime = record["elapsedTime"] as? String ?: return@map null
+                        val parkCode = record["parkCode"] as? String ?: return@map null // Get park code
+
+                        // Fetch the park image URL using the park code
+                        val imageUrl = fetchParkImageUrl(parkCode)
+
+                        // Create a TimeRecord object
+                        TimeRecord(parkName, elapsedTime, parkCode, imageUrl)
+                    }?.filterNotNull() ?: emptyList() // Filter out any null items
 
                     // Update the adapter with fetched data using updateData method
                     timeRecordAdapter.updateData(timeRecords)
@@ -300,6 +304,11 @@ class HomeFragment : Fragment() {
             .addOnFailureListener { e ->
                 Log.e("HomeFragment", "Error fetching time records: ${e.message}")
             }
+    }
+
+    private fun fetchParkImageUrl(parkCode: String): String? {
+        // Assuming you have a way to retrieve the parks list either from local data or an API
+        return parksList.firstOrNull { it.parkCode == parkCode }?.images?.firstOrNull()?.url
     }
 
 
