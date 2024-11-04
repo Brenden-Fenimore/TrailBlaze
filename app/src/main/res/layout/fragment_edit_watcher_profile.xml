@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:padding="9dp">
+
+    <!-- Swish Background-->
+    <com.example.trailblaze.view.SwishBackgroundView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:id="@+id/swishBackgroundView"
+            tools:ignore="MissingConstraints"/>
+
+    <ImageButton
+            android:src="@drawable/chevron_left"
+            android:contentDescription="@string/chevronBack"
+            android:layout_width="49dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:id="@+id/backButton"
+            android:background="@android:color/transparent"
+            android:layout_centerVertical="true"
+            tools:ignore="HardcodedText,MissingConstraints"/>
+
+    <!--Profile Picture-->
+
+    <ImageView
+            android:id="@+id/profilePicture"
+            android:contentDescription="@string/watcherMemPhoto"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/account_circle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toBottomOf="@+id/swishBackgroundView"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="99dp"
+            android:layout_marginEnd="128dp"/>
+
+    <!--Name Field-->
+    <ImageButton
+            android:id="@+id/camera_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom|end"
+            android:background="@android:color/transparent"
+            android:src="@drawable/camera"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/camera"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="172dp"
+            tools:layout_editor_absoluteX="266dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/watcherName"
+            android:text="@string/watcherMemberName"
+            android:textSize="20sp"
+            android:layout_marginBottom="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/profilePicture"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Nickname Field -->
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nicknameLabel"
+            android:text="@string/watcherNickName"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/watcherName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/nicknameLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/phoneNumber">
+
+        <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/phone"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/phoneIcon" />
+
+        <EditText
+                android:id="@+id/edit_phone"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:hint="@string/userPhone"
+                android:autofillHints="phone"
+                android:inputType="phone" />
+    </LinearLayout>
+
+    <!-- Email Field -->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/phoneNumber"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/emailField">
+
+        <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/baseline_contact_mail_24"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/userEmail" />
+
+        <EditText
+                android:id="@+id/edit_email"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:hint="@string/editUserEmail"
+                android:autofillHints="emailAddress"
+                android:inputType="textEmailAddress" />
+    </LinearLayout>
+
+    <!-- TrailBlaze User Checkbox -->
+    <CheckBox
+            android:id="@+id/isTrailBlazeUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/trailBlazeUser"
+            app:layout_constraintTop_toBottomOf="@id/emailField"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp" />
+
+
+    <!-- Notification Preferences -->
+    <TextView
+            android:id="@+id/notificationPreferencesLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/notificationPreferences"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/isTrailBlazeUser"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="8dp" />
+
+    <!-- Preferences Switches -->
+    <Switch
+            android:id="@+id/receiveMessagesSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/messages"
+            app:layout_constraintTop_toBottomOf="@id/notificationPreferencesLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="8dp" />
+
+    <Switch
+            android:id="@+id/receiveEmailSwitch"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:text="@string/email_heading"
+            app:layout_constraintTop_toBottomOf="@id/receiveMessagesSwitch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="8dp" />
+
+    <Switch
+            android:id="@+id/emergencyNotificationsSwitch"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:text="@string/watcherMemberLoc"
+            app:layout_constraintTop_toBottomOf="@id/receiveEmailSwitch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="16dp" />
+
+    <!-- Save Button -->
+    <Button
+            android:id="@+id/saveWatcherProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="@string/updateProfile"
+            app:layout_constraintTop_toBottomOf="@id/emergencyNotificationsSwitch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
