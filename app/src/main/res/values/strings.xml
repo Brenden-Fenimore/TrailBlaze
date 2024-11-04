@@ -421,4 +421,8 @@
     <string name="hint_nickname">Hint Nickname</string>
     <string name="notificationPreferences">Notification Preferences</string>
     <string name="trailBlazeUser">TrailBlaze User?</string>
+    <string name="messages"> Messages </string>
+    <string name="watcherMemberLoc">Location</string>
+    <string name="chevronBack"> Return to previous screen</string>
+    <string name="watcherMemPhoto"> Watcher member profile photo</string>
 </resources>
