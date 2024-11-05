@@ -203,8 +203,6 @@ class FriendsProfileActivity : AppCompatActivity() {
                     binding.favoriteTrailsSection.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
                     binding.favoriteTrailsHeader.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
 
-                    binding.watcherMember.visibility = if (isWatcherVisible) View.VISIBLE else View.GONE
-
                     // Check if the account is private
                     if (isPrivateAccount) {
                         // Hide all user information
@@ -237,7 +235,6 @@ class FriendsProfileActivity : AppCompatActivity() {
         // Hide sections that should not be visible for a private account
         binding.leaderRecyclerView.visibility = View.GONE
         binding.favoriteTrailsSection.visibility = View.GONE
-        binding.watcherMember.visibility = View.GONE
     }
 
     private fun loadUserOtherInformation(document: DocumentSnapshot) {
@@ -250,7 +247,6 @@ class FriendsProfileActivity : AppCompatActivity() {
         // Set visibility based on the privacy settings
         binding.leaderRecyclerView.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
         binding.favoriteTrailsSection.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
-        binding.watcherMember.visibility = if (isWatcherVisible) View.VISIBLE else View.GONE
 
         // Optionally load other information like badges or favorite parks
         val badges = document.get("badges") as? List<String> ?: emptyList()
@@ -402,9 +398,9 @@ class FriendsProfileActivity : AppCompatActivity() {
             .setSpeed(1f, 5f)
             .setTimeToLive(3000L) // Increase the time to live to allow for longer fall
             .addShapes(Shape.Circle)
-            .addSizes(Size(6))
+            .addSizes(Size(8))
             // Set the position to emit from the right side and farther down
-            .setPosition(konfettiView.width + 50f, konfettiView.width + 50f, -100f, -50f)
+            .setPosition(konfettiView.width + 400f, konfettiView.width + 400f, -100f, -50f)
             .stream(300, 3000L) // Stream 300 particles for 3000 milliseconds (3 seconds)
 
         // Optionally hide the konfetti view after some time
@@ -706,7 +702,6 @@ class FriendsProfileActivity : AppCompatActivity() {
         val leaderboardAdapter = LeaderboardAdapter(entries)
         binding.leaderRecyclerView.adapter = leaderboardAdapter
     }
-
 
     // Fetches the friend's photos based on their userId
     private fun fetchFriendPhotos(friendUserId: String) {
