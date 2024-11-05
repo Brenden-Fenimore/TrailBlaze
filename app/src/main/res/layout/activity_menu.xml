@@ -54,6 +54,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/menuTitle"
                 android:textSize="40sp"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -80,7 +81,7 @@
         <LinearLayout
                 android:layout_marginTop="40dp"
                 android:layout_width="350dp"
-                android:paddingTop="80dp"
+                android:paddingTop="60dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
@@ -97,6 +98,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:textSize="20sp"
+                        android:textColor="?attr/colorPrimary"
                         android:fontFamily="@font/amethysta"
                         android:paddingBottom="8dp"/>
 
@@ -120,6 +122,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:textSize="20sp"
+                        android:textColor="?attr/colorPrimary"
                         android:fontFamily="@font/amethysta"
                         android:paddingBottom="8dp"/>
 
@@ -143,6 +146,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:textSize="20sp"
+                        android:textColor="?attr/colorPrimary"
                         android:fontFamily="@font/amethysta"
                         android:paddingBottom="8dp"/>
 
@@ -152,6 +156,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginBottom="10dp"
+                    android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp"
+                    android:paddingEnd="9dp"
+                    android:paddingStart="9dp">
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/amethysta"
+                        android:gravity="center"
+                        android:id="@+id/about"
+                        android:text="@string/aboutTitle"
+                        android:textColor="?attr/colorPrimary"
+                        android:contentDescription="@string/description"/>
+
+            </LinearLayout>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
                     android:background="@android:color/darker_gray"/>
 
         </LinearLayout>

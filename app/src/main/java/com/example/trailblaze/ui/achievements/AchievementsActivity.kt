@@ -18,6 +18,8 @@ class AchievementsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_achievements)
+        // Hide the ActionBar
+        supportActionBar?.hide()
 
         findViewById<ImageButton>(R.id.chevron_left).setOnClickListener{
             onBackPressedDispatcher.onBackPressed()

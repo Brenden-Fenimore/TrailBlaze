@@ -1,6 +1,7 @@
 package com.example.trailblaze.ui.profile
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -28,6 +29,9 @@ import com.example.trailblaze.ui.parks.ParkDetailActivity
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.*
+import nl.dionsegijn.konfetti.KonfettiView
+import nl.dionsegijn.konfetti.models.Shape
+import nl.dionsegijn.konfetti.models.Size
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -81,6 +85,8 @@ class FriendsProfileActivity : AppCompatActivity() {
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Hide the ActionBar
+        supportActionBar?.hide()
 
 
         binding = ActivityFriendsProfileBinding.inflate(layoutInflater)
@@ -103,8 +109,10 @@ class FriendsProfileActivity : AppCompatActivity() {
 
         // Initialize the RecyclerView for friends in common
         friendsInCommonList = mutableListOf()
-        friendsInCommonAdapter = FriendAdapter(friendsInCommonList) { friend ->
-            // Handle friend click here if needed
+        friendsInCommonAdapter = FriendAdapter(friendsInCommonList) { user ->
+            val intent = Intent(this, FriendsProfileActivity::class.java)
+            intent.putExtra("friendUserId", user.userId)
+            startActivity(intent)
         }
 
         friendsInCommonRecyclerView = binding.friendsInCommonRecyclerView
@@ -127,6 +135,8 @@ class FriendsProfileActivity : AppCompatActivity() {
         loadFriendProfile()
         fetchFriendsInCommon()
         loadFavoriteParks()
+        // Fetch leaderboard data
+        fetchLeaderboard()
 
         // Initialize RecyclerView and Adapter
         val recyclerView = findViewById<RecyclerView>(R.id.photosRecyclerView)
@@ -162,6 +172,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                     val username = document.getString("username")
                     val imageUrl = document.getString("profileImageUrl")
                     val favoritePark = document.get("favoriteParks")
+                    val isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
 
                     binding.username.text = username
                     ImageLoader.loadProfilePicture(this, binding.profilePicture, imageUrl)
@@ -173,7 +184,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                     val isWatcherVisible = document.getBoolean("watcherVisible") ?: true
 
                     // Set visibility based on the privacy settings
-                    binding.leaderboardSection.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
+                    binding.leaderRecyclerView.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
                     binding.leaderboardHeader.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
 
                     binding.photosRecyclerView.visibility = if (isPhotosVisible) View.VISIBLE else View.GONE
@@ -183,6 +194,15 @@ class FriendsProfileActivity : AppCompatActivity() {
                     binding.favoriteTrailsHeader.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
 
                     binding.watcherMember.visibility = if (isWatcherVisible) View.VISIBLE else View.GONE
+
+                    // Check if the account is private
+                    if (isPrivateAccount) {
+                        // Hide all user information
+                        hideUserInformation()
+                    } else {
+                        // Load and display other information
+                        loadUserOtherInformation(document)
+                    }
 
                     // Check if the current user is friends with this friend
                     checkFriendshipStatus(currentUserId, userId)
@@ -203,7 +223,32 @@ class FriendsProfileActivity : AppCompatActivity() {
                 Log.e("FriendsProfileActivity", "Error fetching friend profile: ", exception)
             }
     }
+    private fun hideUserInformation() {
+        // Hide sections that should not be visible for a private account
+        binding.leaderRecyclerView.visibility = View.GONE
+        binding.favoriteTrailsSection.visibility = View.GONE
+        binding.watcherMember.visibility = View.GONE
+    }
 
+    private fun loadUserOtherInformation(document: DocumentSnapshot) {
+        // Retrieve visibility settings from the document
+        val isLeaderboardVisible = document.getBoolean("leaderboardVisible") ?: true
+        val isPhotosVisible = document.getBoolean("photosVisible") ?: true
+        val isFavoriteTrailsVisible = document.getBoolean("favoriteTrailsVisible") ?: true
+        val isWatcherVisible = document.getBoolean("watcherVisible") ?: true
+
+        // Set visibility based on the privacy settings
+        binding.leaderRecyclerView.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
+        binding.favoriteTrailsSection.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
+        binding.watcherMember.visibility = if (isWatcherVisible) View.VISIBLE else View.GONE
+
+        // Optionally load other information like badges or favorite parks
+        val badges = document.get("badges") as? List<String> ?: emptyList()
+        updateBadgesList(badges)
+
+        // Load favorite parks or any other relevant information
+        loadFavoriteParks()
+    }
 
     private fun checkFriendshipStatus(currentUserId: String, friendId: String) {
         firestore.collection("users").document(currentUserId).get()
@@ -212,33 +257,25 @@ class FriendsProfileActivity : AppCompatActivity() {
                     val friendsList = document.get("friends") as? List<String> ?: emptyList()
                     val favoriteFriendsList = document.get("favoriteFriends") as? List<String> ?: emptyList()
 
-                    // Check if the friendId exists in the friends list
+                    // Check if the friend is already in the friends list
                     if (friendsList.contains(friendId)) {
-                        // They are friends, show favorite button and hide add friend button
-                        binding.favoriteFriendBtn.visibility = View.VISIBLE // Show favorite icon
                         binding.addFriendButton.visibility = View.GONE // Hide add friend button
+                        binding.favoriteFriendBtn.visibility = View.VISIBLE // Show favorite button
+                        // Set the favorite button icon based on current favorite status
+                        if (favoriteFriendsList.contains(friendId)) {
+                            binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled) // Set filled icon
+                        } else {
+                            binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Set outline icon
+                        }
                     } else {
-                        // They are not friends, show add friend button and hide favorite button
-                        binding.favoriteFriendBtn.visibility = View.GONE // Hide favorite icon
                         binding.addFriendButton.visibility = View.VISIBLE // Show add friend button
-                    }
-
-                    // Check if the friend is already in the favorites list
-                    if (favoriteFriendsList.contains(friendId)) {
-                        Toast.makeText(this, "Friend added to favorites successfully!", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(this, "Friend already a favorite friend.", Toast.LENGTH_SHORT).show()
+                        binding.favoriteFriendBtn.visibility = View.GONE // Hide favorite button
                     }
 
                     // Set up click listener for the favorite button
                     binding.favoriteFriendBtn.setOnClickListener {
-                        if (favoriteFriendsList.contains(friendId)) {
-                            Toast.makeText(this, "This friend is already in your favorites.", Toast.LENGTH_SHORT).show()
-                        } else {
-                            addFavoriteFriend(currentUserId, friendId)
-                        }
+                        toggleFavoriteStatus(currentUserId, friendId)
                     }
-
                 }
             }
             .addOnFailureListener { exception ->
@@ -246,30 +283,42 @@ class FriendsProfileActivity : AppCompatActivity() {
             }
     }
 
-    private fun addFavoriteFriend(currentUserId: String, friendId: String) {
+    private fun toggleFavoriteStatus(currentUserId: String, friendId: String) {
         val userRef = firestore.collection("users").document(currentUserId)
 
         userRef.get().addOnSuccessListener { document ->
             if (document != null && document.exists()) {
-                // Get the favorite friends list from the document
                 val favoriteFriendsList = document.get("favoriteFriends") as? List<String> ?: emptyList()
 
                 // Check if the friendId is already in the favorites list
                 if (favoriteFriendsList.contains(friendId)) {
-                    Toast.makeText(this, "This friend is already in your favorites.", Toast.LENGTH_SHORT).show()
-                } else {
-                    // Create a HashMap to represent the user's document
-                    val userUpdates = HashMap<String, Any>()
-                    userUpdates["favoriteFriends"] = FieldValue.arrayUnion(friendId) // Add friendId to the array
-
-                    // Update the current user's document in Firestore
-                    userRef.set(userUpdates, SetOptions.merge())
+                    // Friend is already a favorite, remove them from favorites
+                    userRef.update("favoriteFriends", FieldValue.arrayRemove(friendId))
                         .addOnSuccessListener {
-                            Toast.makeText(this, "Friend added to favorites successfully!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show()
+                            binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Change to outline icon
                         }
-                        .addOnFailureListener { exception ->
-                            Log.e("FriendsProfileActivity", "Error adding friend to favorites: ", exception)
-                            Toast.makeText(this, "Failed to add friend to favorites.", Toast.LENGTH_SHORT).show()
+                        .addOnFailureListener { e ->
+                            Toast.makeText(this, "Failed to remove from favorites: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                } else {
+                    // Friend is not a favorite, add them to favorites
+                    userRef.update("favoriteFriends", FieldValue.arrayUnion(friendId))
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show()
+
+                            // Show confetti
+                            showConfetti()
+
+                            achievementManager.checkAndGrantCommunityBuilderBadge()
+
+                            // Save to Firebase
+                            achievementManager.saveBadgeToUserProfile("communitybuilder")
+
+                            binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled) // Change to filled icon
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(this, "Failed to add to favorites: ${e.message}", Toast.LENGTH_SHORT).show()
                         }
                 }
             } else {
@@ -280,6 +329,31 @@ class FriendsProfileActivity : AppCompatActivity() {
             Log.e("FriendsProfileActivity", "Error fetching user document: ", exception)
             Toast.makeText(this, "Error fetching user data.", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun showConfetti() {
+        // Get the KonfettiView from the layout
+        val konfettiView = findViewById<KonfettiView>(R.id.konfettiView)
+
+        // Set the view to visible
+        konfettiView.visibility = View.VISIBLE
+
+        // Show confetti
+        konfettiView.build()
+            .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA, Color.CYAN)
+            .setDirection(0.0, 359.0) // Allow confetti to fall in all directions
+            .setSpeed(1f, 5f)
+            .setTimeToLive(3000L) // Increase the time to live to allow for longer fall
+            .addShapes(Shape.Circle)
+            .addSizes(Size(8))
+            // Set the position to emit from the right side and farther down
+            .setPosition(konfettiView.width + 400f, konfettiView.width + 400f, -100f, -50f)
+            .stream(300, 3000L) // Stream 300 particles for 3000 milliseconds (3 seconds)
+
+        // Optionally hide the konfetti view after some time
+        konfettiView.postDelayed({
+            konfettiView.visibility = View.GONE
+        }, 6000) // Hide after 6 seconds
     }
 
     private fun updateBadgesList(badges: List<String>) {
@@ -319,13 +393,19 @@ class FriendsProfileActivity : AppCompatActivity() {
                         } else {
                             // Create a HashMap to represent the user's document
                             val userUpdates = HashMap<String, Any>()
-                            userUpdates["friends"] = FieldValue.arrayUnion(friendId)
+                            userUpdates["friends"] = FieldValue.arrayUnion(friendId) // Add friendId to the friends array
 
                             // Update the current user's document in Firestore
                             userRef.set(userUpdates, SetOptions.merge())
                                 .addOnSuccessListener {
                                     Toast.makeText(this, "Friend added successfully!", Toast.LENGTH_SHORT).show()
 
+                                    // Hide add friend button and show favorite button
+                                    binding.addFriendButton.visibility = View.GONE
+                                    binding.favoriteFriendBtn.visibility = View.VISIBLE
+                                    binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Set outline icon
+
+                                    // Optionally, grant an achievement for adding a friend
                                     achievementManager.checkAndGrantSocialButterflyBadge(currentUserId)
                                 }
                                 .addOnFailureListener { exception ->
@@ -514,6 +594,41 @@ class FriendsProfileActivity : AppCompatActivity() {
     private fun updateParksRecyclerView(parks: List<Park>) {
         favoritesAdapter.updateData(parks) // Update the adapter with the fetched parks
     }
+
+    private fun fetchLeaderboard() {
+        firestore.collection("users").get()
+            .addOnSuccessListener { querySnapshot ->
+                val leaderboardEntries = mutableListOf<LeaderboardEntry>()
+
+                for (document in querySnapshot.documents) {
+                    val userId = document.id
+                    val username = document.getString("username") ?: "Unknown"
+                    val badges = document.get("badges") as? List<String> ?: emptyList()
+                    val badgeCount = badges.size
+
+                    // Get the profile image URL
+                    val profileImageUrl = document.getString("profileImageUrl") // Assuming this field exists
+
+                    // Add to leaderboard entries
+                    leaderboardEntries.add(LeaderboardEntry(userId, username, badgeCount, profileImageUrl))
+                }
+
+                // Sort the leaderboard entries by badge count in descending order
+                leaderboardEntries.sortByDescending { it.badgeCount }
+
+                // Update the RecyclerView with the sorted leaderboard
+                updateLeaderboardRecyclerView(leaderboardEntries)
+            }
+            .addOnFailureListener { e ->
+                Log.e("ProfileFragment", "Error fetching leaderboard: ", e)
+            }
+    }
+
+    private fun updateLeaderboardRecyclerView(entries: List<LeaderboardEntry>) {
+        val leaderboardAdapter = LeaderboardAdapter(entries)
+        binding.leaderRecyclerView.adapter = leaderboardAdapter
+    }
+
 
     // Fetches the friend's photos based on their userId
     private fun fetchFriendPhotos(friendUserId: String) {

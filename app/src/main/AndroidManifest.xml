@@ -20,6 +20,10 @@
             android:enableOnBackInvokedCallback="true">
 
         <activity
+                android:name=".ui.parks.AttemptTrailActivity"
+                android:exported="true"/>
+
+        <activity
                 android:name=".ui.profile.UserListActivity"
                 android:exported="true"/>
 
@@ -127,6 +131,13 @@
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="${GOOGLE_MAPS_API_KEY}"/>
+
+
+        <!-- Acceptable Use Activity-->
+        <activity android:name=".login.AcceptableActivity" />
+
+        <!-- Privacy Activity-->
+        <activity android:name=".login.PrivacyActivity" />
     </application>
     //enables the emulator to access the internet (Brenden enabled this for MAPS API to get nearby search)
     <uses-permission android:name="android.permission.INTERNET" />

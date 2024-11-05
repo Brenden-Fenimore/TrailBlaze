@@ -83,9 +83,10 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     //firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
+    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
     implementation("com.google.firebase:firebase-analytics")
     implementation ("com.google.firebase:firebase-firestore-ktx:24.0.1")
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
 
     //for adding profile pics
     implementation ("com.google.firebase:firebase-storage-ktx")
@@ -114,8 +115,6 @@ dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.9.0"))
     implementation ("androidx.activity:activity-compose:1.6.1")
 
-
-
     implementation ("com.google.android.gms:play-services-maps:18.0.2")
     implementation ("com.google.maps.android:android-maps-utils:2.2.0")
     implementation("com.google.android.libraries.places:places:4.0.0")
@@ -124,4 +123,9 @@ dependencies {
 
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
+    //confetti
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.21")
+    implementation ("nl.dionsegijn:konfetti:1.2.6")
+
 }

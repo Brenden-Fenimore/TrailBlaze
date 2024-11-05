@@ -4,10 +4,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/swishLayout">
+    <nl.dionsegijn.konfetti.KonfettiView
+            android:id="@+id/konfettiView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/swishLayout">
 
                 <!-- Custom Swish Background at the bottom layer -->
                 <com.example.trailblaze.view.SwishBackgroundView
@@ -24,6 +30,21 @@
                 android:background="@android:color/transparent"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"/>
+
+
+        <ImageButton
+                app:srcCompat="@drawable/icon_unfriend"
+                android:contentDescription="@string/remove_friend"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:id="@+id/removeFriendButton"
+                android:tint="#CDEDA3"
+                android:background="@android:color/transparent"
+                android:layout_toEndOf="@id/chevron_left"
+                android:layout_centerVertical="true"
+                android:visibility="gone"/>
+
+
 
         <ImageButton
                 android:src="@drawable/favorite"
@@ -73,6 +94,7 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:scaleType="centerCrop"
+                    android:tint="?attr/colorPrimary"
                     android:src="@drawable/location"
                     android:contentDescription="@string/locationIcon"
                     android:background="@android:color/transparent"
@@ -95,6 +117,7 @@
                     android:layout_height="60dp"
                     android:layout_marginTop="8dp"
                     android:scaleType="centerCrop"
+                    android:tint="?attr/colorPrimary"
                     android:src="@drawable/difficulty"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/difficultyIcon"
@@ -108,6 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/username"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="27sp"
                 android:fontFamily="@font/amethysta"
                 android:layout_gravity="center"
@@ -150,7 +174,7 @@
                 android:textSize="20sp"
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
-                android:textColor="#4C662B"
+                android:textColor="?attr/colorPrimary"
                 android:paddingTop="16dp"
                 android:paddingBottom="8dp"/>
 
@@ -168,57 +192,20 @@
                 android:layout_height="wrap_content"
                 android:text="@string/leaderboard"
                 android:textSize="20sp"
-                android:textColor="#4C662B"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
                 android:paddingTop="16dp"
                 android:paddingBottom="8dp"/>
 
-        <HorizontalScrollView
-                android:id="@+id/leaderboardSection"
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/leaderRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="horizontal">
-
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                <!-- Placeholder for leaderboard items -->
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/leaderboardPicture"/>
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/leaderboardPicture"/>
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/leaderboardPicture"/>
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/leaderboardPicture"/>
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/leaderboardPicture"/>
-                <!-- Add more leaderboard items here -->
-            </LinearLayout>
-        </HorizontalScrollView>
+                android:padding="0dp"
+                android:layout_margin="0dp"
+                app:layoutManager="LinearLayoutManager"
+                android:orientation="horizontal" />
 
         <!-- Photos Section -->
         <TextView
@@ -227,13 +214,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/userPhotos"
                 android:textSize="20sp"
-                android:textColor="#4C662B"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
                 android:paddingTop="16dp"
                 android:paddingBottom="8dp"/>
 
             <LinearLayout
+                    android:id="@+id/photoSection"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -256,7 +244,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/userFavoriteTrails"
                 android:textSize="20sp"
-                android:textColor="#4C662B"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
                 android:paddingTop="16dp"
@@ -273,6 +261,8 @@
         <View
                 android:layout_width="match_parent"
                 android:layout_height="75dp"/>
+
+
 
     </LinearLayout>
     </ScrollView>

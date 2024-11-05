@@ -36,6 +36,7 @@
                 android:id="@+id/Settings"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/activityTitle"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="40sp"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
@@ -61,6 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
+                    android:textColor="?attr/colorPrimary"
                     android:gravity="center"
                     android:fontFamily="@font/amethysta"
                     android:id="@+id/notification"
@@ -86,6 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
+                    android:textColor="?attr/colorPrimary"
                     android:gravity="center"
                     android:fontFamily="@font/amethysta"
                     android:id="@+id/appearance"
@@ -110,6 +113,7 @@
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="20sp"
                     android:fontFamily="@font/amethysta"
                     android:gravity="center"
@@ -123,32 +127,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="10dp"
-                android:background="@android:color/darker_gray"/>
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="8dp"
-                android:paddingEnd="9dp"
-                android:paddingStart="9dp">
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/amethysta"
-                    android:gravity="center"
-                    android:id="@+id/about"
-                    android:text="@string/aboutTitle"
-                    android:contentDescription="@string/description"/>
-
-
-
-        </LinearLayout>
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
                 android:background="@android:color/darker_gray"/>
 
     </LinearLayout>

@@ -105,15 +105,55 @@ class AchievementManager(context: Context) {
     fun checkAndGrantSafetyExpertBadge() {
         isAchievementUnlocked("safetyexpert") { hasSafetyExpertBadge ->
             if (!hasSafetyExpertBadge) {
-                // Grant the badge
+                // Grant the Safety Expert badge
                 grantBadge("safetyexpert")
-
                 // Update Firestore
                 unlockAchievement("safetyexpert")
 
-                checkAndGrantLeaderboardBadge()
             } else {
                 Log.d("AchievementManager", "Safety Expert badge already unlocked.")
+            }
+        }
+    }
+
+    // Check and grant the Badge Collector badge
+    fun checkAndGrantBadgeCollectorBadge() {
+        isAchievementUnlocked("badgecollector") { hasBadgeCollectorBadge ->
+            if (!hasBadgeCollectorBadge) {
+                // Grant the Badge Collector badge
+                grantBadge("badgecollector")
+                // Update Firestore
+                unlockAchievement("badgecollector")
+            } else {
+                Log.d("AchievementManager", "Badge Collector badge already unlocked.")
+            }
+        }
+    }
+
+    // Check and grant the Badge Collector badge
+    fun checkAndGrantCommunityBuilderBadge() {
+        isAchievementUnlocked("communitybuilder") { hasBadgeCollectorBadge ->
+            if (!hasBadgeCollectorBadge) {
+                // Grant the Badge Collector badge
+                grantBadge("communitybuilder")
+                // Update Firestore
+                unlockAchievement("communitybuilder")
+            } else {
+                Log.d("AchievementManager", "Badge Collector badge already unlocked.")
+            }
+        }
+    }
+
+    // Check and grant the Badge Collector badge
+    fun checkAndGrantConquerorBadge() {
+        isAchievementUnlocked("conqueror") { hasBadgeCollectorBadge ->
+            if (!hasBadgeCollectorBadge) {
+                // Grant the Badge Collector badge
+                grantBadge("conqueror")
+                // Update Firestore
+                unlockAchievement("conqueror")
+            } else {
+                Log.d("AchievementManager", "Conqueror Badge already unlocked.")
             }
         }
     }

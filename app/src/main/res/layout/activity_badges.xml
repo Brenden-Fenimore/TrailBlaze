@@ -2,11 +2,18 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+    <nl.dionsegijn.konfetti.KonfettiView
+            android:id="@+id/konfettiView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
 
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/swishLayout">
+
+
 
         <!-- Custom Swish Background at the bottom layer -->
         <com.example.trailblaze.view.SwishBackgroundView
@@ -37,6 +44,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="Your Badges"
                 android:textSize="40sp"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

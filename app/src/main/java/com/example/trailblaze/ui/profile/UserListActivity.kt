@@ -19,6 +19,7 @@ class UserListActivity: AppCompatActivity(){
         super.onCreate(savedInstanceState)
         binding = ActivityUserListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
 
         //set click listener
         binding.chevronLeft.setOnClickListener { onBackPressed() }

@@ -20,10 +20,12 @@ class SupportScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_support_screen)
+        // Hide the ActionBar
+        supportActionBar?.hide()
 
         //initialize var
         contactUsTxt = findViewById(R.id.contactUs)
-        bugtxt = findViewById(R.id.bug)
+
 
         //set click listener for contactUs text
         contactUsTxt.setOnClickListener {
@@ -35,13 +37,6 @@ class SupportScreenActivity : AppCompatActivity() {
         //set the listener for the back button
         findViewById<ImageButton>(R.id.chevron_left).setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
-        }
-
-        //set the click listener for the bug text
-        bugtxt.setOnClickListener {
-            val intent = Intent(this, ContactUsActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
         }
 
         emergencyTxt = findViewById(R.id.emergency)

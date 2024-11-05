@@ -37,6 +37,7 @@
                 android:id="@+id/Settings"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/helpAndSupportTitle"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="40sp"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
@@ -56,6 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/contactTitle"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="18sp"
                 android:fontFamily="@font/amethysta"
                 android:gravity="center"/>
@@ -68,6 +70,7 @@
             <TextView
                     android:layout_width="139dp"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="18sp"
                     android:fontFamily="@font/amethysta"
                     android:text="@string/contactTitle2"/>
@@ -79,7 +82,8 @@
                     android:inputType="text"
                     android:fontFamily="@font/amethysta"
                     android:background="@drawable/edittext_background"
-                    android:padding="12dp" />
+                    android:padding="12dp"
+                    android:textColorHint="?attr/colorPrimary"/>
 
         </LinearLayout>
         <LinearLayout
@@ -90,6 +94,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="18sp"
                     android:fontFamily="@font/amethysta"
                     android:text="@string/contactTitle3"/>
@@ -103,7 +108,8 @@
                     android:background="@drawable/edittext_background"
                     android:padding="12dp"
                     android:scrollbars="vertical"
-                    android:gravity="top|start"/>
+                    android:gravity="top|start"
+                    android:textColorHint="?attr/colorPrimary"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -131,6 +137,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/contact4"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:layout_gravity="center_horizontal"
         />

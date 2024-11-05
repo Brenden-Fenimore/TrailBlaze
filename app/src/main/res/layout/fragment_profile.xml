@@ -65,6 +65,7 @@
                     android:layout_height="48dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/location"
+                    android:tint="?attr/colorPrimary"
                     android:contentDescription="@string/locationIcon"
                     android:background="@android:color/transparent"
                     android:layout_marginEnd="16dp" />
@@ -85,6 +86,7 @@
                     android:layout_height="60dp"
                     android:layout_marginTop="8dp"
                     android:scaleType="centerCrop"
+                    android:tint="?attr/colorPrimary"
                     android:src="@drawable/difficulty"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/difficultyIcon"
@@ -99,6 +101,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/username"
                 android:textSize="27sp"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:layout_gravity="center"
                 android:paddingTop="8dp" />
@@ -145,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/friends"
                 android:textSize="20sp"
-                android:textColor="#4C662B"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
                 android:paddingTop="16dp"/>
@@ -164,55 +167,21 @@
                 android:layout_height="wrap_content"
                 android:text="@string/leaderboard"
                 android:textSize="20sp"
-                android:textColor="#4C662B"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
                 android:paddingTop="16dp"/>
 
-        <HorizontalScrollView
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/leaderRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="horizontal">
+                android:padding="0dp"
+                android:layout_margin="0dp"
+                app:layoutManager="LinearLayoutManager"
+                android:orientation="horizontal" />
 
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                <!-- Placeholder for leaderboard items -->
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/leaderboardPicture" />
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/leaderboardPicture" />
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/leaderboardPicture" />
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/leaderboardPicture" />
-                <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="25dp"
-                        android:src="@drawable/question"
-                        android:contentDescription="@string/leaderboardPicture" />
-                <!-- Add more leaderboard items here -->
-            </LinearLayout>
-        </HorizontalScrollView>
 
         <!-- Photos Section -->
 
@@ -226,21 +195,22 @@
                 android:layout_height="wrap_content"
                 android:text="@string/userPhotos"
                 android:textSize="20sp"
-                android:textColor="#4C662B"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
                 android:paddingTop="16dp"/>
 
-        <ImageButton
-                android:id="@+id/uploadPhotoButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_gravity="center_vertical"
-                app:srcCompat="@drawable/add_circle"
-                android:contentDescription="@string/uploadPhoto"
-                android:background="@android:color/transparent" />
+            <ImageButton
+                    android:id="@+id/uploadPhotoButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:tint="?attr/colorPrimary"
+                    android:layout_gravity="center_vertical"
+                    app:srcCompat="@drawable/add_circle"
+                    android:contentDescription="@string/uploadPhoto"
+                    android:background="@android:color/transparent"/>
 
         </LinearLayout>
 
@@ -259,7 +229,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/userFavoriteTrails"
                 android:textSize="20sp"
-                android:textColor="#4C662B"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:textStyle="bold"
                 android:paddingTop="16dp"/>

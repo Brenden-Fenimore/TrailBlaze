@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/swishLayout">
+
+        <!-- Custom Swish Background at the bottom layer -->
+        <com.example.trailblaze.view.SwishBackgroundView
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+        <ImageButton
+                app:srcCompat="@drawable/baseline_arrow_back_ios_new_24"
+                android:contentDescription="@string/btn_back"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:id="@+id/chevron_left"
+                android:tint="#CDEDA3"
+                android:background="@android:color/transparent"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+    <nl.dionsegijn.konfetti.KonfettiView
+            android:id="@+id/konfettiView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+
+    <LinearLayout
+            android:id="@+id/attemptTrailTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/swishLayout"
+            android:orientation="vertical">
+
+        <!-- Park Name -->
+        <TextView
+                android:id="@+id/parkNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:textColor="?attr/colorPrimary"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/parkName" />
+        <TextView
+                android:id="@+id/attemptTrail"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/attemptTitle"
+                android:textSize="20sp"
+                android:fontFamily="@font/amethysta"
+                android:layout_width="337dp"
+                android:layout_marginBottom="30dp"
+                android:textColor="@android:color/holo_red_dark"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/attemptTrailTitle"
+            android:orientation="vertical">
+    <CheckBox
+            android:id="@+id/solo_journey_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorPrimary"
+            android:text="@string/solo"
+            android:checked="true"
+            android:layout_gravity="center"/>
+
+    <LinearLayout
+            android:id="@+id/party_info_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Party:" />
+
+        <!-- RecyclerView for party members would go here -->
+        <!-- Example: RecyclerView to show party members can be added here -->
+
+        <Button
+                android:id="@+id/add_non_trailBlaze_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add non-trailBlaze user" />
+
+        <EditText
+                android:id="@+id/non_trailBlaze_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter name of non-trailBlaze user" />
+    </LinearLayout>
+
+
+    </LinearLayout>
+
+    <Button
+            android:id="@+id/start_trail_button"
+            android:layout_width="304dp"
+            android:layout_height="wrap_content"
+            android:text="@string/start"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp"/>
+</RelativeLayout>
