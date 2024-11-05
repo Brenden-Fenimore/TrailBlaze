@@ -478,12 +478,30 @@ interface PhotoDeletionListener {
         override fun onPhotoDeleted(photoUrl: String) {
             val userId = FirebaseAuth.getInstance().currentUser?.uid
             if (userId != null) {
-                firestore.collection("users").document(userId).update("photos", FieldValue.arrayRemove(photoUrl))
-                    .addOnSuccessListener {
-                        Log.d("ProfileFragment", "Photo deleted successfully.")
+                // Find the specific document to delete
+                firestore.collection("users").document(userId)
+                    .collection("photos")
+                    .whereEqualTo("url", photoUrl)
+                    .get()
+                    .addOnSuccessListener { querySnapshot ->
+                        if (querySnapshot.isEmpty) {
+                            Log.d("ProfileFragment", "No photo found with the given URL.")
+                            return@addOnSuccessListener
+                        }
+                        // Iterate through matching documents and delete them
+                        for (document in querySnapshot.documents) {
+                            document.reference.delete()
+                                .addOnSuccessListener {
+                                    Log.d("ProfileFragment", "Photo document deleted successfully: ${document.id}.")
+                                }
+                                .addOnFailureListener { e ->
+                                    Log.e("Firestore", "Error deleting photo document: ", e)
+                                }
+                        }
+                        fetchPhotos() // Refresh photos after deletion
                     }
                     .addOnFailureListener { e ->
-                        Log.e("Firestore", "Error deleting photo: ", e)
+                        Log.e("Firestore", "Error finding photo document: ", e)
                     }
             }
         }
