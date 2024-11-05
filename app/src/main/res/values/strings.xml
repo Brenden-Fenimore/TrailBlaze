@@ -158,7 +158,7 @@
     <string name="conqueror">Conqueror: Complete a challenging trail with a difficult rating.</string>
     <string name="explorer">Explorer: Hike trails in various terrains (e.g., mountains, forests, deserts).</string>
     <string name="trailmaster">Trail Master: Complete trails in all four seasons.</string>
-    <string name="socialbutterfly">Social Butterfly: Add at least 2 TrailMates.</string>
+    <string name="socialbutterfly">Social Butterfly: Add at least 2 TrailBlazers.</string>
     <string name="teamplayer">Team Player: Complete a group challenge or relay race.</string>
     <string name="safteyexpert">Safety Expert: Look at the safety tips.</string>
     <string name="communitybuilder">Community Builder: Add a favorite friend.</string>
@@ -212,7 +212,7 @@
     <string name="homepage_searchbar_hint">Search</string>
     <string name="homepage_nearby_trails">Top parks nearby:</string>
     <string name="homepage_time_records">Completed Parks:</string>
-    <string name="homepage_friends">Hike with TrailMates!</string>
+    <string name="homepage_friends">Hike with TrailBlazers!</string>
 
     <string name="locationIcon">Location Icon</string>
     <string name="profilePicture">Profile Picture</string>
@@ -298,7 +298,7 @@
     <string name="updateProfile">Update Profile</string>
     <string name="suggestedTrailsMiles">Suggested Trails: %1$d miles</string>
     <string name="bucketListTrails">Bucket List Trails</string>
-    <string name="favoriteFriends">Favorite TrailMates</string>
+    <string name="favoriteFriends">Favorite TrailBlazers</string>
     <string name="rangeMiles">  Range</string>
     <string name="uploadPhoto">Upload Photo</string>
     <!-- Spinner options for terrain -->
@@ -334,7 +334,7 @@
 
     <string name="addAsTrusted">Add as trusted Contact</string>
     <string name="friendsInCommon">Friends in Common</string>
-    <string name="meetTrailMates">Meet TrailMates</string>
+    <string name="meetTrailMates">Meet TrailBlazers</string>
 
     <!-- Spinner options for terrain -->
 
