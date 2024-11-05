@@ -432,4 +432,5 @@
     <string name="watcherMemberLoc">Location</string>
     <string name="chevronBack"> Return to previous screen</string>
     <string name="watcherMemPhoto"> Watcher member profile photo</string>
+    <string name="remove_friend">Remove Friend from Friend List</string>
 </resources>
