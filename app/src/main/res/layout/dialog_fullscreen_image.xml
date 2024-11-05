@@ -31,4 +31,16 @@
             android:scaleType="centerCrop"
             android:background="?android:attr/selectableItemBackgroundBorderless" />
 
+    <ImageButton
+            android:id="@+id/deleteImageButton"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:padding="8dp"
+            android:src="@drawable/delete"
+            android:scaleType="fitCenter"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:visibility="gone" />
+
 </RelativeLayout>

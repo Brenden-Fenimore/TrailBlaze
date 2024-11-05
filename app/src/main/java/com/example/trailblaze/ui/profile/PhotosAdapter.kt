@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.trailblaze.R
 
-class PhotosAdapter(private var photoUrls: MutableList<String>) : RecyclerView.Adapter<PhotosAdapter.PhotoViewHolder>() {
+class PhotosAdapter(private var photoUrls: MutableList<String>, private val isOwnProfile: Boolean) : RecyclerView.Adapter<PhotosAdapter.PhotoViewHolder>() {
 
     class PhotoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.imageView)
@@ -33,7 +33,7 @@ class PhotosAdapter(private var photoUrls: MutableList<String>) : RecyclerView.A
         // Set up click listener for full-screen view
         holder.itemView.setOnClickListener {
             val fragmentManager = (holder.itemView.context as AppCompatActivity).supportFragmentManager
-            FullscreenImageDialogFragment.newInstance(photoUrls, position)
+            FullscreenImageDialogFragment.newInstance(photoUrls, position, isOwnProfile)
                 .show(fragmentManager, "fullscreenDialog")
         }
     }

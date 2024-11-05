@@ -130,7 +130,7 @@ class FriendsProfileActivity : AppCompatActivity() {
 
         // Initialize RecyclerView and Adapter
         val recyclerView = findViewById<RecyclerView>(R.id.photosRecyclerView)
-        photosAdapter = PhotosAdapter(photoUrls)
+        photosAdapter = PhotosAdapter(photoUrls, isOwnProfile = false)
         recyclerView.adapter = photosAdapter
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
@@ -536,4 +536,3 @@ class FriendsProfileActivity : AppCompatActivity() {
             }
     }
 }
-
