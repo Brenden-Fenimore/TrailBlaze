@@ -127,15 +127,17 @@
 
         <!-- Watcher Member -->
         <TextView
-                android:id="@+id/watcher_member"
+                android:id="@+id/watcherMember"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/watcherMember"
+                android:layout_height="48dp"
+                android:focusable="true"
+                android:text="@string/watcherMemberList"
                 android:textSize="16sp"
                 android:fontFamily="@font/amethysta"
                 android:textColor="@android:color/holo_blue_dark"
                 android:layout_gravity="center"
-                android:paddingTop="4dp" />
+                android:clickable="true"
+                android:padding="13dp" />
 
     <LinearLayout
             android:layout_width="match_parent"
