@@ -484,6 +484,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                                     binding.addFriendButton.visibility = View.GONE
                                     binding.favoriteFriendBtn.visibility = View.VISIBLE
                                     binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Set outline icon
+                                    binding.removeFriendButton.visibility = View.VISIBLE // Show unfriend button
 
                                     // Optionally, grant an achievement for adding a friend
                                     achievementManager.checkAndGrantSocialButterflyBadge(currentUserId)
