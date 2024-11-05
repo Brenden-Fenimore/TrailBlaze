@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.example.trailblaze.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 
 class FullscreenImageDialogFragment : DialogFragment() {
@@ -96,37 +97,45 @@ class FullscreenImageDialogFragment : DialogFragment() {
         val deletedImageUrl = imageUrls[currentIndex]
         Log.d("DeletePhoto", "Attempting to delete photo: $deletedImageUrl")
 
-        // Extract the photo ID from the URL (this should not include any special characters)
-        val photoId = deletedImageUrl.substringAfterLast("/").substringBefore("?") // Get the last segment of the URL before any query params
+        // Extract the photoId from the URL if needed
+        val photoId = deletedImageUrl.substringAfterLast("/") // Assuming photoId is at the end of the URL
         Log.d("DeletePhoto", "Extracted photo ID: $photoId")
 
-        // Get the current user's ID
+        // Get current user's ID
         val userId = getCurrentUserId()
+        if (userId.isEmpty()) {
+            Toast.makeText(context, "User not authenticated", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-        // Create references for Firebase Storage and Realtime Database
-        val storageRef = FirebaseStorage.getInstance().getReference("profilePhotos/$photoId") // Path to the photo in Storage
-        val dbRef = FirebaseDatabase.getInstance().getReference("users/$userId/photos").child(photoId) // Correct path to the database
+        // Create a reference to the document in Firestore
+        val dbRef = FirebaseFirestore.getInstance().collection("users")
+            .document(userId)
+            .collection("photos")
+            .document(photoId)
 
-        // Delete the photo from Firebase Storage
+        // Delete the document from Firestore
+        dbRef.delete()
+            .addOnSuccessListener {
+                Log.d("DeletePhoto", "Deleted photo document from Firestore")
+                Toast.makeText(context, "Photo deleted successfully", Toast.LENGTH_SHORT).show()
+                dismiss() // Dismiss the dialog after deletion
+            }
+            .addOnFailureListener { exception ->
+                Log.e("DeletePhoto", "Error deleting photo document from Firestore", exception)
+                Toast.makeText(context, "Failed to delete photo document", Toast.LENGTH_SHORT).show()
+            }
+
+        // Optionally, you can also delete the photo from Firebase Storage
+        val storagePath = deletedImageUrl.substringAfter("/o/").substringBefore("?").replace("%2F", "/")
+        val storageRef = FirebaseStorage.getInstance().getReference(storagePath)
+
         storageRef.delete()
             .addOnSuccessListener {
                 Log.d("DeletePhoto", "Deleted photo from Firebase Storage")
-
-                // Now delete the photo reference from Realtime Database
-                dbRef.removeValue()
-                    .addOnSuccessListener {
-                        Log.d("DeletePhoto", "Deleted photo reference from database")
-                        Toast.makeText(context, "Photo deleted successfully", Toast.LENGTH_SHORT).show()
-                        dismiss() // Dismiss the dialog after deletion
-                    }
-                    .addOnFailureListener { exception ->
-                        Log.e("DeletePhoto", "Error deleting photo reference from database", exception)
-                        Toast.makeText(context, "Failed to delete photo reference", Toast.LENGTH_SHORT).show()
-                    }
             }
             .addOnFailureListener { exception ->
-                Log.e("DeletePhoto", "Error deleting photo from Firebase", exception)
-                Toast.makeText(context, "Failed to delete photo from storage", Toast.LENGTH_SHORT).show()
+                Log.e("DeletePhoto", "Error deleting photo from Firebase Storage", exception)
             }
     }
 
