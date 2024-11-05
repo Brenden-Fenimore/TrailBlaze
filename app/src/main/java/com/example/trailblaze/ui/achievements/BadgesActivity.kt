@@ -13,6 +13,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import nl.dionsegijn.konfetti.KonfettiView
+import nl.dionsegijn.konfetti.models.Shape
+import nl.dionsegijn.konfetti.models.Size
 
 class BadgesActivity : AppCompatActivity() {
 
@@ -325,8 +327,10 @@ class BadgesActivity : AppCompatActivity() {
             .setDirection(0.0, 359.0) // Allow confetti to fall in all directions
             .setSpeed(1f, 5f)
             .setTimeToLive(3000L) // Increase the time to live to allow for longer fall
+            .addShapes(Shape.Circle)
+            .addSizes(Size(8))
             // Set the position to emit from the right side and farther down
-            .setPosition(konfettiView.width + 50f, konfettiView.width + 50f, -100f, -50f)
+            .setPosition(konfettiView.width + 400f, konfettiView.width + 400f, -100f, -50f)
             .stream(300, 3000L) // Stream 300 particles for 3000 milliseconds (3 seconds)
 
         // Optionally hide the konfetti view after some time

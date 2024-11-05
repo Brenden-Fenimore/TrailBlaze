@@ -257,6 +257,28 @@
                 app:layoutManager="LinearLayoutManager"
                 android:orientation="horizontal"/>
 
+
+        <!-- Completed Trails Section -->
+        <TextView
+                android:id="@+id/completedTrailsHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/homepage_time_records"
+                android:textSize="20sp"
+                android:textColor="?attr/colorPrimary"
+                android:fontFamily="@font/amethysta"
+                android:textStyle="bold"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/timeRecordsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="LinearLayoutManager"
+                android:orientation="horizontal"/>
+
+
         <!-- Spacer to add margin for navigation bar -->
         <View
                 android:layout_width="match_parent"

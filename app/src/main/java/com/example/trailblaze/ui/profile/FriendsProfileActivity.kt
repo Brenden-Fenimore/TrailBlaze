@@ -5,13 +5,10 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
@@ -35,6 +32,8 @@ import nl.dionsegijn.konfetti.models.Size
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.example.trailblaze.ui.parks.TimeRecordAdapter
+import com.example.trailblaze.ui.parks.TimeRecord
 
 class FriendsProfileActivity : AppCompatActivity() {
 
@@ -51,6 +50,7 @@ class FriendsProfileActivity : AppCompatActivity() {
     private lateinit var friendsInCommonRecyclerView: RecyclerView
     private lateinit var friendsInCommonAdapter: FriendAdapter
     private lateinit var friendsInCommonList: MutableList<Friends>
+    private lateinit var removeFriendImageButton: ImageButton
 
     private lateinit var photosAdapter: PhotosAdapter
     private val photoUrls = mutableListOf<String>()
@@ -59,8 +59,9 @@ class FriendsProfileActivity : AppCompatActivity() {
     private lateinit var favoritesAdapter: ParksAdapter
     private var favoriteParks: MutableList<Park> = mutableListOf()
 
-
-
+    private lateinit var timeRecordsRecyclerView: RecyclerView
+    private lateinit var timeRecordAdapter: TimeRecordAdapter
+    private var timeRecords: List<TimeRecord> = emptyList()
 
     // Define all possible badges
     private val allBadges = listOf(
@@ -88,7 +89,6 @@ class FriendsProfileActivity : AppCompatActivity() {
         // Hide the ActionBar
         supportActionBar?.hide()
 
-
         binding = ActivityFriendsProfileBinding.inflate(layoutInflater)
         setContentView(binding.root) // Set the content view here
 
@@ -105,7 +105,6 @@ class FriendsProfileActivity : AppCompatActivity() {
         binding.iconDifficulty.setOnClickListener {
             fetchCurrentUserDifficulty()
         }
-
 
         // Initialize the RecyclerView for friends in common
         friendsInCommonList = mutableListOf()
@@ -138,6 +137,7 @@ class FriendsProfileActivity : AppCompatActivity() {
         // Fetch leaderboard data
         fetchLeaderboard()
 
+
         // Initialize RecyclerView and Adapter
         val recyclerView = findViewById<RecyclerView>(R.id.photosRecyclerView)
         photosAdapter = PhotosAdapter(photoUrls)
@@ -151,6 +151,16 @@ class FriendsProfileActivity : AppCompatActivity() {
             addFriend(userId) // Call the function to add friend
         }
 
+        // Initialize the remove friend button
+        removeFriendImageButton = binding.removeFriendButton
+        removeFriendImageButton.setOnClickListener {
+            confirmRemoveFriend() // Prompt for confirmation before removal
+        }
+
+        // Check if the user is already a friend and update the UI accordingly
+        val currentUserId = auth.currentUser?.uid ?: return
+        checkFriendshipStatus(currentUserId, userId)
+
         favoritesRecyclerView = binding.favoriteTrailsSection
         favoritesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
@@ -161,6 +171,20 @@ class FriendsProfileActivity : AppCompatActivity() {
             startActivity(intent)
         }
         favoritesRecyclerView.adapter = favoritesAdapter
+
+        // Initialize RecyclerView for time records
+        timeRecordsRecyclerView = binding.timeRecordsRecyclerView
+        timeRecordsRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+        // Initialize adapter with an empty list and set it on the RecyclerView
+        timeRecordAdapter = TimeRecordAdapter(mutableListOf()) { timeRecord ->
+            // Create an intent to start the ParkDetailActivity
+            val intent = Intent(this, ParkDetailActivity::class.java).apply {
+                putExtra("PARK_CODE", timeRecord.parkCode) // Pass the park code
+            }
+            startActivity(intent) // Start the ParkDetailActivity
+        }
+        timeRecordsRecyclerView.adapter = timeRecordAdapter
     }
 
     private fun loadFriendProfile() {
@@ -214,6 +238,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                     // Fetch and display the friend's photos if the photos section is visible
                     if (isPhotosVisible) {
                         fetchFriendPhotos(userId)
+                        fetchTimeRecordsForFriend(userId)
                     }
                 } else {
                     Log.e("FriendsProfileActivity", "Friend document does not exist")
@@ -261,6 +286,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                     if (friendsList.contains(friendId)) {
                         binding.addFriendButton.visibility = View.GONE // Hide add friend button
                         binding.favoriteFriendBtn.visibility = View.VISIBLE // Show favorite button
+                        binding.removeFriendButton.visibility = View.VISIBLE
                         // Set the favorite button icon based on current favorite status
                         if (favoriteFriendsList.contains(friendId)) {
                             binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled) // Set filled icon
@@ -270,6 +296,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                     } else {
                         binding.addFriendButton.visibility = View.VISIBLE // Show add friend button
                         binding.favoriteFriendBtn.visibility = View.GONE // Hide favorite button
+                        binding.removeFriendButton.visibility = View.GONE
                     }
 
                     // Set up click listener for the favorite button
@@ -280,6 +307,36 @@ class FriendsProfileActivity : AppCompatActivity() {
             }
             .addOnFailureListener { exception ->
                 Log.e("FriendsProfileActivity", "Error fetching user friends: ", exception)
+            }
+    }
+
+    private fun confirmRemoveFriend() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Remove Friend")
+        builder.setMessage("Are you sure you want to remove this friend?")
+        builder.setPositiveButton("Yes") { _, _ ->
+            removeFriend(userId)
+        }
+        builder.setNegativeButton("No") { dialog, _ ->
+            dialog.dismiss()
+        }
+        builder.show()
+    }
+
+    private fun removeFriend(friendId: String) {
+        val currentUserId = auth.currentUser?.uid ?: return
+        val userRef = firestore.collection("users").document(currentUserId)
+
+        userRef.update("friends", FieldValue.arrayRemove(friendId))
+            .addOnSuccessListener {
+                Toast.makeText(this, "Friend removed successfully!", Toast.LENGTH_SHORT).show()
+                binding.addFriendButton.visibility = View.VISIBLE // Show add friend button
+                binding.favoriteFriendBtn.visibility = View.GONE // Hide favorite button
+                binding.removeFriendButton.visibility = View.GONE   // Hide unfriend button
+            }
+            .addOnFailureListener { exception ->
+                Log.e("FriendsProfileActivity", "Error removing friend: ", exception)
+                Toast.makeText(this, "Failed to remove friend.", Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -648,6 +705,30 @@ class FriendsProfileActivity : AppCompatActivity() {
             }
             .addOnFailureListener { e ->
                 Log.e("FriendsProfileActivity", "Error fetching photos", e)
+            }
+    }
+
+    private fun fetchTimeRecordsForFriend(friendId: String) {
+        firestore.collection("users").document(friendId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val timeRecordsData = document.get("timeRecords") as? List<Map<String, Any>>
+                    val timeRecords = timeRecordsData?.map { record ->
+                        val parkName = record["parkName"] as? String ?: return@map null
+                        val elapsedTime = record["elapsedTime"] as? String ?: return@map null
+                        val parkCode = record["parkCode"] as? String ?: return@map null
+                        val imageUrl = record["imageUrl"] as? String ?: return@map null
+
+                        // Create a TimeRecord object
+                        TimeRecord(parkName, elapsedTime, imageUrl, parkCode)
+                    }?.filterNotNull() ?: emptyList() // Filter out any null items
+
+                    // Update the adapter with fetched data using updateData method
+                    timeRecordAdapter.updateData(timeRecords)
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("FriendsProfileActivity", "Error fetching time records: ${e.message}")
             }
     }
 }

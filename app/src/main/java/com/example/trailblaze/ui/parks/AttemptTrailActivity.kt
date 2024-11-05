@@ -123,11 +123,14 @@ class AttemptTrailActivity : AppCompatActivity() {
         }
 
         saveTimeButton.setOnClickListener {
+
+            isRunning = false // Pause the timer
+
             // Get the elapsed time as a String
             val elapsedTimeString = timerTextView.text.toString()
 
             // Create a TimeRecord object with parkImageUrl
-            val timeRecord = TimeRecord(parkName, elapsedTimeString, parkImageUrl)
+            val timeRecord = TimeRecord(parkName, elapsedTimeString, parkImageUrl, parkCode)
 
             // Save the record to Firestore
             saveTimeToFirestore(timeRecord)
@@ -165,9 +168,9 @@ class AttemptTrailActivity : AppCompatActivity() {
             .setSpeed(1f, 5f)
             .setTimeToLive(3000L) // Increase the time to live to allow for longer fall
             .addShapes(Shape.Circle)
-            .addSizes(Size(6))
+            .addSizes(Size(8))
             // Set the position to emit from the right side and farther down
-            .setPosition(konfettiView.width + 50f, konfettiView.width + 50f, -100f, -50f)
+            .setPosition(konfettiView.width + 400f, konfettiView.width + 400f, -100f, -50f)
             .stream(300, 3000L) // Stream 300 particles for 3000 milliseconds (3 seconds)
 
         // Optionally hide the konfetti view after some time

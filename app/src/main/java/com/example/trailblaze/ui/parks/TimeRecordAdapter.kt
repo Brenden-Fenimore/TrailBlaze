@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.trailblaze.R
 
-class TimeRecordAdapter(private val timeRecords: MutableList<TimeRecord>) :
+class TimeRecordAdapter(private val timeRecords: MutableList<TimeRecord>, private val onItemClick: (TimeRecord) -> Unit) :
     RecyclerView.Adapter<TimeRecordAdapter.TimeRecordViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeRecordViewHolder {
@@ -29,6 +29,11 @@ class TimeRecordAdapter(private val timeRecords: MutableList<TimeRecord>) :
                 .placeholder(R.drawable.baseline_downloading_24) // Placeholder while loading
                 .error(R.drawable.no_image_available) // Fallback image if loading fails
                 .into(holder.parkImageView)
+        }
+
+        // Set the click listener for the item
+        holder.itemView.setOnClickListener {
+            onItemClick(timeRecord) // Call the click listener with the clicked timeRecord
         }
     }
 

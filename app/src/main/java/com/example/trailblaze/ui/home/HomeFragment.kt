@@ -129,7 +129,13 @@ class HomeFragment : Fragment() {
         timeRecordsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         // Initialize adapter with an empty list and set it on the RecyclerView
-        timeRecordAdapter = TimeRecordAdapter(mutableListOf())
+        timeRecordAdapter = TimeRecordAdapter(mutableListOf()) { timeRecord ->
+            // Create an intent to start the ParkDetailActivity
+            val intent = Intent(context, ParkDetailActivity::class.java).apply {
+                putExtra("PARK_CODE", timeRecord.parkCode) // Pass the park code
+            }
+            startActivity(intent) // Start the ParkDetailActivity
+        }
         timeRecordsRecyclerView.adapter = timeRecordAdapter
 
         // Load users (you would need to implement this)
@@ -293,10 +299,11 @@ class HomeFragment : Fragment() {
                     val timeRecords = timeRecordsData?.map { record ->
                         val parkName = record["parkName"] as? String ?: return@map null
                         val elapsedTime = record["elapsedTime"] as? String ?: return@map null
+                        val parkCode = record["parkCode"] as? String ?: return@map null
                         val imageUrl = record["imageUrl"] as? String ?: return@map null
 
                         // Create a TimeRecord object
-                        TimeRecord(parkName, elapsedTime, imageUrl)
+                        TimeRecord(parkName, elapsedTime, imageUrl, parkCode)
                     }?.filterNotNull() ?: emptyList() // Filter out any null items
 
                     // Update the adapter with fetched data using updateData method
