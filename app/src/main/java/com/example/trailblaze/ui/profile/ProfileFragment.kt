@@ -488,6 +488,11 @@ interface PhotoDeletionListener {
             }
         }
 
+        override fun onResume() {
+            super.onResume()
+            fetchPhotos()
+        }
+
         override fun onDestroyView() {
             super.onDestroyView()
             _binding = null

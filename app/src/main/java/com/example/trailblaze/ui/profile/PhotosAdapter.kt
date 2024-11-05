@@ -33,8 +33,12 @@ class PhotosAdapter(private var photoUrls: MutableList<String>, private val isOw
         // Set up click listener for full-screen view
         holder.itemView.setOnClickListener {
             val fragmentManager = (holder.itemView.context as AppCompatActivity).supportFragmentManager
-            FullscreenImageDialogFragment.newInstance(photoUrls, position, isOwnProfile)
-                .show(fragmentManager, "fullscreenDialog")
+            val fullscreenDialog = FullscreenImageDialogFragment.newInstance(photoUrls, position, isOwnProfile)
+
+            // Set the adapter before showing the dialog
+            fullscreenDialog.setPhotosAdapter(this) // Pass the current adapter
+
+            fullscreenDialog.show(fragmentManager, "fullscreenDialog")
         }
     }
 
@@ -49,4 +53,11 @@ class PhotosAdapter(private var photoUrls: MutableList<String>, private val isOw
         photoUrls.addAll(newPhotoUrls) // Add new photos
         notifyDataSetChanged() // Notify the adapter to refresh the RecyclerView
     }
+
+    fun removeItem(position: Int) {
+        photoUrls.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
+
 }

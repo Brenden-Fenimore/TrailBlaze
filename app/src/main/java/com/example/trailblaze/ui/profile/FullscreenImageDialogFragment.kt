@@ -24,7 +24,8 @@ class FullscreenImageDialogFragment : DialogFragment() {
     private lateinit var deleteButton: ImageButton
     private var isOwnProfile: Boolean = false
     private var currentIndex: Int = 0
-    private lateinit var imageUrls: List<String>
+    private lateinit var imageUrls: MutableList<String>
+    private lateinit var photosAdapter: PhotosAdapter
 
     companion object {
         fun newInstance(imageUrls: List<String>, initialPosition: Int, isOwnProfile: Boolean): FullscreenImageDialogFragment {
@@ -48,7 +49,7 @@ class FullscreenImageDialogFragment : DialogFragment() {
         prevButton = view.findViewById(R.id.prevImageButton)
         deleteButton = view.findViewById(R.id.deleteImageButton)
 
-        imageUrls = arguments?.getStringArrayList("imageUrls") ?: emptyList()
+        imageUrls = (arguments?.getStringArrayList("imageUrls") ?: emptyList()) as MutableList<String>
         currentIndex = arguments?.getInt("position") ?: 0
 
         displayImage(currentIndex)
@@ -68,6 +69,10 @@ class FullscreenImageDialogFragment : DialogFragment() {
 
 
         return view
+    }
+
+    fun setPhotosAdapter(adapter: PhotosAdapter) {
+        this.photosAdapter = adapter
     }
 
     private fun displayImage(index: Int) {
@@ -97,7 +102,7 @@ class FullscreenImageDialogFragment : DialogFragment() {
         val deletedImageUrl = imageUrls[currentIndex]
         Log.d("DeletePhoto", "Attempting to delete photo: $deletedImageUrl")
 
-        // Extract the photoId from the URL if needed
+        // Extract the photoId from the URL
         val photoId = deletedImageUrl.substringAfterLast("/") // Assuming photoId is at the end of the URL
         Log.d("DeletePhoto", "Extracted photo ID: $photoId")
 
@@ -118,15 +123,32 @@ class FullscreenImageDialogFragment : DialogFragment() {
         dbRef.delete()
             .addOnSuccessListener {
                 Log.d("DeletePhoto", "Deleted photo document from Firestore")
+
+                // Remove the photo from the local imageUrls list
+                imageUrls.removeAt(currentIndex)
+
+                // Notify the adapter of the change
+                photosAdapter.removeItem(currentIndex)
+
+                // Optionally reset the current index if it exceeds the new list size
+                if (currentIndex >= imageUrls.size) {
+                    currentIndex = imageUrls.size - 1
+                }
+                // Refresh the display after deletion
+                if (imageUrls.isNotEmpty()) {
+                    displayImage(currentIndex)
+                } else {
+                    dismiss() // Close the dialog if there are no images left
+                }
+
                 Toast.makeText(context, "Photo deleted successfully", Toast.LENGTH_SHORT).show()
-                dismiss() // Dismiss the dialog after deletion
             }
             .addOnFailureListener { exception ->
                 Log.e("DeletePhoto", "Error deleting photo document from Firestore", exception)
                 Toast.makeText(context, "Failed to delete photo document", Toast.LENGTH_SHORT).show()
             }
 
-        // Optionally, you can also delete the photo from Firebase Storage
+        // Optionally, delete the photo from Firebase Storage
         val storagePath = deletedImageUrl.substringAfter("/o/").substringBefore("?").replace("%2F", "/")
         val storageRef = FirebaseStorage.getInstance().getReference(storagePath)
 
@@ -138,6 +160,7 @@ class FullscreenImageDialogFragment : DialogFragment() {
                 Log.e("DeletePhoto", "Error deleting photo from Firebase Storage", exception)
             }
     }
+
 
     private fun getCurrentUserId(): String {
         return FirebaseAuth.getInstance().currentUser?.uid ?: ""
