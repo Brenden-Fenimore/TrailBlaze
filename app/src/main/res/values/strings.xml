@@ -398,4 +398,5 @@
     <string name="solo">Is this a solo journey?</string>
     <string name="start">Start Trail</string>
     <string name="bucket_list_description">Adds current park to user\'s bucket list</string>
+    <string name="remove_friend">Remove Friend from Friend List</string>
 </resources>

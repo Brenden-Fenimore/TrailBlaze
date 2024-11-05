@@ -51,6 +51,7 @@ class FriendsProfileActivity : AppCompatActivity() {
     private lateinit var friendsInCommonRecyclerView: RecyclerView
     private lateinit var friendsInCommonAdapter: FriendAdapter
     private lateinit var friendsInCommonList: MutableList<Friends>
+    private lateinit var removeFriendImageButton: ImageButton
 
     private lateinit var photosAdapter: PhotosAdapter
     private val photoUrls = mutableListOf<String>()
@@ -106,7 +107,6 @@ class FriendsProfileActivity : AppCompatActivity() {
             fetchCurrentUserDifficulty()
         }
 
-
         // Initialize the RecyclerView for friends in common
         friendsInCommonList = mutableListOf()
         friendsInCommonAdapter = FriendAdapter(friendsInCommonList) { user ->
@@ -150,6 +150,16 @@ class FriendsProfileActivity : AppCompatActivity() {
         addFriendButton.setOnClickListener {
             addFriend(userId) // Call the function to add friend
         }
+
+        // Initialize the remove friend button
+        removeFriendImageButton = binding.removeFriendButton
+        removeFriendImageButton.setOnClickListener {
+            confirmRemoveFriend() // Prompt for confirmation before removal
+        }
+
+        // Check if the user is already a friend and update the UI accordingly
+        val currentUserId = auth.currentUser?.uid ?: return
+        checkFriendshipStatus(currentUserId, userId)
 
         favoritesRecyclerView = binding.favoriteTrailsSection
         favoritesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -261,6 +271,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                     if (friendsList.contains(friendId)) {
                         binding.addFriendButton.visibility = View.GONE // Hide add friend button
                         binding.favoriteFriendBtn.visibility = View.VISIBLE // Show favorite button
+                        binding.removeFriendButton.visibility = View.VISIBLE // Show unfriend button
                         // Check if the friend is in favorites
                         if (favoriteFriendsList.contains(friendId)) {
                             binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled) // Set filled icon
@@ -270,6 +281,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                     } else {
                         binding.addFriendButton.visibility = View.VISIBLE // Show add friend button
                         binding.favoriteFriendBtn.visibility = View.GONE // Hide favorite button
+                        binding.removeFriendButton.visibility = View.GONE   // Hide unfriend button
                     }
 
                     // Set up click listener for the favorite button
@@ -289,6 +301,35 @@ class FriendsProfileActivity : AppCompatActivity() {
             }
     }
 
+    private fun confirmRemoveFriend() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Remove Friend")
+        builder.setMessage("Are you sure you want to remove this friend?")
+        builder.setPositiveButton("Yes") { _, _ ->
+            removeFriend(userId)
+        }
+        builder.setNegativeButton("No") { dialog, _ ->
+            dialog.dismiss()
+        }
+        builder.show()
+    }
+
+    private fun removeFriend(friendId: String) {
+        val currentUserId = auth.currentUser?.uid ?: return
+        val userRef = firestore.collection("users").document(currentUserId)
+
+        userRef.update("friends", FieldValue.arrayRemove(friendId))
+            .addOnSuccessListener {
+                Toast.makeText(this, "Friend removed successfully!", Toast.LENGTH_SHORT).show()
+                binding.addFriendButton.visibility = View.VISIBLE // Show add friend button
+                binding.favoriteFriendBtn.visibility = View.GONE // Hide favorite button
+                binding.removeFriendButton.visibility = View.GONE   // Hide unfriend button
+            }
+            .addOnFailureListener { exception ->
+                Log.e("FriendsProfileActivity", "Error removing friend: ", exception)
+                Toast.makeText(this, "Failed to remove friend.", Toast.LENGTH_SHORT).show()
+            }
+    }
 
     private fun addFavoriteFriend(currentUserId: String, friendId: String) {
         val userRef = firestore.collection("users").document(currentUserId)
@@ -355,8 +396,6 @@ class FriendsProfileActivity : AppCompatActivity() {
             konfettiView.visibility = View.GONE
         }, 6000) // Hide after 6 seconds
     }
-
-
 
 
     private fun removeFavoriteFriend(currentUserId: String, friendId: String) {
