@@ -154,7 +154,7 @@ class FriendsProfileActivity : AppCompatActivity() {
         // Initialize the remove friend button
         removeFriendImageButton = binding.removeFriendButton
         removeFriendImageButton.setOnClickListener {
-            confirmRemoveFriend() // Prompt for confirmation before removal
+            confirmRemoveFriend(userId) // Prompt for confirmation before removal
         }
 
         // Check if the user is already a friend and update the UI accordingly
@@ -301,17 +301,28 @@ class FriendsProfileActivity : AppCompatActivity() {
             }
     }
 
-    private fun confirmRemoveFriend() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Remove Friend")
-        builder.setMessage("Are you sure you want to remove this friend?")
-        builder.setPositiveButton("Yes") { _, _ ->
-            removeFriend(userId)
-        }
-        builder.setNegativeButton("No") { dialog, _ ->
-            dialog.dismiss()
-        }
-        builder.show()
+    private fun confirmRemoveFriend(friendId: String) {
+        // Fetch friend's username
+        firestore.collection("users").document(friendId).get()
+            .addOnSuccessListener { document ->
+                val friendUsername = document.getString("username") ?: "this friend"
+
+                // Show the confirmation dialog with the friend's username
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Remove Friend")
+                builder.setMessage("Are you sure you want to remove $friendUsername?")
+                builder.setPositiveButton("Yes") { _, _ ->
+                    removeFriend(friendId) // Proceed to remove friend if confirmed
+                }
+                builder.setNegativeButton("No") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                builder.show()
+            }
+            .addOnFailureListener { exception ->
+                Log.e("FriendsProfileActivity", "Error fetching username: ", exception)
+                Toast.makeText(this, "Error fetching friend info.", Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun removeFriend(friendId: String) {
@@ -435,7 +446,6 @@ class FriendsProfileActivity : AppCompatActivity() {
         }
     }
 
-
     private fun updateBadgesList(badges: List<String>) {
         // Filter the list of all badges based on fetched user badges
         val unlockedBadges = allBadges.filter { badge -> badges.contains(badge.id) }
@@ -454,58 +464,71 @@ class FriendsProfileActivity : AppCompatActivity() {
     }
 
     private fun addFriend(friendId: String) {
-        val currentUserId = auth.currentUser?.uid // Get the current user's ID
+        confirmAddFriend(friendId) // Show confirmation before proceeding
+    }
 
-        if (currentUserId != null) {
-            // Reference to the current user's document
-            val userRef = firestore.collection("users").document(currentUserId)
+    private fun confirmAddFriend(friendId: String) {
+        // Fetch friend's username
+        firestore.collection("users").document(friendId).get()
+            .addOnSuccessListener { document ->
+                val friendUsername = document.getString("username") ?: "this user"
 
-            // Fetch the current user's document to check their friends list
-            userRef.get()
-                .addOnSuccessListener { document ->
-                    if (document != null && document.exists()) {
-                        // Get the friends list from the document
-                        val friendsList = document.get("friends") as? List<String> ?: emptyList()
+                // Show the confirmation dialog with the friend's username
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Add Friend")
+                builder.setMessage("Are you sure you want to add $friendUsername?")
+                builder.setPositiveButton("Yes") { _, _ ->
+                    performAddFriend(friendId) // Proceed to add friend if confirmed
+                }
+                builder.setNegativeButton("No") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                builder.show()
+            }
+            .addOnFailureListener { exception ->
+                Log.e("FriendsProfileActivity", "Error fetching username: ", exception)
+                Toast.makeText(this, "Error fetching friend info.", Toast.LENGTH_SHORT).show()
+            }
+    }
 
-                        // Check if the friendId is already in the friends list
-                        if (friendsList.contains(friendId)) {
-                            Toast.makeText(this, "This user is already your friend.", Toast.LENGTH_SHORT).show()
-                        } else {
-                            // Create a HashMap to represent the user's document
-                            val userUpdates = HashMap<String, Any>()
-                            userUpdates["friends"] = FieldValue.arrayUnion(friendId) // Add friendId to the friends array
+    private fun performAddFriend(friendId: String) {
+        val currentUserId = auth.currentUser?.uid ?: return
 
-                            // Update the current user's document in Firestore
-                            userRef.set(userUpdates, SetOptions.merge())
-                                .addOnSuccessListener {
-                                    Toast.makeText(this, "Friend added successfully!", Toast.LENGTH_SHORT).show()
+        val userRef = firestore.collection("users").document(currentUserId)
 
-                                    // Hide add friend button and show favorite button
-                                    binding.addFriendButton.visibility = View.GONE
-                                    binding.favoriteFriendBtn.visibility = View.VISIBLE
-                                    binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Set outline icon
-                                    binding.removeFriendButton.visibility = View.VISIBLE // Show unfriend button
+        userRef.get().addOnSuccessListener { document ->
+            if (document != null && document.exists()) {
+                val friendsList = document.get("friends") as? List<String> ?: emptyList()
 
-                                    // Optionally, grant an achievement for adding a friend
-                                    achievementManager.checkAndGrantSocialButterflyBadge(currentUserId)
-                                }
-                                .addOnFailureListener { exception ->
-                                    Log.e("FriendsProfileActivity", "Error adding friend: ", exception)
-                                    Toast.makeText(this, "Failed to add friend.", Toast.LENGTH_SHORT).show()
-                                }
+                if (friendsList.contains(friendId)) {
+                    Toast.makeText(this, "This user is already your friend.", Toast.LENGTH_SHORT).show()
+                } else {
+                    val userUpdates = hashMapOf<String, Any>("friends" to FieldValue.arrayUnion(friendId))
+
+                    userRef.set(userUpdates, SetOptions.merge())
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Friend request sent successfully!", Toast.LENGTH_SHORT).show()
+
+                            binding.addFriendButton.visibility = View.GONE
+                            binding.favoriteFriendBtn.visibility = View.VISIBLE
+                            binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Set outline icon
+                            binding.removeFriendButton.visibility = View.VISIBLE
+
+                            // Optionally, grant an achievement for adding a friend
+                            achievementManager.checkAndGrantSocialButterflyBadge(currentUserId)
                         }
-                    } else {
-                        Log.e("FriendsProfileActivity", "User document does not exist")
-                        Toast.makeText(this, "User document not found.", Toast.LENGTH_SHORT).show()
-                    }
+                        .addOnFailureListener { exception ->
+                            Log.e("FriendsProfileActivity", "Error adding friend: ", exception)
+                            Toast.makeText(this, "Failed to send friend request.", Toast.LENGTH_SHORT).show()
+                        }
                 }
-                .addOnFailureListener { exception ->
-                    Log.e("FriendsProfileActivity", "Error fetching user document: ", exception)
-                    Toast.makeText(this, "Error fetching user data.", Toast.LENGTH_SHORT).show()
-                }
-        } else {
-            Log.e("FriendsProfileActivity", "Current user ID is null")
-            Toast.makeText(this, "You are not logged in.", Toast.LENGTH_SHORT).show()
+            } else {
+                Log.e("FriendsProfileActivity", "User document does not exist")
+                Toast.makeText(this, "User document not found.", Toast.LENGTH_SHORT).show()
+            }
+        }.addOnFailureListener { exception ->
+            Log.e("FriendsProfileActivity", "Error fetching user document: ", exception)
+            Toast.makeText(this, "Error fetching user data.", Toast.LENGTH_SHORT).show()
         }
     }
 
