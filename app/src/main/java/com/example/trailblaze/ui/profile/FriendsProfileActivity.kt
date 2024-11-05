@@ -301,11 +301,12 @@ class FriendsProfileActivity : AppCompatActivity() {
             }
     }
 
+    // Displays a confirmation dialog for removing a friend with the friend's username
     private fun confirmRemoveFriend(friendId: String) {
         // Fetch friend's username
         firestore.collection("users").document(friendId).get()
             .addOnSuccessListener { document ->
-                val friendUsername = document.getString("username") ?: "this friend"
+                val friendUsername = document.getString("username") ?: "this friend"    // Use "this friend" if username is missing
 
                 // Show the confirmation dialog with the friend's username
                 val builder = AlertDialog.Builder(this)
@@ -315,7 +316,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                     removeFriend(friendId) // Proceed to remove friend if confirmed
                 }
                 builder.setNegativeButton("No") { dialog, _ ->
-                    dialog.dismiss()
+                    dialog.dismiss()       // Dismiss the dialog on "No"
                 }
                 builder.show()
             }
@@ -325,6 +326,7 @@ class FriendsProfileActivity : AppCompatActivity() {
             }
     }
 
+    // Removes the friend from the current user's friends list in Firestore
     private fun removeFriend(friendId: String) {
         val currentUserId = auth.currentUser?.uid ?: return
         val userRef = firestore.collection("users").document(currentUserId)
@@ -332,6 +334,8 @@ class FriendsProfileActivity : AppCompatActivity() {
         userRef.update("friends", FieldValue.arrayRemove(friendId))
             .addOnSuccessListener {
                 Toast.makeText(this, "Friend removed successfully!", Toast.LENGTH_SHORT).show()
+
+                // Update UI to reflect removal
                 binding.addFriendButton.visibility = View.VISIBLE // Show add friend button
                 binding.favoriteFriendBtn.visibility = View.GONE // Hide favorite button
                 binding.removeFriendButton.visibility = View.GONE   // Hide unfriend button
@@ -463,15 +467,17 @@ class FriendsProfileActivity : AppCompatActivity() {
         }
     }
 
+    // Initiates the friend addition process by calling the confirmation dialog
     private fun addFriend(friendId: String) {
         confirmAddFriend(friendId) // Show confirmation before proceeding
     }
 
+    // Displays a confirmation dialog for adding a friend with the friend's username
     private fun confirmAddFriend(friendId: String) {
         // Fetch friend's username
         firestore.collection("users").document(friendId).get()
             .addOnSuccessListener { document ->
-                val friendUsername = document.getString("username") ?: "this user"
+                val friendUsername = document.getString("username") ?: "this user"  // Use "this user" if username is missing
 
                 // Show the confirmation dialog with the friend's username
                 val builder = AlertDialog.Builder(this)
@@ -481,7 +487,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                     performAddFriend(friendId) // Proceed to add friend if confirmed
                 }
                 builder.setNegativeButton("No") { dialog, _ ->
-                    dialog.dismiss()
+                    dialog.dismiss()        // Dismiss the dialog on "No"
                 }
                 builder.show()
             }
@@ -491,24 +497,29 @@ class FriendsProfileActivity : AppCompatActivity() {
             }
     }
 
+    // Adds the friend to the current user's friends list in Firestore
     private fun performAddFriend(friendId: String) {
         val currentUserId = auth.currentUser?.uid ?: return
 
+        // Get a reference to the current user's document in Firestore
         val userRef = firestore.collection("users").document(currentUserId)
 
         userRef.get().addOnSuccessListener { document ->
             if (document != null && document.exists()) {
                 val friendsList = document.get("friends") as? List<String> ?: emptyList()
 
+                // Check if friend is already in the user's friends list
                 if (friendsList.contains(friendId)) {
                     Toast.makeText(this, "This user is already your friend.", Toast.LENGTH_SHORT).show()
                 } else {
+                    // Prepare update to add friend to friends list
                     val userUpdates = hashMapOf<String, Any>("friends" to FieldValue.arrayUnion(friendId))
 
                     userRef.set(userUpdates, SetOptions.merge())
                         .addOnSuccessListener {
                             Toast.makeText(this, "Friend request sent successfully!", Toast.LENGTH_SHORT).show()
 
+                            // Update UI to reflect friend status
                             binding.addFriendButton.visibility = View.GONE
                             binding.favoriteFriendBtn.visibility = View.VISIBLE
                             binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Set outline icon
