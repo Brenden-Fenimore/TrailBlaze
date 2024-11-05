@@ -130,7 +130,7 @@
         <activity android:name=".login.PrivacyActivity" />
 
         <!-- Watcher Member Activity-->
-
+<activity android:name=".watcherFeature.WatcherMemberList"/>
 
     </application>
 
