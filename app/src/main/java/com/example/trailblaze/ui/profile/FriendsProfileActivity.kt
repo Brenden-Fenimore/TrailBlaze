@@ -251,7 +251,6 @@ class FriendsProfileActivity : AppCompatActivity() {
         // Hide sections that should not be visible for a private account
         binding.leaderRecyclerView.visibility = View.GONE
         binding.favoriteTrailsSection.visibility = View.GONE
-        binding.watcherMember.visibility = View.GONE
         binding.photosRecyclerView.visibility = View.GONE
         binding.badgesRecyclerView.visibility = View.GONE
         binding.favoriteTrailsHeader.visibility = View.GONE
@@ -266,12 +265,10 @@ class FriendsProfileActivity : AppCompatActivity() {
         val isLeaderboardVisible = document.getBoolean("leaderboardVisible") ?: true
         val isPhotosVisible = document.getBoolean("photosVisible") ?: true
         val isFavoriteTrailsVisible = document.getBoolean("favoriteTrailsVisible") ?: true
-        val isWatcherVisible = document.getBoolean("watcherVisible") ?: true
 
         // Set visibility based on the privacy settings
         binding.leaderRecyclerView.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
         binding.favoriteTrailsSection.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
-        binding.watcherMember.visibility = if (isWatcherVisible) View.VISIBLE else View.GONE
         binding.photosRecyclerView.visibility = if (isPhotosVisible) View.VISIBLE else View.GONE
 
         // Optionally load other information like badges or favorite parks
