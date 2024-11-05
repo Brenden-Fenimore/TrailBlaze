@@ -260,7 +260,7 @@
 
         <!-- Completed Trails Section -->
         <TextView
-                android:id="@+id/completedTrailsHeader"
+                android:id="@+id/completedParksHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/homepage_time_records"

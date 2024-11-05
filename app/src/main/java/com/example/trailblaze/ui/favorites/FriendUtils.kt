@@ -20,7 +20,8 @@ object FriendUtils {
                     val userId = document.id
                     val username = document.getString("username") ?: "Unknown"
                     val profileImageUrl = document.getString("profileImageUrl") ?: ""
-                    val friend = Friends(userId, username, profileImageUrl)
+                    val isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
+                    val friend = Friends(userId, username, profileImageUrl, isPrivateAccount)
                     favoriteFriends.add(friend)
                 }
                 completedRequests++

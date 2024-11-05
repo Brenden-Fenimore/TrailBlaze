@@ -227,7 +227,8 @@ class ProfileFragment : Fragment() {
                     val friend = Friends(
                         userId  = friendId,
                         username = document.getString("username") ?: "Unknown",
-                        profileImageUrl = document.getString("profileImageUrl")
+                        profileImageUrl = document.getString("profileImageUrl"),
+                        isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
                     )
                     friendsList.add(friend) // Add friend to the list
                 }

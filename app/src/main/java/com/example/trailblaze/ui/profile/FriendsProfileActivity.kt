@@ -195,29 +195,10 @@ class FriendsProfileActivity : AppCompatActivity() {
                 if (document != null && document.exists()) {
                     val username = document.getString("username")
                     val imageUrl = document.getString("profileImageUrl")
-                    val favoritePark = document.get("favoriteParks")
                     val isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
 
                     binding.username.text = username
                     ImageLoader.loadProfilePicture(this, binding.profilePicture, imageUrl)
-
-                    // Retrieve visibility settings
-                    val isLeaderboardVisible = document.getBoolean("leaderboardVisible") ?: true
-                    val isPhotosVisible = document.getBoolean("photosVisible") ?: true
-                    val isFavoriteTrailsVisible = document.getBoolean("favoriteTrailsVisible") ?: true
-                    val isWatcherVisible = document.getBoolean("watcherVisible") ?: true
-
-                    // Set visibility based on the privacy settings
-                    binding.leaderRecyclerView.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
-                    binding.leaderboardHeader.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
-
-                    binding.photosRecyclerView.visibility = if (isPhotosVisible) View.VISIBLE else View.GONE
-                    binding.photosHeader.visibility = if (isPhotosVisible) View.VISIBLE else View.GONE
-
-                    binding.favoriteTrailsSection.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
-                    binding.favoriteTrailsHeader.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
-
-                    binding.watcherMember.visibility = if (isWatcherVisible) View.VISIBLE else View.GONE
 
                     // Check if the account is private
                     if (isPrivateAccount) {
@@ -225,18 +206,18 @@ class FriendsProfileActivity : AppCompatActivity() {
                         hideUserInformation()
                     } else {
                         // Load and display other information
-                        loadUserOtherInformation(document)
+                        loadUserOtherInformation(document) // Ensure this method is called only if the account isn't private
                     }
 
-                    // Check if the current user is friends with this friend
+                    // Check friendship status and update UI
                     checkFriendshipStatus(currentUserId, userId)
 
                     // Fetch and display badges
                     val badges = document.get("badges") as? List<String> ?: emptyList()
                     updateBadgesList(badges)
 
-                    // Fetch and display the friend's photos if the photos section is visible
-                    if (isPhotosVisible) {
+                    // If the account is not private, fetch friend photos and time records
+                    if (!isPrivateAccount) {
                         fetchFriendPhotos(userId)
                         fetchTimeRecordsForFriend(userId)
                     }
@@ -248,11 +229,20 @@ class FriendsProfileActivity : AppCompatActivity() {
                 Log.e("FriendsProfileActivity", "Error fetching friend profile: ", exception)
             }
     }
+
+
     private fun hideUserInformation() {
         // Hide sections that should not be visible for a private account
         binding.leaderRecyclerView.visibility = View.GONE
         binding.favoriteTrailsSection.visibility = View.GONE
         binding.watcherMember.visibility = View.GONE
+        binding.photosRecyclerView.visibility = View.GONE
+        binding.badgesRecyclerView.visibility = View.GONE
+        binding.favoriteTrailsHeader.visibility = View.GONE
+        binding.photosHeader.visibility = View.GONE
+        binding.leaderboardHeader.visibility = View.GONE
+        binding.completedParksHeader.visibility = View.GONE
+        binding.timeRecordsRecyclerView.visibility = View.GONE
     }
 
     private fun loadUserOtherInformation(document: DocumentSnapshot) {
@@ -266,6 +256,7 @@ class FriendsProfileActivity : AppCompatActivity() {
         binding.leaderRecyclerView.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
         binding.favoriteTrailsSection.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
         binding.watcherMember.visibility = if (isWatcherVisible) View.VISIBLE else View.GONE
+        binding.photosRecyclerView.visibility = if (isPhotosVisible) View.VISIBLE else View.GONE
 
         // Optionally load other information like badges or favorite parks
         val badges = document.get("badges") as? List<String> ?: emptyList()
@@ -524,7 +515,8 @@ class FriendsProfileActivity : AppCompatActivity() {
                     val friend = Friends(
                         userId = friendId,
                         username = document.getString("username") ?: "Unknown",
-                        profileImageUrl = document.getString("profileImageUrl")
+                        profileImageUrl = document.getString("profileImageUrl"),
+                        isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
                     )
                     commonFriends.add(friend)
                 }

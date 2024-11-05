@@ -36,6 +36,7 @@ object UserManager {
                         favoriteParks = document.get("favoriteParks") as? List<Park> ?: emptyList(),
                         badges = document.get("badges") as? List<String> ?: emptyList(),
                         bucketListParks = document.get("bucketList") as? List<Park> ?: emptyList(),
+                        isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false,
                     )
                     setCurrentUser(user)
                     callback(user)

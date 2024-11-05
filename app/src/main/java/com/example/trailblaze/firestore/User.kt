@@ -18,5 +18,6 @@ data class User(
     val friends: List<String> = emptyList(),
     val badges: List<String> = emptyList(),
     val favoriteParks: List<Park> = emptyList(),
-    val bucketListParks: List<Park> = emptyList()
+    val bucketListParks: List<Park> = emptyList(),
+    val isPrivateAccount: Boolean,
 )
