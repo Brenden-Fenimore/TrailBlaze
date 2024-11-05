@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.trailblaze.R
 
-class PhotosAdapter(private var photoUrls: MutableList<String>) : RecyclerView.Adapter<PhotosAdapter.PhotoViewHolder>() {
+class PhotosAdapter(private var photoUrls: MutableList<String>, private val isOwnProfile: Boolean) : RecyclerView.Adapter<PhotosAdapter.PhotoViewHolder>() {
 
     class PhotoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.imageView)
@@ -33,8 +33,12 @@ class PhotosAdapter(private var photoUrls: MutableList<String>) : RecyclerView.A
         // Set up click listener for full-screen view
         holder.itemView.setOnClickListener {
             val fragmentManager = (holder.itemView.context as AppCompatActivity).supportFragmentManager
-            FullscreenImageDialogFragment.newInstance(photoUrls, position)
-                .show(fragmentManager, "fullscreenDialog")
+            val fullscreenDialog = FullscreenImageDialogFragment.newInstance(photoUrls, position, isOwnProfile)
+
+            // Set the adapter before showing the dialog
+            fullscreenDialog.setPhotosAdapter(this) // Pass the current adapter
+
+            fullscreenDialog.show(fragmentManager, "fullscreenDialog")
         }
     }
 
@@ -49,4 +53,11 @@ class PhotosAdapter(private var photoUrls: MutableList<String>) : RecyclerView.A
         photoUrls.addAll(newPhotoUrls) // Add new photos
         notifyDataSetChanged() // Notify the adapter to refresh the RecyclerView
     }
+
+    fun removeItem(position: Int) {
+        photoUrls.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
+
 }

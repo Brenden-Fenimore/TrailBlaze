@@ -5,10 +5,13 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
@@ -106,6 +109,7 @@ class FriendsProfileActivity : AppCompatActivity() {
             fetchCurrentUserDifficulty()
         }
 
+
         // Initialize the RecyclerView for friends in common
         friendsInCommonList = mutableListOf()
         friendsInCommonAdapter = FriendAdapter(friendsInCommonList) { user ->
@@ -140,7 +144,7 @@ class FriendsProfileActivity : AppCompatActivity() {
 
         // Initialize RecyclerView and Adapter
         val recyclerView = findViewById<RecyclerView>(R.id.photosRecyclerView)
-        photosAdapter = PhotosAdapter(photoUrls)
+        photosAdapter = PhotosAdapter(photoUrls, isOwnProfile = false)
         recyclerView.adapter = photosAdapter
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
@@ -265,6 +269,7 @@ class FriendsProfileActivity : AppCompatActivity() {
         // Load favorite parks or any other relevant information
         loadFavoriteParks()
     }
+
 
     private fun checkFriendshipStatus(currentUserId: String, friendId: String) {
         firestore.collection("users").document(currentUserId).get()
@@ -724,4 +729,3 @@ class FriendsProfileActivity : AppCompatActivity() {
             }
     }
 }
-
