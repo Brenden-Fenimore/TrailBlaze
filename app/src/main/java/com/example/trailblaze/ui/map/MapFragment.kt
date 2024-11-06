@@ -25,15 +25,13 @@ import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.AutocompletePrediction
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken
-import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
-import com.google.android.libraries.places.api.net.PlacesClient
 import com.example.trailblaze.firestore.UserManager
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.model.CircularBounds
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.kotlin.circularBounds
-import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
-import com.google.android.libraries.places.api.net.SearchNearbyRequest
+import com.google.android.libraries.places.api.net.*
+import com.google.android.libraries.places.api.net.kotlin.fetchPlaceRequest
 
 
 class MapFragment : Fragment(),
@@ -51,11 +49,12 @@ OnMapReadyCallback {
 
     private lateinit var map: GoogleMap
     private val fullSail : CameraPosition = CameraPosition.builder().target(LatLng(28.596472,-81.301472)).zoom(15f).build()
-    var autocompletelist : List<AutocompletePrediction> = mutableListOf()
+    lateinit var autocompletelist : List<AutocompletePrediction>
     var autocompletelistString : MutableList<String> = mutableListOf()
     val searchTypes = listOf("hiking_area", "park")
     lateinit var mapFragment : SupportMapFragment
-    val currentUser = UserManager.getCurrentUser()
+    var currentUser = UserManager.getCurrentUser()
+    var placesList: MutableList<Place> = mutableListOf()
 
 
 
@@ -81,6 +80,7 @@ OnMapReadyCallback {
         val satelliteImageCircle = _binding!!.satelliteImage
         val roadImageCircle = _binding!!.roadmapImage
         val terrainImageCircle = _binding!!.terrainImage
+
         //Initialize the SDK
         Places.initializeWithNewPlacesApiEnabled(this.context!!, apiKey)
 
@@ -88,26 +88,32 @@ OnMapReadyCallback {
         val placesClient = Places.createClient(this.context!!)
         //go to fullsail button
         fullsailButton.setOnClickListener {  map.animateCamera(CameraUpdateFactory.newCameraPosition(fullSail))}
+
         //clear searchbar when clearbutton is clicked
         clearButton.setOnClickListener { multiAutoCompleteTextView.text?.clear() }
 
         //map buttons
-        satelliteButton.setOnClickListener {map.mapType=GoogleMap.MAP_TYPE_HYBRID
-            satelliteImageCircle.setImageResource(R.drawable.green_circle)
-            terrainImageCircle.setImageResource(R.drawable.grey_circle)
-            roadImageCircle.setImageResource(R.drawable.grey_circle)
-        }
-        terrainButton.setOnClickListener {map.mapType=GoogleMap.MAP_TYPE_TERRAIN
-            satelliteImageCircle.setImageResource(R.drawable.grey_circle)
-            terrainImageCircle.setImageResource(R.drawable.green_circle)
-            roadImageCircle.setImageResource(R.drawable.grey_circle)}
         roadButton.setOnClickListener {map.mapType=GoogleMap.MAP_TYPE_NORMAL
+            roadImageCircle.setImageResource(R.drawable.green_circle)
             satelliteImageCircle.setImageResource(R.drawable.grey_circle)
-            terrainImageCircle.setImageResource(R.drawable.grey_circle)
-            roadImageCircle.setImageResource(R.drawable.green_circle)}
+            terrainImageCircle.setImageResource(R.drawable.grey_circle)}
+        satelliteButton.setOnClickListener {map.mapType=GoogleMap.MAP_TYPE_HYBRID
+            roadImageCircle.setImageResource(R.drawable.grey_circle)
+            satelliteImageCircle.setImageResource(R.drawable.green_circle)
+            terrainImageCircle.setImageResource(R.drawable.grey_circle)}
+        terrainButton.setOnClickListener {map.mapType=GoogleMap.MAP_TYPE_TERRAIN
+            roadImageCircle.setImageResource(R.drawable.grey_circle)
+            satelliteImageCircle.setImageResource(R.drawable.grey_circle)
+            terrainImageCircle.setImageResource(R.drawable.green_circle)}
+
+
+
+        //Find trails near me button
         nearbySearchButton.setOnClickListener{
+            //check permissions and request if no access is found
             locationCheckAndRequest()
 
+            //check permission was granted before continuing
             if (ActivityCompat.checkSelfPermission(
                     //if access fine location is granted
                     this.context!!,
@@ -120,6 +126,7 @@ OnMapReadyCallback {
                 ) == PackageManager.PERMISSION_GRANTED
             )
             {
+                map.clear()
                 val placeRequest = FindCurrentPlaceRequest.builder(mutableListOf(Place.Field.LOCATION)).build()
                 val placeResponse = placesClient.findCurrentPlace(placeRequest)
                 placeResponse.addOnSuccessListener { result ->
@@ -127,11 +134,13 @@ OnMapReadyCallback {
                     {
                         val location = result.placeLikelihoods[0].place.location
                         map.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
-
-                        val circle : CircularBounds = circularBounds(location,30*1609.34)
+                        currentUser = UserManager.getCurrentUser()
+                        var radius = currentUser!!.distance!!*1609.34
+                        if(radius >= 50000.0) {radius = 50000.0 }
+                        val circle : CircularBounds = circularBounds(location,radius)
                         //currentUser?.distance!!
-                        val searchNearbyRequest = SearchNearbyRequest.builder(circle,mutableListOf(
-                            Place.Field.ID, Place.Field.ADDRESS_COMPONENTS, Place.Field.LOCATION, Place.Field.DISPLAY_NAME))
+                        val searchNearbyRequest = SearchNearbyRequest.builder(circle,listOf(
+                            Place.Field.ID, Place.Field.ADDRESS_COMPONENTS, Place.Field.LOCATION, Place.Field.DISPLAY_NAME,Place.Field.PHOTO_METADATAS))
                             .setIncludedTypes(listOf("hiking_area"))
                             .build()
                         placesClient.searchNearby(searchNearbyRequest).addOnSuccessListener{ result->
@@ -139,6 +148,7 @@ OnMapReadyCallback {
                             {
                                 map.addMarker(MarkerOptions().position(place.location).title(place.displayName))
                             }
+                            placesList.addAll(result.places)
                         }
                     }
 
@@ -155,8 +165,22 @@ OnMapReadyCallback {
         multiAutoCompleteTextView.setAdapter(autoFillAdapter)
         multiAutoCompleteTextView.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
         multiAutoCompleteTextView.threshold = 0
-
-
+        //if an item is clicked from the dropdown menu
+        multiAutoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
+            //create a FetchPlaceRequest object that gets the place id from the list of places
+            // and the list of fields we want to get more of
+            val placeFetch : FetchPlaceRequest = FetchPlaceRequest.builder(autocompletelist[position].placeId.toString()
+                ,listOf( Place.Field.ID, Place.Field.ADDRESS_COMPONENTS, Place.Field.LOCATION, Place.Field.DISPLAY_NAME,Place.Field.PHOTO_METADATAS)).build()
+            //ask for the place from Google and on success
+            placesClient.fetchPlace(placeFetch).addOnSuccessListener{response ->
+                //reset map and placeList, add place to placeList and move camera to the marker we
+                // create from the place's location
+                map.clear()
+                placesList.clear()
+                placesList.add(response.place)
+                map.addMarker(MarkerOptions().position(response.place.location).title(response.place.displayName))
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(response.place.location,13f)) }
+        }
         //when user types in the searchbar
         multiAutoCompleteTextView.addTextChangedListener{
                 updateAutoCompletePredictions(autoFillAdapter!!, multiAutoCompleteTextView.text.toString(), placesClient)
@@ -177,23 +201,41 @@ OnMapReadyCallback {
 
     //function to update list of autocomplete suggestions
     fun updateAutoCompletePredictions(adapter : ArrayAdapter<String>, string : String, placesClient : PlacesClient){
+
+        //create token for grouping requests for less cost
         val token = AutocompleteSessionToken.newInstance()
+
+        //build the AutoCompletePredictionsRequest
         val findAutocompletePredictionsRequest  =
             FindAutocompletePredictionsRequest.builder()
                 .setQuery(string)
                 .setTypesFilter(searchTypes)
                 .setSessionToken(token)
                 .build()
+
+        //use the findAP function from the Google places client and set on success listener
         placesClient.findAutocompletePredictions(findAutocompletePredictionsRequest).addOnSuccessListener{
             response ->
+
+            //clear previous list of place names (strings)
             autocompletelistString.clear()
+
+            //set our autocompletelist equal to the response's list
             autocompletelist = response.autocompletePredictions
+
+            //clear the adapter
             adapter.clear()
+
+            //loop through each prediction and grab the string for display
             for (prediction in response.autocompletePredictions) {
                 autocompletelistString.add(prediction.getFullText(null).toString())
                 }
+            //add each string of the autocompletelistString to the adapter
             adapter.addAll(autocompletelistString)
+
+            //if request fails
         }.addOnFailureListener {
+            //clear the string list so dropdown has no data
             autocompletelistString.clear()
         }
     }
