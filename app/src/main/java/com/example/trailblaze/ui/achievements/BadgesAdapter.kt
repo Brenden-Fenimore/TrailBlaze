@@ -9,22 +9,27 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
 
+// Adapter for displaying a list of badges in a RecyclerView
 class BadgesAdapter(
-    private var badges: List<Badge>,
-    private val itemClickListener: ((Badge) -> Unit)
+    private var badges: List<Badge>, // List of badges to be displayed
+    private val itemClickListener: ((Badge) -> Unit) // Click listener for badge items
 ) : RecyclerView.Adapter<BadgesAdapter.ViewHolder>() {
 
+    // Inner class to represent each badge item in the RecyclerView
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        // ImageView to display the badge image
         val badgeImage: ImageView = view.findViewById(R.id.badge_image)
 
         init {
             // Set click listener for the badge item
             itemView.setOnClickListener {
+                // Get the adapter position of the clicked item
                 val position = adapterPosition
+                // Check if the position is valid (not NO_POSITION)
                 if (position != RecyclerView.NO_POSITION) {
                     // Get the badge at the clicked position
                     val badge = badges[position]
-                    // Call the item click listener
+                    // Invoke the item click listener with the clicked badge
                     itemClickListener(badge)
                 }
             }

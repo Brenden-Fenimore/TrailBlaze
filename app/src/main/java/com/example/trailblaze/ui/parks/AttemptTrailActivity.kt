@@ -32,6 +32,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+// Activity where the user attempts a trail
 class AttemptTrailActivity : AppCompatActivity() {
 
     private lateinit var parkCode: String

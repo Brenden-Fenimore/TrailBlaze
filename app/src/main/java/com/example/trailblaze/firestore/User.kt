@@ -1,7 +1,7 @@
 package com.example.trailblaze.firestore
 
 import com.example.trailblaze.nps.Park
-
+// Data class representing a user
 data class User(
     val uid: String = "",
     val username: String = "",

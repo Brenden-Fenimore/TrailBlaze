@@ -9,31 +9,34 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
 
+// Activity that displays the achievements and badges for the user
 class AchievementsActivity : AppCompatActivity() {
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var achievementsAdapter: AchievementsAdapter
-    private lateinit var yourBadges: Button
+    private lateinit var recyclerView: RecyclerView // RecyclerView to display achievement categories
+    private lateinit var achievementsAdapter: AchievementsAdapter // Adapter for the RecyclerView
+    private lateinit var yourBadges: Button // Button to navigate to the BadgesActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_achievements)
-        // Hide the ActionBar
+        setContentView(R.layout.activity_achievements) // Set the content view for the activity
+
+        // Hide the ActionBar for a cleaner look
         supportActionBar?.hide()
 
-        findViewById<ImageButton>(R.id.chevron_left).setOnClickListener{
-            onBackPressedDispatcher.onBackPressed()
+        // Set the listener for the back button
+        findViewById<ImageButton>(R.id.chevron_left).setOnClickListener {
+            onBackPressedDispatcher.onBackPressed() // Go back to the previous screen
         }
 
-        // Initialize your button
+        // Initialize the button to view badges
         yourBadges = findViewById(R.id.your_badges)
 
-        // Set the onClickListener for the button
+        // Set the onClickListener for the "Your Badges" button
         yourBadges.setOnClickListener {
-            // Create an Intent to start BadgesActivity
+            // Create an Intent to start the BadgesActivity
             val intent = Intent(this, BadgesActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            startActivity(intent)
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP) // Prevents creating a new instance if it's already on top
+            startActivity(intent) // Start the BadgesActivity
         }
 
         //list of achievement categories

@@ -1,5 +1,6 @@
 package com.example.trailblaze.ui.achievements
 
+// Data class representing a category of achievements in the application
 data class AchievementCategory(
     val title: String,
 
