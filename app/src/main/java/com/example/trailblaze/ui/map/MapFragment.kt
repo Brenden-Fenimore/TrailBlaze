@@ -132,17 +132,25 @@ OnMapReadyCallback {
                 placeResponse.addOnSuccessListener { result ->
                     if(result.placeLikelihoods.isNotEmpty())
                     {
+                        //get the closest location to user
                         val location = result.placeLikelihoods[0].place.location
+                        //animate camera to user location at 10 zoom
                         map.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
+                        //refresh current user
                         currentUser = UserManager.getCurrentUser()
+                        //take mile distance and convert to meters
                         var radius = currentUser!!.distance!!*1609.34
-                        if(radius >= 50000.0) {radius = 50000.0 }
+                        //check if meter distance is over 50,000 and if it is then set it to 50,000
+                        if(radius > 50000.0) {radius = 50000.0 }
+                        //create circle area to search within
                         val circle : CircularBounds = circularBounds(location,radius)
-                        //currentUser?.distance!!
+                        //create SearchNearbyRequest object
                         val searchNearbyRequest = SearchNearbyRequest.builder(circle,listOf(
                             Place.Field.ID, Place.Field.ADDRESS_COMPONENTS, Place.Field.LOCATION, Place.Field.DISPLAY_NAME,Place.Field.PHOTO_METADATAS))
                             .setIncludedTypes(listOf("hiking_area"))
                             .build()
+                        //on success of searchNearby function, create marker at each place with name
+                        // and then add each place into placesList
                         placesClient.searchNearby(searchNearbyRequest).addOnSuccessListener{ result->
                             for(place in result.places)
                             {
