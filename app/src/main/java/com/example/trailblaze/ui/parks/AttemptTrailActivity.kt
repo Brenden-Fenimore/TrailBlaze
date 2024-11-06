@@ -412,7 +412,7 @@ class AttemptTrailActivity : AppCompatActivity() {
             override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
                 if (response.isSuccessful) {
                     response.body()?.let { npsResponse ->
-                        val park = npsResponse.data.firstOrNull() // Assuming the first park in the response
+                        val park = npsResponse.data.firstOrNull()
                         park?.let {
                             populateParkDetails(it) // Pass the park object to populate the UI
                         } ?: run {
