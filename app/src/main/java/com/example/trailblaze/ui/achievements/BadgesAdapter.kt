@@ -56,21 +56,33 @@ class BadgesAdapter(
         }
     }
 
+    // Override the onCreateViewHolder method to create a new ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        // Inflate the badge_item layout and create a View for the ViewHolder
         val view = LayoutInflater.from(parent.context).inflate(R.layout.badge_item, parent, false)
+
+        // Return a new instance of ViewHolder with the inflated view
         return ViewHolder(view)
     }
 
+    // Override the onBindViewHolder method to bind data to the ViewHolder
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        // Get the badge at the current position in the list
         val badge = badges[position]
+
+        // Bind the badge data to the ViewHolder
         holder.bind(badge)
     }
 
+    // Override the getItemCount method to return the total number of items
     override fun getItemCount(): Int = badges.size
 
-    // Update the badges list
+    // Function to update the badges list with a new list of badges
     fun updateBadges(newBadges: List<Badge>) {
+        // Update the current badges list with the new list
         this.badges = newBadges
-        notifyDataSetChanged() // Notify the adapter that the data has changed
+
+        // Notify the adapter that the dataset has changed and it should refresh the views
+        notifyDataSetChanged()
     }
 }

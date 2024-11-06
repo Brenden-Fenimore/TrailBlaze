@@ -150,17 +150,25 @@ class HomeFragment : Fragment() {
         fetchUserState() // Fetch the user state to update parks
     }
 
+    // Function to update the greeting message based on the current time of day
     private fun updateGreeting() {
+        // Get an instance of the Calendar class to retrieve the current date and time
         val calendar = Calendar.getInstance()
+        // Get the current hour of the day (0-23 format)
         val hourOfDay = calendar.get(Calendar.HOUR_OF_DAY)
 
+        // Determine the appropriate greeting based on the current hour
         val greeting: String =
             when {
-            hourOfDay in 5..11 -> "Good Morning"
-            hourOfDay in 12..17 -> "Good Afternoon"
-            else -> "Good Evening"
-        }
+                // If the hour is between 5 (inclusive) and 11 (inclusive), set greeting to "Good Morning"
+                hourOfDay in 5..11 -> "Good Morning"
+                // If the hour is between 12 (inclusive) and 17 (inclusive), set greeting to "Good Afternoon"
+                hourOfDay in 12..17 -> "Good Afternoon"
+                // For all other hours (18-24), set greeting to "Good Evening"
+                else -> "Good Evening"
+            }
 
+        // Update the text of the greetingTextView with the determined greeting
         greetingTextView.text = greeting
     }
 

@@ -144,35 +144,52 @@ class FavoritesFragment : Fragment() {
             }
     }
 
+    // Function to fetch details for a list of parks based on their codes
     private fun fetchParksDetails(parkCodes: List<String>) {
+        // Create a list of network requests (calls) to fetch park details for each park code
         val tasks = parkCodes.map { parkCode ->
-            RetrofitInstance.api.getParkDetails(parkCode)
+            RetrofitInstance.api.getParkDetails(parkCode) // Call the API to get details for each park
         }
 
+        // Variable to track the number of completed requests
         var completedRequests = 0
 
+        // Iterate through each network call to enqueue the requests
         tasks.forEach { call ->
+            // Enqueue the network call asynchronously
             call.enqueue(object : Callback<NPSResponse> {
+                // Callback method for handling a successful response from the API
                 override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
+                    // Check if the response is successful and contains data
                     if (response.isSuccessful && response.body() != null) {
+                        // Get the first park from the response data
                         val park = response.body()?.data?.firstOrNull()
+                        // If a park is found, add it to the favoriteParks list if not already present
                         park?.let {
                             // Check if the park is already in the list before adding
                             if (!favoriteParks.contains(it)) {
-                                favoriteParks.add(it)
+                                favoriteParks.add(it) // Add the park to the favorites list
                             }
                         }
                     }
+                    // Increment the count of completed requests
                     completedRequests++
+                    // Check if all requests have completed
                     if (completedRequests == parkCodes.size) {
+                        // Update the RecyclerView with the favorite parks once all requests are complete
                         updateParksRecyclerView(favoriteParks)
                     }
                 }
 
+                // Callback method for handling a failed response from the API
                 override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
+                    // Log an error message indicating the failure to fetch park details
                     Log.e("FavoritesFragment", "Error fetching park details: ${t.message}")
+                    // Increment the count of completed requests even on failure
                     completedRequests++
+                    // Check if all requests have completed
                     if (completedRequests == parkCodes.size) {
+                        // Update the RecyclerView with the favorite parks even if some requests failed
                         updateParksRecyclerView(favoriteParks)
                     }
                 }
@@ -180,7 +197,9 @@ class FavoritesFragment : Fragment() {
         }
     }
 
+    // Function to update the RecyclerView with the list of favorite parks
     private fun updateParksRecyclerView(parks: List<Park>) {
+        // Update the adapter with the new list of fetched parks
         favoritesAdapter.updateData(parks) // Update the adapter with the fetched parks
     }
 
@@ -240,26 +259,39 @@ class FavoritesFragment : Fragment() {
         }
     }
 
+    // Function to fetch favorite friends for the currently logged-in user
     private fun fetchFavoriteFriends() {
+        // Get the current user's ID from Firebase Authentication
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+
+        // Access the Firestore database to get the user's document
         firestore.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
+                // Check if the document exists and is not null
                 if (document != null && document.exists()) {
+                    // Retrieve the list of favorite friend IDs from the document
                     val favoriteFriendIds = document.get("favoriteFriends") as? List<String> ?: emptyList()
-                    // Call the utility function to fetch friend details
+
+                    // Call a utility function to fetch the details of the friends using their IDs
                     FriendUtils.fetchFriendsDetails(favoriteFriendIds, firestore) { friends ->
+                        // Update the RecyclerView with the list of fetched friends
                         updateFriendsRecyclerView(friends)
                     }
                 } else {
+                    // Log a message if the user document does not exist or is null
                     Log.d("FavoritesFragment", "User document does not exist or is null.")
                 }
             }
+            // Handle failures in retrieving the user document
             .addOnFailureListener { exception ->
+                // Log an error message with the exception details
                 Log.e("FavoritesFragment", "Failed to retrieve user document: ${exception.message}")
             }
     }
 
+    // Function to update the RecyclerView with the list of friends
     private fun updateFriendsRecyclerView(friends: List<Friends>) {
+        // Update the favorite friends adapter with the new list of friends
         favoriteFriendsAdapter.updateData(friends) // Update the adapter with the fetched friends
     }
 
