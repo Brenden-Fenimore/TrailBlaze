@@ -40,9 +40,8 @@ class WatcherMemberList : AppCompatActivity() {
         }
         watcherProfileRecycler.adapter = adapter
 
-        // Set up the back button using onBackPressedDispatcher
-        findViewById<ImageButton>(R.id.backButton).setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
+        findViewById<ImageButton>(R.id.chevron_left).setOnClickListener {
+            onBackPressed()
         }
     }
 }
