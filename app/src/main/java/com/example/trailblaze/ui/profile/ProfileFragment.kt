@@ -162,11 +162,8 @@ interface PhotoDeletionListener {
             badgesList = binding.badgesRecyclerView
             badgesList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-        // Fetch leaderboard data
-        fetchLeaderboard()
-
-        return binding.root
-    }
+            return binding.root
+        }
 
         private fun setupUIEventListeners() {
             binding.editbutton.setOnClickListener {

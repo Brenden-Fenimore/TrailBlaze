@@ -301,6 +301,11 @@
     <string name="favoriteFriends">Favorite TrailBlazers</string>
     <string name="rangeMiles">  Range</string>
     <string name="uploadPhoto">Upload Photo</string>
+    <string name="deleteButton">Delete Button</string>
+    <string name="fullscreenImage">Fullscreen Image</string>
+    <string name="previousButton">Previous Button</string>
+    <string name="nextButton">Next Button</string>
+    <string name="editCaptionButton">Edit Caption</string>
     <!-- Spinner options for terrain -->
     <string-array name="terrain_options">
         <item>Foot Trails</item>
