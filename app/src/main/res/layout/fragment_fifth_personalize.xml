@@ -20,7 +20,7 @@
                 android:padding="9dp"
                 android:layout_margin="18dp"
                 android:fontFamily="@font/amethysta"
-                android:textSize="22sp"
+                android:textSize="24sp"
                 android:textAlignment="center"
                 android:text="@string/setupWatchers"/>
 
@@ -34,7 +34,7 @@
                 android:textAlignment="center"
                 android:text="@string/watcherDescription"
                 android:layout_gravity="center_horizontal"
-                android:background="EFE7EF"
+                android:background="@drawable/textview_border"
                 />
 
         <ImageView
@@ -56,20 +56,20 @@
                 android:layout_margin="13dp">
 
             <Button
-                    android:id="@+id/acceptableUseBtn"
+                    android:id="@+id/yesBtn"
                     android:layout_width="150dp"
                     android:layout_height="55dp"
-                    android:text="Yes"
+                    android:text="@string/Yes"
                     android:fontFamily="@font/amethysta"
                     android:textSize="18sp"
                     android:layout_weight="1"/>
 
             <Button
-                    android:id="@+id/privacyPolicyBtn"
+                    android:id="@+id/LaterBtn"
                     android:layout_width="150dp"
                     android:layout_height="55dp"
                     android:layout_marginStart="16dp"
-                    android:text="Later"
+                    android:text="@string/Later"
                     android:fontFamily="@font/amethysta"
                     android:textSize="18sp"
                     android:layout_weight="1"/>

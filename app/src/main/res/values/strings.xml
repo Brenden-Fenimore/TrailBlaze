@@ -449,4 +449,6 @@
     </string>
     <string name="setupWatchers">Would you like to designate Watcher(s) for your account?</string>
     <string name="watcherDescription">Watchers are trusted contacts that can monitor your journey in real-time to stay safe and connected.</string>
+    <string name="Later">Later</string>
+    <string name="Yes">Yes</string>
 </resources>
