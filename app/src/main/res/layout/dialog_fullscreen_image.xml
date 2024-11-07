@@ -12,6 +12,30 @@
             android:scaleType="fitCenter"
             android:adjustViewBounds="true" />
 
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/fullscreenImageView"
+            android:layout_alignBottom="@id/fullscreenImageView"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp">
+
+    <TextView
+            android:id="@+id/captionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:background="#80000000"
+            android:visibility="gone"
+            android:singleLine="true"
+            android:paddingStart="1dp"
+            android:paddingEnd="1dp" />
+
+    </RelativeLayout>
+
     <ImageButton
             android:id="@+id/prevImageButton"
             android:contentDescription="@string/previousButton"
@@ -41,15 +65,15 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp">
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="1dp">
 
     <ImageButton
             android:id="@+id/deleteImageButton"
             android:contentDescription="@string/deleteButton"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:padding="8dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:padding="4dp"
             android:src="@drawable/delete"
             android:scaleType="fitCenter"
             android:background="?android:attr/selectableItemBackgroundBorderless"
@@ -60,7 +84,7 @@
             android:contentDescription="@string/editCaptionButton"
             android:layout_width="38dp"
             android:layout_height="38dp"
-            android:padding="8dp"
+            android:padding="4dp"
             android:src="@drawable/edit"
             android:scaleType="fitCenter"
             android:background="?android:attr/selectableItemBackgroundBorderless"
@@ -68,18 +92,4 @@
             android:visibility="gone"/>
 
     </LinearLayout>
-
-    <TextView
-            android:id="@+id/captionTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|start"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            android:textColor="@android:color/white"
-            android:textSize="14sp"
-            android:background="@android:color/black"
-            android:visibility="gone"
-            android:maxWidth="80dp" />
-
 </RelativeLayout>

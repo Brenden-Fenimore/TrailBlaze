@@ -29,7 +29,10 @@ class FourthPersonalizeFragment : Fragment() {
     ): View? {
         //inflate the layout
         val view = inflater.inflate(R.layout.fragment_fourth_personalize, container, false)
-
+        view.findViewById<Button>(R.id.continuebtn4).setOnClickListener {
+            //navigate to ThirdFragment
+            (activity as? PersonalizeActivity)?.loadFragment(FifthPersonalizeFragment())
+        }
         // define map for spinner options with unique ids
         val optionsSpinner1 = mapOf(
             "Foot Trails" to 1,
@@ -59,16 +62,6 @@ class FourthPersonalizeFragment : Fragment() {
             "Climbing" to 4,
         )
 
-        //set up the finished button
-        view.findViewById<Button>(R.id.finished).setOnClickListener {
-            //navigate to MainActivity
-            val intent = Intent(activity, MainActivity::class.java)
-            saveUserPreferences()
-            //clear the activity stack so the user can't return to the fragments
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-            activity?.finish()
-        }
         //initialize the Spinners
         terrain = view.findViewById(R.id.spinner1)
         fitnessLevel = view.findViewById(R.id.spinner2)

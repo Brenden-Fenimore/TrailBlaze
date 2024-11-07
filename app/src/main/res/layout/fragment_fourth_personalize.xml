@@ -128,13 +128,13 @@
     </LinearLayout>
 
     <Button
-            android:text="Finished"
+            android:text="@string/titleContinue"
             android:layout_width="304dp"
             android:fontFamily="@font/amethysta"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:id="@+id/finished">
+            android:id="@+id/continuebtn4">
     </Button>
 
 </RelativeLayout>

@@ -14,7 +14,7 @@
             android:id="@+id/watcherSetupBody">
 
         <TextView
-                android:layout_width="375dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/watcherSetupStatement"
                 android:padding="9dp"
