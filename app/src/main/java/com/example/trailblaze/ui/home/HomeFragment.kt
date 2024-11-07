@@ -129,7 +129,13 @@ class HomeFragment : Fragment() {
         timeRecordsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         // Initialize adapter with an empty list and set it on the RecyclerView
-        timeRecordAdapter = TimeRecordAdapter(mutableListOf())
+        timeRecordAdapter = TimeRecordAdapter(mutableListOf()) { timeRecord ->
+            // Create an intent to start the ParkDetailActivity
+            val intent = Intent(context, ParkDetailActivity::class.java).apply {
+                putExtra("PARK_CODE", timeRecord.parkCode) // Pass the park code
+            }
+            startActivity(intent) // Start the ParkDetailActivity
+        }
         timeRecordsRecyclerView.adapter = timeRecordAdapter
 
         // Load users (you would need to implement this)
@@ -144,17 +150,25 @@ class HomeFragment : Fragment() {
         fetchUserState() // Fetch the user state to update parks
     }
 
+    // Function to update the greeting message based on the current time of day
     private fun updateGreeting() {
+        // Get an instance of the Calendar class to retrieve the current date and time
         val calendar = Calendar.getInstance()
+        // Get the current hour of the day (0-23 format)
         val hourOfDay = calendar.get(Calendar.HOUR_OF_DAY)
 
+        // Determine the appropriate greeting based on the current hour
         val greeting: String =
             when {
-            hourOfDay in 5..11 -> "Good Morning"
-            hourOfDay in 12..17 -> "Good Afternoon"
-            else -> "Good Evening"
-        }
+                // If the hour is between 5 (inclusive) and 11 (inclusive), set greeting to "Good Morning"
+                hourOfDay in 5..11 -> "Good Morning"
+                // If the hour is between 12 (inclusive) and 17 (inclusive), set greeting to "Good Afternoon"
+                hourOfDay in 12..17 -> "Good Afternoon"
+                // For all other hours (18-24), set greeting to "Good Evening"
+                else -> "Good Evening"
+            }
 
+        // Update the text of the greetingTextView with the determined greeting
         greetingTextView.text = greeting
     }
 
@@ -213,10 +227,11 @@ class HomeFragment : Fragment() {
                     val userId = document.id
                     val username = document.getString("username")
                     val profileImageUrl = document.getString("profileImageUrl")
+                    val isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
 
                     // Check for null username and ensure the user is not the current user
                     if (username != null && userId != currentUserId) {
-                        Friends(userId, username, profileImageUrl) // Replace with your User model constructor
+                        Friends(userId, username, profileImageUrl, isPrivateAccount) // Replace with your User model constructor
                     } else {
                         null
                     }
@@ -293,10 +308,11 @@ class HomeFragment : Fragment() {
                     val timeRecords = timeRecordsData?.map { record ->
                         val parkName = record["parkName"] as? String ?: return@map null
                         val elapsedTime = record["elapsedTime"] as? String ?: return@map null
+                        val parkCode = record["parkCode"] as? String ?: return@map null
                         val imageUrl = record["imageUrl"] as? String ?: return@map null
 
                         // Create a TimeRecord object
-                        TimeRecord(parkName, elapsedTime, imageUrl)
+                        TimeRecord(parkName, elapsedTime, imageUrl, parkCode)
                     }?.filterNotNull() ?: emptyList() // Filter out any null items
 
                     // Update the adapter with fetched data using updateData method

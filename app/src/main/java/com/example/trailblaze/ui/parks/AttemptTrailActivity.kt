@@ -1,21 +1,28 @@
 package com.example.trailblaze.ui.parks
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
 import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.Park
 import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.ui.achievements.AchievementManager
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import nl.dionsegijn.konfetti.KonfettiView
@@ -25,6 +32,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+// Activity where the user attempts a trail
 class AttemptTrailActivity : AppCompatActivity() {
 
     private lateinit var parkCode: String
@@ -36,6 +44,10 @@ class AttemptTrailActivity : AppCompatActivity() {
     private lateinit var startTrailButton: Button
     private lateinit var firestore: FirebaseFirestore
     private lateinit var achievementManager: AchievementManager
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var userAdapter: UserAdapter
+    private var userList: MutableList<NonTrailBlazeUser> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +80,178 @@ class AttemptTrailActivity : AppCompatActivity() {
 
         startTrailButton.setOnClickListener {
             showTimerDialog()
+            savePartyMembersToFirestore()
         }
+
+        // Find the button and set the click listener
+        val addNonTrailBlazeUserButton: Button = findViewById(R.id.add_non_TrailBlaze_user)
+        addNonTrailBlazeUserButton.setOnClickListener {
+            showAddUserDialog()
+        }
+
+        val addTrailBlazeUser: Button = findViewById(R.id.add_trailMates_user)
+        addTrailBlazeUser.setOnClickListener {
+            showAddFriendsDialog()
+        }
+
+        recyclerView = findViewById(R.id.partyMemberRecyclerView)
+        userAdapter = UserAdapter(this, userList)
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.adapter = userAdapter
+        addCurrentUserToParty()
+        updatePartyMemberCount()
+    }
+    private fun showAddFriendsDialog() {
+        // Inflate the dialog layout
+        val dialogView = layoutInflater.inflate(R.layout.dialog_add_friends, null)
+        val dialogBuilder = AlertDialog.Builder(this)
+            .setView(dialogView)
+
+        val dialog = dialogBuilder.create()
+
+        // Initialize RecyclerView
+        val friendsRecyclerView: RecyclerView = dialogView.findViewById(R.id.friendsRecyclerView)
+        val confirmButton: Button = dialogView.findViewById(R.id.confirm_selection_button)
+
+        // Initialize an empty friends list
+        val friendsList = mutableListOf<AddFriend>()
+
+        // Initialize the adapter with the friends list
+        val friendsAdapter = AddFriendsAdapter(friendsList) { friend ->
+            // Handle checkbox change if necessary (optional)
+        }
+
+        // Set up the RecyclerView
+        friendsRecyclerView.layoutManager = LinearLayoutManager(this)
+        friendsRecyclerView.adapter = friendsAdapter
+
+        // Fetch the user's friends
+        fetchUserFriends { fetchedFriends ->
+            friendsList.clear() // Clear the current list
+            friendsList.addAll(fetchedFriends) // Add the fetched friends
+            friendsAdapter.notifyDataSetChanged() // Notify the adapter to refresh the list
+        }
+
+        // Confirm button click listener
+        confirmButton.setOnClickListener {
+            // Loop through the friends list and add selected friends to the userList
+            for (friend in friendsList) {
+                if (friend.isSelected) {
+                    userList.add(NonTrailBlazeUser(friend.username)) // Add selected friend's username
+                }
+            }
+            userAdapter.notifyDataSetChanged() // Notify the user adapter to refresh the list
+            updatePartyMemberCount() // Update the member count
+            dialog.dismiss() // Close the dialog
+        }
+
+        dialog.show() // Show the dialog
+    }
+
+    private fun fetchUserFriends(onComplete: (List<AddFriend>) -> Unit) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+            firestore.collection("users").document(userId).get()
+                .addOnSuccessListener { document ->
+                    if (document.exists()) {
+                        val friendsIds = document.get("friends") as? List<String> ?: emptyList()
+                        loadFriendsData(friendsIds, onComplete)
+                    } else {
+                        onComplete(emptyList()) // No friends found
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Log.e("Firestore", "Error fetching friends: ", e)
+                    onComplete(emptyList()) // In case of an error, return empty list
+                }
+        } else {
+            onComplete(emptyList()) // User not logged in
+        }
+    }
+
+    private fun loadFriendsData(friendIds: List<String>, onComplete: (List<AddFriend>) -> Unit) {
+        val tasks = mutableListOf<Task<DocumentSnapshot>>()
+        val friendsList = mutableListOf<AddFriend>()
+
+        for (friendId in friendIds) {
+            tasks.add(firestore.collection("users").document(friendId).get().addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val username = document.getString("username") ?: "Unknown"
+                    friendsList.add(AddFriend(username, false)) // Add friend to the list
+                }
+            })
+        }
+
+        // Wait until all friend data is fetched
+        Tasks.whenAllSuccess<DocumentSnapshot>(tasks).addOnSuccessListener {
+            onComplete(friendsList) // Return the populated friends list
+        }
+    }
+
+    private fun addCurrentUserToParty() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid // Get the current user's ID
+
+        if (userId != null) {
+            firestore.collection("users").document(userId).get()
+                .addOnSuccessListener { document ->
+                    if (document != null && document.exists()) {
+                        val username = document.getString("username") ?: "Unknown User" // Fetch the username
+                        // Add the current user's username to the user list
+                        userList.add(NonTrailBlazeUser(username))
+                        userAdapter.notifyItemInserted(userList.size - 1) // Notify adapter of new item
+                    } else {
+                        // Handle the case where the document does not exist
+                        userList.add(NonTrailBlazeUser("Username not found"))
+                        userAdapter.notifyItemInserted(userList.size - 1)
+                    }
+                }
+                .addOnFailureListener {
+                    // Handle failure
+                    userList.add(NonTrailBlazeUser("Error fetching username"))
+                    userAdapter.notifyItemInserted(userList.size - 1)
+                }
+        } else {
+            // Handle the case where userId is null (not logged in)
+            userList.add(NonTrailBlazeUser("Not logged in"))
+            userAdapter.notifyItemInserted(userList.size - 1)
+        }
+    }
+    private fun showAddUserDialog() {
+        // Inflate the custom layout for adding a user
+        val dialogView = layoutInflater.inflate(R.layout.dialog_add_user, null)
+
+        // Create the dialog
+        val dialogBuilder = AlertDialog.Builder(this)
+            .setView(dialogView)
+
+        val dialog = dialogBuilder.create()
+
+        // Initialize the views in the dialog
+        val editTextUserName: EditText = dialogView.findViewById(R.id.non_trailBlaze_user_name_input)
+        val buttonSaveUser: Button = dialogView.findViewById(R.id.save_user_button)
+
+        buttonSaveUser.setOnClickListener {
+            val userName = editTextUserName.text.toString().trim()
+            if (userName.isNotEmpty()) {
+                // Add the new user to the list
+                userList.add(NonTrailBlazeUser(userName))
+                userAdapter.notifyItemInserted(userList.size - 1) // Notify adapter of new item
+
+                // Update the party member count
+                updatePartyMemberCount()
+
+                editTextUserName.text.clear() // Clear the EditText for the next input
+                dialog.dismiss() // Close the dialog
+            } else {
+                Toast.makeText(this, "Please enter a name", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        dialog.show()
+    }
+    private fun updatePartyMemberCount() {
+        val partyMemberCountTextView: TextView = findViewById(R.id.party_member_count)
+        partyMemberCountTextView.text = "(${userList.size})"  // Update the count in the format (N)
     }
 
     private fun showTimerDialog() {
@@ -123,11 +306,14 @@ class AttemptTrailActivity : AppCompatActivity() {
         }
 
         saveTimeButton.setOnClickListener {
+
+            isRunning = false // Pause the timer
+
             // Get the elapsed time as a String
             val elapsedTimeString = timerTextView.text.toString()
 
             // Create a TimeRecord object with parkImageUrl
-            val timeRecord = TimeRecord(parkName, elapsedTimeString, parkImageUrl)
+            val timeRecord = TimeRecord(parkName, elapsedTimeString, parkImageUrl, parkCode)
 
             // Save the record to Firestore
             saveTimeToFirestore(timeRecord)
@@ -165,9 +351,9 @@ class AttemptTrailActivity : AppCompatActivity() {
             .setSpeed(1f, 5f)
             .setTimeToLive(3000L) // Increase the time to live to allow for longer fall
             .addShapes(Shape.Circle)
-            .addSizes(Size(6))
+            .addSizes(Size(8))
             // Set the position to emit from the right side and farther down
-            .setPosition(konfettiView.width + 50f, konfettiView.width + 50f, -100f, -50f)
+            .setPosition(konfettiView.width + 400f, konfettiView.width + 400f, -100f, -50f)
             .stream(300, 3000L) // Stream 300 particles for 3000 milliseconds (3 seconds)
 
         // Optionally hide the konfetti view after some time
@@ -185,9 +371,11 @@ class AttemptTrailActivity : AppCompatActivity() {
             // Update the timeRecords field, creating it if it doesn't exist
             userDocRef.update("timeRecords", FieldValue.arrayUnion(timeRecord))
                 .addOnSuccessListener {
+                    // After saving the time record, delete party members
+                    deletePartyMembers(userId)
+                    // Notify watchers
+                    //notifyWatchers(userId)
                     achievementManager.checkAndGrantConquerorBadge()
-
-                    // Save to Firebase
                     achievementManager.saveBadgeToUserProfile("conqueror")
                     Log.d("AttemptTrailActivity", "Time record saved successfully")
                 }
@@ -225,7 +413,7 @@ class AttemptTrailActivity : AppCompatActivity() {
             override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
                 if (response.isSuccessful) {
                     response.body()?.let { npsResponse ->
-                        val park = npsResponse.data.firstOrNull() // Assuming the first park in the response
+                        val park = npsResponse.data.firstOrNull()
                         park?.let {
                             populateParkDetails(it) // Pass the park object to populate the UI
                         } ?: run {
@@ -246,5 +434,40 @@ class AttemptTrailActivity : AppCompatActivity() {
         parkNameTextView.text = park.fullName
         parkName = park.fullName // Store the park name
         parkImageUrl = park.images.firstOrNull()?.url ?: ""
+    }
+
+    private fun savePartyMembersToFirestore() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+            // Reference to the user's document in Firestore
+            val userDocRef = firestore.collection("users").document(userId)
+
+            // Convert userList to a list of usernames
+            val partyMembers = userList.map { it.name }
+
+            // Update the partyMembers field, creating it if it doesn't exist
+            userDocRef.update("partyMembers", partyMembers)
+                .addOnSuccessListener {
+                    Log.d("AttemptTrailActivity", "Party members saved successfully")
+                }
+                .addOnFailureListener { e ->
+                    Log.e("AttemptTrailActivity", "Error saving party members: ${e.message}")
+                }
+        } else {
+            Log.e("AttemptTrailActivity", "User not authenticated")
+        }
+    }
+
+    private fun deletePartyMembers(userId: String) {
+        val userDocRef = firestore.collection("users").document(userId)
+
+        // Remove party members by deleting the "partyMembers" field
+        userDocRef.update("partyMembers", FieldValue.delete())
+            .addOnSuccessListener {
+                Log.d("AttemptTrailActivity", "Party members deleted successfully")
+            }
+            .addOnFailureListener { e ->
+                Log.e("AttemptTrailActivity", "Error deleting party members: ${e.message}")
+            }
     }
 }

@@ -40,7 +40,6 @@ class MenuActivity : AppCompatActivity() {
 
         val toAbout = findViewById<TextView>(R.id.about)
 
-
         // Initialize AchievementManager
         achievementManager = AchievementManager(this)
 
@@ -104,15 +103,10 @@ class MenuActivity : AppCompatActivity() {
         }
     }
 
-
-
     private fun loadProfilePicture() {
         val userId = auth.currentUser?.uid ?: return
         userRepository.getUserProfileImage(userId) { imageUrl ->
             ImageLoader.loadProfilePicture(this, binding.profilePicture, imageUrl)
         }
     }
-
-
-
 }

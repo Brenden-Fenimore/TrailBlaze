@@ -225,18 +225,19 @@ interface PhotoDeletionListener {
         private fun loadFriendsData(friendIds: List<String>) {
             val tasks = mutableListOf<Task<DocumentSnapshot>>()
 
-            for (friendId in friendIds) {
-                tasks.add(firestore.collection("users").document(friendId).get().addOnSuccessListener { document ->
-                    if (document.exists()) {
-                        val friend = Friends(
-                            userId = friendId,
-                            username = document.getString("username") ?: "Unknown",
-                            profileImageUrl = document.getString("profileImageUrl")
-                        )
-                        friendsList.add(friend) // Add friend to the list
-                    }
-                })
-            }
+        for (friendId in friendIds) {
+            tasks.add(firestore.collection("users").document(friendId).get().addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val friend = Friends(
+                        userId  = friendId,
+                        username = document.getString("username") ?: "Unknown",
+                        profileImageUrl = document.getString("profileImageUrl"),
+                        isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
+                    )
+                    friendsList.add(friend) // Add friend to the list
+                }
+            })
+        }
 
             // Wait until all friend data is fetched
             Tasks.whenAllSuccess<DocumentSnapshot>(tasks).addOnSuccessListener {
@@ -484,6 +485,39 @@ interface PhotoDeletionListener {
             }
         }
 
+    private fun fetchLeaderboard() {
+        firestore.collection("users").get()
+            .addOnSuccessListener { querySnapshot ->
+                val leaderboardEntries = mutableListOf<LeaderboardEntry>()
+
+                for (document in querySnapshot.documents) {
+                    val userId = document.id
+                    val username = document.getString("username") ?: "Unknown"
+                    val badges = document.get("badges") as? List<String> ?: emptyList()
+                    val badgeCount = badges.size
+
+                    // Get the profile image URL
+                    val profileImageUrl = document.getString("profileImageUrl") // Assuming this field exists
+
+                    // Add to leaderboard entries
+                    leaderboardEntries.add(LeaderboardEntry(userId, username, badgeCount, profileImageUrl))
+                }
+
+                // Sort the leaderboard entries by badge count in descending order
+                leaderboardEntries.sortByDescending { it.badgeCount }
+
+                // Update the RecyclerView with the sorted leaderboard
+                updateLeaderboardRecyclerView(leaderboardEntries)
+            }
+            .addOnFailureListener { e ->
+                Log.e("ProfileFragment", "Error fetching leaderboard: ", e)
+            }
+    }
+
+    private fun updateLeaderboardRecyclerView(entries: List<LeaderboardEntry>) {
+        val leaderboardAdapter = LeaderboardAdapter(entries)
+        binding.leaderRecyclerView.adapter = leaderboardAdapter
+    }
         override fun onPhotoDeleted(photoUrl: String) {
             val userId = FirebaseAuth.getInstance().currentUser?.uid
             if (userId != null) {
@@ -519,39 +553,6 @@ interface PhotoDeletionListener {
             super.onResume()
             fetchPhotos()
         }
-    private fun fetchLeaderboard() {
-        firestore.collection("users").get()
-            .addOnSuccessListener { querySnapshot ->
-                val leaderboardEntries = mutableListOf<LeaderboardEntry>()
-
-                for (document in querySnapshot.documents) {
-                    val userId = document.id
-                    val username = document.getString("username") ?: "Unknown"
-                    val badges = document.get("badges") as? List<String> ?: emptyList()
-                    val badgeCount = badges.size
-
-                    // Get the profile image URL
-                    val profileImageUrl = document.getString("profileImageUrl") // Assuming this field exists
-
-                    // Add to leaderboard entries
-                    leaderboardEntries.add(LeaderboardEntry(userId, username, badgeCount, profileImageUrl))
-                }
-
-                // Sort the leaderboard entries by badge count in descending order
-                leaderboardEntries.sortByDescending { it.badgeCount }
-
-                // Update the RecyclerView with the sorted leaderboard
-                updateLeaderboardRecyclerView(leaderboardEntries)
-            }
-            .addOnFailureListener { e ->
-                Log.e("ProfileFragment", "Error fetching leaderboard: ", e)
-            }
-    }
-
-    private fun updateLeaderboardRecyclerView(entries: List<LeaderboardEntry>) {
-        val leaderboardAdapter = LeaderboardAdapter(entries)
-        binding.leaderRecyclerView.adapter = leaderboardAdapter
-    }
 
         override fun onDestroyView() {
             super.onDestroyView()

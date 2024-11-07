@@ -9,16 +9,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
 
+// Fragment that displays a list of achievements
 class AchievementsFragment : Fragment() {
 
-    private lateinit var achievementManager: AchievementManager
-    private lateinit var achievementsList: RecyclerView
-    private lateinit var achievementsAdapter: AchievementsAdapter
-    private lateinit var categories: List<AchievementCategory>
+    private lateinit var achievementManager: AchievementManager // Manager for handling achievement logic
+    private lateinit var achievementsList: RecyclerView // RecyclerView to display achievements
+    private lateinit var achievementsAdapter: AchievementsAdapter // Adapter for the RecyclerView
+    private lateinit var categories: List<AchievementCategory> // List of achievement categories
 
+    // Inflate the layout for the fragment and initialize components
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val root = inflater.inflate(R.layout.fragment_achievements, container, false)
 
+        // Initialize the AchievementManager with the current context
         achievementManager = AchievementManager(requireContext())
         achievementsList = root.findViewById(R.id.achievementsRecyclerView)
         achievementsList.layoutManager = LinearLayoutManager(context)

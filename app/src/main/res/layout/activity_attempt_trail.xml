@@ -86,25 +86,74 @@
             android:orientation="vertical"
             android:visibility="gone">
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Current Party:" />
-
-        <!-- RecyclerView for party members would go here -->
-        <!-- Example: RecyclerView to show party members can be added here -->
-
-        <Button
-                android:id="@+id/add_non_trailBlaze_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add non-trailBlaze user" />
-
-        <EditText
-                android:id="@+id/non_trailBlaze_user_name"
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter name of non-trailBlaze user" />
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="?attr/colorPrimary"
+                    android:text="Current Party:" />
+
+            <!-- TextView to show number of people in the party -->
+            <TextView
+                    android:id="@+id/party_member_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textColor="?attr/colorPrimary"
+                    android:layout_marginStart="8dp"
+                    android:text="(0)" />
+        </LinearLayout>
+
+        <!-- RecyclerView for party members would go here -->
+        <androidx.cardview.widget.CardView
+                android:id="@+id/currentParty"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="8dp"
+                app:cardBackgroundColor="@android:color/white"
+                android:layout_margin="16dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/partyMemberRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="LinearLayoutManager"
+                android:orientation="horizontal"/>
+        </androidx.cardview.widget.CardView>
+        <!-- Example: RecyclerView to show party members can be added here -->
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+            <Button
+                    android:id="@+id/add_non_TrailBlaze_user"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Add non-TrailBlazer" />
+
+            <Button
+                    android:id="@+id/add_trailMates_user"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Add TrailBlazer"
+                    android:layout_marginStart="16dp"/> <!-- Add margin for spacing -->
+        </LinearLayout>
+
     </LinearLayout>
 
 

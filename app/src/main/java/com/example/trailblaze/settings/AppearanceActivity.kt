@@ -69,15 +69,23 @@ class AppearanceActivity : AppCompatActivity() {
         }
     }
 
+    // Function to save the user's preference for dark mode
     private fun saveDarkModePreference(isEnabled: Boolean) {
+        // Obtain an editor to modify the shared preferences
         val editor = sharedPreferences.edit()
+        // Save the dark mode preference as a boolean value
         editor.putBoolean("isDarkModeEnabled", isEnabled)
+        // Apply the changes asynchronously
         editor.apply()
     }
 
+    // Function to save the user's preference for metric units
     private fun saveMetricUnitsPreference(isEnabled: Boolean) {
+        // Obtain an editor to modify the shared preferences
         val editor = sharedPreferences.edit()
+        // Save the metric units preference as a boolean value
         editor.putBoolean("isMetricUnits", isEnabled)
+        // Apply the changes asynchronously
         editor.apply()
     }
 }

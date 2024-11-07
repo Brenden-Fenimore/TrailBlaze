@@ -50,10 +50,11 @@ class UserListActivity: AppCompatActivity(){
                     val userId = document.id
                     val username = document.getString("username")
                     val profileImageUrl = document.getString("profileImageUrl")
+                    val isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
 
                     // Check for null username and ensure the user is not the current user
                     if (username != null && userId != currentUserId) {
-                        Friends(userId, username, profileImageUrl) // Replace with your User model constructor
+                        Friends(userId, username, profileImageUrl, isPrivateAccount) // Replace with your User model constructor
                     } else {
                         null
                     }
