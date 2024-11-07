@@ -21,7 +21,7 @@ class FifthPersonalizeFragment : Fragment() {
         //inflate the layout
         val view = inflater.inflate(R.layout.fragment_fifth_personalize, container, false)
         view.findViewById<Button>(R.id.yesBtn).setOnClickListener {
-            val intent = Intent(context, EditWatcherProfile::class.java)
+            val intent = Intent(activity, EditWatcherProfile::class.java)
         }
 
         view.findViewById<Button>(R.id.LaterBtn).setOnClickListener {
