@@ -31,8 +31,8 @@
             android:background="#80000000"
             android:visibility="gone"
             android:singleLine="true"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp" />
+            android:paddingStart="1dp"
+            android:paddingEnd="1dp" />
 
     </RelativeLayout>
 
@@ -65,15 +65,15 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp">
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="1dp">
 
     <ImageButton
             android:id="@+id/deleteImageButton"
             android:contentDescription="@string/deleteButton"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:padding="8dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:padding="4dp"
             android:src="@drawable/delete"
             android:scaleType="fitCenter"
             android:background="?android:attr/selectableItemBackgroundBorderless"
@@ -84,7 +84,7 @@
             android:contentDescription="@string/editCaptionButton"
             android:layout_width="38dp"
             android:layout_height="38dp"
-            android:padding="8dp"
+            android:padding="4dp"
             android:src="@drawable/edit"
             android:scaleType="fitCenter"
             android:background="?android:attr/selectableItemBackgroundBorderless"
