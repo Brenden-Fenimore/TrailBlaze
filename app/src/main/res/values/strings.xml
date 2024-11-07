@@ -428,6 +428,7 @@
     <string name="watcherLogo">Watcher Logo</string>
     <string name="usernameLabel">Username</string>
     <string name="watcherMemberList">Watcher Member List</string>
-    <string name="watcherStats">Watcher Stats</string>
+    <string name="watcherStats">Watcher Awards</string>
+    <string name="watcherBadgeDetails">This badge is awarded for exceptional response time to your Blazers messages. You have shown time and time again that you are there for your Blazer when they need you most!! Congratulations!!</string>
 
 </resources>

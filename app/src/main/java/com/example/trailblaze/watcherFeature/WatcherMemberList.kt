@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class WatcherMemberList : AppCompatActivity() {
 
-    private lateinit var WatcherMember: RecyclerView
+    private lateinit var WatcherProfile: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
