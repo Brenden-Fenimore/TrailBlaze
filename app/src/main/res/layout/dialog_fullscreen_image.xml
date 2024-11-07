@@ -12,6 +12,30 @@
             android:scaleType="fitCenter"
             android:adjustViewBounds="true" />
 
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/fullscreenImageView"
+            android:layout_alignBottom="@id/fullscreenImageView"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp">
+
+    <TextView
+            android:id="@+id/captionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:background="#80000000"
+            android:visibility="gone"
+            android:singleLine="true"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp" />
+
+    </RelativeLayout>
+
     <ImageButton
             android:id="@+id/prevImageButton"
             android:contentDescription="@string/previousButton"
@@ -68,18 +92,4 @@
             android:visibility="gone"/>
 
     </LinearLayout>
-
-    <TextView
-            android:id="@+id/captionTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|start"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            android:textColor="@android:color/white"
-            android:textSize="14sp"
-            android:background="@android:color/black"
-            android:visibility="gone"
-            android:maxWidth="80dp" />
-
 </RelativeLayout>
