@@ -16,14 +16,14 @@ class WatcherMemberAdapter(
 
     // ViewHolder to hold each item view
     inner class WatcherMemberViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val profileImage: ImageView = itemView.findViewById(R.id.watcherImage)
+        private val watcherProfileImage: ImageView = itemView.findViewById(R.id.watcherImage)
         private val watcherName: TextView = itemView.findViewById(R.id.watcherMemberName)
         private val badgeImage: ImageView = itemView.findViewById(R.id.watcherBadgeImage)
 
         // Bind data to each view
         fun bind(watcher: WatcherMember) {
             watcherName.text = watcher.watcherName
-            profileImage.setImageResource(watcher.watcherProfileImage)
+            watcherProfileImage.setImageResource(watcher.watcherProfileImage)
             badgeImage.setImageResource(watcher.watcherBadgeImage)
 
             // Set onClickListener for each item
