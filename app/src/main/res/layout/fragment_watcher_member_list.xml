@@ -33,19 +33,6 @@
     <!--Edit Member Watcher List-->
 
 
-    <ImageButton
-            android:src="@drawable/baseline_settings_24"
-            android:contentDescription="@string/settings"
-            android:layout_width="49dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:id="@+id/settingsbtn"
-            android:background="@android:color/transparent"
-            android:layout_centerVertical="true"
-            tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="355dp"
-            tools:ignore="MissingConstraints"/>
-
     <!-- Watcher Member List -->
 
     <TextView
