@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,8 @@ import com.example.trailblaze.settings.SettingsScreenActivity
 import com.example.trailblaze.ui.MenuActivity
 import com.example.trailblaze.ui.parks.ParkDetailActivity
 import com.example.trailblaze.ui.parks.ThumbnailAdapter
+import com.example.trailblaze.ui.parks.TimeRecordAdapter
+import com.example.trailblaze.ui.parks.TimeRecord
 import com.example.trailblaze.ui.profile.FriendAdapter
 import com.example.trailblaze.ui.profile.Friends
 import com.example.trailblaze.ui.profile.FriendsProfileActivity
@@ -27,6 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 
 class HomeFragment : Fragment() {
@@ -39,12 +43,17 @@ class HomeFragment : Fragment() {
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
     private var parksList: List<Park> = listOf()
-    private lateinit var parksRecyclerView: RecyclerView   // RecyclerView to display parks
+    private lateinit var parksRecyclerView: RecyclerView           // RecyclerView to display parks
     private lateinit var thumbnailAdapter: ThumbnailAdapter        // Adapter for RecyclerView
+    private lateinit var timeRecordsRecyclerView: RecyclerView
+    private lateinit var timeRecordAdapter: TimeRecordAdapter
+
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    private lateinit var greetingTextView: TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -53,6 +62,9 @@ class HomeFragment : Fragment() {
         // Initialize Firestore
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
+
+        greetingTextView = binding.homepagegreeting
+        updateGreeting()
 
         binding.menuButton.setOnClickListener {
             val intent = Intent(activity, MenuActivity::class.java)
@@ -68,7 +80,6 @@ class HomeFragment : Fragment() {
             val intent = Intent(activity, UserListActivity::class.java)
             startActivity(intent)
         }
-
 
 
         // RecyclerView setup
@@ -113,11 +124,52 @@ class HomeFragment : Fragment() {
         }
         usersRecyclerView.adapter = usersAdapter
 
+        // Initialize RecyclerView for time records
+        timeRecordsRecyclerView = binding.timeRecordsRecyclerView
+        timeRecordsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+        // Initialize adapter with an empty list and set it on the RecyclerView
+        timeRecordAdapter = TimeRecordAdapter(mutableListOf()) { timeRecord ->
+            // Create an intent to start the ParkDetailActivity
+            val intent = Intent(context, ParkDetailActivity::class.java).apply {
+                putExtra("PARK_CODE", timeRecord.parkCode) // Pass the park code
+            }
+            startActivity(intent) // Start the ParkDetailActivity
+        }
+        timeRecordsRecyclerView.adapter = timeRecordAdapter
+
         // Load users (you would need to implement this)
         fetchUsers()
         fetchCurrentUser()
         fetchUserState()
+        fetchTimeRecords()
         return root
+    }
+    override fun onResume() {
+        super.onResume()
+        fetchUserState() // Fetch the user state to update parks
+    }
+
+    // Function to update the greeting message based on the current time of day
+    private fun updateGreeting() {
+        // Get an instance of the Calendar class to retrieve the current date and time
+        val calendar = Calendar.getInstance()
+        // Get the current hour of the day (0-23 format)
+        val hourOfDay = calendar.get(Calendar.HOUR_OF_DAY)
+
+        // Determine the appropriate greeting based on the current hour
+        val greeting: String =
+            when {
+                // If the hour is between 5 (inclusive) and 11 (inclusive), set greeting to "Good Morning"
+                hourOfDay in 5..11 -> "Good Morning"
+                // If the hour is between 12 (inclusive) and 17 (inclusive), set greeting to "Good Afternoon"
+                hourOfDay in 12..17 -> "Good Afternoon"
+                // For all other hours (18-24), set greeting to "Good Evening"
+                else -> "Good Evening"
+            }
+
+        // Update the text of the greetingTextView with the determined greeting
+        greetingTextView.text = greeting
     }
 
     private fun fetchUsername() {
@@ -141,8 +193,6 @@ class HomeFragment : Fragment() {
             binding.homepageusername.text = "Not logged in"
         }
     }
-
-
 
     private fun fetchParksData() {
         RetrofitInstance.api.getParks(10).enqueue(object : Callback<NPSResponse> {
@@ -177,10 +227,11 @@ class HomeFragment : Fragment() {
                     val userId = document.id
                     val username = document.getString("username")
                     val profileImageUrl = document.getString("profileImageUrl")
+                    val isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
 
                     // Check for null username and ensure the user is not the current user
                     if (username != null && userId != currentUserId) {
-                        Friends(userId, username, profileImageUrl) // Replace with your User model constructor
+                        Friends(userId, username, profileImageUrl, isPrivateAccount) // Replace with your User model constructor
                     } else {
                         null
                     }
@@ -202,6 +253,7 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
     private fun fetchParksByState(userState: String) {
         RetrofitInstance.api.getParksbyQuery(userState).enqueue(object : Callback<NPSResponse> {
             override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
@@ -233,11 +285,12 @@ class HomeFragment : Fragment() {
             firestore.collection("users").document(userId).get()
                 .addOnSuccessListener { document ->
                     if (document != null && document.exists()) {
-                        val userState = document.getString("state") ?: "No State Found"// Fetch the username
-                        fetchParksByState(userState)
+                        val userState = document.getString("state") ?: "No State Found" // Fetch the state
+                        fetchParksByState(userState) // Fetch parks based on the state
                     }
                 }
                 .addOnFailureListener {
+                    Log.e("HomeFragment", "Error fetching user state: ${it.message}")
                 }
         } else {
             // Handle the case where userId is null (not logged in)
@@ -245,7 +298,31 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun fetchTimeRecords() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
 
+        firestore.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val timeRecordsData = document.get("timeRecords") as? List<Map<String, Any>>
+                    val timeRecords = timeRecordsData?.map { record ->
+                        val parkName = record["parkName"] as? String ?: return@map null
+                        val elapsedTime = record["elapsedTime"] as? String ?: return@map null
+                        val parkCode = record["parkCode"] as? String ?: return@map null
+                        val imageUrl = record["imageUrl"] as? String ?: return@map null
+
+                        // Create a TimeRecord object
+                        TimeRecord(parkName, elapsedTime, imageUrl, parkCode)
+                    }?.filterNotNull() ?: emptyList() // Filter out any null items
+
+                    // Update the adapter with fetched data using updateData method
+                    timeRecordAdapter.updateData(timeRecords)
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("HomeFragment", "Error fetching time records: ${e.message}")
+            }
+    }
 
     override fun onDestroyView()
     {

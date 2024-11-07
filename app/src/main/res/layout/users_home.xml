@@ -12,6 +12,7 @@
             android:layout_height="50dp"
             android:layout_marginEnd="16dp"
             android:contentDescription="@string/profilePicture"
+            android:textColor="?attr/colorPrimary"
             android:src="@drawable/xpic" />
 
 </LinearLayout>

@@ -49,7 +49,7 @@
                     android:layout_marginTop="10dp"
                     android:textSize="40sp"
                     android:text="@string/homepage_welcome_user"
-                    android:textColor="#000000"
+                    android:textColor="?attr/colorPrimary"
                     android:fontFamily="@font/amethysta"
                     android:textAlignment="center"/>
             <LinearLayout
@@ -63,52 +63,12 @@
                         android:layout_height="wrap_content"
                         android:textSize="27sp"
                         android:text="@string/username"
-                        android:textColor="#000000"
+                        android:textColor="?attr/colorPrimary"
                         android:fontFamily="@font/amethysta"
                         android:layout_weight="1"
                         android:textAlignment="center"/>
             </LinearLayout>
-            <LinearLayout
-                    android:id="@+id/searchbarlayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                    <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/searchbartextfield"
-                            android:layout_width="380dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-                            app:boxStrokeWidth="2dp"
-                            app:boxStrokeWidthFocused="2dp"
-                            app:boxCornerRadiusBottomStart="10dp"
-                            app:boxCornerRadiusBottomEnd="10dp"
-                            app:boxCornerRadiusTopEnd="10dp"
-                            app:boxCornerRadiusTopStart="10dp"
-                            app:startIconDrawable="@drawable/magnifying_glass_small"
-                            app:endIconMode="custom"
-                            app:endIconDrawable="@drawable/mic_small"
-                            app:boxBackgroundColor="#E4E2E2"
-                            app:boxStrokeColor="#0386D0"
-                            app:cursorColor="#0386D0"
-                            app:hintTextColor="#0386D0">
-
-                        <com.google.android.material.textfield.TextInputEditText
-
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Search"
-                                android:textSize="18sp"
-                                android:id="@+id/searchbar"
-                                android:fontFamily="@font/amethysta"
-                                android:textColor="#000000"
-                                android:singleLine="true"/>
-                    </com.google.android.material.textfield.TextInputLayout>
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
             <ScrollView android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -133,7 +93,7 @@
                             android:fontFamily="@font/amethysta"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="#4C662B"
+                            android:textColor="?attr/colorPrimary"
                             android:shadowColor="@color/black"/>
 
                     <!-- RecyclerView for Nearby Trails -->
@@ -145,70 +105,33 @@
                 </LinearLayout>
 
                 <LinearLayout
-                        android:id="@+id/browsedifficultylayout"
-                        android:layout_width="match_parent"
+                        android:id="@+id/timeRecordsLayout"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:paddingLeft="16dp">
+
                     <!--        Browse By Difficulty-->
                     <TextView
-                            android:id="@+id/browsedifficulty"
+                            android:id="@+id/timeRecords"
                             android:layout_marginTop="30dp"
-                            android:text="@string/homepage_browse_by_difficulty"
+                            android:text="@string/homepage_time_records"
                             android:textSize="20sp"
                             android:textStyle="bold"
                             android:fontFamily="@font/amethysta"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="#4C662B"
+                            android:textColor="?attr/colorPrimary"
                             android:shadowColor="@color/black"/>
-                <!--        Browse By Difficulty Images-->
-                <HorizontalScrollView
-                        android:id="@+id/browsebydifficultyscroll"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:scrollbars="horizontal"
-                        android:scrollbarStyle="insideOverlay"
-                        android:scrollbarAlwaysDrawHorizontalTrack="true">
-                    <LinearLayout
+
+                    <!-- New RecyclerView for displaying time records -->
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/timeRecordsRecyclerView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="15dp">
-                        <ImageView
-                                android:layout_width="128dp"
-                                android:layout_height="128dp"
-                                app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"
-                                android:contentDescription="@string/description"/>
-
-                        <ImageView
-                                android:layout_width="128dp"
-                                android:layout_height="128dp"
-                                app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"
-                                android:contentDescription="@string/description"/>
-                        <ImageView
-                                android:layout_width="128dp"
-                                android:layout_height="128dp"
-                                app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"
-                                android:contentDescription="@string/description"/>
-                        <ImageView
-                                android:layout_width="128dp"
-                                android:layout_height="128dp"
-                                app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"
-                                android:contentDescription="@string/description"/>
-                        <ImageView
-                                android:layout_width="128dp"
-                                android:layout_height="128dp"
-                                app:srcCompat="@drawable/no_image_available"
-                                android:layout_marginStart="15dp"
-                                android:contentDescription="@string/description"/>
-                    </LinearLayout>
-                </HorizontalScrollView>
+                            android:layout_marginTop="16dp" />
                 </LinearLayout>
+
                 <LinearLayout
                         android:id="@+id/invitefriendslayout"
                         android:layout_width="wrap_content"
@@ -223,21 +146,22 @@
                             android:fontFamily="@font/amethysta"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="#4C662B"
+                            android:textColor="?attr/colorPrimary"
                             android:shadowColor="@color/black"/>
 
                     <ImageButton
-                            android:layout_marginTop="15dp"
-                            android:layout_marginStart="125dp"
-                            android:src="@android:drawable/ic_menu_add"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="20dp"
+                            app:srcCompat="@drawable/add_circle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:clickable="true"
                             android:id="@+id/addFriend"
                             android:focusable="true"
                             app:maxImageSize="24dp"
+                            android:tint="?attr/colorPrimary"
                             app:backgroundTint="#00FFFFFF"
-                            android:scaleX="2" android:scaleY="2"
+                            android:textColor="?attr/colorPrimary"
                             android:contentDescription="@string/description"/>
                 </LinearLayout>
 

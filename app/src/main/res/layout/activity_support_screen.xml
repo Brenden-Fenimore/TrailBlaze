@@ -37,6 +37,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/helpAndSupportTitle"
                 android:textSize="40sp"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -104,23 +105,9 @@
                     android:orientation="horizontal"
                     android:paddingEnd="9dp"
                     android:paddingStart="9dp">
-                <TextView
-                        android:layout_width="300dp"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="8dp"
-                        android:textSize="20sp"
-                        android:fontFamily="@font/amethysta"
-                        android:layout_marginStart="20dp"
-                        android:layout_gravity="center"
-                        android:id="@+id/bug"
-                        android:textColor="@android:color/holo_blue_dark"
-                        android:text="@string/bug"/>
+
             </LinearLayout>
-            <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@android:color/darker_gray"/>
+
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

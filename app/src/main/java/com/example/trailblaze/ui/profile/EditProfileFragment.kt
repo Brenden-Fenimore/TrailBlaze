@@ -1,7 +1,9 @@
 package com.example.trailblaze.ui.profile
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -11,17 +13,15 @@ import android.view.LayoutInflater
 import com.example.trailblaze.databinding.FragmentEditProfileBinding
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
 import androidx.navigation.fragment.findNavController
-import android.widget.SeekBar
-import android.widget.Spinner
-import android.widget.TextView
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.trailblaze.firestore.ImageLoader
 import com.example.trailblaze.firestore.UserRepository
 import com.example.trailblaze.ui.achievements.AchievementManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
@@ -37,6 +37,9 @@ class EditProfileFragment : Fragment() {
     private lateinit var firestore: FirebaseFirestore
     private lateinit var userRepository: UserRepository
     private lateinit var achievementManager: AchievementManager
+    private lateinit var sharedPreferences: SharedPreferences
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +47,9 @@ class EditProfileFragment : Fragment() {
     ): View {
         _binding = FragmentEditProfileBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        // Initialize SharedPreferences
+        sharedPreferences = requireActivity().getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
 
         //setup firestore instance
         firestore = FirebaseFirestore.getInstance()
@@ -54,6 +60,9 @@ class EditProfileFragment : Fragment() {
 
         // Fetch and display current user data
         loadUserProfile()
+
+        // Load saved visibility settings from Firebase
+        loadVisibilitySettings()
 
         // Setup other views and buttons
         setupUI()
@@ -85,27 +94,92 @@ class EditProfileFragment : Fragment() {
             findNavController().navigate(R.id.action_editProfileFragment_to_settingsScreenActivity)
         }
 
+        binding.leaderboardSwitch.setOnCheckedChangeListener { _, _ -> updateVisibilitySettings() }
+        binding.photosSwitch.setOnCheckedChangeListener { _, _ -> updateVisibilitySettings() }
+        binding.favoritetrailsSwitch.setOnCheckedChangeListener { _, _ -> updateVisibilitySettings() }
+        binding.watcherSwitch.setOnCheckedChangeListener { _, _ -> updateVisibilitySettings() }
+        binding.sharelocationSwitch.setOnCheckedChangeListener { _, _ -> updateVisibilitySettings() }
+
+        setupSpinners()
+
         return view
     }
 
+    override fun onResume() {
+        super.onResume()
+        // Check and update the SeekBar label when the fragment resumes
+        val isMetric = sharedPreferences.getBoolean("isMetricUnits", true)
+        updateSeekBarLabel(binding.seekBar.progress) // Update label based on current SeekBar progress
+    }
+
+    private fun setupSpinners() {
+        // Set up a theme-aware custom adapter for the Terrain spinner
+        // Load the array of terrain options from resources
+        val terrainOptions = resources.getStringArray(R.array.terrain_options)
+        // Apply the custom adapter to display each option in a theme-aware way
+        binding.terrainSpinner.adapter = ArrayAdapter(
+            requireContext(),
+            // Custom layout for consistent text color based on theme
+            R.layout.spinner_item,
+            terrainOptions
+        )
+
+        // Set up the Fitness Level spinner with theme-aware styling
+        // Load the array of fitness level options from resources
+        val fitnessLevelOptions = resources.getStringArray(R.array.fitness_level_options)
+        // Apply the custom adapter to the spinner for fitness levels
+        binding.fitnessLevelSpinner.adapter = ArrayAdapter(
+            requireContext(),
+            // Custom layout for consistent text color based on theme
+            R.layout.spinner_item,
+            fitnessLevelOptions
+        )
+
+        // Set up the Difficulty Level spinner with theme-aware styling
+        // Load the array of difficulty level options from resources
+        val difficultyOptions = resources.getStringArray(R.array.difficulty_level_options)
+        // Apply the custom adapter to the spinner for difficulty levels
+        binding.difficultySpinner.adapter = ArrayAdapter(
+            requireContext(),
+            // Custom layout for consistent text color based on theme
+            R.layout.spinner_item,
+            difficultyOptions
+        )
+
+        // Set up the Type of Hike spinner with theme-aware styling
+        // Load the array of hike type options from resources
+        val hikeTypeOptions = resources.getStringArray(R.array.hike_type_options)
+        // Apply the custom adapter to the spinner for hike types
+        binding.typeOfHikeSpinner.adapter = ArrayAdapter(
+            requireContext(),
+            // Custom layout for consistent text color based on theme
+            R.layout.spinner_item,
+            hikeTypeOptions
+        )
+    }
 
     private fun setupSeekBarListener() {
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                //update the TextView with the current progress/value of the seekBar
-                selectedValueTextView.text = progress.toString()
+                selectedFilterValue = progress.toDouble()
+                updateSeekBarLabel(progress)
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                // Optional: Do something when the user starts dragging the SeekBar
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                //get the progress value when the user stops dragging the SeekBar
-                selectedFilterValue = (seekBar?.progress ?: 0.0).toDouble()
-
-            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
+    }
+
+    private fun updateSeekBarLabel(progress: Int) {
+        // Check if metric units are selected
+        val isMetric = sharedPreferences.getBoolean("isMetricUnits", true)
+
+        // Update the TextView with the current progress/value of the SeekBar
+        selectedValueTextView.text = if (isMetric) {
+            "${progress} km" // Assuming the progress represents kilometers
+        } else {
+            "${(progress * 0.621371).toInt()} miles" // Convert to miles if imperial
+        }
     }
 
     private fun loadUserProfile() {
@@ -137,6 +211,12 @@ class EditProfileFragment : Fragment() {
                 val distance = document.getDouble("distance") ?: 0.0
                 binding.seekBar.progress = distance.toInt().coerceIn(0, binding.seekBar.max)
                 binding.range.text = distance.toString()
+
+                binding.leaderboardSwitch.isChecked = document.getBoolean("showLeaderboard") == true
+                binding.photosSwitch.isChecked = document.getBoolean("showPhotos") == true
+                binding.favoritetrailsSwitch.isChecked = document.getBoolean("showFavoriteTrails") == true
+                binding.watcherSwitch.isChecked = document.getBoolean("showWatcher") == true
+                binding.sharelocationSwitch.isChecked = document.getBoolean("showLocation") == true
             }
         }.addOnFailureListener { exception ->
             Log.e("EditProfile", "Error loading user data: ${exception.message}")
@@ -187,10 +267,7 @@ class EditProfileFragment : Fragment() {
                     userRef.update("profileImageUrl", downloadUri.toString())
                         .addOnSuccessListener {
                             Log.d("Firestore", "Profile picture URL updated successfully")
-                            achievementManager.checkAndGrantPhotographerBadge()
-                            achievementManager.saveBadgeToUserProfile("photographer")
 
-                            achievementManager.checkAndGrantLeaderboardBadge()
                         }
                         .addOnFailureListener { exception ->
                             Log.e("Firestore", "Error updating profile picture URL: ${exception.message}")
@@ -258,7 +335,6 @@ class EditProfileFragment : Fragment() {
         }
     }
 
-
     private fun loadProfilePicture() {
         val userId = auth.currentUser?.uid ?: return
         userRepository.getUserProfileImage(userId) { imageUrl ->
@@ -268,6 +344,46 @@ class EditProfileFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun updateVisibilitySettings() {
+        val currentUserId = auth.currentUser?.uid ?: return
+        val updates = hashMapOf<String, Any>(
+            "leaderboardVisible" to binding.leaderboardSwitch.isChecked,
+            "photosVisible" to binding.photosSwitch.isChecked,
+            "favoriteTrailsVisible" to binding.favoritetrailsSwitch.isChecked,
+            "watcherVisible" to binding.watcherSwitch.isChecked,
+            "shareLocationVisible" to binding.sharelocationSwitch.isChecked
+        )
+
+        firestore.collection("users").document(currentUserId)
+            .set(updates, SetOptions.merge())
+            .addOnSuccessListener {
+            }
+            .addOnFailureListener { exception ->
+                Log.e("EditProfileFragment", "Error updating visibility settings: ", exception)
+                Toast.makeText(requireContext(), "Failed to update settings.", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun loadVisibilitySettings() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val firestore = FirebaseFirestore.getInstance()
+
+        firestore.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    // Retrieve each visibility setting from Firebase and set the switch states
+                    binding.leaderboardSwitch.isChecked = document.getBoolean("leaderboardVisible") ?: false
+                    binding.photosSwitch.isChecked = document.getBoolean("photosVisible") ?: false
+                    binding.favoritetrailsSwitch.isChecked = document.getBoolean("favoriteTrailsVisible") ?: false
+                    binding.watcherSwitch.isChecked = document.getBoolean("watcherVisible") ?: false
+                    binding.sharelocationSwitch.isChecked = document.getBoolean("shareLocationVisible") ?: false
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("EditProfileFragment", "Error loading visibility settings", exception)
+            }
     }
 }
 

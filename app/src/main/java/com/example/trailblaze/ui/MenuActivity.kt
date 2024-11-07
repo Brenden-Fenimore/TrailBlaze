@@ -1,14 +1,18 @@
 package com.example.trailblaze.ui
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trailblaze.R
 import com.example.trailblaze.databinding.ActivityMenuBinding
 import com.example.trailblaze.firestore.ImageLoader
 import com.example.trailblaze.firestore.UserRepository
 import com.example.trailblaze.login.LoginActivity
+import com.example.trailblaze.settings.AboutActivity
 import com.example.trailblaze.settings.SafetyActivity
 import com.example.trailblaze.settings.SettingsScreenActivity
 import com.example.trailblaze.settings.SupportScreenActivity
@@ -16,9 +20,9 @@ import com.example.trailblaze.ui.achievements.AchievementManager
 import com.example.trailblaze.ui.achievements.AchievementsActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import nl.dionsegijn.konfetti.KonfettiView
 
 
-@Suppress("DEPRECATION")
 class MenuActivity : AppCompatActivity() {
 
     private lateinit var achievementManager: AchievementManager
@@ -31,6 +35,10 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        // Hide the ActionBar
+        supportActionBar?.hide()
+
+        val toAbout = findViewById<TextView>(R.id.about)
 
         // Initialize AchievementManager
         achievementManager = AchievementManager(this)
@@ -78,14 +86,19 @@ class MenuActivity : AppCompatActivity() {
             // Save to Firebase
             achievementManager.saveBadgeToUserProfile("safetyexpert")
 
-
-
             val intent = Intent(this, SafetyActivity::class.java)
             startActivity(intent)
         }
 
         binding.navigationTrailChallenges.setOnClickListener {
             val intent = Intent(this, AchievementsActivity::class.java)
+            startActivity(intent)
+        }
+
+        //set click listener for about
+        toAbout.setOnClickListener {
+            val intent = Intent(this, AboutActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
     }

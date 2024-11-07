@@ -1,0 +1,21 @@
+<!-- dialog_add_friends.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:padding="16dp">
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/friendsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="LinearLayoutManager"
+            android:orientation="vertical"/>
+
+    <Button
+            android:id="@+id/confirm_selection_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="304dp"
+            android:layout_height="wrap_content"
+            android:text="Confirm Selection" />
+</LinearLayout>

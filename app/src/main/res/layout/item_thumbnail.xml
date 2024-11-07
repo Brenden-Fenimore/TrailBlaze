@@ -21,7 +21,7 @@
             android:textSize="13sp"
             android:maxLines="2"
             android:ellipsize="end"
-            android:textColor="#4C662B"
+            android:textColor="?attr/colorPrimary"
             android:shadowColor="#000000"
             android:textStyle="bold"
             android:layout_marginTop="6dp"/>

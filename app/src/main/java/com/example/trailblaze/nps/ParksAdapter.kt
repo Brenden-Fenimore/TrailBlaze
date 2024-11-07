@@ -1,5 +1,6 @@
 package com.example.trailblaze.nps
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.trailblaze.R
+import com.example.trailblaze.ui.parks.ParkDetailActivity
 
 // Adapter class for binding park data to RecyclerView items
 class ParksAdapter(var parksList: List<Park>, private val onParkClick: (Park) -> Unit) : RecyclerView.Adapter<ParksAdapter.ParkViewHolder>() {
@@ -44,6 +46,7 @@ class ParksAdapter(var parksList: List<Park>, private val onParkClick: (Park) ->
         holder.itemView.setOnClickListener {
             onParkClick(park) // Use the onParkClick callback
         }
+
     }
 
     // Return the size of the dataset

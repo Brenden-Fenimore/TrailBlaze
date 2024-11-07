@@ -1,5 +1,6 @@
 package com.example.trailblaze.ui.achievements
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -11,18 +12,23 @@ import com.example.trailblaze.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import nl.dionsegijn.konfetti.KonfettiView
+import nl.dionsegijn.konfetti.models.Shape
+import nl.dionsegijn.konfetti.models.Size
 
+
+// Activity that displays the user's badges
 class BadgesActivity : AppCompatActivity() {
 
-    private lateinit var firestore: FirebaseFirestore
-    private lateinit var auth: FirebaseAuth
-    private lateinit var badgesRecyclerView: RecyclerView
-    private lateinit var sash: FrameLayout
-    private lateinit var badgesAdapter: BadgesAdapter
-    private var userBadges: MutableList<Badge> = mutableListOf()
-    private lateinit var achievementManager: AchievementManager
-    private val addedBadgeIds: MutableSet<String> = mutableSetOf()
-    private val addedBadgeTypes: MutableSet<String> = mutableSetOf()
+    private lateinit var firestore: FirebaseFirestore // Firestore instance for database operations
+    private lateinit var auth: FirebaseAuth // Firebase Authentication instance for user management
+    private lateinit var badgesRecyclerView: RecyclerView // RecyclerView to display the list of badges
+    private lateinit var sash: FrameLayout // FrameLayout for special UI elements, possibly a sash for displaying badges
+    private lateinit var badgesAdapter: BadgesAdapter // Adapter to bind badge data to the RecyclerView
+    private var userBadges: MutableList<Badge> = mutableListOf() // List to hold the badges owned by the user
+    private lateinit var achievementManager: AchievementManager // Manager for handling achievement-related logic
+    private val addedBadgeIds: MutableSet<String> = mutableSetOf() // Set to track unique badge IDs that have been added
+    private val addedBadgeTypes: MutableSet<String> = mutableSetOf() // Set to track unique badge types that have been added
 
     private val allBadges: List<Badge> = listOf(
         Badge("safetyexpert", "Safety Expert", R.drawable.safetyexpert),
@@ -48,6 +54,8 @@ class BadgesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_badges)
+        // Hide the ActionBar
+        supportActionBar?.hide()
 
         // Initialize Firestore and Auth
         firestore = FirebaseFirestore.getInstance()
@@ -59,6 +67,7 @@ class BadgesActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.save).setOnClickListener {
             Toast.makeText(this, "Badges saved successfully", Toast.LENGTH_SHORT).show()
+            showConfetti()
         }
 
         badgesRecyclerView = findViewById(R.id.recycler_view_badges)
@@ -102,6 +111,7 @@ class BadgesActivity : AppCompatActivity() {
         fetchSashedBadges()
     }
 
+    //fucntion to fetch the current users badges
     private fun fetchUserBadges() {
         // Fetching badges logic here
         val userId = FirebaseAuth.getInstance().currentUser?.uid
@@ -111,6 +121,11 @@ class BadgesActivity : AppCompatActivity() {
                     if (document.exists()) {
                         val badges = document.get("badges") as? List<String> ?: emptyList()
                         updateBadgesList(badges)
+
+                        achievementManager.checkAndGrantBadgeCollectorBadge()
+
+                        // Save to Firebase
+                        achievementManager.saveBadgeToUserProfile("badgecollector")
                     }
                 }
                 .addOnFailureListener { e ->
@@ -118,6 +133,8 @@ class BadgesActivity : AppCompatActivity() {
                 }
         }
     }
+
+    //fucntion to update the badges list
     private fun updateBadgesList(badges: List<String>) {
         // Filter the list of all badges based on fetched user badges
         val unlockedBadges = allBadges.filter { badges.contains(it.id) }
@@ -134,6 +151,7 @@ class BadgesActivity : AppCompatActivity() {
         }
     }
 
+    //fucntion to save the badge to the firestore
     private fun saveBadgeToFirestore(badgeId: String, resourceName: String, x: Int, y: Int) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
@@ -154,6 +172,7 @@ class BadgesActivity : AppCompatActivity() {
         }
     }
 
+    //function to add a badge to the sash
     private fun addBadgeToSash(drawableResId: Int, x: Float, y: Float) {
         // Get the resource name from the drawable resource ID
         val resourceName = resources.getResourceEntryName(drawableResId)
@@ -226,6 +245,7 @@ class BadgesActivity : AppCompatActivity() {
         Log.d("BadgesActivity", "Added badge with resource ID: $drawableResId to sash at x: $x, y: $y")
     }
 
+    //function to fetch sashed badges for current user
     private fun fetchSashedBadges() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
@@ -243,6 +263,7 @@ class BadgesActivity : AppCompatActivity() {
         }
     }
 
+    //function to display sashed badges
     private fun displaySashedBadges(sashedBadges: List<Map<String, Any>>) {
         for (badgeData in sashedBadges) {
             val badgeId = badgeData["badgeId"] as? String ?: continue
@@ -300,6 +321,31 @@ class BadgesActivity : AppCompatActivity() {
             // Mark this badge type as added to prevent duplicates
             addedBadgeTypes.add(resourceName)
         }
+    }
+
+    private fun showConfetti() {
+        // Get the KonfettiView from the layout
+        val konfettiView = findViewById<KonfettiView>(R.id.konfettiView)
+
+        // Set the view to visible
+        konfettiView.visibility = View.VISIBLE
+
+        // Show confetti
+        konfettiView.build()
+            .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA, Color.CYAN)
+            .setDirection(0.0, 359.0) // Allow confetti to fall in all directions
+            .setSpeed(1f, 5f)
+            .setTimeToLive(3000L) // Increase the time to live to allow for longer fall
+            .addShapes(Shape.Circle)
+            .addSizes(Size(8))
+            // Set the position to emit from the right side and farther down
+            .setPosition(konfettiView.width + 400f, konfettiView.width + 400f, -100f, -50f)
+            .stream(300, 3000L) // Stream 300 particles for 3000 milliseconds (3 seconds)
+
+        // Optionally hide the konfetti view after some time
+        konfettiView.postDelayed({
+            konfettiView.visibility = View.GONE
+        }, 6000) // Hide after 6 seconds
     }
 
 }
