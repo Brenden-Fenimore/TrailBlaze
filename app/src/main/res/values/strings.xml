@@ -447,5 +447,11 @@
     <string name="watcherBadgeDetails">This badge is awarded for exceptional response time to your Blazers messages. You
         have shown time and time again that you are there for your Blazer when they need you most!! Congratulations!!
     </string>
-
+    <string name="setupWatchers">Would you like to designate Watcher(s) for your account?</string>
+    <string name="watcherDescription">Watchers are trusted contacts that can monitor your journey in real-time to stay safe and connected.</string>
+    <string name="Later">Later</string>
+    <string name="Yes">Yes</string>
+    <string name="blazer"> TrailBlaze Username</string>
+    <string name="watcherPhoto">Watcher Member Photo</string>
+    <string name="watcherBadge">Watcher Badges</string>
 </resources>
