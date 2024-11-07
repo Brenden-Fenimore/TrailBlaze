@@ -1,39 +1,39 @@
 package com.example.trailblaze.ui.profile
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
 import com.example.trailblaze.R
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 
 class FullscreenImageDialogFragment : DialogFragment() {
 
-    interface OnPhotoDeletedListener {
-        fun onPhotoDeleted()
-    }
-
     private lateinit var imageView: ImageView
     private lateinit var nextButton: ImageButton
     private lateinit var prevButton: ImageButton
     private lateinit var deleteButton: ImageButton
+    private lateinit var editCaptionButton: ImageButton
     private var isOwnProfile: Boolean = false
     private var currentIndex: Int = 0
     private lateinit var imageUrls: MutableList<String>
     private lateinit var photosAdapter: PhotosAdapter
-    private var photoDeletedListener: OnPhotoDeletedListener? = null
+    private lateinit var captionTextView: TextView
+    private var photoCaptions: MutableMap<String, String> = mutableMapOf()
 
     companion object {
-        fun newInstance(imageUrls: List<String>, initialPosition: Int, isOwnProfile: Boolean): FullscreenImageDialogFragment {
+        fun newInstance(
+            imageUrls: List<String>,
+            initialPosition: Int,
+            isOwnProfile: Boolean
+        ): FullscreenImageDialogFragment {
             val fragment = FullscreenImageDialogFragment()
             val args = Bundle().apply {
                 putStringArrayList("imageUrls", ArrayList(imageUrls))
@@ -53,6 +53,8 @@ class FullscreenImageDialogFragment : DialogFragment() {
         nextButton = view.findViewById(R.id.nextImageButton)
         prevButton = view.findViewById(R.id.prevImageButton)
         deleteButton = view.findViewById(R.id.deleteImageButton)
+        editCaptionButton = view.findViewById(R.id.editCaptionButton)
+        captionTextView = view.findViewById(R.id.captionTextView)
 
         imageUrls = (arguments?.getStringArrayList("imageUrls") ?: emptyList()) as MutableList<String>
         currentIndex = arguments?.getInt("position") ?: 0
@@ -66,10 +68,16 @@ class FullscreenImageDialogFragment : DialogFragment() {
 
         // Set delete button visibility based on ownership
         deleteButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
+        editCaptionButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
 
         deleteButton.setOnClickListener {
             Log.d("FullscreenImageDialog", "Delete button clicked")
             deleteCurrentPhoto()  // Call the delete function when the delete button is clicked
+        }
+
+        editCaptionButton.setOnClickListener {
+            Log.d("FullscreenImageDialog", "Edit Caption button clicked")
+            openEditCaptionDialog(imageUrls[currentIndex])
         }
 
 
@@ -78,10 +86,6 @@ class FullscreenImageDialogFragment : DialogFragment() {
 
     fun setPhotosAdapter(adapter: PhotosAdapter) {
         this.photosAdapter = adapter
-    }
-
-    fun setOnPhotoDeletedListener(listener: OnPhotoDeletedListener) {
-        photoDeletedListener = listener
     }
 
     private fun displayImage(index: Int) {
@@ -96,6 +100,17 @@ class FullscreenImageDialogFragment : DialogFragment() {
         // Disable navigation buttons at the ends
         prevButton.visibility = if (currentIndex > 0) View.VISIBLE else View.INVISIBLE
         nextButton.visibility = if (currentIndex < imageUrls.size - 1) View.VISIBLE else View.INVISIBLE
+
+        // Check if the caption exists in local map
+        val caption = photoCaptions[imageUrl]
+        if (caption.isNullOrEmpty()) {
+            // If no caption is available locally, fetch it from Firestore
+            fetchCaptionFromFirestore(imageUrl)
+        } else {
+            // Display the caption if it exists
+            captionTextView.text = caption
+            captionTextView.visibility = View.VISIBLE
+        }
     }
 
     private fun navigateImage(direction: Int) {
@@ -160,7 +175,8 @@ class FullscreenImageDialogFragment : DialogFragment() {
                                     }
                                     .addOnFailureListener { e ->
                                         Log.e("DeletePhoto", "Error deleting photo document from Firestore", e)
-                                        Toast.makeText(context, "Failed to delete photo document", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(context, "Failed to delete photo document", Toast.LENGTH_SHORT)
+                                            .show()
                                     }
                             }
                         }
@@ -181,4 +197,85 @@ class FullscreenImageDialogFragment : DialogFragment() {
         return FirebaseAuth.getInstance().currentUser?.uid ?: ""
     }
 
+    private fun openEditCaptionDialog(imageUrl: String) {
+        val captionInput = EditText(context)
+        captionInput.hint = "Caption your photo:"
+
+        AlertDialog.Builder(requireContext())
+            .setTitle("Edit Caption")
+            .setView(captionInput)
+            .setPositiveButton("Save") { _, _ ->
+                val newCaption = captionInput.text.toString()
+                saveCaptionToFirestore(imageUrl, newCaption)
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun saveCaptionToFirestore(imageUrl: String, caption: String) {
+        val userId = getCurrentUserId()
+        if (userId.isEmpty()) {
+            Toast.makeText(context, "User not authenticated", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Find the document matching the image URL and update the caption
+        val photosCollection = FirebaseFirestore.getInstance()
+            .collection("users")
+            .document(userId)
+            .collection("photos")
+
+        photosCollection.whereEqualTo("url", imageUrl).get()
+            .addOnSuccessListener { querySnapshot ->
+                if (querySnapshot.isEmpty) {
+                    Log.d("SaveCaption", "No matching Firestore document found for URL: $imageUrl")
+                } else {
+                    // Update each matching document (in case of duplicates)
+                    for (document in querySnapshot.documents) {
+                        document.reference.update("caption", caption)
+                            .addOnSuccessListener {
+                                Log.d("SaveCaption", "Caption updated successfully")
+                                photoCaptions[imageUrl] = caption
+                                displayImage(currentIndex) // Refresh to show updated caption
+                                Toast.makeText(context, "Caption saved", Toast.LENGTH_SHORT).show()
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e("SaveCaption", "Error updating caption", e)
+                                Toast.makeText(context, "Failed to save caption", Toast.LENGTH_SHORT).show()
+                            }
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("SaveCaption", "Error querying Firestore for caption", e)
+                Toast.makeText(context, "Error finding photo document", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun fetchCaptionFromFirestore(imageUrl: String) {
+        val userId = getCurrentUserId()
+        if (userId.isEmpty()) return
+
+        val photosCollection = FirebaseFirestore.getInstance()
+            .collection("users")
+            .document(userId)
+            .collection("photos")
+
+        photosCollection.whereEqualTo("url", imageUrl).get()
+            .addOnSuccessListener { querySnapshot ->
+                if (querySnapshot.documents.isNotEmpty()) {
+                    val caption = querySnapshot.documents.firstOrNull()?.getString("caption")
+                    if (!caption.isNullOrEmpty()) {
+                        // Save the caption in the local map
+                        photoCaptions[imageUrl] = caption
+                        // Display the caption in the TextView
+                        captionTextView.text = caption
+                        captionTextView.visibility = View.VISIBLE
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("FetchCaption", "Error fetching caption from Firestore", e)
+            }
+    }
 }
