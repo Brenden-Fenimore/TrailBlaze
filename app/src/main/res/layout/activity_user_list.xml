@@ -2,7 +2,8 @@
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical">
 
     <RelativeLayout
@@ -25,6 +26,7 @@
                     android:layout_width="39dp"
                     android:layout_height="39dp"
                     android:id="@+id/chevron_left"
+                    android:tint="#CDEDA3"
                     android:background="@android:color/transparent"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"/>
@@ -41,6 +43,7 @@
                 android:text="@string/meetTrailMates"
                 android:textSize="36sp"
                 android:textStyle="bold"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

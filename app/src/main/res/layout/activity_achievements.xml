@@ -19,6 +19,7 @@
                 android:layout_width="39dp"
                 android:layout_height="39dp"
                 android:id="@+id/chevron_left"
+                android:tint="#CDEDA3"
                 android:background="@android:color/transparent"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"/>
@@ -46,6 +47,7 @@
                     android:layout_gravity="center_horizontal"
                     android:text="@string/achievementsTitle"
                     android:textSize="30sp"
+                    android:textColor="?attr/colorPrimary"
                     android:fontFamily="@font/amethysta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -67,7 +69,8 @@
             <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="302dp"
-                    android:src="@drawable/sash_background"/>
+                    android:src="@drawable/sash_background"
+                    android:contentDescription="@string/description"/>
 
             <Button
                     android:layout_gravity="center"

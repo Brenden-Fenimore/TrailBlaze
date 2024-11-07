@@ -14,6 +14,8 @@ class ContactUsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_us)
+        // Hide the ActionBar
+        supportActionBar?.hide()
 
         //find var by id
         submitBtn=findViewById(R.id.submit)

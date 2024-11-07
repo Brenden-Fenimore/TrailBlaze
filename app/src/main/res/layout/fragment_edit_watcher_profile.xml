@@ -4,8 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        >
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- Swish Background-->
     <com.example.trailblaze.view.SwishBackgroundView
@@ -14,7 +13,6 @@
             android:id="@+id/swishBackgroundView"
             tools:ignore="MissingConstraints"/>
 
-    <!-- Back Button-->
     <ImageButton
             android:src="@drawable/chevron_left"
             android:contentDescription="@string/chevronBack"
@@ -30,15 +28,16 @@
 
     <ImageView
             android:id="@+id/profilePicture"
-            android:contentDescription="@string/watcherMemPhoto"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:src="@drawable/account_circle"
             app:layout_constraintTop_toBottomOf="@+id/swishBackgroundView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="0dp"/>
+            app:layout_constraintHorizontal_bias="0.5"
+            android:layout_marginTop="16dp"/>
 
+    <!--Name Field-->
     <ImageButton
             android:id="@+id/camera_icon"
             android:layout_width="48dp"
@@ -191,7 +190,6 @@
             tools:ignore="NotSibling"/>
 
     <!-- Notification Preferences -->
-
     <TextView
             android:id="@+id/notificationPreferencesLabel"
             android:layout_width="wrap_content"

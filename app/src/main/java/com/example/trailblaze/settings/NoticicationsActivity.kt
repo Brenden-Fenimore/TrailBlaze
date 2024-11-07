@@ -11,6 +11,7 @@ class NotificationsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notifications)
+        supportActionBar?.hide()
 
         //set the listener for the back button
         findViewById<ImageButton>(R.id.chevron_left).setOnClickListener {

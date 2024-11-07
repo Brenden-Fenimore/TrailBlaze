@@ -1,17 +1,22 @@
 package com.example.trailblaze.nps
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.trailblaze.R
+import com.example.trailblaze.ui.parks.ParkDetailActivity
 
 // Adapter class for binding park data to RecyclerView items
 class ParksAdapter(var parksList: List<Park>, private val onParkClick: (Park) -> Unit) : RecyclerView.Adapter<ParksAdapter.ParkViewHolder>() {
 
     // ViewHolder for holding views for each item
     class ParkViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val thumbnailImageView: ImageView = view.findViewById(R.id.thumbnailImageView)
         val parkNameTextView: TextView = view.findViewById(R.id.parkNameTextView)
     }
 
@@ -21,15 +26,27 @@ class ParksAdapter(var parksList: List<Park>, private val onParkClick: (Park) ->
         return ParkViewHolder(view)
     }
 
-    // Bind data to the views for each item
     override fun onBindViewHolder(holder: ParkViewHolder, position: Int) {
         val park = parksList[position]
-        holder.parkNameTextView.text = park.fullName
 
-        // Set click listener for each item
+        // Assuming you have an image URL in the Park object (you need to define how to get it)
+        // For example, if you have a property called `images` in the Park class
+        val imageUrl = park.images.firstOrNull()?.url // Replace with the actual property that holds the image URL
+
+        Glide.with(holder.itemView.context)
+            .load(imageUrl)
+            .placeholder(R.drawable.baseline_downloading_24) // Placeholder while loading
+            .error(R.drawable.no_image_available) // Fallback image if loading fails
+            .into(holder.thumbnailImageView)
+
+        // Set the park name
+        holder.parkNameTextView.text = park.fullName // Use the fullName property from the Park object
+
+        // Set the click listener for the item
         holder.itemView.setOnClickListener {
-            onParkClick(park) // Pass the actual park object
+            onParkClick(park) // Use the onParkClick callback
         }
+
     }
 
     // Return the size of the dataset

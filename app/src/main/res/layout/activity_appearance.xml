@@ -17,9 +17,10 @@
         <ImageButton
                 app:srcCompat="@drawable/baseline_arrow_back_ios_new_24"
                 android:contentDescription="@string/btn_back"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
                 android:id="@+id/chevron_left"
+                android:tint="#CDEDA3"
                 android:background="@android:color/transparent"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"/>
@@ -30,44 +31,83 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="150dp"
             android:layout_below="@id/swishLayout"
-            android:orientation="vertical"
-            android:id="@+id/linearLayout">
+            android:orientation="vertical">
         <TextView
-                android:id="@+id/Settings"
+                android:id="@+id/Appearance"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/appearanceTitle"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="40sp"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="20dp"/>
-
+                android:layout_height="wrap_content"/>
 
     </LinearLayout>
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="-151dp"
-            android:layout_below="@+id/linearLayout"
-            android:padding="50dp">
 
-        <Switch
-                android:text="@string/darkMode"
-                android:textSize="18sp"
-                android:layout_width="320dp"
-                android:layout_height="63dp"
-                android:fontFamily="@font/amethysta"
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/darkMode"/>
-        <Switch
-                android:text="@string/metricUnits"
-                android:textSize="18sp"
-                android:layout_width="320dp"
-                android:fontFamily="@font/amethysta"
-                android:layout_height="63dp"
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/metricUnits"/>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="375dp"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content">
+
+        <!-- Leaderboard Switch -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_margin="10dp">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="20sp"
+                    android:text="@string/metricUnits" />
+
+            <Switch
+                    android:id="@+id/metricSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_margin="10dp">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="20sp"
+                    android:text="@string/darkMode" />
+
+            <Switch
+                    android:id="@+id/darkmodeSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/darker_gray"/>
+
+
+
+
 
     </LinearLayout>
     <FrameLayout
@@ -79,8 +119,8 @@
 
         <ImageView
                 android:id="@+id/imageView8"
-                android:layout_width="match_parent"
-                android:layout_height="284dp"
+                android:layout_width="712dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 app:srcCompat="@drawable/flowers"
                 android:contentDescription="@string/description"/>
@@ -90,15 +130,6 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:orientation="horizontal"/>
-        <Button
-                android:id="@+id/saveBtn"
-                android:layout_width="220dp"
-                android:layout_height="50dp"
-                android:focusable="true"
-                android:text="@string/save"
-                android:layout_marginTop="0dp"
-                android:layout_gravity="top|center"
-                android:clickable="true"/>
 
     </FrameLayout>
 

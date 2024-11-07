@@ -1,7 +1,5 @@
 package com.example.trailblaze.nps
 
-import android.app.Activity
-
 // Data classes for mapping the API response
 data class NPSResponse(
     val total: String,              // Total number of parks
@@ -24,7 +22,6 @@ data class Park(
     val stateCode: String,
     val weatherInfo: String,
     val operatingHours: List<OperatingHours>
-
 )
 
 data class Address(

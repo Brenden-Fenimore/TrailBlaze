@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trailblaze.MainActivity
 import com.example.trailblaze.R
+import com.example.trailblaze.firestore.UserManager
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
@@ -95,6 +96,8 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 }
+
+
 
 private fun isValidEmail(email: String): Boolean {
     val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"

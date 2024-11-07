@@ -149,6 +149,7 @@
     <color name="md_theme_surfaceContainer_highContrast">#EEEFE3</color>
     <color name="md_theme_surfaceContainerHigh_highContrast">#E8E9DE</color>
     <color name="md_theme_surfaceContainerHighest_highContrast">#E2E3D8</color>
+    <color name="primary_day_color">#4C662B</color>
     <color name="light_blue_600">#FF039BE5</color>
     <color name="light_blue_900">#FF01579B</color>
     <color name="light_blue_A200">#FF40C4FF</color>

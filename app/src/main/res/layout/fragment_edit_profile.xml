@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -18,11 +17,12 @@
 
         <ImageButton
                 android:src="@drawable/chevron_left"
-                android:contentDescription="@string/settings"
+                android:contentDescription="@string/backButton"
                 android:layout_width="49dp"
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
                 android:id="@+id/backButton"
+                android:tint="#CDEDA3"
                 android:background="@android:color/transparent"
                 android:layout_centerVertical="true"/>
         <ImageButton
@@ -32,6 +32,7 @@
                 android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
                 android:id="@+id/settingsButton"
+                android:tint="#CDEDA3"
                 android:background="@android:color/transparent"
                 android:layout_centerVertical="true"/>
 
@@ -54,6 +55,7 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="?attr/colorPrimary"
                 android:text="@string/editProfile"
                 android:fontFamily="@font/amethysta"
                 android:textSize="40sp"
@@ -70,19 +72,17 @@
 
             <ImageView
                     android:id="@+id/profilePicture"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:src="@drawable/account_circle"
-                    android:scaleType="centerCrop"
-                    android:contentDescription="@string/profilePicture" />
-
+                    android:contentDescription="@string/profilePicture"/>
             <ImageButton
                     android:id="@+id/camera_icon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="bottom|end"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/camera"
+                    android:src="@drawable/camera2"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/camera" />
 
@@ -102,7 +102,8 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/userperson"
+                    android:tint="?attr/colorPrimary"
+                    android:src="@drawable/usericon2"
                     android:contentDescription="@string/profilePicture" />
 
             <EditText
@@ -110,6 +111,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:textColor="?attr/colorPrimary"
                     android:hint="@string/username"
                     android:autofillHints="username"
                     android:inputType="textPersonName" />
@@ -125,6 +127,7 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:tint="?attr/colorPrimary"
                     android:src="@drawable/calendar"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/calendar" />
@@ -134,6 +137,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:textColor="?attr/colorPrimary"
                     android:hint="@string/birthdate"
                     android:autofillHints="dateOfBirth"
                     android:inputType="date" />
@@ -149,6 +153,7 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:tint="?attr/colorPrimary"
                     android:src="@drawable/baseline_contact_mail_24"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/userEmail" />
@@ -158,6 +163,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:textColor="?attr/colorPrimary"
                     android:hint="@string/editUserEmail"
                     android:autofillHints="emailAddress"
                     android:inputType="textEmailAddress" />
@@ -173,18 +179,71 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:tint="?attr/colorPrimary"
                     android:src="@drawable/location"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/locationIcon" />
 
             <EditText
-                    android:id="@+id/edit_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:hint="@string/userLocation"
-                    android:autofillHints="location"
-                    android:inputType="textPostalAddress" />
+                    android:inputType="textEmailAddress"
+                    android:layout_gravity="center"
+                    android:textColor="?attr/colorPrimary"
+                    android:id="@+id/editCity"
+                    android:fontFamily="@font/amethysta"
+                    android:hint="City"/>
+        </LinearLayout>
+        <!-- Location Field -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+            <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:tint="?attr/colorPrimary"
+                    android:src="@drawable/location"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/locationIcon" />
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:layout_gravity="center"
+                    android:textColor="?attr/colorPrimary"
+                    android:id="@+id/editState"
+                    android:fontFamily="@font/amethysta"
+                    android:hint="State"/>
+        </LinearLayout>
+
+        <!-- Location Field -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+            <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:tint="?attr/colorPrimary"
+                    android:src="@drawable/location"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/locationIcon" />
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:layout_gravity="center"
+                    android:textColor="?attr/colorPrimary"
+                    android:id="@+id/editZip"
+                    android:fontFamily="@font/amethysta"
+                    android:hint="Zip"/>
         </LinearLayout>
 
         <!-- Phone Number Field -->
@@ -197,6 +256,7 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:tint="?attr/colorPrimary"
                     android:src="@drawable/phone"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/phoneIcon" />
@@ -206,6 +266,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:textColor="?attr/colorPrimary"
                     android:hint="@string/userPhone"
                     android:autofillHints="phone"
                     android:inputType="phone" />
@@ -224,25 +285,34 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/map"
+                    android:tint="?attr/colorPrimary"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/terrainIcon"
                     android:layout_marginEnd="8dp"/>
-
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
             <TextView
                     android:id="@+id/edit_terrain"
-                    android:layout_width="wrap_content"
+                    android:layout_width="141dp"
                     android:layout_height="wrap_content"
                     android:text="@string/terrain"
-                    android:textSize="16sp"
-                    android:layout_marginEnd="16dp" />
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="20sp"
+                    android:layout_marginEnd="16dp"/>
 
 
             <Spinner
+                    android:id="@+id/terrain_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:entries="@array/terrain_options" />
+            </LinearLayout>
+
         </LinearLayout>
+
 
         <!-- Fitness Level -->
         <LinearLayout
@@ -254,6 +324,7 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:tint="?attr/colorPrimary"
                     android:src="@drawable/directions_walk"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/fitnessLevelIcon"
@@ -261,17 +332,22 @@
 
             <TextView
                     android:id="@+id/edit_fitness"
-                    android:layout_width="wrap_content"
+                    android:layout_width="141dp"
                     android:layout_height="wrap_content"
                     android:text="@string/fitnessLevel"
-                    android:textSize="16sp"
-                    android:layout_marginEnd="16dp" />
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="20sp"
+                    android:layout_marginEnd="16dp"/>
             <Spinner
+                    android:id="@+id/fitness_level_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:entries="@array/fitness_level_options" />
+
         </LinearLayout>
+
+
 
         <!-- Difficulty Level -->
         <LinearLayout
@@ -283,6 +359,7 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:tint="?attr/colorPrimary"
                     android:src="@drawable/difficulty"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/difficultyIcon"
@@ -290,17 +367,20 @@
 
             <TextView
                     android:id="@+id/edit_difficulty"
-                    android:layout_width="wrap_content"
+                    android:layout_width="141dp"
                     android:layout_height="wrap_content"
                     android:text="@string/difficultyLevel"
-                    android:textSize="16sp"
-                    android:layout_marginEnd="16dp" />
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="20sp"
+                    android:layout_marginEnd="16dp"/>
             <Spinner
+                    android:id="@+id/difficulty_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:entries="@array/difficulty_level_options" />
         </LinearLayout>
+
 
         <!-- Type of Hike -->
         <LinearLayout
@@ -312,22 +392,25 @@
             <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:tint="?attr/colorPrimary"
                     android:src="@drawable/map"
                     android:contentDescription="@string/typeOfHikeIcon"
                     android:layout_marginEnd="8dp"/>
 
             <TextView
                     android:id="@+id/edit_type_Of_Hike"
-                    android:layout_width="wrap_content"
+                    android:layout_width="141dp"
                     android:layout_height="wrap_content"
                     android:text="@string/typeOfHike"
-                    android:textSize="16sp"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="20sp"
                     android:layout_marginEnd="16dp" />
             <Spinner
+                    android:id="@+id/type_of_hike_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:entries="@array/hike_type_options" />
+                    android:entries="@array/hike_type_options"/>
         </LinearLayout>
 
         <!-- Suggested Trails SeekBar -->
@@ -344,6 +427,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/suggestedTrails"
+                    android:textColor="?attr/colorPrimary"
                     android:layout_marginTop="16dp" />
 
             <TextView
@@ -351,6 +435,7 @@
                     android:textSize="20sp"
                     android:id="@+id/range"
                     android:fontFamily="@font/amethysta"
+                    android:textColor="?attr/colorPrimary"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"/>
 
@@ -362,11 +447,11 @@
                 android:id="@+id/seekBar"/>
         <TextView
                 android:layout_gravity="center_horizontal"
-                android:text="  Range(miles)"
+                android:text="@string/rangeMiles"
                 android:textSize="20sp"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="305dp"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="?attr/colorPrimary"
                 android:layout_height="wrap_content"/>
 
         <!-- Leaderboard Switch -->
@@ -380,7 +465,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/userLeaderboardSwitch" />
+                    android:text="@string/userLeaderboardSwitch"
+                    android:textColor="?attr/colorPrimary"/>
+
 
             <Switch
                     android:id="@+id/leaderboard_switch"
@@ -399,7 +486,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="?attr/colorPrimary"
                     android:text="@string/userPhotosSwitch" />
+
 
             <Switch
                     android:id="@+id/photos_switch"
@@ -418,7 +507,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="?attr/colorPrimary"
                     android:text="@string/userFavoriteTrailsSwitch" />
+
 
             <Switch
                     android:id="@+id/favoritetrails_switch"
@@ -437,12 +528,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="?attr/colorPrimary"
                     android:text="@string/userWatcherSwitch" />
+
 
             <Switch
                     android:id="@+id/watcher_switch"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"/>
+
         </LinearLayout>
 
         <!-- Share Location Switch -->
@@ -456,7 +550,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="?attr/colorPrimary"
                     android:text="@string/userShareLocationSwitch" />
+
 
             <Switch
                     android:id="@+id/sharelocation_switch"

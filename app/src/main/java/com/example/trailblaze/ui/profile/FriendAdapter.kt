@@ -6,19 +6,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.databinding.ItemUserBinding
 import com.example.trailblaze.firestore.ImageLoader
 
-class UserAdapter(
-    private var users: List<User>, // Replace User with your user data model class
-    private val onClick: (User) -> Unit,
-) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+class FriendAdapter(
+    private var friends: List<Friends>, // Replace User with your user data model class
+    private val onClick: (Friends) -> Unit,
+) : RecyclerView.Adapter<FriendAdapter.UserViewHolder>() {
 
     inner class UserViewHolder(private val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(user: User) {
-            binding.usernameTextView.text = user.username // Assuming you have a TextView for the username
+        fun bind(friends: Friends) {
+            binding.usernameTextView.text = friends.username // Assuming you have a TextView for the username
             // Load the profile picture using an image loading library
-            ImageLoader.loadProfilePicture(binding.root.context, binding.profileImageView, user.profileImageUrl)
+            ImageLoader.loadProfilePicture(binding.root.context, binding.profileImageView, friends.profileImageUrl)
 
             binding.root.setOnClickListener {
-                onClick(user) // Invoke the click listener when the item is clicked
+                onClick(friends) // Invoke the click listener when the item is clicked
             }
         }
     }
@@ -29,13 +29,18 @@ class UserAdapter(
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.bind(users[position])
+        holder.bind(friends[position])
     }
 
-    override fun getItemCount(): Int = users.size
+    override fun getItemCount(): Int = friends.size
 
-    fun updateUserList(newUsers: List<User>) {
-        users = newUsers
+    fun updateUserList(newFriends: List<Friends>) {
+        friends = newFriends
         notifyDataSetChanged()
+    }
+
+    fun updateData(newFriends: List<Friends>) {
+        friends = newFriends
+        notifyDataSetChanged() // Notify the adapter to refresh the data
     }
 }

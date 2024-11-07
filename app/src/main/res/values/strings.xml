@@ -18,7 +18,7 @@
     <string name="previous">Previous</string>
     <string name="map_image">Map</string>
     <string name="profile">Profile</string>
-    <string name="contact_us">Contact Us</string>
+    <string name ="contact_us">Contact Us</string>
     <string name="favorites">Favorites</string>
     <string name="help_center">Help Center</string>
     <string name="username">Username</string>
@@ -151,24 +151,22 @@
     <!-- badge tool tips-->
     <string name="trailblazer">Trailblazer: Complete a trail of a certain distance or elevation gain.</string>
     <string name="mountainclimber">Mountain Climber: Reach a specific altitude or summit.</string>
-    <string name="longdistancetrekker">Long-Distance Trekker: Hike a certain number of miles in a single day or week
-    </string>
+    <string name="longdistancetrekker">Long-Distance Trekker: Hike a certain number of miles in a single day or week</string>
     <string name="habitualhiker">Habitual Hiker: Hike a certain number of times per week or month.</string>
     <string name="weekendwarrior">Weekend Warrior: Complete a trail every weekend.</string>
     <string name="dailyadventurer">Daily Adventurer: Hike at least once a day for a week.</string>
     <string name="conqueror">Conqueror: Complete a challenging trail with a difficult rating.</string>
     <string name="explorer">Explorer: Hike trails in various terrains (e.g., mountains, forests, deserts).</string>
     <string name="trailmaster">Trail Master: Complete trails in all four seasons.</string>
-    <string name="socialbutterfly">Social Butterfly: Hike with a group of friends or family.</string>
+    <string name="socialbutterfly">Social Butterfly: Add at least 2 TrailBlazers.</string>
     <string name="teamplayer">Team Player: Complete a group challenge or relay race.</string>
     <string name="safteyexpert">Safety Expert: Look at the safety tips.</string>
-    <string name="communitybuilder">Community Builder: Organize a group hike or event.</string>
+    <string name="communitybuilder">Community Builder: Add a favorite friend.</string>
     <string name="wildlifewatcher">Wildlife Watcher: Spot a specific animal or bird on a hike.</string>
-    <string name="photographer">Photographer: Capture a stunning photo of a trail or landscape.</string>
+    <string name="photographer">Photographer: Upload a picture to your TrailBlaze.</string>
     <string name="goalsetter">Goal Setter: Set a personal hiking goal and achieve it.</string>
-    <string name="badgecollector">Badge Collector: Earn badges for completing specific challenges or achievements.
-    </string>
-    <string name="leaderboardtip">Leaderboard Climber: Compete with friends or other users on a leaderboard.</string>
+    <string name="badgecollector">Badge Collector: Earn badges for completing specific challenges or achievements.</string>
+    <string name="leaderboardtip">Leaderboard Climber: Get at least 2 badges.</string>
     <string name="parkInfo">Park Information</string>
     <string name="parkName">Park Name</string>
     <string name="parkDescription">Park Description</string>
@@ -213,8 +211,8 @@
     <string name="homepage_welcome_user">Good Afternoon,</string>
     <string name="homepage_searchbar_hint">Search</string>
     <string name="homepage_nearby_trails">Top parks nearby:</string>
-    <string name="homepage_browse_by_difficulty">Browse by difficulty:</string>
-    <string name="homepage_friends">Hike with friends!</string>
+    <string name="homepage_time_records">Completed Parks:</string>
+    <string name="homepage_friends">Hike with TrailBlazers!</string>
 
     <string name="locationIcon">Location Icon</string>
     <string name="profilePicture">Profile Picture</string>
@@ -222,7 +220,7 @@
     <string name="watcherMember">Watcher Member</string>
     <string name="friends">Friends</string>
     <string name="friendProfilePicture">Friend Profile Picture</string>
-    <string name="leaderboard">Leaderboard</string>
+    <string name="leaderboard">Badge Leaderboard</string>
     <string name="leaderboardPicture">Leaderboard Picture</string>
     <string name="userPhotos">Photos</string>
     <string name="userPhotoPictures">User Photo Picture</string>
@@ -250,7 +248,7 @@
     <string name="bug">Report a Bug</string>
     <string name="emergency">I am in an emergency! (Dial 911)</string>
     <string name="contactTitle">If you are experiencing any issues, please let us know. We will try to solve them as
-        soon as possible.
+            soon as possible.
     </string>
     <string name="contactTitle2">Title</string>
     <string name="contactTitle3">Explain the problem</string>
@@ -300,30 +298,35 @@
     <string name="updateProfile">Update Profile</string>
     <string name="suggestedTrailsMiles">Suggested Trails: %1$d miles</string>
     <string name="bucketListTrails">Bucket List Trails</string>
-    <string name="favoriteFriends">Favorite Friends</string>
+    <string name="favoriteFriends">Favorite TrailBlazers</string>
+    <string name="rangeMiles">  Range</string>
+    <string name="uploadPhoto">Upload Photo</string>
+    <string name="deleteButton">Delete Button</string>
+    <string name="fullscreenImage">Fullscreen Image</string>
+    <string name="previousButton">Previous Button</string>
+    <string name="nextButton">Next Button</string>
+    <string name="editCaptionButton">Edit Caption</string>
     <!-- Spinner options for terrain -->
     <string-array name="terrain_options">
-        <item>Mountain</item>
-        <item>Forest</item>
-        <item>Desert</item>
-        <item>Beach</item>
+        <item>Foot Trails</item>
+        <item>Nature Trails</item>
+        <item>Rock Trails</item>
     </string-array>
 
     <!-- Spinner options for fitness level -->
     <string-array name="fitness_level_options">
-        <item>Beginner</item>
-        <item>Intermediate</item>
-        <item>Advanced</item>
+        <item>Low-Intensity</item>
+        <item>Moderate-Intensity</item>
+        <item>High-Intensity</item>
     </string-array>
 
     <!-- Spinner options for difficulty level -->
     <string-array name="difficulty_level_options">
         <item>Easiest</item>
-        <item>Easy</item>
         <item>Moderate</item>
-        <item>Moderate Difficult</item>
-        <item>Difficult</item>
-        <item>Extremely Difficult</item>
+        <item>Moderately Strenuous</item>
+        <item>Strenuous</item>
+        <item>Very Strenuous</item>
     </string-array>
 
     <!-- Spinner options for hike type -->
@@ -336,7 +339,7 @@
 
     <string name="addAsTrusted">Add as trusted Contact</string>
     <string name="friendsInCommon">Friends in Common</string>
-    <string name="meetTrailMates">Meet TrailMates</string>
+    <string name="meetTrailMates">Meet TrailBlazers</string>
 
     <!-- Spinner options for terrain -->
 
@@ -410,7 +413,16 @@
     <string name="friendRequest">Friend Requests</string>
     <string name="notifications">Notifications</string>
     <string name="trailUpdates">Trail Updates</string>
+    <string name="privateAccount">Make Account Private</string>
 
+
+    <!-- Attempt Trail STRINGS-->
+
+    <string name="attemptTitle">You are about to attempt a trail/park. For your safety in the event of a disaster
+    or no return, please input your party information.</string>
+    <string name="solo">Is this a solo journey?</string>
+    <string name="start">Start Trail</string>
+    <string name="bucket_list_description">Adds current park to user\'s bucket list</string>
     <!-- SETTINGS STRINGS-->
 
 
@@ -423,8 +435,8 @@
     <string name="trailBlazeUser">TrailBlaze User?</string>
     <string name="messages">Messages</string>
     <string name="watcherMemberLoc">Location</string>
+    <string name="remove_friend">Remove Friend from Friend List</string>
     <string name="chevronBack">Return to previous screen</string>
-    <string name="watcherMemPhoto">Watcher member profile photo</string>
     <string name="watcherLogo">Watcher Logo</string>
     <string name="usernameLabel">Username</string>
     <string name="watcherMemberList">Watcher Member List</string>

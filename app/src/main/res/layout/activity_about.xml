@@ -20,6 +20,7 @@
                 android:layout_width="39dp"
                 android:layout_height="39dp"
                 android:id="@+id/chevron_left"
+                android:tint="#CDEDA3"
                 android:background="@android:color/transparent"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"/>
@@ -28,7 +29,7 @@
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="25dp"
             android:layout_below="@id/swishLayout"
             android:id="@+id/titleLayout"
             android:orientation="vertical">
@@ -37,6 +38,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/aboutTitle"
                 android:textSize="40sp"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -55,13 +57,14 @@
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:layout_below="@id/imageView2"
-                  android:layout_marginTop="45dp"
+                  android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true">
         <TextView
                 android:layout_width="wrap_content"
                 android:textSize="18sp"
                 android:fontFamily="@font/amethysta"
                 android:layout_height="wrap_content"
+                android:textColor="?attr/colorPrimary"
                 android:gravity="center"
                 android:text="@string/aboutContent"
         />
@@ -75,8 +78,8 @@
 
         <ImageView
                 android:id="@+id/imageView8"
-                android:layout_width="425dp"
-                android:layout_height="310dp"
+                android:layout_width="706dp"
+                android:layout_height="478dp"
                 android:layout_gravity="center_horizontal"
                 app:srcCompat="@drawable/flowers"
                 android:contentDescription="@string/description"/>

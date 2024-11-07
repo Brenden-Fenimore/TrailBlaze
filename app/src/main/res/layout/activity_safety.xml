@@ -20,6 +20,7 @@
                 android:layout_width="39dp"
                 android:layout_height="39dp"
                 android:id="@+id/chevron_left"
+                android:tint="#CDEDA3"
                 android:background="@android:color/transparent"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"/>
@@ -45,6 +46,7 @@
                     android:layout_gravity="center_horizontal"
                     android:text="@string/safetyTips"
                     android:textSize="40sp"
+                    android:textColor="?attr/colorPrimary"
                     android:fontFamily="@font/amethysta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -62,10 +64,12 @@
                     android:layout_width="122dp"
                     android:layout_height="121dp"
                     app:srcCompat="@drawable/waterbottle"
-                    android:id="@+id/imageView7"/>
+                    android:id="@+id/imageView7"
+                    android:contentDescription="@string/description"/>
             <TextView
                     android:text="@string/water"
                     android:layout_width="209dp"
+                    android:textColor="?attr/colorPrimary"
                     android:fontFamily="@font/amethysta"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"
@@ -84,16 +88,18 @@
             <TextView
                     android:text="@string/boots"
                     android:layout_width="215dp"
+                    android:textColor="?attr/colorPrimary"
                     android:fontFamily="@font/amethysta"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView3"/>
             <ImageView
-                    android:layout_width="120dp"
+                    android:layout_width="0dp"
                     android:layout_height="115dp"
                     app:srcCompat="@drawable/boots"
                     android:id="@+id/imageView9"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:contentDescription="@string/description"/>
         </LinearLayout>
 
         <LinearLayout
@@ -104,18 +110,21 @@
                 android:id="@+id/layerslayout"
                 android:orientation="horizontal">
             <ImageView
-                    android:layout_width="120dp"
+                    android:layout_width="0dp"
                     android:layout_height="83dp"
                     app:srcCompat="@drawable/layers"
                     android:id="@+id/imageView12"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:contentDescription="@string/description"/>
 
             <TextView
                     android:text="@string/layers"
                     android:layout_width="192dp"
+                    android:textColor="?attr/colorPrimary"
                     android:fontFamily="@font/amethysta"
                     android:layout_gravity="center"
-                    android:layout_height="wrap_content" android:id="@+id/textView2"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView2"/>
 
         </LinearLayout>
         <LinearLayout
@@ -129,14 +138,18 @@
             <TextView
                     android:text="@string/flashligh"
                     android:layout_width="248dp"
+                    android:textColor="?attr/colorPrimary"
                     android:fontFamily="@font/amethysta"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView4"/>
             <ImageView
-                    android:layout_width="93dp"
-                    android:layout_height="102dp" app:srcCompat="@drawable/flashlight" android:id="@+id/imageView13"
-                    android:layout_weight="1"/>
+                    android:layout_width="0dp"
+                    android:layout_height="102dp"
+                    app:srcCompat="@drawable/flashlight"
+                    android:id="@+id/imageView13"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/description"/>
         </LinearLayout>
 
         <LinearLayout
@@ -147,14 +160,17 @@
                 android:id="@+id/limitslayout"
                 android:orientation="horizontal">
             <ImageView
-                    android:layout_width="122dp"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    app:srcCompat="@drawable/limits" android:id="@+id/imageView10"
-                    android:layout_weight="1"/>
+                    app:srcCompat="@drawable/limits"
+                    android:id="@+id/imageView10"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/description"/>
 
             <TextView
                     android:text="@string/limits"
                     android:layout_width="222dp"
+                    android:textColor="?attr/colorPrimary"
                     android:fontFamily="@font/amethysta"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"
@@ -175,14 +191,18 @@
             <TextView
                     android:text="@string/markedtrail"
                     android:layout_width="248dp"
+                    android:textColor="?attr/colorPrimary"
                     android:fontFamily="@font/amethysta"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView5"/>
             <ImageView
-                    android:layout_width="102dp"
-                    android:layout_height="match_parent" app:srcCompat="@drawable/stayontrails"
-                    android:id="@+id/imageView14" android:layout_weight="1"/>
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/stayontrails"
+                    android:id="@+id/imageView14"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/description"/>
         </LinearLayout>
 
         <LinearLayout
@@ -193,13 +213,17 @@
                 android:id="@+id/waterfallslayout"
                 android:orientation="horizontal">
             <ImageView
-                    android:layout_width="121dp"
-                    android:layout_height="66dp" app:srcCompat="@drawable/waterfalls" android:id="@+id/imageView15"
-                    android:layout_weight="1"/>
+                    android:layout_width="0dp"
+                    android:layout_height="66dp"
+                    app:srcCompat="@drawable/waterfalls"
+                    android:id="@+id/imageView15"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/description"/>
 
             <TextView
                     android:text="@string/waterfalls"
                     android:layout_width="222dp"
+                    android:textColor="?attr/colorPrimary"
                     android:fontFamily="@font/amethysta"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"
@@ -220,14 +244,18 @@
             <TextView
                     android:text="@string/whistle"
                     android:layout_width="248dp"
+                    android:textColor="?attr/colorPrimary"
                     android:fontFamily="@font/amethysta"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView9"/>
             <ImageView
-                    android:layout_width="78dp"
-                    android:layout_height="82dp" app:srcCompat="@drawable/whistle" android:id="@+id/imageView16"
-                    android:layout_weight="1"/>
+                    android:layout_width="0dp"
+                    android:layout_height="82dp"
+                    app:srcCompat="@drawable/whistle"
+                    android:id="@+id/imageView16"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/description"/>
         </LinearLayout>
 
         <LinearLayout
@@ -239,13 +267,16 @@
                 android:orientation="horizontal">
 
             <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="65dp"
-                    app:srcCompat="@drawable/nocellphone" android:id="@+id/imageView17"
-                    android:layout_weight="1"/>
+                    app:srcCompat="@drawable/nocellphone"
+                    android:id="@+id/imageView17"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/description"/>
             <TextView
                     android:text="@string/phone"
                     android:layout_width="222dp"
+                    android:textColor="?attr/colorPrimary"
                     android:fontFamily="@font/amethysta"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"
@@ -267,14 +298,18 @@
             <TextView
                     android:text="@string/animal"
                     android:layout_width="248dp"
+                    android:textColor="?attr/colorPrimary"
                     android:fontFamily="@font/amethysta"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView12"/>
             <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" app:srcCompat="@drawable/dontfeedwildlife"
-                    android:id="@+id/imageView18" android:layout_weight="1"/>
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/dontfeedwildlife"
+                    android:id="@+id/imageView18"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/description"/>
 
         </LinearLayout>
 
@@ -287,12 +322,16 @@
                 android:orientation="horizontal">
 
             <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" app:srcCompat="@drawable/bear" android:id="@+id/imageView19"
-                    android:layout_weight="1"/>
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/bear"
+                    android:id="@+id/imageView19"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/description"/>
             <TextView
                     android:text="@string/bear"
                     android:layout_width="222dp"
+                    android:textColor="?attr/colorPrimary"
                     android:fontFamily="@font/amethysta"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"
@@ -315,14 +354,18 @@
             <TextView
                     android:text="@string/snakes"
                     android:layout_width="237dp"
+                    android:textColor="?attr/colorPrimary"
                     android:fontFamily="@font/amethysta"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView13"/>
             <ImageView
-                    android:layout_width="129dp"
-                    android:layout_height="match_parent" app:srcCompat="@drawable/snake" android:id="@+id/imageView20"
-                    android:layout_weight="1"/>
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/snake"
+                    android:id="@+id/imageView20"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/description"/>
 
         </LinearLayout>
 
@@ -336,12 +379,16 @@
                 android:orientation="horizontal">
 
             <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" app:srcCompat="@drawable/ticks" android:id="@+id/imageView21"
-                    android:layout_weight="1"/>
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/ticks"
+                    android:id="@+id/imageView21"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/description"/>
             <TextView
                     android:text="@string/ticks"
                     android:layout_width="222dp"
+                    android:textColor="?attr/colorPrimary"
                     android:layout_gravity="center"
                     android:fontFamily="@font/amethysta"
                     android:layout_height="wrap_content"
@@ -364,14 +411,18 @@
             <TextView
                     android:text="@string/poisonivy"
                     android:layout_width="219dp"
+                    android:textColor="?attr/colorPrimary"
                     android:fontFamily="@font/amethysta"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView17"/>
             <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" app:srcCompat="@drawable/poisonivy" android:id="@+id/imageView22"
-                    android:layout_weight="1"/>
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/poisonivy"
+                    android:id="@+id/imageView22"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/description"/>
 
         </LinearLayout>
 
@@ -384,12 +435,16 @@
                 android:orientation="horizontal">
 
             <ImageView
-                    android:layout_width="135dp"
-                    android:layout_height="match_parent" app:srcCompat="@drawable/trailblaze_logo"
-                    android:id="@+id/imageView23" android:layout_weight="1"/>
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/trailblaze_logo"
+                    android:id="@+id/imageView23"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/description"/>
             <TextView
                     android:text="@string/fun"
                     android:layout_width="191dp"
+                    android:textColor="?attr/colorPrimary"
                     android:layout_gravity="center"
                     android:fontFamily="@font/amethysta"
                     android:layout_height="wrap_content"
