@@ -20,6 +20,7 @@ class WatcherMemberList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_watcher_member_list)
 
+
         // Initialize the RecyclerView
         watcherProfileRecycler = findViewById(R.id.watcherMemberRecyclerView)
 

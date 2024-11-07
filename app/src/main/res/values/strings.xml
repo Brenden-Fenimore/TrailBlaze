@@ -18,7 +18,7 @@
     <string name="previous">Previous</string>
     <string name="map_image">Map</string>
     <string name="profile">Profile</string>
-    <string name ="contact_us">Contact Us</string>
+    <string name="contact_us">Contact Us</string>
     <string name="favorites">Favorites</string>
     <string name="help_center">Help Center</string>
     <string name="username">Username</string>
@@ -151,7 +151,8 @@
     <!-- badge tool tips-->
     <string name="trailblazer">Trailblazer: Complete a trail of a certain distance or elevation gain.</string>
     <string name="mountainclimber">Mountain Climber: Reach a specific altitude or summit.</string>
-    <string name="longdistancetrekker">Long-Distance Trekker: Hike a certain number of miles in a single day or week</string>
+    <string name="longdistancetrekker">Long-Distance Trekker: Hike a certain number of miles in a single day or week
+    </string>
     <string name="habitualhiker">Habitual Hiker: Hike a certain number of times per week or month.</string>
     <string name="weekendwarrior">Weekend Warrior: Complete a trail every weekend.</string>
     <string name="dailyadventurer">Daily Adventurer: Hike at least once a day for a week.</string>
@@ -165,7 +166,8 @@
     <string name="wildlifewatcher">Wildlife Watcher: Spot a specific animal or bird on a hike.</string>
     <string name="photographer">Photographer: Upload a picture to your TrailBlaze.</string>
     <string name="goalsetter">Goal Setter: Set a personal hiking goal and achieve it.</string>
-    <string name="badgecollector">Badge Collector: Earn badges for completing specific challenges or achievements.</string>
+    <string name="badgecollector">Badge Collector: Earn badges for completing specific challenges or achievements.
+    </string>
     <string name="leaderboardtip">Leaderboard Climber: Get at least 2 badges.</string>
     <string name="parkInfo">Park Information</string>
     <string name="parkName">Park Name</string>
@@ -248,7 +250,7 @@
     <string name="bug">Report a Bug</string>
     <string name="emergency">I am in an emergency! (Dial 911)</string>
     <string name="contactTitle">If you are experiencing any issues, please let us know. We will try to solve them as
-            soon as possible.
+        soon as possible.
     </string>
     <string name="contactTitle2">Title</string>
     <string name="contactTitle3">Explain the problem</string>
@@ -299,7 +301,7 @@
     <string name="suggestedTrailsMiles">Suggested Trails: %1$d miles</string>
     <string name="bucketListTrails">Bucket List Trails</string>
     <string name="favoriteFriends">Favorite TrailBlazers</string>
-    <string name="rangeMiles">  Range</string>
+    <string name="rangeMiles">Range</string>
     <string name="uploadPhoto">Upload Photo</string>
     <string name="deleteButton">Delete Button</string>
     <string name="fullscreenImage">Fullscreen Image</string>
@@ -419,7 +421,8 @@
     <!-- Attempt Trail STRINGS-->
 
     <string name="attemptTitle">You are about to attempt a trail/park. For your safety in the event of a disaster
-    or no return, please input your party information.</string>
+        or no return, please input your party information.
+    </string>
     <string name="solo">Is this a solo journey?</string>
     <string name="start">Start Trail</string>
     <string name="bucket_list_description">Adds current park to user\'s bucket list</string>
@@ -444,7 +447,6 @@
     <string name="watcherBadgeDetails">This badge is awarded for exceptional response time to your Blazers messages. You
         have shown time and time again that you are there for your Blazer when they need you most!! Congratulations!!
     </string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-
+    <string name="setupWatchers">Would you like to designate Watcher(s) for your account?</string>
+    <string name="watcherDescription">Watchers are trusted contacts that can monitor your journey in real-time to stay safe and connected.</string>
 </resources>
