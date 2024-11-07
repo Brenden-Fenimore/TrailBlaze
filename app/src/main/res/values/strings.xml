@@ -435,11 +435,8 @@
     <string name="trailBlazeUser">TrailBlaze User?</string>
     <string name="messages">Messages</string>
     <string name="watcherMemberLoc">Location</string>
-    <string name="chevronBack"> Return to previous screen</string>
-    <string name="watcherMemPhoto"> Watcher member profile photo</string>
     <string name="remove_friend">Remove Friend from Friend List</string>
     <string name="chevronBack">Return to previous screen</string>
-    <string name="watcherMemPhoto">Watcher member profile photo</string>
     <string name="watcherLogo">Watcher Logo</string>
     <string name="usernameLabel">Username</string>
     <string name="watcherMemberList">Watcher Member List</string>

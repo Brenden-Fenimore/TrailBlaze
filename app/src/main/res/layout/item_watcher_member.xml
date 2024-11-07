@@ -13,7 +13,6 @@
             android:layout_height="100dp"
             android:id="@+id/watcherImage"
             android:src="@drawable/account_circle"
-            android:contentDescription="@string/watcherMemPhoto"
             tools:ignore="MissingConstraints"/>
 
 <!-- Watcher Name -->

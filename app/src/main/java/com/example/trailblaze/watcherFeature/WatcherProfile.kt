@@ -5,14 +5,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trailblaze.R
 
-class WatcherProfile : AppCompatActivity() {
+// Data class definition
+data class WatcherMember(
+    val watcherName: String,
+    val watcherProfileImage: Int,
+    val watcherBadgeImage: Int
+)
 
-    // Data class definition
-    data class WatcherMember(
-        val watcherName: String,
-        val watcherProfileImage: Int,
-        val watcherBadgeImage: Int
-    )
+class WatcherProfile : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

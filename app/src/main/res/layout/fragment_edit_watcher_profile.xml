@@ -4,8 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:padding="9dp">
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- Swish Background-->
     <com.example.trailblaze.view.SwishBackgroundView
@@ -29,7 +28,6 @@
 
     <ImageView
             android:id="@+id/profilePicture"
-            android:contentDescription="@string/watcherMemPhoto"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:src="@drawable/account_circle"
@@ -38,7 +36,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             android:layout_marginTop="16dp"/>
-            android:layout_marginTop="0dp"/>
 
     <!--Name Field-->
     <ImageButton
