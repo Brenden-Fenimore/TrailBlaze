@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="8dp">
+
+    <ImageView
+            android:id="@+id/thumbnailImageView"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/thumbnail" />
+
+    <TextView
+            android:id="@+id/parkNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="13sp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="?attr/colorPrimary"
+            android:shadowColor="#000000"
+            android:textStyle="bold"
+            android:layout_marginTop="6dp"/>
+
+</LinearLayout>

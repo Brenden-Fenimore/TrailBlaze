@@ -11,19 +11,168 @@
     <string name="helloMap">Hello MAP Fragment</string>
     <string name="helloFavorites">Hello FAVORITES Fragment</string>
     <string name="helloProfile">Hello PROFILE Fragment</string>
-    <string name="title_activity_settings">SettingsActivity</string>
-    <string name="activityTitle">Settings</string>
-    <string name="accountTitle">Account</string>
-    <string name="notificationTitle">Notifications</string>
-    <string name="appearanceTitle">Appearance</string>
-    <string name="helpAndSupportTitle">Help and Support</string>
-    <string name="aboutTitle">About</string>
-    <string name="privacyTitle">Privacy and Security</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="map_image">Map</string>
+    <string name="profile">Profile</string>
+    <string name ="contact_us">Contact Us</string>
+    <string name="favorites">Favorites</string>
+    <string name="help_center">Help Center</string>
+    <string name="username">Username</string>
+    <string name="logout">Logout</string>
+    <string name="btn_back">Goes back to the previous page</string>
+    <string name="settings">Settings</string>
+    <string name="forgotpassword1">Enter the Email address associated with your account.</string>
+    <string name="forgotpassword2">We will email you a link to reset your password</string>
+    <string name="aspects">What aspect/s of hiking do you like to experience most?</string>
+    <string name="location">TrailBlaze utilizes your location to provide personalized suggestions of nearby trails,
+        please enter your location.
+    </string>
+    <string name="distance">How far would you like to receive suggested trails?</string>
+    <string name="interact">How would you like to interact with the community></string>
+    <string name="interaction1">I would like my account to be found by others.</string>
+    <string name="interaction2">I would like my hiking experience shared with others and/or on leaderboards.</string>
+    <string name="interaction3">I would like to volunteer for creating and maintaining trails for my community.</string>
+    <string name="interaction4">I would like to be notified if someone is in danger or any potential danger is on a
+        trail.
+    </string>
+    <string name="options">Please select your preferences for each of the categories listed below.</string>
+    <string name="privacy_policy1">Your privacy is important to us. It is TrailBlaze policy to respect your privacy
+        regarding any information we may collect from you across our website, and other sites we own and operate.
+    </string>
+    <string name="privacy_policy2">We only ask for personal information when we truly need it to provide a service to
+        you. We collect it by fair and lawful means, with your knowledge and consent. We also let you know why we’re
+        collecting it and how it will be used.
+    </string>
+    <string name="privacy_policy3">We only retain collected information for as long as necessary to provide you with
+        your requested service.">
+    </string>
+    <string name="titleForgotPassword">Forgot Password</string>
+    <string name="titleEmail">Email Address</string>
+    <string name="titleResetPw">Reset Password</string>
+    <string name="titleLogin">Login</string>
+    <string name="login1">By signing in you are agreeing to our</string>
+    <string name="titleTerms">Terms and Conditions</string>
+    <string name="titleRegister">Register</string>
+    <string name="passWord">Password</string>
+    <string name="rememberPassword">Remember Password</string>
+    <string name="personalize">Lets Personalize your account</string>
+    <string name="userName">Username</string>
+    <string name="dob">Date of Birth mm/dd/yyyy</string>
+    <string name="password2">Confirm Password</string>
+    <string name="agree">You agree to our</string>
+    <string name="createAccount">Create Account</string>
+    <string name="titleLogout">Logout</string>
+    <string name="reviewTerms">Review Terms and Conditions</string>
+    <string name="ok">OK</string>
+    <string name="titleNature">Nature</string>
+    <string name="titleBreaks">Breaks</string>
+    <string name="titleUphill">Uphill</string>
+    <string name="pace">Pace</string>
+    <string name="titleContinue">Continue</string>
+    <string name="menuTitle">Menu</string>
+    <string name="exploreTrails">Explore Trails</string>
+    <string name="trailChallenges">Trail Challenges</string>
+    <string name="safetyTips">Safety Tips</string>
+    <string name="phoneNumber">Phone Number</string>
+    <string name="water">Stay hydrated: Dehydration can be a serious health problem, so bring more water than you think
+        youll need. Use a durable water bottle to ensure you have access to clean water.
+    </string>
+    <string name="boots">Wear proper footwear: Wear quality closed-toe shoes with good cushioning and grip to avoid sore
+        feet and ankle injuries.
+    </string>
+    <string name="layers">Dress in layers: Wear clothes that work for the weather and avoid cotton.</string>
+    <string name="flashligh">Carry essentials: Bring a flashlight, matches, emergency shelter, and extra food and
+        water.
+    </string>
+    <string name="limits">Know your limits: Be aware of your physical abilities and listen to your body. Recognize signs
+        of fatigue or distress, such as shortness of breath or dizziness.
+    </string>
+    <string name="markedtrail">Stay on marked trails: Making shortcuts can lead to erosion and increase your chances of
+        getting lost.
+    </string>
+    <string name="waterfalls">Dont climb on waterfalls: Falls from waterfalls and wet rocks can cause serious injuries
+        and deaths.
+    </string>
+    <string name="whistle">Use a whistle: A whistle can be heard from far away and takes less energy than yelling.
+    </string>
+    <string name="phone">Dont rely on cell phones: Dont count on cell phones to work in the wilderness.</string>
+    <string name="animal">Never feed or touch wildlife: Do not approach or attempt to move sick or injured wildlife.
+        Please report any encounters with aggressive, sick or injured animals to a park staff.
+    </string>
+    <string name="bear">Wildlife lives in all state parks, even near urban areas: Although rare, black bears, mountain
+        lions and rattlesnakes may be seen. If you encounter wildlife on the trail, keep your distance, back away slowly
+        and do not run. Report your sightings to park staff.
+    </string>
+    <string name="ticks">Ticks: Tick populations can increase depending on the season. Take the following precautions
+        to avoid them:
+        Walk in the middle of trails. Use insect repellent. Tuck your pants into your socks. After taking off gear,
+        check for hitchhiking ticks. Always do a “tick check” with the help of a friend.
+    </string>
+    <string name="poisonivy">Poison oak: It is a common plant throughout much of California. Learn to identify its
+        shiny, three-leaf pattern, and avoid touching it. If you touch poison oak, wash immediately with water and mild
+        soap. Pat dry with a clean towel.
+    </string>
+    <string name="fun">But mostly have fun! Enjoy nature! Love yourself. And remember leave only footprints, and take
+        only memories!
+    </string>
+
+    <string name="snakes">Snakes: Always know where you are stepping. For example, if you must traverse a log that has
+        fallen across the trail, rather than just stepping over the log, first step up onto the log then step down once
+        you know the coast is clear. Be cautious when climbing rocks or picking up firewood. If you see a snake,
+        maintain a distance of at least 6 feet. Most bites occur when people get too close or try to touch them.
+    </string>
+    <string name="park_image">park_image</string>
+    <string name="latitude_heading">Latitude:</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="longitude_heading">Longitude:</string>
+    <string name="address_heading">Address:</string>
+    <string name="activities">Activities</string>
+    <string name="addresses">Addresses</string>
+    <string name="operating_hours">Operating Hours</string>
+    <string name="contacts">Contacts</string>
+    <string name="entrance_passes">Entrance Passes</string>
+    <string name="images">Images</string>
+    <string name="weather_info">Weather Info</string>
+    <string name="photos">Photos</string>
+    <string name="activities_heading">Available Activities:</string>
+    <string name="operating_hours_header">Hours of Operation:</string>
+    <string name="contact_heading">Contact Us:</string>
+    <string name="phone_number_heading">Phone Number:</string>
+    <string name="email_heading">Email:</string>
+    <string name="entrance_fee_heading">Entrance Fee:</string>
+    <string name="weather_info_heading">Yearly Weather Conditions:</string>
+    <string name="achievementsTitle">TrailBlaze Challenges</string>
+    <string name="overallProgress">Overall Progress</string>
+    <!-- badge tool tips-->
+    <string name="trailblazer">Trailblazer: Complete a trail of a certain distance or elevation gain.</string>
+    <string name="mountainclimber">Mountain Climber: Reach a specific altitude or summit.</string>
+    <string name="longdistancetrekker">Long-Distance Trekker: Hike a certain number of miles in a single day or week</string>
+    <string name="habitualhiker">Habitual Hiker: Hike a certain number of times per week or month.</string>
+    <string name="weekendwarrior">Weekend Warrior: Complete a trail every weekend.</string>
+    <string name="dailyadventurer">Daily Adventurer: Hike at least once a day for a week.</string>
+    <string name="conqueror">Conqueror: Complete a challenging trail with a difficult rating.</string>
+    <string name="explorer">Explorer: Hike trails in various terrains (e.g., mountains, forests, deserts).</string>
+    <string name="trailmaster">Trail Master: Complete trails in all four seasons.</string>
+    <string name="socialbutterfly">Social Butterfly: Add at least 2 TrailBlazers.</string>
+    <string name="teamplayer">Team Player: Complete a group challenge or relay race.</string>
+    <string name="safteyexpert">Safety Expert: Look at the safety tips.</string>
+    <string name="communitybuilder">Community Builder: Add a favorite friend.</string>
+    <string name="wildlifewatcher">Wildlife Watcher: Spot a specific animal or bird on a hike.</string>
+    <string name="photographer">Photographer: Upload a picture to your TrailBlaze.</string>
+    <string name="goalsetter">Goal Setter: Set a personal hiking goal and achieve it.</string>
+    <string name="badgecollector">Badge Collector: Earn badges for completing specific challenges or achievements.</string>
+    <string name="leaderboardtip">Leaderboard Climber: Get at least 2 badges.</string>
+    <string name="parkInfo">Park Information</string>
+    <string name="parkName">Park Name</string>
+    <string name="parkDescription">Park Description</string>
+    <string name="editSash">Edit Sash</string>
+    <string name="save">Save</string>
+
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris volutpat, dolor id
@@ -56,6 +205,242 @@
         dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="title_activity_login">Login</string>
+    <string name="title_activity_terms_and_conditions">TermsAndConditions</string>
+    <string name="title_activity_terms">TermsActivity</string>
+    //User variables
+    <string name="homepage_welcome_user">Good Afternoon,</string>
+    <string name="homepage_searchbar_hint">Search</string>
+    <string name="homepage_nearby_trails">Top parks nearby:</string>
+    <string name="homepage_time_records">Completed Parks:</string>
+    <string name="homepage_friends">Hike with TrailBlazers!</string>
 
+    <string name="locationIcon">Location Icon</string>
+    <string name="profilePicture">Profile Picture</string>
+    <string name="difficultyIcon">Difficulty Icon</string>
+    <string name="watcherMember">Watcher Member</string>
+    <string name="friends">Friends</string>
+    <string name="friendProfilePicture">Friend Profile Picture</string>
+    <string name="leaderboard">Badge Leaderboard</string>
+    <string name="leaderboardPicture">Leaderboard Picture</string>
+    <string name="userPhotos">Photos</string>
+    <string name="userPhotoPictures">User Photo Picture</string>
+    <string name="userFavoriteTrails">Favorite Trails</string>
+    <string name="userFavoriteTrailsPictures">User Favorite Trail Picture</string>
+    <string name="userBadge1">User Badge 1</string>
+    <string name="userBadge2">User Badge 2</string>
+    <string name="userBadge3">User Badge 3</string>
+    <string name="editIcon">Edit</string>
+    <string name="editProfile">Edit Profile</string>
+    <string name="backButton">Back Button</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="activityTitle">Settings</string>
+    <string name="accountTitle">Account</string>
+    <string name="notificationTitle">Notifications</string>
+    <string name="appearanceTitle">Appearance</string>
+    <string name="helpAndSupportTitle">Help and Support</string>
+    <string name="aboutTitle">About</string>
+    <string name="privacyTitle">Privacy and Security</string>
+    <string name="friendsProfile1">Friends in Common</string>
+    <string name="friendsAdd">Add as a trusted Contact/Watcher</string>
+    <string name="titleHelp">Help and Support</string>
+    <string name="contact">Contact Us</string>
+    <string name="troubleshoot">Troubleshooting Guide</string>
+    <string name="bug">Report a Bug</string>
+    <string name="emergency">I am in an emergency! (Dial 911)</string>
+    <string name="contactTitle">If you are experiencing any issues, please let us know. We will try to solve them as
+            soon as possible.
+    </string>
+    <string name="contactTitle2">Title</string>
+    <string name="contactTitle3">Explain the problem</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="inputText">Input Text</string>
+    <string name="description">Enter a description...</string>
+    <string name="contact4">You can also contact us at</string>
+    <string name="supportEmail">customersupport@trailblaze.com</string>
+    <string name="aboutContent">TrailBlaze aims to be the go-to application for all hikers, climbers, and outdoorsy
+        types by offering a fantastic way to view trail options whether traveling or at home. &#10;With customization
+        options, the latest updates on trails, and an expansive community, it is sure to be a standout in the space.
+    </string>
+    <string name="title_activity_help_frag">HelpFrag</string>
+    <string name="friend_s_profile">Friend\'s Profile</string>
+    <string name="backarrow">backArrow</string>
+    <string name="map_search_hint">Search for a Trail</string>
+    <string name="backArrow">backArrow</string>
+    <string name="title_activity_safety_tips">SafetyTipsActivity</string>
+
+    <string name="favorite_trails">Favorite Trails</string>
+
+    <string name="thumbnail">thumbnail</string>
+    <string name="homepage_friend_list">List of preferred friends</string>
+    <string name="search">Search</string>
+    <string name="camera">Edit Picture</string>
+    <string name="calendar">Calendar</string>
+    <string name="birthdate">Date of Birth MM/DD/YYYY</string>
+    <string name="userEmail">Users Email</string>
+    <string name="editUserEmail">Email Address</string>
+    <string name="userLocation">Location</string>
+    <string name="phoneIcon">Phone Icon</string>
+    <string name="userPhone">Phone Number</string>
+    <string name="terrainIcon">Terrain Icon</string>
+    <string name="terrain">Terrain</string>
+    <string name="fitnessLevelIcon">Fitness Level Icon</string>
+    <string name="fitnessLevel">Fitness Level</string>
+    <string name="difficultyLevel">Difficulty Level</string>
+    <string name="typeOfHikeIcon">Type of Hike Icon</string>
+    <string name="typeOfHike">Type of Hike</string>
+    <string name="suggestedTrails">Suggested Trails</string>
+    <string name="userLeaderboardSwitch">Leaderboard</string>
+    <string name="userPhotosSwitch">Photos</string>
+    <string name="userFavoriteTrailsSwitch">Favorite Trails</string>
+    <string name="userWatcherSwitch">Watcher</string>
+    <string name="userShareLocationSwitch">Share Location</string>
+    <string name="updateProfile">Update Profile</string>
+    <string name="suggestedTrailsMiles">Suggested Trails: %1$d miles</string>
+    <string name="bucketListTrails">Bucket List Trails</string>
+    <string name="favoriteFriends">Favorite TrailBlazers</string>
+    <string name="rangeMiles">  Range</string>
+    <string name="uploadPhoto">Upload Photo</string>
+    <string name="deleteButton">Delete Button</string>
+    <string name="fullscreenImage">Fullscreen Image</string>
+    <string name="previousButton">Previous Button</string>
+    <string name="nextButton">Next Button</string>
+    <string name="editCaptionButton">Edit Caption</string>
+    <!-- Spinner options for terrain -->
+    <string-array name="terrain_options">
+        <item>Foot Trails</item>
+        <item>Nature Trails</item>
+        <item>Rock Trails</item>
+    </string-array>
+
+    <!-- Spinner options for fitness level -->
+    <string-array name="fitness_level_options">
+        <item>Low-Intensity</item>
+        <item>Moderate-Intensity</item>
+        <item>High-Intensity</item>
+    </string-array>
+
+    <!-- Spinner options for difficulty level -->
+    <string-array name="difficulty_level_options">
+        <item>Easiest</item>
+        <item>Moderate</item>
+        <item>Moderately Strenuous</item>
+        <item>Strenuous</item>
+        <item>Very Strenuous</item>
+    </string-array>
+
+    <!-- Spinner options for hike type -->
+    <string-array name="hike_type_options">
+        <item>Day Hike</item>
+        <item>Backpacking</item>
+        <item>Trail Running</item>
+        <item>Climbing</item>
+    </string-array>
+
+    <string name="addAsTrusted">Add as trusted Contact</string>
+    <string name="friendsInCommon">Friends in Common</string>
+    <string name="meetTrailMates">Meet TrailBlazers</string>
+
+    <!-- Spinner options for terrain -->
+
+    <!--LEGAL STRINGS-->
+    <string name="privacy">Privacy Policy</string>
+    <string name="acceptableUse">Acceptable Use Policy</string>
+    <string name="privacyPolicy">Privacy Policy</string>
+    <string name="lastUpdated_toc">Last updated October 24, 2024</string>
+
+    <string-array name="termsOfConditions_table">
+        <item>TABLE OF CONTENTS</item>
+        <item>OUR SERVICES</item>
+        <item>INTELLECTUAL PROPERTY RIGHTS</item>
+        <item>USER REPRESENTATIONS</item>
+        <item>PROHIBITED ACTIVITIES</item>
+        <item>USER GENERATED CONTRIBUTIONS</item>
+        <item>CONTRIBUTION LICENSE</item>
+        <item>SERVICES MANAGEMENT</item>
+        <item>TERM AND TERMINATION</item>
+        <item>MODIFICATIONS AND INTERRUPTIONS</item>
+        <item>GOVERNING LAW</item>
+        <item>DISPUTE RESOLUTION</item>
+        <item>CORRECTIONS</item>
+        <item>DISCLAIMER</item>
+        <item>LIMITATIONS OF LIABILITY</item>
+        <item>INDEMNIFICATION</item>
+        <item>USER DATA</item>
+        <item>ELECTRONIC COMMUNICATIONS, TRANSACTIONS, AND SIGNATURES</item>
+        <item>MISCELLANEOUS</item>
+        <item>CONTACT US</item>
+    </string-array>
+
+    <string name="agreementToTerms">AGREEMENT TO OUR LEGAL TERMS</string>
+    <string name="ourServices">The information provided when using the Services is not intended for distribution to or
+        use by any person or entity in any jurisdiction or country where such distribution or use would be contrary to
+        law or regulation which would subject us to any registration requirement within such jurisdiction or country.
+        Accordingly, those persons who choose to access the Services from other locations do so on their own initiative
+        and are solely responsible for compliance with local laws, if and to the extent local laws are applicable.
+    </string>
+
+    <string name="termsIntro">"We are TrailBlaze (“Company,” “we,” “our”), a company registered in State, United States
+        at TBD, TBD, State TBD.
+        We operate the website http://www.trailblaze.com (the “Site”), the mobile application TrailBlaze (the “App”), as
+        well as other related products and services that refer or link to these legal terms (the “Legal Terms”)
+        (collectively, the “Services”).
+        You can contact us by email at email or by mail to address.
+        The Legal Terms constitute a legally binding agreement made between you, whether personally or on behalf of an
+        entity (“you”), and blank, concerning your access to and use of the Services. You agree that by accessing the
+        Services, you have read, understood, and agreed to be bound by all of these Legal Terms. IF YOU DO NOT AGREE
+        WITH ALL OF THESE LEGAL TERMS, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SERVICES AND YOU MUST
+        DISCONTINUE IMMEDIATELY.
+        Supplemental terms and conditions or documents that may be posted on the Services from time to time are hereby
+        expressly incorporated by reference. \n We reserve the right, in our sole discretion, to make changes by
+        modifications to these Legal Terms at any time and for any reason. We will alert you about any changes by
+        updating the “Last Updated” date of these Legal Terms, and you waive any right to receive specific notice of
+        each such change. It is your responsibility to periodically review these Legal Terms to stay informed of
+        updates. You will be subject to, and will be deemed to have been made aware of and to have accepted, the changes
+        in any revised Legal Terms by your continued use of the Services after the date such revised Legal Terms are
+        posted.
+        We recommend that you print a copy of these Legal Terms for your records. \n "
+    </string>
+
+    <!--LEGAL STRINGS-->
+
+    <!-- SETTINGS STRINGS-->
+
+    <string name="darkMode">Dark Mode</string>
+    <string name="metricUnits">Metric Units</string>
+    <string name="watcherReminder">Watcher Reminder</string>
+    <string name="photoOpp">Photo Opportunities</string>
+    <string name="friendRequest">Friend Requests</string>
+    <string name="notifications">Notifications</string>
+    <string name="trailUpdates">Trail Updates</string>
+    <string name="privateAccount">Make Account Private</string>
+
+
+    <!-- Attempt Trail STRINGS-->
+
+    <string name="attemptTitle">You are about to attempt a trail/park. For your safety in the event of a disaster
+    or no return, please input your party information.</string>
+    <string name="solo">Is this a solo journey?</string>
+    <string name="start">Start Trail</string>
+    <string name="bucket_list_description">Adds current park to user\'s bucket list</string>
+    <!-- SETTINGS STRINGS-->
+
+
+    <!-- Watcher Member Strings-->
+
+    <string name="watcherMemberName">Watcher Member Name</string>
+    <string name="watcherNickName">Watcher Nickname</string>
+    <string name="hint_nickname">Hint Nickname</string>
+    <string name="notificationPreferences">Notification Preferences</string>
+    <string name="trailBlazeUser">TrailBlaze User?</string>
+    <string name="messages">Messages</string>
+    <string name="watcherMemberLoc">Location</string>
+    <string name="remove_friend">Remove Friend from Friend List</string>
+    <string name="chevronBack">Return to previous screen</string>
+    <string name="watcherLogo">Watcher Logo</string>
+    <string name="usernameLabel">Username</string>
+    <string name="watcherMemberList">Watcher Member List</string>
+    <string name="watcherStats">Watcher Awards</string>
+    <string name="watcherBadgeDetails">This badge is awarded for exceptional response time to your Blazers messages. You have shown time and time again that you are there for your Blazer when they need you most!! Congratulations!!</string>
 
 </resources>

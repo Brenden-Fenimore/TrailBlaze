@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+    <!-- Watcher Profile Image -->
+
+    <ImageView
+            android:layout_width="96dp"
+            android:layout_height="100dp"
+            android:id="@+id/watcherImage"
+            android:src="@drawable/account_circle"
+            tools:ignore="MissingConstraints"/>
+
+<!-- Watcher Name -->
+
+    <TextView
+            android:id="@+id/watcherName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="@string/watcherMember"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Badge Image-->
+
+    <ImageView
+            android:id="@+id/watcherBadgeImage"
+            android:layout_width="48dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/badge"
+            android:contentDescription="Watcher Badges"
+            app:layout_constraintStart_toStartOf="@id/watcherName"
+            app:layout_constraintTop_toBottomOf="@id/watcherName"
+            android:layout_marginTop="5dp"
+            android:padding="6dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

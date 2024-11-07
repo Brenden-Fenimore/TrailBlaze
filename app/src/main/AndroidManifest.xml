@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools">
+          xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraText">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
             android:allowBackup="true"
@@ -11,16 +15,105 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.TrailBlaze"
-            tools:targetApi="31">
+            tools:targetApi="31"
+            android:enableOnBackInvokedCallback="true">
+
         <activity
-                android:name=".Login.RegisterActivity"
+                android:name=".ui.parks.AttemptTrailActivity"
+                android:exported="true"/>
+
+        <activity
+                android:name=".ui.profile.UserListActivity"
+                android:exported="true"/>
+
+        <activity
+                android:name=".ui.achievements.BadgesActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".ui.achievements.Badge"
+                android:exported="true"/>
+        <activity
+                android:name=".ui.achievements.Achievement"
+                android:exported="true"/>
+        <activity
+                android:name=".ui.achievements.BadgesAdapter"
+                android:exported="true"/>
+        <activity
+                android:name=".ui.achievements.AchievementCategory"
+                android:exported="true"/>
+        <activity
+                android:name=".ui.achievements.AchievementsAdapter"
+                android:exported="true"/>
+        <activity
+                android:name=".ui.achievements.AchievementsFragment"
+                android:exported="true"/>
+
+        <activity
+                android:name=".ui.parks.ParkDetailActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".ui.achievements.AchievementsActivity"
                 android:exported="false"/>
         <activity
-                android:name=".Login.LoginActivity"
+                android:name=".settings.SafetyActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".ui.Map.MapFragment"
+                android:exported="false"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
+                android:name=".ui.profile.EditProfileFragment"
+                android:exported="false"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
+                android:name=".ui.MenuActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".settings.AboutActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".settings.PrivacyAndSecurityActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".settings.AppearanceActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".settings.NotificationsActivity"
+                android:exported="false"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
+                android:name=".settings.ContactUsActivity"
+                android:exported="false"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
+                android:name=".settings.SupportScreenActivity"
+                android:exported="false"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
+                android:name=".ui.profile.FriendsProfileActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".login.TermsActivity"
+                android:exported="false"
+                android:label="@string/title_activity_terms"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
+                android:name=".login.PersonalizeActivity"
+                android:exported="false"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
+                android:name=".login.ForgotPasswordActivity"
+                android:exported="false"
+                android:theme="@style/Theme.TrailBlaze"/>
+        <activity
+                android:name=".login.RegisterActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".login.LoginActivity"
                 android:exported="true"
                 android:theme="@style/Theme.TrailBlaze"/>
         <activity
-                android:name=".Settings.SettingsScreenActivity"
+                android:name=".settings.SettingsScreenActivity"
                 android:exported="false"
                 android:theme="@style/Theme.TrailBlaze"/>
         <activity
@@ -33,6 +126,22 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-    </application>
 
+        <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="${GOOGLE_MAPS_API_KEY}"/>
+
+
+        <!-- Acceptable Use Activity-->
+        <activity android:name=".login.AcceptableActivity" />
+
+        <!-- Privacy Activity-->
+        <activity android:name=".login.PrivacyActivity" />
+
+        <!-- Watcher Member Activity-->
+<activity android:name=".watcherFeature.WatcherMemberList"/>
+
+    </application>
+    //enables the emulator to access the internet (Brenden enabled this for MAPS API to get nearby search)
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

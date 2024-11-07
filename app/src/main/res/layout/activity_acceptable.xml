@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="0dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+    <!-- Swish Background-->
+    <com.example.trailblaze.view.SwishBackgroundView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:id="@+id/swishBackgroundView"/>
+
+        <!-- Acceptable Use header-->
+
+        <TextView
+
+                android:id="@+id/acceptableUse"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:singleLine="true"
+                android:text="@string/acceptableUse"
+                android:textSize="30sp"
+                android:textColor="?attr/colorPrimary"
+                android:fontFamily="@font/amethysta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/swishBackgroundView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!--Last Updated Notice-->
+        <TextView
+                android:id="@+id/lastUpdated"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center_horizontal"
+                android:singleLine="true"
+                android:text="@string/lastUpdated_toc"
+                android:textSize="15sp"
+                android:textColor="?attr/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/termsAndCon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Scroll portion for policy body-->
+
+        <ScrollView
+                android:id="@+id/termsBodyScroll"
+                android:layout_width="385dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:padding="20dp"
+                app:layout_constraintTop_toBottomOf="@id/agreement_toc"
+                app:layout_constraintBottom_toTopOf="@id/buttonLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_weight="1">
+
+            <TextView
+                    android:id="@+id/acceptableTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/colorPrimary"
+                    android:scrollbars="vertical"
+                    android:textSize="16sp"
+                    android:padding="5dp"
+            />
+        </ScrollView>
+
+        <!-- Static Buttons-->
+    <LinearLayout
+            android:id="@+id/buttonLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+                android:id="@+id/acceptableOkBtn"
+                app:layout_constraintTop_toBottomOf="@id/buttonLayout"
+                android:layout_width="220dp"
+                android:layout_height="50dp"
+                android:text="@string/ok"
+                android:layout_marginTop="0dp"
+                android:layout_gravity="center_horizontal"/>
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

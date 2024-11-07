@@ -1,23 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".ui.home.HomeFragment">
-
-
-<TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:gravity="center_horizontal"
-        android:text="@string/helloHome"/>
-    <Button
-            android:text="Logout"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/logoutbtn"
-            android:layout_marginTop="20dp">
-    </Button>
+            android:id="@+id/swishLayout">
 
-</FrameLayout>
+        <!-- Custom Swish Background at the bottom layer -->
+        <com.example.trailblaze.view.SwishBackgroundView
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+        <!--    Hamburger menu in top left-->
+
+        <ImageButton
+                android:src="@drawable/navmenu"
+                android:contentDescription="@string/settings"
+                android:layout_width="49dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:id="@+id/menuButton"
+                android:background="@android:color/transparent"
+                android:layout_centerVertical="true"
+                android:tint="#CDEDA3"/>
+        <ImageButton
+                android:src="@drawable/baseline_settings_24"
+                android:contentDescription="@string/settings"
+                android:layout_width="49dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/settingsbtn"
+                android:background="@android:color/transparent"
+                android:layout_centerVertical="true"
+                android:tint="#CDEDA3"/>
+    </RelativeLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+        android:layout_below="@id/swishLayout">
+            <TextView
+                    android:id="@+id/homepagegreeting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="40sp"
+                    android:text="@string/homepage_welcome_user"
+                    android:textColor="?attr/colorPrimary"
+                    android:fontFamily="@font/amethysta"
+                    android:textAlignment="center"/>
+            <LinearLayout
+                    android:id="@+id/usernamelayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:layout_marginStart="0dp"
+                        android:id="@+id/homepageusername"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="27sp"
+                        android:text="@string/username"
+                        android:textColor="?attr/colorPrimary"
+                        android:fontFamily="@font/amethysta"
+                        android:layout_weight="1"
+                        android:textAlignment="center"/>
+            </LinearLayout>
+
+            <ScrollView android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                <LinearLayout
+                        android:id="@+id/nearbytrailslayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="16dp">
+                    <!--        Top Trails Nearby-->
+                    <TextView
+                            android:id="@+id/toptrails"
+                            android:layout_marginTop="30dp"
+                            android:text="@string/homepage_nearby_trails"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/amethysta"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="?attr/colorPrimary"
+                            android:shadowColor="@color/black"/>
+
+                    <!-- RecyclerView for Nearby Trails -->
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/thumbnailRecyclerView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/timeRecordsLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="16dp">
+
+                    <!--        Browse By Difficulty-->
+                    <TextView
+                            android:id="@+id/timeRecords"
+                            android:layout_marginTop="30dp"
+                            android:text="@string/homepage_time_records"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/amethysta"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="?attr/colorPrimary"
+                            android:shadowColor="@color/black"/>
+
+                    <!-- New RecyclerView for displaying time records -->
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/timeRecordsRecyclerView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/invitefriendslayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    <TextView
+                            android:id="@+id/hikewithfriends"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginStart="20dp"
+                            android:text="@string/homepage_friends"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/amethysta"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="?attr/colorPrimary"
+                            android:shadowColor="@color/black"/>
+
+                    <ImageButton
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="20dp"
+                            app:srcCompat="@drawable/add_circle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:id="@+id/addFriend"
+                            android:focusable="true"
+                            app:maxImageSize="24dp"
+                            android:tint="?attr/colorPrimary"
+                            app:backgroundTint="#00FFFFFF"
+                            android:textColor="?attr/colorPrimary"
+                            android:contentDescription="@string/description"/>
+                </LinearLayout>
+
+                    <!-- RecyclerView for Users -->
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/usersRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false"/>
+
+                <!-- Spacer to add margin for navigation bar -->
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp" />
+            </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+</RelativeLayout>

@@ -1,15 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".ui.favorites.FavoritesFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:paddingBottom="16dp">
 
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/swishLayout">
+
+        <!-- Custom Swish Background at the bottom layer -->
+        <com.example.trailblaze.view.SwishBackgroundView
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+        <!--    Hamburger menu in top left-->
+
+        <ImageButton
+                android:src="@drawable/navmenu"
+                android:contentDescription="@string/settings"
+                android:layout_width="49dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:id="@+id/menuButton"
+                android:tint="#CDEDA3"
+                android:background="@android:color/transparent"
+                android:layout_centerVertical="true"/>
+        <ImageButton
+                android:src="@drawable/baseline_settings_24"
+                android:contentDescription="@string/settings"
+                android:layout_width="49dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:tint="#CDEDA3"
+                android:id="@+id/settingsbtn"
+                android:background="@android:color/transparent"
+                android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/swishLayout">
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+    <!-- Favorites Title -->
+        <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/favorites"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="40sp"
+                android:fontFamily="@font/amethysta"
+                android:layout_marginStart="16dp" />
+
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:orientation="vertical">
+    <!-- Favorite Trails Section -->
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_horizontal"
-            android:text="@string/helloFavorites"/>
+            android:text="@string/userFavoriteTrails"
+            android:textSize="20sp"
+            android:textColor="?attr/colorPrimary"
+            android:fontFamily="@font/amethysta"
+            android:textStyle="bold"
+            android:paddingTop="35dp"/>
 
-</FrameLayout>
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <!-- Favorite Parks RecyclerViewer Section -->
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/favoritesRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:scrollbars="horizontal" />
+
+    </LinearLayout>
+
+    <!-- Bucket List Trails Section -->
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bucketListTrails"
+            android:textSize="20sp"
+            android:textColor="?attr/colorPrimary"
+            android:fontFamily="@font/amethysta"
+            android:textStyle="bold"
+            android:paddingTop="25dp"/>
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <!-- Bucket List Parks RecyclerViewer Section -->
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/bucketListParksRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:scrollbars="horizontal" />
+
+    </LinearLayout>
+
+    <!-- Favorite Friends Section -->
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/favoriteFriends"
+            android:textSize="20sp"
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold"
+            android:fontFamily="@font/amethysta"
+            android:paddingTop="25dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/favoriteFriendsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"/>
+
+</LinearLayout>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Spacer to add margin for navigation bar -->
+
+</LinearLayout>

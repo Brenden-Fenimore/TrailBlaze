@@ -28,5 +28,31 @@
             android:id="@+id/navigation_profile"
             android:name="com.example.trailblaze.ui.profile.ProfileFragment"
             android:label="profile"
-            tools:layout="@layout/fragment_profile"/>
+            tools:layout="@layout/fragment_profile">
+        <action
+                android:id="@+id/action_profileFragment_to_editProfileFragment"
+                app:destination="@id/editProfileFragment" />
+        <action android:id="@+id/action_navigation_profile_to_watcherMemberList"
+                app:destination="@id/watcherMemberList"/>
+    </fragment>
+
+    <activity
+            android:id="@+id/settingsScreenActivity"
+            android:name="com.example.trailblaze.settings.SettingsScreenActivity"
+            android:label="Settings" />
+
+    <fragment
+            android:id="@+id/editProfileFragment"
+            android:name="com.example.trailblaze.ui.profile.EditProfileFragment"
+            android:label="Edit Profile"
+            tools:layout="@layout/fragment_edit_profile" >
+        <action android:id="@+id/action_editProfileFragment_to_settingsScreenActivity"
+                app:destination="@id/settingsScreenActivity"/>
+        <action android:id="@+id/action_editProfileFragment_to_navigation_profile"
+                app:destination="@id/navigation_profile"/>
+    </fragment>
+    <fragment android:id="@+id/watcherMemberList" android:name="com.example.trailblaze.watcherFeature.WatcherMemberList"
+              android:label="WatcherMemberList"/>
+
+
 </navigation>

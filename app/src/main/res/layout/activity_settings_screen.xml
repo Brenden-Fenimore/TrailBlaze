@@ -4,24 +4,41 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
-    <ImageButton
-            android:layout_width="39dp"
-            android:layout_height="39dp"
-            app:srcCompat="@drawable/chevron_left"
-            android:background="@android:color/transparent"
-            android:id="@+id/chevron_left"/>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/swishLayout">
+
+        <!-- Custom Swish Background at the bottom layer -->
+        <com.example.trailblaze.view.SwishBackgroundView
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+        <ImageButton
+                app:srcCompat="@drawable/baseline_arrow_back_ios_new_24"
+                android:contentDescription="@string/btn_back"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:id="@+id/chevron_left"
+                android:tint="#CDEDA3"
+                android:background="@android:color/transparent"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"/>
+    </RelativeLayout>
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="150dp"
-            android:layout_below="@id/chevron_left"
+            android:layout_below="@id/swishLayout"
             android:orientation="vertical">
         <TextView
                 android:id="@+id/Settings"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/activityTitle"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="40sp"
+                android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -36,66 +53,21 @@
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
                 android:orientation="horizontal"
                 android:paddingEnd="9dp"
                 android:paddingStart="9dp">
-            <ImageView
-                    android:layout_width="29dp"
-                    android:layout_height="29dp"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="10dp"
-                    app:srcCompat="@drawable/account_circle"
-                    android:id="@+id/imageView1"
-                    android:layout_weight="1"/>
+
             <TextView
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:layout_gravity="center"
-                    android:id="@+id/account"
-                    android:text="@string/accountTitle"/>
-            <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    app:srcCompat="@drawable/chevron_right"
-                    android:background="@android:color/transparent"
-                    android:id="@+id/toAccount"
-                    android:layout_weight="1"/>
-
-
-        </LinearLayout>
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:background="@android:color/darker_gray"/>
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingEnd="9dp"
-                android:paddingStart="9dp">
-            <ImageView
-                    android:layout_width="29dp"
-                    android:layout_height="29dp"
-                    android:layout_marginRight="10dp"
-                    app:srcCompat="@drawable/notification"
-                    android:id="@+id/imageView4" android:layout_weight="1"/>
-            <TextView
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:layout_gravity="center"
+                    android:textColor="?attr/colorPrimary"
+                    android:gravity="center"
+                    android:fontFamily="@font/amethysta"
                     android:id="@+id/notification"
                     android:text="@string/notificationTitle"/>
-            <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/chevron_right"
-                    android:background="@android:color/transparent"
-                    android:id="@+id/toNotifications"
-                    android:layout_weight="1"/>
+
 
 
         </LinearLayout>
@@ -107,29 +79,21 @@
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
                 android:orientation="horizontal"
                 android:paddingEnd="9dp"
                 android:paddingStart="9dp">
-            <ImageView
-                    android:layout_width="29dp"
-                    android:layout_height="29dp"
-                    android:layout_marginRight="10dp"
-                    app:srcCompat="@drawable/eye" android:id="@+id/imageView3"
-                    android:layout_weight="1"/>
+
             <TextView
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:layout_gravity="center"
+                    android:textColor="?attr/colorPrimary"
+                    android:gravity="center"
+                    android:fontFamily="@font/amethysta"
                     android:id="@+id/appearance"
-                    android:text="@string/appearanceTitle"/>
-            <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/chevron_right"
-                    android:background="@android:color/transparent"
-                    android:id="@+id/toAppearance"
-                    android:layout_weight="1"/>
+                    android:text="@string/appearanceTitle"
+                    android:contentDescription="@string/description"/>
 
 
         </LinearLayout>
@@ -141,29 +105,21 @@
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
                 android:orientation="horizontal"
                 android:paddingEnd="9dp"
                 android:paddingStart="9dp">
-            <ImageView
-                    android:layout_width="29dp"
-                    android:layout_height="29dp"
-                    android:layout_marginRight="10dp"
-                    app:srcCompat="@drawable/lockoutline"
-                    android:id="@+id/imageView5" android:layout_weight="1"/>
+
             <TextView
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="20sp"
-                    android:layout_gravity="center"
+                    android:fontFamily="@font/amethysta"
+                    android:gravity="center"
                     android:id="@+id/privacyAndSecurity"
-                    android:text="@string/privacyTitle"/>
-            <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/chevron_right"
-                    android:background="@android:color/transparent"
-                    android:id="@+id/toPrivacy"
-                    android:layout_weight="1"/>
+                    android:text="@string/privacyTitle"
+                    android:contentDescription="@string/description"/>
 
 
         </LinearLayout>
@@ -173,84 +129,38 @@
                 android:layout_marginBottom="10dp"
                 android:background="@android:color/darker_gray"/>
 
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingEnd="9dp"
-                android:paddingStart="9dp">
-            <ImageView
-                    android:layout_width="29dp"
-                    android:layout_height="29dp"
-                    android:layout_marginRight="10dp"
-                    app:srcCompat="@drawable/help" android:id="@+id/imageView"
-                    android:layout_weight="1"/>
-            <TextView
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:layout_gravity="center"
-                    android:id="@+id/helpAndSupport"
-                    android:text="@string/helpAndSupportTitle"/>
-            <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/chevron_right"
-                    android:background="@android:color/transparent"
-                    android:id="@+id/toHelpandSupport"
-                    android:layout_weight="1"/>
-
-
-        </LinearLayout>
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:background="@android:color/darker_gray"/>
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingEnd="9dp"
-                android:paddingStart="9dp">
-            <ImageView
-                    android:layout_width="29dp"
-                    android:layout_height="29dp"
-                    android:layout_marginRight="10dp"
-                    app:srcCompat="@drawable/questionmark"
-                    android:id="@+id/imageView6" android:layout_weight="1"/>
-            <TextView
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:layout_gravity="center"
-                    android:id="@+id/about"
-                    android:text="@string/aboutTitle"/>
-            <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/chevron_right"
-                    android:background="@android:color/transparent"
-                    android:id="@+id/toAbout"
-                    android:layout_weight="1"/>
-
-
-        </LinearLayout>
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"/>
     </LinearLayout>
+    <FrameLayout
+            android:id="@+id/frameStackorConnectw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="0dp">
+
+        <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="449dp"
+                android:layout_height="324dp"
+                android:layout_gravity="center_horizontal"
+                app:srcCompat="@drawable/flowers"
+                android:contentDescription="@string/description"/>
+        <LinearLayout
+                android:id="@+id/linearRowFacebookOne"
+                android:layout_gravity="top|center"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"/>
+    </FrameLayout>
 
     <Button
-            android:text="Log Out"
+            android:text="@string/titleLogout"
             android:layout_width="304dp"
+            android:fontFamily="@font/amethysta"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:id="@+id/logoutbtn">
-    </Button>
 
+    </Button>
 
 </RelativeLayout>
