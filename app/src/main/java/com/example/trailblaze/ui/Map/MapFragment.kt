@@ -1,6 +1,7 @@
 package com.example.trailblaze.ui.Map
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -21,7 +22,6 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.AutocompletePrediction
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken
@@ -31,7 +31,9 @@ import com.google.android.libraries.places.api.model.CircularBounds
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.kotlin.circularBounds
 import com.google.android.libraries.places.api.net.*
-import com.google.android.libraries.places.api.net.kotlin.fetchPlaceRequest
+import androidx.compose.material3.*
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 
 class MapFragment : Fragment(),
@@ -55,20 +57,22 @@ OnMapReadyCallback {
     lateinit var mapFragment : SupportMapFragment
     var currentUser = UserManager.getCurrentUser()
     var placesList: MutableList<Place> = mutableListOf()
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    lateinit var thiscontext : Context
 
 
 
 
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
         _binding = FragmentMapBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
+        thiscontext = this.context!!
 
         // Get the SupportMapFragment and request notification when the map is ready to be used.
         mapFragment = this.childFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
         //Set interactive buttons to a value to work with
         val multiAutoCompleteTextView = _binding!!.mapSearch
         val clearButton = _binding!!.clearMapsearchtext
@@ -82,10 +86,10 @@ OnMapReadyCallback {
         val terrainImageCircle = _binding!!.terrainImage
 
         //Initialize the SDK
-        Places.initializeWithNewPlacesApiEnabled(this.context!!, apiKey)
+        Places.initializeWithNewPlacesApiEnabled(thiscontext, apiKey)
 
         // Create a new PlacesClient instance
-        val placesClient = Places.createClient(this.context!!)
+        val placesClient = Places.createClient(thiscontext)
         //go to fullsail button
         fullsailButton.setOnClickListener {  map.animateCamera(CameraUpdateFactory.newCameraPosition(fullSail))}
 
@@ -198,10 +202,32 @@ OnMapReadyCallback {
         if (apiKey.isEmpty()) {
             Log.e("Places test", "No api key")
         }
-
         return root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?){
+
+        val bottomsheet = this.view!!.findViewById<ConstraintLayout>(R.id.bottomsheetinclude)
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomsheet)
+        bottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
+
+            override fun onSlide(bottomSheet: View,     slideOffset:Float) {
+                // handle onSlide
+            }
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_COLLAPSED -> Toast.makeText(thiscontext, "STATE_COLLAPSED", Toast.LENGTH_SHORT).show()
+                    BottomSheetBehavior.STATE_EXPANDED -> Toast.makeText(thiscontext, "STATE_EXPANDED", Toast.LENGTH_SHORT).show()
+                    BottomSheetBehavior.STATE_DRAGGING -> Toast.makeText(thiscontext, "STATE_DRAGGING", Toast.LENGTH_SHORT).show()
+                    BottomSheetBehavior.STATE_SETTLING -> Toast.makeText(thiscontext, "STATE_SETTLING", Toast.LENGTH_SHORT).show()
+                    BottomSheetBehavior.STATE_HIDDEN -> Toast.makeText(thiscontext, "STATE_HIDDEN", Toast.LENGTH_SHORT).show()
+                    else -> Toast.makeText(thiscontext, "OTHER_STATE", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -275,12 +301,12 @@ OnMapReadyCallback {
         //request user location permissions
         if (ActivityCompat.checkSelfPermission(
                 //if access fine location is not granted
-                this.context!!,
+                thiscontext!!,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
             //and access coarse location is not granted
             && ActivityCompat.checkSelfPermission(
-                this.context!!,
+                thiscontext!!,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         )
