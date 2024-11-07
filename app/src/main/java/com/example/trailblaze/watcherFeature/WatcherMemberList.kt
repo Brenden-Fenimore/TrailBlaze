@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 class WatcherMemberList : AppCompatActivity() {
 
     private lateinit var watcherProfileRecycler: RecyclerView
+    private lateinit var watcherAdapter: WatcherAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +36,7 @@ class WatcherMemberList : AppCompatActivity() {
         )
 
         // Initialize the adapter and set it to the RecyclerView
-        val adapter = WatcherAdapter(watcherList) { watcherMember ->
+        val adapter = WatcherAdapter(this, watcherList) { watcherMember ->
             val intent = Intent(this, WatcherProfile::class.java)
             startActivity(intent)
         }

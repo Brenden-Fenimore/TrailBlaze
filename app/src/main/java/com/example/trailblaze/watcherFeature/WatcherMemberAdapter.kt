@@ -7,8 +7,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
 import com.example.trailblaze.watcherFeature.WatcherProfile
+import android.content.Context
+import android.content.Intent
 
-class WatcherAdapter(private val watcherList: List<WatcherMember>, private val onItemClick: (WatcherMember) -> Unit) :
+class WatcherAdapter(
+    private val context: Context, private val watcherList: List<WatcherMember>, private val onItemClick: (WatcherMember) -> Unit) :
     RecyclerView.Adapter<WatcherAdapter.WatcherViewHolder>() {
 
     class WatcherViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -16,14 +19,21 @@ class WatcherAdapter(private val watcherList: List<WatcherMember>, private val o
         val watcherImage: ImageView = itemView.findViewById(R.id.watcherImage)
         val badgeImage: ImageView = itemView.findViewById(R.id.watcherBadgeImage)
 
-        fun bind(watcher: WatcherMember, onItemClick: (WatcherMember) -> Unit) {
+        fun bind(context: Context, watcher: WatcherMember, onItemClick: (WatcherMember) -> Unit) {
             watcherName.text = watcher.watcherName
             watcherImage.setImageResource(watcher.watcherProfileImage)
             badgeImage.setImageResource(watcher.watcherBadgeImage)
 
             itemView.setOnClickListener {
+                val intent = Intent(context, WatcherProfile::class.java).apply{
+                    putExtra("watcherName", watcher.watcherName)
+                    putExtra("watcherProfileImage", watcher.watcherProfileImage)
+                    putExtra("watcherBadgeImage", watcher.watcherBadgeImage)
+                }
+                context.startActivity(intent)
                 onItemClick(watcher)
             }
+
         }
     }
 
@@ -35,7 +45,7 @@ class WatcherAdapter(private val watcherList: List<WatcherMember>, private val o
 
     override fun onBindViewHolder(holder: WatcherViewHolder, position: Int) {
         val watcher = watcherList[position]
-        holder.bind(watcher, onItemClick)
+        holder.bind(context, watcher, onItemClick)
     }
 
     override fun getItemCount(): Int {
