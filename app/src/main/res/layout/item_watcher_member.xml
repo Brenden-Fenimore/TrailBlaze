@@ -18,7 +18,7 @@
 <!-- Watcher Name -->
 
     <TextView
-            android:id="@+id/watcherMemberName"
+            android:id="@+id/watcherName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
@@ -38,8 +38,8 @@
             android:layout_marginStart="8dp"
             android:src="@drawable/badge"
             android:contentDescription="Watcher Badges"
-            app:layout_constraintStart_toStartOf="@id/watcherMemberName"
-            app:layout_constraintTop_toBottomOf="@id/watcherMemberName"
+            app:layout_constraintStart_toStartOf="@id/watcherName"
+            app:layout_constraintTop_toBottomOf="@id/watcherName"
             android:layout_marginTop="5dp"
             android:padding="6dp"/>
 

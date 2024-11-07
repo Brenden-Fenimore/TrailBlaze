@@ -8,31 +8,37 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
 import com.example.trailblaze.watcherFeature.WatcherProfile
 
-class WatcherMemberAdapter(private val watcherList: List<WatcherMember>) :
-    RecyclerView.Adapter<WatcherMemberAdapter.WatcherViewHolder>() {
+class WatcherAdapter(private val watcherList: List<WatcherMember>, private val onItemClick: (WatcherMember) -> Unit) :
+    RecyclerView.Adapter<WatcherAdapter.WatcherViewHolder>() {
 
-    // Define the ViewHolder class
     class WatcherViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val watcherName: TextView = itemView.findViewById(R.id.watcherName)
+        val watcherName: TextView = itemView.findViewById(R.id.watcherName) // Change this line
         val watcherImage: ImageView = itemView.findViewById(R.id.watcherImage)
-        val badgeImage: ImageView = itemView.findViewById(R.id.watcherBadgeImage) // New badge ImageView
+        val badgeImage: ImageView = itemView.findViewById(R.id.watcherBadgeImage)
+
+        fun bind(watcher: WatcherMember, onItemClick: (WatcherMember) -> Unit) {
+            watcherName.text = watcher.watcherName
+            watcherImage.setImageResource(watcher.watcherProfileImage)
+            badgeImage.setImageResource(watcher.watcherBadgeImage)
+
+            itemView.setOnClickListener {
+                onItemClick(watcher)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatcherViewHolder {
-        // Inflate the layout for each item in the RecyclerView
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_watcher_member, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_watcher_member, parent, false)
         return WatcherViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: WatcherViewHolder, position: Int) {
-        // Get the current watcher from the list
         val watcher = watcherList[position]
-
-        // Bind the data to the views
-        holder.watcherName.text = watcher.watcherName
-        holder.watcherImage.setImageResource(watcher.watcherProfileImage)
-        //holder.badgeImage.setImageResource(watcher.badgeImage)
+        holder.bind(watcher, onItemClick)
     }
 
-    override fun getItemCount(): Int = watcherList.size // Return the size of the list
+    override fun getItemCount(): Int {
+        return watcherList.size
+    }
 }

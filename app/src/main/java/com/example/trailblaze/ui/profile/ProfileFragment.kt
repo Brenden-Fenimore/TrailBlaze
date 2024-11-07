@@ -40,6 +40,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+import com.example.trailblaze.watcherFeature.WatcherMemberList
 
 interface PhotoDeletionListener {
     fun onPhotoDeleted(deletedPhotoUrl: String)
@@ -136,6 +137,11 @@ interface PhotoDeletionListener {
             // Initialize the icons
             binding.iconLocation.setOnClickListener {
                 fetchCurrentUserLocation()
+            }
+
+            binding.watcherMember.setOnClickListener {
+                val intent = Intent(context, WatcherMemberList::class.java)
+                startActivity(intent)
             }
 
             binding.iconDifficulty.setOnClickListener {
