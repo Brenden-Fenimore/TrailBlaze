@@ -1,14 +1,10 @@
 package com.example.trailblaze.watcherFeature
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trailblaze.R
 import android.content.Intent
 import android.widget.ImageButton
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 

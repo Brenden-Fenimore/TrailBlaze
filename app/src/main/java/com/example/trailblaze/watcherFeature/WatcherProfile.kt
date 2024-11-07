@@ -1,6 +1,5 @@
 package com.example.trailblaze.watcherFeature
 
-import android.media.Image
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView

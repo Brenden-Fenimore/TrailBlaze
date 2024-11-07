@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import com.example.trailblaze.MainActivity
 import com.example.trailblaze.R
-import com.example.trailblaze.databinding.FragmentEditWatcherProfileBinding
 import com.example.trailblaze.watcherFeature.EditWatcherProfile
 
 class FifthPersonalizeFragment : Fragment() {
