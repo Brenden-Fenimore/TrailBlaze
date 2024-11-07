@@ -253,29 +253,56 @@ class FullscreenImageDialogFragment : DialogFragment() {
     }
 
     private fun fetchCaptionFromFirestore(imageUrl: String) {
-        val userId = getCurrentUserId()
-        if (userId.isEmpty()) return
+        Log.d("FetchCaption", "Fetching caption for imageUrl: $imageUrl")
 
-        val photosCollection = FirebaseFirestore.getInstance()
-            .collection("users")
-            .document(userId)
-            .collection("photos")
+        val userId = getCurrentUserId()  // Check current user's photo, if needed
+        if (userId.isEmpty()) {
+            Log.d("FetchCaption", "User ID is empty, returning")
+            return
+        }
 
-        photosCollection.whereEqualTo("url", imageUrl).get()
-            .addOnSuccessListener { querySnapshot ->
-                if (querySnapshot.documents.isNotEmpty()) {
-                    val caption = querySnapshot.documents.firstOrNull()?.getString("caption")
-                    if (!caption.isNullOrEmpty()) {
-                        // Save the caption in the local map
-                        photoCaptions[imageUrl] = caption
-                        // Display the caption in the TextView
-                        captionTextView.text = caption
-                        captionTextView.visibility = View.VISIBLE
+        // Fetch from all users' photo collections
+        val firestore = FirebaseFirestore.getInstance()
+
+        // Query all users' photos to find the matching imageUrl and fetch the caption
+        firestore.collection("users")
+            .get() // Get all users
+            .addOnSuccessListener { usersSnapshot ->
+                var found = false
+                for (userDoc in usersSnapshot.documents) {
+                    val userPhotosCollection = userDoc.reference.collection("photos")
+
+                    // Query photos collection of each user to find the photo by its URL
+                    userPhotosCollection.whereEqualTo("url", imageUrl).get()
+                        .addOnSuccessListener { querySnapshot ->
+                            if (querySnapshot.documents.isNotEmpty()) {
+                                val caption = querySnapshot.documents.firstOrNull()?.getString("caption")
+                                if (!caption.isNullOrEmpty()) {
+                                    Log.d("FetchCaption", "Found caption: $caption")
+                                    photoCaptions[imageUrl] = caption
+                                    captionTextView.text = caption
+                                    captionTextView.visibility = View.VISIBLE
+                                } else {
+                                    Log.d("FetchCaption", "No caption found for this imageUrl.")
+                                }
+                                found = true
+                            }
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e("FetchCaption", "Error fetching caption from Firestore", e)
+                        }
+
+                    // Break the loop once we've found the caption to prevent querying other users
+                    if (found) {
+                        return@addOnSuccessListener
                     }
+                }
+                if (!found) {
+                    Log.d("FetchCaption", "No caption found for the imageUrl in any user’s photos.")
                 }
             }
             .addOnFailureListener { e ->
-                Log.e("FetchCaption", "Error fetching caption from Firestore", e)
+                Log.e("FetchCaption", "Error querying users from Firestore", e)
             }
     }
 }
