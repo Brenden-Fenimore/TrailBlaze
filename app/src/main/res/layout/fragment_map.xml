@@ -16,7 +16,8 @@
                 class="com.google.android.gms.maps.SupportMapFragment"
                 android:id="@+id/map_fragment"
                 android:layout_width="match_parent"
-                android:layout_height="783dp"/>
+                android:layout_height="match_parent"
+                android:layout_marginBottom="80dp"/>
         <Button
                 android:layout_marginTop="350dp"
                 android:layout_marginStart="275dp"
@@ -44,7 +45,7 @@
             android:layout_marginStart="80dp"
             android:layout_width="230dp"
             android:layout_height="40dp"
-            android:background="#E64A642B"/>
+            android:background="#E6FFFFFF"/>
     <MultiAutoCompleteTextView
             android:layout_marginTop="25dp"
             android:layout_marginStart="85dp"
@@ -57,8 +58,8 @@
             android:fontFamily="@font/amethysta"
             android:singleLine="true"
             android:dropDownHeight="wrap_content"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#DBDBDB"/>
+            android:textColor="#000000"
+            android:textColorHint="#6B6B6B"/>
 
     <ImageButton
             android:layout_marginStart="285dp"
@@ -182,7 +183,8 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".MainActivity">
+            tools:context=".MainActivity"
+            android:layout_marginBottom="80dp">
         <include layout="@layout/map_fragment_bottom_sheet"
                  android:id="@+id/bottomsheetinclude"
                  app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"/>

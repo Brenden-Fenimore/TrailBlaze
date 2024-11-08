@@ -33,7 +33,10 @@ import com.google.android.libraries.places.api.model.kotlin.circularBounds
 import com.google.android.libraries.places.api.net.*
 import androidx.compose.material3.*
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.example.trailblaze.ui.Map.MapBottomSheetAdapter
 
 
 class MapFragment : Fragment(),
@@ -59,7 +62,10 @@ OnMapReadyCallback {
     var placesList: MutableList<Place> = mutableListOf()
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     lateinit var thiscontext : Context
-
+    lateinit var placesClient : PlacesClient
+    lateinit var bottomSheetAdapter: MapBottomSheetAdapter
+    lateinit var multiAutoCompleteTextView : MultiAutoCompleteTextView
+    lateinit var autoFillAdapter : ArrayAdapter<String>
 
 
 
@@ -74,7 +80,7 @@ OnMapReadyCallback {
         mapFragment = this.childFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
         //Set interactive buttons to a value to work with
-        val multiAutoCompleteTextView = _binding!!.mapSearch
+        multiAutoCompleteTextView = _binding!!.mapSearch
         val clearButton = _binding!!.clearMapsearchtext
         val fullsailButton = _binding!!.fullsail
         val satelliteButton = _binding!!.satellite
@@ -84,14 +90,24 @@ OnMapReadyCallback {
         val satelliteImageCircle = _binding!!.satelliteImage
         val roadImageCircle = _binding!!.roadmapImage
         val terrainImageCircle = _binding!!.terrainImage
+        val recyclerView = _binding!!.bottomsheetinclude.bottomSheetRecycler
 
         //Initialize the SDK
         Places.initializeWithNewPlacesApiEnabled(thiscontext, apiKey)
 
         // Create a new PlacesClient instance
-        val placesClient = Places.createClient(thiscontext)
+        placesClient = Places.createClient(thiscontext)
         //go to fullsail button
-        fullsailButton.setOnClickListener {  map.animateCamera(CameraUpdateFactory.newCameraPosition(fullSail))}
+        fullsailButton.setOnClickListener {
+
+//          map.animateCamera(CameraUpdateFactory.newCameraPosition(fullSail))
+            placesList.clear()
+            map.clear()
+            bottomSheetAdapter = MapBottomSheetAdapter(placesList)
+            recyclerView.adapter = bottomSheetAdapter
+            recyclerView.layoutManager = LinearLayoutManager(thiscontext)
+            recyclerView!!.adapter?.notifyDataSetChanged()
+        }
 
         //clear searchbar when clearbutton is clicked
         clearButton.setOnClickListener { multiAutoCompleteTextView.text?.clear() }
@@ -150,7 +166,7 @@ OnMapReadyCallback {
                         val circle : CircularBounds = circularBounds(location,radius)
                         //create SearchNearbyRequest object
                         val searchNearbyRequest = SearchNearbyRequest.builder(circle,listOf(
-                            Place.Field.ID, Place.Field.ADDRESS_COMPONENTS, Place.Field.LOCATION, Place.Field.DISPLAY_NAME,Place.Field.PHOTO_METADATAS))
+                            Place.Field.ID,Place.Field.FORMATTED_ADDRESS, Place.Field.LOCATION, Place.Field.DISPLAY_NAME,Place.Field.PHOTO_METADATAS))
                             .setIncludedTypes(listOf("hiking_area"))
                             .build()
                         //on success of searchNearby function, create marker at each place with name
@@ -161,6 +177,12 @@ OnMapReadyCallback {
                                 map.addMarker(MarkerOptions().position(place.location).title(place.displayName))
                             }
                             placesList.addAll(result.places)
+
+                            bottomSheetAdapter = MapBottomSheetAdapter(placesList)
+                            recyclerView.adapter = bottomSheetAdapter
+                            recyclerView.layoutManager = LinearLayoutManager(thiscontext)
+                            recyclerView!!.adapter?.notifyDataSetChanged()
+
                         }
                     }
 
@@ -172,8 +194,8 @@ OnMapReadyCallback {
         }
 
         //dropdown menu adapter for list
-        var autoFillAdapter =
-            context?.let { ArrayAdapter(it, android.R.layout.simple_list_item_1, autocompletelistString) }
+        autoFillAdapter =
+            context!!.let { ArrayAdapter(it, android.R.layout.simple_list_item_1, autocompletelistString) }
         multiAutoCompleteTextView.setAdapter(autoFillAdapter)
         multiAutoCompleteTextView.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
         multiAutoCompleteTextView.threshold = 0
@@ -182,7 +204,7 @@ OnMapReadyCallback {
             //create a FetchPlaceRequest object that gets the place id from the list of places
             // and the list of fields we want to get more of
             val placeFetch : FetchPlaceRequest = FetchPlaceRequest.builder(autocompletelist[position].placeId.toString()
-                ,listOf( Place.Field.ID, Place.Field.ADDRESS_COMPONENTS, Place.Field.LOCATION, Place.Field.DISPLAY_NAME,Place.Field.PHOTO_METADATAS)).build()
+                ,listOf( Place.Field.ID, Place.Field.FORMATTED_ADDRESS, Place.Field.LOCATION, Place.Field.DISPLAY_NAME,Place.Field.PHOTO_METADATAS)).build()
             //ask for the place from Google and on success
             placesClient.fetchPlace(placeFetch).addOnSuccessListener{response ->
                 //reset map and placeList, add place to placeList and move camera to the marker we
@@ -190,14 +212,20 @@ OnMapReadyCallback {
                 map.clear()
                 placesList.clear()
                 placesList.add(response.place)
+
+
+
+                bottomSheetAdapter = MapBottomSheetAdapter(placesList)
+                recyclerView.adapter = bottomSheetAdapter
+                recyclerView.layoutManager = LinearLayoutManager(thiscontext)
+                recyclerView!!.adapter?.notifyDataSetChanged()
+
+
+
+
                 map.addMarker(MarkerOptions().position(response.place.location).title(response.place.displayName))
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(response.place.location,13f)) }
         }
-        //when user types in the searchbar
-        multiAutoCompleteTextView.addTextChangedListener{
-                updateAutoCompletePredictions(autoFillAdapter!!, multiAutoCompleteTextView.text.toString(), placesClient)
-        }
-
         // Log an error if apiKey is not set.
         if (apiKey.isEmpty()) {
             Log.e("Places test", "No api key")
@@ -207,26 +235,31 @@ OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
 
+        multiAutoCompleteTextView.addTextChangedListener{
+                updateAutoCompletePredictions(autoFillAdapter!!, multiAutoCompleteTextView.text.toString(), placesClient)
+        }
         val bottomsheet = this.view!!.findViewById<ConstraintLayout>(R.id.bottomsheetinclude)
         bottomSheetBehavior = BottomSheetBehavior.from(bottomsheet)
-        bottomSheetBehavior.addBottomSheetCallback(object :
-            BottomSheetBehavior.BottomSheetCallback() {
-
-            override fun onSlide(bottomSheet: View,     slideOffset:Float) {
-                // handle onSlide
-            }
-
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                when (newState) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> Toast.makeText(thiscontext, "STATE_COLLAPSED", Toast.LENGTH_SHORT).show()
-                    BottomSheetBehavior.STATE_EXPANDED -> Toast.makeText(thiscontext, "STATE_EXPANDED", Toast.LENGTH_SHORT).show()
-                    BottomSheetBehavior.STATE_DRAGGING -> Toast.makeText(thiscontext, "STATE_DRAGGING", Toast.LENGTH_SHORT).show()
-                    BottomSheetBehavior.STATE_SETTLING -> Toast.makeText(thiscontext, "STATE_SETTLING", Toast.LENGTH_SHORT).show()
-                    BottomSheetBehavior.STATE_HIDDEN -> Toast.makeText(thiscontext, "STATE_HIDDEN", Toast.LENGTH_SHORT).show()
-                    else -> Toast.makeText(thiscontext, "OTHER_STATE", Toast.LENGTH_SHORT).show()
-                }
-            }
-        })
+        bottomSheetBehavior.maxHeight = 1400
+        bottomSheetBehavior.peekHeight = 100
+//        bottomSheetBehavior.addBottomSheetCallback(object :
+//            BottomSheetBehavior.BottomSheetCallback() {
+//
+//            override fun onSlide(bottomSheet: View,     slideOffset:Float) {
+//                // handle onSlide
+//            }
+//
+//            override fun onStateChanged(bottomSheet: View, newState: Int) {
+//                when (newState) {
+//                    BottomSheetBehavior.STATE_COLLAPSED -> Toast.makeText(thiscontext, "STATE_COLLAPSED", Toast.LENGTH_SHORT).show()
+//                    BottomSheetBehavior.STATE_EXPANDED -> Toast.makeText(thiscontext, "STATE_EXPANDED", Toast.LENGTH_SHORT).show()
+//                    BottomSheetBehavior.STATE_DRAGGING -> Toast.makeText(thiscontext, "STATE_DRAGGING", Toast.LENGTH_SHORT).show()
+//                    BottomSheetBehavior.STATE_SETTLING -> Toast.makeText(thiscontext, "STATE_SETTLING", Toast.LENGTH_SHORT).show()
+//                    BottomSheetBehavior.STATE_HIDDEN -> Toast.makeText(thiscontext, "STATE_HIDDEN", Toast.LENGTH_SHORT).show()
+//                    else -> Toast.makeText(thiscontext, "OTHER_STATE", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//        })
     }
     override fun onDestroyView() {
         super.onDestroyView()
@@ -266,7 +299,7 @@ OnMapReadyCallback {
                 }
             //add each string of the autocompletelistString to the adapter
             adapter.addAll(autocompletelistString)
-
+            adapter.notifyDataSetChanged()
             //if request fails
         }.addOnFailureListener {
             //clear the string list so dropdown has no data
