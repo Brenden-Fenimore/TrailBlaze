@@ -14,9 +14,12 @@ import com.example.trailblaze.ui.profile.PendingRequest
 
 class FriendRequestActivity : AppCompatActivity() {
 
+    // RecyclerView and Adapter for displaying pending friend requests
     private lateinit var pendingRequestsRecyclerView: RecyclerView
     private lateinit var pendingRequestsAdapter: PendingRequestsAdapter
-    private val pendingRequests = mutableListOf<PendingRequest>()
+    private val pendingRequests = mutableListOf<PendingRequest>()    // List to store pending requests
+
+    // Firebase Authentication and Firestore instances
     private val auth = FirebaseAuth.getInstance()
     private val firestore = FirebaseFirestore.getInstance()
 
@@ -24,11 +27,11 @@ class FriendRequestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_friend_request) // Set your layout file here
 
-        // Initialize RecyclerView
+        // Initialize RecyclerView for displaying pending requests
         pendingRequestsRecyclerView = findViewById(R.id.pendingRequestsRecyclerView)
         pendingRequestsRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Initialize Adapter
+        // Initialize Adapter and set click listeners for accept and decline actions
         pendingRequestsAdapter = PendingRequestsAdapter(
             pendingRequests,
             onAcceptClicked = { userId -> acceptFriendRequest(userId) },
@@ -36,20 +39,22 @@ class FriendRequestActivity : AppCompatActivity() {
         )
         pendingRequestsRecyclerView.adapter = pendingRequestsAdapter
 
-        // Fetch pending requests data
+        // Fetch and display the list of pending friend requests
         fetchPendingRequests()
     }
 
+    // Fetches pending friend requests from Firestore for the current user
     private fun fetchPendingRequests() {
-        val currentUserId = auth.currentUser?.uid ?: return
+        val currentUserId = auth.currentUser?.uid ?: return     // Get the current user's ID
 
         firestore.collection("users").document(currentUserId).get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
+                    // Retrieve and populate the pending requests list
                     val pendingRequestsList = document.get("pendingRequests") as? List<String> ?: emptyList()
                     pendingRequests.clear()
                     pendingRequests.addAll(pendingRequestsList.map { userId -> PendingRequest(userId, "Username") })
-                    pendingRequestsAdapter.notifyDataSetChanged()
+                    pendingRequestsAdapter.notifyDataSetChanged()       // Notify adapter of data change
                 }
             }
             .addOnFailureListener { exception ->
@@ -57,8 +62,9 @@ class FriendRequestActivity : AppCompatActivity() {
             }
     }
 
+    // Accepts a friend request by moving the user ID from pending requests to friends list
     private fun acceptFriendRequest(userId: String) {
-        val currentUserId = auth.currentUser?.uid ?: return
+        val currentUserId = auth.currentUser?.uid ?: return     // Get the current user's ID
 
         firestore.runBatch { batch ->
             // Remove userId from pendingRequests in the current user's document
@@ -79,12 +85,14 @@ class FriendRequestActivity : AppCompatActivity() {
         }
     }
 
+    // Declines a friend request by removing the user ID from the pending requests list
     private fun declineFriendRequest(userId: String) {
-        val currentUserId = auth.currentUser?.uid ?: return
+        val currentUserId = auth.currentUser?.uid ?: return     // Get the current user's ID
 
         firestore.collection("users").document(currentUserId)
-            .update("pendingRequests", FieldValue.arrayRemove(userId))
+            .update("pendingRequests", FieldValue.arrayRemove(userId))      // Remove userId from pending requests
             .addOnSuccessListener {
+                // Remove the declined user from the list and update the adapter
                 pendingRequests.removeAll { it.userId == userId }
                 pendingRequestsAdapter.notifyDataSetChanged()
                 Toast.makeText(this, "Friend request declined", Toast.LENGTH_SHORT).show()
