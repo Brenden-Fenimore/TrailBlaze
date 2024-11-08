@@ -13,8 +13,8 @@
         <com.example.trailblaze.view.SwishBackgroundView
                 android:layout_width="match_parent"
                 android:layout_height="100dp" />
-        <!--    Hamburger menu in top left-->
 
+        <!--    Hamburger menu in top left-->
         <ImageButton
                 android:src="@drawable/navmenu"
                 android:contentDescription="@string/settings"
@@ -25,6 +25,8 @@
                 android:background="@android:color/transparent"
                 android:layout_centerVertical="true"
                 android:tint="#CDEDA3"/>
+
+        <!-- Settings button in top right -->
         <ImageButton
                 android:src="@drawable/baseline_settings_24"
                 android:contentDescription="@string/settings"
@@ -35,6 +37,37 @@
                 android:background="@android:color/transparent"
                 android:layout_centerVertical="true"
                 android:tint="#CDEDA3"/>
+        <!-- FrameLayout for Pending Requests Button with Counter -->
+        <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/menuButton"
+                android:layout_centerVertical="true">
+
+            <!-- Pending Friend Requests Button -->
+            <ImageButton
+                    android:id="@+id/pendingRequestsButton"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/pending_request"
+                    android:tint="#CDEDA3"
+                    android:background="@android:color/transparent"/>
+
+            <!-- Badge for Pending Requests Count -->
+            <TextView
+                    android:id="@+id/pendingRequestsCounter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/circle_background"
+                    android:padding="2dp"
+                    android:text="@string/_0"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/amethysta"
+                    android:layout_gravity="top|end"
+                    android:layout_marginStart="25dp"
+                    android:visibility="gone" />
+        </FrameLayout>
     </RelativeLayout>
 
         <LinearLayout

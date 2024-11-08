@@ -483,47 +483,39 @@ class FriendsProfileActivity : AppCompatActivity() {
     private fun performAddFriend(friendId: String) {
         val currentUserId = auth.currentUser?.uid ?: return
 
-        // Get a reference to the current user's document in Firestore
-        val userRef = firestore.collection("users").document(currentUserId)
+        // Reference to the friend’s document in Firestore
+        val friendRef = firestore.collection("users").document(friendId)
 
-        userRef.get().addOnSuccessListener { document ->
+        friendRef.get().addOnSuccessListener { document ->
             if (document != null && document.exists()) {
-                val friendsList = document.get("friends") as? List<String> ?: emptyList()
+                val pendingRequests = document.get("pendingRequests") as? List<String> ?: emptyList()
 
-                // Check if friend is already in the user's friends list
-                if (friendsList.contains(friendId)) {
-                    Toast.makeText(this, "This user is already your friend.", Toast.LENGTH_SHORT).show()
+                if (pendingRequests.contains(currentUserId)) {
+                    Toast.makeText(this, "Friend request already sent.", Toast.LENGTH_SHORT).show()
                 } else {
-                    // Prepare update to add friend to friends list
-                    val userUpdates = hashMapOf<String, Any>("friends" to FieldValue.arrayUnion(friendId))
+                    // Update the friend's document to add the current user's ID to pendingRequests
+                    val friendUpdates = hashMapOf<String, Any>("pendingRequests" to FieldValue.arrayUnion(currentUserId))
 
-                    userRef.set(userUpdates, SetOptions.merge())
+                    friendRef.set(friendUpdates, SetOptions.merge())
                         .addOnSuccessListener {
                             Toast.makeText(this, "Friend request sent successfully!", Toast.LENGTH_SHORT).show()
-
-                            // Update UI to reflect friend status
                             binding.addFriendButton.visibility = View.GONE
-                            binding.favoriteFriendBtn.visibility = View.VISIBLE
-                            binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Set outline icon
-                            binding.removeFriendButton.visibility = View.VISIBLE
-
-                            // Optionally, grant an achievement for adding a friend
-                            achievementManager.checkAndGrantSocialButterflyBadge(currentUserId)
                         }
                         .addOnFailureListener { exception ->
-                            Log.e("FriendsProfileActivity", "Error adding friend: ", exception)
+                            Log.e("FriendsProfileActivity", "Error sending friend request: ", exception)
                             Toast.makeText(this, "Failed to send friend request.", Toast.LENGTH_SHORT).show()
                         }
                 }
             } else {
-                Log.e("FriendsProfileActivity", "User document does not exist")
-                Toast.makeText(this, "User document not found.", Toast.LENGTH_SHORT).show()
+                Log.e("FriendsProfileActivity", "Friend document does not exist")
+                Toast.makeText(this, "User not found.", Toast.LENGTH_SHORT).show()
             }
         }.addOnFailureListener { exception ->
-            Log.e("FriendsProfileActivity", "Error fetching user document: ", exception)
+            Log.e("FriendsProfileActivity", "Error fetching friend document: ", exception)
             Toast.makeText(this, "Error fetching user data.", Toast.LENGTH_SHORT).show()
         }
     }
+
 
     private fun fetchFriendsInCommon() {
         val currentUserId = auth.currentUser?.uid ?: return

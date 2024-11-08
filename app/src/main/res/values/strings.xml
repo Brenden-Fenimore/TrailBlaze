@@ -424,4 +424,9 @@
     <string name="blazer"> TrailBlaze Username</string>
     <string name="watcherPhoto">Watcher Member Photo</string>
     <string name="watcherBadge">Watcher Badges</string>
+    <string name="watcherMemPhoto"> Watcher member profile photo</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
+    <string name="_0">0</string>
+    <string name="pending_requests">Pending Requests</string>
 </resources>
