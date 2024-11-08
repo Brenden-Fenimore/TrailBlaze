@@ -81,7 +81,9 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        // Set up the click listener for the pending requests button on the homepage
         binding.pendingRequestsButton.setOnClickListener {
+            // Create an intent to navigate to FriendRequestActivity when the button is clicked
             val intent = Intent(activity, FriendRequestActivity::class.java)
             startActivity(intent)
         }
@@ -330,22 +332,32 @@ class HomeFragment : Fragment() {
             }
     }
 
+    // Fetches the list of pending friend requests for the current user from Firestore,
+    // then updates the pending requests counter displayed on the homepage.
     private fun fetchPendingRequestsAndUpdateCounter() {
+        // Get the current user's ID; if it's null (not logged in), return early
         val currentUserId = auth.currentUser?.uid ?: return
+
+        // Retrieve the user's document from Firestore to access pending requests
         firestore.collection("users").document(currentUserId).get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
+                    // Get the pending requests list, or default to an empty list if not present
                     val pendingRequestsList = document.get("pendingRequests") as? List<String> ?: emptyList()
+                    // Reference to the counter TextView element
                     val counterTextView = binding.pendingRequestsCounter
+                    // If there are no pending requests, hide the counter badge
                     if (pendingRequestsList.isEmpty()) {
                         counterTextView.visibility = View.GONE
                     } else {
+                        // Set the counter to the size of the pending requests list and make it visible
                         counterTextView.text = pendingRequestsList.size.toString()
                         counterTextView.visibility = View.VISIBLE
                     }
                 }
             }
             .addOnFailureListener { exception ->
+                // Log an error message if fetching the pending requests fails
                 Log.e("HomeFragment", "Error fetching pending requests", exception)
             }
     }
