@@ -132,6 +132,7 @@ interface PhotoDeletionListener {
             favoritesRecyclerView.adapter = favoritesAdapter
 
             fetchFavoriteParks()
+            fetchLeaderboard()
 
 
             // Initialize the icons

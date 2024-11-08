@@ -35,6 +35,11 @@ class AchievementsAdapter(private val categories: List<AchievementCategory>) :
                 // Show tooltip for the second badge when clicked
                 showTooltip(badge3, category.tooltipTexts[2])
             }
+            badge3.setImageResource(category.badgeResourceIds.getOrNull(2) ?: R.drawable.default_badge)
+            badge3.setOnClickListener {
+                // Show tooltip for the second badge when clicked
+                showTooltip(badge3, category.tooltipTexts[3])
+            }
         }
     }
 
