@@ -44,34 +44,58 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-            <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:orientation="horizontal"
-                          android:padding="16dp">
-
-                <!-- Username TextView -->
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/titleLayout"
+                    android:orientation="vertical">
                 <TextView
-                        android:id="@+id/usernameTextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/username"
-                        android:textSize="16sp" />
-
-                <!-- Accept Button -->
-                <Button
-                        android:id="@+id/acceptButton"
+                        android:id="@+id/Settings"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Pending Requests"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="36sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/amethysta"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/accept" />
+                        android:paddingBottom="20dp"/>
 
-                <!-- Decline Button -->
-                <Button
-                        android:id="@+id/declineButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/decline"
-                        android:layout_marginStart="8dp" />
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@android:color/darker_gray"/>
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:orientation="horizontal"
+                              android:padding="16dp">
+
+                    <!-- Username TextView -->
+                    <TextView
+                            android:id="@+id/usernameTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/username"
+                            android:textSize="16sp" />
+
+                    <!-- Accept Button -->
+                    <Button
+                            android:id="@+id/acceptButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/accept" />
+
+                    <!-- Decline Button -->
+                    <Button
+                            android:id="@+id/declineButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/decline"
+                            android:layout_marginStart="8dp" />
+                </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
         </ScrollView>
