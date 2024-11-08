@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#CDEDA3" /> <!-- Red or any color for the badge background -->
+    <corners android:radius="250dp" /> <!-- Adjust radius for a circular shape -->
+</shape>

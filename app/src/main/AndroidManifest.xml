@@ -117,6 +117,9 @@
                 android:name=".settings.SettingsScreenActivity"
                 android:exported="false"
                 android:theme="@style/Theme.TrailBlaze"/>
+
+        <activity android:name=".ui.profile.FriendRequestActivity" />
+
         <activity
                 android:name=".MainActivity"
                 android:exported="true"

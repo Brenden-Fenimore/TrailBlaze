@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trailblaze.R
 import com.example.trailblaze.databinding.FragmentHomeBinding
 import com.example.trailblaze.firestore.UserManager
 import com.example.trailblaze.nps.NPSResponse
@@ -21,16 +23,15 @@ import com.example.trailblaze.ui.parks.ParkDetailActivity
 import com.example.trailblaze.ui.parks.ThumbnailAdapter
 import com.example.trailblaze.ui.parks.TimeRecordAdapter
 import com.example.trailblaze.ui.parks.TimeRecord
-import com.example.trailblaze.ui.profile.FriendAdapter
-import com.example.trailblaze.ui.profile.Friends
-import com.example.trailblaze.ui.profile.FriendsProfileActivity
-import com.example.trailblaze.ui.profile.UserListActivity
+import com.example.trailblaze.ui.profile.*
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+import com.example.trailblaze.ui.profile.PendingRequest
 
 
 class HomeFragment : Fragment() {
@@ -47,7 +48,6 @@ class HomeFragment : Fragment() {
     private lateinit var thumbnailAdapter: ThumbnailAdapter        // Adapter for RecyclerView
     private lateinit var timeRecordsRecyclerView: RecyclerView
     private lateinit var timeRecordAdapter: TimeRecordAdapter
-
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -81,6 +81,12 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        // Set up the click listener for the pending requests button on the homepage
+        binding.pendingRequestsButton.setOnClickListener {
+            // Create an intent to navigate to FriendRequestActivity when the button is clicked
+            val intent = Intent(activity, FriendRequestActivity::class.java)
+            startActivity(intent)
+        }
 
         // RecyclerView setup
         parksRecyclerView = binding.thumbnailRecyclerView
@@ -137,6 +143,8 @@ class HomeFragment : Fragment() {
             startActivity(intent) // Start the ParkDetailActivity
         }
         timeRecordsRecyclerView.adapter = timeRecordAdapter
+
+        fetchPendingRequestsAndUpdateCounter()
 
         // Load users (you would need to implement this)
         fetchUsers()
@@ -321,6 +329,36 @@ class HomeFragment : Fragment() {
             }
             .addOnFailureListener { e ->
                 Log.e("HomeFragment", "Error fetching time records: ${e.message}")
+            }
+    }
+
+    // Fetches the list of pending friend requests for the current user from Firestore,
+    // then updates the pending requests counter displayed on the homepage.
+    private fun fetchPendingRequestsAndUpdateCounter() {
+        // Get the current user's ID; if it's null (not logged in), return early
+        val currentUserId = auth.currentUser?.uid ?: return
+
+        // Retrieve the user's document from Firestore to access pending requests
+        firestore.collection("users").document(currentUserId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    // Get the pending requests list, or default to an empty list if not present
+                    val pendingRequestsList = document.get("pendingRequests") as? List<String> ?: emptyList()
+                    // Reference to the counter TextView element
+                    val counterTextView = binding.pendingRequestsCounter
+                    // If there are no pending requests, hide the counter badge
+                    if (pendingRequestsList.isEmpty()) {
+                        counterTextView.visibility = View.GONE
+                    } else {
+                        // Set the counter to the size of the pending requests list and make it visible
+                        counterTextView.text = pendingRequestsList.size.toString()
+                        counterTextView.visibility = View.VISIBLE
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                // Log an error message if fetching the pending requests fails
+                Log.e("HomeFragment", "Error fetching pending requests", exception)
             }
     }
 

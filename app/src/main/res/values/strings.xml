@@ -433,4 +433,8 @@
     <string name="chevronBack"> Return to previous screen</string>
     <string name="watcherMemPhoto"> Watcher member profile photo</string>
     <string name="remove_friend">Remove Friend from Friend List</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
+    <string name="_0">0</string>
+    <string name="pending_requests">Pending Requests</string>
 </resources>
