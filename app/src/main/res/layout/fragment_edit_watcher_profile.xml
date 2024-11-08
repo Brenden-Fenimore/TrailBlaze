@@ -105,7 +105,8 @@
                 android:src="@drawable/phone"
                 android:scaleType="centerCrop"
                 android:contentDescription="@string/phoneIcon"
-                android:paddingStart="10dp"/>
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"/>
 
         <EditText
                 android:id="@+id/edit_phone"
@@ -151,45 +152,10 @@
     </LinearLayout>
     </LinearLayout>
 
-    <!-- TrailBlaze User Checkbox -->
-    <CheckBox
-            android:id="@+id/isTrailBlazeUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/trailBlazeUser"
-            android:textSize="17sp"
-            android:fontFamily="@font/amethysta"
-            app:layout_constraintTop_toBottomOf="@id/watcherMemberContactDetails"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginStart="15dp"/>
 
-
-    <!-- TrailBlaze Username Field -->
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/usernameLabel"
-            android:text="@string/usernameLabel"
-            android:textSize="16sp"
-            android:fontFamily="@font/amethysta"
-            app:layout_constraintLeft_toRightOf="@+id/isTrailBlazeUser"
-            app:layout_constraintTop_toTopOf="@+id/isTrailBlazeUser"
-            app:layout_constraintTop_toBottomOf="@id/emailField"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/notificationPreferencesLabel"
-            android:textAlignment="@+id/isTrailBlazeUser"
-            android:layout_marginStart="192dp"
-            android:layout_marginTop="16dp"
-            android:padding="12dp"
-            app:layout_constraintHorizontal_bias="0.423"
-            app:layout_constraintVertical_bias="1.0"
-            tools:ignore="NotSibling"/>
 
     <!-- Notification Preferences -->
+
     <TextView
             android:id="@+id/notificationPreferencesLabel"
             android:layout_width="wrap_content"
@@ -198,11 +164,12 @@
             android:textStyle="bold"
             android:textSize="20sp"
             android:fontFamily="@font/amethysta"
-            app:layout_constraintTop_toBottomOf="@id/isTrailBlazeUser"
+            app:layout_constraintTop_toBottomOf="@id/watcherMemberContactDetails"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="18dp"
-            android:padding="9dp"/>
+            android:padding="9dp"
+            tools:layout_editor_absoluteY="441dp"
+            app:layout_constraintHorizontal_bias="0.579"/>
 
     <ScrollView
             android:layout_width="match_parent"

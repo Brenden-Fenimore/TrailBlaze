@@ -37,8 +37,6 @@ class EditWatcherProfile : AppCompatActivity() {
         nicknameField = findViewById(R.id.nicknameLabel)
         phoneNumberField = findViewById(R.id.edit_phone)
         emailField = findViewById(R.id.edit_email)
-        trailBlazeUserCheckbox = findViewById(R.id.isTrailBlazeUser)
-        trailBlazeUsernameField = findViewById(R.id.usernameLabel)
         receiveMessagesSwitch = findViewById(R.id.receiveMessagesSwitch)
         receiveEmailSwitch = findViewById(R.id.receiveEmailSwitch)
         receiveLocationSwitch = findViewById(R.id.receiveLocationSwitch)
