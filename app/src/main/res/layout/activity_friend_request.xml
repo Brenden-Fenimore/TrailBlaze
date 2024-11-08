@@ -34,25 +34,18 @@
             android:layout_centerVertical="true"/>
 </RelativeLayout>
 
-<ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/swishLayout">
-
-    <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/titleLayout"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_below="@id/swishLayout"
+                android:padding="16dp">
+
             <TextView
-                    android:id="@+id/Settings"
+                    android:id="@+id/pendingRequestTitle"
                     android:layout_gravity="center_horizontal"
-                    android:text="Pending Requests"
+                    android:text="@string/pending_requests"
                     android:textColor="?attr/colorPrimary"
                     android:textSize="36sp"
                     android:textStyle="bold"
@@ -61,12 +54,6 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="30dp"/>
 
-
-            <!-- Example layout file where the RecyclerView is added -->
-            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
                 <!-- RecyclerView for Pending Friend Requests -->
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/pendingRequestsRecyclerView"
@@ -74,9 +61,5 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp" />
 
-            </RelativeLayout>
-
         </LinearLayout>
-    </RelativeLayout>
-</ScrollView>
 </RelativeLayout>
