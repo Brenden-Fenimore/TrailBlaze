@@ -6,6 +6,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 
 // Class responsible for managing achievements and badges for users
 class AchievementManager(context: Context) {
@@ -167,18 +170,40 @@ class AchievementManager(context: Context) {
         }
     }
 
-    // Check and grant the Badge Collector badge
+    // Function to check and grant the Conqueror badge after completing 3 trails
     fun checkAndGrantConquerorBadge() {
-        isAchievementUnlocked("conqueror") { hasBadgeCollectorBadge ->
-            if (!hasBadgeCollectorBadge) {
-                // Grant the Badge Collector badge
-                grantBadge("conqueror")
-                // Update Firestore
-                unlockAchievement("conqueror")
-            } else {
-                Log.d("AchievementManager", "Conqueror Badge already unlocked.")
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+
+        // Fetch the user's completed trails from Firestore
+        firestore.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    // Assuming 'completedTrails' is a field that stores the number of completed trails
+                    val completedTrails = document.getLong("completedTrails") ?: 0
+
+                    if (completedTrails >= 3) {
+                        // Check if the Conqueror badge is already unlocked
+                        isAchievementUnlocked("conqueror") { hasBadgeCollectorBadge ->
+                            if (!hasBadgeCollectorBadge) {
+                                // Grant the Conqueror badge
+                                grantBadge("conqueror")
+                                // Update Firestore
+                                unlockAchievement("conqueror")
+                                Log.d("AchievementManager", "Conqueror Badge granted.")
+                            } else {
+                                Log.d("AchievementManager", "Conqueror Badge already unlocked.")
+                            }
+                        }
+                    } else {
+                        Log.d("AchievementManager", "User has completed $completedTrails trails. Badge not granted.")
+                    }
+                } else {
+                    Log.d("AchievementManager", "User document does not exist.")
+                }
             }
-        }
+            .addOnFailureListener { e ->
+                Log.e("AchievementManager", "Error fetching user data: ${e.message}")
+            }
     }
 
     // Check and grant the Leaderboard badge
@@ -212,6 +237,292 @@ class AchievementManager(context: Context) {
             Log.e("Firestore", "User not logged in")
         }
     }
+
+    // Check and grant the Badge Collector badge
+    fun checkAndGrantTrailBlazerBadge() {
+        isAchievementUnlocked("trailblazer") { hasBadgeCollectorBadge ->
+            if (!hasBadgeCollectorBadge) {
+                // Grant the Badge Collector badge
+                grantBadge("trailblazer")
+                // Update Firestore
+                unlockAchievement("trailblazer")
+            } else {
+                Log.d("AchievementManager", "TrailBlazer Badge already unlocked.")
+            }
+        }
+    }
+
+    // Check and grant the Badge Collector badge
+    fun checkAndGrantMountainClimberBadge() {
+        isAchievementUnlocked("mountainclimber") { hasBadgeCollectorBadge ->
+            if (!hasBadgeCollectorBadge) {
+                // Grant the Badge Collector badge
+                grantBadge("mountainclimber")
+                // Update Firestore
+                unlockAchievement("mountainclimber")
+            } else {
+                Log.d("AchievementManager", "Mountain Climber Badge already unlocked.")
+            }
+        }
+    }
+
+    // Check and grant the Badge Collector badge
+    fun checkAndGrantLongDistanceBadge() {
+        isAchievementUnlocked("longdistancetrekker") { hasBadgeCollectorBadge ->
+            if (!hasBadgeCollectorBadge) {
+                // Grant the Badge Collector badge
+                grantBadge("longdistancetrekker")
+                // Update Firestore
+                unlockAchievement("longdistancetrekker")
+            } else {
+                Log.d("AchievementManager", "Long Distance Badge already unlocked.")
+            }
+        }
+    }
+
+    fun checkAndGrantHabitualBadge() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val oneWeekAgo = System.currentTimeMillis() - (7 *24* 60 *60* 1000) // Current time minus 7 days
+
+        // Fetch the user's trails from Firestore
+        firestore.collection("users").document(userId).collection("trails")
+            .whereGreaterThan("completionTime", oneWeekAgo) // Assuming 'completionTime' is a timestamp
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                val completedTrailsCount = querySnapshot.size() // Get the count of completed trails in the last week
+
+                if (completedTrailsCount >= 2) {
+                    // Check if the Habitual Hiker badge is already unlocked
+                    isAchievementUnlocked("habitualhiker") { hasBadgeCollectorBadge ->
+                        if (!hasBadgeCollectorBadge) {
+                            // Grant the Habitual Hiker badge
+                            grantBadge("habitualhiker")
+                            // Update Firestore
+                            unlockAchievement("habitualhiker")
+                            Log.d("AchievementManager", "Habitual Hiker Badge granted.")
+                        } else {
+                            Log.d("AchievementManager", "Habitual Hiker Badge already unlocked.")
+                        }
+                    }
+                } else {
+                    Log.d("AchievementManager", "User completed $completedTrailsCount trails in the last week. Badge not granted.")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("AchievementManager", "Error fetching user trails: ${e.message}")
+            }
+    }
+
+    // Check and grant the Weekend Warrior badge
+    fun checkAndGrantWeekendBadge(timestamp: Long) {
+        // Create a Calendar instance and set the time
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = timestamp
+
+        // Get the day of the week
+        val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+
+        // Check if the day is Saturday (7) or Sunday (1)
+        if (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY) {
+            isAchievementUnlocked("weekendwarrior") { hasBadgeCollectorBadge ->
+                if (!hasBadgeCollectorBadge) {
+                    // Grant the Weekend Warrior badge
+                    grantBadge("weekendwarrior")
+                    // Update Firestore
+                    unlockAchievement("weekendwarrior")
+                    Log.d("AchievementManager", "Weekend Warrior Badge granted.")
+                } else {
+                    Log.d("AchievementManager", "Weekend Warrior Badge already unlocked.")
+                }
+            }
+        } else {
+            Log.d("AchievementManager", "Trail completed on a weekday; no badge granted.")
+        }
+    }
+
+    fun checkForDailyAdventurerBadge(userId: String) {
+        val hikeDatesRef = firestore.collection("users").document(userId).collection("hikeDates")
+
+        // Fetch the hike dates
+        hikeDatesRef.get()
+            .addOnSuccessListener { querySnapshot ->
+                // Create a list to hold the unique dates
+                val hikeDates = mutableListOf<String>()
+
+                // Loop through the documents to extract dates
+                for (document in querySnapshot.documents) {
+                    val date = document.getDate("date")?.let { SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(it) }
+                    if (date != null && !hikeDates.contains(date)) {
+                        hikeDates.add(date)
+                    }
+                }
+
+                // Check for 7 consecutive days
+                if (hasSevenConsecutiveDays(hikeDates)) {
+                    grantDailyAdventurerBadge(userId)
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("AchievementManager", "Error retrieving hike dates: ${e.message}")
+            }
+    }
+
+    // Method to grant the Daily Adventurer badge
+    private fun grantDailyAdventurerBadge(userId: String) {
+        // Calculate the timestamps for the last 7 days
+        val calendar = Calendar.getInstance()
+        val today = calendar.timeInMillis
+        calendar.add(Calendar.DAY_OF_YEAR, -6) // Go back 6 days to include today
+        val oneWeekAgo = calendar.timeInMillis
+
+        // Fetch the user's trails from Firestore for the last week
+        firestore.collection("users").document(userId).collection("trails")
+            .whereGreaterThan("completionTime", oneWeekAgo)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                // To track the unique days the user completed trails
+                val completedDays = mutableSetOf<String>()
+
+                querySnapshot.forEach { document ->
+                    val completionTime = document.getLong("completionTime") ?: return@forEach
+                    val date = Date(completionTime)
+                    val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                    completedDays.add(dateFormat.format(date)) // Add the date in "yyyy-MM-dd" format to the set
+                }
+
+                // Check if the user completed trails for all 7 days
+                if (completedDays.size >= 7) {
+                    // Check if the Daily Adventurer badge is already unlocked
+                    isAchievementUnlocked("dailyadventurer") { hasBadge ->
+                        if (!hasBadge) {
+                            // Grant the badge and unlock the achievement
+                            grantBadge("dailyadventurer")
+                            unlockAchievement("dailyadventurer")
+                            Log.d("AchievementManager", "Daily Adventurer badge granted.")
+                        } else {
+                            Log.d("AchievementManager", "Daily Adventurer badge already unlocked.")
+                        }
+                    }
+                } else {
+                    Log.d("AchievementManager", "User completed trails on ${completedDays.size} unique days. Badge not granted.")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("AchievementManager", "Error fetching user trails: ${e.message}")
+            }
+    }
+
+    private fun hasSevenConsecutiveDays(dates: List<String>): Boolean {
+        // Convert date strings to Date objects
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val dateObjects = dates.mapNotNull { date ->
+            try {
+                dateFormat.parse(date)
+            } catch (e: ParseException) {
+                null // Ignore invalid date formats
+            }
+        }.sorted() // Sort the dates in ascending order
+
+        // Check for consecutive days
+        var consecutiveCount = 1 // Start counting from the first date
+
+        for (i in 1 until dateObjects.size) {
+            val currentDate = dateObjects[i]
+            val previousDate = dateObjects[i - 1]
+
+            // Check if the current date is exactly one day after the previous date
+            val calendar = Calendar.getInstance()
+            calendar.time = previousDate
+            calendar.add(Calendar.DAY_OF_YEAR, 1)
+
+            if (calendar.time == currentDate) {
+                consecutiveCount++
+            } else {
+                consecutiveCount = 1 // Reset the count if not consecutive
+            }
+
+            // If we have found 7 consecutive days, return true
+            if (consecutiveCount >= 7) {
+                return true
+            }
+        }
+        // If we finish the loop without finding 7 consecutive days, return false
+        return false
+    }
+
+    fun checkAndGrantExplorerBadge(completionTime: Long) {
+        // Create a Calendar instance to check the hour
+        val calendar = Calendar.getInstance().apply {
+            timeInMillis = completionTime
+        }
+
+        // Get the hour of the day (in 24-hour format)
+        val hourOfDay = calendar.get(Calendar.HOUR_OF_DAY)
+
+        // Define evening hours (for example, 17:00 - 23:59)
+        if (hourOfDay >= 17) { // Change this to your desired evening start hour
+            isAchievementUnlocked("explorer") { hasExplorerBadge ->
+                if (!hasExplorerBadge) {
+                    // Grant the Explorer badge
+                    grantBadge("explorer")
+                    // Update Firestore
+                    unlockAchievement("explorer")
+                    Log.d("AchievementManager", "Explorer Badge granted for evening trail completion.")
+                } else {
+                    Log.d("AchievementManager", "Explorer Badge already unlocked.")
+                }
+            }
+        } else {
+            Log.d("AchievementManager", "Trail completed outside of evening hours, no badge granted.")
+        }
+    }
+
+    fun checkAndGrantTeamPlayerBadge(isPartyHike: Boolean) {
+        if (isPartyHike) { // Only check for the badge if it's a party hike
+            isAchievementUnlocked("teamplayer") { hasTeamPlayerBadge ->
+                if (!hasTeamPlayerBadge) {
+                    // Grant the Team Player badge
+                    grantBadge("teamplayer")
+                    // Update Firestore
+                    unlockAchievement("teamplayer")
+                    Log.d("AchievementManager", "Team Player Badge granted.")
+                } else {
+                    Log.d("AchievementManager", "Team Player Badge already unlocked.")
+                }
+            }
+        } else {
+            Log.d("AchievementManager", "Not a party hike, Team Player Badge not granted.")
+        }
+    }
+
+    // Check and grant the Badge Collector badge
+    fun checkAndGrantWildlifeBadge() {
+        isAchievementUnlocked("wildlifewatcher") { hasBadgeCollectorBadge ->
+            if (!hasBadgeCollectorBadge) {
+                // Grant the Badge Collector badge
+                grantBadge("wildlifewatcher")
+                // Update Firestore
+                unlockAchievement("wildlifewatcher")
+            } else {
+                Log.d("AchievementManager", "Wildlife Watcher Badge already unlocked.")
+            }
+        }
+    }
+
+    // Check and grant the Badge Collector badge
+    fun checkAndGrantGaolBadge() {
+        isAchievementUnlocked("goalsetter") { hasBadgeCollectorBadge ->
+            if (!hasBadgeCollectorBadge) {
+                // Grant the Badge Collector badge
+                grantBadge("goalsetter")
+                // Update Firestore
+                unlockAchievement("goalsetter")
+            } else {
+                Log.d("AchievementManager", "Goal Setter Badge already unlocked.")
+            }
+        }
+    }
+
 
     // Logic to grant a badge to the user
     private fun grantBadge(badgeId: String) {

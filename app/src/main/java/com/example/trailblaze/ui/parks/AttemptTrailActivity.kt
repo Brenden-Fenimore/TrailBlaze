@@ -31,6 +31,8 @@ import nl.dionsegijn.konfetti.models.Size
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
 
 // Activity where the user attempts a trail
 class AttemptTrailActivity : AppCompatActivity() {
@@ -306,17 +308,26 @@ class AttemptTrailActivity : AppCompatActivity() {
         }
 
         saveTimeButton.setOnClickListener {
-
             isRunning = false // Pause the timer
 
             // Get the elapsed time as a String
             val elapsedTimeString = timerTextView.text.toString()
 
-            // Create a TimeRecord object with parkImageUrl
-            val timeRecord = TimeRecord(parkName, elapsedTimeString, parkImageUrl, parkCode)
+            // Get the current date as a formatted string
+            val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
-            // Save the record to Firestore
-            saveTimeToFirestore(timeRecord)
+            // Create a TimeRecord object with the current timestamp and date
+            val timeRecord = TimeRecord(
+                parkName,
+                elapsedTimeString,
+                parkImageUrl,
+                parkCode,
+                System.currentTimeMillis(), // current timestamp
+                currentDate // current date
+            )
+
+            // Save the record to Firestore, passing the elapsed time in milliseconds
+            saveTimeToFirestore(timeRecord, convertElapsedTimeToMillis(elapsedTimeString))
 
             showConfetti()
             Toast.makeText(this, "Time saved: $elapsedTimeString for park: $parkName", Toast.LENGTH_SHORT).show()
@@ -335,6 +346,23 @@ class AttemptTrailActivity : AppCompatActivity() {
 
         // Show the dialog
         dialog.show()
+    }
+
+    private fun convertElapsedTimeToMillis(elapsedTime: String): Long {
+        val timeParts = elapsedTime.split(":")
+        var milliseconds = 0L
+
+        // Ensure the elapsedTime is in the correct format
+        if (timeParts.size == 3) {
+            val hours = timeParts[0].toLongOrNull() ?: 0
+            val minutes = timeParts[1].toLongOrNull() ?: 0
+            val seconds = timeParts[2].toLongOrNull() ?: 0
+
+            // Convert the time to milliseconds
+            milliseconds = (hours *3600 + minutes* 60 + seconds) * 1000
+        }
+
+        return milliseconds
     }
 
     private fun showConfetti() {
@@ -362,22 +390,50 @@ class AttemptTrailActivity : AppCompatActivity() {
         }, 6000) // Hide after 6 seconds
     }
 
-    private fun saveTimeToFirestore(timeRecord: TimeRecord) {
+    private fun saveTimeToFirestore(timeRecord: TimeRecord, elapsedTime: Long) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
             // Reference to the user's document in Firestore
             val userDocRef = firestore.collection("users").document(userId)
 
+            // Create a TimeRecord with the current timestamp
+            val timeRecordWithTimestamp = timeRecord.copy(timestamp = System.currentTimeMillis())
+
             // Update the timeRecords field, creating it if it doesn't exist
-            userDocRef.update("timeRecords", FieldValue.arrayUnion(timeRecord))
+            userDocRef.update("timeRecords", FieldValue.arrayUnion(timeRecordWithTimestamp))
                 .addOnSuccessListener {
                     // After saving the time record, delete party members
                     deletePartyMembers(userId)
                     // Notify watchers
                     //notifyWatchers(userId)
+
+                    // Check and grant the Explorer badge for evening completion
+                    achievementManager.checkAndGrantExplorerBadge(timeRecordWithTimestamp.timestamp)
+                    achievementManager.saveBadgeToUserProfile("explorer")
+
                     achievementManager.checkAndGrantConquerorBadge()
                     achievementManager.saveBadgeToUserProfile("conqueror")
                     Log.d("AttemptTrailActivity", "Time record saved successfully")
+
+                    achievementManager.checkAndGrantTrailBlazerBadge()
+                    achievementManager.saveBadgeToUserProfile("trailblazer")
+
+                    // Check for Long Distance badge (5 minutes = 300 seconds)
+                    if (elapsedTime > 300_000) { // 300,000 milliseconds = 5 minutes
+                        achievementManager.checkAndGrantLongDistanceBadge()
+                        achievementManager.saveBadgeToUserProfile("longdistancetrekker")
+                    }
+                    // Check for Habitual Hiker badge
+                    achievementManager.checkAndGrantHabitualBadge()
+                    achievementManager.saveBadgeToUserProfile("habitualhiker")
+
+                    // Check for Weekend Warrior badge
+                    achievementManager.checkAndGrantWeekendBadge(timeRecordWithTimestamp.timestamp)
+                    achievementManager.saveBadgeToUserProfile("weekendwarrior")
+
+                    // Check and grant the Daily Adventurer badge
+                    achievementManager.checkForDailyAdventurerBadge(FirebaseAuth.getInstance().currentUser?.uid ?: "")
+                    achievementManager.saveBadgeToUserProfile("dailyadventurer")
                 }
                 .addOnFailureListener { e ->
                     Log.e("AttemptTrailActivity", "Error saving time record: ${e.message}")
@@ -449,6 +505,9 @@ class AttemptTrailActivity : AppCompatActivity() {
             userDocRef.update("partyMembers", partyMembers)
                 .addOnSuccessListener {
                     Log.d("AttemptTrailActivity", "Party members saved successfully")
+                    // Check and grant Team Player badge after saving party members
+                    achievementManager.checkAndGrantTeamPlayerBadge(true) // Assume true for party hike
+                    achievementManager.saveBadgeToUserProfile("teamplayer")
                 }
                 .addOnFailureListener { e ->
                     Log.e("AttemptTrailActivity", "Error saving party members: ${e.message}")
