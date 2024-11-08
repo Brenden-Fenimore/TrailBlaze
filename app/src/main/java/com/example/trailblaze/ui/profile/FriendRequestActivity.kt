@@ -2,6 +2,7 @@ package com.example.trailblaze.ui.profile
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +28,10 @@ class FriendRequestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_friend_request) // Set your layout file here
 
+        findViewById<ImageButton>(R.id.chevron_left).setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
         // Initialize RecyclerView for displaying pending requests
         pendingRequestsRecyclerView = findViewById(R.id.pendingRequestsRecyclerView)
         pendingRequestsRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -45,16 +50,30 @@ class FriendRequestActivity : AppCompatActivity() {
 
     // Fetches pending friend requests from Firestore for the current user
     private fun fetchPendingRequests() {
-        val currentUserId = auth.currentUser?.uid ?: return     // Get the current user's ID
+        val currentUserId = auth.currentUser?.uid ?: return // Get the current user's ID
 
         firestore.collection("users").document(currentUserId).get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
                     // Retrieve and populate the pending requests list
                     val pendingRequestsList = document.get("pendingRequests") as? List<String> ?: emptyList()
-                    pendingRequests.clear()
-                    pendingRequests.addAll(pendingRequestsList.map { userId -> PendingRequest(userId, "Username") })
-                    pendingRequestsAdapter.notifyDataSetChanged()       // Notify adapter of data change
+
+                    pendingRequests.clear() // Clear existing requests to prevent duplicates
+
+                    // Fetch details for each pending request user
+                    pendingRequestsList.forEach { userId ->
+                        firestore.collection("users").document(userId).get()
+                            .addOnSuccessListener { userDocument ->
+                                val username = userDocument.getString("username") ?: "Unknown User"
+                                val profileImageUrl = userDocument.getString("profileImageUrl") ?: ""
+
+                                // Add to pending requests with both username and profile picture
+                                pendingRequests.add(PendingRequest(userId, username, profileImageUrl))
+                                pendingRequestsAdapter.notifyDataSetChanged() // Notify adapter of data change
+                            }.addOnFailureListener { exception ->
+                                Log.e("FriendRequestActivity", "Error fetching user details for $userId", exception)
+                            }
+                    }
                 }
             }
             .addOnFailureListener { exception ->
