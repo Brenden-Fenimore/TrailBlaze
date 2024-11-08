@@ -67,6 +67,7 @@ class BadgesActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.save).setOnClickListener {
             Toast.makeText(this, "Badges saved successfully", Toast.LENGTH_SHORT).show()
+            achievementManager.checkAndGrantGoalBadge()
             showConfetti()
         }
 
@@ -122,10 +123,7 @@ class BadgesActivity : AppCompatActivity() {
                         val badges = document.get("badges") as? List<String> ?: emptyList()
                         updateBadgesList(badges)
 
-                        achievementManager.checkAndGrantBadgeCollectorBadge()
-
-                        // Save to Firebase
-                        achievementManager.saveBadgeToUserProfile("badgecollector")
+                        achievementManager.checkAndGrantBadgeCollectorBadge(userId)
                     }
                 }
                 .addOnFailureListener { e ->

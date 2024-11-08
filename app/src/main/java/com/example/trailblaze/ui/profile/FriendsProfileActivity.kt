@@ -386,10 +386,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                             // Show confetti
                             showConfetti()
 
-                            achievementManager.checkAndGrantCommunityBuilderBadge()
-
-                            // Save to Firebase
-                            achievementManager.saveBadgeToUserProfile("communitybuilder")
+                            achievementManager.checkAndGrantCommunityBuilderBadge(userId)
 
                             binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled) // Change to filled icon
                         }

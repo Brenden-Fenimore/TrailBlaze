@@ -7,5 +7,4 @@ data class TimeRecord(
     val parkCode: String,
     val timestamp: Long,
     val date: String
-
 )

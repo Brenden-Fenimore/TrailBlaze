@@ -218,6 +218,8 @@ interface PhotoDeletionListener {
                         if (document.exists()) {
                             val friendsIds = document.get("friends") as? List<String> ?: emptyList()
                             loadFriendsData(friendsIds)
+                            achievementManager.checkAndGrantSocialButterflyBadge(userId)
+
                         }
                     }
                     .addOnFailureListener { e ->
@@ -438,10 +440,10 @@ interface PhotoDeletionListener {
                 .addOnSuccessListener {
                     Log.d("ProfileFragment", "Photo successfully added to Firestore!")
 
-                    achievementManager.checkAndGrantPhotographerBadge()
-                    achievementManager.saveBadgeToUserProfile("photographer")
+                    achievementManager.checkAndGrantPhotographerBadge(userId)
 
                     achievementManager.checkAndGrantLeaderboardBadge()
+
 
                     fetchPhotos() // Call fetchPhotos after successfully saving
                 }

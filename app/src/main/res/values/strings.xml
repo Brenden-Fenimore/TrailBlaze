@@ -150,7 +150,7 @@
     <string name="overallProgress">Overall Progress</string>
     <!-- badge tool tips-->
     <string name="trailblazer">Trailblazer: Complete a trail.</string>
-    <string name="mountainclimber">Mountain Climber: Climb a mountain.</string>
+    <string name="mountainclimber">Mountain Climber: Visit a park that has a hiking activity.</string>
     <string name="longdistancetrekker">Long-Distance Trekker: Hike a certain amount of time.</string>
     <string name="habitualhiker">Habitual Hiker: Hike 2 trails a week.</string>
     <string name="weekendwarrior">Weekend Warrior: Complete a trail during the weekend.</string>
@@ -159,12 +159,12 @@
     <string name="explorer">Explorer: Complete a trail in the evening.</string>
     <string name="trailmaster">Trail Master: Complete trails in all four seasons.</string>
     <string name="socialbutterfly">Social Butterfly: Add at least 2 TrailBlazers.</string>
-    <string name="teamplayer">Team Player: Complete a group challenge or relay race.</string>
+    <string name="teamplayer">Team Player: Complete a trail with a party of friends.</string>
     <string name="safteyexpert">Safety Expert: Look at the safety tips.</string>
     <string name="communitybuilder">Community Builder: Add a favorite friend.</string>
-    <string name="wildlifewatcher">Wildlife Watcher: Spot a specific animal or bird on a hike.</string>
+    <string name="wildlifewatcher">Wildlife Watcher: Complete a trail with a Wildlife activity.</string>
     <string name="photographer">Photographer: Upload a picture to your TrailBlaze.</string>
-    <string name="goalsetter">Goal Setter: Set a goal and complete it.</string>
+    <string name="goalsetter">Goal Setter: Add your badges to your sash.</string>
     <string name="badgecollector">Badge Collector: Earn badges for completing specific challenges or achievements.</string>
     <string name="leaderboardtip">Leaderboard Climber: Get at least 2 badges.</string>
 

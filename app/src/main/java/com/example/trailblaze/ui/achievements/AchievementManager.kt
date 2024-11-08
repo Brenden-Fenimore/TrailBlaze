@@ -15,7 +15,8 @@ class AchievementManager(context: Context) {
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance() // Firestore instance for database operations
 
     // Unlock an achievement
-    fun unlockAchievement(achievementId: String) {
+    // Unlock an achievement
+    fun unlockAchievement(achievementId: String, onComplete: (Boolean) -> Unit) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid // Get the current user's ID
         if (userId != null) {
             val userRef = firestore.collection("users").document(userId) // Reference to the user's document in Firestore
@@ -27,12 +28,15 @@ class AchievementManager(context: Context) {
             )
                 .addOnSuccessListener {
                     Log.d("Firestore", "Achievement unlocked successfully: $achievementId")
+                    onComplete(true) // Call the callback with true
                 }
                 .addOnFailureListener { e ->
                     Log.e("Firestore", "Error unlocking achievement: ", e)
+                    onComplete(false) // Call the callback with false
                 }
         } else {
             Log.e("Firestore", "User not logged in")
+            onComplete(false) // Call the callback with false
         }
     }
 
@@ -86,21 +90,35 @@ class AchievementManager(context: Context) {
                 // Get the list of friends from the document, default to an empty list if null
                 val friendsList = document.get("friends") as? List<String> ?: emptyList()
 
-                // Check if the user has at least 1 friend (threshold can be adjusted)
-                if (friendsList.size >= 1) { // Adjust the threshold if needed
+                // Check if the user has more than 2 friends
+                if (friendsList.size > 6) { // Adjusted threshold to more than 2
                     // Check if the "Social Butterfly" achievement is unlocked
                     isAchievementUnlocked("socialbutterfly") { hasSocialButterflyBadge ->
                         // If the badge is not already unlocked
                         if (!hasSocialButterflyBadge) {
-                            // Grant the badge and update Firestore
-                            grantBadge("socialbutterfly") // Grant the badge
-                            unlockAchievement("socialbutterfly") // Mark the achievement as unlocked
+                            // Grant the badge
+                            grantBadge("socialbutterfly")
+
+                            // Update Firestore and check if it was successful
+                            unlockAchievement("socialbutterfly") { success ->
+                                if (success) {
+                                    // Only save the badge if the achievement was successfully unlocked
+                                    saveBadgeToUserProfile("socialbutterfly")
+                                    Log.d("AchievementManager", "Social Butterfly badge granted and saved to Firestore.")
+                                } else {
+                                    Log.d("AchievementManager", "Failed to unlock the Social Butterfly badge in Firestore.")
+                                }
+                            }
                         } else {
                             // Log that the badge is already unlocked
                             Log.d("AchievementManager", "Social Butterfly badge already unlocked.")
                         }
                     }
+                } else {
+                    Log.d("AchievementManager", "User does not have enough friends to qualify for the Social Butterfly badge.")
                 }
+            } else {
+                Log.d("AchievementManager", "User document does not exist.")
             }
         }.addOnFailureListener { exception ->
             // Log an error message if fetching the user document fails
@@ -110,7 +128,7 @@ class AchievementManager(context: Context) {
 
 
     // Check and grant the "Photographer" badge if it hasn't been unlocked yet
-    fun checkAndGrantPhotographerBadge() {
+    fun checkAndGrantPhotographerBadge(userId: String) {
         // Check if the "Photographer" achievement is unlocked
         isAchievementUnlocked("photographer") { hasPhotographerBadge ->
             // If the badge has not been unlocked
@@ -118,8 +136,16 @@ class AchievementManager(context: Context) {
                 // Grant the "Photographer" badge
                 grantBadge("photographer")
 
-                // Update Firestore to mark the achievement as unlocked
-                unlockAchievement("photographer")
+                // Update Firestore to mark the achievement as unlocked and check if it was successful
+                unlockAchievement("photographer") { success ->
+                    if (success) {
+                        // Only save the badge if the achievement was successfully unlocked
+                        saveBadgeToUserProfile("photographer")
+                        Log.d("AchievementManager", "Photographer badge granted and saved to Firestore.")
+                    } else {
+                        Log.d("AchievementManager", "Failed to unlock the Photographer badge in Firestore.")
+                    }
+                }
             } else {
                 // Log that the "Photographer" badge is already unlocked
                 Log.d("AchievementManager", "Photographer badge already unlocked.")
@@ -128,14 +154,22 @@ class AchievementManager(context: Context) {
     }
 
     // Check and grant the Safety Expert badge
-    fun checkAndGrantSafetyExpertBadge() {
+    fun checkAndGrantSafetyExpertBadge(userId: String) {
         isAchievementUnlocked("safetyexpert") { hasSafetyExpertBadge ->
             if (!hasSafetyExpertBadge) {
                 // Grant the Safety Expert badge
                 grantBadge("safetyexpert")
-                // Update Firestore
-                unlockAchievement("safetyexpert")
 
+                // Update Firestore to mark the achievement as unlocked and check if it was successful
+                unlockAchievement("safetyexpert") { success ->
+                    if (success) {
+                        // Only save the badge if the achievement was successfully unlocked
+                        saveBadgeToUserProfile("safetyexpert")
+                        Log.d("AchievementManager", "Safety Expert badge granted and saved to Firestore.")
+                    } else {
+                        Log.d("AchievementManager", "Failed to unlock the Safety Expert badge in Firestore.")
+                    }
+                }
             } else {
                 Log.d("AchievementManager", "Safety Expert badge already unlocked.")
             }
@@ -143,29 +177,47 @@ class AchievementManager(context: Context) {
     }
 
     // Check and grant the Badge Collector badge
-    fun checkAndGrantBadgeCollectorBadge() {
+    fun checkAndGrantBadgeCollectorBadge(userId: String) {
         isAchievementUnlocked("badgecollector") { hasBadgeCollectorBadge ->
             if (!hasBadgeCollectorBadge) {
                 // Grant the Badge Collector badge
                 grantBadge("badgecollector")
-                // Update Firestore
-                unlockAchievement("badgecollector")
+
+                // Update Firestore to mark the achievement as unlocked and check if it was successful
+                unlockAchievement("badgecollector") { success ->
+                    if (success) {
+                        // Only save the badge if the achievement was successfully unlocked
+                        saveBadgeToUserProfile("badgecollector")
+                        Log.d("AchievementManager", "Badge Collector badge granted and saved to Firestore.")
+                    } else {
+                        Log.d("AchievementManager", "Failed to unlock the Badge Collector badge in Firestore.")
+                    }
+                }
             } else {
                 Log.d("AchievementManager", "Badge Collector badge already unlocked.")
             }
         }
     }
 
-    // Check and grant the Badge Collector badge
-    fun checkAndGrantCommunityBuilderBadge() {
-        isAchievementUnlocked("communitybuilder") { hasBadgeCollectorBadge ->
-            if (!hasBadgeCollectorBadge) {
-                // Grant the Badge Collector badge
+    // Check and grant the Community Builder badge
+    fun checkAndGrantCommunityBuilderBadge(userId: String) {
+        isAchievementUnlocked("communitybuilder") { hasCommunityBuilderBadge ->
+            if (!hasCommunityBuilderBadge) {
+                // Grant the Community Builder badge
                 grantBadge("communitybuilder")
-                // Update Firestore
-                unlockAchievement("communitybuilder")
+
+                // Update Firestore to mark the achievement as unlocked and check if it was successful
+                unlockAchievement("communitybuilder") { success ->
+                    if (success) {
+                        // Only save the badge if the achievement was successfully unlocked
+                        saveBadgeToUserProfile("communitybuilder")
+                        Log.d("AchievementManager", "Community Builder badge granted and saved to Firestore.")
+                    } else {
+                        Log.d("AchievementManager", "Failed to unlock the Community Builder badge in Firestore.")
+                    }
+                }
             } else {
-                Log.d("AchievementManager", "Badge Collector badge already unlocked.")
+                Log.d("AchievementManager", "Community Builder badge already unlocked.")
             }
         }
     }
@@ -183,12 +235,21 @@ class AchievementManager(context: Context) {
 
                     if (completedTrails >= 3) {
                         // Check if the Conqueror badge is already unlocked
-                        isAchievementUnlocked("conqueror") { hasBadgeCollectorBadge ->
-                            if (!hasBadgeCollectorBadge) {
+                        isAchievementUnlocked("conqueror") { hasConquerorBadge ->
+                            if (!hasConquerorBadge) {
                                 // Grant the Conqueror badge
                                 grantBadge("conqueror")
-                                // Update Firestore
-                                unlockAchievement("conqueror")
+
+                                // Update Firestore to mark the achievement as unlocked and check if it was successful
+                                unlockAchievement("conqueror") { success ->
+                                    if (success) {
+                                        // Only save the badge if the achievement was successfully unlocked
+                                        saveBadgeToUserProfile("conqueror")
+                                        Log.d("AchievementManager", "Conqueror Badge granted and saved to Firestore.")
+                                    } else {
+                                        Log.d("AchievementManager", "Failed to unlock the Conqueror Badge in Firestore.")
+                                    }
+                                }
                                 Log.d("AchievementManager", "Conqueror Badge granted.")
                             } else {
                                 Log.d("AchievementManager", "Conqueror Badge already unlocked.")
@@ -221,14 +282,28 @@ class AchievementManager(context: Context) {
                     if (badgesList.size >= 2) {
                         isAchievementUnlocked("leaderboard") { hasLeaderboardBadge ->
                             if (!hasLeaderboardBadge) {
-                                // Grant the badge and update Firestore
+                                // Grant the badge
                                 grantBadge("leaderboard")
-                                unlockAchievement("leaderboard")
+
+                                // Update Firestore to mark the achievement as unlocked and check if it was successful
+                                unlockAchievement("leaderboard") { success ->
+                                    if (success) {
+                                        // Only save the badge if the achievement was successfully unlocked
+                                        saveBadgeToUserProfile("leaderboard")
+                                        Log.d("AchievementManager", "Leaderboard badge granted and saved to Firestore.")
+                                    } else {
+                                        Log.d("AchievementManager", "Failed to unlock the Leaderboard badge in Firestore.")
+                                    }
+                                }
                             } else {
                                 Log.d("AchievementManager", "Leaderboard badge already unlocked.")
                             }
                         }
+                    } else {
+                        Log.d("AchievementManager", "User has less than 2 badges. Leaderboard badge not granted.")
                     }
+                } else {
+                    Log.d("AchievementManager", "User document does not exist.")
                 }
             }.addOnFailureListener { exception ->
                 Log.e("AchievementManager", "Error fetching user document: ", exception)
@@ -238,42 +313,69 @@ class AchievementManager(context: Context) {
         }
     }
 
-    // Check and grant the Badge Collector badge
+    // Check and grant the TrailBlazer badge
     fun checkAndGrantTrailBlazerBadge() {
-        isAchievementUnlocked("trailblazer") { hasBadgeCollectorBadge ->
-            if (!hasBadgeCollectorBadge) {
-                // Grant the Badge Collector badge
+        isAchievementUnlocked("trailblazer") { hasTrailBlazerBadge ->
+            if (!hasTrailBlazerBadge) {
+                // Grant the TrailBlazer badge
                 grantBadge("trailblazer")
-                // Update Firestore
-                unlockAchievement("trailblazer")
+
+                // Update Firestore to mark the achievement as unlocked and check if it was successful
+                unlockAchievement("trailblazer") { success ->
+                    if (success) {
+                        // Only save the badge if the achievement was successfully unlocked
+                        saveBadgeToUserProfile("trailblazer")
+                        Log.d("AchievementManager", "TrailBlazer Badge granted and saved to Firestore.")
+                    } else {
+                        Log.d("AchievementManager", "Failed to unlock the TrailBlazer Badge in Firestore.")
+                    }
+                }
             } else {
                 Log.d("AchievementManager", "TrailBlazer Badge already unlocked.")
             }
         }
     }
 
-    // Check and grant the Badge Collector badge
+    // Check and grant the Mountain Climber badge
     fun checkAndGrantMountainClimberBadge() {
-        isAchievementUnlocked("mountainclimber") { hasBadgeCollectorBadge ->
-            if (!hasBadgeCollectorBadge) {
-                // Grant the Badge Collector badge
+        isAchievementUnlocked("mountainclimber") { hasMountainClimberBadge ->
+            if (!hasMountainClimberBadge) {
+                // Grant the Mountain Climber badge
                 grantBadge("mountainclimber")
-                // Update Firestore
-                unlockAchievement("mountainclimber")
+
+                // Update Firestore to mark the achievement as unlocked and check if it was successful
+                unlockAchievement("mountainclimber") { success ->
+                    if (success) {
+                        // Only save the badge if the achievement was successfully unlocked
+                        saveBadgeToUserProfile("mountainclimber")
+                        Log.d("AchievementManager", "Mountain Climber Badge granted and saved to Firestore.")
+                    } else {
+                        Log.d("AchievementManager", "Failed to unlock the Mountain Climber Badge in Firestore.")
+                    }
+                }
             } else {
                 Log.d("AchievementManager", "Mountain Climber Badge already unlocked.")
             }
         }
     }
 
-    // Check and grant the Badge Collector badge
+    // Check and grant the Long Distance Badge
     fun checkAndGrantLongDistanceBadge() {
-        isAchievementUnlocked("longdistancetrekker") { hasBadgeCollectorBadge ->
-            if (!hasBadgeCollectorBadge) {
-                // Grant the Badge Collector badge
+        isAchievementUnlocked("longdistancetrekker") { hasLongDistanceBadge ->
+            if (!hasLongDistanceBadge) {
+                // Grant the Long Distance Badge
                 grantBadge("longdistancetrekker")
-                // Update Firestore
-                unlockAchievement("longdistancetrekker")
+
+                // Update Firestore to mark the achievement as unlocked and check if it was successful
+                unlockAchievement("longdistancetrekker") { success ->
+                    if (success) {
+                        // Only save the badge if the achievement was successfully unlocked
+                        saveBadgeToUserProfile("longdistancetrekker")
+                        Log.d("AchievementManager", "Long Distance Badge granted and saved to Firestore.")
+                    } else {
+                        Log.d("AchievementManager", "Failed to unlock the Long Distance Badge in Firestore.")
+                    }
+                }
             } else {
                 Log.d("AchievementManager", "Long Distance Badge already unlocked.")
             }
@@ -289,23 +391,40 @@ class AchievementManager(context: Context) {
             .whereGreaterThan("completionTime", oneWeekAgo) // Assuming 'completionTime' is a timestamp
             .get()
             .addOnSuccessListener { querySnapshot ->
-                val completedTrailsCount = querySnapshot.size() // Get the count of completed trails in the last week
+                val completedDays = mutableSetOf<String>() // To track unique days
 
-                if (completedTrailsCount >= 2) {
+                // Iterate through trails and add the date to the set
+                querySnapshot.forEach { document ->
+                    val completionTime = document.getLong("completionTime") ?: return@forEach
+                    val date = Date(completionTime)
+                    val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                    completedDays.add(dateFormat.format(date)) // Add unique dates to the set
+                }
+
+                // Check if the user completed trails on at least 2 unique days
+                if (completedDays.size >= 2) {
                     // Check if the Habitual Hiker badge is already unlocked
                     isAchievementUnlocked("habitualhiker") { hasBadgeCollectorBadge ->
                         if (!hasBadgeCollectorBadge) {
                             // Grant the Habitual Hiker badge
                             grantBadge("habitualhiker")
-                            // Update Firestore
-                            unlockAchievement("habitualhiker")
-                            Log.d("AchievementManager", "Habitual Hiker Badge granted.")
+
+                            // Update Firestore and check if it was successful
+                            unlockAchievement("habitualhiker") { success ->
+                                if (success) {
+                                    // Only save the badge if the achievement was successfully unlocked
+                                    saveBadgeToUserProfile("habitualhiker")
+                                    Log.d("AchievementManager", "Habitual Hiker Badge granted and saved to Firestore.")
+                                } else {
+                                    Log.d("AchievementManager", "Failed to unlock the Habitual Hiker Badge in Firestore.")
+                                }
+                            }
                         } else {
                             Log.d("AchievementManager", "Habitual Hiker Badge already unlocked.")
                         }
                     }
                 } else {
-                    Log.d("AchievementManager", "User completed $completedTrailsCount trails in the last week. Badge not granted.")
+                    Log.d("AchievementManager", "User completed trails on ${completedDays.size} unique days. Badge not granted.")
                 }
             }
             .addOnFailureListener { e ->
@@ -324,12 +443,21 @@ class AchievementManager(context: Context) {
 
         // Check if the day is Saturday (7) or Sunday (1)
         if (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY) {
-            isAchievementUnlocked("weekendwarrior") { hasBadgeCollectorBadge ->
-                if (!hasBadgeCollectorBadge) {
+            isAchievementUnlocked("weekendwarrior") { hasWeekendWarriorBadge ->
+                if (!hasWeekendWarriorBadge) {
                     // Grant the Weekend Warrior badge
                     grantBadge("weekendwarrior")
-                    // Update Firestore
-                    unlockAchievement("weekendwarrior")
+
+                    // Update Firestore to mark the achievement as unlocked and check if it was successful
+                    unlockAchievement("weekendwarrior") { success ->
+                        if (success) {
+                            // Only save the badge if the achievement was successfully unlocked
+                            saveBadgeToUserProfile("weekendwarrior")
+                            Log.d("AchievementManager", "Weekend Warrior Badge granted and saved to Firestore.")
+                        } else {
+                            Log.d("AchievementManager", "Failed to unlock the Weekend Warrior Badge in Firestore.")
+                        }
+                    }
                     Log.d("AchievementManager", "Weekend Warrior Badge granted.")
                 } else {
                     Log.d("AchievementManager", "Weekend Warrior Badge already unlocked.")
@@ -359,7 +487,19 @@ class AchievementManager(context: Context) {
 
                 // Check for 7 consecutive days
                 if (hasSevenConsecutiveDays(hikeDates)) {
+                    // Grant the Daily Adventurer badge
                     grantDailyAdventurerBadge(userId)
+
+                    // Update Firestore to mark the achievement as unlocked
+                    unlockAchievement("dailyadventurer") { success ->
+                        if (success) {
+                            // Save the badge to the user's profile if the achievement was successfully unlocked
+                            saveBadgeToUserProfile("dailyadventurer")
+                            Log.d("AchievementManager", "Daily Adventurer Badge granted and saved to Firestore.")
+                        } else {
+                            Log.d("AchievementManager", "Failed to unlock the Daily Adventurer Badge in Firestore.")
+                        }
+                    }
                 }
             }
             .addOnFailureListener { e ->
@@ -395,9 +535,19 @@ class AchievementManager(context: Context) {
                     // Check if the Daily Adventurer badge is already unlocked
                     isAchievementUnlocked("dailyadventurer") { hasBadge ->
                         if (!hasBadge) {
-                            // Grant the badge and unlock the achievement
+                            // Grant the badge
                             grantBadge("dailyadventurer")
-                            unlockAchievement("dailyadventurer")
+
+                            // Update Firestore to mark the achievement as unlocked and check if it was successful
+                            unlockAchievement("dailyadventurer") { success ->
+                                if (success) {
+                                    // Only save the badge if the achievement was successfully unlocked
+                                    saveBadgeToUserProfile("dailyadventurer")
+                                    Log.d("AchievementManager", "Daily Adventurer badge granted and saved to Firestore.")
+                                } else {
+                                    Log.d("AchievementManager", "Failed to unlock the Daily Adventurer badge in Firestore.")
+                                }
+                            }
                             Log.d("AchievementManager", "Daily Adventurer badge granted.")
                         } else {
                             Log.d("AchievementManager", "Daily Adventurer badge already unlocked.")
@@ -465,15 +615,24 @@ class AchievementManager(context: Context) {
                 if (!hasExplorerBadge) {
                     // Grant the Explorer badge
                     grantBadge("explorer")
-                    // Update Firestore
-                    unlockAchievement("explorer")
+
+                    // Update Firestore to mark the achievement as unlocked and check if it was successful
+                    unlockAchievement("explorer") { success ->
+                        if (success) {
+                            // Only save the badge if the achievement was successfully unlocked
+                            saveBadgeToUserProfile("explorer")
+                            Log.d("AchievementManager", "Explorer Badge granted and saved to Firestore for evening trail completion.")
+                        } else {
+                            Log.d("AchievementManager", "Failed to unlock the Explorer Badge in Firestore.")
+                        }
+                    }
                     Log.d("AchievementManager", "Explorer Badge granted for evening trail completion.")
                 } else {
                     Log.d("AchievementManager", "Explorer Badge already unlocked.")
                 }
             }
         } else {
-            Log.d("AchievementManager", "Trail completed outside of evening hours, no badge granted.")
+            Log.d("AchievementManager", "Trail completed outside of evening hours; no badge granted.")
         }
     }
 
@@ -483,40 +642,69 @@ class AchievementManager(context: Context) {
                 if (!hasTeamPlayerBadge) {
                     // Grant the Team Player badge
                     grantBadge("teamplayer")
-                    // Update Firestore
-                    unlockAchievement("teamplayer")
+
+                    // Update Firestore to mark the achievement as unlocked and check if it was successful
+                    unlockAchievement("teamplayer") { success ->
+                        if (success) {
+                            // Only save the badge if the achievement was successfully unlocked
+                            saveBadgeToUserProfile("teamplayer")
+                            Log.d("AchievementManager", "Team Player Badge granted and saved to Firestore.")
+                        } else {
+                            Log.d("AchievementManager", "Failed to unlock the Team Player Badge in Firestore.")
+                        }
+                    }
                     Log.d("AchievementManager", "Team Player Badge granted.")
                 } else {
                     Log.d("AchievementManager", "Team Player Badge already unlocked.")
                 }
             }
         } else {
-            Log.d("AchievementManager", "Not a party hike, Team Player Badge not granted.")
+            Log.d("AchievementManager", "Not a party hike; Team Player Badge not granted.")
         }
     }
 
-    // Check and grant the Badge Collector badge
+    // Check and grant the Wildlife Watcher badge
     fun checkAndGrantWildlifeBadge() {
-        isAchievementUnlocked("wildlifewatcher") { hasBadgeCollectorBadge ->
-            if (!hasBadgeCollectorBadge) {
-                // Grant the Badge Collector badge
+        isAchievementUnlocked("wildlifewatcher") { hasWildlifeWatcherBadge ->
+            if (!hasWildlifeWatcherBadge) {
+                // Grant the Wildlife Watcher badge
                 grantBadge("wildlifewatcher")
-                // Update Firestore
-                unlockAchievement("wildlifewatcher")
+
+                // Update Firestore to mark the achievement as unlocked and check if it was successful
+                unlockAchievement("wildlifewatcher") { success ->
+                    if (success) {
+                        // Only save the badge if the achievement was successfully unlocked
+                        saveBadgeToUserProfile("wildlifewatcher")
+                        Log.d("AchievementManager", "Wildlife Watcher Badge granted and saved to Firestore.")
+                    } else {
+                        Log.d("AchievementManager", "Failed to unlock the Wildlife Watcher Badge in Firestore.")
+                    }
+                }
+                Log.d("AchievementManager", "Wildlife Watcher Badge granted.")
             } else {
                 Log.d("AchievementManager", "Wildlife Watcher Badge already unlocked.")
             }
         }
     }
 
-    // Check and grant the Badge Collector badge
-    fun checkAndGrantGaolBadge() {
-        isAchievementUnlocked("goalsetter") { hasBadgeCollectorBadge ->
-            if (!hasBadgeCollectorBadge) {
-                // Grant the Badge Collector badge
+    // Check and grant the Goal Setter badge
+    fun checkAndGrantGoalBadge() {
+        isAchievementUnlocked("goalsetter") { hasGoalSetterBadge ->
+            if (!hasGoalSetterBadge) {
+                // Grant the Goal Setter badge
                 grantBadge("goalsetter")
-                // Update Firestore
-                unlockAchievement("goalsetter")
+
+                // Update Firestore to mark the achievement as unlocked and check if it was successful
+                unlockAchievement("goalsetter") { success ->
+                    if (success) {
+                        // Only save the badge if the achievement was successfully unlocked
+                        saveBadgeToUserProfile("goalsetter")
+                        Log.d("AchievementManager", "Goal Setter Badge granted and saved to Firestore.")
+                    } else {
+                        Log.d("AchievementManager", "Failed to unlock the Goal Setter Badge in Firestore.")
+                    }
+                }
+                Log.d("AchievementManager", "Goal Setter Badge granted.")
             } else {
                 Log.d("AchievementManager", "Goal Setter Badge already unlocked.")
             }

@@ -50,6 +50,7 @@ class AttemptTrailActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var userAdapter: UserAdapter
     private var userList: MutableList<NonTrailBlazeUser> = mutableListOf()
+    private lateinit var activities: Array<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +70,11 @@ class AttemptTrailActivity : AppCompatActivity() {
         parkCode = intent.getStringExtra("PARK_CODE") ?: ""
         parkNameTextView = findViewById(R.id.parkNameTextView)
         fetchParkDetails(parkCode)
+
+        activities = intent.getStringArrayExtra("PARK_ACTIVITIES") ?: arrayOf()
+        // Log the activities to see what was pulled in
+        Log.d("AttemptTrailActivity", "Activities received: ${activities.joinToString(", ")}")
+
 
         Log.d("AttemptTrailActivity", "Received park code: $parkCode")
 
@@ -326,6 +332,15 @@ class AttemptTrailActivity : AppCompatActivity() {
                 currentDate // current date
             )
 
+            // Check if "Rock Climbing" is in the activities
+            if (activities.contains("Hiking")) {
+                achievementManager.checkAndGrantMountainClimberBadge()
+            }
+
+            // Check if "Rock Climbing" is in the activities
+            if (activities.contains("Wildlife Watching")) {
+                achievementManager.checkAndGrantWildlifeBadge()
+            }
             // Save the record to Firestore, passing the elapsed time in milliseconds
             saveTimeToFirestore(timeRecord, convertElapsedTimeToMillis(elapsedTimeString))
 
@@ -409,31 +424,23 @@ class AttemptTrailActivity : AppCompatActivity() {
 
                     // Check and grant the Explorer badge for evening completion
                     achievementManager.checkAndGrantExplorerBadge(timeRecordWithTimestamp.timestamp)
-                    achievementManager.saveBadgeToUserProfile("explorer")
 
                     achievementManager.checkAndGrantConquerorBadge()
-                    achievementManager.saveBadgeToUserProfile("conqueror")
-                    Log.d("AttemptTrailActivity", "Time record saved successfully")
 
                     achievementManager.checkAndGrantTrailBlazerBadge()
-                    achievementManager.saveBadgeToUserProfile("trailblazer")
 
                     // Check for Long Distance badge (5 minutes = 300 seconds)
                     if (elapsedTime > 300_000) { // 300,000 milliseconds = 5 minutes
                         achievementManager.checkAndGrantLongDistanceBadge()
-                        achievementManager.saveBadgeToUserProfile("longdistancetrekker")
                     }
                     // Check for Habitual Hiker badge
                     achievementManager.checkAndGrantHabitualBadge()
-                    achievementManager.saveBadgeToUserProfile("habitualhiker")
 
                     // Check for Weekend Warrior badge
                     achievementManager.checkAndGrantWeekendBadge(timeRecordWithTimestamp.timestamp)
-                    achievementManager.saveBadgeToUserProfile("weekendwarrior")
 
                     // Check and grant the Daily Adventurer badge
                     achievementManager.checkForDailyAdventurerBadge(FirebaseAuth.getInstance().currentUser?.uid ?: "")
-                    achievementManager.saveBadgeToUserProfile("dailyadventurer")
                 }
                 .addOnFailureListener { e ->
                     Log.e("AttemptTrailActivity", "Error saving time record: ${e.message}")
