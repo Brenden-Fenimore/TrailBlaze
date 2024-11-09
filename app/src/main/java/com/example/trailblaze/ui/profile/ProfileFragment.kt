@@ -77,10 +77,10 @@ interface PhotoDeletionListener {
         // Define all possible badges
         private val allBadges = listOf(
             Badge("safetyexpert", "Safety Expert", R.drawable.safetyexpert),
-            Badge("trailblaze", "TrailBlazer", R.drawable.trailblaze_logo),
+            Badge("trailblazer", "TrailBlazer", R.drawable.trailblaze_logo),
             Badge("mountainclimber", "MountainClimber", R.drawable.mountainclimber),
-            Badge("trekker", "Trekker", R.drawable.trekker),
-            Badge("hiker", "Hiker", R.drawable.hhiker),
+            Badge("longdistancetrekker", "Trekker", R.drawable.trekker),
+            Badge("habitualhiker", "Hiker", R.drawable.hhiker),
             Badge("weekendwarrior", "Weekend Warrior", R.drawable.weekendwarrior),
             Badge("dailyadventurer", "Daily Adventurer", R.drawable.dailyadventurer),
             Badge("conqueror", "Conqueror", R.drawable.conqueror),
