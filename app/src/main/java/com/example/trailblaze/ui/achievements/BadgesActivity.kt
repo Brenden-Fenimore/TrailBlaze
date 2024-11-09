@@ -243,24 +243,9 @@ class BadgesActivity : AppCompatActivity() {
                         true
                     }
 
-                    MotionEvent.ACTION_UP -> {
-                        // Finalize the position on release
-                        val badgeId = view.tag as? String
-                        if (badgeId != null) {
-                            // Save the updated position in Firestore
-                            saveBadgePositionToFirestore(
-                                badgeId,
-                                (view.layoutParams as FrameLayout.LayoutParams).leftMargin.toFloat(),
-                                (view.layoutParams as FrameLayout.LayoutParams).topMargin.toFloat()
-                            )
-                        }
-                        true
-                    }
-
                     else -> false
                 }
             }
-
 
             // Finally, add the badge to the sash (FrameLayout)
             sash.addView(badge)
