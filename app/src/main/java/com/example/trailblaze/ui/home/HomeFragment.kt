@@ -236,10 +236,11 @@ class HomeFragment : Fragment() {
                     val username = document.getString("username")
                     val profileImageUrl = document.getString("profileImageUrl")
                     val isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
+                    val watcherVisible = document.getBoolean("watcherVisible") ?: false
 
                     // Check for null username and ensure the user is not the current user
                     if (username != null && userId != currentUserId) {
-                        Friends(userId, username, profileImageUrl, isPrivateAccount) // Replace with your User model constructor
+                        Friends(userId, username, profileImageUrl, isPrivateAccount, watcherVisible) // Replace with your User model constructor
                     } else {
                         null
                     }

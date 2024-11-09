@@ -238,7 +238,8 @@ interface PhotoDeletionListener {
                         userId  = friendId,
                         username = document.getString("username") ?: "Unknown",
                         profileImageUrl = document.getString("profileImageUrl"),
-                        isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
+                        isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false,
+                        watcherVisible = document.getBoolean("watcherVisible") ?: false
                     )
                     friendsList.add(friend) // Add friend to the list
                 }

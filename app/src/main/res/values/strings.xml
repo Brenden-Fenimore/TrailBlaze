@@ -400,7 +400,7 @@
 
 
     <!-- Watcher Member Strings-->
-
+    <string name="watcherMemberTitle">WatcherMember</string>
     <string name="watcherMemberName">Watcher Member Name</string>
     <string name="watcherNickName">Watcher Nickname</string>
     <string name="hint_nickname">Hint Nickname</string>

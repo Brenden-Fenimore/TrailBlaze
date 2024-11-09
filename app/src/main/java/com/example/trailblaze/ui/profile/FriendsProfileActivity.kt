@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -109,6 +110,7 @@ class FriendsProfileActivity : AppCompatActivity() {
             fetchCurrentUserDifficulty()
         }
 
+
         // Initialize the RecyclerView for friends in common
         friendsInCommonList = mutableListOf()
         friendsInCommonAdapter = FriendAdapter(friendsInCommonList) { user ->
@@ -206,7 +208,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                     val isLeaderboardVisible = document.getBoolean("leaderboardVisible") ?: true
                     val isPhotosVisible = document.getBoolean("photosVisible") ?: true
                     val isFavoriteTrailsVisible = document.getBoolean("favoriteTrailsVisible") ?: true
-                    val isWatcherVisible = document.getBoolean("watcherVisible") ?: true
+                    val watcherVisible = document.getBoolean("watcherVisible") ?: false
 
                     // Set visibility based on the privacy settings
                     binding.leaderRecyclerView.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
@@ -217,6 +219,9 @@ class FriendsProfileActivity : AppCompatActivity() {
 
                     binding.favoriteTrailsSection.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
                     binding.favoriteTrailsHeader.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
+
+                    // Set visibility for the watcherMember TextView
+                    binding.watcherMember.visibility = if (watcherVisible) View.VISIBLE else View.GONE
 
                     // Check if the account is private
                     if (isPrivateAccount) {
@@ -258,6 +263,9 @@ class FriendsProfileActivity : AppCompatActivity() {
         binding.leaderboardHeader.visibility = View.GONE
         binding.completedParksHeader.visibility = View.GONE
         binding.timeRecordsRecyclerView.visibility = View.GONE
+        binding.watcherMember.visibility = View.GONE
+
+
     }
 
     private fun loadUserOtherInformation(document: DocumentSnapshot) {
@@ -554,7 +562,8 @@ class FriendsProfileActivity : AppCompatActivity() {
                         userId = friendId,
                         username = document.getString("username") ?: "Unknown",
                         profileImageUrl = document.getString("profileImageUrl"),
-                        isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
+                        isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false,
+                        watcherVisible = document.getBoolean("watcherVisible") ?: false
                     )
                     commonFriends.add(friend)
                 }
