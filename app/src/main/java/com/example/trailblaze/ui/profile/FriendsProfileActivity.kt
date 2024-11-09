@@ -65,7 +65,6 @@ class FriendsProfileActivity : AppCompatActivity() {
 
     private lateinit var timeRecordsRecyclerView: RecyclerView
     private lateinit var timeRecordAdapter: TimeRecordAdapter
-    private var timeRecords: List<TimeRecord> = emptyList()
 
     // Define all possible badges
     private val allBadges = listOf(
@@ -376,31 +375,35 @@ class FriendsProfileActivity : AppCompatActivity() {
 
                 // Check if the friendId is already in the favorites list
                 if (favoriteFriendsList.contains(friendId)) {
-                    // Friend is already a favorite, remove them from favorites
-                    userRef.update("favoriteFriends", FieldValue.arrayRemove(friendId))
-                        .addOnSuccessListener {
-                            Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show()
-                            binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Change to outline icon
-                        }
-                        .addOnFailureListener { e ->
-                            Toast.makeText(this, "Failed to remove from favorites: ${e.message}", Toast.LENGTH_SHORT).show()
-                        }
+                    // Friend is already a favorite, ask for confirmation to remove
+                    showConfirmationDialog("Remove from Watchers List", "Are you sure you want to remove this friend from your Watchers List?") {
+                        userRef.update("favoriteFriends", FieldValue.arrayRemove(friendId))
+                            .addOnSuccessListener {
+                                Toast.makeText(this, "Removed from Watchers List", Toast.LENGTH_SHORT).show()
+                                binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Change to outline icon
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(this, "Failed to remove from Watchers List: ${e.message}", Toast.LENGTH_SHORT).show()
+                            }
+                    }
                 } else {
-                    // Friend is not a favorite, add them to favorites
-                    userRef.update("favoriteFriends", FieldValue.arrayUnion(friendId))
-                        .addOnSuccessListener {
-                            Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show()
+                    // Friend is not a favorite, ask for confirmation to add
+                    showConfirmationDialog("Add to Watchers List", "Are you sure you want to add this friend to your Watchers List?") {
+                        userRef.update("favoriteFriends", FieldValue.arrayUnion(friendId))
+                            .addOnSuccessListener {
+                                Toast.makeText(this, "Added to your Watchers List", Toast.LENGTH_SHORT).show()
 
-                            // Show confetti
-                            showConfetti()
+                                // Show confetti
+                                showConfetti()
 
-                            achievementManager.checkAndGrantCommunityBuilderBadge(userId)
+                                achievementManager.checkAndGrantCommunityBuilderBadge(userId)
 
-                            binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled) // Change to filled icon
-                        }
-                        .addOnFailureListener { e ->
-                            Toast.makeText(this, "Failed to add to favorites: ${e.message}", Toast.LENGTH_SHORT).show()
-                        }
+                                binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled) // Change to filled icon
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(this, "Failed to add to favorites: ${e.message}", Toast.LENGTH_SHORT).show()
+                            }
+                    }
                 }
             } else {
                 Log.e("FriendsProfileActivity", "User document does not exist")
@@ -410,6 +413,20 @@ class FriendsProfileActivity : AppCompatActivity() {
             Log.e("FriendsProfileActivity", "Error fetching user document: ", exception)
             Toast.makeText(this, "Error fetching user data.", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun showConfirmationDialog(title: String, message: String, onConfirm: () -> Unit) {
+        AlertDialog.Builder(this)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton("Yes") { dialog, _ ->
+                onConfirm.invoke() // Call the onConfirm function
+                dialog.dismiss() // Dismiss the dialog
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss() // Just dismiss the dialog
+            }
+            .show()
     }
 
     private fun showConfetti() {
