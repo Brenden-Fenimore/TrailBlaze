@@ -88,6 +88,11 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding.notification.setOnClickListener{
+            val intent = Intent(context, PendingNotificationActivity::class.java)
+            startActivity(intent)
+        }
+
         // RecyclerView setup
         parksRecyclerView = binding.thumbnailRecyclerView
         parksRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -145,6 +150,7 @@ class HomeFragment : Fragment() {
         timeRecordsRecyclerView.adapter = timeRecordAdapter
 
         fetchPendingRequestsAndUpdateCounter()
+        fetchNotificationsCounter()
 
         // Load users (you would need to implement this)
         fetchUsers()
@@ -361,6 +367,36 @@ class HomeFragment : Fragment() {
             }
             .addOnFailureListener { exception ->
                 // Log an error message if fetching the pending requests fails
+                Log.e("HomeFragment", "Error fetching pending requests", exception)
+            }
+    }
+
+    // Fetches the list of notifications for the current user from Firestore,
+    // then updates the notification counter displayed on the homepage.
+    private fun fetchNotificationsCounter() {
+        // Get the current user's ID; if it's null (not logged in), return early
+        val currentUserId = auth.currentUser?.uid ?: return
+
+        // Retrieve the user's document from Firestore to access notifications
+        firestore.collection("users").document(currentUserId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    // Get the notifications list, or default to an empty list if not present
+                    val notificationList = document.get("notifications") as? List<String> ?: emptyList()
+                    // Reference to the counter TextView element
+                    val counterTextView = binding.notificationCounter
+                    // If there are no notifications, hide the counter badge
+                    if (notificationList.isEmpty()) {
+                        counterTextView.visibility = View.GONE
+                    } else {
+                        // Set the counter to the size of the notifications list and make it visible
+                        counterTextView.text = notificationList.size.toString()
+                        counterTextView.visibility = View.VISIBLE
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                // Log an error message if fetching the notifications fails
                 Log.e("HomeFragment", "Error fetching pending requests", exception)
             }
     }
