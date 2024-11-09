@@ -197,8 +197,8 @@ class BadgesActivity : AppCompatActivity() {
 
         Log.d("BadgesActivity", "Adding badge with resource ID: $drawableResId at x: ${params.leftMargin}, y: ${params.topMargin}")
 
-        // Generate a unique badge ID using the current timestamp
-        val uniqueBadgeId = "${resourceName}_${System.currentTimeMillis()}"
+        // Use the resource name directly as the unique badge ID
+        val uniqueBadgeId = resourceName // Use the resource name directly
 
         // Save the badge to Firestore with the resource name instead of the drawableResId
         saveBadgeToFirestore(uniqueBadgeId, resourceName, params.leftMargin, params.topMargin)
@@ -242,6 +242,7 @@ class BadgesActivity : AppCompatActivity() {
         sash.addView(badge)
         Log.d("BadgesActivity", "Added badge with resource ID: $drawableResId to sash at x: $x, y: $y")
     }
+
 
     //function to fetch sashed badges for current user
     private fun fetchSashedBadges() {
