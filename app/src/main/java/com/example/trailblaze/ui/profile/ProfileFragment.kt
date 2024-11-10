@@ -40,6 +40,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+import com.example.trailblaze.watcherFeature.WatcherMemberList
 
 interface PhotoDeletionListener {
     fun onPhotoDeleted(deletedPhotoUrl: String)
@@ -76,10 +77,10 @@ interface PhotoDeletionListener {
         // Define all possible badges
         private val allBadges = listOf(
             Badge("safetyexpert", "Safety Expert", R.drawable.safetyexpert),
-            Badge("trailblaze", "TrailBlazer", R.drawable.trailblaze_logo),
+            Badge("trailblazer", "TrailBlazer", R.drawable.trailblaze_logo),
             Badge("mountainclimber", "MountainClimber", R.drawable.mountainclimber),
-            Badge("trekker", "Trekker", R.drawable.trekker),
-            Badge("hiker", "Hiker", R.drawable.hhiker),
+            Badge("longdistancetrekker", "Trekker", R.drawable.trekker),
+            Badge("habitualhiker", "Hiker", R.drawable.hhiker),
             Badge("weekendwarrior", "Weekend Warrior", R.drawable.weekendwarrior),
             Badge("dailyadventurer", "Daily Adventurer", R.drawable.dailyadventurer),
             Badge("conqueror", "Conqueror", R.drawable.conqueror),
@@ -131,11 +132,17 @@ interface PhotoDeletionListener {
             favoritesRecyclerView.adapter = favoritesAdapter
 
             fetchFavoriteParks()
+            fetchLeaderboard()
 
 
             // Initialize the icons
             binding.iconLocation.setOnClickListener {
                 fetchCurrentUserLocation()
+            }
+
+            binding.watcherMember.setOnClickListener {
+                val intent = Intent(context, WatcherMemberList::class.java)
+                startActivity(intent)
             }
 
             binding.iconDifficulty.setOnClickListener {
@@ -162,11 +169,8 @@ interface PhotoDeletionListener {
             badgesList = binding.badgesRecyclerView
             badgesList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-        // Fetch leaderboard data
-        fetchLeaderboard()
-
-        return binding.root
-    }
+            return binding.root
+        }
 
         private fun setupUIEventListeners() {
             binding.editbutton.setOnClickListener {
@@ -214,6 +218,8 @@ interface PhotoDeletionListener {
                         if (document.exists()) {
                             val friendsIds = document.get("friends") as? List<String> ?: emptyList()
                             loadFriendsData(friendsIds)
+                            achievementManager.checkAndGrantSocialButterflyBadge(userId)
+
                         }
                     }
                     .addOnFailureListener { e ->
@@ -232,7 +238,8 @@ interface PhotoDeletionListener {
                         userId  = friendId,
                         username = document.getString("username") ?: "Unknown",
                         profileImageUrl = document.getString("profileImageUrl"),
-                        isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
+                        isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false,
+                        watcherVisible = document.getBoolean("watcherVisible") ?: false
                     )
                     friendsList.add(friend) // Add friend to the list
                 }
@@ -434,10 +441,10 @@ interface PhotoDeletionListener {
                 .addOnSuccessListener {
                     Log.d("ProfileFragment", "Photo successfully added to Firestore!")
 
-                    achievementManager.checkAndGrantPhotographerBadge()
-                    achievementManager.saveBadgeToUserProfile("photographer")
+                    achievementManager.checkAndGrantPhotographerBadge(userId)
 
                     achievementManager.checkAndGrantLeaderboardBadge()
+
 
                     fetchPhotos() // Call fetchPhotos after successfully saving
                 }

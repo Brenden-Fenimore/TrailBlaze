@@ -88,6 +88,11 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding.notification.setOnClickListener{
+            val intent = Intent(context, PendingNotificationActivity::class.java)
+            startActivity(intent)
+        }
+
         // RecyclerView setup
         parksRecyclerView = binding.thumbnailRecyclerView
         parksRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -145,6 +150,7 @@ class HomeFragment : Fragment() {
         timeRecordsRecyclerView.adapter = timeRecordAdapter
 
         fetchPendingRequestsAndUpdateCounter()
+        fetchNotificationsCounter()
 
         // Load users (you would need to implement this)
         fetchUsers()
@@ -236,10 +242,11 @@ class HomeFragment : Fragment() {
                     val username = document.getString("username")
                     val profileImageUrl = document.getString("profileImageUrl")
                     val isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
+                    val watcherVisible = document.getBoolean("watcherVisible") ?: false
 
                     // Check for null username and ensure the user is not the current user
                     if (username != null && userId != currentUserId) {
-                        Friends(userId, username, profileImageUrl, isPrivateAccount) // Replace with your User model constructor
+                        Friends(userId, username, profileImageUrl, isPrivateAccount, watcherVisible) // Replace with your User model constructor
                     } else {
                         null
                     }
@@ -317,10 +324,12 @@ class HomeFragment : Fragment() {
                         val parkName = record["parkName"] as? String ?: return@map null
                         val elapsedTime = record["elapsedTime"] as? String ?: return@map null
                         val parkCode = record["parkCode"] as? String ?: return@map null
-                        val imageUrl = record["imageUrl"] as? String ?: return@map null
+                        val imageUrl = record["imageUrl"] as? String // This can be null
+                        val timestamp = record["timestamp"] as? Long ?: return@map null // Assuming timestamp is a Long
+                        val date = record["date"] as? String ?: return@map null // Assuming date is a String
 
                         // Create a TimeRecord object
-                        TimeRecord(parkName, elapsedTime, imageUrl, parkCode)
+                        TimeRecord(parkName, elapsedTime, imageUrl, parkCode, timestamp, date)
                     }?.filterNotNull() ?: emptyList() // Filter out any null items
 
                     // Update the adapter with fetched data using updateData method
@@ -358,6 +367,36 @@ class HomeFragment : Fragment() {
             }
             .addOnFailureListener { exception ->
                 // Log an error message if fetching the pending requests fails
+                Log.e("HomeFragment", "Error fetching pending requests", exception)
+            }
+    }
+
+    // Fetches the list of notifications for the current user from Firestore,
+    // then updates the notification counter displayed on the homepage.
+    private fun fetchNotificationsCounter() {
+        // Get the current user's ID; if it's null (not logged in), return early
+        val currentUserId = auth.currentUser?.uid ?: return
+
+        // Retrieve the user's document from Firestore to access notifications
+        firestore.collection("users").document(currentUserId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    // Get the notifications list, or default to an empty list if not present
+                    val notificationList = document.get("pendingNotifications") as? List<String> ?: emptyList()
+                    // Reference to the counter TextView element
+                    val counterTextView = binding.notificationCounter
+                    // If there are no notifications, hide the counter badge
+                    if (notificationList.isEmpty()) {
+                        counterTextView.visibility = View.GONE
+                    } else {
+                        // Set the counter to the size of the notifications list and make it visible
+                        counterTextView.text = notificationList.size.toString()
+                        counterTextView.visibility = View.VISIBLE
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                // Log an error message if fetching the notifications fails
                 Log.e("HomeFragment", "Error fetching pending requests", exception)
             }
     }

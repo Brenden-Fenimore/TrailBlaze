@@ -19,6 +19,8 @@ import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.Park
 import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.ui.achievements.AchievementManager
+import com.example.trailblaze.ui.favorites.FriendUtils
+import com.example.trailblaze.ui.profile.FriendRequestActivity
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
@@ -31,6 +33,8 @@ import nl.dionsegijn.konfetti.models.Size
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
 
 // Activity where the user attempts a trail
 class AttemptTrailActivity : AppCompatActivity() {
@@ -48,6 +52,7 @@ class AttemptTrailActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var userAdapter: UserAdapter
     private var userList: MutableList<NonTrailBlazeUser> = mutableListOf()
+    private lateinit var activities: Array<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,18 +60,22 @@ class AttemptTrailActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         firestore = FirebaseFirestore.getInstance()
+        // Initialize AchievementManager
+        achievementManager = AchievementManager(this)
 
         findViewById<ImageButton>(R.id.chevron_left).setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        // Initialize AchievementManager
-        achievementManager = AchievementManager(this)
-
         // Get the park code from the intent
         parkCode = intent.getStringExtra("PARK_CODE") ?: ""
         parkNameTextView = findViewById(R.id.parkNameTextView)
         fetchParkDetails(parkCode)
+
+        activities = intent.getStringArrayExtra("PARK_ACTIVITIES") ?: arrayOf()
+        // Log the activities to see what was pulled in
+        Log.d("AttemptTrailActivity", "Activities received: ${activities.joinToString(", ")}")
+
 
         Log.d("AttemptTrailActivity", "Received park code: $parkCode")
 
@@ -79,8 +88,16 @@ class AttemptTrailActivity : AppCompatActivity() {
         }
 
         startTrailButton.setOnClickListener {
-            showTimerDialog()
             savePartyMembersToFirestore()
+
+            // Create a list of party member usernames to pass as intent extras
+            val partyMembers = userList.map { it.name } // Extracting the names from userList
+
+            val intent = Intent(this, TimerActivity::class.java)
+            intent.putExtra("PARK_CODE", parkCode)
+            intent.putExtra("PARK_ACTIVITIES", activities) // Pass the activities list
+            intent.putStringArrayListExtra("PARTY_MEMBERS", ArrayList(partyMembers))
+            startActivity(intent)
         }
 
         // Find the button and set the click listener
@@ -148,6 +165,7 @@ class AttemptTrailActivity : AppCompatActivity() {
         dialog.show() // Show the dialog
     }
 
+
     private fun fetchUserFriends(onComplete: (List<AddFriend>) -> Unit) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
@@ -177,7 +195,7 @@ class AttemptTrailActivity : AppCompatActivity() {
             tasks.add(firestore.collection("users").document(friendId).get().addOnSuccessListener { document ->
                 if (document.exists()) {
                     val username = document.getString("username") ?: "Unknown"
-                    friendsList.add(AddFriend(username, false)) // Add friend to the list
+                    friendsList.add(AddFriend(username, friendId, false)) // Add friend to the list
                 }
             })
         }
@@ -254,160 +272,6 @@ class AttemptTrailActivity : AppCompatActivity() {
         partyMemberCountTextView.text = "(${userList.size})"  // Update the count in the format (N)
     }
 
-    private fun showTimerDialog() {
-        // Inflate the custom layout
-        val dialogView = layoutInflater.inflate(R.layout.dialog_timer, null)
-
-        // Create the dialog
-        val dialogBuilder = AlertDialog.Builder(this)
-            .setView(dialogView)
-
-        val dialog = dialogBuilder.create()
-
-        // Initialize the timer TextView
-        val timerTextView: TextView = dialogView.findViewById(R.id.timer_text_view)
-        val startButton: Button = dialogView.findViewById(R.id.start_button)
-        val stopButton: Button = dialogView.findViewById(R.id.stop_button)
-        val saveTimeButton: Button = dialogView.findViewById(R.id.save_time_button)
-        val notifyWatchersButton: Button = dialogView.findViewById(R.id.notify_watchers_button)
-        val emergencyButton: Button = dialogView.findViewById(R.id.emergency_button)
-
-        var handler = Handler()
-        var isRunning = false
-        var startTime = 0L
-        var elapsedTime = 0L
-
-        // Runnable to update the timer
-        val updateTimer: Runnable = object : Runnable {
-            override fun run() {
-                if (isRunning) {
-                    elapsedTime = System.currentTimeMillis() - startTime
-                    val seconds = (elapsedTime / 1000) % 60
-                    val minutes = (elapsedTime / (1000 * 60)) % 60
-                    val hours = (elapsedTime / (1000 *60* 60)) % 24
-                    timerTextView.text = String.format("%02d:%02d:%02d", hours, minutes, seconds)
-                    handler.postDelayed(this, 1000) // Update every second
-                }
-            }
-        }
-
-        // Start button click listener
-        startButton.setOnClickListener {
-            if (!isRunning) {
-                startTime = System.currentTimeMillis() - elapsedTime // Resume from the last elapsed time
-                isRunning = true
-                handler.post(updateTimer) // Start updating the timer
-            }
-        }
-
-        // Stop button click listener
-        stopButton.setOnClickListener {
-            isRunning = false // Pause the timer
-        }
-
-        saveTimeButton.setOnClickListener {
-
-            isRunning = false // Pause the timer
-
-            // Get the elapsed time as a String
-            val elapsedTimeString = timerTextView.text.toString()
-
-            // Create a TimeRecord object with parkImageUrl
-            val timeRecord = TimeRecord(parkName, elapsedTimeString, parkImageUrl, parkCode)
-
-            // Save the record to Firestore
-            saveTimeToFirestore(timeRecord)
-
-            showConfetti()
-            Toast.makeText(this, "Time saved: $elapsedTimeString for park: $parkName", Toast.LENGTH_SHORT).show()
-        }
-
-        // Notify watchers button click listener
-        notifyWatchersButton.setOnClickListener {
-            // Logic to notify watchers
-            Toast.makeText(this, "Notifying watchers...", Toast.LENGTH_SHORT).show()
-        }
-
-        // Emergency button click listener
-        emergencyButton.setOnClickListener {
-            showEmergencyDialog()
-        }
-
-        // Show the dialog
-        dialog.show()
-    }
-
-    private fun showConfetti() {
-        // Get the KonfettiView from the layout
-        val konfettiView = findViewById<KonfettiView>(R.id.konfettiView)
-
-        // Set the view to visible
-        konfettiView.visibility = View.VISIBLE
-
-        // Show confetti
-        konfettiView.build()
-            .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA, Color.CYAN)
-            .setDirection(0.0, 359.0) // Allow confetti to fall in all directions
-            .setSpeed(1f, 5f)
-            .setTimeToLive(3000L) // Increase the time to live to allow for longer fall
-            .addShapes(Shape.Circle)
-            .addSizes(Size(8))
-            // Set the position to emit from the right side and farther down
-            .setPosition(konfettiView.width + 400f, konfettiView.width + 400f, -100f, -50f)
-            .stream(300, 3000L) // Stream 300 particles for 3000 milliseconds (3 seconds)
-
-        // Optionally hide the konfetti view after some time
-        konfettiView.postDelayed({
-            konfettiView.visibility = View.GONE
-        }, 6000) // Hide after 6 seconds
-    }
-
-    private fun saveTimeToFirestore(timeRecord: TimeRecord) {
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
-        if (userId != null) {
-            // Reference to the user's document in Firestore
-            val userDocRef = firestore.collection("users").document(userId)
-
-            // Update the timeRecords field, creating it if it doesn't exist
-            userDocRef.update("timeRecords", FieldValue.arrayUnion(timeRecord))
-                .addOnSuccessListener {
-                    // After saving the time record, delete party members
-                    deletePartyMembers(userId)
-                    // Notify watchers
-                    //notifyWatchers(userId)
-                    achievementManager.checkAndGrantConquerorBadge()
-                    achievementManager.saveBadgeToUserProfile("conqueror")
-                    Log.d("AttemptTrailActivity", "Time record saved successfully")
-                }
-                .addOnFailureListener { e ->
-                    Log.e("AttemptTrailActivity", "Error saving time record: ${e.message}")
-                }
-        } else {
-            Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    // Method to show the emergency confirmation dialog
-    private fun showEmergencyDialog() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Emergency Call")
-        builder.setMessage("Are you sure you want to call 911?")
-        builder.setPositiveButton("Yes") { dialog, which ->
-            callEmergencyNumber()
-        }
-        builder.setNegativeButton("No") { dialog, which ->
-            dialog.dismiss()
-        }
-        builder.show()
-    }
-
-    // Method to initiate the emergency call
-    private fun callEmergencyNumber() {
-        val intent = Intent(Intent.ACTION_DIAL)
-        intent.data = Uri.parse("tel:911")
-        startActivity(intent)
-    }
-
     private fun fetchParkDetails(parkCode: String) {
         RetrofitInstance.api.getParkDetails(parkCode).enqueue(object : Callback<NPSResponse> {
             override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
@@ -449,6 +313,9 @@ class AttemptTrailActivity : AppCompatActivity() {
             userDocRef.update("partyMembers", partyMembers)
                 .addOnSuccessListener {
                     Log.d("AttemptTrailActivity", "Party members saved successfully")
+                    // Check and grant Team Player badge after saving party members
+                    achievementManager.checkAndGrantTeamPlayerBadge(true) // Assume true for party hike
+                    achievementManager.saveBadgeToUserProfile("teamplayer")
                 }
                 .addOnFailureListener { e ->
                     Log.e("AttemptTrailActivity", "Error saving party members: ${e.message}")
@@ -456,18 +323,5 @@ class AttemptTrailActivity : AppCompatActivity() {
         } else {
             Log.e("AttemptTrailActivity", "User not authenticated")
         }
-    }
-
-    private fun deletePartyMembers(userId: String) {
-        val userDocRef = firestore.collection("users").document(userId)
-
-        // Remove party members by deleting the "partyMembers" field
-        userDocRef.update("partyMembers", FieldValue.delete())
-            .addOnSuccessListener {
-                Log.d("AttemptTrailActivity", "Party members deleted successfully")
-            }
-            .addOnFailureListener { e ->
-                Log.e("AttemptTrailActivity", "Error deleting party members: ${e.message}")
-            }
     }
 }

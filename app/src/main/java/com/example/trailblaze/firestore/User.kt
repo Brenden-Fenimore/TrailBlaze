@@ -21,4 +21,5 @@ data class User(
     val bucketListParks: List<Park> = emptyList(),
     val isPrivateAccount: Boolean,
     val pendingRequests: List<String> = emptyList(), // New field for pending requests
+    val pendingNotifications: List<String> = emptyList(), // New field for pending notifications
 )

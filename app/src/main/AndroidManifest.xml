@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraText">
 
@@ -18,6 +17,14 @@
             android:theme="@style/Theme.TrailBlaze"
             tools:targetApi="31"
             android:enableOnBackInvokedCallback="true">
+
+        <activity
+                android:name=".ui.home.PendingNotificationActivity"
+                android:exported="true"/>
+
+        <activity
+                android:name=".ui.parks.TimerActivity"
+                android:exported="true"/>
 
         <activity
                 android:name=".ui.parks.AttemptTrailActivity"
@@ -141,6 +148,10 @@
 
         <!-- Privacy Activity-->
         <activity android:name=".login.PrivacyActivity" />
+
+        <!-- Watcher Member Activity-->
+<activity android:name=".watcherFeature.WatcherMemberList"/>
+
     </application>
     //enables the emulator to access the internet (Brenden enabled this for MAPS API to get nearby search)
     <uses-permission android:name="android.permission.INTERNET" />

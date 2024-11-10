@@ -25,12 +25,18 @@
             android:shadowColor="#000000"
             android:textStyle="bold"
             android:layout_marginTop="6dp"/>
-
+    <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="?attr/colorPrimary"
+            android:maxLines="1"/>
     <TextView
             android:id="@+id/elapsedTimeTextView"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:textSize="12sp"
-            android:textColor="?attr/colorPrimary"
-            android:layout_marginTop="6dp"/>
+            android:textColor="?attr/colorPrimary"/>
+
 </LinearLayout>

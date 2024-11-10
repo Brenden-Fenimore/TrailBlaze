@@ -5,4 +5,5 @@ data class Friends(
     val username: String = "",
     val profileImageUrl: String? = "",
     val isPrivateAccount: Boolean,
+    val watcherVisible: Boolean
 )
