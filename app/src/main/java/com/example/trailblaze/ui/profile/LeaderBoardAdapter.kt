@@ -30,7 +30,9 @@ class LeaderboardAdapter(private var entries: List<LeaderboardEntry>) : Recycler
         // Load the user's profile picture using Glide
         Glide.with(holder.itemView.context)
             .load(entry.profileImageUrl) // Load the profile image URL
-            .placeholder(R.drawable.profile_no_image_available) // Placeholder image
+            .placeholder(R.drawable.baseline_downloading_24) // Placeholder while loading
+            .error(R.drawable.profile_no_image_available) // Fallback image if loading fails
+            .circleCrop() // To display the image in a circular format
             .into(holder.profileImageView)
     }
 

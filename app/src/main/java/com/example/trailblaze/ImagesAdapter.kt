@@ -20,6 +20,7 @@ class ImagesAdapter(private val images: List<String>) : RecyclerView.Adapter<Ima
             .load(imageUrl)
             .placeholder(R.drawable.baseline_downloading_24) // Placeholder while loading
             .error(R.drawable.no_image_available) // Fallback image if loading fails
+            .circleCrop() // To display the image in a circular format
             .into(holder.imageView)
     }
 

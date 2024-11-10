@@ -8,6 +8,7 @@
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
+                  android:id="@+id/profile_image_and_username"
                   android:padding="16dp">
 
         <ImageView
@@ -25,23 +26,33 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/username"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:fontFamily="@font/amethysta"
+                android:layout_gravity="center_vertical"
                 android:textColor="?attr/colorPrimary"/>
+    </LinearLayout>
 
-        <!-- Accept Button -->
-        <Button
-                android:id="@+id/acceptButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/accept" />
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:gravity="center"
+                  android:layout_below="@id/profile_image_and_username"
+    >
+    <!-- Accept Button -->
+    <Button
+            android:id="@+id/acceptButton"
+            android:layout_width="249dp"
+            android:layout_height="55dp"
+            android:text="@string/accept"
+            android:layout_weight="1"/>
 
-        <!-- Decline Button -->
-        <Button
-                android:id="@+id/declineButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/decline"
-                android:layout_marginStart="8dp" />
+    <!-- Decline Button -->
+    <Button
+            android:id="@+id/declineButton"
+            android:layout_width="249dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="16dp"
+            android:text="@string/decline"
+            android:layout_weight="1"/>
     </LinearLayout>
 </RelativeLayout>
