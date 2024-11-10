@@ -20,6 +20,21 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp">
 
+        <TextView
+                android:id="@+id/locationTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:background="#80000000"
+                android:visibility="gone"
+                android:singleLine="true"
+                android:padding="8dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp" />
+
     <TextView
             android:id="@+id/captionTextView"
             android:layout_width="wrap_content"

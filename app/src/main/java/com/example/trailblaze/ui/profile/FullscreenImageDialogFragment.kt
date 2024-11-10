@@ -1,18 +1,27 @@
 package com.example.trailblaze.ui.profile
 
 import android.app.AlertDialog
+import android.graphics.drawable.Drawable
+import android.location.Geocoder
+import android.location.Address
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
 import com.example.trailblaze.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import java.io.File
+import java.io.IOException
+import java.util.*
+import kotlin.collections.ArrayList
 
 class FullscreenImageDialogFragment : DialogFragment() {
 
@@ -27,6 +36,9 @@ class FullscreenImageDialogFragment : DialogFragment() {
     private lateinit var photosAdapter: PhotosAdapter
     private lateinit var captionTextView: TextView
     private var photoCaptions: MutableMap<String, String> = mutableMapOf()
+    private lateinit var locationTextView: TextView
+
+    private val npsApiBaseUrl = "https://api.nps.gov/api/v1/parks"
 
     companion object {
         fun newInstance(
@@ -55,6 +67,7 @@ class FullscreenImageDialogFragment : DialogFragment() {
         deleteButton = view.findViewById(R.id.deleteImageButton)
         editCaptionButton = view.findViewById(R.id.editCaptionButton)
         captionTextView = view.findViewById(R.id.captionTextView)
+        locationTextView = view.findViewById(R.id.locationTextView)
 
         imageUrls = (arguments?.getStringArrayList("imageUrls") ?: emptyList()) as MutableList<String>
         currentIndex = arguments?.getInt("position") ?: 0
@@ -92,7 +105,6 @@ class FullscreenImageDialogFragment : DialogFragment() {
             openEditCaptionDialog(imageUrls[currentIndex])
         }
 
-
         return view
     }
 
@@ -123,6 +135,9 @@ class FullscreenImageDialogFragment : DialogFragment() {
             captionTextView.text = caption
             captionTextView.visibility = View.VISIBLE
         }
+
+        // Display location based on EXIF data
+        loadGeoLocation(imageUrl)
     }
 
     private fun navigateImage(direction: Int) {
@@ -316,5 +331,103 @@ class FullscreenImageDialogFragment : DialogFragment() {
             .addOnFailureListener { e ->
                 Log.e("FetchCaption", "Error querying users from Firestore", e)
             }
+    }
+
+    private fun loadGeoLocation(imageUrl: String) {
+        Log.d("GeoLocation", "Attempting to load geo-location for image: $imageUrl")
+
+        Glide.with(this)
+            .downloadOnly()
+            .load(imageUrl)
+            .into(object : CustomTarget<File>() {
+                override fun onResourceReady(
+                    resource: File,
+                    transition: com.bumptech.glide.request.transition.Transition<in File>?
+                ) {
+                    Log.d("GeoLocation", "Image downloaded successfully, extracting EXIF data...")
+
+                    try {
+                        val exifInterface = ExifInterface(resource)
+                        val latLong = FloatArray(2)
+
+                        // Check if EXIF contains geo-location data
+                        if (exifInterface.getLatLong(latLong)) {
+                            val latitude = latLong[0].toDouble()  // Convert Float to Double
+                            val longitude = latLong[1].toDouble() // Convert Float to Double
+                            Log.d("GeoLocation", "Geo-location found: Latitude = $latitude, Longitude = $longitude")
+
+                            // Reverse geocode to get a location name
+                            val locationName = getLocationName(latitude, longitude)  // Now passing Double
+                            if (locationName != null) {
+                                if (locationName.isNotEmpty()) {
+                                    Log.d("GeoLocation", "Location name found: $locationName")
+                                    locationTextView.text = locationName
+                                } else {
+                                    locationTextView.text = "Location not found"
+                                    Log.d("GeoLocation", "No location name found for the given coordinates.")
+                                }
+                            }
+
+                            locationTextView.visibility = View.VISIBLE
+                        } else {
+                            Log.d("GeoLocation", "No geo-location data found for this image.")
+                            locationTextView.visibility = View.GONE
+                        }
+                    } catch (e: IOException) {
+                        Log.e("GeoLocation", "Error reading EXIF data", e)
+                        locationTextView.visibility = View.GONE
+                    }
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) {
+                    Log.d("GeoLocation", "Clearing loaded image, hiding location info.")
+                    locationTextView.visibility = View.GONE
+                }
+            })
+    }
+
+    private fun getLocationName(latitude: Double, longitude: Double): String? {
+        val geocoder = Geocoder(requireContext(), Locale.getDefault())
+
+        try {
+            val addresses: MutableList<Address>? = geocoder.getFromLocation(latitude, longitude, 1)
+
+            if (addresses != null) {
+                if (addresses.isNotEmpty()) {
+                    val address = addresses[0]
+
+                    // Debugging log to inspect all address components
+                    Log.d("GeoLocation", "Full address components: ${address.featureName}, ${address.locality}, ${address.adminArea}, ${address.countryName}")
+
+                    // Prioritize locality (city, region) over feature name (which may be street number)
+                    var locationName = address.locality // Try to get locality first
+
+                    // If locality is not available, try to get the feature name (e.g., point of interest)
+                    if (locationName.isNullOrEmpty()) {
+                        locationName = address.featureName
+                    }
+
+                    // If neither locality nor feature name is found, check administrative area (state/county)
+                    if (locationName.isNullOrEmpty()) {
+                        locationName = address.adminArea
+                    }
+
+                    // If still no location name, fallback to country name
+                    if (locationName.isNullOrEmpty()) {
+                        locationName = address.countryName
+                    }
+
+                    // Log the location name for debugging
+                    Log.d("GeoLocation", "Refined location name: $locationName")
+
+                    return locationName
+                } else {
+                    Log.d("GeoLocation", "No address found for coordinates.")
+                }
+            }
+        } catch (e: IOException) {
+            Log.e("GeoLocation", "Geocoder failed", e)
+        }
+        return null
     }
 }
