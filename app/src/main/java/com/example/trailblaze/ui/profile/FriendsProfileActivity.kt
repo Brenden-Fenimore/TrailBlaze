@@ -801,7 +801,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                 raindrop.setImageResource(R.drawable.raindrop2)
 
                 // Set position and animation
-                val params = RelativeLayout.LayoutParams(15, 1000)
+                val params = RelativeLayout.LayoutParams(30, 1000)
                 params.addRule(RelativeLayout.ALIGN_PARENT_TOP)
 
                 params.leftMargin = (0..binding.root.width).random()
