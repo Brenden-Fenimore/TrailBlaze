@@ -3,27 +3,54 @@ package com.example.trailblaze.ui.home
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
 
-class PendingNotificationAdapter : RecyclerView.Adapter<PendingNotificationAdapter.ViewHolder>() {
+class PendingNotificationAdapter(
+    private val onNotificationChecked: (String, Boolean) -> Unit
+) : RecyclerView.Adapter<PendingNotificationAdapter.ViewHolder>() {
 
-    private var notificationsList: List<String> = listOf() // Replace String with your notification model class if needed
+    private val notificationsList: MutableList<Pair<String, Boolean>> = mutableListOf() // Pair<Notification, IsRead>
 
-    fun setNotifications(notifications: List<String>) {
-        notificationsList = notifications
+    fun setNotifications(pendingNotifications: List<String>, reviewedNotifications: List<String>) {
+        notificationsList.clear() // Clear any existing notifications
+
+        // Add pending notifications as unread (false)
+        notificationsList.addAll(pendingNotifications.map { Pair(it, false) })
+
+        // Add reviewed notifications as read (true)
+        notificationsList.addAll(reviewedNotifications.map { Pair(it, true) })
+
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_notification, parent, false) // Create an XML layout for individual notifications
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_notification, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val notification = notificationsList[position]
-        // Bind your notification data to the UI here
-        holder.bind(notification)
+        val notificationPair = notificationsList[position]
+        val notification = notificationPair.first
+        val isRead = notificationPair.second
+
+        holder.bind(notification, isRead)
+
+        // Disable checkbox listener for reviewed notifications
+        holder.checkBox.setOnCheckedChangeListener(null)
+
+        holder.checkBox.isChecked = isRead
+
+        // Only allow checking for pending notifications
+        holder.checkBox.isEnabled = !isRead
+
+        holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
+            if (!isRead) { // Only react to changes for pending notifications
+                onNotificationChecked(notification, isChecked)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -31,9 +58,12 @@ class PendingNotificationAdapter : RecyclerView.Adapter<PendingNotificationAdapt
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(notification: String) {
-            // Bind the notification data to the view here
-            // e.g. itemView.notificationTextView.text = notification
+        val notificationTextView: TextView = itemView.findViewById(R.id.notificationTextView)
+        val checkBox: CheckBox = itemView.findViewById(R.id.checkBox)
+
+        fun bind(notification: String, isRead: Boolean) {
+            notificationTextView.text = notification
+            checkBox.isChecked = isRead
         }
     }
 }

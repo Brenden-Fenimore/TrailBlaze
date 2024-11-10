@@ -382,7 +382,7 @@ class HomeFragment : Fragment() {
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
                     // Get the notifications list, or default to an empty list if not present
-                    val notificationList = document.get("notifications") as? List<String> ?: emptyList()
+                    val notificationList = document.get("pendingNotifications") as? List<String> ?: emptyList()
                     // Reference to the counter TextView element
                     val counterTextView = binding.notificationCounter
                     // If there are no notifications, hide the counter badge

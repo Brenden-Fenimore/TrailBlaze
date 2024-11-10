@@ -17,8 +17,13 @@
             android:theme="@style/Theme.TrailBlaze"
             tools:targetApi="31"
             android:enableOnBackInvokedCallback="true">
+
         <activity
                 android:name=".ui.home.PendingNotificationActivity"
+                android:exported="true"/>
+
+        <activity
+                android:name=".ui.parks.TimerActivity"
                 android:exported="true"/>
 
         <activity
