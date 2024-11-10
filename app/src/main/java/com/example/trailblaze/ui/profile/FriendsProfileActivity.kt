@@ -380,6 +380,9 @@ class FriendsProfileActivity : AppCompatActivity() {
                     showConfirmationDialog("Remove from Watchers List", "Are you sure you want to remove this friend from your Watchers List?") {
                         userRef.update("favoriteFriends", FieldValue.arrayRemove(friendId))
                             .addOnSuccessListener {
+
+                                triggerBrokenHeartDropEffect()
+
                                 Toast.makeText(this, "Removed from Watchers List", Toast.LENGTH_SHORT).show()
                                 binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Change to outline icon
                             }
@@ -394,8 +397,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                             .addOnSuccessListener {
                                 Toast.makeText(this, "Added to your Watchers List", Toast.LENGTH_SHORT).show()
 
-                                // Show confetti
-                                showConfetti()
+                                triggerHeartDropEffect()
 
                                 achievementManager.checkAndGrantCommunityBuilderBadge(userId)
 
@@ -801,7 +803,83 @@ class FriendsProfileActivity : AppCompatActivity() {
                 raindrop.setImageResource(R.drawable.raindrop2)
 
                 // Set position and animation
-                val params = RelativeLayout.LayoutParams(30, 1000)
+                val params = RelativeLayout.LayoutParams(30, 1500)
+                params.addRule(RelativeLayout.ALIGN_PARENT_TOP)
+
+                params.leftMargin = (0..binding.root.width).random()
+
+                raindrop.layoutParams = params
+                binding.root.addView(raindrop)
+
+                // Start animation
+                val animation = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.raindrop_fall).apply{
+                    duration = (1000..2000).random().toLong()
+                }
+                raindrop.startAnimation(animation)
+
+                // Remove view after animation
+                animation.setAnimationListener(object : android.view.animation.Animation.AnimationListener {
+                    override fun onAnimationEnd(animation: android.view.animation.Animation?) {
+                        binding.root.removeView(raindrop)
+                    }
+
+                    override fun onAnimationRepeat(animation: android.view.animation.Animation?) {}
+                    override fun onAnimationStart(animation: android.view.animation.Animation?) {}
+                })
+            }, delay)
+        }
+    }
+
+    private fun triggerHeartDropEffect() {
+        val handler = Handler(Looper.getMainLooper())
+
+        for (i in 0 until 20) {  // Number of raindrops
+            val delay = (0 .. 1000).random().toLong()   // Random delay between 0 and 1 second
+
+            handler.postDelayed({
+                val raindrop = ImageView(this)
+                raindrop.setImageResource(R.drawable.heart)
+
+                // Set position and animation
+                val params = RelativeLayout.LayoutParams(90, 1500)
+                params.addRule(RelativeLayout.ALIGN_PARENT_TOP)
+
+                params.leftMargin = (0..binding.root.width).random()
+
+                raindrop.layoutParams = params
+                binding.root.addView(raindrop)
+
+                // Start animation
+                val animation = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.raindrop_fall).apply{
+                    duration = (1000..2000).random().toLong()
+                }
+                raindrop.startAnimation(animation)
+
+                // Remove view after animation
+                animation.setAnimationListener(object : android.view.animation.Animation.AnimationListener {
+                    override fun onAnimationEnd(animation: android.view.animation.Animation?) {
+                        binding.root.removeView(raindrop)
+                    }
+
+                    override fun onAnimationRepeat(animation: android.view.animation.Animation?) {}
+                    override fun onAnimationStart(animation: android.view.animation.Animation?) {}
+                })
+            }, delay)
+        }
+    }
+
+    private fun triggerBrokenHeartDropEffect() {
+        val handler = Handler(Looper.getMainLooper())
+
+        for (i in 0 until 20) {  // Number of raindrops
+            val delay = (0 .. 1000).random().toLong()   // Random delay between 0 and 1 second
+
+            handler.postDelayed({
+                val raindrop = ImageView(this)
+                raindrop.setImageResource(R.drawable.broken_heart)
+
+                // Set position and animation
+                val params = RelativeLayout.LayoutParams(90, 1500)
                 params.addRule(RelativeLayout.ALIGN_PARENT_TOP)
 
                 params.leftMargin = (0..binding.root.width).random()
