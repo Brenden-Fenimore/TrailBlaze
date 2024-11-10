@@ -798,7 +798,7 @@ class FriendsProfileActivity : AppCompatActivity() {
 
             handler.postDelayed({
                 val raindrop = ImageView(this)
-                raindrop.setImageResource(R.drawable.raindrop)
+                raindrop.setImageResource(R.drawable.raindrop2)
 
                 // Set position and animation
                 val params = RelativeLayout.LayoutParams(15, 1000)
