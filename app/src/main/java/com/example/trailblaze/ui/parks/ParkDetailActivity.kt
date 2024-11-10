@@ -42,6 +42,8 @@ class ParkDetailActivity : AppCompatActivity() {
     private lateinit var favoriteButton: ImageButton            // Declare button variables
     private val firestore = FirebaseFirestore.getInstance()     // Declare Firestore instance
     private lateinit var bucketListButton: ImageButton
+    private lateinit var activitiesList: Array<String>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +65,7 @@ class ParkDetailActivity : AppCompatActivity() {
         hikeButton.setOnClickListener {
             val intent = Intent(this, AttemptTrailActivity::class.java)
             intent.putExtra("PARK_CODE", parkCode)
+            intent.putExtra("PARK_ACTIVITIES", activitiesList) // Pass the activities list
             startActivity(intent)
         }
 
@@ -140,6 +143,9 @@ class ParkDetailActivity : AppCompatActivity() {
         val activities = park.activities.joinToString("\n") { it.name }
         parkActivitiesTextView.text = activities.ifEmpty { "No activities available." }
 
+        // Get the activities list from the park object and convert to the array
+        activitiesList = park.activities.map { it.name }.toTypedArray()
+
         // Populate contact information
         val contactNumber = park.contacts.phoneNumbers.joinToString("\n") { it.phoneNumber }
         parkContactsPhoneTextView.text = contactNumber.ifEmpty { "No contact number available." }
@@ -154,6 +160,7 @@ class ParkDetailActivity : AppCompatActivity() {
         val entrancePass = park.entrancePasses.joinToString("\n") { "${it.cost}, ${it.description}, ${it.title}" }
         parkEntrancePassesTextView.text = if (entrancePass.isNotEmpty()) {
             entrancePass
+
         } else {
             "No entrance fee information available."
         }

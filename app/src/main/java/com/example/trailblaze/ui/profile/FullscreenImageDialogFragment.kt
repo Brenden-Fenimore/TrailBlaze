@@ -71,8 +71,20 @@ class FullscreenImageDialogFragment : DialogFragment() {
         editCaptionButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
 
         deleteButton.setOnClickListener {
-            Log.d("FullscreenImageDialog", "Delete button clicked")
-            deleteCurrentPhoto()  // Call the delete function when the delete button is clicked
+            // Show a confirmation dialog
+            AlertDialog.Builder(requireContext())
+                .setTitle("Delete Photo")
+                .setMessage("Are you sure you want to delete this photo?")
+                .setPositiveButton("Delete") { _, _ ->
+                    // User confirmed, proceed with deletion
+                    Log.d("FullscreenImageDialog", "Delete confirmed")
+                    deleteCurrentPhoto()
+                }
+                .setNegativeButton("Cancel") { dialog, _ ->
+                    // User cancelled, dismiss the dialog
+                    dialog.dismiss()
+                }
+                .show()
         }
 
         editCaptionButton.setOnClickListener {

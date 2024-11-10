@@ -6,11 +6,15 @@
         android:orientation="vertical"
         android:gravity="center">
 
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
     <LinearLayout
             android:orientation="vertical"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
         <TextView
                 android:ellipsize="end"
                 android:id="@+id/aspectsTitle"
@@ -141,15 +145,15 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+        <Button
+                android:text="@string/titleContinue"
+                android:layout_width="304dp"
+                android:fontFamily="@font/amethysta"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/continuebtn1">
+        </Button>
     </LinearLayout>
-
-    <Button
-            android:text="@string/titleContinue"
-            android:layout_width="304dp"
-            android:fontFamily="@font/amethysta"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/continuebtn1">
-    </Button>
+    </ScrollView>
 </RelativeLayout>

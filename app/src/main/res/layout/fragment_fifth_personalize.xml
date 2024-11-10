@@ -6,21 +6,23 @@
         android:orientation="vertical"
         android:gravity="center">
 
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
     <LinearLayout
             android:orientation="vertical"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/watcherSetupBody">
-
+            android:layout_height="wrap_content">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/watcherSetupStatement"
                 android:padding="9dp"
                 android:layout_margin="18dp"
+                android:textSize="20sp"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
-                android:textSize="24sp"
                 android:textAlignment="center"
                 android:text="@string/setupWatchers"/>
 
@@ -77,5 +79,6 @@
 
         </LinearLayout>
     </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

@@ -3,6 +3,7 @@ package com.example.trailblaze.ui
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -51,17 +52,16 @@ class MenuActivity : AppCompatActivity() {
 
         val logoutbtn = findViewById<Button>(R.id.logoutbtn)
 
-        //set click listener for the logout button
+        // Set click listener for the logout button
         logoutbtn.setOnClickListener {
             val sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
             val editor = sharedPreferences.edit()
             editor.putBoolean("isLoggedIn", false)
             editor.apply()
 
-            //navigate back to login
+            // Navigate back to login
             val intent = Intent(this, LoginActivity::class.java)
-
-            //clear the stack
+            // Clear the stack
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
             finish()
@@ -80,11 +80,14 @@ class MenuActivity : AppCompatActivity() {
         }
 
         binding.navigationSafety.setOnClickListener {
-            // Grant the Safety Expert badge
-            achievementManager.checkAndGrantSafetyExpertBadge()
-
-            // Save to Firebase
-            achievementManager.saveBadgeToUserProfile("safetyexpert")
+            // Get the current user's ID
+            val userId = auth.currentUser?.uid
+            if (userId != null) {
+                // Grant the Safety Expert badge
+                achievementManager.checkAndGrantSafetyExpertBadge(userId)
+            } else {
+                Log.e("MenuActivity", "User not authenticated.")
+            }
 
             val intent = Intent(this, SafetyActivity::class.java)
             startActivity(intent)
@@ -95,7 +98,7 @@ class MenuActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        //set click listener for about
+        // Set click listener for about
         toAbout.setOnClickListener {
             val intent = Intent(this, AboutActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

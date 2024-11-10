@@ -3,11 +3,11 @@ package com.example.trailblaze.ui.profile
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
@@ -64,15 +64,14 @@ class FriendsProfileActivity : AppCompatActivity() {
 
     private lateinit var timeRecordsRecyclerView: RecyclerView
     private lateinit var timeRecordAdapter: TimeRecordAdapter
-    private var timeRecords: List<TimeRecord> = emptyList()
 
     // Define all possible badges
     private val allBadges = listOf(
         Badge("safetyexpert", "Safety Expert", R.drawable.safetyexpert),
-        Badge("trailblaze", "TrailBlazer", R.drawable.trailblaze_logo),
+        Badge("trailblazer", "TrailBlazer", R.drawable.trailblaze_logo),
         Badge("mountainclimber", "MountainClimber", R.drawable.mountainclimber),
-        Badge("trekker", "Trekker", R.drawable.trekker),
-        Badge("hiker", "Hiker", R.drawable.hhiker),
+        Badge("longdistancetrekker", "Trekker", R.drawable.trekker),
+        Badge("habitualhiker", "Hiker", R.drawable.hhiker),
         Badge("weekendwarrior", "Weekend Warrior", R.drawable.weekendwarrior),
         Badge("dailyadventurer", "Daily Adventurer", R.drawable.dailyadventurer),
         Badge("conqueror", "Conqueror", R.drawable.conqueror),
@@ -108,6 +107,7 @@ class FriendsProfileActivity : AppCompatActivity() {
         binding.iconDifficulty.setOnClickListener {
             fetchCurrentUserDifficulty()
         }
+
 
         // Initialize the RecyclerView for friends in common
         friendsInCommonList = mutableListOf()
@@ -206,7 +206,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                     val isLeaderboardVisible = document.getBoolean("leaderboardVisible") ?: true
                     val isPhotosVisible = document.getBoolean("photosVisible") ?: true
                     val isFavoriteTrailsVisible = document.getBoolean("favoriteTrailsVisible") ?: true
-                    val isWatcherVisible = document.getBoolean("watcherVisible") ?: true
+                    val watcherVisible = document.getBoolean("watcherVisible") ?: false
 
                     // Set visibility based on the privacy settings
                     binding.leaderRecyclerView.visibility = if (isLeaderboardVisible) View.VISIBLE else View.GONE
@@ -217,6 +217,9 @@ class FriendsProfileActivity : AppCompatActivity() {
 
                     binding.favoriteTrailsSection.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
                     binding.favoriteTrailsHeader.visibility = if (isFavoriteTrailsVisible) View.VISIBLE else View.GONE
+
+                    // Set visibility for the watcherMember TextView
+                    binding.watcherMember.visibility = if (watcherVisible) View.VISIBLE else View.GONE
 
                     // Check if the account is private
                     if (isPrivateAccount) {
@@ -258,6 +261,9 @@ class FriendsProfileActivity : AppCompatActivity() {
         binding.leaderboardHeader.visibility = View.GONE
         binding.completedParksHeader.visibility = View.GONE
         binding.timeRecordsRecyclerView.visibility = View.GONE
+        binding.watcherMember.visibility = View.GONE
+
+
     }
 
     private fun loadUserOtherInformation(document: DocumentSnapshot) {
@@ -346,6 +352,8 @@ class FriendsProfileActivity : AppCompatActivity() {
 
         userRef.update("friends", FieldValue.arrayRemove(friendId))
             .addOnSuccessListener {
+                triggerRaindropEffect()
+
                 Toast.makeText(this, "Friend removed successfully!", Toast.LENGTH_SHORT).show()
 
                 // Update UI to reflect removal
@@ -368,34 +376,37 @@ class FriendsProfileActivity : AppCompatActivity() {
 
                 // Check if the friendId is already in the favorites list
                 if (favoriteFriendsList.contains(friendId)) {
-                    // Friend is already a favorite, remove them from favorites
-                    userRef.update("favoriteFriends", FieldValue.arrayRemove(friendId))
-                        .addOnSuccessListener {
-                            Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show()
-                            binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Change to outline icon
-                        }
-                        .addOnFailureListener { e ->
-                            Toast.makeText(this, "Failed to remove from favorites: ${e.message}", Toast.LENGTH_SHORT).show()
-                        }
+                    // Friend is already a favorite, ask for confirmation to remove
+                    showConfirmationDialog("Remove from Watchers List", "Are you sure you want to remove this friend from your Watchers List?") {
+                        userRef.update("favoriteFriends", FieldValue.arrayRemove(friendId))
+                            .addOnSuccessListener {
+
+                                triggerBrokenHeartDropEffect()
+
+                                Toast.makeText(this, "Removed from Watchers List", Toast.LENGTH_SHORT).show()
+                                binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Change to outline icon
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(this, "Failed to remove from Watchers List: ${e.message}", Toast.LENGTH_SHORT).show()
+                            }
+                    }
                 } else {
-                    // Friend is not a favorite, add them to favorites
-                    userRef.update("favoriteFriends", FieldValue.arrayUnion(friendId))
-                        .addOnSuccessListener {
-                            Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show()
+                    // Friend is not a favorite, ask for confirmation to add
+                    showConfirmationDialog("Add to Watchers List", "Are you sure you want to add this friend to your Watchers List?") {
+                        userRef.update("favoriteFriends", FieldValue.arrayUnion(friendId))
+                            .addOnSuccessListener {
+                                Toast.makeText(this, "Added to your Watchers List", Toast.LENGTH_SHORT).show()
 
-                            // Show confetti
-                            showConfetti()
+                                triggerHeartDropEffect()
 
-                            achievementManager.checkAndGrantCommunityBuilderBadge()
+                                achievementManager.checkAndGrantCommunityBuilderBadge(userId)
 
-                            // Save to Firebase
-                            achievementManager.saveBadgeToUserProfile("communitybuilder")
-
-                            binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled) // Change to filled icon
-                        }
-                        .addOnFailureListener { e ->
-                            Toast.makeText(this, "Failed to add to favorites: ${e.message}", Toast.LENGTH_SHORT).show()
-                        }
+                                binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled) // Change to filled icon
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(this, "Failed to add to favorites: ${e.message}", Toast.LENGTH_SHORT).show()
+                            }
+                    }
                 }
             } else {
                 Log.e("FriendsProfileActivity", "User document does not exist")
@@ -405,6 +416,20 @@ class FriendsProfileActivity : AppCompatActivity() {
             Log.e("FriendsProfileActivity", "Error fetching user document: ", exception)
             Toast.makeText(this, "Error fetching user data.", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun showConfirmationDialog(title: String, message: String, onConfirm: () -> Unit) {
+        AlertDialog.Builder(this)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton("Yes") { dialog, _ ->
+                onConfirm.invoke() // Call the onConfirm function
+                dialog.dismiss() // Dismiss the dialog
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss() // Just dismiss the dialog
+            }
+            .show()
     }
 
     private fun showConfetti() {
@@ -483,47 +508,39 @@ class FriendsProfileActivity : AppCompatActivity() {
     private fun performAddFriend(friendId: String) {
         val currentUserId = auth.currentUser?.uid ?: return
 
-        // Get a reference to the current user's document in Firestore
-        val userRef = firestore.collection("users").document(currentUserId)
+        // Reference to the friend’s document in Firestore
+        val friendRef = firestore.collection("users").document(friendId)
 
-        userRef.get().addOnSuccessListener { document ->
+        friendRef.get().addOnSuccessListener { document ->
             if (document != null && document.exists()) {
-                val friendsList = document.get("friends") as? List<String> ?: emptyList()
+                val pendingRequests = document.get("pendingRequests") as? List<String> ?: emptyList()
 
-                // Check if friend is already in the user's friends list
-                if (friendsList.contains(friendId)) {
-                    Toast.makeText(this, "This user is already your friend.", Toast.LENGTH_SHORT).show()
+                if (pendingRequests.contains(currentUserId)) {
+                    Toast.makeText(this, "Friend request already sent.", Toast.LENGTH_SHORT).show()
                 } else {
-                    // Prepare update to add friend to friends list
-                    val userUpdates = hashMapOf<String, Any>("friends" to FieldValue.arrayUnion(friendId))
+                    // Update the friend's document to add the current user's ID to pendingRequests
+                    val friendUpdates = hashMapOf<String, Any>("pendingRequests" to FieldValue.arrayUnion(currentUserId))
 
-                    userRef.set(userUpdates, SetOptions.merge())
+                    friendRef.set(friendUpdates, SetOptions.merge())
                         .addOnSuccessListener {
                             Toast.makeText(this, "Friend request sent successfully!", Toast.LENGTH_SHORT).show()
-
-                            // Update UI to reflect friend status
                             binding.addFriendButton.visibility = View.GONE
-                            binding.favoriteFriendBtn.visibility = View.VISIBLE
-                            binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Set outline icon
-                            binding.removeFriendButton.visibility = View.VISIBLE
-
-                            // Optionally, grant an achievement for adding a friend
-                            achievementManager.checkAndGrantSocialButterflyBadge(currentUserId)
                         }
                         .addOnFailureListener { exception ->
-                            Log.e("FriendsProfileActivity", "Error adding friend: ", exception)
+                            Log.e("FriendsProfileActivity", "Error sending friend request: ", exception)
                             Toast.makeText(this, "Failed to send friend request.", Toast.LENGTH_SHORT).show()
                         }
                 }
             } else {
-                Log.e("FriendsProfileActivity", "User document does not exist")
-                Toast.makeText(this, "User document not found.", Toast.LENGTH_SHORT).show()
+                Log.e("FriendsProfileActivity", "Friend document does not exist")
+                Toast.makeText(this, "User not found.", Toast.LENGTH_SHORT).show()
             }
         }.addOnFailureListener { exception ->
-            Log.e("FriendsProfileActivity", "Error fetching user document: ", exception)
+            Log.e("FriendsProfileActivity", "Error fetching friend document: ", exception)
             Toast.makeText(this, "Error fetching user data.", Toast.LENGTH_SHORT).show()
         }
     }
+
 
     private fun fetchFriendsInCommon() {
         val currentUserId = auth.currentUser?.uid ?: return
@@ -565,7 +582,8 @@ class FriendsProfileActivity : AppCompatActivity() {
                         userId = friendId,
                         username = document.getString("username") ?: "Unknown",
                         profileImageUrl = document.getString("profileImageUrl"),
-                        isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
+                        isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false,
+                        watcherVisible = document.getBoolean("watcherVisible") ?: false
                     )
                     commonFriends.add(friend)
                 }
@@ -757,10 +775,12 @@ class FriendsProfileActivity : AppCompatActivity() {
                         val parkName = record["parkName"] as? String ?: return@map null
                         val elapsedTime = record["elapsedTime"] as? String ?: return@map null
                         val parkCode = record["parkCode"] as? String ?: return@map null
-                        val imageUrl = record["imageUrl"] as? String ?: return@map null
+                        val imageUrl = record["imageUrl"] as? String // This can be null
+                        val timestamp = record["timestamp"] as? Long ?: return@map null // Assuming timestamp is a Long
+                        val date = record["date"] as? String ?: return@map null // Assuming date is a String
 
                         // Create a TimeRecord object
-                        TimeRecord(parkName, elapsedTime, imageUrl, parkCode)
+                        TimeRecord(parkName, elapsedTime, imageUrl, parkCode, timestamp, date)
                     }?.filterNotNull() ?: emptyList() // Filter out any null items
 
                     // Update the adapter with fetched data using updateData method
@@ -770,5 +790,119 @@ class FriendsProfileActivity : AppCompatActivity() {
             .addOnFailureListener { e ->
                 Log.e("FriendsProfileActivity", "Error fetching time records: ${e.message}")
             }
+    }
+
+    private fun triggerRaindropEffect() {
+        val handler = Handler(Looper.getMainLooper())
+
+        for (i in 0 until 20) {  // Number of raindrops
+            val delay = (0 .. 1000).random().toLong()   // Random delay between 0 and 1 second
+
+            handler.postDelayed({
+                val raindrop = ImageView(this)
+                raindrop.setImageResource(R.drawable.raindrop2)
+
+                // Set position and animation
+                val params = RelativeLayout.LayoutParams(30, 1500)
+                params.addRule(RelativeLayout.ALIGN_PARENT_TOP)
+
+                params.leftMargin = (0..binding.root.width).random()
+
+                raindrop.layoutParams = params
+                binding.root.addView(raindrop)
+
+                // Start animation
+                val animation = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.raindrop_fall).apply{
+                    duration = (1000..2000).random().toLong()
+                }
+                raindrop.startAnimation(animation)
+
+                // Remove view after animation
+                animation.setAnimationListener(object : android.view.animation.Animation.AnimationListener {
+                    override fun onAnimationEnd(animation: android.view.animation.Animation?) {
+                        binding.root.removeView(raindrop)
+                    }
+
+                    override fun onAnimationRepeat(animation: android.view.animation.Animation?) {}
+                    override fun onAnimationStart(animation: android.view.animation.Animation?) {}
+                })
+            }, delay)
+        }
+    }
+
+    private fun triggerHeartDropEffect() {
+        val handler = Handler(Looper.getMainLooper())
+
+        for (i in 0 until 20) {  // Number of raindrops
+            val delay = (0 .. 1000).random().toLong()   // Random delay between 0 and 1 second
+
+            handler.postDelayed({
+                val raindrop = ImageView(this)
+                raindrop.setImageResource(R.drawable.heart)
+
+                // Set position and animation
+                val params = RelativeLayout.LayoutParams(90, 1500)
+                params.addRule(RelativeLayout.ALIGN_PARENT_TOP)
+
+                params.leftMargin = (0..binding.root.width).random()
+
+                raindrop.layoutParams = params
+                binding.root.addView(raindrop)
+
+                // Start animation
+                val animation = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.raindrop_fall).apply{
+                    duration = (1000..2000).random().toLong()
+                }
+                raindrop.startAnimation(animation)
+
+                // Remove view after animation
+                animation.setAnimationListener(object : android.view.animation.Animation.AnimationListener {
+                    override fun onAnimationEnd(animation: android.view.animation.Animation?) {
+                        binding.root.removeView(raindrop)
+                    }
+
+                    override fun onAnimationRepeat(animation: android.view.animation.Animation?) {}
+                    override fun onAnimationStart(animation: android.view.animation.Animation?) {}
+                })
+            }, delay)
+        }
+    }
+
+    private fun triggerBrokenHeartDropEffect() {
+        val handler = Handler(Looper.getMainLooper())
+
+        for (i in 0 until 20) {  // Number of raindrops
+            val delay = (0 .. 1000).random().toLong()   // Random delay between 0 and 1 second
+
+            handler.postDelayed({
+                val raindrop = ImageView(this)
+                raindrop.setImageResource(R.drawable.broken_heart)
+
+                // Set position and animation
+                val params = RelativeLayout.LayoutParams(90, 1500)
+                params.addRule(RelativeLayout.ALIGN_PARENT_TOP)
+
+                params.leftMargin = (0..binding.root.width).random()
+
+                raindrop.layoutParams = params
+                binding.root.addView(raindrop)
+
+                // Start animation
+                val animation = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.raindrop_fall).apply{
+                    duration = (1000..2000).random().toLong()
+                }
+                raindrop.startAnimation(animation)
+
+                // Remove view after animation
+                animation.setAnimationListener(object : android.view.animation.Animation.AnimationListener {
+                    override fun onAnimationEnd(animation: android.view.animation.Animation?) {
+                        binding.root.removeView(raindrop)
+                    }
+
+                    override fun onAnimationRepeat(animation: android.view.animation.Animation?) {}
+                    override fun onAnimationStart(animation: android.view.animation.Animation?) {}
+                })
+            }, delay)
+        }
     }
 }
