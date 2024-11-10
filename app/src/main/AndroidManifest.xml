@@ -37,24 +37,6 @@
         <activity
                 android:name=".ui.achievements.BadgesActivity"
                 android:exported="true"/>
-        <activity
-                android:name=".ui.achievements.Badge"
-                android:exported="true"/>
-        <activity
-                android:name=".ui.achievements.Achievement"
-                android:exported="true"/>
-        <activity
-                android:name=".ui.achievements.BadgesAdapter"
-                android:exported="true"/>
-        <activity
-                android:name=".ui.achievements.AchievementCategory"
-                android:exported="true"/>
-        <activity
-                android:name=".ui.achievements.AchievementsAdapter"
-                android:exported="true"/>
-        <activity
-                android:name=".ui.achievements.AchievementsFragment"
-                android:exported="true"/>
 
         <activity
                 android:name=".ui.parks.ParkDetailActivity"
@@ -65,14 +47,7 @@
         <activity
                 android:name=".settings.SafetyActivity"
                 android:exported="false"/>
-        <activity
-                android:name=".ui.Map.MapFragment"
-                android:exported="false"
-                android:theme="@style/Theme.TrailBlaze"/>
-        <activity
-                android:name=".ui.profile.EditProfileFragment"
-                android:exported="false"
-                android:theme="@style/Theme.TrailBlaze"/>
+
         <activity
                 android:name=".ui.MenuActivity"
                 android:exported="false"/>
