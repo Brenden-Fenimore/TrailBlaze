@@ -58,21 +58,14 @@
                 android:gravity="center"
                 android:layout_margin="13dp">
 
-            <Button
-                    android:id="@+id/yesBtn"
-                    android:layout_width="150dp"
-                    android:layout_height="55dp"
-                    android:text="@string/Yes"
-                    android:fontFamily="@font/amethysta"
-                    android:textSize="18sp"
-                    android:layout_weight="1"/>
+
 
             <Button
-                    android:id="@+id/LaterBtn"
-                    android:layout_width="150dp"
+                    android:id="@+id/ContBtn"
+                    android:layout_width="0dp"
                     android:layout_height="55dp"
-                    android:layout_marginStart="16dp"
-                    android:text="@string/Later"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/titleContinue"
                     android:fontFamily="@font/amethysta"
                     android:textSize="18sp"
                     android:layout_weight="1"/>

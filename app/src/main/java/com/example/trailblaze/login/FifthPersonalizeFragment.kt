@@ -18,11 +18,9 @@ class FifthPersonalizeFragment : Fragment() {
     ): View? {
         //inflate the layout
         val view = inflater.inflate(R.layout.fragment_fifth_personalize, container, false)
-        view.findViewById<Button>(R.id.yesBtn).setOnClickListener {
-            val intent = Intent(activity, EditWatcherProfile::class.java)
-        }
 
-        view.findViewById<Button>(R.id.LaterBtn).setOnClickListener {
+
+        view.findViewById<Button>(R.id.ContBtn).setOnClickListener {
             //navigate to MainActivity
             val intent = Intent(activity, MainActivity::class.java)
             //clear the activity stack so the user can't return to the fragments
