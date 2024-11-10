@@ -27,6 +27,8 @@ class FriendRequestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_friend_request) // Set your layout file here
+        // Hide the ActionBar
+        supportActionBar?.hide()
 
         findViewById<ImageButton>(R.id.chevron_left).setOnClickListener {
             onBackPressedDispatcher.onBackPressed()

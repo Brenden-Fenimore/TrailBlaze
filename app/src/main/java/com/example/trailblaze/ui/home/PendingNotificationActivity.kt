@@ -23,6 +23,8 @@ class PendingNotificationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPendingNotificationsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        // Hide the ActionBar
+        supportActionBar?.hide()
 
         findViewById<ImageButton>(R.id.chevron_left).setOnClickListener {
             onBackPressedDispatcher.onBackPressed()

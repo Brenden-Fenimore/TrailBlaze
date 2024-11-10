@@ -5,6 +5,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center">
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
     <LinearLayout
             android:orientation="vertical"
@@ -88,16 +91,17 @@
                     android:text="@string/interaction4"
                     android:textStyle="normal"/>
         </LinearLayout>
+        <Button
+                android:text="@string/titleContinue"
+                android:layout_width="304dp"
+                android:fontFamily="@font/amethysta"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/continuebtn3">
+        </Button>
     </LinearLayout>
+    </ScrollView>
 
-    <Button
-            android:text="@string/titleContinue"
-            android:layout_width="304dp"
-            android:fontFamily="@font/amethysta"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/continuebtn3">
-    </Button>
 
 </RelativeLayout>

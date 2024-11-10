@@ -35,6 +35,8 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_register)
+        // Hide the ActionBar
+        supportActionBar?.hide()
 
         //initialize Firestore and FirebaseAuth
         firestore = FirebaseFirestore.getInstance()

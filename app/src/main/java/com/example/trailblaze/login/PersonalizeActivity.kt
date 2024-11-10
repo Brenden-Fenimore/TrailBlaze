@@ -11,6 +11,8 @@ class PersonalizeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personalize)
+        // Hide the ActionBar
+        supportActionBar?.hide()
 
         if(savedInstanceState == null) {
             loadFragment(FirstPersonalizeFragment())
@@ -25,7 +27,7 @@ class PersonalizeActivity : AppCompatActivity() {
     //fucntion to load new fragments
     fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, fragment)
+            .replace(R.id.termsBodyScroll, fragment)
             .addToBackStack(null)
             .commit()
     }
