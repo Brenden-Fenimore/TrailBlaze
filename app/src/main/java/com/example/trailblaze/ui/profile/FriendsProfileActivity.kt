@@ -3,15 +3,13 @@ package com.example.trailblaze.ui.profile
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
@@ -37,6 +35,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import com.example.trailblaze.ui.parks.TimeRecordAdapter
 import com.example.trailblaze.ui.parks.TimeRecord
+import android.widget.ImageView
+import android.widget.RelativeLayout
+import com.google.android.material.animation.AnimationUtils
+
 
 class FriendsProfileActivity : AppCompatActivity() {
 
@@ -346,6 +348,9 @@ class FriendsProfileActivity : AppCompatActivity() {
 
         userRef.update("friends", FieldValue.arrayRemove(friendId))
             .addOnSuccessListener {
+                // Trigger the raindrop animation
+                triggerRaindropEffect()
+
                 Toast.makeText(this, "Friend removed successfully!", Toast.LENGTH_SHORT).show()
 
                 // Update UI to reflect removal
@@ -762,5 +767,43 @@ class FriendsProfileActivity : AppCompatActivity() {
             .addOnFailureListener { e ->
                 Log.e("FriendsProfileActivity", "Error fetching time records: ${e.message}")
             }
+    }
+
+    private fun triggerRaindropEffect() {
+        val handler = Handler(Looper.getMainLooper())
+
+        for (i in 0 until 20) {  // Number of raindrops
+            val delay = (0 .. 1000).random().toLong()   // Random delay between 0 and 1 second
+
+            handler.postDelayed({
+                val raindrop = ImageView(this)
+                raindrop.setImageResource(R.drawable.raindrop)
+
+                // Set position and animation
+                val params = RelativeLayout.LayoutParams(15, 1000)
+                params.addRule(RelativeLayout.ALIGN_PARENT_TOP)
+
+                params.leftMargin = (0..binding.root.width).random()
+
+                raindrop.layoutParams = params
+                binding.root.addView(raindrop)
+
+                // Start animation
+                val animation = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.raindrop_fall).apply{
+                    duration = (1000..2000).random().toLong()
+                }
+                raindrop.startAnimation(animation)
+
+                // Remove view after animation
+                animation.setAnimationListener(object : android.view.animation.Animation.AnimationListener {
+                    override fun onAnimationEnd(animation: android.view.animation.Animation?) {
+                        binding.root.removeView(raindrop)
+                    }
+
+                    override fun onAnimationRepeat(animation: android.view.animation.Animation?) {}
+                    override fun onAnimationStart(animation: android.view.animation.Animation?) {}
+                })
+            }, delay)
+        }
     }
 }
