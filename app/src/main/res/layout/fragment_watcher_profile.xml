@@ -209,17 +209,37 @@
                 android:contentDescription="@string/watcherBadge"
                 android:layout_marginTop="5dp"
                 android:padding="6dp"/>
+        <ImageView
+                android:id="@+id/watcherBadges1"
+                android:layout_width="75dp"
+                android:layout_height="73dp"
+                android:layout_marginStart="1dp"
+                android:src="@drawable/badge"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@string/watcherBadge"
+                android:layout_marginTop="5dp"
+                android:padding="6dp"/>
+        <ImageView
+                android:id="@+id/watcherBadges2"
+                android:layout_width="75dp"
+                android:layout_height="73dp"
+                android:layout_marginStart="1dp"
+                android:src="@drawable/badge"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@string/watcherBadge"
+                android:layout_marginTop="5dp"
+                android:padding="6dp"/>
 
         <!-- Badge Description-->
 
-        <TextView
+      <!--  <TextView
                 android:layout_width="325dp"
                 android:layout_height="wrap_content"
                 android:text="@string/watcherBadgeDetails"
                 android:fontFamily="@font/amethysta"
                 android:textSize="14sp"
                 android:textAlignment="center"
-                android:padding="10dp"/>
+                android:padding="10dp"/> -->
 
     </LinearLayout>
     </HorizontalScrollView>
