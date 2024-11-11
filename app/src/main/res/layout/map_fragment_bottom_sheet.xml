@@ -17,6 +17,7 @@
             android:src="@drawable/scrollview_bar"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/bottom_sheet_bar"/>
     <androidx.recyclerview.widget.RecyclerView
 
