@@ -501,43 +501,48 @@ class FullscreenImageDialogFragment : DialogFragment() {
     }
 
     private fun fetchGeoLocationFromExif(imageUrl: String) {
-        Glide.with(this)
-            .downloadOnly()
-            .load(imageUrl)
-            .into(object : CustomTarget<File>() {
-                override fun onResourceReady(
-                    resource: File,
-                    transition: com.bumptech.glide.request.transition.Transition<in File>?
-                ) {
-                    Log.d("GeoLocation", "Image downloaded successfully, extracting EXIF data...")
+        // Create a unique file path to download the image temporarily
+        val tempFile = File(requireContext().cacheDir, "temp_image.jpg")
 
-                    try {
-                        val exifInterface = ExifInterface(resource)
-                        val latLong = FloatArray(2)
+        val storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(imageUrl)
 
-                        if (exifInterface.getLatLong(latLong)) {
-                            val latitude = latLong[0].toDouble()
-                            val longitude = latLong[1].toDouble()
-                            Log.d("GeoLocation", "Geo-location found: Latitude = $latitude, Longitude = $longitude")
+        // Download the file from Firebase Storage
+        storageReference.getFile(tempFile)
+            .addOnSuccessListener {
+                Log.d("GeoLocation", "Image downloaded successfully to: ${tempFile.absolutePath}")
 
-                            val locationName = getLocationName(latitude, longitude)
-                            locationTextView.text = locationName ?: "Location not found"
+                // Once the file is downloaded, try to read EXIF data
+                try {
+                    val exifInterface = ExifInterface(tempFile.absolutePath)
+
+                    val latLong = exifInterface.latLong
+                    if (latLong != null) {
+                        val latitude = latLong[0]
+                        val longitude = latLong[1]
+
+                        val locationName = getLocationName(latitude, longitude)
+
+                        if (!locationName.isNullOrEmpty()) {
+                            locationTextView.text = locationName
                             locationTextView.visibility = View.VISIBLE
+                            Log.d("GeoLocation", "Location fetched from EXIF: $locationName")
                         } else {
-                            Log.d("GeoLocation", "No geo-location data found for this image.")
+                            Log.d("GeoLocation", "No location found from EXIF.")
                             locationTextView.visibility = View.GONE
                         }
-                    } catch (e: IOException) {
-                        Log.e("GeoLocation", "Error reading EXIF data", e)
+                    } else {
+                        Log.d("GeoLocation", "No EXIF lat/long found.")
                         locationTextView.visibility = View.GONE
                     }
-                }
-
-                override fun onLoadCleared(placeholder: Drawable?) {
-                    Log.d("GeoLocation", "Clearing loaded image, hiding location info.")
+                } catch (e: IOException) {
+                    Log.e("GeoLocation", "Error reading EXIF data", e)
                     locationTextView.visibility = View.GONE
                 }
-            })
+            }
+            .addOnFailureListener { e ->
+                Log.e("GeoLocation", "Error downloading image from Firebase Storage", e)
+                locationTextView.visibility = View.GONE
+            }
     }
 
 }
