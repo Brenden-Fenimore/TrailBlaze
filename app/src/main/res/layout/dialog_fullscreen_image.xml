@@ -36,6 +36,19 @@
 
     </RelativeLayout>
 
+    <TextView
+            android:id="@+id/locationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:background="#80000000"
+            android:visibility="gone"
+            android:padding="8dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="16dp" />
+
     <ImageButton
             android:id="@+id/prevImageButton"
             android:contentDescription="@string/previousButton"
@@ -90,6 +103,18 @@
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:text="@string/editCaptionButton"
             android:visibility="gone"/>
+
+        <ImageButton
+                android:id="@+id/editLocationButton"
+                android:contentDescription="@string/editLocationButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:padding="4dp"
+                android:src="@drawable/locationtag"
+                android:scaleType="fitCenter"
+                android:paddingTop="8dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:visibility="gone"/>
 
     </LinearLayout>
 </RelativeLayout>
