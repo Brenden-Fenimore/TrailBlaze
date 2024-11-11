@@ -349,46 +349,43 @@ class FullscreenImageDialogFragment : DialogFragment() {
         Log.d("GeoLocation", "Attempting to load geo-location for image: $imageUrl")
 
         // First, try to load the location from Firestore
-        val userId = getCurrentUserId()
-        if (userId.isEmpty()) {
-            Log.d("GeoLocation", "User not authenticated")
-            locationTextView.visibility = View.GONE
-            return
-        }
+        Glide.with(this)
+            .downloadOnly()
+            .load(imageUrl)
+            .into(object : CustomTarget<File>() {
+                override fun onResourceReady(
+                    resource: File,
+                    transition: com.bumptech.glide.request.transition.Transition<in File>?
+                ) {
+                    Log.d("GeoLocation", "Image downloaded successfully, extracting EXIF data...")
 
-        val photosCollection = FirebaseFirestore.getInstance()
-            .collection("users")
-            .document(userId)
-            .collection("photos")
+                    try {
+                        val exifInterface = ExifInterface(resource)
+                        val latLong = FloatArray(2)
 
-        // Fetch the document for the photo
-        photosCollection.whereEqualTo("url", imageUrl).get()
-            .addOnSuccessListener { querySnapshot ->
-                if (querySnapshot.isEmpty) {
-                    Log.d("GeoLocation", "No location found for this image in Firestore.")
-                    // If no location in Firestore, fallback to EXIF
-                    fetchGeoLocationFromExif(imageUrl)
-                } else {
-                    // Fetch the location if it exists
-                    val document = querySnapshot.documents.firstOrNull()
-                    val location = document?.getString("location")
-                    val isLocationManuallySet = document?.getBoolean("isLocationManuallySet") ?: false
+                        if (exifInterface.getLatLong(latLong)) {
+                            val latitude = latLong[0].toDouble()
+                            val longitude = latLong[1].toDouble()
+                            Log.d("GeoLocation", "Geo-location found: Latitude = $latitude, Longitude = $longitude")
 
-                    if (isLocationManuallySet && !location.isNullOrEmpty()) {
-                        // If manually set location exists in Firestore, show it
-                        Log.d("GeoLocation", "Manually set location from Firestore: $location")
-                        locationTextView.text = location
-                        locationTextView.visibility = View.VISIBLE
-                    } else {
-                        Log.d("GeoLocation", "No manual location found, falling back to EXIF.")
-                        fetchGeoLocationFromExif(imageUrl)
+                            val locationName = getLocationName(latitude, longitude)
+                            locationTextView.text = locationName ?: "Location not found"
+                            locationTextView.visibility = View.VISIBLE
+                        } else {
+                            Log.d("GeoLocation", "No geo-location data found for this image.")
+                            locationTextView.visibility = View.GONE
+                        }
+                    } catch (e: IOException) {
+                        Log.e("GeoLocation", "Error reading EXIF data", e)
+                        locationTextView.visibility = View.GONE
                     }
                 }
-            }
-            .addOnFailureListener { e ->
-                Log.e("GeoLocation", "Error fetching location from Firestore", e)
-                fetchGeoLocationFromExif(imageUrl)  // If Firestore fetch fails, try EXIF
-            }
+
+                override fun onLoadCleared(placeholder: Drawable?) {
+                    Log.d("GeoLocation", "Clearing loaded image, hiding location info.")
+                    locationTextView.visibility = View.GONE
+                }
+            })
     }
 
     private fun getLocationName(latitude: Double, longitude: Double): String? {
