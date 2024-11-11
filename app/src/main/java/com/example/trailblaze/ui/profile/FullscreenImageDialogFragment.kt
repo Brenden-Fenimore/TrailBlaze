@@ -348,46 +348,51 @@ class FullscreenImageDialogFragment : DialogFragment() {
     private fun loadGeoLocation(imageUrl: String) {
         Log.d("GeoLocation", "Attempting to load geo-location for image: $imageUrl")
 
-        val userId = getCurrentUserId()
-        if (userId.isEmpty()) {
-            Log.d("GeoLocation", "User not authenticated")
-            locationTextView.visibility = View.GONE
-            return
-        }
+        val firestore = FirebaseFirestore.getInstance()
 
-        val photosCollection = FirebaseFirestore.getInstance()
-            .collection("users")
-            .document(userId)
-            .collection("photos")
+        // Query all users' photos to find the matching imageUrl and fetch the location
+        firestore.collection("users")
+            .get() // Get all users
+            .addOnSuccessListener { usersSnapshot ->
+                var found = false
+                for (userDoc in usersSnapshot.documents) {
+                    val userPhotosCollection = userDoc.reference.collection("photos")
 
-        // Fetch the document for the photo
-        photosCollection.whereEqualTo("url", imageUrl).get()
-            .addOnSuccessListener { querySnapshot ->
-                Log.d("GeoLocation", "Firestore query successful, documents found: ${querySnapshot.size()}")
+                    // Query photos collection of each user to find the photo by its URL
+                    userPhotosCollection.whereEqualTo("url", imageUrl).get()
+                        .addOnSuccessListener { querySnapshot ->
+                            if (querySnapshot.documents.isNotEmpty()) {
+                                val document = querySnapshot.documents.firstOrNull()
+                                val location = document?.getString("location")
+                                val isLocationManuallySet = document?.getBoolean("isLocationManuallySet") ?: false
 
-                if (querySnapshot.isEmpty) {
-                    Log.d("GeoLocation", "No location found for this image in Firestore.")
-                    // If no location in Firestore, fallback to EXIF
-                    fetchGeoLocationFromExif(imageUrl)
-                } else {
-                    // Fetch the location if it exists
-                    val document = querySnapshot.documents.firstOrNull()
-                    val location = document?.getString("location")
-                    val isLocationManuallySet = document?.getBoolean("isLocationManuallySet") ?: false
+                                if (isLocationManuallySet && !location.isNullOrEmpty()) {
+                                    // If manually set location exists in Firestore, show it
+                                    Log.d("GeoLocation", "Manually set location from Firestore: $location")
+                                    locationTextView.text = location
+                                    locationTextView.visibility = View.VISIBLE
+                                } else {
+                                    Log.d("GeoLocation", "No manual location found, falling back to EXIF.")
+                                    fetchGeoLocationFromExif(imageUrl)
+                                }
+                                found = true
+                            }
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e("GeoLocation", "Error fetching location from Firestore", e)
+                        }
 
-                    if (isLocationManuallySet && !location.isNullOrEmpty()) {
-                        // If manually set location exists in Firestore, show it
-                        Log.d("GeoLocation", "Manually set location from Firestore: $location")
-                        locationTextView.text = location
-                        locationTextView.visibility = View.VISIBLE
-                    } else {
-                        Log.d("GeoLocation", "No manual location found, falling back to EXIF.")
-                        fetchGeoLocationFromExif(imageUrl)
+                    // Break the loop once we've found the location to prevent querying other users
+                    if (found) {
+                        return@addOnSuccessListener
                     }
+                }
+                if (!found) {
+                    Log.d("GeoLocation", "No location found for the imageUrl in any user’s photos.")
                 }
             }
             .addOnFailureListener { e ->
-                Log.e("GeoLocation", "Error fetching location from Firestore", e)
+                Log.e("GeoLocation", "Error querying users from Firestore", e)
                 fetchGeoLocationFromExif(imageUrl)  // If Firestore fetch fails, try EXIF
             }
     }
