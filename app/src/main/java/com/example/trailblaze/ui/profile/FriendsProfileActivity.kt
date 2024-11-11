@@ -108,6 +108,10 @@ class FriendsProfileActivity : AppCompatActivity() {
             fetchCurrentUserDifficulty()
         }
 
+        // Watcher Member Click Listener
+        binding.watcherMember.setOnClickListener{
+        setContentView(R.layout.activity_watcher_member)
+        }
 
         // Initialize the RecyclerView for friends in common
         friendsInCommonList = mutableListOf()
@@ -220,6 +224,7 @@ class FriendsProfileActivity : AppCompatActivity() {
 
                     // Set visibility for the watcherMember TextView
                     binding.watcherMember.visibility = if (watcherVisible) View.VISIBLE else View.GONE
+
 
                     // Check if the account is private
                     if (isPrivateAccount) {

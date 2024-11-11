@@ -49,6 +49,9 @@ class TimerActivity: AppCompatActivity() {
     // Property to hold the current user
     private var currentUser: User? = null
 
+    // Watcher List
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_timer)
@@ -63,6 +66,8 @@ class TimerActivity: AppCompatActivity() {
         activities = intent.getStringArrayExtra("PARK_ACTIVITIES") ?: arrayOf()
 
         partyMembers = intent.getStringArrayExtra("PARTY_MEMBERS") ?: arrayOf()
+
+       val watcherMembers = intent.getStringArrayExtra("WATCHER_MEMBERS") ?: arrayOf()
 
         // Log the activities to see what was pulled in
         Log.d("AttemptTrailActivity", "Activities received: ${activities.joinToString(", ")}")
@@ -173,6 +178,10 @@ class TimerActivity: AppCompatActivity() {
         emergencyButton.setOnClickListener {
             showEmergencyDialog()
         }
+    }
+
+    private fun showWatcherSelectionDialog(){
+
     }
 
     private fun sendNotificationToFriend(friendId: String) {

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+>
+
+    <!-- Swish Background-->
+    <com.example.trailblaze.view.SwishBackgroundView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:id="@+id/swishBackgroundView"
+            tools:ignore="MissingConstraints"/>
+
+    <!-- Back Button-->
+
+    <ImageButton
+            android:src="@drawable/chevron_left"
+            android:contentDescription="@string/chevronBack"
+            android:layout_width="49dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:id="@+id/backButton"
+            android:background="@android:color/transparent"
+            android:layout_centerVertical="true"
+            tools:ignore="HardcodedText,MissingConstraints"/>
+
+
+    <!--Profile Picture-->
+
+    <ImageView
+            android:id="@+id/watcherProfilePicture"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/account_circle"
+            android:contentDescription="@string/watcherPhoto"
+            app:layout_constraintTop_toBottomOf="@+id/swishBackgroundView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="0dp"/>
+
+
+    <!--TrailBlaze Username Field-->
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/watcherName"
+            android:text="@string/blazer"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/amethysta"
+            android:layout_marginBottom="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/watcherProfilePicture"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="9dp"/>
+
+    <!-- Watcher Logo-->
+    <ImageView
+            android:id="@+id/watcherLogo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginBottom="3dp"
+            app:layout_constraintTop_toBottomOf="@id/watcherName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/watcherslogo"
+            android:contentDescription="@string/watcherLogo"
+            android:layout_gravity="center_horizontal"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/watcherLogo"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/watcherRankDetails"
+            android:padding="5dp"
+            android:layout_marginTop="9dp">
+
+        <!-- Watcher Rank-->
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/watcherRank"
+                android:text="@string/watcherRank"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:padding="9dp"
+                android:textSize="20sp"
+                android:fontFamily="@font/amethysta"
+                android:layout_marginTop="9dp"/>
+
+<!-- Rank Metrics-->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="9dp">
+
+        <!-- Total Trails Watched-->
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/amethysta"
+                android:text="Total Trails Watched"
+                android:padding="9dp"
+                android:textSize="12sp"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/totalTrailsWatched"
+                    android:text="58"
+                    android:layout_marginTop="10dp"
+                    android:padding="9dp"
+                    android:fontFamily="@font/amethysta"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+            <!-- Average Watcher Response Time-->
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/amethysta"
+                    android:text="Average Response Time"
+                    android:padding="9dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="12sp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/averageResponseTime"
+                    android:text="180"
+                    android:layout_marginTop="10dp"
+                    android:padding="9dp"
+                    android:fontFamily="@font/amethysta"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/watcherAwards"
+                app:layout_constraintTop_toBottomOf="@+id/watcherRankDetails"
+                android:layout_marginTop="9dp">
+
+            <!-- Watcher Award Label-->
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/watcherStatsLabel"
+                    android:text="@string/watcherStats"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/amethysta"
+                    android:layout_marginBottom="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="9dp"/>
+
+            <!-- Badge Scrolling Portion -->
+            <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:id="@+id/badgeScroll">
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/watcherStats"
+                        android:padding="3dp"
+                        tools:ignore="UseCompoundDrawables">
+
+                    <!-- Badge Bar-->
+
+                    <!-- Badge Image-->
+
+                    <ImageView
+                            android:id="@+id/watcherBadges"
+                            android:layout_width="95dp"
+                            android:layout_height="93dp"
+                            android:layout_marginStart="1dp"
+                            android:src="@drawable/badge"
+                            android:layout_gravity="center_vertical"
+                            android:contentDescription="@string/watcherBadge"
+                            android:layout_marginTop="5dp"
+                            android:padding="6dp"/>
+                    <ImageView
+                            android:id="@+id/watcherBadges1"
+                            android:layout_width="95dp"
+                            android:layout_height="93dp"
+                            android:layout_marginStart="1dp"
+                            android:src="@drawable/badge"
+                            android:layout_gravity="center_vertical"
+                            android:contentDescription="@string/watcherBadge"
+                            android:layout_marginTop="5dp"
+                            android:padding="6dp"/>
+                    <ImageView
+                            android:id="@+id/watcherBadges2"
+                            android:layout_width="95dp"
+                            android:layout_height="93dp"
+                            android:layout_marginStart="1dp"
+                            android:src="@drawable/badge"
+                            android:layout_gravity="center_vertical"
+                            android:contentDescription="@string/watcherBadge"
+                            android:layout_marginTop="5dp"
+                            android:padding="6dp"/>
+
+                    <!-- Badge Description-->
+
+                    <!--  <TextView
+                              android:layout_width="325dp"
+                              android:layout_height="wrap_content"
+                              android:text="@string/watcherBadgeDetails"
+                              android:fontFamily="@font/amethysta"
+                              android:textSize="14sp"
+                              android:textAlignment="center"
+                              android:padding="10dp"/> -->
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+        </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
