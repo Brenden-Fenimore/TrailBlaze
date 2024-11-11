@@ -20,6 +20,12 @@ class FifthPersonalizeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_fifth_personalize, container, false)
         view.findViewById<Button>(R.id.yesBtn).setOnClickListener {
 
+            //navigate to MainActivity
+            val intent = Intent(activity, MainActivity::class.java)
+            //clear the activity stack so the user can't return to the fragments
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            activity?.finish()
         }
 
         //set up the finished button
