@@ -37,8 +37,7 @@ class FullscreenImageDialogFragment : DialogFragment() {
     private lateinit var captionTextView: TextView
     private var photoCaptions: MutableMap<String, String> = mutableMapOf()
     private lateinit var locationTextView: TextView
-
-    private val npsApiBaseUrl = "https://api.nps.gov/api/v1/parks"
+    private lateinit var editLocationButton: ImageButton
 
     companion object {
         fun newInstance(
@@ -68,6 +67,7 @@ class FullscreenImageDialogFragment : DialogFragment() {
         editCaptionButton = view.findViewById(R.id.editCaptionButton)
         captionTextView = view.findViewById(R.id.captionTextView)
         locationTextView = view.findViewById(R.id.locationTextView)
+        editLocationButton = view.findViewById(R.id.editLocationButton)
 
         imageUrls = (arguments?.getStringArrayList("imageUrls") ?: emptyList()) as MutableList<String>
         currentIndex = arguments?.getInt("position") ?: 0
@@ -82,6 +82,7 @@ class FullscreenImageDialogFragment : DialogFragment() {
         // Set delete button visibility based on ownership
         deleteButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
         editCaptionButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
+        editLocationButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
 
         deleteButton.setOnClickListener {
             // Show a confirmation dialog
@@ -105,6 +106,11 @@ class FullscreenImageDialogFragment : DialogFragment() {
             openEditCaptionDialog(imageUrls[currentIndex])
         }
 
+        editLocationButton.setOnClickListener {
+            val imageUrl = imageUrls[currentIndex] // Get the current image URL
+            promptForLocationUpdate(imageUrl)
+        }
+
         return view
     }
 
@@ -115,6 +121,12 @@ class FullscreenImageDialogFragment : DialogFragment() {
     private fun displayImage(index: Int) {
         currentIndex = index
         val imageUrl = imageUrls[currentIndex]
+
+        // Reset text views at the start to prevent carryover
+        captionTextView.text = ""
+        captionTextView.visibility = View.GONE
+        locationTextView.text = ""
+        locationTextView.visibility = View.GONE
 
         // Loads images through Glide
         Glide.with(this)
@@ -336,54 +348,47 @@ class FullscreenImageDialogFragment : DialogFragment() {
     private fun loadGeoLocation(imageUrl: String) {
         Log.d("GeoLocation", "Attempting to load geo-location for image: $imageUrl")
 
-        Glide.with(this)
-            .downloadOnly()
-            .load(imageUrl)
-            .into(object : CustomTarget<File>() {
-                override fun onResourceReady(
-                    resource: File,
-                    transition: com.bumptech.glide.request.transition.Transition<in File>?
-                ) {
-                    Log.d("GeoLocation", "Image downloaded successfully, extracting EXIF data...")
+        // First, try to load the location from Firestore
+        val userId = getCurrentUserId()
+        if (userId.isEmpty()) {
+            Log.d("GeoLocation", "User not authenticated")
+            locationTextView.visibility = View.GONE
+            return
+        }
 
-                    try {
-                        val exifInterface = ExifInterface(resource)
-                        val latLong = FloatArray(2)
+        val photosCollection = FirebaseFirestore.getInstance()
+            .collection("users")
+            .document(userId)
+            .collection("photos")
 
-                        // Check if EXIF contains geo-location data
-                        if (exifInterface.getLatLong(latLong)) {
-                            val latitude = latLong[0].toDouble()  // Convert Float to Double
-                            val longitude = latLong[1].toDouble() // Convert Float to Double
-                            Log.d("GeoLocation", "Geo-location found: Latitude = $latitude, Longitude = $longitude")
+        // Fetch the document for the photo
+        photosCollection.whereEqualTo("url", imageUrl).get()
+            .addOnSuccessListener { querySnapshot ->
+                if (querySnapshot.isEmpty) {
+                    Log.d("GeoLocation", "No location found for this image in Firestore.")
+                    // If no location in Firestore, fallback to EXIF
+                    fetchGeoLocationFromExif(imageUrl)
+                } else {
+                    // Fetch the location if it exists
+                    val document = querySnapshot.documents.firstOrNull()
+                    val location = document?.getString("location")
+                    val isLocationManuallySet = document?.getBoolean("isLocationManuallySet") ?: false
 
-                            // Reverse geocode to get a location name
-                            val locationName = getLocationName(latitude, longitude)  // Now passing Double
-                            if (locationName != null) {
-                                if (locationName.isNotEmpty()) {
-                                    Log.d("GeoLocation", "Location name found: $locationName")
-                                    locationTextView.text = locationName
-                                } else {
-                                    locationTextView.text = "Location not found"
-                                    Log.d("GeoLocation", "No location name found for the given coordinates.")
-                                }
-                            }
-
-                            locationTextView.visibility = View.VISIBLE
-                        } else {
-                            Log.d("GeoLocation", "No geo-location data found for this image.")
-                            locationTextView.visibility = View.GONE
-                        }
-                    } catch (e: IOException) {
-                        Log.e("GeoLocation", "Error reading EXIF data", e)
-                        locationTextView.visibility = View.GONE
+                    if (isLocationManuallySet && !location.isNullOrEmpty()) {
+                        // If manually set location exists in Firestore, show it
+                        Log.d("GeoLocation", "Manually set location from Firestore: $location")
+                        locationTextView.text = location
+                        locationTextView.visibility = View.VISIBLE
+                    } else {
+                        Log.d("GeoLocation", "No manual location found, falling back to EXIF.")
+                        fetchGeoLocationFromExif(imageUrl)
                     }
                 }
-
-                override fun onLoadCleared(placeholder: Drawable?) {
-                    Log.d("GeoLocation", "Clearing loaded image, hiding location info.")
-                    locationTextView.visibility = View.GONE
-                }
-            })
+            }
+            .addOnFailureListener { e ->
+                Log.e("GeoLocation", "Error fetching location from Firestore", e)
+                fetchGeoLocationFromExif(imageUrl)  // If Firestore fetch fails, try EXIF
+            }
     }
 
     private fun getLocationName(latitude: Double, longitude: Double): String? {
@@ -430,4 +435,67 @@ class FullscreenImageDialogFragment : DialogFragment() {
         }
         return null
     }
+    private fun promptForLocationUpdate(imageUrl: String) {
+        // Example implementation using an AlertDialog to enter location manually
+        val editText = EditText(context)
+        editText.hint = "Enter new location"
+
+        AlertDialog.Builder(requireContext())
+            .setTitle("Update Location Tag")
+            .setView(editText)
+            .setPositiveButton("Update") { _, _ ->
+                val newLocation = editText.text.toString()
+                updateLocationTag(imageUrl, newLocation)  // Pass the imageUrl
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun updateLocationTag(imageUrl: String, newLocation: String) {
+        locationTextView.text = newLocation
+        locationTextView.visibility = View.VISIBLE
+        // Optionally, save this update to Firestore
+        saveLocationToFirestore(imageUrl, newLocation)
+    }
+
+    private fun saveLocationToFirestore(imageUrl: String, newLocation: String) {
+        val userId = getCurrentUserId()
+        if (userId.isEmpty()) {
+            Toast.makeText(context, "User not authenticated", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Find the document matching the image URL and update the location
+        val photosCollection = FirebaseFirestore.getInstance()
+            .collection("users")
+            .document(userId)
+            .collection("photos")
+
+        photosCollection.whereEqualTo("url", imageUrl).get()
+            .addOnSuccessListener { querySnapshot ->
+                if (querySnapshot.isEmpty) {
+                    Log.d("SaveLocation", "No matching Firestore document found for URL: $imageUrl")
+                } else {
+                    // Update each matching document (in case of duplicates)
+                    for (document in querySnapshot.documents) {
+                        document.reference.update("location", newLocation)
+                            .addOnSuccessListener {
+                                Log.d("SaveLocation", "Location updated successfully")
+                                // Optionally update the location in the local map or state
+                                Toast.makeText(context, "Location saved", Toast.LENGTH_SHORT).show()
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e("SaveLocation", "Error updating location", e)
+                                Toast.makeText(context, "Failed to save location", Toast.LENGTH_SHORT).show()
+                            }
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("SaveLocation", "Error querying Firestore for location", e)
+                Toast.makeText(context, "Error finding photo document", Toast.LENGTH_SHORT).show()
+            }
+    }
+
 }
+

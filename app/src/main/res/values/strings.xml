@@ -306,6 +306,7 @@
     <string name="previousButton">Previous Button</string>
     <string name="nextButton">Next Button</string>
     <string name="editCaptionButton">Edit Caption</string>
+    <string name="editLocationButton">Edit Location Button</string>
     <!-- Spinner options for terrain -->
     <string-array name="terrain_options">
         <item>Foot Trails</item>
