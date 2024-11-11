@@ -348,44 +348,48 @@ class FullscreenImageDialogFragment : DialogFragment() {
     private fun loadGeoLocation(imageUrl: String) {
         Log.d("GeoLocation", "Attempting to load geo-location for image: $imageUrl")
 
-        // First, try to load the location from Firestore
-        Glide.with(this)
-            .downloadOnly()
-            .load(imageUrl)
-            .into(object : CustomTarget<File>() {
-                override fun onResourceReady(
-                    resource: File,
-                    transition: com.bumptech.glide.request.transition.Transition<in File>?
-                ) {
-                    Log.d("GeoLocation", "Image downloaded successfully, extracting EXIF data...")
+        val userId = getCurrentUserId()
+        if (userId.isEmpty()) {
+            Log.d("GeoLocation", "User not authenticated")
+            locationTextView.visibility = View.GONE
+            return
+        }
 
-                    try {
-                        val exifInterface = ExifInterface(resource)
-                        val latLong = FloatArray(2)
+        val photosCollection = FirebaseFirestore.getInstance()
+            .collection("users")
+            .document(userId)
+            .collection("photos")
 
-                        if (exifInterface.getLatLong(latLong)) {
-                            val latitude = latLong[0].toDouble()
-                            val longitude = latLong[1].toDouble()
-                            Log.d("GeoLocation", "Geo-location found: Latitude = $latitude, Longitude = $longitude")
+        // Fetch the document for the photo
+        photosCollection.whereEqualTo("url", imageUrl).get()
+            .addOnSuccessListener { querySnapshot ->
+                Log.d("GeoLocation", "Firestore query successful, documents found: ${querySnapshot.size()}")
 
-                            val locationName = getLocationName(latitude, longitude)
-                            locationTextView.text = locationName ?: "Location not found"
-                            locationTextView.visibility = View.VISIBLE
-                        } else {
-                            Log.d("GeoLocation", "No geo-location data found for this image.")
-                            locationTextView.visibility = View.GONE
-                        }
-                    } catch (e: IOException) {
-                        Log.e("GeoLocation", "Error reading EXIF data", e)
-                        locationTextView.visibility = View.GONE
+                if (querySnapshot.isEmpty) {
+                    Log.d("GeoLocation", "No location found for this image in Firestore.")
+                    // If no location in Firestore, fallback to EXIF
+                    fetchGeoLocationFromExif(imageUrl)
+                } else {
+                    // Fetch the location if it exists
+                    val document = querySnapshot.documents.firstOrNull()
+                    val location = document?.getString("location")
+                    val isLocationManuallySet = document?.getBoolean("isLocationManuallySet") ?: false
+
+                    if (isLocationManuallySet && !location.isNullOrEmpty()) {
+                        // If manually set location exists in Firestore, show it
+                        Log.d("GeoLocation", "Manually set location from Firestore: $location")
+                        locationTextView.text = location
+                        locationTextView.visibility = View.VISIBLE
+                    } else {
+                        Log.d("GeoLocation", "No manual location found, falling back to EXIF.")
+                        fetchGeoLocationFromExif(imageUrl)
                     }
                 }
-
-                override fun onLoadCleared(placeholder: Drawable?) {
-                    Log.d("GeoLocation", "Clearing loaded image, hiding location info.")
-                    locationTextView.visibility = View.GONE
-                }
-            })
+            }
+            .addOnFailureListener { e ->
+                Log.e("GeoLocation", "Error fetching location from Firestore", e)
+                fetchGeoLocationFromExif(imageUrl)  // If Firestore fetch fails, try EXIF
+            }
     }
 
     private fun getLocationName(latitude: Double, longitude: Double): String? {
@@ -455,43 +459,85 @@ class FullscreenImageDialogFragment : DialogFragment() {
         saveLocationToFirestore(imageUrl, newLocation)
     }
 
-    private fun saveLocationToFirestore(imageUrl: String, newLocation: String) {
+    private fun saveLocationToFirestore(imageUrl: String, location: String) {
         val userId = getCurrentUserId()
         if (userId.isEmpty()) {
-            Toast.makeText(context, "User not authenticated", Toast.LENGTH_SHORT).show()
+            Log.d("GeoLocation", "User not authenticated")
             return
         }
 
-        // Find the document matching the image URL and update the location
         val photosCollection = FirebaseFirestore.getInstance()
             .collection("users")
             .document(userId)
             .collection("photos")
 
+        // Find the photo document to update
         photosCollection.whereEqualTo("url", imageUrl).get()
             .addOnSuccessListener { querySnapshot ->
                 if (querySnapshot.isEmpty) {
-                    Log.d("SaveLocation", "No matching Firestore document found for URL: $imageUrl")
+                    Log.d("GeoLocation", "No photo found with this URL.")
                 } else {
-                    // Update each matching document (in case of duplicates)
-                    for (document in querySnapshot.documents) {
-                        document.reference.update("location", newLocation)
-                            .addOnSuccessListener {
-                                Log.d("SaveLocation", "Location updated successfully")
-                                // Optionally update the location in the local map or state
-                                Toast.makeText(context, "Location saved", Toast.LENGTH_SHORT).show()
-                            }
-                            .addOnFailureListener { e ->
-                                Log.e("SaveLocation", "Error updating location", e)
-                                Toast.makeText(context, "Failed to save location", Toast.LENGTH_SHORT).show()
-                            }
-                    }
+                    val document = querySnapshot.documents.firstOrNull()
+                    val photoRef = photosCollection.document(document?.id ?: "")
+
+                    // Save the location and set the flag for manual edit
+                    val locationData = mapOf(
+                        "location" to location,
+                        "isLocationManuallySet" to true
+                    )
+
+                    photoRef.update(locationData)
+                        .addOnSuccessListener {
+                            Log.d("GeoLocation", "Location successfully saved to Firestore!")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e("GeoLocation", "Failed to save location to Firestore", e)
+                        }
                 }
             }
             .addOnFailureListener { e ->
-                Log.e("SaveLocation", "Error querying Firestore for location", e)
-                Toast.makeText(context, "Error finding photo document", Toast.LENGTH_SHORT).show()
+                Log.e("GeoLocation", "Error finding photo in Firestore", e)
             }
+    }
+
+    private fun fetchGeoLocationFromExif(imageUrl: String) {
+        Glide.with(this)
+            .downloadOnly()
+            .load(imageUrl)
+            .into(object : CustomTarget<File>() {
+                override fun onResourceReady(
+                    resource: File,
+                    transition: com.bumptech.glide.request.transition.Transition<in File>?
+                ) {
+                    Log.d("GeoLocation", "Image downloaded successfully, extracting EXIF data...")
+
+                    try {
+                        val exifInterface = ExifInterface(resource)
+                        val latLong = FloatArray(2)
+
+                        if (exifInterface.getLatLong(latLong)) {
+                            val latitude = latLong[0].toDouble()
+                            val longitude = latLong[1].toDouble()
+                            Log.d("GeoLocation", "Geo-location found: Latitude = $latitude, Longitude = $longitude")
+
+                            val locationName = getLocationName(latitude, longitude)
+                            locationTextView.text = locationName ?: "Location not found"
+                            locationTextView.visibility = View.VISIBLE
+                        } else {
+                            Log.d("GeoLocation", "No geo-location data found for this image.")
+                            locationTextView.visibility = View.GONE
+                        }
+                    } catch (e: IOException) {
+                        Log.e("GeoLocation", "Error reading EXIF data", e)
+                        locationTextView.visibility = View.GONE
+                    }
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) {
+                    Log.d("GeoLocation", "Clearing loaded image, hiding location info.")
+                    locationTextView.visibility = View.GONE
+                }
+            })
     }
 
 }
