@@ -192,14 +192,13 @@ class TimerActivity: AppCompatActivity() {
                 if (document != null && document.exists()) {
                     val pendingNotifications = document.get("pendingNotifications") as? List<String> ?: emptyList()
 
-                    // Construct the notification message using the party members' names
-                    // Assuming 'partyMembers' contains names directly:
-                    val partyMembersString = partyMembers.joinToString(", ") // Join party members' names with commas
-                    // Construct the notification message including the park name
-                    val notificationMessage = "$currentUserName has just embarked on a new trail adventure at $parkName! Please keep an eye on them and check in periodically. Their safety is important."
+                    // Construct the notification message
+                    val notificationMessage = "$currentUserName has just embarked on a new trail adventure at $parkName! " +
+                            "Please keep an eye on them and check in periodically. Their safety is important."
                     // Check if the notification message has already been sent
                     if (pendingNotifications.contains(notificationMessage)) {
-                        Toast.makeText(this, "Notification already sent to this friend.", Toast.LENGTH_SHORT).show()
+                        // Only notify if it's already been sent
+                        Toast.makeText(this, "Notification already sent to ${document.getString("username")}.", Toast.LENGTH_SHORT).show()
                     } else {
                         // Update the friend's document to add the notification message to pendingNotifications
                         val notificationUpdates = hashMapOf<String, Any>(
@@ -208,11 +207,11 @@ class TimerActivity: AppCompatActivity() {
 
                         friendRef.set(notificationUpdates, SetOptions.merge())
                             .addOnSuccessListener {
-                                Toast.makeText(this, "Notification sent successfully!", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Notification sent successfully to ${document.getString("username")}!", Toast.LENGTH_SHORT).show()
                             }
                             .addOnFailureListener { exception ->
                                 Log.e("TimerActivity", "Error sending notification: ", exception)
-                                Toast.makeText(this, "Failed to send notification.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Failed to send notification to ${document.getString("username")}.", Toast.LENGTH_SHORT).show()
                             }
                     }
                 } else {
