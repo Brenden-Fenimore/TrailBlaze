@@ -18,28 +18,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="80dp"/>
-        <Button
-                android:layout_marginTop="350dp"
-                android:layout_marginStart="275dp"
-                android:text="Find Trails Near Me"
-                android:fontFamily="@font/amethysta"
-                android:layout_width="124dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/nearbysearch"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:backgroundTint="#4B652B"
-                android:textColor="@color/white"/>
-
     </FrameLayout>
 
+
     <Button
-            android:text="FullSail"
-            android:layout_marginStart="300dp"
-            android:layout_marginTop="75dp"
+            android:layout_marginTop="350dp"
+            android:layout_marginStart="275dp"
+            android:text="Find Trails Near Me"
+            android:fontFamily="@font/amethysta"
+            android:layout_width="124dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/nearbysearch"
+            app:strokeColor="#000000"
+            app:strokeWidth="1dp"
+            android:backgroundTint="#4B652B"
+            android:textColor="@color/white"/>
+    <Button
+            android:text="Clear Map"
+            android:layout_alignEnd="@id/nearbysearch"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/fullsail"/>
+            android:id="@+id/fullsail"
+            app:strokeColor="#000000"
+            android:backgroundTint="#4B652B"
+            app:strokeWidth="1dp"
+            android:layout_below="@id/nearbysearch"/>
     <View
             android:layout_marginTop="27dp"
             android:layout_marginStart="80dp"

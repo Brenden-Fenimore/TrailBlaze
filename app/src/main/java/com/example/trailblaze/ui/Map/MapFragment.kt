@@ -103,7 +103,7 @@ OnMapReadyCallback {
 //          map.animateCamera(CameraUpdateFactory.newCameraPosition(fullSail))
             placesList.clear()
             map.clear()
-            bottomSheetAdapter = MapBottomSheetAdapter(placesList)
+            bottomSheetAdapter = MapBottomSheetAdapter(placesList,placesClient)
             recyclerView.adapter = bottomSheetAdapter
             recyclerView.layoutManager = LinearLayoutManager(thiscontext)
             recyclerView!!.adapter?.notifyDataSetChanged()
@@ -158,6 +158,8 @@ OnMapReadyCallback {
                         map.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
                         //refresh current user
                         currentUser = UserManager.getCurrentUser()
+
+                        //TODO (check if measurement of distance is metric or imperial before converting)
                         //take mile distance and convert to meters
                         var radius = currentUser!!.distance!!*1609.34
                         //check if meter distance is over 50,000 and if it is then set it to 50,000
@@ -178,7 +180,7 @@ OnMapReadyCallback {
                             }
                             placesList.addAll(result.places)
 
-                            bottomSheetAdapter = MapBottomSheetAdapter(placesList)
+                            bottomSheetAdapter = MapBottomSheetAdapter(placesList,placesClient)
                             recyclerView.adapter = bottomSheetAdapter
                             recyclerView.layoutManager = LinearLayoutManager(thiscontext)
                             recyclerView!!.adapter?.notifyDataSetChanged()
@@ -215,7 +217,7 @@ OnMapReadyCallback {
 
 
 
-                bottomSheetAdapter = MapBottomSheetAdapter(placesList)
+                bottomSheetAdapter = MapBottomSheetAdapter(placesList,placesClient)
                 recyclerView.adapter = bottomSheetAdapter
                 recyclerView.layoutManager = LinearLayoutManager(thiscontext)
                 recyclerView!!.adapter?.notifyDataSetChanged()
@@ -236,7 +238,7 @@ OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
 
         multiAutoCompleteTextView.addTextChangedListener{
-                updateAutoCompletePredictions(autoFillAdapter!!, multiAutoCompleteTextView.text.toString(), placesClient)
+                updateAutoCompletePredictions(autoFillAdapter, multiAutoCompleteTextView.text.toString(), placesClient)
         }
         val bottomsheet = this.view!!.findViewById<ConstraintLayout>(R.id.bottomsheetinclude)
         bottomSheetBehavior = BottomSheetBehavior.from(bottomsheet)
