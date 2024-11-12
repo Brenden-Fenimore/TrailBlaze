@@ -161,12 +161,7 @@ class TimerActivity: AppCompatActivity() {
 
         // Notify watchers button click listener
         notifyWatchersButton.setOnClickListener {
-            fetchFavoriteFriends { favoriteFriends ->
-                // Iterate through the favorite friends and send notification
-                for (friend in favoriteFriends) {
-                    sendNotificationToFriend(friend.id) // Assuming AddFriend has an id property
-                }
-            }
+            showAddWatcherDialog()
         }
 
         // Emergency button click listener
@@ -421,5 +416,47 @@ class TimerActivity: AppCompatActivity() {
         Tasks.whenAllSuccess<DocumentSnapshot>(tasks).addOnSuccessListener {
             onComplete(friendsList) // Return the populated friends list
         }
+    }
+
+    private fun showAddWatcherDialog() {
+        // Inflate the dialog layout
+        val dialogView = layoutInflater.inflate(R.layout.dialog_add_friends, null)
+
+        val dialogBuilder = AlertDialog.Builder(this)
+            .setView(dialogView)
+
+        val dialog = dialogBuilder.create()
+
+        // Initialize RecyclerView
+        val friendsRecyclerView: RecyclerView = dialogView.findViewById(R.id.friendsRecyclerView)
+        val confirmButton: Button = dialogView.findViewById(R.id.confirm_selection_button)
+
+        // Initialize an empty friends list
+        val friendsList = mutableListOf<AddFriend>()
+
+        // Initialize the adapter with the friends list
+        val friendsAdapter = AddFriendsAdapter(friendsList) { friend ->
+        }
+
+        // Set up the RecyclerView
+        friendsRecyclerView.layoutManager = LinearLayoutManager(this)
+        friendsRecyclerView.adapter = friendsAdapter
+
+        // Fetch the user's favorite friends
+        fetchFavoriteFriends { fetchedFriends ->
+            friendsList.clear() // Clear the current list
+            friendsList.addAll(fetchedFriends) // Add the fetched friends
+            friendsAdapter.notifyDataSetChanged() // Notify the adapter to refresh the list
+        }
+
+        // Confirm button click listener
+        confirmButton.setOnClickListener {
+            val selectedFriends = friendsList.filter { it.isSelected } // Get only selected friends
+            selectedFriends.forEach { friend ->
+                sendNotificationToFriend(friend.id) // Send notification to each selected friend
+            }
+            dialog.dismiss() // Close the dialog after action is complete
+        }
+        dialog.show() // Show the dialog
     }
 }
