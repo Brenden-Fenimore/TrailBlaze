@@ -20,4 +20,11 @@ data class User(
     val favoriteParks: List<Park> = emptyList(),
     val bucketListParks: List<Park> = emptyList(),
     val isPrivateAccount: Boolean,
+    val favoriteTrailsVisible: Boolean,
+    val leaderboardVisible: Boolean,
+    val photosVisible: Boolean,
+    val shareLocationVisible: Boolean,
+    val watcherVisible: Boolean,
+    val photos: List<String> = emptyList()
+
 )
