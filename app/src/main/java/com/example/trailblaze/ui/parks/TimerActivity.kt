@@ -8,6 +8,7 @@ import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,6 +34,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import com.example.trailblaze.firestore.UserManager
 import com.example.trailblaze.firestore.User
+import com.example.trailblaze.watcherFeature.WatcherMemberViewModel
 import com.google.firebase.firestore.SetOptions
 
 class TimerActivity: AppCompatActivity() {
@@ -50,7 +52,11 @@ class TimerActivity: AppCompatActivity() {
     private var currentUser: User? = null
 
     // Watcher List
+private val selectedWatchers = mutableListOf<AddFriend>()
 
+    // Initialize WatcherMemberViewModel
+
+   private val watcherMemberViewModel: WatcherMemberViewModel by viewModels ()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,7 +73,7 @@ class TimerActivity: AppCompatActivity() {
 
         partyMembers = intent.getStringArrayExtra("PARTY_MEMBERS") ?: arrayOf()
 
-       val watcherMembers = intent.getStringArrayExtra("WATCHER_MEMBERS") ?: arrayOf()
+
 
         // Log the activities to see what was pulled in
         Log.d("AttemptTrailActivity", "Activities received: ${activities.joinToString(", ")}")
@@ -79,6 +85,8 @@ class TimerActivity: AppCompatActivity() {
 
         // Initialize AchievementManager
         achievementManager = AchievementManager(this)
+
+
 
         // Get the park code from the intent
         parkCode = intent.getStringExtra("PARK_CODE") ?: ""
@@ -166,12 +174,7 @@ class TimerActivity: AppCompatActivity() {
 
         // Notify watchers button click listener
         notifyWatchersButton.setOnClickListener {
-            fetchFavoriteFriends { favoriteFriends ->
-                // Iterate through the favorite friends and send notification
-                for (friend in favoriteFriends) {
-                    sendNotificationToFriend(friend.id) // Assuming AddFriend has an id property
-                }
-            }
+          showWatcherSelectionDialog() // Start Watcher Selection Dialog
         }
 
         // Emergency button click listener
@@ -180,11 +183,34 @@ class TimerActivity: AppCompatActivity() {
         }
     }
 
-    private fun showWatcherSelectionDialog(){
+    private fun showWatcherSelectionDialog() {
+        watcherMemberViewModel.fetchWatcherMembers()
 
+        watcherMemberViewModel.watcherMembers.observe(this) { watcherList ->
+            val watcherNames = watcherList.map { it.username }.toTypedArray()
+            val selectedItems = BooleanArray(watcherNames.size)
+
+            AlertDialog.Builder(this)
+                .setTitle("Select Watchers")
+                .setMultiChoiceItems(watcherNames, selectedItems) { _, index, isSelected ->
+                    val friend = watcherList[index]
+                    if (isSelected) {
+                        watcherMemberViewModel.addWatcher(friend)
+                    } else {
+                        watcherMemberViewModel.removeWatcher(friend)
+                    }
+                }
+                .setPositiveButton("NOTIFY") { _, _ ->
+                    watcherMemberViewModel.selectedWatchers.value?.forEach { watcher ->
+                        sendNotificationToFriend(watcher.userId)
+                    }
+                }
+                .setNegativeButton("CANCEL", null)
+                .show()
+        }
     }
 
-    private fun sendNotificationToFriend(friendId: String) {
+  private fun sendNotificationToFriend(friendId: String) {
         val currentUserId = FirebaseAuth.getInstance().currentUser?.uid ?: return
 
         // Reference to the current user's document in Firestore
