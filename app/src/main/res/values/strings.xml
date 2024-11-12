@@ -165,7 +165,8 @@
     <string name="wildlifewatcher">Wildlife Watcher: Complete a trail with a Wildlife activity.</string>
     <string name="photographer">Photographer: Upload a picture to your TrailBlaze.</string>
     <string name="goalsetter">Goal Setter: Add your badges to your sash.</string>
-    <string name="badgecollector">Badge Collector: Earn badges for completing specific challenges or achievements.</string>
+    <string name="badgecollector">Badge Collector: Earn badges for completing specific challenges or achievements.
+    </string>
     <string name="leaderboardtip">Leaderboard Climber: Get at least 2 badges.</string>
 
     <!-- Park information-->
@@ -418,13 +419,15 @@
         have shown time and time again that you are there for your Blazer when they need you most!! Congratulations!!
     </string>
     <string name="setupWatcher">Would you like to be designated as a Watcher for your TrailBlaze friends?</string>
-    <string name="watcherDescription">Watchers are trusted contacts that can monitor a TrailBlazer\'s journey in real-time to help users stay safe and connected.</string>
+    <string name="watcherDescription">Watchers are trusted contacts that can monitor a TrailBlazer\'s journey in
+        real-time to help users stay safe and connected.
+    </string>
     <string name="Later">Later</string>
     <string name="Yes">Yes</string>
-    <string name="blazer"> TrailBlaze Username</string>
+    <string name="blazer">TrailBlaze Username</string>
     <string name="watcherPhoto">Watcher Member Photo</string>
     <string name="watcherBadge">Watcher Badges</string>
-    <string name="watcherMemPhoto"> Watcher member profile photo</string>
+    <string name="watcherMemPhoto">Watcher member profile photo</string>
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
     <string name="_0">0</string>

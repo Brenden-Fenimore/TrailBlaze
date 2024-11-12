@@ -110,7 +110,7 @@ class FriendsProfileActivity : AppCompatActivity() {
 
         // Watcher Member Click Listener
         binding.watcherMember.setOnClickListener{
-        setContentView(R.layout.activity_watcher_member)
+        setContentView(R.layout.activity_watcher_profile)
         }
 
         // Initialize the RecyclerView for friends in common

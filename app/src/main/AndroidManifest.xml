@@ -1,43 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraText">
+          xmlns:tools="http://schemas.android.com/tools"
+          tools:ignore="ExtraText">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
             android:allowBackup="true"
             android:dataExtractionRules="@xml/data_extraction_rules"
+            android:enableOnBackInvokedCallback="true"
             android:fullBackupContent="@xml/backup_rules"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.TrailBlaze"
-            tools:targetApi="31"
-            android:enableOnBackInvokedCallback="true">
-
+            tools:targetApi="31">
+        <activity
+                android:name=".watcherFeature.WatcherProfile"
+                android:exported="false"/>
         <activity
                 android:name=".ui.home.PendingNotificationActivity"
                 android:exported="true"/>
-
         <activity
                 android:name=".ui.parks.TimerActivity"
                 android:exported="true"/>
-
         <activity
                 android:name=".ui.parks.AttemptTrailActivity"
                 android:exported="true"/>
-
         <activity
                 android:name=".ui.profile.UserListActivity"
                 android:exported="true"/>
-
         <activity
                 android:name=".ui.achievements.BadgesActivity"
                 android:exported="true"/>
-
         <activity
                 android:name=".ui.parks.ParkDetailActivity"
                 android:exported="true"/>
@@ -47,7 +46,6 @@
         <activity
                 android:name=".settings.SafetyActivity"
                 android:exported="false"/>
-
         <activity
                 android:name=".ui.MenuActivity"
                 android:exported="false"/>
@@ -99,9 +97,7 @@
                 android:name=".settings.SettingsScreenActivity"
                 android:exported="false"
                 android:theme="@style/Theme.TrailBlaze"/>
-
-        <activity android:name=".ui.profile.FriendRequestActivity" />
-
+        <activity android:name=".ui.profile.FriendRequestActivity"/>
         <activity
                 android:name=".MainActivity"
                 android:exported="true"
@@ -115,19 +111,10 @@
 
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
-                android:value="${GOOGLE_MAPS_API_KEY}"/>
-
-
-        <!-- Acceptable Use Activity-->
-        <activity android:name=".login.AcceptableActivity" />
-
-        <!-- Privacy Activity-->
-        <activity android:name=".login.PrivacyActivity" />
-
-        <!-- Watcher Member Activity-->
-<activity android:name=".watcherFeature.WatcherMemberList"/>
-
+                android:value="${GOOGLE_MAPS_API_KEY}"/> <!-- Acceptable Use Activity -->
+        <activity android:name=".login.AcceptableActivity"/> <!-- Privacy Activity -->
+        <activity android:name=".login.PrivacyActivity"/> <!-- Watcher Member Activity -->
+        <activity android:name=".watcherFeature.WatcherMemberList"/>
     </application>
-    //enables the emulator to access the internet (Brenden enabled this for MAPS API to get nearby search)
-    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>

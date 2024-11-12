@@ -58,25 +58,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:padding="9dp"/>
 
-    <!-- Watcher Logo-->
-    <ImageView
-            android:id="@+id/watcherLogo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginBottom="3dp"
-            app:layout_constraintTop_toBottomOf="@id/watcherName"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/watcherslogo"
-            android:contentDescription="@string/watcherLogo"
-            android:layout_gravity="center_horizontal"/>
+
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/watcherLogo"
+            app:layout_constraintTop_toBottomOf="@+id/watcherName"
             app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/watcherRankDetails"
             android:padding="5dp"
@@ -96,23 +84,23 @@
                 android:fontFamily="@font/amethysta"
                 android:layout_marginTop="9dp"/>
 
-<!-- Rank Metrics-->
+        <!-- Rank Metrics-->
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="9dp">
 
-        <!-- Total Trails Watched-->
+            <!-- Total Trails Watched-->
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/amethysta"
-                android:text="Total Trails Watched"
-                android:padding="9dp"
-                android:textSize="12sp"
-                android:layout_marginTop="10dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/amethysta"
+                    android:text="Total Trails Watched"
+                    android:padding="9dp"
+                    android:textSize="12sp"
+                    android:layout_marginTop="10dp"/>
 
             <TextView
                     android:layout_width="wrap_content"
@@ -149,91 +137,103 @@
         </LinearLayout>
     </LinearLayout>
 
-        <LinearLayout
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/watcherAwards"
+            app:layout_constraintTop_toBottomOf="@+id/watcherRankDetails"
+            android:layout_marginTop="9dp">
+
+        <!-- Watcher Award Label-->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/watcherStatsLabel"
+                android:text="@string/watcherStats"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/amethysta"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center_horizontal"
+                android:padding="9dp"/>
+
+        <!-- Badge Scrolling Portion -->
+        <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:id="@+id/watcherAwards"
-                app:layout_constraintTop_toBottomOf="@+id/watcherRankDetails"
-                android:layout_marginTop="9dp">
+                android:layout_marginTop="6dp"
+                android:id="@+id/badgeScroll">
 
-            <!-- Watcher Award Label-->
-            <TextView
+            <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/watcherStatsLabel"
-                    android:text="@string/watcherStats"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/amethysta"
-                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
                     android:layout_gravity="center_horizontal"
-                    android:padding="9dp"/>
+                    android:id="@+id/watcherStats"
+                    android:padding="3dp"
+                    tools:ignore="UseCompoundDrawables">
 
-            <!-- Badge Scrolling Portion -->
-            <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:id="@+id/badgeScroll">
+                <!-- Badge Bar-->
 
-                <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_gravity="center_horizontal"
-                        android:id="@+id/watcherStats"
-                        android:padding="3dp"
-                        tools:ignore="UseCompoundDrawables">
+                <!-- Badge Image-->
 
-                    <!-- Badge Bar-->
+                <ImageView
+                        android:id="@+id/watcherBadges"
+                        android:layout_width="95dp"
+                        android:layout_height="93dp"
+                        android:layout_marginStart="1dp"
+                        android:src="@drawable/badge"
+                        android:layout_gravity="center_vertical"
+                        android:contentDescription="@string/watcherBadge"
+                        android:layout_marginTop="5dp"
+                        android:padding="6dp"/>
+                <ImageView
+                        android:id="@+id/watcherBadges1"
+                        android:layout_width="95dp"
+                        android:layout_height="93dp"
+                        android:layout_marginStart="1dp"
+                        android:src="@drawable/badge"
+                        android:layout_gravity="center_vertical"
+                        android:contentDescription="@string/watcherBadge"
+                        android:layout_marginTop="5dp"
+                        android:padding="6dp"/>
+                <ImageView
+                        android:id="@+id/watcherBadges2"
+                        android:layout_width="95dp"
+                        android:layout_height="93dp"
+                        android:layout_marginStart="1dp"
+                        android:src="@drawable/badge"
+                        android:layout_gravity="center_vertical"
+                        android:contentDescription="@string/watcherBadge"
+                        android:layout_marginTop="5dp"
+                        android:padding="6dp"/>
 
-                    <!-- Badge Image-->
+                <!-- Badge Description-->
 
-                    <ImageView
-                            android:id="@+id/watcherBadges"
-                            android:layout_width="95dp"
-                            android:layout_height="93dp"
-                            android:layout_marginStart="1dp"
-                            android:src="@drawable/badge"
-                            android:layout_gravity="center_vertical"
-                            android:contentDescription="@string/watcherBadge"
-                            android:layout_marginTop="5dp"
-                            android:padding="6dp"/>
-                    <ImageView
-                            android:id="@+id/watcherBadges1"
-                            android:layout_width="95dp"
-                            android:layout_height="93dp"
-                            android:layout_marginStart="1dp"
-                            android:src="@drawable/badge"
-                            android:layout_gravity="center_vertical"
-                            android:contentDescription="@string/watcherBadge"
-                            android:layout_marginTop="5dp"
-                            android:padding="6dp"/>
-                    <ImageView
-                            android:id="@+id/watcherBadges2"
-                            android:layout_width="95dp"
-                            android:layout_height="93dp"
-                            android:layout_marginStart="1dp"
-                            android:src="@drawable/badge"
-                            android:layout_gravity="center_vertical"
-                            android:contentDescription="@string/watcherBadge"
-                            android:layout_marginTop="5dp"
-                            android:padding="6dp"/>
+                <!--  <TextView
+                          android:layout_width="325dp"
+                          android:layout_height="wrap_content"
+                          android:text="@string/watcherBadgeDetails"
+                          android:fontFamily="@font/amethysta"
+                          android:textSize="14sp"
+                          android:textAlignment="center"
+                          android:padding="10dp"/> -->
 
-                    <!-- Badge Description-->
-
-                    <!--  <TextView
-                              android:layout_width="325dp"
-                              android:layout_height="wrap_content"
-                              android:text="@string/watcherBadgeDetails"
-                              android:fontFamily="@font/amethysta"
-                              android:textSize="14sp"
-                              android:textAlignment="center"
-                              android:padding="10dp"/> -->
-
-                </LinearLayout>
-            </HorizontalScrollView>
-
-        </LinearLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
+        <!-- Watcher Logo-->
+        <ImageView
+                android:id="@+id/watcherLogo"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="3dp"
+                app:layout_constraintTop_toBottomOf="@id/watcherName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/watcherslogo"
+                android:contentDescription="@string/watcherLogo"
+                android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
