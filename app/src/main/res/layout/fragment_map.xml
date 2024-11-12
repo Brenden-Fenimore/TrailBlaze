@@ -18,69 +18,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="80dp"/>
+
     </FrameLayout>
-
-
-    <Button
-            android:layout_marginTop="350dp"
-            android:layout_marginStart="275dp"
-            android:text="Find Trails Near Me"
-            android:fontFamily="@font/amethysta"
-            android:layout_width="124dp"
+    <RelativeLayout
+            android:id="@+id/search"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:id="@+id/nearbysearch"
-            app:strokeColor="#000000"
-            app:strokeWidth="1dp"
-            android:backgroundTint="#4B652B"
-            android:textColor="@color/white"/>
-    <Button
-            android:text="Clear Map"
-            android:layout_alignEnd="@id/nearbysearch"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/fullsail"
-            app:strokeColor="#000000"
-            android:backgroundTint="#4B652B"
-            app:strokeWidth="1dp"
-            android:layout_below="@id/nearbysearch"/>
-    <View
-            android:layout_marginTop="27dp"
-            android:layout_marginStart="80dp"
-            android:layout_width="230dp"
-            android:layout_height="40dp"
-            android:background="#E6FFFFFF"/>
-    <MultiAutoCompleteTextView
-            android:layout_marginTop="25dp"
-            android:layout_marginStart="85dp"
-            android:id="@+id/map_search"
-            android:text=""
-            android:hint="@string/map_search_hint"
-            android:ems="10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/amethysta"
-            android:singleLine="true"
-            android:dropDownHeight="wrap_content"
-            android:textColor="#000000"
-            android:textColorHint="#6B6B6B"/>
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true">>
 
-    <ImageButton
-            android:layout_marginStart="285dp"
-            android:layout_marginTop="42dp"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:id="@+id/clear_mapsearchtext"
-            app:srcCompat="@drawable/x"
-            android:clickable="true"/>
+        <View
+                android:layout_width="230dp"
+                android:layout_height="40dp"
+                android:background="#E6FFFFFF"/>
+
+        <MultiAutoCompleteTextView
+                android:id="@+id/map_search"
+                android:text=""
+                android:hint="@string/map_search_hint"
+                android:ems="10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/amethysta"
+                android:singleLine="true"
+                android:dropDownHeight="wrap_content"
+                android:textColor="#000000"
+                android:textColorHint="#6B6B6B"/>
+
+        <ImageButton
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:id="@+id/clear_mapsearchtext"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/x"
+                android:clickable="true"/>
+    </RelativeLayout>
 
 
     //roadmap button layout
     <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:translationX="335dp"
-            android:translationY="130dp"
+            android:layout_below="@id/search"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="15dp"
             android:id="@+id/roadmap"
             android:clickable="true">
         <ImageView
@@ -110,13 +92,13 @@
         //end of road button
     </RelativeLayout>
 
-
     //satellite button layout
     <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:translationX="335dp"
-            android:translationY="200dp"
+            android:layout_below="@id/roadmap"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="15dp"
             android:id="@+id/satellite"
             android:clickable="true">
         <ImageView
@@ -150,8 +132,9 @@
     <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:translationX="335dp"
-            android:translationY="270dp"
+            android:layout_below="@id/satellite"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="15dp"
             android:id="@+id/terrain"
             android:clickable="true">
         <ImageView
@@ -182,13 +165,47 @@
         </TextView>
         //end of terrain button
     </RelativeLayout>
+
+    <Button
+            android:layout_below="@id/terrain"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="15dp"
+            android:text="Find Trails Near Me"
+            android:fontFamily="@font/amethysta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nearbysearch"
+            android:backgroundTint="#4B652B"
+            app:strokeColor="#000000"
+            app:strokeWidth="1dp"
+            android:textColor="@color/white"/>
+
+    <Button
+            android:text="Clear Map"
+            android:layout_alignEnd="@id/nearbysearch"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fullsail"
+            app:strokeColor="#000000"
+            android:backgroundTint="#4B652B"
+            app:strokeWidth="1dp"
+            android:layout_below="@id/nearbysearch"/>
+
+
+
+
+
+
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".MainActivity"
-            android:layout_marginBottom="80dp">
+            android:layout_marginBottom="53dp">
+
         <include layout="@layout/map_fragment_bottom_sheet"
                  android:id="@+id/bottomsheetinclude"
                  app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"/>
