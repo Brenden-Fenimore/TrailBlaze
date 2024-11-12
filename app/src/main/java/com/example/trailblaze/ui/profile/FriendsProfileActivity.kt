@@ -345,76 +345,83 @@ class FriendsProfileActivity : AppCompatActivity() {
             }
     }
 
-    // Removes the friend from the current user's friends list in Firestore
+    // Removes the friend from the current user's friends list and favorites list in Firestore
     private fun removeFriend(friendId: String) {
         val currentUserId = auth.currentUser?.uid ?: return
         val userRef = firestore.collection("users").document(currentUserId)
 
-        userRef.update("friends", FieldValue.arrayRemove(friendId))
-            .addOnSuccessListener {
-                triggerRaindropEffect()
+        firestore.runBatch { batch ->
+            // Remove the friend from both friends and favoriteFriends lists
+            batch.update(userRef, "friends", FieldValue.arrayRemove(friendId))
+            batch.update(userRef, "favoriteFriends", FieldValue.arrayRemove(friendId))
+        }.addOnSuccessListener {
+            // Trigger visual effects and update the UI after successful removal
+            triggerRaindropEffect()
 
-                Toast.makeText(this, "Friend removed successfully!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Friend removed successfully!", Toast.LENGTH_SHORT).show()
 
-                // Update UI to reflect removal
-                binding.addFriendButton.visibility = View.VISIBLE // Show add friend button
-                binding.favoriteFriendBtn.visibility = View.GONE // Hide favorite button
-                binding.removeFriendButton.visibility = View.GONE   // Hide unfriend button
-            }
-            .addOnFailureListener { exception ->
-                Log.e("FriendsProfileActivity", "Error removing friend: ", exception)
-                Toast.makeText(this, "Failed to remove friend.", Toast.LENGTH_SHORT).show()
-            }
+            // Update UI to reflect removal
+            binding.addFriendButton.visibility = View.VISIBLE // Show add friend button
+            binding.favoriteFriendBtn.visibility = View.GONE // Hide favorite button
+            binding.removeFriendButton.visibility = View.GONE // Hide unfriend button
+        }.addOnFailureListener { exception ->
+            Log.e("FriendsProfileActivity", "Error removing friend: ", exception)
+            Toast.makeText(this, "Failed to remove friend.", Toast.LENGTH_SHORT).show()
+        }
     }
+
 
     private fun toggleFavoriteStatus(currentUserId: String, friendId: String) {
         val userRef = firestore.collection("users").document(currentUserId)
+        val friendRef = firestore.collection("users").document(friendId) // Reference to the friend's document
 
-        userRef.get().addOnSuccessListener { document ->
-            if (document != null && document.exists()) {
-                val favoriteFriendsList = document.get("favoriteFriends") as? List<String> ?: emptyList()
+        friendRef.get().addOnSuccessListener { friendDocument ->
+            val friendUsername = friendDocument.getString("username") ?: "this friend" // Get friend's username
 
-                // Check if the friendId is already in the favorites list
-                if (favoriteFriendsList.contains(friendId)) {
-                    // Friend is already a favorite, ask for confirmation to remove
-                    showConfirmationDialog("Remove from Watchers List", "Are you sure you want to remove this friend from your Watchers List?") {
-                        userRef.update("favoriteFriends", FieldValue.arrayRemove(friendId))
-                            .addOnSuccessListener {
+            userRef.get().addOnSuccessListener { userDocument ->
+                if (userDocument != null && userDocument.exists()) {
+                    val favoriteFriendsList = userDocument.get("favoriteFriends") as? List<String> ?: emptyList()
 
-                                triggerBrokenHeartDropEffect()
-
-                                Toast.makeText(this, "Removed from Watchers List", Toast.LENGTH_SHORT).show()
-                                binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Change to outline icon
-                            }
-                            .addOnFailureListener { e ->
-                                Toast.makeText(this, "Failed to remove from Watchers List: ${e.message}", Toast.LENGTH_SHORT).show()
-                            }
+                    // Check if the friendId is already in the favorites list
+                    if (favoriteFriendsList.contains(friendId)) {
+                        // Friend is already a favorite, ask for confirmation to remove
+                        showConfirmationDialog("Remove from Watchers List", "Are you sure you want to remove $friendUsername from your Watchers List?") {
+                            userRef.update("favoriteFriends", FieldValue.arrayRemove(friendId))
+                                .addOnSuccessListener {
+                                    triggerBrokenHeartDropEffect()
+                                    Toast.makeText(this, "$friendUsername removed from Watchers List", Toast.LENGTH_SHORT).show()
+                                    binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Change to outline icon
+                                }
+                                .addOnFailureListener { e ->
+                                    Toast.makeText(this, "Failed to remove from Watchers List: ${e.message}", Toast.LENGTH_SHORT).show()
+                                }
+                        }
+                    } else {
+                        // Friend is not a favorite, ask for confirmation to add
+                        showConfirmationDialog("Add to Watchers List", "Are you sure you want to add $friendUsername to your Watchers List?") {
+                            userRef.update("favoriteFriends", FieldValue.arrayUnion(friendId))
+                                .addOnSuccessListener {
+                                    Toast.makeText(this, "$friendUsername added to your Watchers List", Toast.LENGTH_SHORT).show()
+                                    triggerHeartDropEffect()
+                                    achievementManager.checkAndGrantCommunityBuilderBadge(userId)
+                                    binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled) // Change to filled icon
+                                }
+                                .addOnFailureListener { e ->
+                                    Toast.makeText(this, "Failed to add to favorites: ${e.message}", Toast.LENGTH_SHORT).show()
+                                }
+                        }
                     }
                 } else {
-                    // Friend is not a favorite, ask for confirmation to add
-                    showConfirmationDialog("Add to Watchers List", "Are you sure you want to add this friend to your Watchers List?") {
-                        userRef.update("favoriteFriends", FieldValue.arrayUnion(friendId))
-                            .addOnSuccessListener {
-                                Toast.makeText(this, "Added to your Watchers List", Toast.LENGTH_SHORT).show()
-
-                                triggerHeartDropEffect()
-
-                                achievementManager.checkAndGrantCommunityBuilderBadge(userId)
-
-                                binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled) // Change to filled icon
-                            }
-                            .addOnFailureListener { e ->
-                                Toast.makeText(this, "Failed to add to favorites: ${e.message}", Toast.LENGTH_SHORT).show()
-                            }
-                    }
+                    Log.e("FriendsProfileActivity", "User document does not exist")
+                    Toast.makeText(this, "User document not found.", Toast.LENGTH_SHORT).show()
                 }
-            } else {
-                Log.e("FriendsProfileActivity", "User document does not exist")
-                Toast.makeText(this, "User document not found.", Toast.LENGTH_SHORT).show()
+            }.addOnFailureListener { exception ->
+                Log.e("FriendsProfileActivity", "Error fetching user document: ", exception)
+                Toast.makeText(this, "Error fetching user data.", Toast.LENGTH_SHORT).show()
             }
         }.addOnFailureListener { exception ->
-            Log.e("FriendsProfileActivity", "Error fetching user document: ", exception)
-            Toast.makeText(this, "Error fetching user data.", Toast.LENGTH_SHORT).show()
+            Log.e("FriendsProfileActivity", "Error fetching friend document: ", exception)
+            Toast.makeText(this, "Error fetching friend data.", Toast.LENGTH_SHORT).show()
         }
     }
 
