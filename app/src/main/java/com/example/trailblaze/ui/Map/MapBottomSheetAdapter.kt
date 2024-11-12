@@ -1,5 +1,6 @@
 package com.example.trailblaze.ui.Map
 
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,13 +8,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
-import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
-import com.example.trailblaze.BuildConfig.PLACES_API_KEY
-import com.google.android.libraries.places.api.net.kotlin.fetchPhotoRequest
+import com.google.android.libraries.places.api.net.FetchPhotoRequest
+import com.google.android.libraries.places.api.net.PlacesClient
+import com.google.android.libraries.places.api.net.kotlin.awaitFetchPhoto
 
-class MapBottomSheetAdapter(val items : MutableList<Place>): RecyclerView.Adapter<MapBottomSheetAdapter.MapBottomSheetHolder>() {
+class MapBottomSheetAdapter(val items : MutableList<Place>, placesClient: PlacesClient): RecyclerView.Adapter<MapBottomSheetAdapter.MapBottomSheetHolder>() {
 
+val placesClient = placesClient
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MapBottomSheetHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_map_place, parent, false)
@@ -38,6 +40,12 @@ class MapBottomSheetAdapter(val items : MutableList<Place>): RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: MapBottomSheetHolder, position: Int) {
         val currentItem = items[position]
+        if(currentItem.photoMetadatas.size !=0) {
+            placesClient.fetchPhoto(FetchPhotoRequest.builder(currentItem.photoMetadatas[0]).build())
+                .addOnSuccessListener { response ->
+                    holder.imageIv.setImageBitmap(response.bitmap)
+                }
+        }
         holder.titleTv.text = currentItem.displayName
         holder.addressTv.text = currentItem.formattedAddress
     }
