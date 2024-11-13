@@ -2,6 +2,7 @@ package com.example.trailblaze.ui.Map
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -35,9 +36,16 @@ import androidx.compose.material3.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trailblaze.nps.ParksAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.example.trailblaze.ui.Map.MapBottomSheetAdapter
-
+import com.example.trailblaze.ui.parks.ParkDetailActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import com.example.trailblaze.nps.RetrofitInstance
+import com.example.trailblaze.nps.NPSResponse
+import com.example.trailblaze.nps.Park
 
 class MapFragment : Fragment(),
     OnCameraMoveStartedListener,
@@ -86,6 +94,7 @@ OnMapReadyCallback {
         val satelliteButton = _binding!!.satellite
         val roadButton = _binding!!.roadmap
         val terrainButton = _binding!!.terrain
+        val npsnearbySearchButton = _binding!!.npsnearbysearch
         val nearbySearchButton = _binding!!.nearbysearch
         val satelliteImageCircle = _binding!!.satelliteImage
         val roadImageCircle = _binding!!.roadmapImage
@@ -128,6 +137,38 @@ OnMapReadyCallback {
 
 
 
+        npsnearbySearchButton.setOnClickListener {
+            // Check permissions and request if no access is found
+            locationCheckAndRequest()
+
+            // Check permission was granted before continuing
+            if (ActivityCompat.checkSelfPermission(this.context!!, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this.context!!, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+            ) {
+                // Clear the map
+                map.clear()
+
+                // Get the user's current location
+                val placeRequest = FindCurrentPlaceRequest.builder(mutableListOf(Place.Field.LAT_LNG)).build()
+                val placeResponse = placesClient.findCurrentPlace(placeRequest)
+
+                placeResponse.addOnSuccessListener { result ->
+                    if (result.placeLikelihoods.isNotEmpty()) {
+                        // Get the closest location to the user
+                        val userLocation = currentUser?.state ?: ""
+                        if (userLocation != null) {
+                            // Refresh current user
+                            currentUser = UserManager.getCurrentUser()
+
+                            // Only call fetchParksAndPlaceMarkers based on the userState
+                            fetchParksAndPlaceMarkers(userLocation)
+                        }
+                    }
+                }.addOnFailureListener {
+                    Log.e("MapFragment", "Failed to get user's current location")
+                }
+            }
+        }
         //Find trails near me button
         nearbySearchButton.setOnClickListener{
             //check permissions and request if no access is found
@@ -194,6 +235,7 @@ OnMapReadyCallback {
             }
 
         }
+
 
         //dropdown menu adapter for list
         autoFillAdapter =
@@ -350,6 +392,67 @@ OnMapReadyCallback {
             ActivityCompat.requestPermissions(this.activity!!, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION), 1)
             onRequestPermissionsResult(1,arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION),
                 intArrayOf(PackageManager.PERMISSION_GRANTED,PackageManager.PERMISSION_DENIED))
+        }
+    }
+
+    private fun fetchParksAndPlaceMarkers(userState: String) {
+        RetrofitInstance.api.getParksbyQuery(searchTerm = userState).enqueue(object : Callback<NPSResponse> {
+            override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
+                if (response.isSuccessful) {
+                    val parksList = response.body()?.data ?: emptyList()
+                    map.clear() // Clear existing markers
+
+                    if (parksList.isNotEmpty()) {
+                        // Move the camera to the first park's location
+                        val firstPark = parksList[0]
+                        val latitude = firstPark.latitude?.toDoubleOrNull()
+                        val longitude = firstPark.longitude?.toDoubleOrNull()
+
+                        if (latitude != null && longitude != null) {
+                            val parkLocation = LatLng(latitude, longitude)
+                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(parkLocation, 10f))
+
+                            // Add markers for all parks
+                            for (park in parksList) {
+                                val lat = park.latitude?.toDoubleOrNull()
+                                val lon = park.longitude?.toDoubleOrNull()
+
+                                if (lat != null && lon != null) {
+                                    val markerOptions = MarkerOptions()
+                                        .position(LatLng(lat, lon))
+                                        .title(park.fullName)
+
+                                    // Creating a marker and setting its extra data
+                                    val marker = map.addMarker(markerOptions) // This should be a non-nullable marker if successful
+                                    marker?.let { // Safely access marker
+                                        it.tag = park // Store the entire park object as a tag
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
+                // Handle failure
+                Toast.makeText(context, "Failed to fetch parks", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        // Set an info window or marker click listener after fetching and placing markers
+        map.setOnMarkerClickListener { marker ->
+            // Extract the park information from the marker's tag
+            val park = marker.tag as? Park // For safe casting
+            park?.let {
+                // Create an intent to start ParkDetailActivity
+                val intent = Intent(context, ParkDetailActivity::class.java).apply {
+                    putExtra("PARK_ID", it.parkCode) // Use the appropriate field
+                    // Add more data if necessary
+                }
+                startActivity(intent)
+            }
+            true // Return true to indicate that we've handled the click
         }
     }
 }

@@ -170,6 +170,20 @@
             android:layout_below="@id/terrain"
             android:layout_alignParentEnd="true"
             android:layout_margin="15dp"
+            android:text="National Parks"
+            android:fontFamily="@font/amethysta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/npsnearbysearch"
+            android:backgroundTint="#4B652B"
+            app:strokeColor="#000000"
+            app:strokeWidth="1dp"
+            android:textColor="@color/white"/>
+
+    <Button
+            android:layout_below="@id/npsnearbysearch"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="15dp"
             android:text="Find Trails Near Me"
             android:fontFamily="@font/amethysta"
             android:layout_width="wrap_content"
