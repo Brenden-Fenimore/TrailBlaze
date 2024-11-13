@@ -42,6 +42,8 @@ class FullscreenImageDialogFragment : DialogFragment() {
     private lateinit var locationTextView: TextView
     private lateinit var editLocationButton: ImageButton
     private lateinit var downloadImageButton: ImageButton
+    private lateinit var menuToggleButton: ImageButton
+    private var isMenuExpanded = false
 
     companion object {
         fun newInstance(
@@ -73,6 +75,7 @@ class FullscreenImageDialogFragment : DialogFragment() {
         locationTextView = view.findViewById(R.id.locationTextView)
         editLocationButton = view.findViewById(R.id.editLocationButton)
         downloadImageButton = view.findViewById(R.id.downloadImageButton)
+        menuToggleButton = view.findViewById(R.id.menuToggleButton)
 
         imageUrls = (arguments?.getStringArrayList("imageUrls") ?: emptyList()) as MutableList<String>
         currentIndex = arguments?.getInt("position") ?: 0
@@ -84,11 +87,14 @@ class FullscreenImageDialogFragment : DialogFragment() {
 
         isOwnProfile = arguments?.getBoolean("isOwnProfile") ?: false
 
+        setupMenuToggle(view)
+
         // Set delete button visibility based on ownership
         deleteButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
         editCaptionButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
         editLocationButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
         downloadImageButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
+        menuToggleButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
 
         deleteButton.setOnClickListener {
             // Show a confirmation dialog
@@ -167,6 +173,24 @@ class FullscreenImageDialogFragment : DialogFragment() {
         val newIndex = currentIndex + direction
         if (newIndex in imageUrls.indices) {
             displayImage(newIndex)
+        }
+    }
+
+    private fun setupMenuToggle(view: View) {
+        val menuToggleButton: ImageButton = view.findViewById(R.id.menuToggleButton)
+        val menuButtonsLayout: LinearLayout = view.findViewById(R.id.menuButtonsLayout)
+
+        menuToggleButton.setOnClickListener {
+            isMenuExpanded = !isMenuExpanded
+            if (isMenuExpanded) {
+                // Show buttons and update icon to "<" (left arrow)
+                menuButtonsLayout.visibility = View.VISIBLE
+                menuToggleButton.setImageResource(R.drawable.side_arrow)
+            } else {
+                // Hide buttons and update icon to "V" (down arrow)
+                menuButtonsLayout.visibility = View.GONE
+                menuToggleButton.setImageResource(R.drawable.down_arrow)
+            }
         }
     }
 
