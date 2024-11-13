@@ -2,6 +2,7 @@ package com.example.trailblaze.ui.parks
 
 import ImagesAdapter
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,10 @@ import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.Park
 import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.R
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.FetchPhotoRequest
+import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -23,9 +28,12 @@ import nl.dionsegijn.konfetti.models.Size
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
+import java.io.FileOutputStream
 
 class ParkDetailActivity : AppCompatActivity() {
 
+    private var placeId: String? = null
     private lateinit var parkCode: String // Default to -1 if not found
     private lateinit var parkNameTextView: TextView
     private lateinit var parkDescriptionTextView: TextView
@@ -48,6 +56,7 @@ class ParkDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_park_detail)
+
         // Hide the ActionBar
         supportActionBar?.hide()
 
@@ -55,21 +64,30 @@ class ParkDetailActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
+        // Initialize views
+        initializeViews()
 
-        // Get the park code from the intent
+        // Get the data from intent
         parkCode = intent.getStringExtra("PARK_CODE") ?: ""
+        placeId = intent.getStringExtra("PLACE_ID")
 
-        fetchParkDetails(parkCode)
-
-        val hikeButton: ImageButton = findViewById(R.id.hike_btn)
-        hikeButton.setOnClickListener {
-            val intent = Intent(this, AttemptTrailActivity::class.java)
-            intent.putExtra("PARK_CODE", parkCode)
-            intent.putExtra("PARK_ACTIVITIES", activitiesList) // Pass the activities list
-            startActivity(intent)
+        // Handle data based on what was passed
+        when {
+            !placeId.isNullOrEmpty() -> fetchPlaceDetails(placeId!!)
+            parkCode.isNotEmpty() -> fetchParkDetails(parkCode)
+            else -> {
+                Toast.makeText(this, "Invalid data source", Toast.LENGTH_SHORT).show()
+                finish()
+            }
         }
 
-        // Initialize views
+        // Initialize buttons and their listeners
+        setupButtons()
+    }
+
+
+    private fun initializeViews() {
+// Initialize views
         parkNameTextView = findViewById(R.id.parkNameTextView)
         parkDescriptionTextView = findViewById(R.id.parkDescriptionTextView)
         parkLatitudeTextView = findViewById(R.id.parkLatitudeTextView)
@@ -86,22 +104,30 @@ class ParkDetailActivity : AppCompatActivity() {
         parkImagesRecyclerView = findViewById(R.id.parkImagesRecyclerView)
         parkImagesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        fetchParkDetails(parkCode)
+    }
 
-        // Initialize the favorite button and set up its click listener
+    private fun setupButtons() {
+        // Initialize the favorite button
         favoriteButton = findViewById(R.id.favorite_park_btn)
-        checkFavoriteStatus()       // Check if the park is already in favorites and update the button
-
+        checkFavoriteStatus()
         favoriteButton.setOnClickListener {
-            toggleFavoriteStatus()  // Toggle the favorite status
+            toggleFavoriteStatus()
         }
 
-        // Initialize the bucket list button and set up its click listener
+        // Initialize the bucket list button
         bucketListButton = findViewById(R.id.bucket_list_btn)
         bucketListButton.setOnClickListener {
-            addToBucketList(parkCode)   // Call function to add park to bucket list
+            addToBucketList(parkCode)
         }
 
+        // Initialize the hike button
+        val hikeButton: ImageButton = findViewById(R.id.hike_btn)
+        hikeButton.setOnClickListener {
+            val intent = Intent(this, AttemptTrailActivity::class.java)
+            intent.putExtra("PARK_CODE", parkCode)
+            intent.putExtra("PARK_ACTIVITIES", activitiesList)
+            startActivity(intent)
+        }
     }
 
     private fun fetchParkDetails(parkCode: String) {
@@ -228,7 +254,10 @@ class ParkDetailActivity : AppCompatActivity() {
 
             if (favoriteParks.contains(parkCode)) {
                 // Park is already a favorite; proceed to remove it
-                userDocRef.update("favoriteParks", FieldValue.arrayRemove(parkCode))        // Remove park from favorites
+                userDocRef.update(
+                    "favoriteParks",
+                    FieldValue.arrayRemove(parkCode)
+                )        // Remove park from favorites
                     .addOnSuccessListener {
                         // Notify user of success
                         Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show()
@@ -322,7 +351,85 @@ class ParkDetailActivity : AppCompatActivity() {
             // Hide after 6 seconds
         }, 6000)
     }
+
+    private fun fetchPlaceDetails(placeId: String) {
+        val placeFields = listOf(
+            Place.Field.NAME,
+            Place.Field.ADDRESS,
+            Place.Field.PHONE_NUMBER,
+            Place.Field.WEBSITE_URI,
+            Place.Field.RATING,
+            Place.Field.PHOTO_METADATAS,
+            Place.Field.OPENING_HOURS,
+            Place.Field.TYPES
+        )
+
+        val request = FetchPlaceRequest.builder(placeId, placeFields).build()
+
+        Places.createClient(this).fetchPlace(request)
+            .addOnSuccessListener { response ->
+                val place = response.place
+                populatePlaceDetails(place)
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(this, "Error loading place details", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun populatePlaceDetails(place: Place) {
+        parkNameTextView.text = place.name
+        parkDescriptionTextView.text = place.types?.joinToString(", ") ?: "No description available"
+        parkAddressTextView.text = place.address
+        parkContactsPhoneTextView.text = place.phoneNumber ?: "No phone number available"
+
+        // Handle opening hours
+        place.openingHours?.let { hours ->
+            parkOperatingHoursTextView.text = hours.weekdayText?.joinToString("\n")
+                ?: "Hours not available"
+        }
+
+        // Handle photos
+        place.photoMetadatas?.let { photoMetadatas ->
+            val photoUrls = mutableListOf<String>()
+            var loadedPhotos = 0
+
+            photoMetadatas.forEach { metadata ->
+                val photoRequest = FetchPhotoRequest.builder(metadata)
+                    .setMaxWidth(1000)
+                    .setMaxHeight(1000)
+                    .build()
+
+                Places.createClient(this).fetchPhoto(photoRequest)
+                    .addOnSuccessListener { fetchPhotoResponse ->
+                        val photoUrl = saveBitmapToFile(fetchPhotoResponse.bitmap)
+                        photoUrls.add(photoUrl)
+
+                        loadedPhotos++
+                        if (loadedPhotos == photoMetadatas.size) {
+                            parkImagesRecyclerView.adapter = ImagesAdapter(photoUrls)
+                        }
+                    }
+            }
+        }
+
+        // Hide irrelevant views for Places
+        parkEntrancePassesTextView.visibility = View.GONE
+        parkWeatherInfoTextView.visibility = View.GONE
+        parkActivitiesTextView.visibility = View.GONE
+        parkLatitudeTextView.visibility = View.GONE
+        parkLongitudeTextView.visibility = View.GONE
+        parkContactsEmailTextView.visibility = View.GONE
+    }
+    // Helper function to save bitmap as file and return URL
+    private fun saveBitmapToFile(bitmap: Bitmap): String {
+        val file = File(cacheDir, "place_photo_${System.currentTimeMillis()}.jpg")
+        FileOutputStream(file).use { out ->
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
+        }
+        return file.toURI().toString()
+    }
 }
+
 
 
 
