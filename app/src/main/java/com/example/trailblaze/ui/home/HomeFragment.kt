@@ -141,11 +141,16 @@ class HomeFragment : Fragment() {
 
         // Initialize adapter with an empty list and set it on the RecyclerView
         timeRecordAdapter = TimeRecordAdapter(mutableListOf()) { timeRecord ->
-            // Create an intent to start the ParkDetailActivity
             val intent = Intent(context, ParkDetailActivity::class.java).apply {
-                putExtra("PARK_CODE", timeRecord.parkCode) // Pass the park code
+                if (timeRecord.isPlace) {
+                    putExtra("PLACE_ID", timeRecord.placeId)
+                    putExtra("IS_PLACE", true)
+                } else {
+                    putExtra("PARK_CODE", timeRecord.parkCode)
+                    putExtra("IS_PLACE", false)
+                }
             }
-            startActivity(intent) // Start the ParkDetailActivity
+            startActivity(intent)
         }
         timeRecordsRecyclerView.adapter = timeRecordAdapter
 

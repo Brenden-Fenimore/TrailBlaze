@@ -120,12 +120,19 @@ class ParkDetailActivity : AppCompatActivity() {
             addToBucketList(parkCode)
         }
 
-        // Initialize the hike button
+        // Initialize the hike button with support for both Parks and Places
         val hikeButton: ImageButton = findViewById(R.id.hike_btn)
         hikeButton.setOnClickListener {
             val intent = Intent(this, AttemptTrailActivity::class.java)
-            intent.putExtra("PARK_CODE", parkCode)
-            intent.putExtra("PARK_ACTIVITIES", activitiesList)
+            if (!placeId.isNullOrEmpty()) {
+                // For Places
+                intent.putExtra("PLACE_ID", placeId)
+                intent.putExtra("PLACE_NAME", parkNameTextView.text.toString())
+            } else {
+                // For Parks
+                intent.putExtra("PARK_CODE", parkCode)
+                intent.putExtra("PARK_ACTIVITIES", activitiesList)
+            }
             startActivity(intent)
         }
     }
@@ -355,13 +362,16 @@ class ParkDetailActivity : AppCompatActivity() {
     private fun fetchPlaceDetails(placeId: String) {
         val placeFields = listOf(
             Place.Field.NAME,
-            Place.Field.ADDRESS,
-            Place.Field.PHONE_NUMBER,
+            Place.Field.EDITORIAL_SUMMARY,
+            Place.Field.ADDRESS_COMPONENTS,
+            Place.Field.INTERNATIONAL_PHONE_NUMBER,
             Place.Field.WEBSITE_URI,
             Place.Field.RATING,
             Place.Field.PHOTO_METADATAS,
             Place.Field.OPENING_HOURS,
-            Place.Field.TYPES
+            Place.Field.TYPES,
+            Place.Field.LAT_LNG,
+            Place.Field.PRICE_LEVEL
         )
 
         val request = FetchPlaceRequest.builder(placeId, placeFields).build()
@@ -378,14 +388,91 @@ class ParkDetailActivity : AppCompatActivity() {
 
     private fun populatePlaceDetails(place: Place) {
         parkNameTextView.text = place.name
-        parkDescriptionTextView.text = place.types?.joinToString(", ") ?: "No description available"
-        parkAddressTextView.text = place.address
+
+        // Handle editorial summary for description
+        parkDescriptionTextView.text = place.editorialSummary?.toString()
+            ?: place.types?.joinToString(", ")
+                    ?: "No description available"
+
+        // Handle address components
+        val addressComponents = place.addressComponents
+        if (addressComponents != null) {
+            val streetNumber = addressComponents.asList().find { it.types.contains("street_number") }?.name ?: ""
+            val route = addressComponents.asList().find { it.types.contains("route") }?.name ?: ""
+            val city = addressComponents.asList().find { it.types.contains("locality") }?.name ?: ""
+            val state = addressComponents.asList().find { it.types.contains("administrative_area_level_1") }?.name ?: ""
+            val postalCode = addressComponents.asList().find { it.types.contains("postal_code") }?.name ?: ""
+
+            val formattedAddress = buildString {
+                if (streetNumber.isNotEmpty() && route.isNotEmpty()) {
+                    append("$streetNumber $route")
+                }
+                if (city.isNotEmpty()) {
+                    if (isNotEmpty()) append(", ")
+                    append(city)
+                }
+                if (state.isNotEmpty()) {
+                    if (isNotEmpty()) append(", ")
+                    append(state)
+                }
+                if (postalCode.isNotEmpty()) {
+                    if (isNotEmpty()) append(" ")
+                    append(postalCode)
+                }
+            }
+
+            parkAddressTextView.text = if (formattedAddress.isNotEmpty()) formattedAddress else "Address not available"
+        } else {
+            parkAddressTextView.text = "Address not available"
+        }
+
         parkContactsPhoneTextView.text = place.phoneNumber ?: "No phone number available"
 
-        // Handle opening hours
+        // Handle opening hours with detailed formatting
         place.openingHours?.let { hours ->
-            parkOperatingHoursTextView.text = hours.weekdayText?.joinToString("\n")
-                ?: "Hours not available"
+            val formattedHours = buildString {
+                // Add regular hours
+                hours.weekdayText?.forEachIndexed { index, dayText ->
+                    append(dayText)
+                    if (index < (hours.weekdayText?.size ?: 0) - 1) {
+                        append("\n")
+                    }
+                }
+            }
+
+            parkOperatingHoursTextView.text = formattedHours
+        } ?: run {
+            parkOperatingHoursTextView.text = "Hours not available"
+        }
+
+        // Set the lat/lng values
+        place.latLng?.let { latLng ->
+            parkLatitudeTextView.text = latLng.latitude.toString()
+            parkLongitudeTextView.text = latLng.longitude.toString()
+        } ?: run {
+            parkLatitudeTextView.text = "Latitude not available"
+            parkLongitudeTextView.text = "Longitude not available"
+        }
+
+        // Set the price level
+        val priceLevel = when (place.priceLevel) {
+            0 -> "Free"
+            1 -> "Inexpensive"
+            2 -> "Moderate"
+            3 -> "Expensive"
+            4 -> "Very Expensive"
+            else -> "Price information not available"
+        }
+
+        parkEntrancePassesTextView.text = "Price Level: $priceLevel"
+
+        parkContactsEmailTextView.text = place.websiteUri?.toString() ?: "Website not available"
+
+        parkContactsEmailTextView.setOnClickListener {
+            place.websiteUri?.let { uri ->
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+                startActivity(intent)
+            }
         }
 
         // Handle photos
@@ -413,12 +500,8 @@ class ParkDetailActivity : AppCompatActivity() {
         }
 
         // Hide irrelevant views for Places
-        parkEntrancePassesTextView.visibility = View.GONE
         parkWeatherInfoTextView.visibility = View.GONE
         parkActivitiesTextView.visibility = View.GONE
-        parkLatitudeTextView.visibility = View.GONE
-        parkLongitudeTextView.visibility = View.GONE
-        parkContactsEmailTextView.visibility = View.GONE
     }
     // Helper function to save bitmap as file and return URL
     private fun saveBitmapToFile(bitmap: Bitmap): String {

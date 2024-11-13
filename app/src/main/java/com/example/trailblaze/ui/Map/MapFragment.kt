@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -83,6 +85,13 @@ class MapFragment : Fragment(),
         _binding = FragmentMapBinding.inflate(inflater, container, false)
         thiscontext = requireContext()
 
+        binding.clearMapsearchtext.setOnClickListener {
+            binding.mapSearch.setText("")  // Clear the text
+            autocompletelistString.clear() // Clear suggestions
+            autoFillAdapter.clear()        // Clear adapter
+            autoFillAdapter.notifyDataSetChanged()
+        }
+
         // Initialize Places SDK first
         setupPlacesSDK()
 
@@ -133,11 +142,19 @@ class MapFragment : Fragment(),
         with(multiAutoCompleteTextView) {
             setAdapter(autoFillAdapter)
             setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
-            threshold = 0
+            threshold = 1  // Change threshold to 1 character
 
-            addTextChangedListener {
-                updateAutoCompletePredictions(autoFillAdapter, text.toString(), placesClient)
-            }
+            addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    if (s?.length ?: 0 >= 1) {
+                        updateAutoCompletePredictions(autoFillAdapter, s.toString(), placesClient)
+                    }
+                }
+
+                override fun afterTextChanged(s: Editable?) {}
+            })
 
             setOnItemClickListener { _, _, position, _ ->
                 handleSearchItemClick(position)
@@ -218,45 +235,37 @@ class MapFragment : Fragment(),
         }
     }
 
-    //function to update list of autocomplete suggestions
-    fun updateAutoCompletePredictions(adapter : ArrayAdapter<String>, string : String, placesClient : PlacesClient){
-
-        //create token for grouping requests for less cost
+    fun updateAutoCompletePredictions(adapter: ArrayAdapter<String>, string: String, placesClient: PlacesClient) {
         val token = AutocompleteSessionToken.newInstance()
 
-        //build the AutoCompletePredictionsRequest
-        val findAutocompletePredictionsRequest  =
-            FindAutocompletePredictionsRequest.builder()
-                .setQuery(string)
-                .setTypesFilter(searchTypes)
-                .setSessionToken(token)
-                .build()
+        val findAutocompletePredictionsRequest = FindAutocompletePredictionsRequest.builder()
+            .setQuery(string)
+            .setTypesFilter(searchTypes)
+            .setSessionToken(token)
+            .build()
 
-        //use the findAP function from the Google places client and set on success listener
-        placesClient.findAutocompletePredictions(findAutocompletePredictionsRequest).addOnSuccessListener{
-                response ->
+        placesClient.findAutocompletePredictions(findAutocompletePredictionsRequest)
+            .addOnSuccessListener { response ->
+                autocompletelistString.clear()
+                autocompletelist = response.autocompletePredictions
 
-            //clear previous list of place names (strings)
-            autocompletelistString.clear()
+                response.autocompletePredictions.forEach { prediction ->
+                    autocompletelistString.add(prediction.getFullText(null).toString())
+                }
 
-            //set our autocompletelist equal to the response's list
-            autocompletelist = response.autocompletePredictions
+                adapter.clear()
+                adapter.addAll(autocompletelistString)
 
-            //clear the adapter
-            adapter.clear()
-
-            //loop through each prediction and grab the string for display
-            for (prediction in response.autocompletePredictions) {
-                autocompletelistString.add(prediction.getFullText(null).toString())
+                // Force the dropdown to show if there are results
+                if (autocompletelistString.isNotEmpty()) {
+                    multiAutoCompleteTextView.showDropDown()
+                }
             }
-            //add each string of the autocompletelistString to the adapter
-            adapter.addAll(autocompletelistString)
-            adapter.notifyDataSetChanged()
-            //if request fails
-        }.addOnFailureListener {
-            //clear the string list so dropdown has no data
-            autocompletelistString.clear()
-        }
+            .addOnFailureListener {
+                autocompletelistString.clear()
+                adapter.clear()
+                adapter.notifyDataSetChanged()
+            }
     }
 
     fun locationCheckAndRequest()
@@ -288,13 +297,13 @@ class MapFragment : Fragment(),
         bottomSheetBehavior.peekHeight = 100
     }
 
-    private fun startParkDetailActivity(parkCode: String? = null, placeId: String? = null) {
-        val intent = Intent(context, ParkDetailActivity::class.java).apply {
-            parkCode?.let { putExtra("PARK_CODE", it) }
-            placeId?.let { putExtra("PLACE_ID", it) }
-        }
-        startActivity(intent)
-    }
+//    private fun startParkDetailActivity(parkCode: String? = null, placeId: String? = null) {
+//        val intent = Intent(context, ParkDetailActivity::class.java).apply {
+//            parkCode?.let { putExtra("PARK_CODE", it) }
+//            placeId?.let { putExtra("PLACE_ID", it) }
+//        }
+//        startActivity(intent)
+//    }
 
     private fun fetchParksAndPlaceMarkers(userState: String) {
         RetrofitInstance.api.getParksbyQuery(searchTerm = userState).enqueue(object : Callback<NPSResponse> {

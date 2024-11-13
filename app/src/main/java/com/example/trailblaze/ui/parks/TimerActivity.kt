@@ -1,6 +1,7 @@
 package com.example.trailblaze.ui.parks
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -33,13 +34,24 @@ import java.text.SimpleDateFormat
 import java.util.*
 import com.example.trailblaze.firestore.UserManager
 import com.example.trailblaze.firestore.User
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.FetchPhotoRequest
+import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.firebase.firestore.SetOptions
+import java.io.ByteArrayOutputStream
+import android.util.Base64
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 class TimerActivity: AppCompatActivity() {
     private lateinit var firestore: FirebaseFirestore
     private lateinit var achievementManager: AchievementManager
     private lateinit var parkCode: String
     private lateinit var parkName: String // Store the park name
+    private var placeId: String? = null
+    private lateinit var locationName: String
     private lateinit var parkImageUrl: String
     private lateinit var parkNameTextView: TextView
     private lateinit var activities: Array<String>
@@ -56,12 +68,28 @@ class TimerActivity: AppCompatActivity() {
         currentUser = UserManager.getCurrentUser()
 
         firestore = FirebaseFirestore.getInstance()
-        // Get the park code from the intent
-        parkCode = intent.getStringExtra("PARK_CODE") ?: ""
         parkNameTextView = findViewById(R.id.parkNameTextView)
-        fetchParkDetails(parkCode)
-        activities = intent.getStringArrayExtra("PARK_ACTIVITIES") ?: arrayOf()
 
+        // Get data from intent
+        parkCode = intent.getStringExtra("PARK_CODE") ?: ""
+        placeId = intent.getStringExtra("PLACE_ID")
+        activities = intent.getStringArrayExtra("PARK_ACTIVITIES") ?: arrayOf()
+        partyMembers = intent.getStringArrayExtra("PARTY_MEMBERS") ?: arrayOf()
+
+        // Single fetch logic
+        when {
+            !placeId.isNullOrEmpty() -> {
+                fetchPlaceDetails(placeId!!)
+            }
+            parkCode.isNotEmpty() -> {
+                fetchParkDetails(parkCode)
+            }
+            else -> {
+                locationName = "Unknown Location"
+                parkNameTextView.text = locationName
+            }
+        }
+        activities = intent.getStringArrayExtra("PARK_ACTIVITIES") ?: arrayOf()
         partyMembers = intent.getStringArrayExtra("PARTY_MEMBERS") ?: arrayOf()
 
         // Log the activities to see what was pulled in
@@ -74,11 +102,6 @@ class TimerActivity: AppCompatActivity() {
 
         // Initialize AchievementManager
         achievementManager = AchievementManager(this)
-
-        // Get the park code from the intent
-        parkCode = intent.getStringExtra("PARK_CODE") ?: ""
-        parkNameTextView = findViewById(R.id.parkNameTextView)
-        fetchParkDetails(parkCode)
 
         Log.d("AttemptTrailActivity", "Received park code: $parkCode")
 
@@ -188,7 +211,7 @@ class TimerActivity: AppCompatActivity() {
                     val pendingNotifications = document.get("pendingNotifications") as? List<String> ?: emptyList()
 
                     // Construct the notification message
-                    val notificationMessage = "$currentUserName has just embarked on a new trail adventure at $parkName! " +
+                    val notificationMessage = "$currentUserName has just embarked on a new trail adventure at $locationName! " +
                             "Please keep an eye on them and check in periodically. Their safety is important."
                     // Check if the notification message has already been sent
                     if (pendingNotifications.contains(notificationMessage)) {
@@ -266,49 +289,57 @@ class TimerActivity: AppCompatActivity() {
     }
 
     private fun saveTimeToFirestore(timeRecord: TimeRecord, elapsedTime: Long) {
-        // Use UserManager to get the current user
         val currentUser = UserManager.getCurrentUser()
         val userId = currentUser?.uid
 
         if (userId != null) {
-            // Reference to the user's document in Firestore
             val userDocRef = firestore.collection("users").document(userId)
 
-            // Create a TimeRecord with the current timestamp
-            val timeRecordWithTimestamp = timeRecord.copy(timestamp = System.currentTimeMillis())
+            val finalTimeRecord = TimeRecord(
+                parkName = locationName,
+                elapsedTime = timeRecord.elapsedTime,
+                imageUrl = parkImageUrl,
+                parkCode = if (!placeId.isNullOrEmpty()) placeId!! else timeRecord.parkCode,
+                timestamp = System.currentTimeMillis(),
+                date = timeRecord.date,
+                isPlace = !placeId.isNullOrEmpty(),
+                placeId = placeId
+            )
 
-            // Update the timeRecords field, creating it if it doesn't exist
-            userDocRef.update("timeRecords", FieldValue.arrayUnion(timeRecordWithTimestamp))
+
+            // Log the final record being saved
+            Log.d("TimerActivity", "Attempting to save finalTimeRecord: " +
+                    "parkName=${finalTimeRecord.parkName}, " +
+                    "parkCode=${finalTimeRecord.parkCode}, " +
+                    "elapsedTime=${finalTimeRecord.elapsedTime}")
+
+            userDocRef.update("timeRecords", FieldValue.arrayUnion(finalTimeRecord))
                 .addOnSuccessListener {
-                    // After saving the time record, delete party members
+                    Log.d("TimerActivity", "Successfully saved time record to Firebase")
                     deletePartyMembers(userId)
-                    // Notify watchers
-                    // notifyWatchers(userId)
 
-                    // Check and grant the Explorer badge for evening completion
-                    achievementManager.checkAndGrantExplorerBadge(timeRecordWithTimestamp.timestamp)
-
+                    // Check achievements
+                    achievementManager.checkAndGrantExplorerBadge(finalTimeRecord.timestamp)
                     achievementManager.checkAndGrantConquerorBadge()
-
                     achievementManager.checkAndGrantTrailBlazerBadge()
 
-                    // Check for Long Distance badge (5 minutes = 300 seconds)
-                    if (elapsedTime > 300_000) { // 300,000 milliseconds = 5 minutes
+                    if (elapsedTime > 300_000) {
                         achievementManager.checkAndGrantLongDistanceBadge()
                     }
-                    // Check for Habitual Hiker badge
                     achievementManager.checkAndGrantHabitualBadge()
-
-                    // Check for Weekend Warrior badge
-                    achievementManager.checkAndGrantWeekendBadge(timeRecordWithTimestamp.timestamp)
-
-                    // Check and grant the Daily Adventurer badge
+                    achievementManager.checkAndGrantWeekendBadge(finalTimeRecord.timestamp)
                     achievementManager.checkForDailyAdventurerBadge(userId)
+
+                    Toast.makeText(this, "Time record saved successfully", Toast.LENGTH_SHORT).show()
+                    finish()
                 }
                 .addOnFailureListener { e ->
-                    Log.e("AttemptTrailActivity", "Error saving time record: ${e.message}")
+                    Log.e("TimerActivity", "Error saving time record: ${e.message}")
+                    Log.e("TimerActivity", "Failed record details: ${finalTimeRecord}")
+                    Toast.makeText(this, "Failed to save time record", Toast.LENGTH_SHORT).show()
                 }
         } else {
+            Log.e("TimerActivity", "User not authenticated")
             Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show()
         }
     }
@@ -458,5 +489,55 @@ class TimerActivity: AppCompatActivity() {
             dialog.dismiss() // Close the dialog after action is complete
         }
         dialog.show() // Show the dialog
+    }
+    private fun fetchPlaceDetails(placeId: String) {
+        val placesClient = Places.createClient(this)
+        val placeFields = listOf(Place.Field.NAME, Place.Field.ID, Place.Field.PHOTO_METADATAS)
+
+        val request = FetchPlaceRequest.newInstance(placeId, placeFields)
+
+        placesClient.fetchPlace(request)
+            .addOnSuccessListener { response ->
+                val place = response.place
+                locationName = place.name ?: "Unknown Place"
+                parkName = locationName
+                parkNameTextView.text = locationName
+
+                // Handle photos similar to ParkDetailActivity
+                place.photoMetadatas?.firstOrNull()?.let { metadata ->
+                    val photoRequest = FetchPhotoRequest.builder(metadata)
+                        .setMaxWidth(1000)
+                        .setMaxHeight(1000)
+                        .build()
+
+                    Places.createClient(this).fetchPhoto(photoRequest)
+                        .addOnSuccessListener { fetchPhotoResponse ->
+                            parkImageUrl = saveBitmapToFile(fetchPhotoResponse.bitmap)
+                        }
+                } ?: run {
+                    parkImageUrl = ""
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("TimerActivity", "Place not found: ${exception.message}")
+                locationName = "Unknown Place"
+                parkName = locationName
+                parkNameTextView.text = locationName
+                parkImageUrl = ""
+            }
+    }
+    private fun saveBitmapToFile(bitmap: Bitmap): String {
+        val fileName = "place_image_${System.currentTimeMillis()}.jpg"
+        val file = File(applicationContext.filesDir, fileName)
+
+        try {
+            FileOutputStream(file).use { out ->
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
+            }
+            return file.absolutePath
+        } catch (e: IOException) {
+            Log.e("TimerActivity", "Error saving bitmap: ${e.message}")
+            return ""
+        }
     }
 }
