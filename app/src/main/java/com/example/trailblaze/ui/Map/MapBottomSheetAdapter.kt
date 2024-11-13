@@ -19,7 +19,7 @@ class MapBottomSheetAdapter(
     private var items: MutableList<LocationItem> = mutableListOf(),
     private val placesClient: PlacesClient,
     private val onItemClick: (LocationItem) -> Unit
-) : RecyclerView.Adapter<MapBottomSheetAdapter.MapBottomSheetHolder>() {
+) : RecyclerView.Adapter<MapBottomSheetAdapter.MapBottomSheetHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MapBottomSheetHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_map_place, parent, false)
@@ -40,6 +40,7 @@ class MapBottomSheetAdapter(
             is LocationItem.ParkItem -> bindParkItem(holder, item.park)
         }
 
+        // Simple click handler that delegates to the provided callback
         holder.itemView.setOnClickListener { onItemClick(items[position]) }
     }
 

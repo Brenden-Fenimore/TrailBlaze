@@ -164,29 +164,23 @@ class MapFragment : Fragment(),
 
 
     private fun handleMarkerClick(marker: Marker): Boolean {
-        // First try to get the park from the marker's tag
+        // Handle park markers
         val park = marker.tag as? Park
         if (park != null) {
-            val intent = Intent(context, ParkDetailActivity::class.java).apply {
-                putExtra("PARK_CODE", park.parkCode)
-            }
-            startActivity(intent)
+            navigateToDetail(parkCode = park.parkCode)
             return true
         }
 
-        // If it's not a park, check if it's a place
-        val matchingPlace = locationItems.filterIsInstance<LocationItem.PlaceItem>()
-            .firstOrNull { it.place.location == marker.position }
-
-        matchingPlace?.let {
-            val intent = Intent(context, ParkDetailActivity::class.java).apply {
-                putExtra("PLACE_ID", it.place.id)
-            }
-            startActivity(intent)
+        // Handle place markers
+        val place = marker.tag as? Place
+        if (place != null) {
+            navigateToDetail(placeId = place.id)
+            return true
         }
 
-        return true
+        return false
     }
+
     private fun handleSearchItemClick(position: Int) {
         val placeFetch = FetchPlaceRequest.builder(
             autocompletelist[position].placeId,
@@ -215,15 +209,10 @@ class MapFragment : Fragment(),
             onItemClick = { locationItem ->
                 when (locationItem) {
                     is LocationItem.PlaceItem -> {
-                        val place = locationItem.place
-                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(place.location, 15f))
+                        navigateToDetail(placeId = locationItem.place.id)
                     }
                     is LocationItem.ParkItem -> {
-                        val park = locationItem.park
-                        val intent = Intent(context, ParkDetailActivity::class.java).apply {
-                            putExtra("PARK_CODE", park.parkCode)
-                        }
-                        startActivity(intent)
+                        navigateToDetail(parkCode = locationItem.park.parkCode)
                     }
                 }
             }
@@ -297,13 +286,6 @@ class MapFragment : Fragment(),
         bottomSheetBehavior.peekHeight = 100
     }
 
-//    private fun startParkDetailActivity(parkCode: String? = null, placeId: String? = null) {
-//        val intent = Intent(context, ParkDetailActivity::class.java).apply {
-//            parkCode?.let { putExtra("PARK_CODE", it) }
-//            placeId?.let { putExtra("PLACE_ID", it) }
-//        }
-//        startActivity(intent)
-//    }
 
     private fun fetchParksAndPlaceMarkers(userState: String) {
         RetrofitInstance.api.getParksbyQuery(searchTerm = userState).enqueue(object : Callback<NPSResponse> {
@@ -452,6 +434,14 @@ class MapFragment : Fragment(),
 
             }
         }
+    }
+
+    private fun navigateToDetail(parkCode: String? = null, placeId: String? = null) {
+        val intent = Intent(context, ParkDetailActivity::class.java).apply {
+            parkCode?.let { putExtra("PARK_CODE", it) }
+            placeId?.let { putExtra("PLACE_ID", it) }
+        }
+        startActivity(intent)
     }
 
     override fun onDestroyView() {
