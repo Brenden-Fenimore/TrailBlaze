@@ -80,7 +80,7 @@
             android:layout_alignParentEnd="true"
             android:scaleType="fitCenter"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Menu Toggle" />
+            android:contentDescription="@string/menuButtonIconFullscreen" />
 
     <LinearLayout
             android:id="@+id/menuButtonsLayout"
@@ -98,7 +98,7 @@
             android:contentDescription="@string/deleteButton"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:padding="4dp"
+            android:padding="1dp"
             android:src="@drawable/delete"
             android:scaleType="fitCenter"
             android:background="?android:attr/selectableItemBackgroundBorderless"/>
@@ -108,9 +108,10 @@
             android:contentDescription="@string/editCaptionButton"
             android:layout_width="38dp"
             android:layout_height="38dp"
-            android:padding="4dp"
+            android:padding="1dp"
             android:src="@drawable/edit"
             android:scaleType="fitCenter"
+            android:paddingBottom="4dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:text="@string/editCaptionButton"/>
 
@@ -119,7 +120,8 @@
                 android:contentDescription="@string/editLocationButton"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:padding="4dp"
+                android:padding="1dp"
+                android:layout_marginEnd="6dp"
                 android:src="@drawable/locationtag"
                 android:scaleType="fitCenter"
                 android:paddingTop="8dp"
@@ -130,7 +132,8 @@
                 android:contentDescription="@string/downloadImageButton"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:padding="4dp"
+                android:padding="1dp"
+                android:layout_marginEnd="4dp"
                 android:src="@drawable/download"
                 android:scaleType="fitCenter"
                 android:paddingTop="8dp"
