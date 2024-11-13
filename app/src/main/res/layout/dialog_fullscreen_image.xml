@@ -71,50 +71,73 @@
             android:scaleType="centerCrop"
             android:background="?android:attr/selectableItemBackgroundBorderless" />
 
+    <ImageButton
+            android:id="@+id/menuToggleButton"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/down_arrow"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:scaleType="fitCenter"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/menuButtonIconFullscreen" />
+
     <LinearLayout
-            android:id="@+id/buttonsLayout"
+            android:id="@+id/menuButtonsLayout"
             android:orientation="horizontal"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="1dp"
-            android:layout_marginEnd="1dp">
+            android:layout_marginEnd="20dp">
 
     <ImageButton
             android:id="@+id/deleteImageButton"
             android:contentDescription="@string/deleteButton"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:padding="4dp"
+            android:padding="1dp"
             android:src="@drawable/delete"
             android:scaleType="fitCenter"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:visibility="gone" />
+            android:background="?android:attr/selectableItemBackgroundBorderless"/>
 
     <ImageButton
             android:id="@+id/editCaptionButton"
             android:contentDescription="@string/editCaptionButton"
             android:layout_width="38dp"
             android:layout_height="38dp"
-            android:padding="4dp"
+            android:padding="1dp"
             android:src="@drawable/edit"
             android:scaleType="fitCenter"
+            android:paddingBottom="4dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:text="@string/editCaptionButton"
-            android:visibility="gone"/>
+            android:text="@string/editCaptionButton"/>
 
         <ImageButton
                 android:id="@+id/editLocationButton"
                 android:contentDescription="@string/editLocationButton"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:padding="4dp"
+                android:padding="1dp"
+                android:layout_marginEnd="6dp"
                 android:src="@drawable/locationtag"
                 android:scaleType="fitCenter"
                 android:paddingTop="8dp"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:visibility="gone"/>
+                android:background="?android:attr/selectableItemBackgroundBorderless"/>
+
+        <ImageButton
+                android:id="@+id/downloadImageButton"
+                android:contentDescription="@string/downloadImageButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:padding="1dp"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/download"
+                android:scaleType="fitCenter"
+                android:paddingTop="8dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"/>
 
     </LinearLayout>
 </RelativeLayout>
