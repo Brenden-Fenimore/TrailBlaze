@@ -67,7 +67,7 @@ OnMapReadyCallback {
     val searchTypes = listOf("hiking_area", "park")
     lateinit var mapFragment : SupportMapFragment
     var currentUser = UserManager.getCurrentUser()
-    var placesList: MutableList<Place> = mutableListOf()
+    var locationItems: MutableList<LocationItem> = mutableListOf()
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     lateinit var thiscontext : Context
     lateinit var placesClient : PlacesClient
@@ -106,16 +106,13 @@ OnMapReadyCallback {
 
         // Create a new PlacesClient instance
         placesClient = Places.createClient(thiscontext)
+        setupBottomSheetAdapter()
+
         //go to fullsail button
         fullsailButton.setOnClickListener {
-
-//          map.animateCamera(CameraUpdateFactory.newCameraPosition(fullSail))
-            placesList.clear()
+            locationItems.clear()
             map.clear()
-            bottomSheetAdapter = MapBottomSheetAdapter(placesList,placesClient)
-            recyclerView.adapter = bottomSheetAdapter
-            recyclerView.layoutManager = LinearLayoutManager(thiscontext)
-            recyclerView!!.adapter?.notifyDataSetChanged()
+            bottomSheetAdapter.updateItems(locationItems)
         }
 
         //clear searchbar when clearbutton is clicked
@@ -214,18 +211,15 @@ OnMapReadyCallback {
                             .build()
                         //on success of searchNearby function, create marker at each place with name
                         // and then add each place into placesList
-                        placesClient.searchNearby(searchNearbyRequest).addOnSuccessListener{ result->
-                            for(place in result.places)
-                            {
+                        placesClient.searchNearby(searchNearbyRequest).addOnSuccessListener { result ->
+                            val newLocationItems = result.places.map { LocationItem.PlaceItem(it) }
+                            locationItems.clear()
+                            locationItems.addAll(newLocationItems)
+                            bottomSheetAdapter.updateItems(locationItems)
+
+                            for(place in result.places) {
                                 map.addMarker(MarkerOptions().position(place.location).title(place.displayName))
                             }
-                            placesList.addAll(result.places)
-
-                            bottomSheetAdapter = MapBottomSheetAdapter(placesList,placesClient)
-                            recyclerView.adapter = bottomSheetAdapter
-                            recyclerView.layoutManager = LinearLayoutManager(thiscontext)
-                            recyclerView!!.adapter?.notifyDataSetChanged()
-
                         }
                     }
 
@@ -247,30 +241,32 @@ OnMapReadyCallback {
         multiAutoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
             //create a FetchPlaceRequest object that gets the place id from the list of places
             // and the list of fields we want to get more of
-            val placeFetch : FetchPlaceRequest = FetchPlaceRequest.builder(autocompletelist[position].placeId.toString()
-                ,listOf( Place.Field.ID, Place.Field.FORMATTED_ADDRESS, Place.Field.LOCATION, Place.Field.DISPLAY_NAME,Place.Field.PHOTO_METADATAS)).build()
+            val placeFetch: FetchPlaceRequest = FetchPlaceRequest.builder(
+                autocompletelist[position].placeId.toString(),
+                listOf(
+                    Place.Field.ID,
+                    Place.Field.FORMATTED_ADDRESS,
+                    Place.Field.LOCATION,
+                    Place.Field.DISPLAY_NAME,
+                    Place.Field.PHOTO_METADATAS
+                )
+            ).build()
             //ask for the place from Google and on success
-            placesClient.fetchPlace(placeFetch).addOnSuccessListener{response ->
-                //reset map and placeList, add place to placeList and move camera to the marker we
-                // create from the place's location
+            placesClient.fetchPlace(placeFetch).addOnSuccessListener { response ->
                 map.clear()
-                placesList.clear()
-                placesList.add(response.place)
+                locationItems.clear()
+                locationItems.add(LocationItem.PlaceItem(response.place))
+                bottomSheetAdapter.updateItems(locationItems)
 
-
-
-                bottomSheetAdapter = MapBottomSheetAdapter(placesList,placesClient)
-                recyclerView.adapter = bottomSheetAdapter
-                recyclerView.layoutManager = LinearLayoutManager(thiscontext)
-                recyclerView!!.adapter?.notifyDataSetChanged()
-
-
-
-
-                map.addMarker(MarkerOptions().position(response.place.location).title(response.place.displayName))
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(response.place.location,13f)) }
+                map.addMarker(
+                    MarkerOptions()
+                        .position(response.place.location)
+                        .title(response.place.displayName)
+                )
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(response.place.location, 13f))
+            }
         }
-        // Log an error if apiKey is not set.
+            // Log an error if apiKey is not set.
         if (apiKey.isEmpty()) {
             Log.e("Places test", "No api key")
         }
@@ -395,12 +391,17 @@ OnMapReadyCallback {
         }
     }
 
+    // Update your fetchParksAndPlaceMarkers function
     private fun fetchParksAndPlaceMarkers(userState: String) {
         RetrofitInstance.api.getParksbyQuery(searchTerm = userState).enqueue(object : Callback<NPSResponse> {
             override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
                 if (response.isSuccessful) {
                     val parksList = response.body()?.data ?: emptyList()
-                    map.clear() // Clear existing markers
+                    map.clear()
+
+                    // Convert parks to LocationItems
+                    val locationItems = parksList.map { LocationItem.ParkItem(it) }
+                    bottomSheetAdapter.updateItems(locationItems)
 
                     if (parksList.isNotEmpty()) {
                         // Move the camera to the first park's location
@@ -455,4 +456,33 @@ OnMapReadyCallback {
             true // Return true to indicate that we've handled the click
         }
     }
+
+    // In your MapFragment
+    private fun setupBottomSheetAdapter() {
+        bottomSheetAdapter = MapBottomSheetAdapter(
+            placesClient = placesClient,
+            onItemClick = { locationItem ->
+                when (locationItem) {
+                    is LocationItem.PlaceItem -> {
+                        // Handle Place click
+                        val place = locationItem.place
+                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(place.location, 15f))
+                    }
+                    is LocationItem.ParkItem -> {
+                        // Handle Park click
+                        val park = locationItem.park
+                        val intent = Intent(context, ParkDetailActivity::class.java).apply {
+                            putExtra("PARK_ID", park.parkCode)
+                        }
+                        startActivity(intent)
+                    }
+                }
+            }
+        )
+        binding.bottomsheetinclude.bottomSheetRecycler.apply {
+            adapter = bottomSheetAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
+    }
+
 }
