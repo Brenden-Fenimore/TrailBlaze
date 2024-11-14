@@ -239,14 +239,6 @@ private fun pullFavoriteFriends(onComplete: (List<Friends>) -> Unit) {
                     onComplete(emptyList())
                 }
             }
-//                        val friendObj =friendsList.map {friend ->
-//                            Friends(userId = friend.userId,            // friend ID from loadFriendsData
-//                                username = friend.username,        // username from loadFriendsData
-//                                profileImageUrl = friend.profileImageUrl,  // profileImageUrl from loadFriendsData
-//                                isPrivateAccount = friend.isPrivateAccount, // isPrivateAccount from loadFriendsData
-//                                watcherVisible = friend.watcherVisible)      // watcherVisible from loadFriendsData
-//                        })
-//                    }
 
         .addOnFailureListener{e ->
             Log.e("Firestore", "Error fetching Watchers: ", e)
