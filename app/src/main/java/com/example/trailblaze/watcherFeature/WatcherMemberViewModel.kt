@@ -8,6 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.example.trailblaze.ui.profile.Friends
 import com.google.firebase.auth.FirebaseAuth
 import android.util.Log
+import com.example.trailblaze.ui.parks.AddFriend
 
 data class WatcherMember(
     val userId: String = "",
@@ -59,6 +60,7 @@ private val _selectedWatchers = MutableLiveData<MutableList<Friends>>()
                 Log.e("WatcherMemberViewModel", "Error fetching watcher members: ", exception)
             }
     }
+
     fun addWatcher(watcher: Friends) {
         _selectedWatchers.value?.let {
             if(!it.contains(watcher)){

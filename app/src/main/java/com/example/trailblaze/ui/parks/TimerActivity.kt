@@ -190,7 +190,7 @@ private val selectedWatchers = mutableListOf<AddFriend>()
             val watcherNames = watcherList.map { it.username }.toTypedArray()
             val selectedItems = BooleanArray(watcherNames.size)
 
-            AlertDialog.Builder(this)
+          val dialog =  AlertDialog.Builder(this)
                 .setTitle("Select Watchers")
                 .setMultiChoiceItems(watcherNames, selectedItems) { _, index, isSelected ->
                     val friend = watcherList[index]
@@ -204,9 +204,13 @@ private val selectedWatchers = mutableListOf<AddFriend>()
                     watcherMemberViewModel.selectedWatchers.value?.forEach { watcher ->
                         sendNotificationToFriend(watcher.userId)
                     }
+
                 }
-                .setNegativeButton("CANCEL", null)
-                .show()
+                .setNegativeButton("CANCEL") {dialogInterface, _ ->
+                    dialogInterface.dismiss()
+                }
+                .create()
+            dialog.show()
         }
     }
 
