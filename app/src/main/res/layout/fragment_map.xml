@@ -20,6 +20,8 @@
                 android:layout_marginBottom="80dp"/>
 
     </FrameLayout>
+
+
     <RelativeLayout
             android:id="@+id/search"
             android:layout_width="200dp"
@@ -54,13 +56,37 @@
                 app:srcCompat="@drawable/x"
                 android:clickable="true"/>
     </RelativeLayout>
+    <Button
+            android:layout_below="@id/search"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="15dp"
+            android:text="Find Trails Near Me"
+            android:fontFamily="@font/amethysta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nearbysearch"
+            app:strokeColor="#000000"
+            app:strokeWidth="1dp"/>
+    <Button
+            android:layout_below="@id/nearbysearch"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="15dp"
+            android:text="National Parks"
+            android:fontFamily="@font/amethysta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/npsnearbysearch"
+            app:strokeColor="#000000"
+            app:strokeWidth="1dp"/>
+
+
 
 
     //roadmap button layout
     <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/search"
+            android:layout_below="@id/npsnearbysearch"
             android:layout_alignParentEnd="true"
             android:layout_margin="15dp"
             android:id="@+id/roadmap"
@@ -165,50 +191,6 @@
         </TextView>
         //end of terrain button
     </RelativeLayout>
-
-    <Button
-            android:layout_below="@id/terrain"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="15dp"
-            android:text="National Parks"
-            android:fontFamily="@font/amethysta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/npsnearbysearch"
-            android:backgroundTint="#4B652B"
-            app:strokeColor="#000000"
-            app:strokeWidth="1dp"
-            android:textColor="@color/white"/>
-
-    <Button
-            android:layout_below="@id/npsnearbysearch"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="15dp"
-            android:text="Find Trails Near Me"
-            android:fontFamily="@font/amethysta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/nearbysearch"
-            android:backgroundTint="#4B652B"
-            app:strokeColor="#000000"
-            app:strokeWidth="1dp"
-            android:textColor="@color/white"/>
-
-    <Button
-            android:text="Clear Map"
-            android:layout_alignEnd="@id/nearbysearch"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/fullsail"
-            app:strokeColor="#000000"
-            android:backgroundTint="#4B652B"
-            app:strokeWidth="1dp"
-            android:layout_below="@id/nearbysearch"/>
-
-
-
-
 
 
 
