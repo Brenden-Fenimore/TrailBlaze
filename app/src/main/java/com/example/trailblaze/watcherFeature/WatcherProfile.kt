@@ -31,6 +31,8 @@ class WatcherProfile : AppCompatActivity() {
     private lateinit var watcherName: TextView
     private lateinit var watcherProfilePicture: ImageView
     private lateinit var userId: String
+    private lateinit var chevronLeftButton: ImageButton
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,9 +45,17 @@ class WatcherProfile : AppCompatActivity() {
         userManager = UserManager
 
 
-        //Initialize views
+        // Initialize views
         watcherName = findViewById(R.id.watcherName)
         watcherProfilePicture = findViewById(R.id.watcherProfilePicture)
+        chevronLeftButton = findViewById<ImageButton>(R.id.chevron_left)
+
+        // Back button listener
+
+        chevronLeftButton.setOnClickListener {
+            // navigate to previous screen
+            finish()
+        }
 
         // fetch user
         userId = intent.getStringExtra("userId") ?: FirebaseAuth.getInstance().currentUser?.uid ?: ""
