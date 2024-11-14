@@ -2,7 +2,9 @@ package com.example.trailblaze.ui.profile
 
 import android.app.AlertDialog
 import android.content.ContentValues
-import android.graphics.drawable.Drawable
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.location.Geocoder
 import android.location.Address
 import android.os.Bundle
@@ -13,17 +15,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
 import com.example.trailblaze.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
+import java.net.URL
 import java.util.*
+import java.util.concurrent.Executors
 import kotlin.collections.ArrayList
 
 class FullscreenImageDialogFragment : DialogFragment() {
@@ -43,6 +48,7 @@ class FullscreenImageDialogFragment : DialogFragment() {
     private lateinit var editLocationButton: ImageButton
     private lateinit var downloadImageButton: ImageButton
     private lateinit var menuToggleButton: ImageButton
+    private lateinit var shareImageButton: ImageButton
     private var isMenuExpanded = false
 
     companion object {
@@ -74,6 +80,7 @@ class FullscreenImageDialogFragment : DialogFragment() {
         captionTextView = view.findViewById(R.id.captionTextView)
         locationTextView = view.findViewById(R.id.locationTextView)
         editLocationButton = view.findViewById(R.id.editLocationButton)
+        shareImageButton = view.findViewById(R.id.shareImageButton)
         downloadImageButton = view.findViewById(R.id.downloadImageButton)
         menuToggleButton = view.findViewById(R.id.menuToggleButton)
 
@@ -93,6 +100,7 @@ class FullscreenImageDialogFragment : DialogFragment() {
         deleteButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
         editCaptionButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
         editLocationButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
+        shareImageButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
         downloadImageButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
         menuToggleButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
 
@@ -121,6 +129,11 @@ class FullscreenImageDialogFragment : DialogFragment() {
         editLocationButton.setOnClickListener {
             val imageUrl = imageUrls[currentIndex] // Get the current image URL
             promptForLocationUpdate(imageUrl)
+        }
+
+        shareImageButton.setOnClickListener {
+            val imageUrl = imageUrls[currentIndex] // Get the current image URL
+            sharePhoto(imageUrl)
         }
 
         downloadImageButton.setOnClickListener {
@@ -583,6 +596,50 @@ class FullscreenImageDialogFragment : DialogFragment() {
                 Log.e("GeoLocation", "Error downloading image from Firebase Storage", e)
                 locationTextView.visibility = View.GONE
             }
+    }
+
+    private fun sharePhoto(imageUrl: String) {
+        // Start an asynchronous task to download the image
+        val executor = Executors.newSingleThreadExecutor()
+        executor.execute {
+            try {
+                // Load the image as a bitmap from the provided URL
+                val url = URL(imageUrl)
+                val connection = url.openConnection()
+                connection.doInput = true
+                connection.connect()
+                val inputStream = connection.getInputStream()
+                val bitmap = BitmapFactory.decodeStream(inputStream)
+
+                // Save the bitmap to cache and get its URI
+                val cachePath = File(requireContext().cacheDir, "images")
+                cachePath.mkdirs()
+                val file = File(cachePath, "shared_image.png")
+                val outputStream = FileOutputStream(file)
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                outputStream.close()
+
+                // Get the URI for the saved file
+                val imageUri = FileProvider.getUriForFile(
+                    requireContext(),
+                    "${requireContext().packageName}.provider",
+                    file
+                )
+
+                // Create a share intent
+                val shareIntent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_STREAM, imageUri)
+                    type = "image/png"
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                }
+
+                // Start the share intent
+                startActivity(Intent.createChooser(shareIntent, "Share image via"))
+            } catch (e: Exception) {
+                Log.e("FullscreenImageDialog", "Error sharing image", e)
+            }
+        }
     }
 
     private fun downloadPhoto(imageUrl: String) {

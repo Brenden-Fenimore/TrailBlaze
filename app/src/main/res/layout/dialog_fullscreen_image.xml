@@ -128,6 +128,17 @@
                 android:background="?android:attr/selectableItemBackgroundBorderless"/>
 
         <ImageButton
+                android:id="@+id/shareImageButton"
+                android:contentDescription="@string/shareImageButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:padding="2dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/share"
+                android:scaleType="fitCenter"
+                android:background="?android:attr/selectableItemBackgroundBorderless"/>
+
+        <ImageButton
                 android:id="@+id/downloadImageButton"
                 android:contentDescription="@string/downloadImageButton"
                 android:layout_width="32dp"
