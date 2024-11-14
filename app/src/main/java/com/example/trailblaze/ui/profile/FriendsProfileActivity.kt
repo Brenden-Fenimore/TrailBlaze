@@ -7,6 +7,8 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +16,7 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trailblaze.BuildConfig.PLACES_API_KEY
 import com.example.trailblaze.R
 import com.example.trailblaze.databinding.ActivityFriendsProfileBinding
 import com.example.trailblaze.ui.achievements.AchievementManager
@@ -21,10 +24,7 @@ import com.example.trailblaze.ui.achievements.Badge
 import com.example.trailblaze.ui.achievements.BadgesAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.example.trailblaze.firestore.ImageLoader
-import com.example.trailblaze.nps.NPSResponse
-import com.example.trailblaze.nps.Park
-import com.example.trailblaze.nps.ParksAdapter
-import com.example.trailblaze.nps.RetrofitInstance
+import com.example.trailblaze.nps.*
 import com.example.trailblaze.ui.parks.ParkDetailActivity
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
@@ -37,6 +37,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import com.example.trailblaze.ui.parks.TimeRecordAdapter
 import com.example.trailblaze.ui.parks.TimeRecord
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.FetchPlaceRequest
+import com.google.android.libraries.places.api.net.FetchResolvedPhotoUriRequest
 
 class FriendsProfileActivity : AppCompatActivity() {
 
@@ -65,6 +69,8 @@ class FriendsProfileActivity : AppCompatActivity() {
     private lateinit var timeRecordsRecyclerView: RecyclerView
     private lateinit var timeRecordAdapter: TimeRecordAdapter
 
+    private val apiKey = PLACES_API_KEY
+
     // Define all possible badges
     private val allBadges = listOf(
         Badge("safetyexpert", "Safety Expert", R.drawable.safetyexpert),
@@ -78,7 +84,7 @@ class FriendsProfileActivity : AppCompatActivity() {
         Badge("explorer", "Explorer", R.drawable.explorer),
         Badge("trailmaster", "Trailmaster", R.drawable.trailmaster),
         Badge("socialbutterfly", "Socialbutterfly", R.drawable.socialbutterfly),
-        Badge("teamplayer", "Teleamplayer", R.drawable.teamplayer),
+        Badge("teamplayer", "Teamplayer", R.drawable.teamplayer),
         Badge("communitybuilder", "Community Builder", R.drawable.communitybuilder),
         Badge("wildlifewatcher", "Wildlifewatcher", R.drawable.wildlifewatcher),
         Badge("photographer", "Photographer", R.drawable.photographer),
@@ -168,7 +174,8 @@ class FriendsProfileActivity : AppCompatActivity() {
 
         favoritesAdapter = ParksAdapter(emptyList()) { park ->
             val intent = Intent(this, ParkDetailActivity::class.java).apply {
-                putExtra("PARK_CODE", park.parkCode)
+                if(park.parkCode.length >= 10) { putExtra("PLACE_ID", park.parkCode)}
+                else { putExtra("PARK_CODE", park.parkCode) }
             }
             startActivity(intent)
         }
@@ -311,7 +318,7 @@ class FriendsProfileActivity : AppCompatActivity() {
 
                     // Set up click listener for the favorite button
                     binding.favoriteFriendBtn.setOnClickListener {
-                       toggleFavoriteStatus(currentUserId, friendId)
+                       toggleWatcherStatus(currentUserId, friendId)
                     }
                 }
             }
@@ -371,7 +378,7 @@ class FriendsProfileActivity : AppCompatActivity() {
     }
 
 
-    private fun toggleFavoriteStatus(currentUserId: String, friendId: String) {
+    private fun toggleWatcherStatus(currentUserId: String, friendId: String) {
         val userRef = firestore.collection("users").document(currentUserId)
         val friendRef = firestore.collection("users").document(friendId) // Reference to the friend's document
 
@@ -380,11 +387,11 @@ class FriendsProfileActivity : AppCompatActivity() {
 
             userRef.get().addOnSuccessListener { userDocument ->
                 if (userDocument != null && userDocument.exists()) {
-                    val favoriteFriendsList = userDocument.get("favoriteFriends") as? List<String> ?: emptyList()
+                    val watcherList = userDocument.get("favoriteFriends") as? List<String> ?: emptyList()
 
-                    // Check if the friendId is already in the favorites list
-                    if (favoriteFriendsList.contains(friendId)) {
-                        // Friend is already a favorite, ask for confirmation to remove
+                    // Check if the friendId is already in the watcher list
+                    if (watcherList.contains(friendId)) {
+                        // Friend is already a watcher, ask for confirmation to remove
                         showConfirmationDialog("Remove from Watchers List", "Are you sure you want to remove $friendUsername from your Watchers List?") {
                             userRef.update("favoriteFriends", FieldValue.arrayRemove(friendId))
                                 .addOnSuccessListener {
@@ -397,7 +404,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                                 }
                         }
                     } else {
-                        // Friend is not a favorite, ask for confirmation to add
+                        // Friend is not a watcher, ask for confirmation to add
                         showConfirmationDialog("Add to Watchers List", "Are you sure you want to add $friendUsername to your Watchers List?") {
                             userRef.update("favoriteFriends", FieldValue.arrayUnion(friendId))
                                 .addOnSuccessListener {
@@ -407,7 +414,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                                     binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled) // Change to filled icon
                                 }
                                 .addOnFailureListener { e ->
-                                    Toast.makeText(this, "Failed to add to favorites: ${e.message}", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this, "Failed to add to Watchers List: ${e.message}", Toast.LENGTH_SHORT).show()
                                 }
                         }
                     }
@@ -668,8 +675,12 @@ class FriendsProfileActivity : AppCompatActivity() {
                 if (document != null && document.exists()) {
                     val favoriteParksList = document.get("favoriteParks") as? List<String> ?: emptyList()
 
+                    val parksAndPlaces = parseFavoritesByPlaceAndPark(favoriteParksList)
+
+                    // Assuming you have a function to fetch place details based on place IDs
+                    fetchGooglePlaceDetails(parksAndPlaces[0])
                     // Assuming you have a function to fetch park details based on park IDs
-                    fetchParksDetails(favoriteParksList)
+                    fetchNPSParksDetails(parksAndPlaces[1])
                 } else {
                     Log.e("FriendsProfileActivity", "Friend document does not exist")
                 }
@@ -678,7 +689,94 @@ class FriendsProfileActivity : AppCompatActivity() {
                 Log.e("FriendsProfileActivity", "Error fetching friend's favorite parks: ", exception)
             }
     }
-    private fun fetchParksDetails(parkCodes: List<String>) {
+
+    //function to separate the Parks and Places since Parks ids are 4 in length,
+    // I filter by 10 for extra security as Place Ids are super long
+    private fun parseFavoritesByPlaceAndPark(parksAndPlaces : List<String>) : List<List<String>>{
+        var parsedFavorites = mutableListOf<MutableList<String>>()
+        var placesList = mutableListOf<String>()
+        var parksList = mutableListOf<String>()
+
+        parksAndPlaces.forEach { string ->
+            if(string.length >= 10)  {placesList.add(string)}
+            else {parksList.add(string)}
+        }
+        parsedFavorites.add(placesList)
+        parsedFavorites.add(parksList)
+        return parsedFavorites
+    }
+
+    //initialize places and get the name of place and photos
+    private fun fetchGooglePlaceDetails(parkCodes: List<String>) {
+        Places.initializeWithNewPlacesApiEnabled(this, apiKey)
+        val placesClient = Places.createClient(this)
+        val placeFields = listOf(Place.Field.DISPLAY_NAME, Place.Field.PHOTO_METADATAS)
+
+
+        parkCodes.forEach { placeId ->
+            val request = FetchPlaceRequest.newInstance(placeId, placeFields)
+            placesClient.fetchPlace(request)
+                .addOnSuccessListener { response ->
+
+                    val place = response.place
+                    val locationName = place.displayName ?: "Unknown Place"
+                    var parkImageUrl : String
+                    // Handle photos similar to ParkDetailActivity
+                    place.photoMetadatas?.firstOrNull()?.let { metadata ->
+                        val photoRequest = FetchResolvedPhotoUriRequest.builder(metadata)
+                            .setMaxWidth(1000)
+                            .setMaxHeight(1000)
+                            .build()
+
+                        //get photo and on success build a park passing placeid, location name and image
+                        Places.createClient(this).fetchResolvedPhotoUri(photoRequest)
+                            .addOnSuccessListener { fetchPhotoResponse ->
+                                 parkImageUrl = fetchPhotoResponse.uri.toString()
+                                    val park = Park(
+                                        placeId,
+                                        locationName,
+                                        description = "",
+                                        latitude = "",
+                                        longitude = "",
+                                        states = "",
+                                        addresses = emptyList(),
+                                        activities = emptyList(),
+                                        contacts = Contacts(emptyList(),emptyList()),
+                                        entrancePasses = emptyList(),
+                                        images = listOf<Images>(Images("","","","",parkImageUrl)),
+                                        stateCode = "",
+                                        weatherInfo = "",
+                                        operatingHours = emptyList())
+                                favoriteParks.add(park)
+                            }
+                        //if images are empty build park with just placeid and locationname
+                    } ?: run {
+                         parkImageUrl = ""
+                        val park = Park(
+                            placeId,
+                            locationName,
+                            description = "",
+                            latitude = "",
+                            longitude = "",
+                            states = "",
+                            addresses = emptyList(),
+                            activities = emptyList(),
+                            contacts = Contacts(emptyList(),emptyList()),
+                            entrancePasses = emptyList(),
+                            images = emptyList(),
+                            stateCode = "",
+                            weatherInfo = "",
+                            operatingHours = emptyList())
+                        favoriteParks.add(park)
+                    }
+
+                }
+                .addOnFailureListener { exception ->
+                    Log.e("FriendsProfileActivity", "Place not found: ${exception.message}")
+                }
+        }
+    }
+    private fun fetchNPSParksDetails(parkCodes: List<String>) {
         val tasks = parkCodes.map { parkCode ->
             RetrofitInstance.api.getParkDetails(parkCode)
         }
@@ -842,19 +940,19 @@ class FriendsProfileActivity : AppCompatActivity() {
                 binding.root.addView(raindrop)
 
                 // Start animation
-                val animation = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.raindrop_fall).apply{
+                val animation = AnimationUtils.loadAnimation(this, R.anim.raindrop_fall).apply{
                     duration = (1000..2000).random().toLong()
                 }
                 raindrop.startAnimation(animation)
 
                 // Remove view after animation
-                animation.setAnimationListener(object : android.view.animation.Animation.AnimationListener {
-                    override fun onAnimationEnd(animation: android.view.animation.Animation?) {
+                animation.setAnimationListener(object : Animation.AnimationListener {
+                    override fun onAnimationEnd(animation: Animation?) {
                         binding.root.removeView(raindrop)
                     }
 
-                    override fun onAnimationRepeat(animation: android.view.animation.Animation?) {}
-                    override fun onAnimationStart(animation: android.view.animation.Animation?) {}
+                    override fun onAnimationRepeat(animation: Animation?) {}
+                    override fun onAnimationStart(animation: Animation?) {}
                 })
             }, delay)
         }
@@ -880,19 +978,19 @@ class FriendsProfileActivity : AppCompatActivity() {
                 binding.root.addView(raindrop)
 
                 // Start animation
-                val animation = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.raindrop_fall).apply{
+                val animation = AnimationUtils.loadAnimation(this, R.anim.raindrop_fall).apply{
                     duration = (1000..2000).random().toLong()
                 }
                 raindrop.startAnimation(animation)
 
                 // Remove view after animation
-                animation.setAnimationListener(object : android.view.animation.Animation.AnimationListener {
-                    override fun onAnimationEnd(animation: android.view.animation.Animation?) {
+                animation.setAnimationListener(object : Animation.AnimationListener {
+                    override fun onAnimationEnd(animation: Animation?) {
                         binding.root.removeView(raindrop)
                     }
 
-                    override fun onAnimationRepeat(animation: android.view.animation.Animation?) {}
-                    override fun onAnimationStart(animation: android.view.animation.Animation?) {}
+                    override fun onAnimationRepeat(animation: Animation?) {}
+                    override fun onAnimationStart(animation: Animation?) {}
                 })
             }, delay)
         }
@@ -918,19 +1016,19 @@ class FriendsProfileActivity : AppCompatActivity() {
                 binding.root.addView(raindrop)
 
                 // Start animation
-                val animation = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.raindrop_fall).apply{
+                val animation = AnimationUtils.loadAnimation(this, R.anim.raindrop_fall).apply{
                     duration = (1000..2000).random().toLong()
                 }
                 raindrop.startAnimation(animation)
 
                 // Remove view after animation
-                animation.setAnimationListener(object : android.view.animation.Animation.AnimationListener {
-                    override fun onAnimationEnd(animation: android.view.animation.Animation?) {
+                animation.setAnimationListener(object : Animation.AnimationListener {
+                    override fun onAnimationEnd(animation: Animation?) {
                         binding.root.removeView(raindrop)
                     }
 
-                    override fun onAnimationRepeat(animation: android.view.animation.Animation?) {}
-                    override fun onAnimationStart(animation: android.view.animation.Animation?) {}
+                    override fun onAnimationRepeat(animation: Animation?) {}
+                    override fun onAnimationStart(animation: Animation?) {}
                 })
             }, delay)
         }

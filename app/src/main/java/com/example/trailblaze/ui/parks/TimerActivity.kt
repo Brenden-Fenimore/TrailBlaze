@@ -36,7 +36,6 @@ import com.example.trailblaze.firestore.UserManager
 import com.example.trailblaze.firestore.User
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.net.FetchPhotoRequest
 import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.example.trailblaze.BuildConfig.PLACES_API_KEY
 import com.google.firebase.firestore.SetOptions
