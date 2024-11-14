@@ -1,10 +1,13 @@
 package com.example.trailblaze.ui.profile
 
 import android.app.AlertDialog
+import android.content.ContentValues
 import android.graphics.drawable.Drawable
 import android.location.Geocoder
 import android.location.Address
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -38,6 +41,9 @@ class FullscreenImageDialogFragment : DialogFragment() {
     private var photoCaptions: MutableMap<String, String> = mutableMapOf()
     private lateinit var locationTextView: TextView
     private lateinit var editLocationButton: ImageButton
+    private lateinit var downloadImageButton: ImageButton
+    private lateinit var menuToggleButton: ImageButton
+    private var isMenuExpanded = false
 
     companion object {
         fun newInstance(
@@ -68,6 +74,8 @@ class FullscreenImageDialogFragment : DialogFragment() {
         captionTextView = view.findViewById(R.id.captionTextView)
         locationTextView = view.findViewById(R.id.locationTextView)
         editLocationButton = view.findViewById(R.id.editLocationButton)
+        downloadImageButton = view.findViewById(R.id.downloadImageButton)
+        menuToggleButton = view.findViewById(R.id.menuToggleButton)
 
         imageUrls = (arguments?.getStringArrayList("imageUrls") ?: emptyList()) as MutableList<String>
         currentIndex = arguments?.getInt("position") ?: 0
@@ -79,10 +87,14 @@ class FullscreenImageDialogFragment : DialogFragment() {
 
         isOwnProfile = arguments?.getBoolean("isOwnProfile") ?: false
 
+        setupMenuToggle(view)
+
         // Set delete button visibility based on ownership
         deleteButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
         editCaptionButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
         editLocationButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
+        downloadImageButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
+        menuToggleButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
 
         deleteButton.setOnClickListener {
             // Show a confirmation dialog
@@ -109,6 +121,11 @@ class FullscreenImageDialogFragment : DialogFragment() {
         editLocationButton.setOnClickListener {
             val imageUrl = imageUrls[currentIndex] // Get the current image URL
             promptForLocationUpdate(imageUrl)
+        }
+
+        downloadImageButton.setOnClickListener {
+            val imageUrl = imageUrls[currentIndex]
+            downloadPhoto(imageUrl)
         }
 
         return view
@@ -156,6 +173,24 @@ class FullscreenImageDialogFragment : DialogFragment() {
         val newIndex = currentIndex + direction
         if (newIndex in imageUrls.indices) {
             displayImage(newIndex)
+        }
+    }
+
+    private fun setupMenuToggle(view: View) {
+        val menuToggleButton: ImageButton = view.findViewById(R.id.menuToggleButton)
+        val menuButtonsLayout: LinearLayout = view.findViewById(R.id.menuButtonsLayout)
+
+        menuToggleButton.setOnClickListener {
+            isMenuExpanded = !isMenuExpanded
+            if (isMenuExpanded) {
+                // Show buttons and update icon to "<" (left arrow)
+                menuButtonsLayout.visibility = View.VISIBLE
+                menuToggleButton.setImageResource(R.drawable.side_arrow)
+            } else {
+                // Hide buttons and update icon to "V" (down arrow)
+                menuButtonsLayout.visibility = View.GONE
+                menuToggleButton.setImageResource(R.drawable.down_arrow)
+            }
         }
     }
 
@@ -550,5 +585,34 @@ class FullscreenImageDialogFragment : DialogFragment() {
             }
     }
 
+    private fun downloadPhoto(imageUrl: String) {
+        val fileName = "downloaded_photo_${System.currentTimeMillis()}.jpg"
+
+        val resolver = requireContext().contentResolver
+        val contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        val values = ContentValues().apply {
+            put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
+            put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+            put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/Trailblaze")
+        }
+
+        val uri = resolver.insert(contentUri, values)
+        if (uri != null) {
+            FirebaseStorage.getInstance().getReferenceFromUrl(imageUrl)
+                .getBytes(Long.MAX_VALUE)
+                .addOnSuccessListener { bytes ->
+                    resolver.openOutputStream(uri).use { outputStream ->
+                        outputStream?.write(bytes)
+                        Toast.makeText(requireContext(), "Photo downloaded to gallery", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Log.e("DownloadPhoto", "Failed to download image", e)
+                    Toast.makeText(requireContext(), "Failed to download photo", Toast.LENGTH_SHORT).show()
+                }
+        } else {
+            Toast.makeText(requireContext(), "Failed to create file", Toast.LENGTH_SHORT).show()
+        }
+    }
 }
 

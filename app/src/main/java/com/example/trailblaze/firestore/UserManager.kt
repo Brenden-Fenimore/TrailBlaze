@@ -22,6 +22,7 @@ object UserManager {
         currentUser = user // Assign the provided user to the currentUser variable
     }
 
+
     // Function to fetch user data from Firestore based on userId
     fun fetchUserData(userId: String, firestore: FirebaseFirestore, callback: (User?) -> Unit) {
 
@@ -49,6 +50,12 @@ object UserManager {
                         badges = document.get("badges") as? List<String> ?: emptyList(),
                         bucketListParks = document.get("bucketList") as? List<Park> ?: emptyList(),
                         isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false,
+                        favoriteTrailsVisible = document.getBoolean("favoriteTrailsVisible") ?: false,
+                        leaderboardVisible = document.getBoolean("leaderboardVisible") ?: false,
+                        photosVisible = document.getBoolean("photosVisible") ?: false,
+                        shareLocationVisible = document.getBoolean("shareLocationVisible") ?: false,
+                        watcherVisible = document.getBoolean("watcherVisible") ?: false,
+
                     )
                     // Set the fetched user as the current user
                     setCurrentUser(user)

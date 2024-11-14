@@ -782,16 +782,39 @@ class FriendsProfileActivity : AppCompatActivity() {
                         val parkName = record["parkName"] as? String ?: return@map null
                         val elapsedTime = record["elapsedTime"] as? String ?: return@map null
                         val parkCode = record["parkCode"] as? String ?: return@map null
-                        val imageUrl = record["imageUrl"] as? String // This can be null
-                        val timestamp = record["timestamp"] as? Long ?: return@map null // Assuming timestamp is a Long
-                        val date = record["date"] as? String ?: return@map null // Assuming date is a String
+                        val imageUrl = record["imageUrl"] as? String
+                        val timestamp = record["timestamp"] as? Long ?: return@map null
+                        val date = record["date"] as? String ?: return@map null
+                        val isPlace = record["place"] as? Boolean ?: false // Get the place flag
+                        val placeId = if (isPlace) parkCode else null // If it's a place, use parkCode as placeId
 
-                        // Create a TimeRecord object
-                        TimeRecord(parkName, elapsedTime, imageUrl, parkCode, timestamp, date)
-                    }?.filterNotNull() ?: emptyList() // Filter out any null items
+                        TimeRecord(
+                            parkName = parkName,
+                            elapsedTime = elapsedTime,
+                            imageUrl = imageUrl,
+                            parkCode = parkCode,
+                            timestamp = timestamp,
+                            date = date,
+                            place = isPlace,
+                            placeId = placeId
+                        )
+                    }?.filterNotNull() ?: emptyList()
 
-                    // Update the adapter with fetched data using updateData method
-                    timeRecordAdapter.updateData(timeRecords)
+                    // Initialize adapter with click handling
+                    timeRecordAdapter = TimeRecordAdapter(timeRecords.toMutableList()) { timeRecord ->
+                        val intent = Intent(this, ParkDetailActivity::class.java)
+                        if (timeRecord.place == true) {
+                            // For Google Places
+                            intent.putExtra("PLACE_ID", timeRecord.parkCode)
+                            Log.d("TimeRecordClick", "Opening place with ID: ${timeRecord.parkCode}")
+                        } else {
+                            // For National Parks
+                            intent.putExtra("PARK_CODE", timeRecord.parkCode)
+                            Log.d("TimeRecordClick", "Opening park with code: ${timeRecord.parkCode}")
+                        }
+                        startActivity(intent)
+                    }
+                    timeRecordsRecyclerView.adapter = timeRecordAdapter
                 }
             }
             .addOnFailureListener { e ->
