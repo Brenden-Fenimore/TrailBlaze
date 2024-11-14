@@ -336,23 +336,23 @@ class MapFragment : Fragment(),
 
             satellite.setOnClickListener {
                 map.mapType = GoogleMap.MAP_TYPE_HYBRID
-                roadmapImage.setImageResource(R.drawable.grey_circle)
-                satelliteImage.setImageResource(R.drawable.green_circle)
-                terrainImage.setImageResource(R.drawable.grey_circle)
+                roadmapImage.setImageResource(R.drawable.circle_for_map_type_grey)
+                satelliteImage.setImageResource(R.drawable.circle_for_map_type_green)
+                terrainImage.setImageResource(R.drawable.circle_for_map_type_grey)
             }
 
             roadmap.setOnClickListener {
                 map.mapType = GoogleMap.MAP_TYPE_NORMAL
-                roadmapImage.setImageResource(R.drawable.green_circle)
-                satelliteImage.setImageResource(R.drawable.grey_circle)
-                terrainImage.setImageResource(R.drawable.grey_circle)
+                roadmapImage.setImageResource(R.drawable.circle_for_map_type_green)
+                satelliteImage.setImageResource(R.drawable.circle_for_map_type_grey)
+                terrainImage.setImageResource(R.drawable.circle_for_map_type_grey)
             }
 
             terrain.setOnClickListener {
                 map.mapType = GoogleMap.MAP_TYPE_TERRAIN
-                roadmapImage.setImageResource(R.drawable.grey_circle)
-                satelliteImage.setImageResource(R.drawable.grey_circle)
-                terrainImage.setImageResource(R.drawable.green_circle)
+                roadmapImage.setImageResource(R.drawable.circle_for_map_type_grey)
+                satelliteImage.setImageResource(R.drawable.circle_for_map_type_grey)
+                terrainImage.setImageResource(R.drawable.circle_for_map_type_green)
             }
 
             npsnearbysearch.setOnClickListener {
