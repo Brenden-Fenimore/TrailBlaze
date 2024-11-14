@@ -184,8 +184,14 @@ private val selectedWatchers = mutableListOf<AddFriend>()
     }
 
     private fun showWatcherSelectionDialog() {
-        watcherMemberViewModel.fetchWatcherMembers()
 
+ // call fetchFavoriteFriends fun to ensure that list is current user's watcher members
+        fetchFavoriteFriends { favoriteFriends ->
+     if(favoriteFriends.isEmpty()){
+         //
+         return@fetchFavoriteFriends
+     }
+ }
         watcherMemberViewModel.watcherMembers.observe(this) { watcherList ->
             val watcherNames = watcherList.map { it.username }.toTypedArray()
             val selectedItems = BooleanArray(watcherNames.size)
