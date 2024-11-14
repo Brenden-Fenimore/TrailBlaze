@@ -51,7 +51,6 @@ class WatcherProfile : AppCompatActivity() {
         chevronLeftButton = findViewById<ImageButton>(R.id.chevron_left)
 
         // Back button listener
-
         chevronLeftButton.setOnClickListener {
             // navigate to previous screen
             finish()
