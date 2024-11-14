@@ -38,9 +38,11 @@ import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FetchPhotoRequest
 import com.google.android.libraries.places.api.net.FetchPlaceRequest
+import com.example.trailblaze.BuildConfig.PLACES_API_KEY
 import com.google.firebase.firestore.SetOptions
 import java.io.ByteArrayOutputStream
 import android.util.Base64
+import com.google.android.libraries.places.api.net.FetchResolvedPhotoUriRequest
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -57,6 +59,7 @@ class TimerActivity: AppCompatActivity() {
     private lateinit var activities: Array<String>
     private lateinit var partyMembers: Array<String>
     private lateinit var userAdapter: UserAdapter
+    private val apiKey = PLACES_API_KEY
 
     // Property to hold the current user
     private var currentUser: User? = null
@@ -490,28 +493,29 @@ class TimerActivity: AppCompatActivity() {
         dialog.show() // Show the dialog
     }
     private fun fetchPlaceDetails(placeId: String) {
+        Places.initializeWithNewPlacesApiEnabled(this, apiKey)
         val placesClient = Places.createClient(this)
-        val placeFields = listOf(Place.Field.NAME, Place.Field.ID, Place.Field.PHOTO_METADATAS)
+        val placeFields = listOf(Place.Field.DISPLAY_NAME, Place.Field.ID, Place.Field.PHOTO_METADATAS)
 
         val request = FetchPlaceRequest.newInstance(placeId, placeFields)
 
         placesClient.fetchPlace(request)
             .addOnSuccessListener { response ->
                 val place = response.place
-                locationName = place.name ?: "Unknown Place"
+                locationName = place.displayName ?: "Unknown Place"
                 parkName = locationName
                 parkNameTextView.text = locationName
 
                 // Handle photos similar to ParkDetailActivity
                 place.photoMetadatas?.firstOrNull()?.let { metadata ->
-                    val photoRequest = FetchPhotoRequest.builder(metadata)
+                    val photoRequest = FetchResolvedPhotoUriRequest.builder(metadata)
                         .setMaxWidth(1000)
                         .setMaxHeight(1000)
                         .build()
 
-                    Places.createClient(this).fetchPhoto(photoRequest)
+                    Places.createClient(this).fetchResolvedPhotoUri(photoRequest)
                         .addOnSuccessListener { fetchPhotoResponse ->
-                            parkImageUrl = saveBitmapToFile(fetchPhotoResponse.bitmap)
+                            parkImageUrl = fetchPhotoResponse.uri.toString()
                         }
                 } ?: run {
                     parkImageUrl = ""
