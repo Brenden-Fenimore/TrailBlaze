@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="?android:attr/selectableItemBackground"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        tools:ignore="ExtraText">
 
+    //Image for the place
     <ImageView
             android:layout_marginStart="15dp"
             android:layout_width="100dp"
@@ -18,20 +21,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-        <TextView android:layout_width="245dp"
-                  android:layout_height="wrap_content"
-                  android:fontFamily="@font/amethysta"
-                  android:layout_marginStart="20dp"
-                  android:id="@+id/item_map_place_title"
-                  android:textSize="16dp"
-                  android:textColor="@color/black"
+        //Title for the place
+        <TextView
+                android:layout_width="245dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/amethysta"
+                android:layout_marginStart="20dp"
+                android:id="@+id/item_map_place_title"
+                android:textSize="16dp"
+                android:textColor="@color/black"
         />
-        <TextView android:layout_width="245dp"
-                  android:layout_height="wrap_content"
-                  android:fontFamily="@font/amethysta"
-                  android:layout_marginStart="20dp"
-                  android:id="@+id/item_map_place_address"/>
+
+        //Address for the place
+        <TextView
+                android:layout_width="245dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/amethysta"
+                android:layout_marginStart="20dp"
+                android:id="@+id/item_map_place_address"/>
+
+        //Hidden text for the place id
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:id="@+id/item_map_place_id"/>
 
     </LinearLayout>
 

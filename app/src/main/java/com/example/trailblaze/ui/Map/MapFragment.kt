@@ -82,7 +82,7 @@ OnMapReadyCallback {
         //Set interactive buttons to a value to work with
         multiAutoCompleteTextView = _binding!!.mapSearch
         val clearButton = _binding!!.clearMapsearchtext
-        val fullsailButton = _binding!!.fullsail
+        val fullsailButton = _binding!!.clearMap
         val satelliteButton = _binding!!.satellite
         val roadButton = _binding!!.roadmap
         val terrainButton = _binding!!.terrain
@@ -97,13 +97,15 @@ OnMapReadyCallback {
 
         // Create a new PlacesClient instance
         placesClient = Places.createClient(thiscontext)
-        //go to fullsail button
+        //clear map button
         fullsailButton.setOnClickListener {
 
 //          map.animateCamera(CameraUpdateFactory.newCameraPosition(fullSail))
             placesList.clear()
             map.clear()
-            bottomSheetAdapter = MapBottomSheetAdapter(placesList,placesClient)
+            bottomSheetAdapter = MapBottomSheetAdapter(placesList,placesClient){placeid->
+            Toast.makeText(thiscontext,placeid,Toast.LENGTH_LONG).show()
+            }
             recyclerView.adapter = bottomSheetAdapter
             recyclerView.layoutManager = LinearLayoutManager(thiscontext)
             recyclerView!!.adapter?.notifyDataSetChanged()
@@ -114,17 +116,17 @@ OnMapReadyCallback {
 
         //map buttons
         roadButton.setOnClickListener {map.mapType=GoogleMap.MAP_TYPE_NORMAL
-            roadImageCircle.setImageResource(R.drawable.green_circle)
-            satelliteImageCircle.setImageResource(R.drawable.grey_circle)
-            terrainImageCircle.setImageResource(R.drawable.grey_circle)}
+            roadImageCircle.setImageResource(R.drawable.circle_for_map_type_green)
+            satelliteImageCircle.setImageResource(R.drawable.circle_for_map_type_grey)
+            terrainImageCircle.setImageResource(R.drawable.circle_for_map_type_grey)}
         satelliteButton.setOnClickListener {map.mapType=GoogleMap.MAP_TYPE_HYBRID
-            roadImageCircle.setImageResource(R.drawable.grey_circle)
-            satelliteImageCircle.setImageResource(R.drawable.green_circle)
-            terrainImageCircle.setImageResource(R.drawable.grey_circle)}
+            roadImageCircle.setImageResource(R.drawable.circle_for_map_type_grey)
+            satelliteImageCircle.setImageResource(R.drawable.circle_for_map_type_green)
+            terrainImageCircle.setImageResource(R.drawable.circle_for_map_type_grey)}
         terrainButton.setOnClickListener {map.mapType=GoogleMap.MAP_TYPE_TERRAIN
-            roadImageCircle.setImageResource(R.drawable.grey_circle)
-            satelliteImageCircle.setImageResource(R.drawable.grey_circle)
-            terrainImageCircle.setImageResource(R.drawable.green_circle)}
+            roadImageCircle.setImageResource(R.drawable.circle_for_map_type_grey)
+            satelliteImageCircle.setImageResource(R.drawable.circle_for_map_type_grey)
+            terrainImageCircle.setImageResource(R.drawable.circle_for_map_type_green)}
 
 
 
@@ -180,7 +182,9 @@ OnMapReadyCallback {
                             }
                             placesList.addAll(result.places)
 
-                            bottomSheetAdapter = MapBottomSheetAdapter(placesList,placesClient)
+                            bottomSheetAdapter = MapBottomSheetAdapter(placesList,placesClient){placeid->
+                                Toast.makeText(thiscontext,placeid,Toast.LENGTH_LONG).show()
+                            }
                             recyclerView.adapter = bottomSheetAdapter
                             recyclerView.layoutManager = LinearLayoutManager(thiscontext)
                             recyclerView!!.adapter?.notifyDataSetChanged()
@@ -217,7 +221,9 @@ OnMapReadyCallback {
 
 
 
-                bottomSheetAdapter = MapBottomSheetAdapter(placesList,placesClient)
+                bottomSheetAdapter = MapBottomSheetAdapter(placesList,placesClient){placeid->
+                    Toast.makeText(thiscontext,placeid,Toast.LENGTH_LONG).show()
+                }
                 recyclerView.adapter = bottomSheetAdapter
                 recyclerView.layoutManager = LinearLayoutManager(thiscontext)
                 recyclerView!!.adapter?.notifyDataSetChanged()

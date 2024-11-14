@@ -17,26 +17,27 @@
                 android:id="@+id/map_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="80dp"/>
+                android:layout_marginBottom="120dp"/>
 
     </FrameLayout>
     <RelativeLayout
             android:id="@+id/search"
-            android:layout_width="200dp"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_centerHorizontal="true">>
 
         <View
-                android:layout_width="230dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:background="#E6FFFFFF"/>
+                android:background="@drawable/edittext_background"/>
 
         <MultiAutoCompleteTextView
                 android:id="@+id/map_search"
                 android:text=""
                 android:hint="@string/map_search_hint"
                 android:ems="10"
+                android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/amethysta"
@@ -50,6 +51,7 @@
                 android:layout_height="15dp"
                 android:id="@+id/clear_mapsearchtext"
                 android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
                 android:layout_centerVertical="true"
                 app:srcCompat="@drawable/x"
                 android:clickable="true"/>
@@ -70,7 +72,7 @@
                 android:id="@+id/roadmap_image"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/green_circle"/>
+                android:src="@drawable/circle_for_map_type_green"/>
 
         <ImageView
                 android:layout_width="30dp"
@@ -87,7 +89,9 @@
                 android:translationY="35dp"
                 android:fontFamily="@font/amethysta"
                 android:textSize="10dp"
-                android:textColor="@color/white" android:shadowColor="#000000" android:shadowRadius="5">
+                android:textColor="@color/white"
+                android:shadowColor="#000000"
+                android:shadowRadius="5">
 
         </TextView>
         //end of road button
@@ -107,7 +111,7 @@
                 android:id="@+id/satellite_image"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/grey_circle"/>
+                android:src="@drawable/circle_for_map_type_grey"/>
 
         <ImageView
                 android:layout_width="25dp"
@@ -124,7 +128,9 @@
                 android:translationY="35dp"
                 android:fontFamily="@font/amethysta"
                 android:textSize="10dp"
-                android:textColor="@color/white" android:shadowColor="#000000" android:shadowRadius="5">
+                android:textColor="@color/white"
+                android:shadowColor="#000000"
+                android:shadowRadius="5">
 
         </TextView>
         //end of satellite button
@@ -144,7 +150,7 @@
                 android:id="@+id/terrain_image"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/grey_circle"/>
+                android:src="@drawable/circle_for_map_type_grey"/>
 
         <ImageView
                 android:layout_width="40dp"
@@ -178,10 +184,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/nearbysearch"
-            android:backgroundTint="#4B652B"
+            android:backgroundTint="?attr/colorPrimary"
             app:strokeColor="#000000"
-            app:strokeWidth="1dp"
-            android:textColor="@color/white"/>
+            app:strokeWidth="1dp"/>
 
     <Button
             android:text="Clear Map"
@@ -189,9 +194,9 @@
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/fullsail"
+            android:id="@+id/clear_map"
             app:strokeColor="#000000"
-            android:backgroundTint="#4B652B"
+            android:backgroundTint="?attr/colorPrimary"
             app:strokeWidth="1dp"
             android:layout_below="@id/nearbysearch"/>
 
