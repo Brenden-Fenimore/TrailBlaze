@@ -39,21 +39,28 @@ private val _selectedWatchers = MutableLiveData<MutableList<Friends>>()
             .addOnSuccessListener {documents->
                 val watcherList = documents.mapNotNull{ document ->
                 val userId = document.id
-                val username = document.getString("username")
+                val username = document.getString("username") ?: return@mapNotNull null
                 val profileImageUrl = document.getString("profileImageUrl")
                 val isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
                 val watcherVisible = document.getBoolean("watcherVisible") ?: false
+
 
                     // Verify data fetched correctly
                     Log.d("WatcherMemberViewModel", "Fetched UserId: $userId, Username: $username, WatcherVisible: $watcherVisible")
 
                     // Add visible friends who are not the current user
                     if(username != null && userId != currentUserId && watcherVisible){
-                        Friends(userId, username, profileImageUrl, isPrivateAccount, watcherVisible)
+                        Friends(
+                            userId = userId,
+                            username = username,
+                            profileImageUrl = profileImageUrl,
+                            isPrivateAccount = isPrivateAccount,
+                            watcherVisible = watcherVisible)
                     }else {
                         null
                     }
                     }
+                val updatedWatcherList = watcherList
                 _watcherMembers.value = watcherList
             }
             .addOnFailureListener {exception->

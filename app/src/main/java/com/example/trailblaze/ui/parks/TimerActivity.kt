@@ -36,6 +36,7 @@ import com.example.trailblaze.firestore.UserManager
 import com.example.trailblaze.firestore.User
 import com.example.trailblaze.watcherFeature.WatcherMemberViewModel
 import com.google.firebase.firestore.SetOptions
+import com.example.trailblaze.ui.profile.Friends
 
 class TimerActivity: AppCompatActivity() {
     private lateinit var firestore: FirebaseFirestore
@@ -185,21 +186,21 @@ private val selectedWatchers = mutableListOf<AddFriend>()
 
     private fun showWatcherSelectionDialog() {
 
- // call fetchFavoriteFriends fun to ensure that list is current user's watcher members
-        fetchFavoriteFriends { favoriteFriends ->
+ // call pullFavoriteFriends fun to ensure that list is current user's watcher members
+        pullFavoriteFriends { favoriteFriends ->
      if(favoriteFriends.isEmpty()){
-         //
-         return@fetchFavoriteFriends
+
+         // Exit if list is empty
+         return@pullFavoriteFriends
      }
- }
-        watcherMemberViewModel.watcherMembers.observe(this) { watcherList ->
-            val watcherNames = watcherList.map { it.username }.toTypedArray()
+
+            val watcherNames = favoriteFriends.map { it.username }.toTypedArray()
             val selectedItems = BooleanArray(watcherNames.size)
 
           val dialog =  AlertDialog.Builder(this)
                 .setTitle("Select Watchers")
                 .setMultiChoiceItems(watcherNames, selectedItems) { _, index, isSelected ->
-                    val friend = watcherList[index]
+                    val friend = favoriteFriends[index]
                     if (isSelected) {
                         watcherMemberViewModel.addWatcher(friend)
                     } else {
@@ -210,7 +211,6 @@ private val selectedWatchers = mutableListOf<AddFriend>()
                     watcherMemberViewModel.selectedWatchers.value?.forEach { watcher ->
                         sendNotificationToFriend(watcher.userId)
                     }
-
                 }
                 .setNegativeButton("CANCEL") {dialogInterface, _ ->
                     dialogInterface.dismiss()
@@ -219,6 +219,43 @@ private val selectedWatchers = mutableListOf<AddFriend>()
             dialog.show()
         }
     }
+
+private fun pullFavoriteFriends(onComplete: (List<Friends>) -> Unit) {
+    val userId = FirebaseAuth.getInstance().currentUser?.uid
+    if(userId != null){
+        firestore.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+
+                    // fetch watcher's based on Ids
+                    val friendsIds = document.get("favoriteFriends") as? List<String> ?: emptyList()
+
+                    // load friends based on fetch
+                    loadWatcherData(friendsIds) { friendsList ->
+                        onComplete(friendsList)
+                    }
+                } else {
+                    // if empty return empty list
+                    onComplete(emptyList())
+                }
+            }
+//                        val friendObj =friendsList.map {friend ->
+//                            Friends(userId = friend.userId,            // friend ID from loadFriendsData
+//                                username = friend.username,        // username from loadFriendsData
+//                                profileImageUrl = friend.profileImageUrl,  // profileImageUrl from loadFriendsData
+//                                isPrivateAccount = friend.isPrivateAccount, // isPrivateAccount from loadFriendsData
+//                                watcherVisible = friend.watcherVisible)      // watcherVisible from loadFriendsData
+//                        })
+//                    }
+
+        .addOnFailureListener{e ->
+            Log.e("Firestore", "Error fetching Watchers: ", e)
+            onComplete(emptyList())
+        }
+        }else{
+            onComplete(emptyList())
+        }
+}
 
   private fun sendNotificationToFriend(friendId: String) {
         val currentUserId = FirebaseAuth.getInstance().currentUser?.uid ?: return
@@ -450,6 +487,36 @@ private val selectedWatchers = mutableListOf<AddFriend>()
         }
     }
 
+private fun loadWatcherData(friendIds: List<String>, onComplete: (List<Friends>) -> Unit) {
+    val tasks = mutableListOf<Task<DocumentSnapshot>>()
+    val watcherList = mutableListOf<Friends>()
+
+    for (friendId in friendIds) {
+        tasks.add(firestore.collection("users").document(friendId).get().addOnSuccessListener { document ->
+            if (document.exists()) {
+                val username = document.getString("username") ?: "Unknown"
+                val profileImageUrl = document.getString("profileImageUrl")
+                val isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
+                val watcherVisible = document.getBoolean("isWatcherVisible") ?: false
+
+                // Add friend with required fields
+                watcherList.add(
+                    Friends(
+                        userId = friendId,
+                        username = username,
+                        profileImageUrl = profileImageUrl,
+                        isPrivateAccount = isPrivateAccount,
+                        watcherVisible = watcherVisible
+                    )
+                )
+            }
+        })
+    }
+    // invoke onComplete with watcher list
+    Tasks.whenAllSuccess<DocumentSnapshot>(tasks).addOnSuccessListener {
+       onComplete(watcherList)
+    }
+}
     private fun loadFriendsData(friendIds: List<String>, onComplete: (List<AddFriend>) -> Unit) {
         val tasks = mutableListOf<Task<DocumentSnapshot>>()
         val friendsList = mutableListOf<AddFriend>()
@@ -468,4 +535,5 @@ private val selectedWatchers = mutableListOf<AddFriend>()
             onComplete(friendsList) // Return the populated friends list
         }
     }
+
 }
