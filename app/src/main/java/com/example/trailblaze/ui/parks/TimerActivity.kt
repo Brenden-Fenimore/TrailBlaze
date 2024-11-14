@@ -529,18 +529,4 @@ class TimerActivity: AppCompatActivity() {
                 parkImageUrl = ""
             }
     }
-    private fun saveBitmapToFile(bitmap: Bitmap): String {
-        val fileName = "place_image_${System.currentTimeMillis()}.jpg"
-        val file = File(applicationContext.filesDir, fileName)
-
-        try {
-            FileOutputStream(file).use { out ->
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
-            }
-            return file.absolutePath
-        } catch (e: IOException) {
-            Log.e("TimerActivity", "Error saving bitmap: ${e.message}")
-            return ""
-        }
-    }
 }
