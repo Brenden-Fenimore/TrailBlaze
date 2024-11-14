@@ -1,5 +1,6 @@
 package com.example.trailblaze.watcherFeature
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
@@ -7,12 +8,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
+import com.example.trailblaze.MainActivity
 import com.example.trailblaze.R
 import com.example.trailblaze.databinding.ActivityWatcherProfileBinding
+import com.example.trailblaze.firestore.ImageLoader
 import com.example.trailblaze.firestore.ImageLoader.loadProfilePicture
+import com.example.trailblaze.firestore.User
 import com.example.trailblaze.firestore.UserManager
 import com.example.trailblaze.firestore.UserRepository
 import com.google.firebase.auth.FirebaseAuth
@@ -21,6 +26,9 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
 class WatcherProfile : AppCompatActivity() {
+
+    private var _binding: ActivityWatcherProfileBinding? = null
+    private val binding get() = _binding!!
 
     private var firestore = FirebaseFirestore.getInstance()
     private val storage = FirebaseStorage.getInstance()
@@ -52,6 +60,7 @@ class WatcherProfile : AppCompatActivity() {
 
         // Back button listener
         chevronLeftButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
             // navigate to previous screen
             finish()
         }
@@ -72,25 +81,42 @@ class WatcherProfile : AppCompatActivity() {
                 val username = document.getString("username")?: "Unknown User"
                 val profileImageUrl = document.getString("profile_image")
 
-                    // set username
+                // Set Username
                 watcherName.text = username
 
-                // load profile picture
+                // Load Profile Picture
                 profileImageUrl?.let {
-                    loadProfilePicture(it)
-                } ?: run {
+                    loadWatcherProfilePicture(it)
+                }?:run {
                     watcherProfilePicture.setImageResource(R.drawable.account_circle)
                 }
+
             }
         }
             .addOnFailureListener { exception ->}
     }
 
-    private fun loadProfilePicture(imageUrl: String) {
-        // fetch profile picture
-        val storageRef: StorageReference = storage.getReferenceFromUrl(imageUrl)
+// private fun loadUserData() {
+//
+//     // fetch user from UserManager
+//     val currentBlazer = userManager.getCurrentUser()
+//
+//     if(currentBlazer != null) {
+//
+//         binding.watcherName.text = currentBlazer.username
+//         watcherProfilePicture?.let {
+//             loadWatcherProfilePicture(it)
+//         } ?: run {
+//             watcherProfilePicture.setImageResource(R.drawable.account_circle)
+//         }
+//     }
 
-        // use glide to load image
-        Glide.with(this).load(imageUrl).into(watcherProfilePicture)
-    }
+
+// }
+    private fun loadWatcherProfilePicture(profileImageUrl: String){
+        val userId = auth.currentUser?.uid ?: return
+        userRepository.getUserProfileImage(userId) { imageUrl ->
+            ImageLoader.loadProfilePicture(this, binding.watcherProfilePicture, imageUrl)
+        }
+        }
 }
