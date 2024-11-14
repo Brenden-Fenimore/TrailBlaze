@@ -17,6 +17,7 @@
 
     <!-- Back Image Button -->
     <ImageButton
+            android:focusable="true"
             app:srcCompat="@drawable/baseline_arrow_back_ios_new_24"
             android:contentDescription="@string/btn_back"
             android:layout_width="49dp"
