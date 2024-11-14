@@ -117,7 +117,12 @@ class ParkDetailActivity : AppCompatActivity() {
         // Initialize the bucket list button
         bucketListButton = findViewById(R.id.bucket_list_btn)
         bucketListButton.setOnClickListener {
-            addToBucketList(parkCode)
+            if(!placeId.isNullOrEmpty()){
+                addToBucketList(placeId!!)
+            }
+            else {
+                addToBucketList(parkCode)
+            }
         }
 
         // Initialize the hike button with support for both Parks and Places
@@ -236,14 +241,25 @@ class ParkDetailActivity : AppCompatActivity() {
         userDocRef.get().addOnSuccessListener { document ->
             // Retrieve favorite parks list; if it's missing, use an empty list
             val favoriteParks = document.get("favoriteParks") as? List<String> ?: emptyList()
-
-            // Update the favorite button icon based on whether the park is in the user's favorites
-            if (favoriteParks.contains(parkCode)) {
-                // Show filled heart icon if park is a favorite
-                favoriteButton.setImageResource(R.drawable.favorite_filled)
-            } else {
-                // Show outline heart icon if park is not a favorite
-                favoriteButton.setImageResource(R.drawable.favorite)
+            if(!placeId.isNullOrEmpty()){
+                // Update the favorite button icon based on whether the park is in the user's favorites
+                if (favoriteParks.contains(placeId)) {
+                    // Show filled heart icon if park is a favorite
+                    favoriteButton.setImageResource(R.drawable.favorite_filled)
+                } else {
+                    // Show outline heart icon if park is not a favorite
+                    favoriteButton.setImageResource(R.drawable.favorite)
+                }
+            }
+            else {
+                // Update the favorite button icon based on whether the park is in the user's favorites
+                if (favoriteParks.contains(parkCode)) {
+                    // Show filled heart icon if park is a favorite
+                    favoriteButton.setImageResource(R.drawable.favorite_filled)
+                } else {
+                    // Show outline heart icon if park is not a favorite
+                    favoriteButton.setImageResource(R.drawable.favorite)
+                }
             }
         }
     }
@@ -258,38 +274,79 @@ class ParkDetailActivity : AppCompatActivity() {
         // Get user's favorite parks list and check if the park is already a favorite
         userDocRef.get().addOnSuccessListener { document ->
             val favoriteParks = document.get("favoriteParks") as? List<String> ?: emptyList()
+            if(!placeId.isNullOrEmpty()) {
+                if (favoriteParks.contains(placeId)) {
+                    // Park is already a favorite; proceed to remove it
+                    userDocRef.update(
+                        "favoriteParks",
+                        FieldValue.arrayRemove(placeId)
+                    )        // Remove park from favorites
+                        .addOnSuccessListener {
+                            // Notify user of success
+                            Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show()
+                            // Update to outline icon to reflect removal
+                            favoriteButton.setImageResource(R.drawable.favorite)
+                        }
+                        .addOnFailureListener { e ->
+                            // Notify user of failure
+                            Toast.makeText(this, "Failed to remove from favorites: ${e.message}", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                }
+                else {
+                    // Park is not a favorite; proceed to add it
+                    userDocRef.update("favoriteParks", FieldValue.arrayUnion(placeId))     // Add park to favorites
+                        .addOnSuccessListener {
+                            // Show confetti when adding to favorites
+                            showConfetti()
+                            // Notify user of success
+                            Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show()
+                            // Update to filled icon to reflect addition
+                            favoriteButton.setImageResource(R.drawable.favorite_filled)
+                        }
+                        .addOnFailureListener { e ->
+                            // Notify user of failure
+                            Toast.makeText(this, "Failed to add to favorites: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                }
+            }
 
-            if (favoriteParks.contains(parkCode)) {
-                // Park is already a favorite; proceed to remove it
-                userDocRef.update(
-                    "favoriteParks",
-                    FieldValue.arrayRemove(parkCode)
-                )        // Remove park from favorites
-                    .addOnSuccessListener {
-                        // Notify user of success
-                        Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show()
-                        // Update to outline icon to reflect removal
-                        favoriteButton.setImageResource(R.drawable.favorite)
-                    }
-                    .addOnFailureListener { e ->
-                        // Notify user of failure
-                        Toast.makeText(this, "Failed to remove from favorites: ${e.message}", Toast.LENGTH_SHORT).show()
-                    }
-            } else {
-                // Park is not a favorite; proceed to add it
-                userDocRef.update("favoriteParks", FieldValue.arrayUnion(parkCode))     // Add park to favorites
-                    .addOnSuccessListener {
-                        // Show confetti when adding to favorites
-                        showConfetti()
-                        // Notify user of success
-                        Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show()
-                        // Update to filled icon to reflect addition
-                        favoriteButton.setImageResource(R.drawable.favorite_filled)
-                    }
-                    .addOnFailureListener { e ->
-                        // Notify user of failure
-                        Toast.makeText(this, "Failed to add to favorites: ${e.message}", Toast.LENGTH_SHORT).show()
-                    }
+            //NPS Favorite toggle
+            else {
+                if (favoriteParks.contains(parkCode)) {
+                    // Park is already a favorite; proceed to remove it
+                    userDocRef.update(
+                        "favoriteParks",
+                        FieldValue.arrayRemove(parkCode)
+                    )        // Remove park from favorites
+                        .addOnSuccessListener {
+                            // Notify user of success
+                            Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show()
+                            // Update to outline icon to reflect removal
+                            favoriteButton.setImageResource(R.drawable.favorite)
+                        }
+                        .addOnFailureListener { e ->
+                            // Notify user of failure
+                            Toast.makeText(this, "Failed to remove from favorites: ${e.message}", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                }
+                else {
+                    // Park is not a favorite; proceed to add it
+                    userDocRef.update("favoriteParks", FieldValue.arrayUnion(parkCode))     // Add park to favorites
+                        .addOnSuccessListener {
+                            // Show confetti when adding to favorites
+                            showConfetti()
+                            // Notify user of success
+                            Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show()
+                            // Update to filled icon to reflect addition
+                            favoriteButton.setImageResource(R.drawable.favorite_filled)
+                        }
+                        .addOnFailureListener { e ->
+                            // Notify user of failure
+                            Toast.makeText(this, "Failed to add to favorites: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                }
             }
         }
     }
@@ -361,7 +418,7 @@ class ParkDetailActivity : AppCompatActivity() {
 
     private fun fetchPlaceDetails(placeId: String) {
         val placeFields = listOf(
-            Place.Field.NAME,
+            Place.Field.DISPLAY_NAME,
             Place.Field.EDITORIAL_SUMMARY,
             Place.Field.ADDRESS_COMPONENTS,
             Place.Field.INTERNATIONAL_PHONE_NUMBER,
@@ -370,7 +427,7 @@ class ParkDetailActivity : AppCompatActivity() {
             Place.Field.PHOTO_METADATAS,
             Place.Field.OPENING_HOURS,
             Place.Field.TYPES,
-            Place.Field.LAT_LNG,
+            Place.Field.LOCATION,
             Place.Field.PRICE_LEVEL
         )
 
@@ -387,12 +444,11 @@ class ParkDetailActivity : AppCompatActivity() {
     }
 
     private fun populatePlaceDetails(place: Place) {
-        parkNameTextView.text = place.name
+        parkNameTextView.text = place.displayName
 
         // Handle editorial summary for description
         parkDescriptionTextView.text = place.editorialSummary?.toString()
-            ?: place.types?.joinToString(", ")
-                    ?: "No description available"
+            ?: "No description available"
 
         // Handle address components
         val addressComponents = place.addressComponents
@@ -426,7 +482,7 @@ class ParkDetailActivity : AppCompatActivity() {
             parkAddressTextView.text = "Address not available"
         }
 
-        parkContactsPhoneTextView.text = place.phoneNumber ?: "No phone number available"
+        parkContactsPhoneTextView.text = place.internationalPhoneNumber ?: "No phone number available"
 
         // Handle opening hours with detailed formatting
         place.openingHours?.let { hours ->
@@ -446,7 +502,7 @@ class ParkDetailActivity : AppCompatActivity() {
         }
 
         // Set the lat/lng values
-        place.latLng?.let { latLng ->
+        place.location?.let { latLng ->
             parkLatitudeTextView.text = latLng.latitude.toString()
             parkLongitudeTextView.text = latLng.longitude.toString()
         } ?: run {
