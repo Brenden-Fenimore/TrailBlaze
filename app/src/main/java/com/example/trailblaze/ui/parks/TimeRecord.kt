@@ -7,7 +7,7 @@ data class TimeRecord(
     val parkCode: String,
     val timestamp: Long,
     val date: String,
-    val isPlace: Boolean = false,
+    val place: Boolean = false,
     val placeId: String? = null,
     val placePhotoReference: String? = null  // Add this for Places API photo reference
 )

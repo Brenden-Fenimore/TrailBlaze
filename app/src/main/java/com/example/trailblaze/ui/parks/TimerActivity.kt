@@ -51,7 +51,7 @@ class TimerActivity: AppCompatActivity() {
     private lateinit var parkCode: String
     private lateinit var parkName: String // Store the park name
     private var placeId: String? = null
-    private lateinit var locationName: String
+    private var locationName: String = "Unknown Location"
     private lateinit var parkImageUrl: String
     private lateinit var parkNameTextView: TextView
     private lateinit var activities: Array<String>
@@ -76,7 +76,7 @@ class TimerActivity: AppCompatActivity() {
         activities = intent.getStringArrayExtra("PARK_ACTIVITIES") ?: arrayOf()
         partyMembers = intent.getStringArrayExtra("PARTY_MEMBERS") ?: arrayOf()
 
-        // Single fetch logic
+        // Single fetch logic with locationName already initialized
         when {
             !placeId.isNullOrEmpty() -> {
                 fetchPlaceDetails(placeId!!)
@@ -85,7 +85,6 @@ class TimerActivity: AppCompatActivity() {
                 fetchParkDetails(parkCode)
             }
             else -> {
-                locationName = "Unknown Location"
                 parkNameTextView.text = locationName
             }
         }
@@ -302,7 +301,7 @@ class TimerActivity: AppCompatActivity() {
                 parkCode = if (!placeId.isNullOrEmpty()) placeId!! else timeRecord.parkCode,
                 timestamp = System.currentTimeMillis(),
                 date = timeRecord.date,
-                isPlace = !placeId.isNullOrEmpty(),
+                place = !placeId.isNullOrEmpty(),
                 placeId = placeId
             )
 

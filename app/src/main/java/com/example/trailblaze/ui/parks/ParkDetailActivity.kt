@@ -76,7 +76,7 @@ class ParkDetailActivity : AppCompatActivity() {
             !placeId.isNullOrEmpty() -> fetchPlaceDetails(placeId!!)
             parkCode.isNotEmpty() -> fetchParkDetails(parkCode)
             else -> {
-                Toast.makeText(this, "Invalid data source", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Invalid data provided", Toast.LENGTH_SHORT).show()
                 finish()
             }
         }
