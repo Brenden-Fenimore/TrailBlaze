@@ -276,7 +276,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun fetchParksByState(userState: String) {
-        RetrofitInstance.api.getParksbyQuery(userState).enqueue(object : Callback<NPSResponse> {
+        RetrofitInstance.api.getParksbyState(userState).enqueue(object : Callback<NPSResponse> {
             override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
                 if (response.isSuccessful) {
                     parksList = response.body()?.data ?: emptyList()
