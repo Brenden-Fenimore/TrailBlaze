@@ -345,42 +345,6 @@ class FriendsProfileActivity : AppCompatActivity() {
             }
     }
 
-
-//    private fun checkFriendshipStatus(currentUserId: String, friendId: String) {
-//        firestore.collection("users").document(currentUserId).get()
-//            .addOnSuccessListener { document ->
-//                if (document != null && document.exists()) {
-//                    val friendsList = document.get("friends") as? List<String> ?: emptyList()
-//                    val favoriteFriendsList = document.get("favoriteFriends") as? List<String> ?: emptyList()
-//
-//                    // Check if the friend is already in the friends list
-//                    if (friendsList.contains(friendId)) {
-//                        binding.addFriendButton.visibility = View.GONE // Hide add friend button
-//                        binding.favoriteFriendBtn.visibility = View.VISIBLE // Show favorite button
-//                        binding.removeFriendButton.visibility = View.VISIBLE // Show unfriend button
-//                        // Check if the friend is in favorites
-//                        if (favoriteFriendsList.contains(friendId)) {
-//                            binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled) // Set filled icon
-//                        } else {
-//                            binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Set outline icon
-//                        }
-//                    } else {
-//                        binding.addFriendButton.visibility = View.VISIBLE // Show add friend button
-//                        binding.favoriteFriendBtn.visibility = View.GONE // Hide favorite button
-//                        binding.removeFriendButton.visibility = View.GONE   // Hide unfriend button
-//                    }
-//
-//                    // Set up click listener for the favorite button
-//                    binding.favoriteFriendBtn.setOnClickListener {
-//                       toggleFavoriteStatus(currentUserId, friendId)
-//                    }
-//                }
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.e("FriendsProfileActivity", "Error fetching user friends: ", exception)
-//            }
-//    }
-
     // Displays a confirmation dialog for removing a friend with the friend's username
     private fun confirmRemoveFriend(friendId: String) {
         // Fetch friend's username
