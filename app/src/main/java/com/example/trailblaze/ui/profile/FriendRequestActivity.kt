@@ -85,19 +85,24 @@ class FriendRequestActivity : AppCompatActivity() {
 
     // Accepts a friend request by moving the user ID from pending requests to friends list
     private fun acceptFriendRequest(userId: String) {
-        val currentUserId = auth.currentUser?.uid ?: return     // Get the current user's ID
+        val currentUserId = auth.currentUser?.uid ?: return
 
         firestore.runBatch { batch ->
-            // Remove userId from pendingRequests in the current user's document
-            batch.update(firestore.collection("users").document(currentUserId), "pendingRequests", FieldValue.arrayRemove(userId))
+            val currentUserDoc = firestore.collection("users").document(currentUserId)
+            val friendDoc = firestore.collection("users").document(userId)
 
-            // Add userId to friends in the current user's document
-            batch.update(firestore.collection("users").document(currentUserId), "friends", FieldValue.arrayUnion(userId))
+            // Update friends list
+            batch.update(currentUserDoc, "friends", FieldValue.arrayUnion(userId))
+            batch.update(friendDoc, "friends", FieldValue.arrayUnion(currentUserId))
 
-            // Add currentUserId to friends in the friend's document
-            batch.update(firestore.collection("users").document(userId), "friends", FieldValue.arrayUnion(currentUserId))
+            // Remove from pending requests
+            batch.update(currentUserDoc, "pendingRequests", FieldValue.arrayRemove(userId))
+
+            // Add notification for the friend
+            val notificationMessage = "Your friend request to ${auth.currentUser?.displayName} has been accepted."
+            batch.update(friendDoc, "pendingNotifications", FieldValue.arrayUnion(notificationMessage))
         }.addOnSuccessListener {
-            // Remove the user from the RecyclerView list and notify the adapter
+            // Update UI
             pendingRequests.removeAll { it.userId == userId }
             pendingRequestsAdapter.notifyDataSetChanged()
             Toast.makeText(this, "Friend request accepted", Toast.LENGTH_SHORT).show()
@@ -108,12 +113,17 @@ class FriendRequestActivity : AppCompatActivity() {
 
     // Declines a friend request by removing the user ID from the pending requests list
     private fun declineFriendRequest(userId: String) {
-        val currentUserId = auth.currentUser?.uid ?: return     // Get the current user's ID
+        val currentUserId = auth.currentUser?.uid ?: return
 
         firestore.collection("users").document(currentUserId)
-            .update("pendingRequests", FieldValue.arrayRemove(userId))      // Remove userId from pending requests
+            .update("pendingRequests", FieldValue.arrayRemove(userId))
             .addOnSuccessListener {
-                // Remove the declined user from the list and update the adapter
+                // Notify the friend
+                val friendDoc = firestore.collection("users").document(userId)
+                val notificationMessage = "Your friend request to ${auth.currentUser?.displayName} has been declined."
+                friendDoc.update("pendingNotifications", FieldValue.arrayUnion(notificationMessage))
+
+                // Update UI
                 pendingRequests.removeAll { it.userId == userId }
                 pendingRequestsAdapter.notifyDataSetChanged()
                 Toast.makeText(this, "Friend request declined", Toast.LENGTH_SHORT).show()
