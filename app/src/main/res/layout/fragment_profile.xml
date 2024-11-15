@@ -29,14 +29,14 @@
         <ImageButton
                 android:id="@+id/messageIcon"
                 android:contentDescription="@string/messages"
-                app:srcCompat="@drawable/message_icon"
-                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/whistle"
+                android:clickable="true"
+                android:focusable="true"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="55dp"
-               />
-
+                android:layout_marginEnd="54dp"
+                />
         <ImageButton
                 app:srcCompat="@drawable/edit2"
                 android:contentDescription="@string/settings"

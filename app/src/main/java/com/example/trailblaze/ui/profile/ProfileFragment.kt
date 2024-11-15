@@ -140,11 +140,17 @@ interface PhotoDeletionListener {
                 fetchCurrentUserLocation()
             }
 
+            // Watcher Member Profile Listener
             binding.watcherMember.setOnClickListener {
                 val intent = Intent(context, WatcherMemberList::class.java)
                 startActivity(intent)
             }
 
+
+            // Message Icon Listener
+            binding.messageIcon.setOnClickListener {
+                val intent = Intent(context, MessagingActivity::class.java)
+            }
             binding.iconDifficulty.setOnClickListener {
                 fetchCurrentUserDifficulty()
             }
