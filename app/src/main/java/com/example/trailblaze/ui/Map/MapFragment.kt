@@ -63,11 +63,6 @@ class MapFragment : Fragment(),
     private val map get() = _map!!
 
     val apiKey = PLACES_API_KEY
-    private val fullSail = CameraPosition.builder()
-        .target(LatLng(28.596472,-81.301472))
-        .zoom(15f)
-        .build()
-
     lateinit var autocompletelist: List<AutocompletePrediction>
     var autocompletelistString: MutableList<String> = mutableListOf()
     val searchTypes = listOf("hiking_area", "park")
@@ -288,7 +283,7 @@ class MapFragment : Fragment(),
 
 
     private fun fetchParksAndPlaceMarkers(userState: String) {
-        RetrofitInstance.api.getParksbyQuery(searchTerm = userState).enqueue(object : Callback<NPSResponse> {
+        RetrofitInstance.api.getParksbyState(stateCode = userState).enqueue(object : Callback<NPSResponse> {
             override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
                 if (response.isSuccessful) {
                     val parksList = response.body()?.data ?: emptyList()

@@ -762,10 +762,6 @@ class FriendsProfileActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateParksRecyclerView(parks: List<Park>) {
-        val locationItems = parks.map { park -> LocationItem.ParkItem(park) }
-        favoritesAdapter.updateData(locationItems)
-    }
     private fun fetchLeaderboard() {
         firestore.collection("users").get()
             .addOnSuccessListener { querySnapshot ->
