@@ -18,9 +18,6 @@ class MessagingViewModel : ViewModel() {
     private val firestore = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
 
-    init{
-        loadMessages()
-    }
 
     private fun loadMessages(){
 
@@ -28,19 +25,19 @@ class MessagingViewModel : ViewModel() {
             .orderBy("timestamp")
             .addSnapshotListener { snapshot, error ->
                 if(error != null || snapshot == null){
-                    Log.e("MessagingViewModel", "Error when loading messages", error)
+                    Log.e("MessagingViewModel", "Error loading messages", error)
                     return@addSnapshotListener
                 }
                 val messagesList = snapshot.documents.mapNotNull { doc ->
                     doc.toObject(Message::class.java)
                 }
-                _messages.value = messagesList
+                _message.value = messagesList
             }
 
     }
     fun sendMessage(message: String){
         val sendUserId = auth.currentUser?.uid ?: return
-        val message = Message(message, sendUserId, System.currentTimeMillis())
+        val newMessage = Message(message, sendUserId, System.currentTimeMillis())
         firestore.collection("messages").add(message)
         .addOnSuccessListener {
             Log.d("MessagingViewModel", "Message sent successfully")
