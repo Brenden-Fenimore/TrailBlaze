@@ -1,18 +1,35 @@
 package com.example.trailblaze.ui.profile
 
 import android.app.AlertDialog
+import android.content.ContentValues
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.location.Geocoder
+import android.location.Address
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.FileProvider
+import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
 import com.example.trailblaze.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.net.URL
+import java.util.*
+import java.util.concurrent.Executors
+import kotlin.collections.ArrayList
 
 class FullscreenImageDialogFragment : DialogFragment() {
 
@@ -27,6 +44,12 @@ class FullscreenImageDialogFragment : DialogFragment() {
     private lateinit var photosAdapter: PhotosAdapter
     private lateinit var captionTextView: TextView
     private var photoCaptions: MutableMap<String, String> = mutableMapOf()
+    private lateinit var locationTextView: TextView
+    private lateinit var editLocationButton: ImageButton
+    private lateinit var downloadImageButton: ImageButton
+    private lateinit var menuToggleButton: ImageButton
+    private lateinit var shareImageButton: ImageButton
+    private var isMenuExpanded = false
 
     companion object {
         fun newInstance(
@@ -55,6 +78,11 @@ class FullscreenImageDialogFragment : DialogFragment() {
         deleteButton = view.findViewById(R.id.deleteImageButton)
         editCaptionButton = view.findViewById(R.id.editCaptionButton)
         captionTextView = view.findViewById(R.id.captionTextView)
+        locationTextView = view.findViewById(R.id.locationTextView)
+        editLocationButton = view.findViewById(R.id.editLocationButton)
+        shareImageButton = view.findViewById(R.id.shareImageButton)
+        downloadImageButton = view.findViewById(R.id.downloadImageButton)
+        menuToggleButton = view.findViewById(R.id.menuToggleButton)
 
         imageUrls = (arguments?.getStringArrayList("imageUrls") ?: emptyList()) as MutableList<String>
         currentIndex = arguments?.getInt("position") ?: 0
@@ -66,9 +94,15 @@ class FullscreenImageDialogFragment : DialogFragment() {
 
         isOwnProfile = arguments?.getBoolean("isOwnProfile") ?: false
 
+        setupMenuToggle(view)
+
         // Set delete button visibility based on ownership
         deleteButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
         editCaptionButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
+        editLocationButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
+        shareImageButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
+        downloadImageButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
+        menuToggleButton.visibility = if (isOwnProfile) View.VISIBLE else View.GONE
 
         deleteButton.setOnClickListener {
             // Show a confirmation dialog
@@ -92,6 +126,20 @@ class FullscreenImageDialogFragment : DialogFragment() {
             openEditCaptionDialog(imageUrls[currentIndex])
         }
 
+        editLocationButton.setOnClickListener {
+            val imageUrl = imageUrls[currentIndex] // Get the current image URL
+            promptForLocationUpdate(imageUrl)
+        }
+
+        shareImageButton.setOnClickListener {
+            val imageUrl = imageUrls[currentIndex] // Get the current image URL
+            sharePhoto(imageUrl)
+        }
+
+        downloadImageButton.setOnClickListener {
+            val imageUrl = imageUrls[currentIndex]
+            downloadPhoto(imageUrl)
+        }
 
         return view
     }
@@ -103,6 +151,12 @@ class FullscreenImageDialogFragment : DialogFragment() {
     private fun displayImage(index: Int) {
         currentIndex = index
         val imageUrl = imageUrls[currentIndex]
+
+        // Reset text views at the start to prevent carryover
+        captionTextView.text = ""
+        captionTextView.visibility = View.GONE
+        locationTextView.text = ""
+        locationTextView.visibility = View.GONE
 
         // Loads images through Glide
         Glide.with(this)
@@ -123,12 +177,33 @@ class FullscreenImageDialogFragment : DialogFragment() {
             captionTextView.text = caption
             captionTextView.visibility = View.VISIBLE
         }
+
+        // Display location based on EXIF data
+        loadGeoLocation(imageUrl)
     }
 
     private fun navigateImage(direction: Int) {
         val newIndex = currentIndex + direction
         if (newIndex in imageUrls.indices) {
             displayImage(newIndex)
+        }
+    }
+
+    private fun setupMenuToggle(view: View) {
+        val menuToggleButton: ImageButton = view.findViewById(R.id.menuToggleButton)
+        val menuButtonsLayout: LinearLayout = view.findViewById(R.id.menuButtonsLayout)
+
+        menuToggleButton.setOnClickListener {
+            isMenuExpanded = !isMenuExpanded
+            if (isMenuExpanded) {
+                // Show buttons and update icon to "<" (left arrow)
+                menuButtonsLayout.visibility = View.VISIBLE
+                menuToggleButton.setImageResource(R.drawable.side_arrow)
+            } else {
+                // Hide buttons and update icon to "V" (down arrow)
+                menuButtonsLayout.visibility = View.GONE
+                menuToggleButton.setImageResource(R.drawable.down_arrow)
+            }
         }
     }
 
@@ -317,4 +392,284 @@ class FullscreenImageDialogFragment : DialogFragment() {
                 Log.e("FetchCaption", "Error querying users from Firestore", e)
             }
     }
+
+    private fun loadGeoLocation(imageUrl: String) {
+        Log.d("GeoLocation", "Attempting to load geo-location for image: $imageUrl")
+
+        val firestore = FirebaseFirestore.getInstance()
+
+        // Query all users' photos to find the matching imageUrl and fetch the location
+        firestore.collection("users")
+            .get() // Get all users
+            .addOnSuccessListener { usersSnapshot ->
+                var found = false
+                for (userDoc in usersSnapshot.documents) {
+                    val userPhotosCollection = userDoc.reference.collection("photos")
+
+                    // Query photos collection of each user to find the photo by its URL
+                    userPhotosCollection.whereEqualTo("url", imageUrl).get()
+                        .addOnSuccessListener { querySnapshot ->
+                            if (querySnapshot.documents.isNotEmpty()) {
+                                val document = querySnapshot.documents.firstOrNull()
+                                val location = document?.getString("location")
+                                val isLocationManuallySet = document?.getBoolean("isLocationManuallySet") ?: false
+
+                                if (isLocationManuallySet && !location.isNullOrEmpty()) {
+                                    // If manually set location exists in Firestore, show it
+                                    Log.d("GeoLocation", "Manually set location from Firestore: $location")
+                                    locationTextView.text = location
+                                    locationTextView.visibility = View.VISIBLE
+                                } else {
+                                    Log.d("GeoLocation", "No manual location found, falling back to EXIF.")
+                                    fetchGeoLocationFromExif(imageUrl)
+                                }
+                                found = true
+                            }
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e("GeoLocation", "Error fetching location from Firestore", e)
+                        }
+
+                    // Break the loop once we've found the location to prevent querying other users
+                    if (found) {
+                        return@addOnSuccessListener
+                    }
+                }
+                if (!found) {
+                    Log.d("GeoLocation", "No location found for the imageUrl in any user’s photos.")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("GeoLocation", "Error querying users from Firestore", e)
+                fetchGeoLocationFromExif(imageUrl)  // If Firestore fetch fails, try EXIF
+            }
+    }
+
+    private fun getLocationName(latitude: Double, longitude: Double): String? {
+        val geocoder = Geocoder(requireContext(), Locale.getDefault())
+
+        try {
+            val addresses: MutableList<Address>? = geocoder.getFromLocation(latitude, longitude, 1)
+
+            if (addresses != null) {
+                if (addresses.isNotEmpty()) {
+                    val address = addresses[0]
+
+                    // Debugging log to inspect all address components
+                    Log.d("GeoLocation", "Full address components: ${address.featureName}, ${address.locality}, ${address.adminArea}, ${address.countryName}")
+
+                    // Prioritize locality (city, region) over feature name (which may be street number)
+                    var locationName = address.locality // Try to get locality first
+
+                    // If locality is not available, try to get the feature name (e.g., point of interest)
+                    if (locationName.isNullOrEmpty()) {
+                        locationName = address.featureName
+                    }
+
+                    // If neither locality nor feature name is found, check administrative area (state/county)
+                    if (locationName.isNullOrEmpty()) {
+                        locationName = address.adminArea
+                    }
+
+                    // If still no location name, fallback to country name
+                    if (locationName.isNullOrEmpty()) {
+                        locationName = address.countryName
+                    }
+
+                    // Log the location name for debugging
+                    Log.d("GeoLocation", "Refined location name: $locationName")
+
+                    return locationName
+                } else {
+                    Log.d("GeoLocation", "No address found for coordinates.")
+                }
+            }
+        } catch (e: IOException) {
+            Log.e("GeoLocation", "Geocoder failed", e)
+        }
+        return null
+    }
+    private fun promptForLocationUpdate(imageUrl: String) {
+        // Example implementation using an AlertDialog to enter location manually
+        val editText = EditText(context)
+        editText.hint = "Enter new location"
+
+        AlertDialog.Builder(requireContext())
+            .setTitle("Update Location Tag")
+            .setView(editText)
+            .setPositiveButton("Update") { _, _ ->
+                val newLocation = editText.text.toString()
+                updateLocationTag(imageUrl, newLocation)  // Pass the imageUrl
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun updateLocationTag(imageUrl: String, newLocation: String) {
+        locationTextView.text = newLocation
+        locationTextView.visibility = View.VISIBLE
+        // Optionally, save this update to Firestore
+        saveLocationToFirestore(imageUrl, newLocation)
+    }
+
+    private fun saveLocationToFirestore(imageUrl: String, location: String) {
+        val userId = getCurrentUserId()
+        if (userId.isEmpty()) {
+            Log.d("GeoLocation", "User not authenticated")
+            return
+        }
+
+        val photosCollection = FirebaseFirestore.getInstance()
+            .collection("users")
+            .document(userId)
+            .collection("photos")
+
+        // Find the photo document to update
+        photosCollection.whereEqualTo("url", imageUrl).get()
+            .addOnSuccessListener { querySnapshot ->
+                if (querySnapshot.isEmpty) {
+                    Log.d("GeoLocation", "No photo found with this URL.")
+                } else {
+                    val document = querySnapshot.documents.firstOrNull()
+                    val photoRef = photosCollection.document(document?.id ?: "")
+
+                    // Save the location and set the flag for manual edit
+                    val locationData = mapOf(
+                        "location" to location,
+                        "isLocationManuallySet" to true
+                    )
+
+                    photoRef.update(locationData)
+                        .addOnSuccessListener {
+                            Log.d("GeoLocation", "Location successfully saved to Firestore!")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e("GeoLocation", "Failed to save location to Firestore", e)
+                        }
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("GeoLocation", "Error finding photo in Firestore", e)
+            }
+    }
+
+    private fun fetchGeoLocationFromExif(imageUrl: String) {
+        // Create a unique file path to download the image temporarily
+        val tempFile = File(requireContext().cacheDir, "temp_image.jpg")
+
+        val storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(imageUrl)
+
+        // Download the file from Firebase Storage
+        storageReference.getFile(tempFile)
+            .addOnSuccessListener {
+                Log.d("GeoLocation", "Image downloaded successfully to: ${tempFile.absolutePath}")
+
+                // Once the file is downloaded, try to read EXIF data
+                try {
+                    val exifInterface = ExifInterface(tempFile.absolutePath)
+
+                    val latLong = exifInterface.latLong
+                    if (latLong != null) {
+                        val latitude = latLong[0]
+                        val longitude = latLong[1]
+
+                        val locationName = getLocationName(latitude, longitude)
+
+                        if (!locationName.isNullOrEmpty()) {
+                            locationTextView.text = locationName
+                            locationTextView.visibility = View.VISIBLE
+                            Log.d("GeoLocation", "Location fetched from EXIF: $locationName")
+                        } else {
+                            Log.d("GeoLocation", "No location found from EXIF.")
+                            locationTextView.visibility = View.GONE
+                        }
+                    } else {
+                        Log.d("GeoLocation", "No EXIF lat/long found.")
+                        locationTextView.visibility = View.GONE
+                    }
+                } catch (e: IOException) {
+                    Log.e("GeoLocation", "Error reading EXIF data", e)
+                    locationTextView.visibility = View.GONE
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("GeoLocation", "Error downloading image from Firebase Storage", e)
+                locationTextView.visibility = View.GONE
+            }
+    }
+
+    private fun sharePhoto(imageUrl: String) {
+        // Start an asynchronous task to download the image
+        val executor = Executors.newSingleThreadExecutor()
+        executor.execute {
+            try {
+                // Load the image as a bitmap from the provided URL
+                val url = URL(imageUrl)
+                val connection = url.openConnection()
+                connection.doInput = true
+                connection.connect()
+                val inputStream = connection.getInputStream()
+                val bitmap = BitmapFactory.decodeStream(inputStream)
+
+                // Save the bitmap to cache and get its URI
+                val cachePath = File(requireContext().cacheDir, "images")
+                cachePath.mkdirs()
+                val file = File(cachePath, "shared_image.png")
+                val outputStream = FileOutputStream(file)
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                outputStream.close()
+
+                // Get the URI for the saved file
+                val imageUri = FileProvider.getUriForFile(
+                    requireContext(),
+                    "${requireContext().packageName}.provider",
+                    file
+                )
+
+                // Create a share intent
+                val shareIntent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_STREAM, imageUri)
+                    type = "image/png"
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                }
+
+                // Start the share intent
+                startActivity(Intent.createChooser(shareIntent, "Share image via"))
+            } catch (e: Exception) {
+                Log.e("FullscreenImageDialog", "Error sharing image", e)
+            }
+        }
+    }
+
+    private fun downloadPhoto(imageUrl: String) {
+        val fileName = "downloaded_photo_${System.currentTimeMillis()}.jpg"
+
+        val resolver = requireContext().contentResolver
+        val contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        val values = ContentValues().apply {
+            put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
+            put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+            put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/Trailblaze")
+        }
+
+        val uri = resolver.insert(contentUri, values)
+        if (uri != null) {
+            FirebaseStorage.getInstance().getReferenceFromUrl(imageUrl)
+                .getBytes(Long.MAX_VALUE)
+                .addOnSuccessListener { bytes ->
+                    resolver.openOutputStream(uri).use { outputStream ->
+                        outputStream?.write(bytes)
+                        Toast.makeText(requireContext(), "Photo downloaded to gallery", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Log.e("DownloadPhoto", "Failed to download image", e)
+                    Toast.makeText(requireContext(), "Failed to download photo", Toast.LENGTH_SHORT).show()
+                }
+        } else {
+            Toast.makeText(requireContext(), "Failed to create file", Toast.LENGTH_SHORT).show()
+        }
+    }
 }
+

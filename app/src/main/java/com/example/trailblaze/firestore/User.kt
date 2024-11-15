@@ -22,4 +22,11 @@ data class User(
     val isPrivateAccount: Boolean,
     val pendingRequests: List<String> = emptyList(), // New field for pending requests
     val pendingNotifications: List<String> = emptyList(), // New field for pending notifications
+    val favoriteTrailsVisible: Boolean,
+    val leaderboardVisible: Boolean,
+    val photosVisible: Boolean,
+    val shareLocationVisible: Boolean,
+    val watcherVisible: Boolean,
+    val photos: List<String> = emptyList()
+
 )
