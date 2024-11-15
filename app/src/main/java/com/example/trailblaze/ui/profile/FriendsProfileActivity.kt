@@ -1,6 +1,7 @@
 package com.example.trailblaze.ui.profile
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
@@ -25,6 +26,7 @@ import com.example.trailblaze.ui.achievements.BadgesAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.example.trailblaze.firestore.ImageLoader
 import com.example.trailblaze.nps.*
+import com.example.trailblaze.ui.Map.LocationItem
 import com.example.trailblaze.ui.parks.ParkDetailActivity
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
@@ -39,8 +41,11 @@ import com.example.trailblaze.ui.parks.TimeRecordAdapter
 import com.example.trailblaze.ui.parks.TimeRecord
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.FetchPhotoRequest
 import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FetchResolvedPhotoUriRequest
+import java.io.File
+import java.io.FileOutputStream
 
 class FriendsProfileActivity : AppCompatActivity() {
 
@@ -63,11 +68,11 @@ class FriendsProfileActivity : AppCompatActivity() {
     private val photoUrls = mutableListOf<String>()
 
     private lateinit var favoritesRecyclerView: RecyclerView
-    private lateinit var favoritesAdapter: ParksAdapter
     private var favoriteParks: MutableList<Park> = mutableListOf()
 
     private lateinit var timeRecordsRecyclerView: RecyclerView
     private lateinit var timeRecordAdapter: TimeRecordAdapter
+    private lateinit var favoritesAdapter: FavoritesAdapter
 
     private val apiKey = PLACES_API_KEY
 
@@ -172,12 +177,19 @@ class FriendsProfileActivity : AppCompatActivity() {
         favoritesRecyclerView = binding.favoriteTrailsSection
         favoritesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        favoritesAdapter = ParksAdapter(emptyList()) { park ->
-            val intent = Intent(this, ParkDetailActivity::class.java).apply {
-                if(park.parkCode.length >= 10) { putExtra("PLACE_ID", park.parkCode)}
-                else { putExtra("PARK_CODE", park.parkCode) }
+        favoritesAdapter = FavoritesAdapter(emptyList()) { item ->
+            when (item) {
+                is LocationItem.ParkItem -> {
+                    val intent = Intent(this, ParkDetailActivity::class.java)
+                    intent.putExtra("PARK_CODE", item.park.parkCode)
+                    startActivity(intent)
+                }
+                is LocationItem.PlaceItem -> {
+                    val intent = Intent(this, ParkDetailActivity::class.java)
+                    intent.putExtra("PLACE_ID", item.place.id)
+                    startActivity(intent)
+                }
             }
-            startActivity(intent)
         }
         favoritesRecyclerView.adapter = favoritesAdapter
 
@@ -691,58 +703,69 @@ class FriendsProfileActivity : AppCompatActivity() {
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
                     val favoriteParksList = document.get("favoriteParks") as? List<String> ?: emptyList()
+                    val locationItems = mutableListOf<LocationItem>()
 
-                    // Assuming you have a function to fetch park details based on park IDs
-                    fetchParksDetails(favoriteParksList)
-                } else {
-                    Log.e("FriendsProfileActivity", "Friend document does not exist")
+                    // Separate park codes and place IDs
+                    val parkCodes = favoriteParksList.filter { it.length < 10 }
+                    val placeIds = favoriteParksList.filter { it.length >= 10 }
+
+                    // Counter to track when all items are loaded
+                    var totalLoaded = 0
+                    val totalItems = parkCodes.size + placeIds.size
+
+                    // Fetch parks
+                    parkCodes.forEach { parkCode ->
+                        RetrofitInstance.api.getParkDetails(parkCode).enqueue(object : Callback<NPSResponse> {
+                            override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
+                                response.body()?.data?.firstOrNull()?.let { park ->
+                                    locationItems.add(LocationItem.ParkItem(park))
+                                }
+                                totalLoaded++
+                                checkAndUpdateAdapter(totalLoaded, totalItems, locationItems)
+                            }
+
+                            override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
+                                totalLoaded++
+                                checkAndUpdateAdapter(totalLoaded, totalItems, locationItems)
+                            }
+                        })
+                    }
+
+                    // Fetch places
+                    val placeFields = listOf(
+                        Place.Field.ID,
+                        Place.Field.DISPLAY_NAME,
+                        Place.Field.PHOTO_METADATAS,
+                        Place.Field.LOCATION
+                    )
+
+                    placeIds.forEach { placeId ->
+                        val request = FetchPlaceRequest.builder(placeId, placeFields).build()
+                        Places.createClient(this).fetchPlace(request)
+                            .addOnSuccessListener { response ->
+                                locationItems.add(LocationItem.PlaceItem(response.place))
+                                totalLoaded++
+                                checkAndUpdateAdapter(totalLoaded, totalItems, locationItems)
+                            }
+                            .addOnFailureListener {
+                                totalLoaded++
+                                checkAndUpdateAdapter(totalLoaded, totalItems, locationItems)
+                            }
+                    }
                 }
-            }
-            .addOnFailureListener { exception ->
-                Log.e("FriendsProfileActivity", "Error fetching friend's favorite parks: ", exception)
             }
     }
 
-    private fun fetchParksDetails(parkCodes: List<String>) {
-        val tasks = parkCodes.map { parkCode ->
-            RetrofitInstance.api.getParkDetails(parkCode)
-        }
-
-        // Track the number of responses
-        var completedRequests = 0
-
-        tasks.forEach { call ->
-            call.enqueue(object : Callback<NPSResponse> {
-                override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
-                    if (response.isSuccessful && response.body() != null) {
-                        val park = response.body()?.data?.firstOrNull()
-                        park?.let {
-                            favoriteParks.add(it) // Add the park to the list
-                        }
-                    }
-                    completedRequests++
-                    // Check if all requests are completed
-                    if (completedRequests == parkCodes.size) {
-                        updateParksRecyclerView(favoriteParks)
-                    }
-                }
-
-                override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
-                    Log.e("FavoritesFragment", "Error fetching park details: ${t.message}")
-                    completedRequests++
-                    // Check if all requests are completed, even on failure
-                    if (completedRequests == parkCodes.size) {
-                        updateParksRecyclerView(favoriteParks)
-                    }
-                }
-            })
+    private fun checkAndUpdateAdapter(loaded: Int, total: Int, items: List<LocationItem>) {
+        if (loaded == total) {
+            favoritesAdapter.updateData(items)
         }
     }
 
     private fun updateParksRecyclerView(parks: List<Park>) {
-        favoritesAdapter.updateData(parks) // Update the adapter with the fetched parks
+        val locationItems = parks.map { park -> LocationItem.ParkItem(park) }
+        favoritesAdapter.updateData(locationItems)
     }
-
     private fun fetchLeaderboard() {
         firestore.collection("users").get()
             .addOnSuccessListener { querySnapshot ->
