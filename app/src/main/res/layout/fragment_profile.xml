@@ -25,6 +25,18 @@
                 android:tint="#CDEDA3"
                 android:background="@android:color/transparent"
                 android:layout_centerVertical="true"/>
+
+        <ImageButton
+                android:id="@+id/messageIcon"
+                android:contentDescription="@string/messages"
+                app:srcCompat="@drawable/message_icon"
+                android:background="@android:color/transparent"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="55dp"
+               />
+
         <ImageButton
                 app:srcCompat="@drawable/edit2"
                 android:contentDescription="@string/settings"
