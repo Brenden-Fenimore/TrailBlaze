@@ -293,17 +293,21 @@ class FriendsProfileActivity : AppCompatActivity() {
     }
 
     private fun checkFriendshipStatus(currentUserId: String, friendId: String) {
-        firestore.collection("users").document(currentUserId).get()
-            .addOnSuccessListener { document ->
-                if (document != null && document.exists()) {
-                    val friendsList = document.get("friends") as? List<String> ?: emptyList()
-                    val favoriteFriendsList = document.get("favoriteFriends") as? List<String> ?: emptyList()
+        val currentUserRef = firestore.collection("users").document(currentUserId)
+        val friendRef = firestore.collection("users").document(friendId)
+
+        currentUserRef.get()
+            .addOnSuccessListener { currentUserDoc ->
+                if (currentUserDoc != null && currentUserDoc.exists()) {
+                    val friendsList = currentUserDoc.get("friends") as? List<String> ?: emptyList()
+                    val favoriteFriendsList = currentUserDoc.get("favoriteFriends") as? List<String> ?: emptyList()
 
                     // Check if the friend is already in the friends list
                     if (friendsList.contains(friendId)) {
                         binding.addFriendButton.visibility = View.GONE // Hide add friend button
                         binding.favoriteFriendBtn.visibility = View.VISIBLE // Show favorite button
                         binding.removeFriendButton.visibility = View.VISIBLE // Show unfriend button
+
                         // Check if the friend is in favorites
                         if (favoriteFriendsList.contains(friendId)) {
                             binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled) // Set filled icon
@@ -311,9 +315,30 @@ class FriendsProfileActivity : AppCompatActivity() {
                             binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Set outline icon
                         }
                     } else {
-                        binding.addFriendButton.visibility = View.VISIBLE // Show add friend button
-                        binding.favoriteFriendBtn.visibility = View.GONE // Hide favorite button
-                        binding.removeFriendButton.visibility = View.GONE   // Hide unfriend button
+                        // Check friend's pendingRequests to see if there's a pending request from currentUserId
+                        friendRef.get()
+                            .addOnSuccessListener { friendDoc ->
+                                if (friendDoc != null && friendDoc.exists()) {
+                                    val friendPendingRequests = friendDoc.get("pendingRequests") as? List<String> ?: emptyList()
+
+                                    if (friendPendingRequests.contains(currentUserId)) {
+                                        // Friend request is pending
+                                        binding.addFriendButton.visibility = View.GONE // Hide add friend button
+                                        binding.favoriteFriendBtn.visibility = View.GONE // Hide favorite button
+                                        binding.removeFriendButton.visibility = View.GONE // Hide unfriend button
+                                    } else {
+                                        // No friend request pending
+                                        binding.addFriendButton.visibility = View.VISIBLE // Show add friend button
+                                        binding.favoriteFriendBtn.visibility = View.GONE // Hide favorite button
+                                        binding.removeFriendButton.visibility = View.GONE // Hide unfriend button
+                                    }
+                                } else {
+                                    Log.e("FriendsProfileActivity", "Friend document does not exist")
+                                }
+                            }
+                            .addOnFailureListener { exception ->
+                                Log.e("FriendsProfileActivity", "Error fetching friend document: ", exception)
+                            }
                     }
 
                     // Set up click listener for the favorite button
@@ -323,7 +348,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                 }
             }
             .addOnFailureListener { exception ->
-                Log.e("FriendsProfileActivity", "Error fetching user friends: ", exception)
+                Log.e("FriendsProfileActivity", "Error fetching current user document: ", exception)
             }
     }
 
@@ -677,6 +702,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                 Log.e("FriendsProfileActivity", "Error fetching friend's favorite parks: ", exception)
             }
     }
+
     private fun fetchParksDetails(parkCodes: List<String>) {
         val tasks = parkCodes.map { parkCode ->
             RetrofitInstance.api.getParkDetails(parkCode)
