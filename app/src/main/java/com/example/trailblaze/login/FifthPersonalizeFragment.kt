@@ -19,8 +19,8 @@ class FifthPersonalizeFragment : Fragment() {
         //inflate the layout
         val view = inflater.inflate(R.layout.fragment_fifth_personalize, container, false)
         view.findViewById<Button>(R.id.yesBtn).setOnClickListener {
-    // opt user in as a Watcher on their profile
-}
+
+        }
 
         view.findViewById<Button>(R.id.contBtn).setOnClickListener {
             //navigate to MainActivity

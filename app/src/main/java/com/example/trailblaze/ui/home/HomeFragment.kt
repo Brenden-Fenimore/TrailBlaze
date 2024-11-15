@@ -141,12 +141,18 @@ class HomeFragment : Fragment() {
 
         // Initialize adapter with an empty list and set it on the RecyclerView
         timeRecordAdapter = TimeRecordAdapter(mutableListOf()) { timeRecord ->
-            // Create an intent to start the ParkDetailActivity
             val intent = Intent(context, ParkDetailActivity::class.java).apply {
-                putExtra("PARK_CODE", timeRecord.parkCode) // Pass the park code
+                if (timeRecord.place) {
+                    putExtra("PLACE_ID", timeRecord.placeId)
+                    putExtra("IS_PLACE", true)
+                } else {
+                    putExtra("PARK_CODE", timeRecord.parkCode)
+                    putExtra("IS_PLACE", false)
+                }
             }
-            startActivity(intent) // Start the ParkDetailActivity
+            startActivity(intent)
         }
+        setupTimeRecordAdapter()
         timeRecordsRecyclerView.adapter = timeRecordAdapter
 
         fetchPendingRequestsAndUpdateCounter()
@@ -318,26 +324,23 @@ class HomeFragment : Fragment() {
 
         firestore.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
-                if (document != null && document.exists()) {
+                if (document.exists()) {
                     val timeRecordsData = document.get("timeRecords") as? List<Map<String, Any>>
-                    val timeRecords = timeRecordsData?.map { record ->
-                        val parkName = record["parkName"] as? String ?: return@map null
-                        val elapsedTime = record["elapsedTime"] as? String ?: return@map null
-                        val parkCode = record["parkCode"] as? String ?: return@map null
-                        val imageUrl = record["imageUrl"] as? String // This can be null
-                        val timestamp = record["timestamp"] as? Long ?: return@map null // Assuming timestamp is a Long
-                        val date = record["date"] as? String ?: return@map null // Assuming date is a String
+                    val timeRecords = timeRecordsData?.mapNotNull { record ->
+                        TimeRecord(
+                            parkName = record["parkName"] as? String ?: return@mapNotNull null,
+                            elapsedTime = record["elapsedTime"] as? String ?: return@mapNotNull null,
+                            imageUrl = record["imageUrl"] as? String,
+                            parkCode = record["parkCode"] as? String ?: return@mapNotNull null,
+                            timestamp = record["timestamp"] as? Long ?: return@mapNotNull null,
+                            date = record["date"] as? String ?: return@mapNotNull null,
+                            place = record["isPlace"] as? Boolean ?: false,
+                            placeId = record["placeId"] as? String
+                        )
+                    } ?: emptyList()
 
-                        // Create a TimeRecord object
-                        TimeRecord(parkName, elapsedTime, imageUrl, parkCode, timestamp, date)
-                    }?.filterNotNull() ?: emptyList() // Filter out any null items
-
-                    // Update the adapter with fetched data using updateData method
                     timeRecordAdapter.updateData(timeRecords)
                 }
-            }
-            .addOnFailureListener { e ->
-                Log.e("HomeFragment", "Error fetching time records: ${e.message}")
             }
     }
 
@@ -400,6 +403,23 @@ class HomeFragment : Fragment() {
                 Log.e("HomeFragment", "Error fetching pending requests", exception)
             }
     }
+
+    private fun setupTimeRecordAdapter() {
+        timeRecordAdapter = TimeRecordAdapter(mutableListOf()) { timeRecord ->
+            val intent = Intent(context, ParkDetailActivity::class.java)
+
+            // Check if the parkCode looks like a Place ID (starts with "ChIJ")
+            if (timeRecord.parkCode.startsWith("ChIJ")) {
+                intent.putExtra("PLACE_ID", timeRecord.parkCode)
+                Log.d("TimeRecordClick", "Opening as Place with ID: ${timeRecord.parkCode}")
+            } else {
+                intent.putExtra("PARK_CODE", timeRecord.parkCode)
+                Log.d("TimeRecordClick", "Opening as Park with code: ${timeRecord.parkCode}")
+            }
+            startActivity(intent)
+        }
+    }
+
 
     override fun onDestroyView()
     {

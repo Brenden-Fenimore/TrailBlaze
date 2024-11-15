@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trailblaze.BuildConfig
 import com.example.trailblaze.R
 import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.Park
@@ -23,6 +24,7 @@ import com.example.trailblaze.ui.favorites.FriendUtils
 import com.example.trailblaze.ui.profile.FriendRequestActivity
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
+import com.google.android.libraries.places.api.Places
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
@@ -41,6 +43,8 @@ class AttemptTrailActivity : AppCompatActivity() {
 
     private lateinit var parkCode: String
     private lateinit var parkName: String // Store the park name
+    private var placeId: String? = null
+    private lateinit var locationName: String
     private lateinit var parkImageUrl: String
     private lateinit var parkNameTextView: TextView
     private lateinit var soloJourneyCheckBox: CheckBox
@@ -58,27 +62,44 @@ class AttemptTrailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_attempt_trail)
         supportActionBar?.hide()
-
+        // Initialize Places API right at the start
+        Places.initialize(applicationContext, BuildConfig.PLACES_API_KEY)
+        // Initialize core components
         firestore = FirebaseFirestore.getInstance()
-        // Initialize AchievementManager
         achievementManager = AchievementManager(this)
+        parkNameTextView = findViewById(R.id.parkNameTextView)
 
+        // Back button setup
         findViewById<ImageButton>(R.id.chevron_left).setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        // Get the park code from the intent
+        // Get data from intent
         parkCode = intent.getStringExtra("PARK_CODE") ?: ""
-        parkNameTextView = findViewById(R.id.parkNameTextView)
-        fetchParkDetails(parkCode)
-
+        placeId = intent.getStringExtra("PLACE_ID")
         activities = intent.getStringArrayExtra("PARK_ACTIVITIES") ?: arrayOf()
-        // Log the activities to see what was pulled in
-        Log.d("AttemptTrailActivity", "Activities received: ${activities.joinToString(", ")}")
 
+        // Set location name based on data source
+        locationName = when {
+            !placeId.isNullOrEmpty() -> intent.getStringExtra("PLACE_NAME") ?: "Unknown Place"
+            parkCode.isNotEmpty() -> {
+                fetchParkDetails(parkCode)
+                intent.getStringExtra("PARK_NAME") ?: "Unknown Park"
+            }
+            else -> "Unknown Location"
+        }
+        parkNameTextView.text = locationName
 
-        Log.d("AttemptTrailActivity", "Received park code: $parkCode")
+        // Initialize UI components
+        initializeUIComponents()
 
+        // Set up RecyclerView and party members
+        setupRecyclerView()
+        addCurrentUserToParty()
+        updatePartyMemberCount()
+    }
+
+    private fun initializeUIComponents() {
         soloJourneyCheckBox = findViewById(R.id.solo_journey_checkbox)
         partyInfoLayout = findViewById(R.id.party_info_layout)
         startTrailButton = findViewById(R.id.start_trail_button)
@@ -87,37 +108,43 @@ class AttemptTrailActivity : AppCompatActivity() {
             partyInfoLayout.visibility = if (isChecked) View.GONE else View.VISIBLE
         }
 
+        setupButtons()
+    }
+
+    private fun setupButtons() {
         startTrailButton.setOnClickListener {
             savePartyMembersToFirestore()
+            val partyMembers = userList.map { it.name }
+            val intent = Intent(this, TimerActivity::class.java).apply {
+                // Send Park data if available
+                putExtra("PARK_CODE", parkCode)
+                putExtra("PARK_ACTIVITIES", activities)
 
-            // Create a list of party member usernames to pass as intent extras
-            val partyMembers = userList.map { it.name } // Extracting the names from userList
+                // Send Place data if available
+                putExtra("PLACE_ID", placeId)
+                putExtra("PLACE_NAME", locationName)
 
-            val intent = Intent(this, TimerActivity::class.java)
-            intent.putExtra("PARK_CODE", parkCode)
-            intent.putExtra("PARK_ACTIVITIES", activities) // Pass the activities list
-            intent.putStringArrayListExtra("PARTY_MEMBERS", ArrayList(partyMembers))
+                putStringArrayListExtra("PARTY_MEMBERS", ArrayList(partyMembers))
+            }
             startActivity(intent)
         }
 
-        // Find the button and set the click listener
-        val addNonTrailBlazeUserButton: Button = findViewById(R.id.add_non_TrailBlaze_user)
-        addNonTrailBlazeUserButton.setOnClickListener {
+        findViewById<Button>(R.id.add_non_TrailBlaze_user).setOnClickListener {
             showAddUserDialog()
         }
 
-        val addTrailBlazeUser: Button = findViewById(R.id.add_trailMates_user)
-        addTrailBlazeUser.setOnClickListener {
+        findViewById<Button>(R.id.add_trailMates_user).setOnClickListener {
             showAddFriendsDialog()
         }
+    }
 
+    private fun setupRecyclerView() {
         recyclerView = findViewById(R.id.partyMemberRecyclerView)
         userAdapter = UserAdapter(this, userList)
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.adapter = userAdapter
-        addCurrentUserToParty()
-        updatePartyMemberCount()
     }
+
     private fun showAddFriendsDialog() {
         // Inflate the dialog layout
         val dialogView = layoutInflater.inflate(R.layout.dialog_add_friends, null)

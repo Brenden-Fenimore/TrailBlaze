@@ -23,35 +23,44 @@ class TimeRecordAdapter(
         val timeRecord = timeRecords[position]
         holder.parkNameTextView.text = timeRecord.parkName
         holder.elapsedTimeTextView.text = timeRecord.elapsedTime
-        holder.dateTextView.text = timeRecord.date // Bind the date to the new TextView
+        holder.dateTextView.text = timeRecord.date
 
-        // Load the image using Glide
         if (timeRecord.imageUrl != null) {
             Glide.with(holder.itemView.context)
                 .load(timeRecord.imageUrl)
-                .placeholder(R.drawable.baseline_downloading_24) // Placeholder while loading
-                .error(R.drawable.no_image_available) // Fallback image if loading fails
+                .placeholder(R.drawable.baseline_downloading_24)
+                .error(R.drawable.no_image_available)
                 .into(holder.parkImageView)
         } else {
-            holder.parkImageView.setImageResource(R.drawable.no_image_available) // Set fallback image if no URL
+            holder.parkImageView.setImageResource(R.drawable.no_image_available)
         }
 
-        // Set the click listener for the item
         holder.itemView.setOnClickListener {
-            onItemClick(timeRecord) // Call the click listener with the clicked timeRecord
+            if (timeRecord.place == true) {
+                // For places, use the placeId stored in parkCode
+                val modifiedRecord = timeRecord.copy(placeId = timeRecord.parkCode)
+                onItemClick(modifiedRecord)
+            } else {
+                onItemClick(timeRecord)
+            }
         }
     }
 
     override fun getItemCount(): Int = timeRecords.size
 
-    // Method to update data in the adapter
     fun updateData(newTimeRecords: List<TimeRecord>) {
+        val processedRecords = newTimeRecords.map { record ->
+            if (record.place == true) {
+                record.copy(parkCode = record.placeId ?: "")
+            } else {
+                record
+            }
+        }
         timeRecords.clear()
-        timeRecords.addAll(newTimeRecords)
-        notifyDataSetChanged() // Consider switching to DiffUtil for efficiency on larger datasets
+        timeRecords.addAll(processedRecords)
+        notifyDataSetChanged()
     }
 
-    // Optional: Method to remove a specific item
     fun removeItem(position: Int) {
         if (position >= 0 && position < timeRecords.size) {
             timeRecords.removeAt(position)
@@ -62,7 +71,7 @@ class TimeRecordAdapter(
     class TimeRecordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val parkNameTextView: TextView = itemView.findViewById(R.id.parkNameTextView)
         val elapsedTimeTextView: TextView = itemView.findViewById(R.id.elapsedTimeTextView)
-        val parkImageView: ImageView = itemView.findViewById(R.id.thumbnailImageView) // New ImageView for park image
-        val dateTextView: TextView = itemView.findViewById(R.id.dateTextView) // Add this line for dateTextView
+        val parkImageView: ImageView = itemView.findViewById(R.id.thumbnailImageView)
+        val dateTextView: TextView = itemView.findViewById(R.id.dateTextView)
     }
 }

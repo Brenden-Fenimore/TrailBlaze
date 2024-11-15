@@ -1,6 +1,7 @@
 package com.example.trailblaze.ui.parks
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -34,8 +35,18 @@ import java.text.SimpleDateFormat
 import java.util.*
 import com.example.trailblaze.firestore.UserManager
 import com.example.trailblaze.firestore.User
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.FetchPlaceRequest
+import com.example.trailblaze.BuildConfig.PLACES_API_KEY
 import com.example.trailblaze.watcherFeature.WatcherMemberViewModel
 import com.google.firebase.firestore.SetOptions
+import java.io.ByteArrayOutputStream
+import android.util.Base64
+import com.google.android.libraries.places.api.net.FetchResolvedPhotoUriRequest
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import com.example.trailblaze.ui.profile.Friends
 
 class TimerActivity: AppCompatActivity() {
@@ -43,11 +54,14 @@ class TimerActivity: AppCompatActivity() {
     private lateinit var achievementManager: AchievementManager
     private lateinit var parkCode: String
     private lateinit var parkName: String // Store the park name
+    private var placeId: String? = null
+    private var locationName: String = "Unknown Location"
     private lateinit var parkImageUrl: String
     private lateinit var parkNameTextView: TextView
     private lateinit var activities: Array<String>
     private lateinit var partyMembers: Array<String>
     private lateinit var userAdapter: UserAdapter
+    private val apiKey = PLACES_API_KEY
 
     // Property to hold the current user
     private var currentUser: User? = null
@@ -66,15 +80,29 @@ private val selectedWatchers = mutableListOf<AddFriend>()
         currentUser = UserManager.getCurrentUser()
 
         firestore = FirebaseFirestore.getInstance()
-        // Get the park code from the intent
-        parkCode = intent.getStringExtra("PARK_CODE") ?: ""
         parkNameTextView = findViewById(R.id.parkNameTextView)
-        fetchParkDetails(parkCode)
+
+        // Get data from intent
+        parkCode = intent.getStringExtra("PARK_CODE") ?: ""
+        placeId = intent.getStringExtra("PLACE_ID")
+        activities = intent.getStringArrayExtra("PARK_ACTIVITIES") ?: arrayOf()
+        partyMembers = intent.getStringArrayExtra("PARTY_MEMBERS") ?: arrayOf()
+
+        // Single fetch logic with locationName already initialized
+        when {
+            !placeId.isNullOrEmpty() -> {
+                fetchPlaceDetails(placeId!!)
+            }
+            parkCode.isNotEmpty() -> {
+                fetchParkDetails(parkCode)
+            }
+            else -> {
+                parkNameTextView.text = locationName
+            }
+        }
         activities = intent.getStringArrayExtra("PARK_ACTIVITIES") ?: arrayOf()
 
         partyMembers = intent.getStringArrayExtra("PARTY_MEMBERS") ?: arrayOf()
-
-
 
         // Log the activities to see what was pulled in
         Log.d("AttemptTrailActivity", "Activities received: ${activities.joinToString(", ")}")
@@ -86,8 +114,6 @@ private val selectedWatchers = mutableListOf<AddFriend>()
 
         // Initialize AchievementManager
         achievementManager = AchievementManager(this)
-
-
 
         // Get the park code from the intent
         parkCode = intent.getStringExtra("PARK_CODE") ?: ""
@@ -266,14 +292,13 @@ private fun pullFavoriteFriends(onComplete: (List<Friends>) -> Unit) {
                 if (document != null && document.exists()) {
                     val pendingNotifications = document.get("pendingNotifications") as? List<String> ?: emptyList()
 
-                    // Construct the notification message using the party members' names
-                    // Assuming 'partyMembers' contains names directly:
-                    val partyMembersString = partyMembers.joinToString(", ") // Join party members' names with commas
-                    // Construct the notification message including the park name
-                    val notificationMessage = "$currentUserName has just embarked on a new trail adventure at $parkName! Please keep an eye on them and check in periodically. Their safety is important."
+                    // Construct the notification message
+                    val notificationMessage = "$currentUserName has just embarked on a new trail adventure at $locationName! " +
+                            "Please keep an eye on them and check in periodically. Their safety is important."
                     // Check if the notification message has already been sent
                     if (pendingNotifications.contains(notificationMessage)) {
-                        Toast.makeText(this, "Notification already sent to this friend.", Toast.LENGTH_SHORT).show()
+                        // Only notify if it's already been sent
+                        Toast.makeText(this, "Notification already sent to ${document.getString("username")}.", Toast.LENGTH_SHORT).show()
                     } else {
                         // Update the friend's document to add the notification message to pendingNotifications
                         val notificationUpdates = hashMapOf<String, Any>(
@@ -282,11 +307,11 @@ private fun pullFavoriteFriends(onComplete: (List<Friends>) -> Unit) {
 
                         friendRef.set(notificationUpdates, SetOptions.merge())
                             .addOnSuccessListener {
-                                Toast.makeText(this, "Notification sent successfully!", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Notification sent successfully to ${document.getString("username")}!", Toast.LENGTH_SHORT).show()
                             }
                             .addOnFailureListener { exception ->
                                 Log.e("TimerActivity", "Error sending notification: ", exception)
-                                Toast.makeText(this, "Failed to send notification.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Failed to send notification to ${document.getString("username")}.", Toast.LENGTH_SHORT).show()
                             }
                     }
                 } else {
@@ -354,41 +379,55 @@ private fun pullFavoriteFriends(onComplete: (List<Friends>) -> Unit) {
             // Reference to the user's document in Firestore
             val userDocRef = firestore.collection("users").document(userId)
 
-            // Create a TimeRecord with the current timestamp
-            val timeRecordWithTimestamp = timeRecord.copy(timestamp = System.currentTimeMillis())
+            val finalTimeRecord = TimeRecord(
+                parkName = locationName,
+                elapsedTime = timeRecord.elapsedTime,
+                imageUrl = parkImageUrl,
+                parkCode = if (!placeId.isNullOrEmpty()) placeId!! else timeRecord.parkCode,
+                timestamp = System.currentTimeMillis(),
+                date = timeRecord.date,
+                place = !placeId.isNullOrEmpty(),
+                placeId = placeId
+            )
 
-            // Update the timeRecords field, creating it if it doesn't exist
-            userDocRef.update("timeRecords", FieldValue.arrayUnion(timeRecordWithTimestamp))
+
+            // Log the final record being saved
+            Log.d("TimerActivity", "Attempting to save finalTimeRecord: " +
+                    "parkName=${finalTimeRecord.parkName}, " +
+                    "parkCode=${finalTimeRecord.parkCode}, " +
+                    "elapsedTime=${finalTimeRecord.elapsedTime}")
+
+            userDocRef.update("timeRecords", FieldValue.arrayUnion(finalTimeRecord))
                 .addOnSuccessListener {
-                    // After saving the time record, delete party members
+                    Log.d("TimerActivity", "Successfully saved time record to Firebase")
                     deletePartyMembers(userId)
                     // Notify watchers
                     // notifyWatchers(userId)
 
-                    // Check and grant the Explorer badge for evening completion
-                    achievementManager.checkAndGrantExplorerBadge(timeRecordWithTimestamp.timestamp)
-
+                    // Check achievements
+                    achievementManager.checkAndGrantExplorerBadge(finalTimeRecord.timestamp)
                     achievementManager.checkAndGrantConquerorBadge()
 
                     achievementManager.checkAndGrantTrailBlazerBadge()
 
-                    // Check for Long Distance badge (5 minutes = 300 seconds)
-                    if (elapsedTime > 300_000) { // 300,000 milliseconds = 5 minutes
+                    if (elapsedTime > 300_000) {
                         achievementManager.checkAndGrantLongDistanceBadge()
                     }
                     // Check for Habitual Hiker badge
                     achievementManager.checkAndGrantHabitualBadge()
-
-                    // Check for Weekend Warrior badge
-                    achievementManager.checkAndGrantWeekendBadge(timeRecordWithTimestamp.timestamp)
-
-                    // Check and grant the Daily Adventurer badge
+                    achievementManager.checkAndGrantWeekendBadge(finalTimeRecord.timestamp)
                     achievementManager.checkForDailyAdventurerBadge(userId)
+
+                    Toast.makeText(this, "Time record saved successfully", Toast.LENGTH_SHORT).show()
+                    finish()
                 }
                 .addOnFailureListener { e ->
-                    Log.e("AttemptTrailActivity", "Error saving time record: ${e.message}")
+                    Log.e("TimerActivity", "Error saving time record: ${e.message}")
+                    Log.e("TimerActivity", "Failed record details: ${finalTimeRecord}")
+                    Toast.makeText(this, "Failed to save time record", Toast.LENGTH_SHORT).show()
                 }
         } else {
+            Log.e("TimerActivity", "User not authenticated")
             Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show()
         }
     }
@@ -528,4 +567,96 @@ private fun loadWatcherData(friendIds: List<String>, onComplete: (List<Friends>)
         }
     }
 
+    private fun showAddWatcherDialog() {
+        // Inflate the dialog layout
+        val dialogView = layoutInflater.inflate(R.layout.dialog_add_friends, null)
+
+        val dialogBuilder = AlertDialog.Builder(this)
+            .setView(dialogView)
+
+        val dialog = dialogBuilder.create()
+
+        // Initialize RecyclerView
+        val friendsRecyclerView: RecyclerView = dialogView.findViewById(R.id.friendsRecyclerView)
+        val confirmButton: Button = dialogView.findViewById(R.id.confirm_selection_button)
+
+        // Initialize an empty friends list
+        val friendsList = mutableListOf<AddFriend>()
+
+        // Initialize the adapter with the friends list
+        val friendsAdapter = AddFriendsAdapter(friendsList) { friend ->
+        }
+
+        // Set up the RecyclerView
+        friendsRecyclerView.layoutManager = LinearLayoutManager(this)
+        friendsRecyclerView.adapter = friendsAdapter
+
+        // Fetch the user's favorite friends
+        fetchFavoriteFriends { fetchedFriends ->
+            friendsList.clear() // Clear the current list
+            friendsList.addAll(fetchedFriends) // Add the fetched friends
+            friendsAdapter.notifyDataSetChanged() // Notify the adapter to refresh the list
+        }
+
+        // Confirm button click listener
+        confirmButton.setOnClickListener {
+            val selectedFriends = friendsList.filter { it.isSelected } // Get only selected friends
+            selectedFriends.forEach { friend ->
+                sendNotificationToFriend(friend.id) // Send notification to each selected friend
+            }
+            dialog.dismiss() // Close the dialog after action is complete
+        }
+        dialog.show() // Show the dialog
+    }
+    private fun fetchPlaceDetails(placeId: String) {
+        Places.initializeWithNewPlacesApiEnabled(this, apiKey)
+        val placesClient = Places.createClient(this)
+        val placeFields = listOf(Place.Field.DISPLAY_NAME, Place.Field.ID, Place.Field.PHOTO_METADATAS)
+
+        val request = FetchPlaceRequest.newInstance(placeId, placeFields)
+
+        placesClient.fetchPlace(request)
+            .addOnSuccessListener { response ->
+                val place = response.place
+                locationName = place.displayName ?: "Unknown Place"
+                parkName = locationName
+                parkNameTextView.text = locationName
+
+                // Handle photos similar to ParkDetailActivity
+                place.photoMetadatas?.firstOrNull()?.let { metadata ->
+                    val photoRequest = FetchResolvedPhotoUriRequest.builder(metadata)
+                        .setMaxWidth(1000)
+                        .setMaxHeight(1000)
+                        .build()
+
+                    Places.createClient(this).fetchResolvedPhotoUri(photoRequest)
+                        .addOnSuccessListener { fetchPhotoResponse ->
+                            parkImageUrl = fetchPhotoResponse.uri.toString()
+                        }
+                } ?: run {
+                    parkImageUrl = ""
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("TimerActivity", "Place not found: ${exception.message}")
+                locationName = "Unknown Place"
+                parkName = locationName
+                parkNameTextView.text = locationName
+                parkImageUrl = ""
+            }
+    }
+    private fun saveBitmapToFile(bitmap: Bitmap): String {
+        val fileName = "place_image_${System.currentTimeMillis()}.jpg"
+        val file = File(applicationContext.filesDir, fileName)
+
+        try {
+            FileOutputStream(file).use { out ->
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
+            }
+            return file.absolutePath
+        } catch (e: IOException) {
+            Log.e("TimerActivity", "Error saving bitmap: ${e.message}")
+            return ""
+        }
+    }
 }

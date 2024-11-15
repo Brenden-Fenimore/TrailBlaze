@@ -142,12 +142,6 @@
                 android:layout_gravity="center_horizontal"
                 app:srcCompat="@drawable/flowers"
                 android:contentDescription="@string/description"/>
-        <LinearLayout
-                android:id="@+id/linearRowFacebookOne"
-                android:layout_gravity="top|center"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:orientation="horizontal"/>
 
     </FrameLayout>
 </RelativeLayout>
