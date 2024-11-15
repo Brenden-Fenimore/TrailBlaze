@@ -6,6 +6,9 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.InputFilter
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.example.trailblaze.R
@@ -71,7 +74,7 @@ class EditProfileFragment : Fragment() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         storageReference = FirebaseStorage.getInstance().reference.child("profile_pictures")
 
-
+        setupStateEditText()
 
         seekBar = view.findViewById(R.id.seekBar)
         selectedValueTextView = view.findViewById(R.id.range)
@@ -110,6 +113,35 @@ class EditProfileFragment : Fragment() {
         // Check and update the SeekBar label when the fragment resumes
         val isMetric = sharedPreferences.getBoolean("isMetricUnits", true)
         updateSeekBarLabel(binding.seekBar.progress) // Update label based on current SeekBar progress
+    }
+
+    private fun setupStateEditText() {
+        binding.editState.filters = arrayOf(InputFilter.LengthFilter(2))
+
+        binding.editState.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                if (s != null && !s.toString().isEmpty()) {
+                    val uppercase = s.toString().uppercase()
+                    if (uppercase != s.toString()) {
+                        binding.editState.setText(uppercase)
+                        binding.editState.setSelection(uppercase.length)
+                    }
+                }
+            }
+        })
+    }
+
+    private fun validateState(): Boolean {
+        val stateText = binding.editState.text.toString()
+        if (stateText.length != 2) {
+            binding.editState.error = "State must be 2 letters"
+            return false
+        }
+        return true
     }
 
     private fun setupSpinners() {

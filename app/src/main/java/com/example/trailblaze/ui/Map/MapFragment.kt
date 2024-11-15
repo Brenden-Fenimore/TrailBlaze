@@ -356,8 +356,14 @@ class MapFragment : Fragment(),
             }
 
             npsnearbysearch.setOnClickListener {
-                if (ActivityCompat.checkSelfPermission(thiscontext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(thiscontext, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                if (ActivityCompat.checkSelfPermission(
+                        thiscontext,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) == PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(
+                        thiscontext,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) == PackageManager.PERMISSION_GRANTED
                 ) {
                     map.clear()
                     val placeRequest = FindCurrentPlaceRequest.builder(mutableListOf(Place.Field.LAT_LNG)).build()
@@ -378,60 +384,77 @@ class MapFragment : Fragment(),
             }
 
             nearbysearch.setOnClickListener {
+                Log.d("MapFragment", "Nearby search clicked")
                 locationCheckAndRequest()
 
-                if (ActivityCompat.checkSelfPermission(thiscontext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(thiscontext, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                if (ActivityCompat.checkSelfPermission(
+                        thiscontext,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) == PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(
+                        thiscontext,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) == PackageManager.PERMISSION_GRANTED
                 ) {
+                    Log.d("MapFragment", "Location permissions granted")
                     map.clear()
                     val placeRequest = FindCurrentPlaceRequest.builder(mutableListOf(Place.Field.LOCATION)).build()
                     val placeResponse = placesClient.findCurrentPlace(placeRequest)
                     placeResponse.addOnSuccessListener { result ->
-                        if(result.placeLikelihoods.isNotEmpty())
-                        {
-                            //get the closest location to user
+                        Log.d("MapFragment", "Found current place, likelihoods size: ${result.placeLikelihoods.size}")
+                        if (result.placeLikelihoods.isNotEmpty()) {
                             val location = result.placeLikelihoods[0].place.location
-                            //animate camera to user location at 10 zoom
+                            Log.d("MapFragment", "User location: ${location.latitude}, ${location.longitude}")
+
                             map.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
-                            //refresh current user
                             currentUser = UserManager.getCurrentUser()
 
-                            //TODO (check if measurement of distance is metric or imperial before converting)
-                            //take mile distance and convert to meters
-                            var radius = currentUser!!.distance!!*1609.34
-                            //check if meter distance is over 50,000 and if it is then set it to 50,000
-                            if(radius > 50000.0) {radius = 50000.0 }
-                            //create circle area to search within
-                            val circle : CircularBounds = circularBounds(location,radius)
-                            //create SearchNearbyRequest object
-                            val searchNearbyRequest = SearchNearbyRequest.builder(circle,listOf(
-                                Place.Field.ID,Place.Field.FORMATTED_ADDRESS, Place.Field.LOCATION, Place.Field.DISPLAY_NAME,Place.Field.PHOTO_METADATAS))
+                            var radius = currentUser!!.distance!! * 1609.34
+                            if (radius > 50000.0) {
+                                radius = 50000.0
+                            }
+                            Log.d("MapFragment", "Search radius: $radius meters")
+
+                            val circle: CircularBounds = circularBounds(location, radius)
+                            val searchNearbyRequest = SearchNearbyRequest.builder(
+                                circle, listOf(
+                                    Place.Field.ID,
+                                    Place.Field.FORMATTED_ADDRESS,
+                                    Place.Field.LOCATION,
+                                    Place.Field.DISPLAY_NAME,
+                                    Place.Field.PHOTO_METADATAS
+                                )
+                            )
                                 .setIncludedTypes(listOf("hiking_area"))
                                 .build()
-                            //on success of searchNearby function, create marker at each place with name
-                            // and then add each place into placesList
+
                             placesClient.searchNearby(searchNearbyRequest).addOnSuccessListener { result ->
+                                Log.d("MapFragment", "Found ${result.places.size} nearby places")
+
                                 val newLocationItems = result.places.map { LocationItem.PlaceItem(it) }
                                 locationItems.clear()
                                 locationItems.addAll(newLocationItems)
                                 bottomSheetAdapter.updateItems(locationItems)
 
-                                for(place in result.places) {
+                                for (place in result.places) {
+                                    Log.d("MapFragment", "Adding marker for place: ${place.displayName}")
                                     val marker = map.addMarker(
                                         MarkerOptions()
                                             .position(place.location)
                                             .title(place.displayName)
                                     )
-                                    marker?.tag = place  // Set the place as the marker's tag
+                                    marker?.tag = place
                                 }
+                            }.addOnFailureListener { e ->
+                                Log.e("MapFragment", "Nearby search failed: ${e.message}")
                             }
                         }
-
-
-                    }.addOnFailureListener {
+                    }.addOnFailureListener { e ->
+                        Log.e("MapFragment", "Finding current place failed: ${e.message}")
                     }
+                } else {
+                    Log.d("MapFragment", "Location permissions not granted")
                 }
-
             }
         }
     }
