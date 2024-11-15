@@ -370,7 +370,6 @@ class FriendsProfileActivity : AppCompatActivity() {
         }
     }
 
-
     private fun toggleFavoriteStatus(currentUserId: String, friendId: String) {
         val userRef = firestore.collection("users").document(currentUserId)
         val friendRef = firestore.collection("users").document(friendId) // Reference to the friend's document
@@ -391,6 +390,15 @@ class FriendsProfileActivity : AppCompatActivity() {
                                     triggerBrokenHeartDropEffect()
                                     Toast.makeText(this, "$friendUsername removed from Watchers List", Toast.LENGTH_SHORT).show()
                                     binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Change to outline icon
+
+                                    // Add notification for the friend
+                                    val notificationMessage = "You have been removed from ${userDocument.getString("username")}'s Watchers List."
+                                    friendRef.update("pendingNotifications", FieldValue.arrayUnion(notificationMessage))
+                                        .addOnSuccessListener {
+                                            Log.d("FriendsProfileActivity", "Notification sent for removal from Watchers List")
+                                        }.addOnFailureListener { e ->
+                                            Log.e("FriendsProfileActivity", "Error sending notification: ${e.message}")
+                                        }
                                 }
                                 .addOnFailureListener { e ->
                                     Toast.makeText(this, "Failed to remove from Watchers List: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -405,9 +413,18 @@ class FriendsProfileActivity : AppCompatActivity() {
                                     triggerHeartDropEffect()
                                     achievementManager.checkAndGrantCommunityBuilderBadge(userId)
                                     binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled) // Change to filled icon
+
+                                    // Add notification for the friend
+                                    val notificationMessage = "You have been added to ${userDocument.getString("username")}'s Watchers List."
+                                    friendRef.update("pendingNotifications", FieldValue.arrayUnion(notificationMessage))
+                                        .addOnSuccessListener {
+                                            Log.d("FriendsProfileActivity", "Notification sent for addition to Watchers List")
+                                        }.addOnFailureListener { e ->
+                                            Log.e("FriendsProfileActivity", "Error sending notification: ${e.message}")
+                                        }
                                 }
                                 .addOnFailureListener { e ->
-                                    Toast.makeText(this, "Failed to add to favorites: ${e.message}", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this, "Failed to add to Watchers List: ${e.message}", Toast.LENGTH_SHORT).show()
                                 }
                         }
                     }
@@ -437,31 +454,6 @@ class FriendsProfileActivity : AppCompatActivity() {
                 dialog.dismiss() // Just dismiss the dialog
             }
             .show()
-    }
-
-    private fun showConfetti() {
-        // Get the KonfettiView from the layout
-        val konfettiView = findViewById<KonfettiView>(R.id.konfettiView)
-
-        // Set the view to visible
-        konfettiView.visibility = View.VISIBLE
-
-        // Show confetti
-        konfettiView.build()
-            .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA, Color.CYAN)
-            .setDirection(0.0, 359.0) // Allow confetti to fall in all directions
-            .setSpeed(1f, 5f)
-            .setTimeToLive(3000L) // Increase the time to live to allow for longer fall
-            .addShapes(Shape.Circle)
-            .addSizes(Size(8))
-            // Set the position to emit from the right side and farther down
-            .setPosition(konfettiView.width + 400f, konfettiView.width + 400f, -100f, -50f)
-            .stream(300, 3000L) // Stream 300 particles for 3000 milliseconds (3 seconds)
-
-        // Optionally hide the konfetti view after some time
-        konfettiView.postDelayed({
-            konfettiView.visibility = View.GONE
-        }, 6000) // Hide after 6 seconds
     }
 
     private fun updateBadgesList(badges: List<String>) {
@@ -547,7 +539,6 @@ class FriendsProfileActivity : AppCompatActivity() {
             Toast.makeText(this, "Error fetching user data.", Toast.LENGTH_SHORT).show()
         }
     }
-
 
     private fun fetchFriendsInCommon() {
         val currentUserId = auth.currentUser?.uid ?: return
@@ -678,6 +669,7 @@ class FriendsProfileActivity : AppCompatActivity() {
                 Log.e("FriendsProfileActivity", "Error fetching friend's favorite parks: ", exception)
             }
     }
+
     private fun fetchParksDetails(parkCodes: List<String>) {
         val tasks = parkCodes.map { parkCode ->
             RetrofitInstance.api.getParkDetails(parkCode)
