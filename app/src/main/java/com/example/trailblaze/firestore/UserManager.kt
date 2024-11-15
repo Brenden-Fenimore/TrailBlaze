@@ -13,6 +13,10 @@ object UserManager {
         return currentUser // Return the current user, or null if no user is set
     }
 
+    fun getCurrentUserState(): String? {
+        return currentUser?.state
+    }
+
     // Function to set the current user
     fun setCurrentUser(user: User) {
         currentUser = user // Assign the provided user to the currentUser variable

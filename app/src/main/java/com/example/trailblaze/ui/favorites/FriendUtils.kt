@@ -29,9 +29,9 @@ object FriendUtils {
                     val username = document.getString("username") ?: "Unknown" // Get the username; default to "Unknown" if not available
                     val profileImageUrl = document.getString("profileImageUrl") ?: "" // Get the profile image URL; default to empty string if not available
                     val isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false // Get the privacy status; default to false if not available
-
+                    val watcherVisible = document.getBoolean("isWatcherVisible") ?: false
                     // Create a Friends object with the retrieved details
-                    val friend = Friends(userId, username, profileImageUrl, isPrivateAccount)
+                    val friend = Friends(userId, username, profileImageUrl, isPrivateAccount, watcherVisible)
                     // Add the friend to the list of favorite friends
                     favoriteFriends.add(friend)
                 }

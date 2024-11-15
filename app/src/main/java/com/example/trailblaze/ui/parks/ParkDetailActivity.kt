@@ -2,6 +2,7 @@ package com.example.trailblaze.ui.parks
 
 import ImagesAdapter
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,10 @@ import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.Park
 import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.R
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.FetchPhotoRequest
+import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -23,9 +28,12 @@ import nl.dionsegijn.konfetti.models.Size
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
+import java.io.FileOutputStream
 
 class ParkDetailActivity : AppCompatActivity() {
 
+    private var placeId: String? = null
     private lateinit var parkCode: String // Default to -1 if not found
     private lateinit var parkNameTextView: TextView
     private lateinit var parkDescriptionTextView: TextView
@@ -42,10 +50,13 @@ class ParkDetailActivity : AppCompatActivity() {
     private lateinit var favoriteButton: ImageButton            // Declare button variables
     private val firestore = FirebaseFirestore.getInstance()     // Declare Firestore instance
     private lateinit var bucketListButton: ImageButton
+    private lateinit var activitiesList: Array<String>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_park_detail)
+
         // Hide the ActionBar
         supportActionBar?.hide()
 
@@ -53,20 +64,30 @@ class ParkDetailActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
+        // Initialize views
+        initializeViews()
 
-        // Get the park code from the intent
+        // Get the data from intent
         parkCode = intent.getStringExtra("PARK_CODE") ?: ""
+        placeId = intent.getStringExtra("PLACE_ID")
 
-        fetchParkDetails(parkCode)
-
-        val hikeButton: ImageButton = findViewById(R.id.hike_btn)
-        hikeButton.setOnClickListener {
-            val intent = Intent(this, AttemptTrailActivity::class.java)
-            intent.putExtra("PARK_CODE", parkCode)
-            startActivity(intent)
+        // Handle data based on what was passed
+        when {
+            !placeId.isNullOrEmpty() -> fetchPlaceDetails(placeId!!)
+            parkCode.isNotEmpty() -> fetchParkDetails(parkCode)
+            else -> {
+                Toast.makeText(this, "Invalid data provided", Toast.LENGTH_SHORT).show()
+                finish()
+            }
         }
 
-        // Initialize views
+        // Initialize buttons and their listeners
+        setupButtons()
+    }
+
+
+    private fun initializeViews() {
+// Initialize views
         parkNameTextView = findViewById(R.id.parkNameTextView)
         parkDescriptionTextView = findViewById(R.id.parkDescriptionTextView)
         parkLatitudeTextView = findViewById(R.id.parkLatitudeTextView)
@@ -83,22 +104,42 @@ class ParkDetailActivity : AppCompatActivity() {
         parkImagesRecyclerView = findViewById(R.id.parkImagesRecyclerView)
         parkImagesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        fetchParkDetails(parkCode)
+    }
 
-        // Initialize the favorite button and set up its click listener
+    private fun setupButtons() {
+        // Initialize the favorite button
         favoriteButton = findViewById(R.id.favorite_park_btn)
-        checkFavoriteStatus()       // Check if the park is already in favorites and update the button
-
+        checkFavoriteStatus()
         favoriteButton.setOnClickListener {
-            toggleFavoriteStatus()  // Toggle the favorite status
+            toggleFavoriteStatus()
         }
 
-        // Initialize the bucket list button and set up its click listener
+        // Initialize the bucket list button
         bucketListButton = findViewById(R.id.bucket_list_btn)
         bucketListButton.setOnClickListener {
-            addToBucketList(parkCode)   // Call function to add park to bucket list
+            if(!placeId.isNullOrEmpty()){
+                addToBucketList(placeId!!)
+            }
+            else {
+                addToBucketList(parkCode)
+            }
         }
 
+        // Initialize the hike button with support for both Parks and Places
+        val hikeButton: ImageButton = findViewById(R.id.hike_btn)
+        hikeButton.setOnClickListener {
+            val intent = Intent(this, AttemptTrailActivity::class.java)
+            if (!placeId.isNullOrEmpty()) {
+                // For Places
+                intent.putExtra("PLACE_ID", placeId)
+                intent.putExtra("PLACE_NAME", parkNameTextView.text.toString())
+            } else {
+                // For Parks
+                intent.putExtra("PARK_CODE", parkCode)
+                intent.putExtra("PARK_ACTIVITIES", activitiesList)
+            }
+            startActivity(intent)
+        }
     }
 
     private fun fetchParkDetails(parkCode: String) {
@@ -140,6 +181,9 @@ class ParkDetailActivity : AppCompatActivity() {
         val activities = park.activities.joinToString("\n") { it.name }
         parkActivitiesTextView.text = activities.ifEmpty { "No activities available." }
 
+        // Get the activities list from the park object and convert to the array
+        activitiesList = park.activities.map { it.name }.toTypedArray()
+
         // Populate contact information
         val contactNumber = park.contacts.phoneNumbers.joinToString("\n") { it.phoneNumber }
         parkContactsPhoneTextView.text = contactNumber.ifEmpty { "No contact number available." }
@@ -154,6 +198,7 @@ class ParkDetailActivity : AppCompatActivity() {
         val entrancePass = park.entrancePasses.joinToString("\n") { "${it.cost}, ${it.description}, ${it.title}" }
         parkEntrancePassesTextView.text = if (entrancePass.isNotEmpty()) {
             entrancePass
+
         } else {
             "No entrance fee information available."
         }
@@ -196,14 +241,25 @@ class ParkDetailActivity : AppCompatActivity() {
         userDocRef.get().addOnSuccessListener { document ->
             // Retrieve favorite parks list; if it's missing, use an empty list
             val favoriteParks = document.get("favoriteParks") as? List<String> ?: emptyList()
-
-            // Update the favorite button icon based on whether the park is in the user's favorites
-            if (favoriteParks.contains(parkCode)) {
-                // Show filled heart icon if park is a favorite
-                favoriteButton.setImageResource(R.drawable.favorite_filled)
-            } else {
-                // Show outline heart icon if park is not a favorite
-                favoriteButton.setImageResource(R.drawable.favorite)
+            if(!placeId.isNullOrEmpty()){
+                // Update the favorite button icon based on whether the park is in the user's favorites
+                if (favoriteParks.contains(placeId)) {
+                    // Show filled heart icon if park is a favorite
+                    favoriteButton.setImageResource(R.drawable.favorite_filled)
+                } else {
+                    // Show outline heart icon if park is not a favorite
+                    favoriteButton.setImageResource(R.drawable.favorite)
+                }
+            }
+            else {
+                // Update the favorite button icon based on whether the park is in the user's favorites
+                if (favoriteParks.contains(parkCode)) {
+                    // Show filled heart icon if park is a favorite
+                    favoriteButton.setImageResource(R.drawable.favorite_filled)
+                } else {
+                    // Show outline heart icon if park is not a favorite
+                    favoriteButton.setImageResource(R.drawable.favorite)
+                }
             }
         }
     }
@@ -218,35 +274,79 @@ class ParkDetailActivity : AppCompatActivity() {
         // Get user's favorite parks list and check if the park is already a favorite
         userDocRef.get().addOnSuccessListener { document ->
             val favoriteParks = document.get("favoriteParks") as? List<String> ?: emptyList()
+            if(!placeId.isNullOrEmpty()) {
+                if (favoriteParks.contains(placeId)) {
+                    // Park is already a favorite; proceed to remove it
+                    userDocRef.update(
+                        "favoriteParks",
+                        FieldValue.arrayRemove(placeId)
+                    )        // Remove park from favorites
+                        .addOnSuccessListener {
+                            // Notify user of success
+                            Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show()
+                            // Update to outline icon to reflect removal
+                            favoriteButton.setImageResource(R.drawable.favorite)
+                        }
+                        .addOnFailureListener { e ->
+                            // Notify user of failure
+                            Toast.makeText(this, "Failed to remove from favorites: ${e.message}", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                }
+                else {
+                    // Park is not a favorite; proceed to add it
+                    userDocRef.update("favoriteParks", FieldValue.arrayUnion(placeId))     // Add park to favorites
+                        .addOnSuccessListener {
+                            // Show confetti when adding to favorites
+                            showConfetti()
+                            // Notify user of success
+                            Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show()
+                            // Update to filled icon to reflect addition
+                            favoriteButton.setImageResource(R.drawable.favorite_filled)
+                        }
+                        .addOnFailureListener { e ->
+                            // Notify user of failure
+                            Toast.makeText(this, "Failed to add to favorites: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                }
+            }
 
-            if (favoriteParks.contains(parkCode)) {
-                // Park is already a favorite; proceed to remove it
-                userDocRef.update("favoriteParks", FieldValue.arrayRemove(parkCode))        // Remove park from favorites
-                    .addOnSuccessListener {
-                        // Notify user of success
-                        Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show()
-                        // Update to outline icon to reflect removal
-                        favoriteButton.setImageResource(R.drawable.favorite)
-                    }
-                    .addOnFailureListener { e ->
-                        // Notify user of failure
-                        Toast.makeText(this, "Failed to remove from favorites: ${e.message}", Toast.LENGTH_SHORT).show()
-                    }
-            } else {
-                // Park is not a favorite; proceed to add it
-                userDocRef.update("favoriteParks", FieldValue.arrayUnion(parkCode))     // Add park to favorites
-                    .addOnSuccessListener {
-                        // Show confetti when adding to favorites
-                        showConfetti()
-                        // Notify user of success
-                        Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show()
-                        // Update to filled icon to reflect addition
-                        favoriteButton.setImageResource(R.drawable.favorite_filled)
-                    }
-                    .addOnFailureListener { e ->
-                        // Notify user of failure
-                        Toast.makeText(this, "Failed to add to favorites: ${e.message}", Toast.LENGTH_SHORT).show()
-                    }
+            //NPS Favorite toggle
+            else {
+                if (favoriteParks.contains(parkCode)) {
+                    // Park is already a favorite; proceed to remove it
+                    userDocRef.update(
+                        "favoriteParks",
+                        FieldValue.arrayRemove(parkCode)
+                    )        // Remove park from favorites
+                        .addOnSuccessListener {
+                            // Notify user of success
+                            Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show()
+                            // Update to outline icon to reflect removal
+                            favoriteButton.setImageResource(R.drawable.favorite)
+                        }
+                        .addOnFailureListener { e ->
+                            // Notify user of failure
+                            Toast.makeText(this, "Failed to remove from favorites: ${e.message}", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                }
+                else {
+                    // Park is not a favorite; proceed to add it
+                    userDocRef.update("favoriteParks", FieldValue.arrayUnion(parkCode))     // Add park to favorites
+                        .addOnSuccessListener {
+                            // Show confetti when adding to favorites
+                            showConfetti()
+                            // Notify user of success
+                            Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show()
+                            // Update to filled icon to reflect addition
+                            favoriteButton.setImageResource(R.drawable.favorite_filled)
+                        }
+                        .addOnFailureListener { e ->
+                            // Notify user of failure
+                            Toast.makeText(this, "Failed to add to favorites: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                }
             }
         }
     }
@@ -315,7 +415,160 @@ class ParkDetailActivity : AppCompatActivity() {
             // Hide after 6 seconds
         }, 6000)
     }
+
+    private fun fetchPlaceDetails(placeId: String) {
+        val placeFields = listOf(
+            Place.Field.DISPLAY_NAME,
+            Place.Field.EDITORIAL_SUMMARY,
+            Place.Field.ADDRESS_COMPONENTS,
+            Place.Field.INTERNATIONAL_PHONE_NUMBER,
+            Place.Field.WEBSITE_URI,
+            Place.Field.RATING,
+            Place.Field.PHOTO_METADATAS,
+            Place.Field.OPENING_HOURS,
+            Place.Field.TYPES,
+            Place.Field.LOCATION,
+            Place.Field.PRICE_LEVEL
+        )
+
+        val request = FetchPlaceRequest.builder(placeId, placeFields).build()
+
+        Places.createClient(this).fetchPlace(request)
+            .addOnSuccessListener { response ->
+                val place = response.place
+                populatePlaceDetails(place)
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(this, "Error loading place details", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun populatePlaceDetails(place: Place) {
+        parkNameTextView.text = place.displayName
+
+        // Handle editorial summary for description
+        parkDescriptionTextView.text = place.editorialSummary?.toString()
+            ?: "No description available"
+
+        // Handle address components
+        val addressComponents = place.addressComponents
+        if (addressComponents != null) {
+            val streetNumber = addressComponents.asList().find { it.types.contains("street_number") }?.name ?: ""
+            val route = addressComponents.asList().find { it.types.contains("route") }?.name ?: ""
+            val city = addressComponents.asList().find { it.types.contains("locality") }?.name ?: ""
+            val state = addressComponents.asList().find { it.types.contains("administrative_area_level_1") }?.name ?: ""
+            val postalCode = addressComponents.asList().find { it.types.contains("postal_code") }?.name ?: ""
+
+            val formattedAddress = buildString {
+                if (streetNumber.isNotEmpty() && route.isNotEmpty()) {
+                    append("$streetNumber $route")
+                }
+                if (city.isNotEmpty()) {
+                    if (isNotEmpty()) append(", ")
+                    append(city)
+                }
+                if (state.isNotEmpty()) {
+                    if (isNotEmpty()) append(", ")
+                    append(state)
+                }
+                if (postalCode.isNotEmpty()) {
+                    if (isNotEmpty()) append(" ")
+                    append(postalCode)
+                }
+            }
+
+            parkAddressTextView.text = if (formattedAddress.isNotEmpty()) formattedAddress else "Address not available"
+        } else {
+            parkAddressTextView.text = "Address not available"
+        }
+
+        parkContactsPhoneTextView.text = place.internationalPhoneNumber ?: "No phone number available"
+
+        // Handle opening hours with detailed formatting
+        place.openingHours?.let { hours ->
+            val formattedHours = buildString {
+                // Add regular hours
+                hours.weekdayText?.forEachIndexed { index, dayText ->
+                    append(dayText)
+                    if (index < (hours.weekdayText?.size ?: 0) - 1) {
+                        append("\n")
+                    }
+                }
+            }
+
+            parkOperatingHoursTextView.text = formattedHours
+        } ?: run {
+            parkOperatingHoursTextView.text = "Hours not available"
+        }
+
+        // Set the lat/lng values
+        place.location?.let { latLng ->
+            parkLatitudeTextView.text = latLng.latitude.toString()
+            parkLongitudeTextView.text = latLng.longitude.toString()
+        } ?: run {
+            parkLatitudeTextView.text = "Latitude not available"
+            parkLongitudeTextView.text = "Longitude not available"
+        }
+
+        // Set the price level
+        val priceLevel = when (place.priceLevel) {
+            0 -> "Free"
+            1 -> "Inexpensive"
+            2 -> "Moderate"
+            3 -> "Expensive"
+            4 -> "Very Expensive"
+            else -> "Price information not available"
+        }
+
+        parkEntrancePassesTextView.text = "Price Level: $priceLevel"
+
+        parkContactsEmailTextView.text = place.websiteUri?.toString() ?: "Website not available"
+
+        parkContactsEmailTextView.setOnClickListener {
+            place.websiteUri?.let { uri ->
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+                startActivity(intent)
+            }
+        }
+
+        // Handle photos
+        place.photoMetadatas?.let { photoMetadatas ->
+            val photoUrls = mutableListOf<String>()
+            var loadedPhotos = 0
+
+            photoMetadatas.forEach { metadata ->
+                val photoRequest = FetchPhotoRequest.builder(metadata)
+                    .setMaxWidth(1000)
+                    .setMaxHeight(1000)
+                    .build()
+
+                Places.createClient(this).fetchPhoto(photoRequest)
+                    .addOnSuccessListener { fetchPhotoResponse ->
+                        val photoUrl = saveBitmapToFile(fetchPhotoResponse.bitmap)
+                        photoUrls.add(photoUrl)
+
+                        loadedPhotos++
+                        if (loadedPhotos == photoMetadatas.size) {
+                            parkImagesRecyclerView.adapter = ImagesAdapter(photoUrls)
+                        }
+                    }
+            }
+        }
+
+        // Hide irrelevant views for Places
+        parkWeatherInfoTextView.visibility = View.GONE
+        parkActivitiesTextView.visibility = View.GONE
+    }
+    // Helper function to save bitmap as file and return URL
+    private fun saveBitmapToFile(bitmap: Bitmap): String {
+        val file = File(cacheDir, "place_photo_${System.currentTimeMillis()}.jpg")
+        FileOutputStream(file).use { out ->
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
+        }
+        return file.toURI().toString()
+    }
 }
+
 
 
 

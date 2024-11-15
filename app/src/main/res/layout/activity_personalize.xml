@@ -1,42 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-    <ImageButton
-            android:layout_width="39dp"
-            android:layout_height="39dp"
-            app:srcCompat="@drawable/chevron_left"
-            android:background="@android:color/transparent"
-            android:id="@+id/chevron_left"
-            android:contentDescription="@string/description"/>
+        android:layout_height="match_parent">
+
     <LinearLayout
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="25dp"
-            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical">
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+
+            <!-- Swish Background -->
+            <com.example.trailblaze.view.SwishBackgroundView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/swishBackgroundView"/>
+
+            <!-- Image Button on top of Swish Background -->
+            <ImageButton
+                    android:layout_width="39dp"
+                    android:layout_height="39dp"
+                    app:srcCompat="@drawable/chevron_left"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/chevron_left"
+                    android:tint="#CDEDA3"
+                    android:contentDescription="@string/description"
+                    android:layout_gravity="start|top"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"/>
+
+        </FrameLayout>
+
         <TextView
-                android:id="@+id/Personalizehost"
+                android:id="@+id/termsAndCon"
                 android:layout_gravity="center_horizontal"
-                android:gravity="center"
+                android:layout_marginTop="8dp"
+                android:gravity="center_horizontal"
                 android:text="@string/personalize"
-                android:textSize="40sp"
+                android:textSize="30sp"
+                android:textColor="?attr/colorPrimary"
                 android:fontFamily="@font/amethysta"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
+
+        <FrameLayout
+                android:id="@+id/termsBodyScroll"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:padding="20dp"
+                android:layout_weight="1">
+
+        </FrameLayout>
     </LinearLayout>
-    <FrameLayout
-            android:id="@+id/fragmentContainer"
-            android:layout_gravity="center"
-            android:layout_width="315dp"
-            android:layout_height="610dp">
 
-
-    </FrameLayout>
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

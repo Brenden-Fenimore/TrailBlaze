@@ -281,8 +281,9 @@ class EditProfileFragment : Fragment() {
     private fun updateProfilePicture(imageUrl: String) {
         Glide.with(this)
             .load(imageUrl)
-            .placeholder(R.drawable.account_circle) // Placeholder image while loading
-            .error(R.drawable.account_circle) // Error image if the load fails
+            .placeholder(R.drawable.baseline_downloading_24) // Placeholder while loading
+            .error(R.drawable.no_image_available) // Fallback image if loading fails
+            .circleCrop() // To display the image in a circular format
             .into(binding.profilePicture) // Assuming you have an ImageView with this ID in your layout
     }
 

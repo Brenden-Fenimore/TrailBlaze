@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-        android:layout_height="match_parent" tools:ignore="ExtraText">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="ExtraText">
 
     <FrameLayout
             android:layout_width="match_parent"
@@ -13,59 +16,89 @@
                 class="com.google.android.gms.maps.SupportMapFragment"
                 android:id="@+id/map_fragment"
                 android:layout_width="match_parent"
-                android:layout_height="783dp"/>
+                android:layout_height="match_parent"
+                android:layout_marginBottom="120dp"/>
 
     </FrameLayout>
 
-    <Button
-            android:text="FullSail"
-            android:layout_width="wrap_content"
+
+    <RelativeLayout
+            android:id="@+id/search"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
-            android:id="@+id/fullsail"/>
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true">>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/edittext_background"/>
+
+        <MultiAutoCompleteTextView
+                android:id="@+id/map_search"
+                android:text=""
+                android:hint="@string/map_search_hint"
+                android:ems="10"
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/amethysta"
+                android:singleLine="true"
+                android:dropDownHeight="wrap_content"
+                android:textColor="#000000"
+                android:textColorHint="#6B6B6B"/>
+
+        <ImageButton
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:id="@+id/clear_mapsearchtext"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/x"
+                android:clickable="true"/>
+    </RelativeLayout>
     <Button
-            android:layout_marginTop="725dp"
+            android:layout_below="@id/search"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="15dp"
             android:text="Find Trails Near Me"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/nearbysearch"/>
-
-    <MultiAutoCompleteTextView
-            android:layout_marginTop="25dp"
-            android:layout_marginStart="85dp"
-            android:id="@+id/map_search"
-            android:text=""
-            android:hint="@string/map_search_hint"
-            android:ems="10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:fontFamily="@font/amethysta"
-            android:singleLine="true"
-            android:dropDownHeight="wrap_content"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nearbysearch"
+            app:strokeColor="#000000"
+            app:strokeWidth="1dp"/>
+    <Button
+            android:layout_below="@id/nearbysearch"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="15dp"
+            android:text="National Parks"
+            android:fontFamily="@font/amethysta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/npsnearbysearch"
+            app:strokeColor="#000000"
+            app:strokeWidth="1dp"/>
 
-    <ImageButton
-            android:layout_marginStart="285dp"
-            android:layout_marginTop="42dp"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:id="@+id/clear_mapsearchtext"
-            app:srcCompat="@drawable/x"
-            android:clickable="true"/>
+
 
 
     //roadmap button layout
     <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:translationX="335dp"
-            android:translationY="130dp"
+            android:layout_below="@id/npsnearbysearch"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="5dp"
             android:id="@+id/roadmap"
             android:clickable="true">
         <ImageView
                 android:id="@+id/roadmap_image"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/green_circle"/>
+                android:src="@drawable/circle_for_map_type_green"/>
 
         <ImageView
                 android:layout_width="30dp"
@@ -82,26 +115,29 @@
                 android:translationY="35dp"
                 android:fontFamily="@font/amethysta"
                 android:textSize="10dp"
-                android:textColor="@color/white">
+                android:textColor="@color/white"
+                android:shadowColor="#000000"
+                android:shadowRadius="5">
 
         </TextView>
         //end of road button
     </RelativeLayout>
 
-
     //satellite button layout
     <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:translationX="335dp"
-            android:translationY="200dp"
+            android:layout_below="@id/roadmap"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="5dp"
             android:id="@+id/satellite"
             android:clickable="true">
         <ImageView
                 android:id="@+id/satellite_image"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/grey_circle"/>
+                android:src="@drawable/circle_for_map_type_grey"/>
 
         <ImageView
                 android:layout_width="25dp"
@@ -118,7 +154,9 @@
                 android:translationY="35dp"
                 android:fontFamily="@font/amethysta"
                 android:textSize="10dp"
-                android:textColor="@color/white">
+                android:textColor="@color/white"
+                android:shadowColor="#000000"
+                android:shadowRadius="5">
 
         </TextView>
         //end of satellite button
@@ -128,15 +166,17 @@
     <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:translationX="335dp"
-            android:translationY="270dp"
+            android:layout_below="@id/satellite"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="5dp"
             android:id="@+id/terrain"
             android:clickable="true">
         <ImageView
                 android:id="@+id/terrain_image"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/grey_circle"/>
+                android:src="@drawable/circle_for_map_type_grey"/>
 
         <ImageView
                 android:layout_width="40dp"
@@ -153,11 +193,50 @@
                 android:translationY="35dp"
                 android:fontFamily="@font/amethysta"
                 android:textSize="10dp"
-                android:textColor="@color/white">
+                android:textColor="@color/white"
+                android:shadowColor="#000000"
+                android:shadowRadius="5">
 
         </TextView>
         //end of terrain button
     </RelativeLayout>
 
+<!--    <Button-->
+<!--            android:layout_below="@id/terrain"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_margin="15dp"-->
+<!--            android:text="Find Trails Near Me"-->
+<!--            android:fontFamily="@font/amethysta"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/nearbysearch"-->
+<!--            android:backgroundTint="?attr/colorPrimary"-->
+<!--            app:strokeColor="#000000"-->
+<!--            app:strokeWidth="1dp"/>-->
 
+<!--    <Button-->
+<!--            android:text="Clear Map"-->
+<!--            android:layout_alignEnd="@id/nearbysearch"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/clear_map"-->
+<!--            app:strokeColor="#000000"-->
+<!--            android:backgroundTint="?attr/colorPrimary"-->
+<!--            app:strokeWidth="1dp"-->
+<!--            android:layout_below="@id/nearbysearch"/>-->
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".MainActivity"
+            android:layout_marginBottom="80dp">
+
+        <include layout="@layout/map_fragment_bottom_sheet"
+                 android:id="@+id/bottomsheetinclude"
+                 app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </RelativeLayout>

@@ -74,7 +74,7 @@
             android:layout_below="@id/card_view_badges"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/sash_background"> <!-- Adjust padding as needed -->
+            android:background="@drawable/sash_background">
 
     </FrameLayout>
 

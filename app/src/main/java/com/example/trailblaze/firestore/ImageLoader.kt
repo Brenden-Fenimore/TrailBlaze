@@ -14,8 +14,9 @@ object ImageLoader {
             // Use Glide to load the image from the URL
             Glide.with(context) // Initialize Glide with the context
                 .load(imageUrl) // Specify the URL to load the image from
-                .placeholder(R.drawable.account_circle) // Placeholder image while loading
-                .error(R.drawable.account_circle) // Error image if the load fails
+                .placeholder(R.drawable.baseline_downloading_24) // Placeholder while loading
+                .error(R.drawable.account_circle) // Fallback image if loading fails
+                .circleCrop() // To display the image in a circular format
                 .into(imageView) // Load the image into the specified ImageView
         } else {
             imageView.setImageResource(R.drawable.account_circle) // Set a default image
