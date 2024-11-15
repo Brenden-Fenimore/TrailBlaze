@@ -398,6 +398,15 @@ class FriendsProfileActivity : AppCompatActivity() {
                                     triggerBrokenHeartDropEffect()
                                     Toast.makeText(this, "$friendUsername removed from Watchers List", Toast.LENGTH_SHORT).show()
                                     binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Change to outline icon
+
+                                    // Add notification for the friend
+                                    val notificationMessage = "You have been removed from ${userDocument.getString("username")}'s Watchers List."
+                                    friendRef.update("pendingNotifications", FieldValue.arrayUnion(notificationMessage))
+                                        .addOnSuccessListener {
+                                            Log.d("FriendsProfileActivity", "Notification sent for removal from Watchers List")
+                                        }.addOnFailureListener { e ->
+                                            Log.e("FriendsProfileActivity", "Error sending notification: ${e.message}")
+                                        }
                                 }
                                 .addOnFailureListener { e ->
                                     Toast.makeText(this, "Failed to remove from Watchers List: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -412,6 +421,15 @@ class FriendsProfileActivity : AppCompatActivity() {
                                     triggerHeartDropEffect()
                                     achievementManager.checkAndGrantCommunityBuilderBadge(userId)
                                     binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled) // Change to filled icon
+
+                                    // Add notification for the friend
+                                    val notificationMessage = "You have been added to ${userDocument.getString("username")}'s Watchers List."
+                                    friendRef.update("pendingNotifications", FieldValue.arrayUnion(notificationMessage))
+                                        .addOnSuccessListener {
+                                            Log.d("FriendsProfileActivity", "Notification sent for addition to Watchers List")
+                                        }.addOnFailureListener { e ->
+                                            Log.e("FriendsProfileActivity", "Error sending notification: ${e.message}")
+                                        }
                                 }
                                 .addOnFailureListener { e ->
                                     Toast.makeText(this, "Failed to add to Watchers List: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -529,7 +547,6 @@ class FriendsProfileActivity : AppCompatActivity() {
             Toast.makeText(this, "Error fetching user data.", Toast.LENGTH_SHORT).show()
         }
     }
-
 
     private fun fetchFriendsInCommon() {
         val currentUserId = auth.currentUser?.uid ?: return
@@ -664,6 +681,8 @@ class FriendsProfileActivity : AppCompatActivity() {
                 Log.e("FriendsProfileActivity", "Error fetching friend's favorite parks: ", exception)
             }
     }
+
+    private fun fetchParksDetails(parkCodes: List<String>) {
 
     //function to separate the Parks and Places since Parks ids are 4 in length,
     // I filter by 10 for extra security as Place Ids are super long
