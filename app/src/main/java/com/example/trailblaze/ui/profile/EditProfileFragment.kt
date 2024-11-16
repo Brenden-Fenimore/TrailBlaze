@@ -406,16 +406,50 @@ class EditProfileFragment : Fragment() {
         firestore.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
-                    // Retrieve each visibility setting from Firebase and set the switch states
-                    binding.leaderboardSwitch.isChecked = document.getBoolean("leaderboardVisible") ?: false
-                    binding.photosSwitch.isChecked = document.getBoolean("photosVisible") ?: false
-                    binding.favoritetrailsSwitch.isChecked = document.getBoolean("favoriteTrailsVisible") ?: false
-                    binding.watcherSwitch.isChecked = document.getBoolean("watcherVisible") ?: false
-                    binding.sharelocationSwitch.isChecked = document.getBoolean("shareLocationVisible") ?: false
+                    val isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
+
+                    if (isPrivateAccount) {
+                        // If account is private, set all visibility switches to false
+                        binding.leaderboardSwitch.isChecked = false
+                        binding.photosSwitch.isChecked = false
+                        binding.favoritetrailsSwitch.isChecked = false
+                        binding.watcherSwitch.isChecked = false
+                        binding.sharelocationSwitch.isChecked = false
+
+                        // Update these values in Firestore
+                        updateAllVisibilitySettings(false)
+                    } else {
+                        // Load normal visibility settings if account is public
+                        binding.leaderboardSwitch.isChecked = document.getBoolean("leaderboardVisible") ?: false
+                        binding.photosSwitch.isChecked = document.getBoolean("photosVisible") ?: false
+                        binding.favoritetrailsSwitch.isChecked = document.getBoolean("favoriteTrailsVisible") ?: false
+                        binding.watcherSwitch.isChecked = document.getBoolean("watcherVisible") ?: false
+                        binding.sharelocationSwitch.isChecked = document.getBoolean("shareLocationVisible") ?: false
+                    }
                 }
             }
             .addOnFailureListener { exception ->
                 Log.e("EditProfileFragment", "Error loading visibility settings", exception)
+            }
+    }
+
+    private fun updateAllVisibilitySettings(visible: Boolean) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val updates = hashMapOf(
+            "leaderboardVisible" to visible,
+            "photosVisible" to visible,
+            "favoriteTrailsVisible" to visible,
+            "watcherVisible" to visible,
+            "shareLocationVisible" to visible
+        )
+
+        firestore.collection("users").document(userId)
+            .update(updates as Map<String, Any>)
+            .addOnSuccessListener {
+                Log.d("EditProfileFragment", "All visibility settings updated successfully")
+            }
+            .addOnFailureListener { exception ->
+                Log.e("EditProfileFragment", "Error updating visibility settings", exception)
             }
     }
 }
