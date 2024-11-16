@@ -3,6 +3,7 @@ package com.example.trailblaze.ui.Map
 import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.Editable
@@ -75,10 +76,15 @@ class MapFragment : Fragment(),
     lateinit var bottomSheetAdapter: MapBottomSheetAdapter
     lateinit var multiAutoCompleteTextView: MultiAutoCompleteTextView
     lateinit var autoFillAdapter: ArrayAdapter<String>
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentMapBinding.inflate(inflater, container, false)
         thiscontext = requireContext()
+
+        //Initialize the SharedPreferences
+        sharedPreferences = requireContext().getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+        val isMetricUnits = sharedPreferences.getBoolean("isMetricUnits", false)
 
         binding.clearMapsearchtext.setOnClickListener {
             binding.mapSearch.setText("")  // Clear the text
@@ -363,6 +369,8 @@ class MapFragment : Fragment(),
             }
 
             npsnearbysearch.setOnClickListener {
+                // Get the metric/imperial preference
+                val isMetricUnits = sharedPreferences.getBoolean("isMetricUnits", false)
                 if (ActivityCompat.checkSelfPermission(
                         thiscontext,
                         Manifest.permission.ACCESS_FINE_LOCATION
@@ -381,6 +389,17 @@ class MapFragment : Fragment(),
                             val userLocation = currentUser?.state ?: ""
                             if (userLocation != null) {
                                 currentUser = UserManager.getCurrentUser()
+                                // Convert the search radius based on unit setting
+                                var searchRadius = if (isMetricUnits) {
+                                    currentUser!!.distance!! * 1000.0  // Convert km to meters
+                                } else {
+                                    currentUser!!.distance!! * 1609.34  // Convert miles to meters
+                                }
+
+                                // Cap the radius if needed
+                                if (searchRadius > 50000.0) {
+                                    searchRadius = 50000.0
+                                }
                                 fetchParksAndPlaceMarkers(userLocation)
                             }
                         }
@@ -393,6 +412,8 @@ class MapFragment : Fragment(),
             nearbysearch.setOnClickListener {
                 Log.d("MapFragment", "Nearby search clicked")
                 locationCheckAndRequest()
+                // Get the metric/imperial preference
+                val isMetricUnits = sharedPreferences.getBoolean("isMetricUnits", false)
 
                 if (ActivityCompat.checkSelfPermission(
                         thiscontext,
@@ -416,7 +437,16 @@ class MapFragment : Fragment(),
                             map.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
                             currentUser = UserManager.getCurrentUser()
 
-                            var radius = currentUser!!.distance!! * 1609.34
+                            // Convert the distance based on the unit setting
+                            var radius = if (isMetricUnits) {
+                                // If metric, convert kilometers to meters
+                                currentUser!!.distance!! * 1000.0
+                            } else {
+                                // If imperial, convert miles to meters
+                                currentUser!!.distance!! * 1609.34
+                            }
+
+                            // Cap the radius at 50km (50000m)
                             if (radius > 50000.0) {
                                 radius = 50000.0
                             }
