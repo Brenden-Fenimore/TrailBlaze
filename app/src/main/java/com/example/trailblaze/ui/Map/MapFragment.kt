@@ -103,6 +103,18 @@ class MapFragment : Fragment(),
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        // Get the latest user data
+        currentUser = UserManager.getCurrentUser()
+
+        // If user state exists, fetch parks for the updated state
+        currentUser?.state?.let { userState ->
+            fetchParksAndPlaceMarkers(userState)
+        }
+    }
+
     override fun onMapReady(googleMap: GoogleMap) {
         _map = googleMap
 
