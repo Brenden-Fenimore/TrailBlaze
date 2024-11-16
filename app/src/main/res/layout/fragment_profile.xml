@@ -29,7 +29,7 @@
         <ImageButton
                 android:id="@+id/messageIcon"
                 android:contentDescription="@string/messages"
-                app:srcCompat="@drawable/whistle"
+                app:srcCompat="@drawable/navmenu"
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_width="50dp"
@@ -37,6 +37,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="54dp"
                 />
+
         <ImageButton
                 app:srcCompat="@drawable/edit2"
                 android:contentDescription="@string/settings"
