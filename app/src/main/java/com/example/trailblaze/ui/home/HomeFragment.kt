@@ -167,7 +167,11 @@ class HomeFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
-        fetchUserState() // Fetch the user state to update parks
+        // Refresh all counters and data when returning to the fragment
+        fetchPendingRequestsAndUpdateCounter()
+        fetchNotificationsCounter()
+        fetchUserState()
+        fetchTimeRecords()
     }
 
     // Function to update the greeting message based on the current time of day
