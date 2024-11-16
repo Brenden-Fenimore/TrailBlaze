@@ -191,27 +191,43 @@ class EditProfileFragment : Fragment() {
     }
 
     private fun setupSeekBarListener() {
-        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                selectedFilterValue = progress.toDouble()
-                updateSeekBarLabel(progress)
-            }
+        seekBar.apply {
+            max = 50  // Maximum distance in km/miles
+            progress = 10  // Default value
 
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
+            setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                    // Ensure minimum value of 1
+                    val actualProgress = if (progress < 1) 1 else progress
+                    selectedFilterValue = actualProgress.toDouble()
+                    updateSeekBarLabel(actualProgress)
+                }
+
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+            })
+        }
     }
 
     private fun updateSeekBarLabel(progress: Int) {
-        // Check if metric units are selected
         val isMetric = sharedPreferences.getBoolean("isMetricUnits", true)
-
-        // Update the TextView with the current progress/value of the SeekBar
-        selectedValueTextView.text = if (isMetric) {
-            "${progress} km" // Assuming the progress represents kilometers
+        val distance = if (isMetric) {
+            "$progress km"  // Metric (kilometers)
         } else {
-            "${(progress * 0.621371).toInt()} miles" // Convert to miles if imperial
+            "${(progress * 0.621371).toInt()} miles"  // Imperial (miles)
         }
+
+        // Add zoom level reference
+        val zoomLevel = when (progress) {
+            in 1..2 -> "Street level view"
+            in 3..5 -> "Neighborhood view"
+            in 6..10 -> "City view"
+            in 11..20 -> "Regional view"
+            in 21..35 -> "State view"
+            else -> "Wide area view"
+        }
+
+        selectedValueTextView.text = "$distance ($zoomLevel)"
     }
 
     private fun loadUserProfile() {
@@ -452,6 +468,7 @@ class EditProfileFragment : Fragment() {
                 Log.e("EditProfileFragment", "Error updating visibility settings", exception)
             }
     }
+
 }
 
 

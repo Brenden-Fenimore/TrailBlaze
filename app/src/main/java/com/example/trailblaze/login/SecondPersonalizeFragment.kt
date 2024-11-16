@@ -1,5 +1,6 @@
 package com.example.trailblaze.login
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputFilter
@@ -27,6 +28,7 @@ class SecondPersonalizeFragment : Fragment() {
     private lateinit var seekBar: SeekBar
     lateinit var selectedValueTextView: TextView
     private var selectedFilterValue: Double = 0.0
+    private lateinit var sharedPreferences: SharedPreferences
 
 
     override fun onCreateView(
@@ -80,22 +82,43 @@ class SecondPersonalizeFragment : Fragment() {
     }
 
     private fun setupSeekBarListener() {
-        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                //update the TextView with the current progress/value of the seekBar
-                selectedValueTextView.text = progress.toString()
-            }
+        seekBar.apply {
+            max = 50  // Maximum distance in km/miles
+            progress = 10  // Default value
 
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                // Optional: Do something when the user starts dragging the SeekBar
-            }
+            setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                    // Ensure minimum value of 1
+                    val actualProgress = if (progress < 1) 1 else progress
+                    selectedFilterValue = actualProgress.toDouble()
+                    updateSeekBarLabel(actualProgress)
+                }
 
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                //get the progress value when the user stops dragging the SeekBar
-                selectedFilterValue = (seekBar?.progress ?: 0.0).toDouble()
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+            })
+        }
+    }
 
-            }
-        })
+    private fun updateSeekBarLabel(progress: Int) {
+        val isMetric = sharedPreferences.getBoolean("isMetricUnits", true)
+        val distance = if (isMetric) {
+            "$progress km"  // Metric (kilometers)
+        } else {
+            "${(progress * 0.621371).toInt()} miles"  // Imperial (miles)
+        }
+
+        // Add zoom level reference
+        val zoomLevel = when (progress) {
+            in 1..2 -> "Street level view"
+            in 3..5 -> "Neighborhood view"
+            in 6..10 -> "City view"
+            in 11..20 -> "Regional view"
+            in 21..35 -> "State view"
+            else -> "Wide area view"
+        }
+
+        selectedValueTextView.text = "$distance ($zoomLevel)"
     }
 
     private fun saveUserPreferences() {

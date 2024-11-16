@@ -37,6 +37,7 @@ import com.google.android.libraries.places.api.model.kotlin.circularBounds
 import com.google.android.libraries.places.api.net.*
 import androidx.compose.material3.*
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.nps.ParksAdapter
@@ -114,15 +115,38 @@ class MapFragment : Fragment(),
 
         // Get the latest user data
         currentUser = UserManager.getCurrentUser()
+        val isMetricUnits = sharedPreferences.getBoolean("isMetricUnits", false)
 
-        // If user state exists, fetch parks for the updated state
+        // Calculate the current search radius based on user settings
+        val searchRadius = if (isMetricUnits) {
+            currentUser?.distance?.times(1000.0) ?: 10000.0  // Convert km to meters
+        } else {
+            currentUser?.distance?.times(1609.34) ?: 10000.0  // Convert miles to meters
+        }.coerceAtMost(50000.0)
+
+        // If user state exists, fetch parks with updated zoom level
         currentUser?.state?.let { userState ->
             fetchParksAndPlaceMarkers(userState)
+        }
+
+        // Update current map zoom if map is initialized
+        _map?.let { googleMap ->
+            val currentCenter = googleMap.cameraPosition.target
+            val newZoomLevel = getZoomLevelForDistance(searchRadius)
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentCenter, newZoomLevel))
         }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         _map = googleMap
+        val isMetricUnits = sharedPreferences.getBoolean("isMetricUnits", false)
+
+        // Calculate initial zoom based on user distance preference
+        val searchRadius = if (isMetricUnits) {
+            currentUser?.distance?.times(1000.0) ?: 10000.0  // km to meters
+        } else {
+            currentUser?.distance?.times(1609.34) ?: 10000.0  // miles to meters
+        }.coerceAtMost(50000.0)
 
         // Configure map settings
         map.apply {
@@ -132,6 +156,13 @@ class MapFragment : Fragment(),
             setOnMarkerClickListener { marker ->
                 handleMarkerClick(marker)
                 true
+            }
+
+            // If we have user's last known position, center there with proper zoom
+            currentUser?.let { user ->
+                user.state?.let { state ->
+                    fetchParksAndPlaceMarkers(state)
+                }
             }
         }
 
@@ -301,6 +332,7 @@ class MapFragment : Fragment(),
 
 
     private fun fetchParksAndPlaceMarkers(userState: String) {
+        val isMetricUnits = sharedPreferences.getBoolean("isMetricUnits", false)
         RetrofitInstance.api.getParksbyState(stateCode = userState).enqueue(object : Callback<NPSResponse> {
             override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
                 if (response.isSuccessful) {
@@ -318,8 +350,21 @@ class MapFragment : Fragment(),
 
                         if (latitude != null && longitude != null) {
                             val parkLocation = LatLng(latitude, longitude)
-                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(parkLocation, 10f))
 
+                            // Get user's distance setting and convert to meters
+                            val distanceInMeters = if (isMetricUnits) {
+                                currentUser?.distance?.times(1000.0) ?: 10000.0
+                            } else {
+                                currentUser?.distance?.times(1609.34) ?: 10000.0
+                            }.coerceAtMost(50000.0)
+
+                            // Calculate zoom level based on user's distance setting
+                            val zoomLevel = getZoomLevelForDistance(distanceInMeters)
+
+                            // Apply the zoom level
+                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(parkLocation, zoomLevel))
+
+                            // Add markers for parks
                             for (park in parksList) {
                                 val lat = park.latitude?.toDoubleOrNull()
                                 val lon = park.longitude?.toDoubleOrNull()
@@ -434,7 +479,6 @@ class MapFragment : Fragment(),
                             val location = result.placeLikelihoods[0].place.location
                             Log.d("MapFragment", "User location: ${location.latitude}, ${location.longitude}")
 
-                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
                             currentUser = UserManager.getCurrentUser()
 
                             // Convert the distance based on the unit setting
@@ -451,6 +495,12 @@ class MapFragment : Fragment(),
                                 radius = 50000.0
                             }
                             Log.d("MapFragment", "Search radius: $radius meters")
+
+                            // Calculate appropriate zoom level
+                            val zoomLevel = getZoomLevelForDistance(radius)
+
+                            // Apply the zoom level when moving camera
+                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(location, zoomLevel))
 
                             val circle: CircularBounds = circularBounds(location, radius)
                             val searchNearbyRequest = SearchNearbyRequest.builder(
@@ -502,6 +552,23 @@ class MapFragment : Fragment(),
             placeId?.let { putExtra("PLACE_ID", it) }
         }
         startActivity(intent)
+    }
+
+    // Function to calculate zoom level based on distance
+    private fun getZoomLevelForDistance(distanceInMeters: Double): Float {
+        // Formula provides a reasonable zoom level based on distance
+        // Zoom levels: 1 = World, 5 = Landmass/continent, 10 = City, 15 = Streets, 20 = Buildings
+        return when {
+            distanceInMeters >= 50000 -> 8f    // Max distance (50km)
+            distanceInMeters >= 40000 -> 9f
+            distanceInMeters >= 30000 -> 9.5f
+            distanceInMeters >= 20000 -> 10f
+            distanceInMeters >= 10000 -> 11f
+            distanceInMeters >= 5000 -> 12f
+            distanceInMeters >= 2000 -> 13f
+            distanceInMeters >= 1000 -> 14f
+            else -> 15f                        // Very close distance
+        }
     }
 
     override fun onDestroyView() {
