@@ -151,6 +151,7 @@ interface PhotoDeletionListener {
             binding.messageIcon.setOnClickListener {
                 val intent = Intent(context, MessagingActivity::class.java)
             }
+
             binding.iconDifficulty.setOnClickListener {
                 fetchCurrentUserDifficulty()
             }
