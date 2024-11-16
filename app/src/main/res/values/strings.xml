@@ -281,6 +281,7 @@
     <string name="editLocationButton">Edit Location Button</string>
     <string name="downloadImageButton">Download Image Button</string>
     <string name="menuButtonIconFullscreen">Menu Button Icon Fullscreen</string>
+    <string name="shareImageButton">Share Image Button</string>
     <!-- Spinner options for terrain -->
     <string-array name="terrain_options">
         <item>Foot Trails</item>
