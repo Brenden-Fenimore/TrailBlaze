@@ -20,6 +20,12 @@
             android:theme="@style/Theme.TrailBlaze"
             tools:targetApi="31">
         <activity
+                android:name=".ui.profile.InboxActivity"
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:exported="false"
+                android:label="@string/title_activity_inbox"
+                android:theme="@style/Theme.TrailBlaze.Fullscreen"/>
+        <activity
                 android:name=".watcherFeature.WatcherProfile"
                 android:exported="false"/>
         <activity
@@ -116,7 +122,7 @@
                 android:grantUriPermissions="true">
             <meta-data
                     android:name="android.support.FILE_PROVIDER_PATHS"
-                    android:resource="@xml/file_paths" />
+                    android:resource="@xml/file_paths"/>
         </provider>
 
         <meta-data

@@ -4,14 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.compose.ui.graphics.PathSegment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
-import com.google.protobuf.Internal.ListAdapter
-import com.example.trailblaze.ui.profile.MessageAdapter
 
-class MessageAdapter : RecyclerView.Adapter<MessageAdapter.MessageViewHolder>(){
+class MessageAdapter (private val onMessageClick: (Message) -> Unit) : RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
     private val messages = mutableListOf<Message>()
 
@@ -23,6 +20,7 @@ class MessageAdapter : RecyclerView.Adapter<MessageAdapter.MessageViewHolder>(){
 }
      override fun onBindViewHolder(holder: MessageViewHolder, position: Int){
        holder.bind(messages[position])
+         holder.itemView.setOnClickListener { onMessageClick(messages[position]) }
      }
 
     override fun getItemCount() : Int = messages.size

@@ -443,4 +443,8 @@
     <!-- Messaging Strings-->
 
     <string name="send">Send</string>
+    <string name="attachImage">Attach Image</string>
+    <string name="typeMessage">Type a message</string>
+    <string name="title_activity_inbox">InboxActivity</string>
+<string name="createMessage">Create a message</string>
 </resources>
