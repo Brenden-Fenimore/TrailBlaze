@@ -133,7 +133,20 @@ class FullscreenImageDialogFragment : DialogFragment() {
 
         shareImageButton.setOnClickListener {
             val imageUrl = imageUrls[currentIndex] // Get the current image URL
-            sharePhoto(imageUrl)
+
+            // Fetch metadata
+            val location = locationTextView.text.toString()
+            val uploadDate = "2024-11-17"
+            val caption = captionTextView.text.toString()
+
+            // Pass the metadata to the PostcardDialogFragment
+            val postcardDialog = PostcardDialogFragment.newInstance(
+                imageUrl = imageUrl,
+                location = if (location.isNotBlank()) location else "Unknown Location",
+                uploadDate = uploadDate,
+                caption = caption
+            )
+            postcardDialog.show(parentFragmentManager, "PostcardDialog")
         }
 
         downloadImageButton.setOnClickListener {
