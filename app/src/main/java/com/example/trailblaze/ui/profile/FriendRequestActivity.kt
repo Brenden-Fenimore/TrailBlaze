@@ -128,7 +128,6 @@ class FriendRequestActivity : AppCompatActivity() {
                         findViewById<TextView>(R.id.noPendingRequestsTextView).visibility = View.VISIBLE
                         pendingRequestsRecyclerView.visibility = View.GONE
                     }
-
                     Toast.makeText(this, "Friend request accepted", Toast.LENGTH_SHORT).show()
                 }.addOnFailureListener { exception ->
                     Log.e("FriendRequestActivity", "Error accepting friend request", exception)
@@ -165,7 +164,6 @@ class FriendRequestActivity : AppCompatActivity() {
                             findViewById<TextView>(R.id.noPendingRequestsTextView).visibility = View.VISIBLE
                             pendingRequestsRecyclerView.visibility = View.GONE
                         }
-
                         Toast.makeText(this, "Friend request declined", Toast.LENGTH_SHORT).show()
                     }
                     .addOnFailureListener { exception ->
