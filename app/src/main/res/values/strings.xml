@@ -451,4 +451,5 @@
     <string name="senderImage">Sender Image</string>
     <string name="senderName">Sender Name</string>
     <string name="searchFriends">Search Friends</string>
+    <string name="timeTemplate">11/18/2024 12:00 p.m.</string>
 </resources>

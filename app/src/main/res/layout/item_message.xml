@@ -6,7 +6,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="9dp">
+            android:padding="9dp"
+            android:elevation="4dp"
+            >
 
     <ImageView
         android:id="@+id/senderImageView"
@@ -43,13 +45,18 @@
             android:fontFamily="@font/amethysta"
             />
 
+        <TextView
+                android:id="@+id/timestampTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:elevation="1dp"
+                android:fontFamily="@font/amethysta"
+                android:text="@string/timeTemplate"
+                android:textSize="12sp"
+        />
+
     </LinearLayout>
-    <TextView
-            android:id="@+id/timestampTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:textSize="12sp"
-            />
+
 
     </LinearLayout>
