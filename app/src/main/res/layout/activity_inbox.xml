@@ -52,13 +52,15 @@
             android:fontFamily="@font/amethysta"
             android:textSize="27sp"
             app:layout_constraintTop_toBottomOf="@+id/swishBackgroundView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textColor="?attr/colorPrimary"
             android:layout_gravity="center_horizontal"
-            tools:layout_editor_absoluteX="169dp"
             android:padding="9dp"
-            android:layout_margin="9dp"
-            tools:ignore="MissingConstraints"/>
+            android:layout_margin="9dp"/>
 
     <!-- RecyclerView for displaying messages-->
 
