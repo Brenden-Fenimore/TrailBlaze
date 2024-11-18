@@ -10,6 +10,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.util.*
 
+data class Friend(val id: String, val name: String)
 
 class MessagingViewModel : ViewModel() {
     // TODO: Implement the ViewModel
@@ -27,6 +28,8 @@ class MessagingViewModel : ViewModel() {
     private val _sendMessageStatus = MutableLiveData<Boolean>()
     val sendMessageStatus: LiveData<Boolean> get() = _sendMessageStatus
 
+    private val _friends = MutableLiveData<List<Friend>>()
+    val friends: LiveData<List<Friend>> get() = _friends
 
     init {
         loadMessages()
@@ -51,6 +54,25 @@ class MessagingViewModel : ViewModel() {
             }
 
     }
+    // Fetch friends for recipient selection
+    fun fetchFriends(): LiveData<List<Friend>> {
+        val userId = auth.currentUser?.uid ?: return MutableLiveData(emptyList())
+        firestore.collection("friends")
+            .whereEqualTo("ownerId", userId) // Ensure you're fetching the user's friends
+            .get()
+            .addOnSuccessListener { snapshot ->
+                val friendsList = snapshot.documents.mapNotNull { doc ->
+                    val friendId = doc.id
+                    val friendName = doc.getString("name") ?: return@mapNotNull null
+                    Friend(id = friendId, name = friendName)
+                }
+                _friends.value = friendsList
+            }
+            .addOnFailureListener { error ->
+                Log.e("MessagingViewModel", "Error fetching friends: ${error.message}", error)
+            }
+        return _friends
+    }
 
     fun sendMessage(
         recipientId: String,
@@ -58,6 +80,7 @@ class MessagingViewModel : ViewModel() {
         imageUri: Uri? = null
     ) {
         val senderId = auth.currentUser?.uid ?: return
+        val timestamp = System.currentTimeMillis()
 
         if (imageUri != null) {
             uploadImage(imageUri){
@@ -99,9 +122,11 @@ private fun uploadImage(imageUri: Uri, onComplete: (String?) -> Unit){
         firestore.collection("messages").add(message)
             .addOnSuccessListener{
                 Log.e("MessageViewModel", "Message sent successfully")
+                _sendMessageStatus.value = true
             }
             .addOnFailureListener { error ->
                 Log.e("MessageViewModel", "Error sending message: ${error.message}", error)
+                _sendMessageStatus.value = false
             }
     }
 }

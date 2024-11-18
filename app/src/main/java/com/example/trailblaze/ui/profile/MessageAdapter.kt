@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
@@ -50,9 +52,12 @@ inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
         return sdf.format(java.util.Date(timestamp))
     }
 
+
 }
     class MessageDiffCallback : DiffUtil.ItemCallback<Message>() {
         override fun areItemsTheSame(oldItem: Message, newItem: Message)= oldItem.timestamp == newItem.timestamp
         override fun areContentsTheSame(oldItem: Message, newItem: Message)= oldItem == newItem
     }
+
+
 }
