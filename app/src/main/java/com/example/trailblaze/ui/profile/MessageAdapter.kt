@@ -3,6 +3,7 @@ package com.example.trailblaze.ui.profile
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -32,11 +33,23 @@ class MessageAdapter (private val onMessageClick: (Message) -> Unit) : RecyclerV
     }
 
 inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private val senderImageView: ImageView = itemView.findViewById(R.id.senderImageView)
+    private val senderNameTextView: TextView = itemView.findViewById(R.id.senderNameTextView)
     private val messageTextView: TextView = itemView.findViewById(R.id.messageTextView)
+    private val timestampTextView: TextView = itemView.findViewById(R.id.timestampTextView)
 
     fun bind(message: Message) {
+       // senderNameTextView.text = message.senderName
         messageTextView.text = message.toString()
+        timestampTextView.text = formatTimestamp(message.timestamp)
     }
+
+    private fun formatTimestamp(timestamp: Long): String {
+        // Convert the timestamp to a human-readable date
+        val sdf = java.text.SimpleDateFormat("MMM dd, HH:mm", java.util.Locale.getDefault())
+        return sdf.format(java.util.Date(timestamp))
+    }
+
 }
     class MessageDiffCallback : DiffUtil.ItemCallback<Message>() {
         override fun areItemsTheSame(oldItem: Message, newItem: Message)= oldItem.timestamp == newItem.timestamp
