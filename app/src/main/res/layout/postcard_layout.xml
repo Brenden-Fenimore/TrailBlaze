@@ -3,7 +3,8 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="500dp"
+        android:scaleType="fitCenter"
         android:background="@color/white">
 
     <!-- Postcard Background -->
@@ -11,14 +12,15 @@
             android:id="@+id/postcardBackground"
             android:layout_width="450dp"
             android:layout_height="650dp"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             android:src="@drawable/postcard_transformed"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintDimensionRatio="16:9"
-            android:contentDescription="Postcard background" />
+            app:layout_constraintWidth_percent="0.8"
+            android:contentDescription="Postcard" />
 
     <!-- Photo Section: Constrained to Left Half of the Postcard -->
     <ImageView
@@ -38,7 +40,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
-            android:padding="16dp"
+            android:padding="2dp"
             android:gravity="center_vertical"
             app:layout_constraintTop_toTopOf="@id/postcardBackground"
             app:layout_constraintBottom_toBottomOf="@id/postcardBackground"
@@ -48,8 +50,9 @@
         <!-- Location Tag -->
         <TextView
                 android:id="@+id/locationTextView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxWidth="115dp"
                 android:text="Location Tag"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -59,19 +62,22 @@
         <!-- Upload Date -->
         <TextView
                 android:id="@+id/dateTextView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxWidth="115dp"
                 android:text="Date"
                 android:textColor="@color/black"
                 android:textSize="14sp"
+                android:textStyle="italic"
                 android:paddingBottom="8dp" />
 
-        <!-- Editable Caption -->
+        <!-- Caption -->
         <TextView
                 android:id="@+id/captionText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Enter caption"
+                android:maxWidth="150dp"
+                android:text="Caption"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:background="@android:color/transparent"
