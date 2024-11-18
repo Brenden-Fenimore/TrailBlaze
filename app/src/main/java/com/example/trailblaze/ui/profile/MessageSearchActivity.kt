@@ -1,0 +1,32 @@
+package com.example.trailblaze.ui.profile
+
+import android.os.Bundle
+import android.widget.AutoCompleteTextView
+import android.widget.EditText
+import android.widget.ImageButton
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.RecyclerView
+import com.example.trailblaze.R
+
+class MessageSearchActivity : AppCompatActivity() {
+
+private lateinit var searchInput: AutoCompleteTextView
+private lateinit var backButton: ImageButton
+private lateinit var searchButton: ImageButton
+private lateinit var friendsRecyclerView: RecyclerView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_message_search)
+
+        searchInput = findViewById(R.id.recipientSearch)
+        backButton = findViewById(R.id.backButton)
+        searchButton = findViewById(R.id.searchIcon)
+        friendsRecyclerView = findViewById(R.id.searchFriendsRecycler)
+
+    }
+}

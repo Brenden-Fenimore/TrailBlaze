@@ -20,6 +20,9 @@
             android:theme="@style/Theme.TrailBlaze"
             tools:targetApi="31">
         <activity
+                android:name=".ui.profile.MessageSearchActivity"
+                android:exported="false"/>
+        <activity
                 android:name=".ui.profile.InboxActivity"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:exported="false"
