@@ -2,7 +2,9 @@ package com.example.trailblaze.ui.profile
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -62,19 +64,29 @@ class FriendRequestActivity : AppCompatActivity() {
 
                     pendingRequests.clear() // Clear existing requests to prevent duplicates
 
-                    // Fetch details for each pending request user
-                    pendingRequestsList.forEach { userId ->
-                        firestore.collection("users").document(userId).get()
-                            .addOnSuccessListener { userDocument ->
-                                val username = userDocument.getString("username") ?: "Unknown User"
-                                val profileImageUrl = userDocument.getString("profileImageUrl") ?: ""
+                    if (pendingRequestsList.isEmpty()) {
+                        // No pending requests
+                        findViewById<TextView>(R.id.noPendingRequestsTextView).visibility = View.VISIBLE
+                        pendingRequestsRecyclerView.visibility = View.GONE
+                    } else {
+                        // Hide the "No Pending Requests" message and show the RecyclerView
+                        findViewById<TextView>(R.id.noPendingRequestsTextView).visibility = View.GONE
+                        pendingRequestsRecyclerView.visibility = View.VISIBLE
 
-                                // Add to pending requests with both username and profile picture
-                                pendingRequests.add(PendingRequest(userId, username, profileImageUrl))
-                                pendingRequestsAdapter.notifyDataSetChanged() // Notify adapter of data change
-                            }.addOnFailureListener { exception ->
-                                Log.e("FriendRequestActivity", "Error fetching user details for $userId", exception)
-                            }
+                        // Fetch details for each pending request user
+                        pendingRequestsList.forEach { userId ->
+                            firestore.collection("users").document(userId).get()
+                                .addOnSuccessListener { userDocument ->
+                                    val username = userDocument.getString("username") ?: "Unknown User"
+                                    val profileImageUrl = userDocument.getString("profileImageUrl") ?: ""
+
+                                    // Add to pending requests with both username and profile picture
+                                    pendingRequests.add(PendingRequest(userId, username, profileImageUrl))
+                                    pendingRequestsAdapter.notifyDataSetChanged() // Notify adapter of data change
+                                }.addOnFailureListener { exception ->
+                                    Log.e("FriendRequestActivity", "Error fetching user details for $userId", exception)
+                                }
+                        }
                     }
                 }
             }
@@ -110,6 +122,13 @@ class FriendRequestActivity : AppCompatActivity() {
                     // Update UI
                     pendingRequests.removeAll { it.userId == userId }
                     pendingRequestsAdapter.notifyDataSetChanged()
+
+                    // Check if there are no pending requests left
+                    if (pendingRequests.isEmpty()) {
+                        findViewById<TextView>(R.id.noPendingRequestsTextView).visibility = View.VISIBLE
+                        pendingRequestsRecyclerView.visibility = View.GONE
+                    }
+
                     Toast.makeText(this, "Friend request accepted", Toast.LENGTH_SHORT).show()
                 }.addOnFailureListener { exception ->
                     Log.e("FriendRequestActivity", "Error accepting friend request", exception)
@@ -140,6 +159,13 @@ class FriendRequestActivity : AppCompatActivity() {
                         // Update UI
                         pendingRequests.removeAll { it.userId == userId }
                         pendingRequestsAdapter.notifyDataSetChanged()
+
+                        // Check if there are no pending requests left
+                        if (pendingRequests.isEmpty()) {
+                            findViewById<TextView>(R.id.noPendingRequestsTextView).visibility = View.VISIBLE
+                            pendingRequestsRecyclerView.visibility = View.GONE
+                        }
+
                         Toast.makeText(this, "Friend request declined", Toast.LENGTH_SHORT).show()
                     }
                     .addOnFailureListener { exception ->
