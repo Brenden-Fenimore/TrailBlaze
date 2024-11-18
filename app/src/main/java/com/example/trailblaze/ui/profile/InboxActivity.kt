@@ -35,7 +35,7 @@ class InboxActivity : AppCompatActivity() {
         observeMessages()
 
         binding.createMessage.setOnClickListener{
-            startActivity(Intent(this, MessagingActivity::class.java))
+            startActivity(Intent(this, MessageSearchActivity::class.java))
         }
 
 binding.backButton.setOnClickListener { onBackPressed() }

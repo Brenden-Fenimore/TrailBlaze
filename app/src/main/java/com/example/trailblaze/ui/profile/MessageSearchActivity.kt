@@ -20,13 +20,17 @@ private lateinit var friendsRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_message_search)
 
         searchInput = findViewById(R.id.recipientSearch)
         backButton = findViewById(R.id.backButton)
         searchButton = findViewById(R.id.searchIcon)
         friendsRecyclerView = findViewById(R.id.searchFriendsRecycler)
+
+        backButton.setOnClickListener {
+            finish()
+        }
+
 
     }
 }
