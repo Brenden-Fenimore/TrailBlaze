@@ -52,11 +52,17 @@ class PostcardDialogFragment : DialogFragment() {
         confirmButton.setOnClickListener {
             view?.post {
 
+                // Before sharing the postcard
+                confirmButton.visibility = View.GONE
+
                 // Generate postcard image
                 val postcardBitmap = createPostcardBitmap(view)
 
                 // Share postcard
                 sharePostcard(postcardBitmap)
+
+                // After sharing is done
+                confirmButton.visibility = View.VISIBLE
 
                 // Close dialog
                 dismiss()

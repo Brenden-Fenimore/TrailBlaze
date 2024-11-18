@@ -136,7 +136,7 @@ class FullscreenImageDialogFragment : DialogFragment() {
 
             // Fetch metadata
             val location = locationTextView.text.toString()
-            val uploadDate = "2024-11-17"
+            val uploadDate = "DateGoesHere"
             val caption = captionTextView.text.toString()
 
             // Pass the metadata to the PostcardDialogFragment
