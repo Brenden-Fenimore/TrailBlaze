@@ -19,14 +19,13 @@ import java.io.FileOutputStream
 
 class PostcardDialogFragment : DialogFragment() {
 
-    private lateinit var imageUrl: String
-    private lateinit var location: String
-    private lateinit var uploadDate: String
-    private lateinit var caption: String
+    private var imageUrl: String? = null
+    private var location: String? = null
+    private var uploadDate: String? = null
+    private var caption: String? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.postcard_layout, container, false)
 
@@ -38,7 +37,11 @@ class PostcardDialogFragment : DialogFragment() {
         val confirmButton: Button = view.findViewById(R.id.confirmButton)
 
         // Load photo
-        Glide.with(requireContext()).load(imageUrl).into(photoImageView)
+        Glide.with(requireContext())
+            .load(imageUrl)
+            .placeholder(R.drawable.trailblaze_logo)
+            .error(R.drawable.no_image_available)
+            .into(photoImageView)
 
         // Set location, date, and caption
         locationTextView.text = location
@@ -47,25 +50,28 @@ class PostcardDialogFragment : DialogFragment() {
 
         // Confirm button logic
         confirmButton.setOnClickListener {
+            view?.post {
 
-            // Generate postcard image
-            val postcardBitmap = createPostcardBitmap(view)
+                // Generate postcard image
+                val postcardBitmap = createPostcardBitmap(view)
 
-            // Share postcard
-            sharePostcard(postcardBitmap)
+                // Share postcard
+                sharePostcard(postcardBitmap)
 
-            // Close dialog
-            dismiss()
+                // Close dialog
+                dismiss()
+            }
         }
 
         return view
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setStyle(STYLE_NORMAL, R.style.PostcardDialogTheme)
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            imageUrl = it.getString("imageUrl") ?: "" // Fix here
+            imageUrl = it.getString("imageUrl") ?: ""
             location = it.getString("location") ?: "Unknown Location"
             uploadDate = it.getString("uploadDate") ?: "Unknown Date"
             caption = it.getString("caption") ?: ""
@@ -73,13 +79,11 @@ class PostcardDialogFragment : DialogFragment() {
     }
 
     private fun createPostcardBitmap(view: View): Bitmap {
-        view.measure(
-            View.MeasureSpec.makeMeasureSpec(view.width, View.MeasureSpec.EXACTLY),
-            View.MeasureSpec.makeMeasureSpec(view.height, View.MeasureSpec.EXACTLY)
+        val bitmap = Bitmap.createBitmap(
+            view.width.takeIf { it > 0 } ?: 1,
+            view.height.takeIf { it > 0 } ?: 1,
+            Bitmap.Config.ARGB_8888
         )
-        view.layout(0, 0, view.measuredWidth, view.measuredHeight)
-
-        val bitmap = Bitmap.createBitmap(view.measuredWidth, view.measuredHeight, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         view.draw(canvas)
 
@@ -87,39 +91,34 @@ class PostcardDialogFragment : DialogFragment() {
     }
 
     private fun sharePostcard(bitmap: Bitmap) {
+        // Save bitmap to cache directory
         val cachePath = File(requireContext().cacheDir, "postcards")
         cachePath.mkdirs()
-        val file = File(cachePath, "shared_postcard.png")
-        val outputStream = FileOutputStream(file)
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
-        outputStream.close()
+        val file = File(cachePath, "postcard.jpg")
+        FileOutputStream(file).use { outputStream ->
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+        }
 
-        val imageUri = FileProvider.getUriForFile(
-            requireContext(),
-            "${requireContext().packageName}.provider",
-            file
-        )
-
-        val shareIntent = Intent().apply {
-            action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_STREAM, imageUri)
-            type = "image/png"
+        // Share the image
+        val uri = FileProvider.getUriForFile(requireContext(), "${requireContext().packageName}.provider", file)
+        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "image/jpeg"
+            putExtra(Intent.EXTRA_STREAM, uri)
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
-        startActivity(Intent.createChooser(shareIntent, "Share postcard via"))
+        startActivity(Intent.createChooser(shareIntent, "Share Postcard"))
     }
 
     companion object {
         fun newInstance(imageUrl: String, location: String, uploadDate: String, caption: String): PostcardDialogFragment {
-            val args = Bundle().apply {
-                putString("imageUrl", imageUrl)
-                putString("location", location)
-                putString("uploadDate", uploadDate)
-                putString("caption", caption)
+                return PostcardDialogFragment().apply {
+                arguments = Bundle().apply {
+                    putString("imageUrl", imageUrl)
+                    putString("location", location)
+                    putString("uploadDate", uploadDate)
+                    putString("caption", caption)
+                }
             }
-            val fragment = PostcardDialogFragment()
-            fragment.arguments = args
-            return fragment
         }
     }
 }

@@ -1,107 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
-    <!-- Background image -->
+    <!-- Postcard Background -->
     <ImageView
-            android:id="@+id/backgroundImageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/postcardBackground"
+            android:layout_width="450dp"
+            android:layout_height="650dp"
             android:scaleType="fitXY"
             android:src="@drawable/postcard_transformed"
-            android:alpha="0.8" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintDimensionRatio="16:9"
+            android:contentDescription="Postcard background" />
 
-    <!-- Overlay container for postcard content -->
+    <!-- Photo Section: Constrained to Left Half of the Postcard -->
+    <ImageView
+            android:id="@+id/photoImageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintTop_toTopOf="@id/postcardBackground"
+            app:layout_constraintBottom_toBottomOf="@id/postcardBackground"
+            app:layout_constraintStart_toStartOf="@id/postcardBackground"
+            app:layout_constraintEnd_toStartOf="@id/detailsLayout"
+            android:contentDescription="Photo on postcard" />
+
+    <!-- Right Half: Details -->
     <LinearLayout
-            android:id="@+id/postcardContainer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="8dp">
+            android:id="@+id/detailsLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toTopOf="@id/postcardBackground"
+            app:layout_constraintBottom_toBottomOf="@id/postcardBackground"
+            app:layout_constraintStart_toEndOf="@id/photoImageView"
+            app:layout_constraintEnd_toEndOf="@id/postcardBackground">
 
-        <!-- Left half for the photo -->
-        <ImageView
-                android:id="@+id/photoImageView"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/photo_description" />
+        <!-- Location Tag -->
+        <TextView
+                android:id="@+id/locationTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Location Tag"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingBottom="8dp" />
 
-        <!-- Right half for text details -->
-        <LinearLayout
-                android:id="@+id/detailsContainer"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:padding="8dp"
-                android:background="@android:color/white"
-                android:alpha="0.9">
+        <!-- Upload Date -->
+        <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:paddingBottom="8dp" />
 
-            <!-- Location -->
-            <TextView
-                    android:id="@+id/locationTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:paddingBottom="8dp"
-                    android:text="Location" />
+        <!-- Editable Caption -->
+        <TextView
+                android:id="@+id/captionText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter caption"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:background="@android:color/transparent"
+                android:padding="8dp" />
 
-            <!-- Upload Date -->
-            <TextView
-                    android:id="@+id/dateTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:paddingBottom="8dp"
-                    android:text="Upload Date" />
+        <Button
+                android:id="@+id/confirmButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
-            <!-- Caption -->
-            <TextView
-                    android:id="@+id/captionText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:text="Caption"
-                    android:paddingBottom="16dp" />
-
-            <!-- Buttons -->
-            <LinearLayout
-                    android:id="@+id/buttonsContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:paddingTop="16dp">
-
-                <!-- Confirm Button -->
-                <Button
-                        android:id="@+id/confirmButton"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/confirm"
-                        android:background="@color/green"
-                        android:textColor="@color/white" />
-
-                <!-- Cancel Button -->
-                <Button
-                        android:id="@+id/cancelButton"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/cancel"
-                        android:textColor="@color/white"
-                        android:layout_marginStart="8dp" />
-            </LinearLayout>
-        </LinearLayout>
     </LinearLayout>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

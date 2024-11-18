@@ -147,6 +147,8 @@ class FullscreenImageDialogFragment : DialogFragment() {
                 caption = caption
             )
             postcardDialog.show(parentFragmentManager, "PostcardDialog")
+
+            dismiss()
         }
 
         downloadImageButton.setOnClickListener {
