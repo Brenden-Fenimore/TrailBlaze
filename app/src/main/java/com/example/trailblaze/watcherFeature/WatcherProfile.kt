@@ -60,9 +60,7 @@ class WatcherProfile : AppCompatActivity() {
 
         // Back button listener
         chevronLeftButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            // navigate to previous screen
-            finish()
+            setContentView(R.layout.fragment_profile)
         }
 
         // fetch user
@@ -96,23 +94,7 @@ class WatcherProfile : AppCompatActivity() {
             .addOnFailureListener { exception ->}
     }
 
-// private fun loadUserData() {
-//
-//     // fetch user from UserManager
-//     val currentBlazer = userManager.getCurrentUser()
-//
-//     if(currentBlazer != null) {
-//
-//         binding.watcherName.text = currentBlazer.username
-//         watcherProfilePicture?.let {
-//             loadWatcherProfilePicture(it)
-//         } ?: run {
-//             watcherProfilePicture.setImageResource(R.drawable.account_circle)
-//         }
-//     }
 
-
-// }
     private fun loadWatcherProfilePicture(profileImageUrl: String){
         val userId = auth.currentUser?.uid ?: return
         userRepository.getUserProfileImage(userId) { imageUrl ->

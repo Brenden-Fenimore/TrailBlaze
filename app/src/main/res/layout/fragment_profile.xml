@@ -29,13 +29,15 @@
         <ImageButton
                 android:id="@+id/messageIcon"
                 android:contentDescription="@string/messages"
-                app:srcCompat="@drawable/navmenu"
+                app:srcCompat="@drawable/messaging_bubbles_icon"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="54dp"
+                android:background="@android:color/transparent"
+                android:tint="#CDEDA3"
                 />
 
         <ImageButton

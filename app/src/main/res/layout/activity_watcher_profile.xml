@@ -16,11 +16,12 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
     <!-- Back Image Button -->
+    
     <ImageButton
             android:focusable="true"
             app:srcCompat="@drawable/baseline_arrow_back_ios_new_24"
             android:contentDescription="@string/btn_back"
-            android:layout_width="49dp"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/chevron_left"
             android:tint="#CDEDA3"
