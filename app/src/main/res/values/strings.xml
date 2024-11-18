@@ -450,4 +450,5 @@
 <string name="createMessage">Create a message</string>
     <string name="senderImage">Sender Image</string>
     <string name="senderName">Sender Name</string>
+    <string name="searchFriends">Search Friends</string>
 </resources>
