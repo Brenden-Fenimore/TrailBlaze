@@ -79,7 +79,7 @@
                 android:layout_height="48dp"
                 android:layout_marginEnd="9dp"
                 android:contentDescription="@string/attachImage"
-                android:src="@drawable/camera"/>
+                android:src="@drawable/round_camera_alt_24"/>
 
         <EditText
                 android:id="@+id/messageEditText"
