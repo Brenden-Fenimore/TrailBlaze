@@ -12,10 +12,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:id="@+id/topBanner"
-            app:layout_constraintTop_toTopOf="parent
-"           app:layout_constraintBottom_toTopOf="@+id/messagesRecyclerView"
             android:elevation="4dp"
-            tools:ignore="ExtraText">
+            tools:ignore="ExtraText,MissingConstraints">
 
     <!-- Back Button-->
     <ImageButton

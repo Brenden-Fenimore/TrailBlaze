@@ -450,5 +450,6 @@
     <string name="senderName">Sender Name</string>
     <string name="searchFriends">Search Friends</string>
     <string name="timeTemplate">11/18/2024 12:00 p.m.</string>
-
+    <string name="searchUsername">Enter username</string>
+<string name="bckButton">Back to previous</string>
 </resources>
