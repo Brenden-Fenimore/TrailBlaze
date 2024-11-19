@@ -29,7 +29,7 @@
         <ImageButton
                 android:id="@+id/messageIcon"
                 android:contentDescription="@string/messages"
-                app:srcCompat="@drawable/messaging_bubbles_icon"
+                app:srcCompat="@drawable/message_icon"
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_width="70dp"

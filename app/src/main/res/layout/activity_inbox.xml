@@ -36,7 +36,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:contentDescription="@string/createMessage"
-            android:src="@drawable/add_messaging_bubbles_icon"
+            android:src="@drawable/create_message_icon"
             android:tint="#CDEDA3"
             android:background="@android:color/transparent"
             app:layout_constraintTop_toTopOf="parent"
