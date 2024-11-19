@@ -110,43 +110,30 @@ class MapFragment : Fragment(),
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        // Get the latest user data
-        currentUser = UserManager.getCurrentUser()
-        val isMetricUnits = sharedPreferences.getBoolean("isMetricUnits", false)
-
-        // Calculate the current search radius based on user settings
-        val searchRadius = if (isMetricUnits) {
-            currentUser?.distance?.times(1000.0) ?: 10000.0  // Convert km to meters
-        } else {
-            currentUser?.distance?.times(1609.34) ?: 10000.0  // Convert miles to meters
-        }.coerceAtMost(50000.0)
-
-        // If user state exists, fetch parks with updated zoom level
-        currentUser?.state?.let { userState ->
-            fetchParksAndPlaceMarkers(userState)
-        }
-
-        // Update current map zoom if map is initialized
-        _map?.let { googleMap ->
-            val currentCenter = googleMap.cameraPosition.target
-            val newZoomLevel = getZoomLevelForDistance(searchRadius)
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentCenter, newZoomLevel))
-        }
-    }
+//    override fun onResume() {
+//        super.onResume()
+//
+//        // Get the latest user data
+//        currentUser = UserManager.getCurrentUser()
+//        val isMetricUnits = sharedPreferences.getBoolean("isMetricUnits", false)
+//
+//        // Calculate the current search radius based on user settings
+//        val searchRadius = if (isMetricUnits) {
+//            currentUser?.distance?.times(1000.0) ?: 10000.0  // Convert km to meters
+//        } else {
+//            currentUser?.distance?.times(1609.34) ?: 10000.0  // Convert miles to meters
+//        }.coerceAtMost(50000.0)
+//
+//        // Update current map zoom if map is initialized
+//        _map?.let { googleMap ->
+//            val currentCenter = googleMap.cameraPosition.target
+//            val newZoomLevel = getZoomLevelForDistance(searchRadius)
+//            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentCenter, newZoomLevel))
+//        }
+//    }
 
     override fun onMapReady(googleMap: GoogleMap) {
         _map = googleMap
-        val isMetricUnits = sharedPreferences.getBoolean("isMetricUnits", false)
-
-        // Calculate initial zoom based on user distance preference
-        val searchRadius = if (isMetricUnits) {
-            currentUser?.distance?.times(1000.0) ?: 10000.0  // km to meters
-        } else {
-            currentUser?.distance?.times(1609.34) ?: 10000.0  // miles to meters
-        }.coerceAtMost(50000.0)
 
         // Configure map settings
         map.apply {
@@ -157,16 +144,39 @@ class MapFragment : Fragment(),
                 handleMarkerClick(marker)
                 true
             }
-
-            // If we have user's last known position, center there with proper zoom
-            currentUser?.let { user ->
-                user.state?.let { state ->
-                    fetchParksAndPlaceMarkers(state)
-                }
-            }
         }
 
         locationCheckAndRequest()
+        // Center on current location if permissions are granted
+        if (ActivityCompat.checkSelfPermission(
+                thiscontext,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                thiscontext,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            map.isMyLocationEnabled = true // Shows the blue dot for current location
+
+            val placeRequest = FindCurrentPlaceRequest.builder(listOf(Place.Field.LAT_LNG)).build()
+            placesClient.findCurrentPlace(placeRequest).addOnSuccessListener { response ->
+                if (response.placeLikelihoods.isNotEmpty()) {
+                    val location = response.placeLikelihoods[0].place.location
+
+                    // Calculate zoom based on user's distance preference
+                    val isMetricUnits = sharedPreferences.getBoolean("isMetricUnits", false)
+                    val distanceInMeters = if (isMetricUnits) {
+                        currentUser?.distance?.times(1000.0) ?: 10000.0  // Convert km to meters
+                    } else {
+                        currentUser?.distance?.times(1609.34) ?: 10000.0  // Convert miles to meters
+                    }.coerceAtMost(50000.0)
+
+                    val zoomLevel = getZoomLevelForDistance(distanceInMeters)
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(location, zoomLevel))
+                }
+            }
+        }
     }
 
     private fun initializeViews() {
