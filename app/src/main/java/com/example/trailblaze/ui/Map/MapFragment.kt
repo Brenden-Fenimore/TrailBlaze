@@ -148,7 +148,7 @@ class MapFragment : Fragment(),
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.context!!)
             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
                 map.isMyLocationEnabled = true // Shows the blue dot for current location
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude,location.longitude),15f))
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude,location.longitude),15f))
                 userLocation = LatLng(location.latitude,location.longitude)
             }
         }
