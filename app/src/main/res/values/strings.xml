@@ -435,4 +435,10 @@
     <string name="pending_requests">Pending Requests</string>
     <string name="photo_description">Photo Description</string>
     <string name="confirm">Confirm</string>
+    <string name="Postcard">Postcard</string>
+    <string name="photo_on_postcard">Photo on postcard</string>
+    <string name="location_tag">Location Tag</string>
+    <string name="date">Date</string>
+    <string name="caption">Caption</string>
+    <string name="share_postcard">Share Postcard</string>
 </resources>

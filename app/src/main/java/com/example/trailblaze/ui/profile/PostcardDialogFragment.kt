@@ -73,7 +73,6 @@ class PostcardDialogFragment : DialogFragment() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setStyle(STYLE_NORMAL, R.style.PostcardDialogTheme)
         super.onCreate(savedInstanceState)
 
         arguments?.let {
@@ -100,15 +99,15 @@ class PostcardDialogFragment : DialogFragment() {
         // Save bitmap to cache directory
         val cachePath = File(requireContext().cacheDir, "postcards")
         cachePath.mkdirs()
-        val file = File(cachePath, "postcard.jpg")
+        val file = File(cachePath, "postcard.png")
         FileOutputStream(file).use { outputStream ->
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
         }
 
         // Share the image
         val uri = FileProvider.getUriForFile(requireContext(), "${requireContext().packageName}.provider", file)
         val shareIntent = Intent(Intent.ACTION_SEND).apply {
-            type = "image/jpeg"
+            type = "image/png"
             putExtra(Intent.EXTRA_STREAM, uri)
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }

@@ -50,6 +50,7 @@ class FullscreenImageDialogFragment : DialogFragment() {
     private lateinit var menuToggleButton: ImageButton
     private lateinit var shareImageButton: ImageButton
     private var isMenuExpanded = false
+    private lateinit var dateTextView: TextView
 
     companion object {
         fun newInstance(
@@ -83,6 +84,7 @@ class FullscreenImageDialogFragment : DialogFragment() {
         shareImageButton = view.findViewById(R.id.shareImageButton)
         downloadImageButton = view.findViewById(R.id.downloadImageButton)
         menuToggleButton = view.findViewById(R.id.menuToggleButton)
+        dateTextView = view.findViewById(R.id.dateTextView)
 
         imageUrls = (arguments?.getStringArrayList("imageUrls") ?: emptyList()) as MutableList<String>
         currentIndex = arguments?.getInt("position") ?: 0
@@ -136,7 +138,7 @@ class FullscreenImageDialogFragment : DialogFragment() {
 
             // Fetch metadata
             val location = locationTextView.text.toString()
-            val uploadDate = "DateGoesHere"
+            val uploadDate = dateTextView.text.toString()
             val caption = captionTextView.text.toString()
 
             // Pass the metadata to the PostcardDialogFragment
@@ -195,6 +197,9 @@ class FullscreenImageDialogFragment : DialogFragment() {
 
         // Display location based on EXIF data
         loadGeoLocation(imageUrl)
+
+        // Fetch and display the upload date
+        fetchUploadDate(imageUrl)
     }
 
     private fun navigateImage(direction: Int) {
@@ -685,6 +690,48 @@ class FullscreenImageDialogFragment : DialogFragment() {
         } else {
             Toast.makeText(requireContext(), "Failed to create file", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun fetchUploadDate(imageUrl: String) {
+        val userId = getCurrentUserId()
+        if (userId.isEmpty()) {
+            Log.e("FetchUploadDate", "User ID is empty, cannot fetch upload date.")
+            return
+        }
+
+        // Fetch from the user's photo collection
+        val photosCollection = FirebaseFirestore.getInstance()
+            .collection("users")
+            .document(userId)
+            .collection("photos")
+
+        photosCollection.whereEqualTo("url", imageUrl).get()
+            .addOnSuccessListener { querySnapshot ->
+                if (querySnapshot.isEmpty) {
+                    Log.d("FetchUploadDate", "No matching Firestore document found for URL: $imageUrl")
+                } else {
+                    // Assume the first matching document contains the needed upload date
+                    val document = querySnapshot.documents.firstOrNull()
+                    val uploadTimestamp = document?.getTimestamp("uploadDate")
+                    val uploadDate = uploadTimestamp?.toDate()
+
+                    if (uploadDate != null) {
+                        // Format the date to a readable string
+                        val formattedDate = android.text.format.DateFormat.format("MMM dd, yyyy", uploadDate).toString()
+                        dateTextView.text = formattedDate
+                        dateTextView.visibility = View.VISIBLE
+                    } else {
+                        Log.d("FetchUploadDate", "No uploadDate field found in the document.")
+                        dateTextView.text = "Unknown Date"
+                        dateTextView.visibility = View.VISIBLE
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("FetchUploadDate", "Error fetching upload date", e)
+                dateTextView.text = "Error Loading Date"
+                dateTextView.visibility = View.VISIBLE
+            }
     }
 }
 

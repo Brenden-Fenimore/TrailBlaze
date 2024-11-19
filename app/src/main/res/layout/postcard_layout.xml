@@ -4,8 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:scaleType="fitCenter"
-        android:background="@color/white">
+        android:scaleType="fitCenter">
 
     <!-- Postcard Background -->
     <ImageView
@@ -19,7 +18,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintDimensionRatio="16:9"
-            android:contentDescription="Postcard" />
+            android:contentDescription="@string/Postcard" />
 
     <!-- Photo Section: Constrained to Left Half of the Postcard -->
     <ImageView
@@ -34,7 +33,7 @@
             app:layout_constraintBottom_toBottomOf="@id/postcardBackground"
             app:layout_constraintStart_toStartOf="@id/postcardBackground"
             app:layout_constraintEnd_toStartOf="@id/detailsLayout"
-            android:contentDescription="Photo on postcard" />
+            android:contentDescription="@string/photo_on_postcard" />
 
     <!-- Right Half: Details -->
     <LinearLayout
@@ -54,7 +53,7 @@
                 android:id="@+id/locationTextView"
                 android:layout_width="94dp"
                 android:layout_height="wrap_content"
-                android:text="Location Tag"
+                android:text="@string/location_tag"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -66,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxWidth="110dp"
-                android:text="Date"
+                android:text="@string/date"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="italic"
@@ -77,7 +76,7 @@
                 android:id="@+id/captionText"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:text="Caption"
+                android:text="@string/caption"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:background="@android:color/transparent"
@@ -88,11 +87,10 @@
             android:id="@+id/confirmButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Confirm"
+            android:text="@string/share_postcard"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:paddingStart="45dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="5dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
