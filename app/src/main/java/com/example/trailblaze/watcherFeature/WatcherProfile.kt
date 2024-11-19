@@ -56,11 +56,11 @@ class WatcherProfile : AppCompatActivity() {
         // Initialize views
         watcherName = findViewById(R.id.watcherName)
         watcherProfilePicture = findViewById(R.id.watcherProfilePicture)
-        chevronLeftButton = findViewById<ImageButton>(R.id.chevron_left)
+        chevronLeftButton = findViewById(R.id.chevron_left)
 
         // Back button listener
         chevronLeftButton.setOnClickListener {
-            setContentView(R.layout.fragment_profile)
+            onBackPressed()
         }
 
         // fetch user
