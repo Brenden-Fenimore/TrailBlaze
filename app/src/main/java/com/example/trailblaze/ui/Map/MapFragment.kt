@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -47,6 +48,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Marker
+import java.util.*
 
 class MapFragment : Fragment(),
     OnCameraMoveStartedListener,
@@ -107,19 +109,19 @@ class MapFragment : Fragment(),
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        // Get the latest user data and configure search radius to meters
-        val searchRadius = userDistanceMeters()
-
-        // Update current map zoom if map is initialized
-        _map?.let { googleMap ->
-            val currentCenter = googleMap.cameraPosition.target
-            val newZoomLevel = getZoomLevelForDistance(searchRadius)
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentCenter, newZoomLevel))
-        }
-    }
+//    override fun onResume() {
+//        super.onResume()
+//
+//        // Get the latest user data and configure search radius to meters
+//        val searchRadius = userDistanceMeters()
+//
+//        // Update current map zoom if map is initialized
+//        _map?.let { googleMap ->
+//            val currentCenter = googleMap.cameraPosition.target
+//            val newZoomLevel = getZoomLevelForDistance(searchRadius)
+//            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentCenter, newZoomLevel))
+//        }
+//    }
 
     override fun onMapReady(googleMap: GoogleMap) {
         _map = googleMap
@@ -176,19 +178,19 @@ class MapFragment : Fragment(),
         return searchRadius
     }
 
-    private fun parkWithinBounds(userLocation: LatLng, searchRadius : Double, parkLocation: LatLng): Boolean {
-
-        val searchRadiusLatLngRadius = searchRadius / 111111.1
-        val bounds = LatLngBounds(
-            //southwest corner
-            LatLng(userLocation.latitude - searchRadiusLatLngRadius,
-            userLocation.longitude - searchRadiusLatLngRadius),
-            //northeast corner
-            LatLng(userLocation.latitude + searchRadiusLatLngRadius,
-            userLocation.longitude + searchRadiusLatLngRadius))
-
-        return bounds.contains(parkLocation)
-    }
+//    private fun parkWithinBounds(userLocation: LatLng, searchRadius : Double, parkLocation: LatLng): Boolean {
+//
+//        val searchRadiusLatLngRadius = searchRadius / 111111.1
+//        val bounds = LatLngBounds(
+//            //southwest corner
+//            LatLng(userLocation.latitude - searchRadiusLatLngRadius,
+//            userLocation.longitude - searchRadiusLatLngRadius),
+//            //northeast corner
+//            LatLng(userLocation.latitude + searchRadiusLatLngRadius,
+//            userLocation.longitude + searchRadiusLatLngRadius))
+//
+//        return bounds.contains(parkLocation)
+//    }
     private fun initializeViews() {
         multiAutoCompleteTextView = binding.mapSearch
         setupBottomSheetAdapter()
@@ -357,60 +359,29 @@ class MapFragment : Fragment(),
                 if (response.isSuccessful) {
                     val parksList = response.body()?.data ?: emptyList()
                     map.clear()
-                    val beforeFilterItems = parksList.map { LocationItem.ParkItem(it) }
+                    val locationItems = parksList.map { LocationItem.ParkItem(it) }
 
-                    userDistanceMeters()
-                    val newLocationItems : MutableList<LocationItem.ParkItem> = mutableListOf()
-                    beforeFilterItems.forEach { park ->
-                        if (park.park.latitude != "" || park.park.longitude != "" || !::userLocation.isInitialized) {
-                            if (parkWithinBounds(
-                                    userLocation, userDistanceMeters(),
-                                    LatLng(park.park.latitude!!.toDouble(), park.park.longitude!!.toDouble()))
-                            )
-                            {
-                                newLocationItems.add(park)
-                            }
-                        }
-                    }
-                    locationItems.clear()
-                    locationItems.addAll(newLocationItems)
+                    // Update bottom sheet with all parks
                     bottomSheetAdapter.updateItems(locationItems)
 
-                    if (newLocationItems.isNotEmpty()) {
-                        val firstPark = parksList[0]
-                        val latitude = firstPark.latitude?.toDoubleOrNull()
-                        val longitude = firstPark.longitude?.toDoubleOrNull()
+                    if (parksList.isNotEmpty()) {
+                        // Add markers for all parks
+                        parksList.forEach { park ->
+                            val lat = park.latitude?.toDoubleOrNull()
+                            val lon = park.longitude?.toDoubleOrNull()
 
-                        if (latitude != null && longitude != null) {
-                            val parkLocation = LatLng(latitude, longitude)
-
-                            val distanceInMeters = userDistanceMeters()
-
-                            // Calculate zoom level based on user's distance setting
-                            val zoomLevel = getZoomLevelForDistance(distanceInMeters)
-
-                            // Apply the zoom level
-                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(parkLocation, zoomLevel))
-
-                            // Add markers for parks
-                            for (park in newLocationItems) {
-                                val lat = park.park.latitude?.toDoubleOrNull()
-                                val lon = park.park.longitude?.toDoubleOrNull()
-
-                                if (lat != null && lon != null) {
-                                    val marker = map.addMarker(
-                                        MarkerOptions()
-                                            .position(LatLng(lat, lon))
-                                            .title(park.park.fullName)
-                                    )
-                                    marker?.tag = park
-                                }
+                            if (lat != null && lon != null) {
+                                val parkLocation = LatLng(lat, lon)
+                                val marker = map.addMarker(
+                                    MarkerOptions()
+                                        .position(parkLocation)
+                                        .title(park.fullName)
+                                )
+                                marker?.tag = park
                             }
                         }
-                    }
-                    else
-                    {
-                        Toast.makeText(context, "No National Parks within your search radius", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(context, "No National Parks found in this state", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -420,6 +391,7 @@ class MapFragment : Fragment(),
             }
         })
     }
+
 
     private fun setupClickListeners() {
         with(binding) {
@@ -562,18 +534,15 @@ class MapFragment : Fragment(),
 
     // Function to calculate zoom level based on distance
     private fun getZoomLevelForDistance(distanceInMeters: Double): Float {
-        // Formula provides a reasonable zoom level based on distance
-        // Zoom levels: 1 = World, 5 = Landmass/continent, 10 = City, 15 = Streets, 20 = Buildings
         return when {
-            distanceInMeters >= 50000 -> 8f    // Max distance (50km)
-            distanceInMeters >= 40000 -> 9f
-            distanceInMeters >= 30000 -> 9.5f
-            distanceInMeters >= 20000 -> 10f
-            distanceInMeters >= 10000 -> 11f
-            distanceInMeters >= 5000 -> 12f
-            distanceInMeters >= 2000 -> 13f
-            distanceInMeters >= 1000 -> 14f
-            else -> 15f                        // Very close distance
+            distanceInMeters >= 160934 -> 7f    // 100 miles
+            distanceInMeters >= 80467 -> 8f     // 50 miles
+            distanceInMeters >= 40234 -> 9f     // 25 miles
+            distanceInMeters >= 20117 -> 10f    // 12.5 miles
+            distanceInMeters >= 10058 -> 11f    // 6.25 miles
+            distanceInMeters >= 5029 -> 12f     // 3.12 miles
+            distanceInMeters >= 2515 -> 13f     // 1.56 miles
+            else -> 14f
         }
     }
 
