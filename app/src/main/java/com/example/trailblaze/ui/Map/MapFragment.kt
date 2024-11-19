@@ -14,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.app.ActivityCompat
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.example.trailblaze.BuildConfig.PLACES_API_KEY
 import com.example.trailblaze.R
@@ -24,7 +23,6 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.*
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.AutocompletePrediction
@@ -35,14 +33,9 @@ import com.google.android.libraries.places.api.model.CircularBounds
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.kotlin.circularBounds
 import com.google.android.libraries.places.api.net.*
-import androidx.compose.material3.*
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.trailblaze.nps.ParksAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.example.trailblaze.ui.Map.MapBottomSheetAdapter
 import com.example.trailblaze.ui.parks.ParkDetailActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -50,6 +43,9 @@ import retrofit2.Response
 import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.Park
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Marker
 
 class MapFragment : Fragment(),
@@ -77,6 +73,8 @@ class MapFragment : Fragment(),
     lateinit var bottomSheetAdapter: MapBottomSheetAdapter
     lateinit var multiAutoCompleteTextView: MultiAutoCompleteTextView
     lateinit var autoFillAdapter: ArrayAdapter<String>
+    lateinit var userLocation: LatLng
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -85,7 +83,6 @@ class MapFragment : Fragment(),
 
         //Initialize the SharedPreferences
         sharedPreferences = requireContext().getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
-        val isMetricUnits = sharedPreferences.getBoolean("isMetricUnits", false)
 
         binding.clearMapsearchtext.setOnClickListener {
             binding.mapSearch.setText("")  // Clear the text
@@ -110,31 +107,22 @@ class MapFragment : Fragment(),
         return binding.root
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//
-//        // Get the latest user data
-//        currentUser = UserManager.getCurrentUser()
-//        val isMetricUnits = sharedPreferences.getBoolean("isMetricUnits", false)
-//
-//        // Calculate the current search radius based on user settings
-//        val searchRadius = if (isMetricUnits) {
-//            currentUser?.distance?.times(1000.0) ?: 10000.0  // Convert km to meters
-//        } else {
-//            currentUser?.distance?.times(1609.34) ?: 10000.0  // Convert miles to meters
-//        }.coerceAtMost(50000.0)
-//
-//        // Update current map zoom if map is initialized
-//        _map?.let { googleMap ->
-//            val currentCenter = googleMap.cameraPosition.target
-//            val newZoomLevel = getZoomLevelForDistance(searchRadius)
-//            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentCenter, newZoomLevel))
-//        }
-//    }
+    override fun onResume() {
+        super.onResume()
+
+        // Get the latest user data and configure search radius to meters
+        val searchRadius = userDistanceMeters()
+
+        // Update current map zoom if map is initialized
+        _map?.let { googleMap ->
+            val currentCenter = googleMap.cameraPosition.target
+            val newZoomLevel = getZoomLevelForDistance(searchRadius)
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentCenter, newZoomLevel))
+        }
+    }
 
     override fun onMapReady(googleMap: GoogleMap) {
         _map = googleMap
-
         // Configure map settings
         map.apply {
             uiSettings.isZoomControlsEnabled = true
@@ -145,40 +133,57 @@ class MapFragment : Fragment(),
                 true
             }
         }
-
         locationCheckAndRequest()
-        // Center on current location if permissions are granted
         if (ActivityCompat.checkSelfPermission(
                 thiscontext,
                 Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED &&
-            ActivityCompat.checkSelfPermission(
+            ) == PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(
                 thiscontext,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            map.isMyLocationEnabled = true // Shows the blue dot for current location
-
-            val placeRequest = FindCurrentPlaceRequest.builder(listOf(Place.Field.LAT_LNG)).build()
-            placesClient.findCurrentPlace(placeRequest).addOnSuccessListener { response ->
-                if (response.placeLikelihoods.isNotEmpty()) {
-                    val location = response.placeLikelihoods[0].place.location
-
-                    // Calculate zoom based on user's distance preference
-                    val isMetricUnits = sharedPreferences.getBoolean("isMetricUnits", false)
-                    val distanceInMeters = if (isMetricUnits) {
-                        currentUser?.distance?.times(1000.0) ?: 10000.0  // Convert km to meters
-                    } else {
-                        currentUser?.distance?.times(1609.34) ?: 10000.0  // Convert miles to meters
-                    }.coerceAtMost(50000.0)
-
-                    val zoomLevel = getZoomLevelForDistance(distanceInMeters)
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(location, zoomLevel))
-                }
+            Log.d("MapFragment", "Location permissions granted")
+            //get location and assign to userLocation val for kt scope to use for every function
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.context!!)
+            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                map.isMyLocationEnabled = true // Shows the blue dot for current location
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude,location.longitude),15f))
+                userLocation = LatLng(location.latitude,location.longitude)
             }
         }
+
     }
 
+
+    private fun userDistanceMeters() : Double{
+        // Get the latest user data
+        currentUser = UserManager.getCurrentUser()
+        val isMetricUnits = sharedPreferences.getBoolean("isMetricUnits", false)
+
+        // Calculate the current search radius based on user settings
+        val searchRadius = if (isMetricUnits) {
+            currentUser?.distance?.times(1000.0) ?: 10000.0  // Convert km to meters
+        } else {
+            currentUser?.distance?.times(1609.34) ?: 10000.0  // Convert miles to meters
+        }.coerceAtMost(50000.0)
+
+        return searchRadius
+    }
+
+    private fun parkWithinBounds(userLocation: LatLng, searchRadius : Double, parkLocation: LatLng): Boolean {
+
+        val searchRadiusLatLngRadius = searchRadius / 111111.1
+        val bounds = LatLngBounds(
+            //southwest corner
+            LatLng(userLocation.latitude - searchRadiusLatLngRadius,
+            userLocation.longitude - searchRadiusLatLngRadius),
+            //northeast corner
+            LatLng(userLocation.latitude + searchRadiusLatLngRadius,
+            userLocation.longitude + searchRadiusLatLngRadius))
+
+        return bounds.contains(parkLocation)
+    }
     private fun initializeViews() {
         multiAutoCompleteTextView = binding.mapSearch
         setupBottomSheetAdapter()
@@ -342,18 +347,31 @@ class MapFragment : Fragment(),
 
 
     private fun fetchParksAndPlaceMarkers(userState: String) {
-        val isMetricUnits = sharedPreferences.getBoolean("isMetricUnits", false)
         RetrofitInstance.api.getParksbyState(stateCode = userState).enqueue(object : Callback<NPSResponse> {
             override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
                 if (response.isSuccessful) {
                     val parksList = response.body()?.data ?: emptyList()
                     map.clear()
-                    val newLocationItems = parksList.map { LocationItem.ParkItem(it) }
+                    val beforeFilterItems = parksList.map { LocationItem.ParkItem(it) }
+
+                    userDistanceMeters()
+                    val newLocationItems : MutableList<LocationItem.ParkItem> = mutableListOf()
+                    beforeFilterItems.forEach { park ->
+                        if (park.park.latitude != "" || park.park.longitude != "" || !::userLocation.isInitialized) {
+                            if (parkWithinBounds(
+                                    userLocation, userDistanceMeters(),
+                                    LatLng(park.park.latitude!!.toDouble(), park.park.longitude!!.toDouble()))
+                            )
+                            {
+                                newLocationItems.add(park)
+                            }
+                        }
+                    }
                     locationItems.clear()
                     locationItems.addAll(newLocationItems)
                     bottomSheetAdapter.updateItems(locationItems)
 
-                    if (parksList.isNotEmpty()) {
+                    if (newLocationItems.isNotEmpty()) {
                         val firstPark = parksList[0]
                         val latitude = firstPark.latitude?.toDoubleOrNull()
                         val longitude = firstPark.longitude?.toDoubleOrNull()
@@ -361,12 +379,7 @@ class MapFragment : Fragment(),
                         if (latitude != null && longitude != null) {
                             val parkLocation = LatLng(latitude, longitude)
 
-                            // Get user's distance setting and convert to meters
-                            val distanceInMeters = if (isMetricUnits) {
-                                currentUser?.distance?.times(1000.0) ?: 10000.0
-                            } else {
-                                currentUser?.distance?.times(1609.34) ?: 10000.0
-                            }.coerceAtMost(50000.0)
+                            val distanceInMeters = userDistanceMeters()
 
                             // Calculate zoom level based on user's distance setting
                             val zoomLevel = getZoomLevelForDistance(distanceInMeters)
@@ -375,20 +388,24 @@ class MapFragment : Fragment(),
                             map.animateCamera(CameraUpdateFactory.newLatLngZoom(parkLocation, zoomLevel))
 
                             // Add markers for parks
-                            for (park in parksList) {
-                                val lat = park.latitude?.toDoubleOrNull()
-                                val lon = park.longitude?.toDoubleOrNull()
+                            for (park in newLocationItems) {
+                                val lat = park.park.latitude?.toDoubleOrNull()
+                                val lon = park.park.longitude?.toDoubleOrNull()
 
                                 if (lat != null && lon != null) {
                                     val marker = map.addMarker(
                                         MarkerOptions()
                                             .position(LatLng(lat, lon))
-                                            .title(park.fullName)
+                                            .title(park.park.fullName)
                                     )
                                     marker?.tag = park
                                 }
                             }
                         }
+                    }
+                    else
+                    {
+                        Toast.makeText(context, "No National Parks within your search radius", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -443,18 +460,6 @@ class MapFragment : Fragment(),
                         if (result.placeLikelihoods.isNotEmpty()) {
                             val userLocation = currentUser?.state ?: ""
                             if (userLocation != null) {
-                                currentUser = UserManager.getCurrentUser()
-                                // Convert the search radius based on unit setting
-                                var searchRadius = if (isMetricUnits) {
-                                    currentUser!!.distance!! * 1000.0  // Convert km to meters
-                                } else {
-                                    currentUser!!.distance!! * 1609.34  // Convert miles to meters
-                                }
-
-                                // Cap the radius if needed
-                                if (searchRadius > 50000.0) {
-                                    searchRadius = 50000.0
-                                }
                                 fetchParksAndPlaceMarkers(userLocation)
                             }
                         }
@@ -467,8 +472,6 @@ class MapFragment : Fragment(),
             nearbysearch.setOnClickListener {
                 Log.d("MapFragment", "Nearby search clicked")
                 locationCheckAndRequest()
-                // Get the metric/imperial preference
-                val isMetricUnits = sharedPreferences.getBoolean("isMetricUnits", false)
 
                 if (ActivityCompat.checkSelfPermission(
                         thiscontext,
@@ -486,33 +489,21 @@ class MapFragment : Fragment(),
                     placeResponse.addOnSuccessListener { result ->
                         Log.d("MapFragment", "Found current place, likelihoods size: ${result.placeLikelihoods.size}")
                         if (result.placeLikelihoods.isNotEmpty()) {
-                            val location = result.placeLikelihoods[0].place.location
-                            Log.d("MapFragment", "User location: ${location.latitude}, ${location.longitude}")
+                            Log.d("MapFragment", "User location: ${userLocation.latitude}, ${userLocation.longitude}")
 
                             currentUser = UserManager.getCurrentUser()
 
                             // Convert the distance based on the unit setting
-                            var radius = if (isMetricUnits) {
-                                // If metric, convert kilometers to meters
-                                currentUser!!.distance!! * 1000.0
-                            } else {
-                                // If imperial, convert miles to meters
-                                currentUser!!.distance!! * 1609.34
-                            }
-
-                            // Cap the radius at 50km (50000m)
-                            if (radius > 50000.0) {
-                                radius = 50000.0
-                            }
+                            val radius = userDistanceMeters()
                             Log.d("MapFragment", "Search radius: $radius meters")
 
                             // Calculate appropriate zoom level
                             val zoomLevel = getZoomLevelForDistance(radius)
 
                             // Apply the zoom level when moving camera
-                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(location, zoomLevel))
+                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(userLocation, zoomLevel))
 
-                            val circle: CircularBounds = circularBounds(location, radius)
+                            val circle: CircularBounds = circularBounds(userLocation, radius)
                             val searchNearbyRequest = SearchNearbyRequest.builder(
                                 circle, listOf(
                                     Place.Field.ID,
