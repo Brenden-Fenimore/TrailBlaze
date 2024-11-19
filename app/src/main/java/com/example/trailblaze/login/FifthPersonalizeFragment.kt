@@ -35,7 +35,7 @@ class FifthPersonalizeFragment : Fragment() {
             }
         }
 
-        view.findViewById<Button>(R.id.LaterBtn).setOnClickListener {
+        view.findViewById<Button>(R.id.contBtn).setOnClickListener {
             navigateToMainActivity()
         }
 

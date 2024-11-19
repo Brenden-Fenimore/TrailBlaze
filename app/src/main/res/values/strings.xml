@@ -434,4 +434,20 @@
     <string name="_0">0</string>
     <string name="pending_requests">Pending Requests</string>
     <string name="no_pending_requests">There are currently no pending friend requests.</string>
+
+    <!-- Messaging Strings-->
+
+    <string name="send">Send</string>
+    <string name="attachImage">Attach Image</string>
+    <string name="typeMessage">Type a message</string>
+    <string name="title_activity_inbox">InboxActivity</string>
+    <string name="inbox">Inbox</string>
+    <string name="createMessage">Create a message</string>
+    <string name="senderImage">Sender Image</string>
+    <string name="senderName">Sender Name</string>
+    <string name="searchFriends">Search Friends</string>
+    <string name="timeTemplate">11/18/2024 12:00 p.m.</string>
+    <string name="notifyWatchers">Notify Watchers</string>
+    <string name="watcherRank">Watcher Rank</string>
+    <string name="setupWatcher">Setup Watcher</string>
 </resources>
