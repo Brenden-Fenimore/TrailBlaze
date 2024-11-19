@@ -147,9 +147,14 @@ class MapFragment : Fragment(),
             //get location and assign to userLocation val for kt scope to use for every function
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.context!!)
             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-                map.isMyLocationEnabled = true // Shows the blue dot for current location
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude,location.longitude),15f))
-                userLocation = LatLng(location.latitude,location.longitude)
+                map.isMyLocationEnabled = true
+                val searchRadius = userDistanceMeters()
+                val zoomLevel = getZoomLevelForDistance(searchRadius)
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                    LatLng(location.latitude, location.longitude),
+                    zoomLevel
+                ))
+                userLocation = LatLng(location.latitude, location.longitude)
             }
         }
 
