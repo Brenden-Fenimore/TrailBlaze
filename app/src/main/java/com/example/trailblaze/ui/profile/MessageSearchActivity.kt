@@ -75,6 +75,7 @@ private lateinit var friendsRecyclerView: RecyclerView
         fetchUsers()
 
     }
+
     private fun fetchUsers() {
         val currentUserId = FirebaseAuth.getInstance().currentUser?.uid // Get the current user's ID
 
