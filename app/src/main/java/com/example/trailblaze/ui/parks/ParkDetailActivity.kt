@@ -370,6 +370,10 @@ class ParkDetailActivity : AppCompatActivity() {
                 // If the park is not in the bucket list, add it using arrayUnion to avoid duplicates
                 userDocRef.update("bucketListParks", FieldValue.arrayUnion(parkCode))
                     .addOnSuccessListener {
+
+                        // Show confetti when adding to favorites
+                        showConfetti()
+
                         // Display success message when the park is successfully added to the bucket list
                         Toast.makeText(this, "Added to bucket list", Toast.LENGTH_SHORT).show()
                     }
