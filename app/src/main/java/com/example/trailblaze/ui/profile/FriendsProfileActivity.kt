@@ -698,9 +698,16 @@ class FriendsProfileActivity : AppCompatActivity() {
         dialogBuilder.show()
     }
 
+    private fun updateFavoriteTrailsCount(count: Int) {
+        val favoriteTrailsTitle = findViewById<TextView>(R.id.favoriteTrailsHeader)
+        favoriteTrailsTitle.text = getString(R.string.userFavoriteTrails, count)
+    }
+
     private fun loadFavoriteParks() {
         firestore.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
+                val favoriteTrails = document.get("favoriteParks") as? List<String> ?: emptyList()
+                updateFavoriteTrailsCount(favoriteTrails.size)
                 if (document != null && document.exists()) {
                     val favoriteParksList = document.get("favoriteParks") as? List<String> ?: emptyList()
                     val locationItems = mutableListOf<LocationItem>()

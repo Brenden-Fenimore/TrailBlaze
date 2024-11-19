@@ -7,8 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trailblaze.R
 import com.example.trailblaze.databinding.FragmentFavoritesBinding
 import com.example.trailblaze.nps.Park
 import com.example.trailblaze.settings.SettingsScreenActivity
@@ -162,6 +164,10 @@ class FavoritesFragment : Fragment() {
 
         firestore.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
+
+                val favoriteTrails = document.get("favoriteParks") as? List<String> ?: emptyList()
+                updateFavoriteTrailsCount(favoriteTrails.size)
+
                 if (document != null && document.exists()) {
                     val favoriteParksList = document.get("favoriteParks") as? List<String> ?: emptyList()
                     val locationItems = mutableListOf<LocationItem>()
@@ -306,5 +312,10 @@ class FavoritesFragment : Fragment() {
         if (loaded == total) {
             bucketListAdapter.updateData(items)
         }
+    }
+
+    private fun updateFavoriteTrailsCount(count: Int) {
+        val favoriteTrailsTitle = view?.findViewById<TextView>(R.id.favoriteTrailsHeader)
+        favoriteTrailsTitle?.text = getString(R.string.userFavoriteTrails, count)
     }
 }

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -348,10 +349,19 @@ interface PhotoDeletionListener {
             dialogBuilder.show()
         }
 
+        private fun updateFavoriteTrailsCount(count: Int) {
+            val favoriteTrailsTitle = view?.findViewById<TextView>(R.id.favoriteTrailsHeader)
+            favoriteTrailsTitle?.text = getString(R.string.userFavoriteTrails, count)
+        }
+
         private fun fetchFavoriteParks() {
             val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
             firestore.collection("users").document(userId).get()
                 .addOnSuccessListener { document ->
+
+                    val favoriteTrails = document.get("favoriteParks") as? List<String> ?: emptyList()
+                    updateFavoriteTrailsCount(favoriteTrails.size)
+
                     if (document != null && document.exists()) {
                         Log.d("FavoritesFragment", "User document retrieved successfully.")
                         val favoriteParkCodes = document.get("favoriteParks") as? List<String> ?: emptyList()
