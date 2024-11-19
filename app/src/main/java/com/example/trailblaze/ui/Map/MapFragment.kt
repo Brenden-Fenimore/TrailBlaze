@@ -43,6 +43,8 @@ import retrofit2.Response
 import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.nps.NPSResponse
 import com.example.trailblaze.nps.Park
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Marker
 
@@ -72,6 +74,7 @@ class MapFragment : Fragment(),
     lateinit var multiAutoCompleteTextView: MultiAutoCompleteTextView
     lateinit var autoFillAdapter: ArrayAdapter<String>
     lateinit var userLocation: LatLng
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -124,27 +127,6 @@ class MapFragment : Fragment(),
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-         locationCheckAndRequest()
-                if (ActivityCompat.checkSelfPermission(
-                        thiscontext,
-                        Manifest.permission.ACCESS_FINE_LOCATION
-                    ) == PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(
-                        thiscontext,
-                        Manifest.permission.ACCESS_COARSE_LOCATION
-                    ) == PackageManager.PERMISSION_GRANTED
-                ) {
-                    Log.d("MapFragment", "Location permissions granted")
-                    val placeRequest = FindCurrentPlaceRequest.builder(mutableListOf(Place.Field.LOCATION)).build()
-                    val placeResponse = placesClient.findCurrentPlace(placeRequest)
-                    placeResponse.addOnSuccessListener { result ->
-                        Log.d("MapFragment", "Found current place, likelihoods size: ${result.placeLikelihoods.size}")
-                        if (result.placeLikelihoods.isNotEmpty()) {
-                            userLocation = result.placeLikelihoods[0].place.location!!
-                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(userLocation,15f))
-                        }
-                    }
-                }
         _map = googleMap
         // Configure map settings
         map.apply {
@@ -155,15 +137,25 @@ class MapFragment : Fragment(),
                 handleMarkerClick(marker)
                 true
             }
-
-            // If we have user's last known position, center there with proper zoom
-//            currentUser?.let { user ->
-//                user.state?.let { state ->
-//                    fetchParksAndPlaceMarkers(state)
-//                }
-//            }
         }
-
+        locationCheckAndRequest()
+        if (ActivityCompat.checkSelfPermission(
+                thiscontext,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(
+                thiscontext,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            Log.d("MapFragment", "Location permissions granted")
+            //get location and assign to userLocation val for kt scope to use for every function
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.context!!)
+            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude,location.longitude),15f))
+                userLocation = LatLng(location.latitude,location.longitude)
+            }
+        }
 
     }
 
@@ -501,8 +493,7 @@ class MapFragment : Fragment(),
                     placeResponse.addOnSuccessListener { result ->
                         Log.d("MapFragment", "Found current place, likelihoods size: ${result.placeLikelihoods.size}")
                         if (result.placeLikelihoods.isNotEmpty()) {
-                            val location = result.placeLikelihoods[0].place.location
-                            Log.d("MapFragment", "User location: ${location.latitude}, ${location.longitude}")
+                            Log.d("MapFragment", "User location: ${userLocation.latitude}, ${userLocation.longitude}")
 
                             currentUser = UserManager.getCurrentUser()
 
@@ -514,9 +505,9 @@ class MapFragment : Fragment(),
                             val zoomLevel = getZoomLevelForDistance(radius)
 
                             // Apply the zoom level when moving camera
-                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(location, zoomLevel))
+                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(userLocation, zoomLevel))
 
-                            val circle: CircularBounds = circularBounds(location, radius)
+                            val circle: CircularBounds = circularBounds(userLocation, radius)
                             val searchNearbyRequest = SearchNearbyRequest.builder(
                                 circle, listOf(
                                     Place.Field.ID,
