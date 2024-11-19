@@ -218,6 +218,10 @@ interface PhotoDeletionListener {
             if (userId != null) {
                 firestore.collection("users").document(userId).get()
                     .addOnSuccessListener { document ->
+
+                        val friendsList = document.get("friends") as? List<String> ?: emptyList()
+                        updateFriendsCount(friendsList.size)
+
                         if (document.exists()) {
                             val friendsIds = document.get("friends") as? List<String> ?: emptyList()
                             loadFriendsData(friendsIds)
@@ -497,6 +501,8 @@ interface PhotoDeletionListener {
                         // Update the adapter with the new photo URLs
                         photosAdapter.updatePhotos(newPhotoUrls)
 
+                        // Update the photo count dynamically
+                        updatePhotosCount(newPhotoUrls.size)
                     }
                     .addOnFailureListener { e ->
                         Log.w(TAG, "Error fetching photos", e)
@@ -504,7 +510,7 @@ interface PhotoDeletionListener {
             }
         }
 
-    private fun fetchLeaderboard() {
+        private fun fetchLeaderboard() {
         firestore.collection("users").get()
             .addOnSuccessListener { querySnapshot ->
                 val leaderboardEntries = mutableListOf<LeaderboardEntry>()
@@ -533,10 +539,11 @@ interface PhotoDeletionListener {
             }
     }
 
-    private fun updateLeaderboardRecyclerView(entries: List<LeaderboardEntry>) {
+        private fun updateLeaderboardRecyclerView(entries: List<LeaderboardEntry>) {
         val leaderboardAdapter = LeaderboardAdapter(entries)
         binding.leaderRecyclerView.adapter = leaderboardAdapter
     }
+
         override fun onPhotoDeleted(photoUrl: String) {
             val userId = FirebaseAuth.getInstance().currentUser?.uid
             if (userId != null) {
@@ -568,7 +575,15 @@ interface PhotoDeletionListener {
             }
         }
 
+        private fun updateFriendsCount(count: Int) {
+            val friendsTitle = view?.findViewById<TextView>(R.id.yourFriendsTitle) ?: return
+            friendsTitle.text = getString(R.string.friends, count)
+        }
 
+        private fun updatePhotosCount(count: Int) {
+            val photosTitle = view?.findViewById<TextView>(R.id.userPhotosTextView) ?: return
+            photosTitle.text = getString(R.string.userPhotos, count)
+        }
 
         override fun onResume() {
             super.onResume()

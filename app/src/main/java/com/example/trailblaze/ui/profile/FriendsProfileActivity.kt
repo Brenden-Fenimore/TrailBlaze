@@ -818,6 +818,8 @@ class FriendsProfileActivity : AppCompatActivity() {
                     }
                 }
                 photosAdapter.updatePhotos(newPhotoUrls)
+
+                updatePhotosCount(newPhotoUrls.size)
             }
             .addOnFailureListener { e ->
                 Log.e("FriendsProfileActivity", "Error fetching photos", e)
@@ -985,5 +987,10 @@ class FriendsProfileActivity : AppCompatActivity() {
                 })
             }, delay)
         }
+    }
+
+    private fun updatePhotosCount(count: Int) {
+        val photosTitle = findViewById<TextView>(R.id.photosHeader)
+        photosTitle.text = getString(R.string.userPhotos, count)
     }
 }
