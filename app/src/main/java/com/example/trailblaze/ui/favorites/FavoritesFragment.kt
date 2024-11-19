@@ -110,7 +110,12 @@ class FavoritesFragment : Fragment() {
 
         // Access the Firestore database to get the user's document
         firestore.collection("users").document(userId).get()
+
             .addOnSuccessListener { document ->
+
+                val yourWatcherList = document.get("favoriteFriends") as? List<String> ?: emptyList()
+                updateYourWatchersCount(yourWatcherList.size)
+
                 // Check if the document exists and is not null
                 if (document != null && document.exists()) {
                     // Retrieve the list of favorite friend IDs from the document
@@ -326,6 +331,11 @@ class FavoritesFragment : Fragment() {
     private fun updateBucketListTrailsCount(count: Int) {
         val bucketListTrailsTitle = view?.findViewById<TextView>(R.id.bucketListTrailsTitle)
         bucketListTrailsTitle?.text = getString(R.string.bucketListTrails, count)
+    }
+
+    private fun updateYourWatchersCount(count: Int) {
+        val yourWatcherTitle = view?.findViewById<TextView>(R.id.favoriteFriendsTitle)
+        yourWatcherTitle?.text = getString(R.string.favoriteFriends, count)
     }
 
 }

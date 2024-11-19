@@ -270,7 +270,7 @@
     <string name="updateProfile">Update Profile</string>
     <string name="suggestedTrailsMiles">Suggested Trails: %1$d miles</string>
     <string name="bucketListTrails">Bucket List Trails (%1$d)</string>
-    <string name="favoriteFriends">Your Watchers</string>
+    <string name="favoriteFriends">Your Watchers (%1$d)</string>
     <string name="rangeMiles">Range</string>
     <string name="uploadPhoto">Upload Photo</string>
     <string name="deleteButton">Delete Button</string>
