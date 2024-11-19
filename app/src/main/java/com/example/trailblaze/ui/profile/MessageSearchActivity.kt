@@ -50,7 +50,7 @@ private lateinit var friendsRecyclerView: RecyclerView
 
         searchButton.setOnClickListener {
             val searchTerm = searchInput.text.toString()
-            if (searchTerm.isBlank() || searchTerm.length < 3) {
+            if (searchTerm.isEmpty() || searchTerm.length < 3) {
                 Log.e("MessageSearchActivity", "Invalid username")
                 return@setOnClickListener
             }else{
@@ -108,5 +108,7 @@ private lateinit var friendsRecyclerView: RecyclerView
             }
     }
 
-    private fun setupSearchRecyclerView(searchTerm: String) {}
+    private fun setupSearchRecyclerView(searchTerm: String) {
+
+    }
 }
