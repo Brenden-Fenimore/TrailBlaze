@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -74,6 +75,7 @@ interface PhotoDeletionListener {
 
         private val photoUrls = mutableListOf<String>()
         private lateinit var photosAdapter: PhotosAdapter
+
 
         // Define all possible badges
         private val allBadges = listOf(
@@ -565,6 +567,8 @@ interface PhotoDeletionListener {
                     }
             }
         }
+
+
 
         override fun onResume() {
             super.onResume()

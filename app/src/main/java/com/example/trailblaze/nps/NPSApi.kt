@@ -23,4 +23,10 @@ interface NPSApi {
         @Query("q") searchTerm: String? = null,
         @Query("api_key") apiKey: String = "cQvtQCUyKgWjZQHWMJsXwXjDs7ZALBbUKTFgC9As"
     ): Call<NPSResponse>
+
+    @GET("parks")
+    fun getParksbyState(
+        @Query("stateCode") stateCode: String? = null,
+        @Query("api_key") apiKey: String = "cQvtQCUyKgWjZQHWMJsXwXjDs7ZALBbUKTFgC9As"
+    ): Call<NPSResponse>
 }

@@ -61,5 +61,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp" />
 
+                <TextView
+                    android:id="@+id/noPendingRequestsTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/no_pending_requests"
+                    android:textSize="18sp"
+                    android:textColor="?attr/colorPrimary"
+                    android:gravity="center"
+                    android:visibility="gone" />
+
         </LinearLayout>
 </RelativeLayout>

@@ -165,8 +165,7 @@
     <string name="wildlifewatcher">Wildlife Watcher: Complete a trail with a Wildlife activity.</string>
     <string name="photographer">Photographer: Upload a picture to your TrailBlaze.</string>
     <string name="goalsetter">Goal Setter: Add your badges to your sash.</string>
-    <string name="badgecollector">Badge Collector: Earn badges for completing specific challenges or achievements.
-    </string>
+    <string name="badgecollector">Badge Collector: Earn badges for completing specific challenges or achievements.</string>
     <string name="leaderboardtip">Leaderboard Climber: Get at least 2 badges.</string>
 
     <!-- Park information-->
@@ -422,34 +421,17 @@
     <string name="watcherBadgeDetails">This badge is awarded for exceptional response time to your Blazers messages. You
         have shown time and time again that you are there for your Blazer when they need you most!! Congratulations!!
     </string>
-    <string name="setupWatcher">Would you like to be designated as a Watcher for your TrailBlaze friends?</string>
-    <string name="watcherDescription">Watchers are trusted contacts that can monitor a TrailBlazer\'s journey in
-        real-time to help users stay safe and connected.
-    </string>
+    <string name="setupWatchers">Would you like to designate Watcher(s) for your account?</string>
+    <string name="watcherDescription">Watchers are trusted contacts that can monitor your journey in real-time to stay safe and connected.</string>
     <string name="Later">Later</string>
     <string name="Yes">Yes</string>
-    <string name="blazer">TrailBlaze Username</string>
+    <string name="blazer"> TrailBlaze Username</string>
     <string name="watcherPhoto">Watcher Member Photo</string>
     <string name="watcherBadge">Watcher Badges</string>
-    <string name="watcherMemPhoto">Watcher member profile photo</string>
+    <string name="watcherMemPhoto"> Watcher member profile photo</string>
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
     <string name="_0">0</string>
     <string name="pending_requests">Pending Requests</string>
-    <string name="notifyWatchers">Notify Watchers</string>
-    <string name="watcherRank">Watcher Rank</string>
-
-
-    <!-- Messaging Strings-->
-
-    <string name="send">Send</string>
-    <string name="attachImage">Attach Image</string>
-    <string name="typeMessage">Type a message</string>
-    <string name="title_activity_inbox">InboxActivity</string>
-    <string name="inbox">Inbox</string>
-    <string name="createMessage">Create a message</string>
-    <string name="senderImage">Sender Image</string>
-    <string name="senderName">Sender Name</string>
-    <string name="searchFriends">Search Friends</string>
-    <string name="timeTemplate">11/18/2024 12:00 p.m.</string>
+    <string name="no_pending_requests">There are currently no pending friend requests.</string>
 </resources>

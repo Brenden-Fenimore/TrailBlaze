@@ -6,6 +6,9 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.InputFilter
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.example.trailblaze.R
@@ -71,7 +74,7 @@ class EditProfileFragment : Fragment() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         storageReference = FirebaseStorage.getInstance().reference.child("profile_pictures")
 
-
+        setupStateEditText()
 
         seekBar = view.findViewById(R.id.seekBar)
         selectedValueTextView = view.findViewById(R.id.range)
@@ -110,6 +113,35 @@ class EditProfileFragment : Fragment() {
         // Check and update the SeekBar label when the fragment resumes
         val isMetric = sharedPreferences.getBoolean("isMetricUnits", true)
         updateSeekBarLabel(binding.seekBar.progress) // Update label based on current SeekBar progress
+    }
+
+    private fun setupStateEditText() {
+        binding.editState.filters = arrayOf(InputFilter.LengthFilter(2))
+
+        binding.editState.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                if (s != null && !s.toString().isEmpty()) {
+                    val uppercase = s.toString().uppercase()
+                    if (uppercase != s.toString()) {
+                        binding.editState.setText(uppercase)
+                        binding.editState.setSelection(uppercase.length)
+                    }
+                }
+            }
+        })
+    }
+
+    private fun validateState(): Boolean {
+        val stateText = binding.editState.text.toString()
+        if (stateText.length != 2) {
+            binding.editState.error = "State must be 2 letters"
+            return false
+        }
+        return true
     }
 
     private fun setupSpinners() {
@@ -159,27 +191,43 @@ class EditProfileFragment : Fragment() {
     }
 
     private fun setupSeekBarListener() {
-        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                selectedFilterValue = progress.toDouble()
-                updateSeekBarLabel(progress)
-            }
+        seekBar.apply {
+            max = 50  // Maximum distance in km/miles
+            progress = 10  // Default value
 
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
+            setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                    // Ensure minimum value of 1
+                    val actualProgress = if (progress < 1) 1 else progress
+                    selectedFilterValue = actualProgress.toDouble()
+                    updateSeekBarLabel(actualProgress)
+                }
+
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+            })
+        }
     }
 
     private fun updateSeekBarLabel(progress: Int) {
-        // Check if metric units are selected
         val isMetric = sharedPreferences.getBoolean("isMetricUnits", true)
-
-        // Update the TextView with the current progress/value of the SeekBar
-        selectedValueTextView.text = if (isMetric) {
-            "${progress} km" // Assuming the progress represents kilometers
+        val distance = if (isMetric) {
+            "$progress km"  // Metric (kilometers)
         } else {
-            "${(progress * 0.621371).toInt()} miles" // Convert to miles if imperial
+            "${(progress * 0.621371).toInt()} miles"  // Imperial (miles)
         }
+
+        // Add zoom level reference
+        val zoomLevel = when (progress) {
+            in 1..2 -> "Street level view"
+            in 3..5 -> "Neighborhood view"
+            in 6..10 -> "City view"
+            in 11..20 -> "Regional view"
+            in 21..35 -> "State view"
+            else -> "Wide area view"
+        }
+
+        selectedValueTextView.text = "$distance ($zoomLevel)"
     }
 
     private fun loadUserProfile() {
@@ -374,18 +422,53 @@ class EditProfileFragment : Fragment() {
         firestore.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
-                    // Retrieve each visibility setting from Firebase and set the switch states
-                    binding.leaderboardSwitch.isChecked = document.getBoolean("leaderboardVisible") ?: false
-                    binding.photosSwitch.isChecked = document.getBoolean("photosVisible") ?: false
-                    binding.favoritetrailsSwitch.isChecked = document.getBoolean("favoriteTrailsVisible") ?: false
-                    binding.watcherSwitch.isChecked = document.getBoolean("watcherVisible") ?: false
-                    binding.sharelocationSwitch.isChecked = document.getBoolean("shareLocationVisible") ?: false
+                    val isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
+
+                    if (isPrivateAccount) {
+                        // If account is private, set all visibility switches to false
+                        binding.leaderboardSwitch.isChecked = false
+                        binding.photosSwitch.isChecked = false
+                        binding.favoritetrailsSwitch.isChecked = false
+                        binding.watcherSwitch.isChecked = false
+                        binding.sharelocationSwitch.isChecked = false
+
+                        // Update these values in Firestore
+                        updateAllVisibilitySettings(false)
+                    } else {
+                        // Load normal visibility settings if account is public
+                        binding.leaderboardSwitch.isChecked = document.getBoolean("leaderboardVisible") ?: false
+                        binding.photosSwitch.isChecked = document.getBoolean("photosVisible") ?: false
+                        binding.favoritetrailsSwitch.isChecked = document.getBoolean("favoriteTrailsVisible") ?: false
+                        binding.watcherSwitch.isChecked = document.getBoolean("watcherVisible") ?: false
+                        binding.sharelocationSwitch.isChecked = document.getBoolean("shareLocationVisible") ?: false
+                    }
                 }
             }
             .addOnFailureListener { exception ->
                 Log.e("EditProfileFragment", "Error loading visibility settings", exception)
             }
     }
+
+    private fun updateAllVisibilitySettings(visible: Boolean) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val updates = hashMapOf(
+            "leaderboardVisible" to visible,
+            "photosVisible" to visible,
+            "favoriteTrailsVisible" to visible,
+            "watcherVisible" to visible,
+            "shareLocationVisible" to visible
+        )
+
+        firestore.collection("users").document(userId)
+            .update(updates as Map<String, Any>)
+            .addOnSuccessListener {
+                Log.d("EditProfileFragment", "All visibility settings updated successfully")
+            }
+            .addOnFailureListener { exception ->
+                Log.e("EditProfileFragment", "Error updating visibility settings", exception)
+            }
+    }
+
 }
 
 

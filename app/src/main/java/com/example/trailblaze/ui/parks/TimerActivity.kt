@@ -379,8 +379,15 @@ private fun pullFavoriteFriends(onComplete: (List<Friends>) -> Unit) {
             // Reference to the user's document in Firestore
             val userDocRef = firestore.collection("users").document(userId)
 
+            // Use the correct park name based on whether it's a Place or NPS park
+            val finalParkName = when {
+                !placeId.isNullOrEmpty() -> locationName
+                parkCode.isNotEmpty() -> parkName  // Use parkName for NPS parks
+                else -> "Unknown Location"
+            }
+
             val finalTimeRecord = TimeRecord(
-                parkName = locationName,
+                parkName = finalParkName,  // Use the determined park name
                 elapsedTime = timeRecord.elapsedTime,
                 imageUrl = parkImageUrl,
                 parkCode = if (!placeId.isNullOrEmpty()) placeId!! else timeRecord.parkCode,
@@ -390,8 +397,6 @@ private fun pullFavoriteFriends(onComplete: (List<Friends>) -> Unit) {
                 placeId = placeId
             )
 
-
-            // Log the final record being saved
             Log.d("TimerActivity", "Attempting to save finalTimeRecord: " +
                     "parkName=${finalTimeRecord.parkName}, " +
                     "parkCode=${finalTimeRecord.parkCode}, " +

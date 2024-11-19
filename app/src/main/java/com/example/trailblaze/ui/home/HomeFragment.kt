@@ -167,7 +167,11 @@ class HomeFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
-        fetchUserState() // Fetch the user state to update parks
+        // Refresh all counters and data when returning to the fragment
+        fetchPendingRequestsAndUpdateCounter()
+        fetchNotificationsCounter()
+        fetchUserState()
+        fetchTimeRecords()
     }
 
     // Function to update the greeting message based on the current time of day
@@ -276,7 +280,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun fetchParksByState(userState: String) {
-        RetrofitInstance.api.getParksbyQuery(userState).enqueue(object : Callback<NPSResponse> {
+        RetrofitInstance.api.getParksbyState(userState).enqueue(object : Callback<NPSResponse> {
             override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
                 if (response.isSuccessful) {
                     parksList = response.body()?.data ?: emptyList()
@@ -377,30 +381,32 @@ class HomeFragment : Fragment() {
     // Fetches the list of notifications for the current user from Firestore,
     // then updates the notification counter displayed on the homepage.
     private fun fetchNotificationsCounter() {
-        // Get the current user's ID; if it's null (not logged in), return early
         val currentUserId = auth.currentUser?.uid ?: return
 
-        // Retrieve the user's document from Firestore to access notifications
         firestore.collection("users").document(currentUserId).get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
-                    // Get the notifications list, or default to an empty list if not present
-                    val notificationList = document.get("pendingNotifications") as? List<String> ?: emptyList()
-                    // Reference to the counter TextView element
-                    val counterTextView = binding.notificationCounter
-                    // If there are no notifications, hide the counter badge
-                    if (notificationList.isEmpty()) {
-                        counterTextView.visibility = View.GONE
+                    // Check if user wants to receive notifications
+                    val receiveNotifications = document.getBoolean("receiveNotifications") ?: true
+
+                    if (receiveNotifications) {
+                        val notificationList = document.get("pendingNotifications") as? List<String> ?: emptyList()
+                        val counterTextView = binding.notificationCounter
+
+                        if (notificationList.isEmpty()) {
+                            counterTextView.visibility = View.GONE
+                        } else {
+                            counterTextView.text = notificationList.size.toString()
+                            counterTextView.visibility = View.VISIBLE
+                        }
                     } else {
-                        // Set the counter to the size of the notifications list and make it visible
-                        counterTextView.text = notificationList.size.toString()
-                        counterTextView.visibility = View.VISIBLE
+                        // Hide notification counter if notifications are disabled
+                        binding.notificationCounter.visibility = View.GONE
                     }
                 }
             }
             .addOnFailureListener { exception ->
-                // Log an error message if fetching the notifications fails
-                Log.e("HomeFragment", "Error fetching pending requests", exception)
+                Log.e("HomeFragment", "Error fetching notifications", exception)
             }
     }
 

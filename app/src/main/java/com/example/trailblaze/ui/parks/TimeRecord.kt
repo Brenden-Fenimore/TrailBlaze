@@ -9,5 +9,4 @@ data class TimeRecord(
     val date: String,
     val place: Boolean = false,
     val placeId: String? = null,
-    val placePhotoReference: String? = null  // Add this for Places API photo reference
 )
