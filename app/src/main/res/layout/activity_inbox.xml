@@ -33,7 +33,7 @@
 
     <ImageButton
             android:id="@+id/createMessage"
-            android:layout_width="50dp"
+            android:layout_width="49dp"
             android:layout_height="50dp"
             android:contentDescription="@string/createMessage"
             android:src="@drawable/create_message_icon"
