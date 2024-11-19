@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.example.trailblaze.MainActivity
 import com.example.trailblaze.R
+import com.example.trailblaze.databinding.ActivityInboxBinding
 import com.example.trailblaze.databinding.ActivityWatcherProfileBinding
 import com.example.trailblaze.firestore.ImageLoader
 import com.example.trailblaze.firestore.ImageLoader.loadProfilePicture
@@ -27,8 +28,8 @@ import com.google.firebase.storage.StorageReference
 
 class WatcherProfile : AppCompatActivity() {
 
-    private var _binding: ActivityWatcherProfileBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: ActivityWatcherProfileBinding
+ //   private val binding get() = _binding!!
 
     private var firestore = FirebaseFirestore.getInstance()
     private val storage = FirebaseStorage.getInstance()
@@ -44,7 +45,8 @@ class WatcherProfile : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_watcher_profile)
+        binding = ActivityWatcherProfileBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // Initialize firebase
         auth = FirebaseAuth.getInstance()
@@ -56,10 +58,10 @@ class WatcherProfile : AppCompatActivity() {
         // Initialize views
         watcherName = findViewById(R.id.watcherName)
         watcherProfilePicture = findViewById(R.id.watcherProfilePicture)
-        chevronLeftButton = findViewById(R.id.chevron_left)
+//        chevronLeftButton = findViewById(R.id.chevron_left)
 
         // Back button listener
-        chevronLeftButton.setOnClickListener {
+        binding.chevronLeft.setOnClickListener {
             onBackPressed()
         }
 

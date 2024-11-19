@@ -20,7 +20,7 @@
     <ImageButton
             android:layout_width="49dp"
             android:layout_height="50dp"
-            android:id="@+id/chevron_left"
+            android:id="@+id/chevronLeft"
             android:src="@drawable/chevron_left"
             android:contentDescription="@string/backButton"
             android:tint="#CDEDA3"
