@@ -328,6 +328,12 @@ class HomeFragment : Fragment() {
 
         firestore.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
+
+                // Retrieve the completed parks list
+                val completedParksList = document.get("completedParks") as? List<String> ?: emptyList()
+                // Update the count dynamically
+                updateCompletedParksCount(completedParksList.size)
+
                 if (document.exists()) {
                     val timeRecordsData = document.get("timeRecords") as? List<Map<String, Any>>
                     val timeRecords = timeRecordsData?.mapNotNull { record ->
@@ -426,6 +432,10 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun updateCompletedParksCount(count: Int) {
+        val completedParksTitle = view?.findViewById<TextView>(R.id.timeRecords)
+        completedParksTitle?.text = getString(R.string.homepage_time_records, count)
+    }
 
     override fun onDestroyView()
     {

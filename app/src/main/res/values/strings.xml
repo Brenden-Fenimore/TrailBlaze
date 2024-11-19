@@ -182,8 +182,8 @@
     <!-- user variables-->
     <string name="homepage_welcome_user">Good Afternoon,</string>
     <string name="homepage_searchbar_hint">Search</string>
-    <string name="homepage_nearby_trails">Top parks nearby:</string>
-    <string name="homepage_time_records">Completed Parks:</string>
+    <string name="homepage_nearby_trails">Top parks nearby</string>
+    <string name="homepage_time_records">Completed Parks (%1$d)</string>
     <string name="homepage_friends">Hike with TrailBlazers!</string>
 
     <string name="locationIcon">Location Icon</string>

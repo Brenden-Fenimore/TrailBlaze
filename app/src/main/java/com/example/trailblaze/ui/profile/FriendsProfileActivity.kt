@@ -829,6 +829,12 @@ class FriendsProfileActivity : AppCompatActivity() {
     private fun fetchTimeRecordsForFriend(friendId: String) {
         firestore.collection("users").document(friendId).get()
             .addOnSuccessListener { document ->
+
+                // Fetch the completed parks list from Firestore
+                val completedParksList = document.get("completedParks") as? List<String> ?: emptyList()
+                // Update the completed parks count
+                updateCompletedParksCount(completedParksList.size)
+
                 if (document != null && document.exists()) {
                     val timeRecordsData = document.get("timeRecords") as? List<Map<String, Any>>
                     val timeRecords = timeRecordsData?.map { record ->
@@ -993,4 +999,10 @@ class FriendsProfileActivity : AppCompatActivity() {
         val photosTitle = findViewById<TextView>(R.id.photosHeader)
         photosTitle.text = getString(R.string.userPhotos, count)
     }
+
+    private fun updateCompletedParksCount(count: Int) {
+        val completedParksTitle = findViewById<TextView>(R.id.completedParksHeader)
+        completedParksTitle?.text = getString(R.string.homepage_time_records, count)
+    }
+
 }
