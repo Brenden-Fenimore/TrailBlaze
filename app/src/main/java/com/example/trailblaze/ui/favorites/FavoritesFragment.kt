@@ -255,6 +255,10 @@ class FavoritesFragment : Fragment() {
 
         firestore.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
+
+                val bucketList = document.get("bucketListParks") as? List<String> ?: emptyList()
+                updateBucketListTrailsCount(bucketList.size)
+
                 if (document != null && document.exists()) {
                     val bucketListParksList = document.get("bucketListParks") as? List<String> ?: emptyList()
                     val locationItems = mutableListOf<LocationItem>()
@@ -318,4 +322,10 @@ class FavoritesFragment : Fragment() {
         val favoriteTrailsTitle = view?.findViewById<TextView>(R.id.favoriteTrailsHeader)
         favoriteTrailsTitle?.text = getString(R.string.userFavoriteTrails, count)
     }
+
+    private fun updateBucketListTrailsCount(count: Int) {
+        val bucketListTrailsTitle = view?.findViewById<TextView>(R.id.bucketListTrailsTitle)
+        bucketListTrailsTitle?.text = getString(R.string.bucketListTrails, count)
+    }
+
 }

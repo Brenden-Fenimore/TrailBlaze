@@ -269,7 +269,7 @@
     <string name="userShareLocationSwitch">Share Location</string>
     <string name="updateProfile">Update Profile</string>
     <string name="suggestedTrailsMiles">Suggested Trails: %1$d miles</string>
-    <string name="bucketListTrails">Bucket List Trails</string>
+    <string name="bucketListTrails">Bucket List Trails (%1$d)</string>
     <string name="favoriteFriends">Your Watchers</string>
     <string name="rangeMiles">Range</string>
     <string name="uploadPhoto">Upload Photo</string>
