@@ -113,11 +113,6 @@ class MapFragment : Fragment(),
         // Get the latest user data and configure search radius to meters
         val searchRadius = userDistanceMeters()
 
-        // If user state exists, fetch parks with updated zoom level
-//        currentUser?.state?.let { userState ->
-//            fetchParksAndPlaceMarkers(userState)
-//        }
-
         // Update current map zoom if map is initialized
         _map?.let { googleMap ->
             val currentCenter = googleMap.cameraPosition.target
@@ -152,6 +147,7 @@ class MapFragment : Fragment(),
             //get location and assign to userLocation val for kt scope to use for every function
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.context!!)
             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                map.isMyLocationEnabled = true // Shows the blue dot for current location
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude,location.longitude),15f))
                 userLocation = LatLng(location.latitude,location.longitude)
             }
