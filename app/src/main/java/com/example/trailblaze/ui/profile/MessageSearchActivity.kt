@@ -111,10 +111,16 @@ private lateinit var friendAdapter: FriendAdapter
     }
 
     private fun openMessagingFragment(friendUserId: String, friendUsername: String) {
-        val intent = Intent(this, MessagingActivity::class.java).apply {
-            putExtra("recipientId", friendUserId)
-            putExtra("recipientName", friendUsername)
+        val messagingFragment = MessagingActivity().apply {
+            arguments = Bundle().apply {
+                putString("recipientId", friendUserId)
+                putString("recipientName", friendUsername)
+            }
         }
-        startActivity(intent)
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, messagingFragment) // Replace `fragmentContainer` with the correct container ID
+            .addToBackStack(null) // Optional: Add to back stack for navigation
+            .commit()
     }
 }

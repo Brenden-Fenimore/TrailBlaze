@@ -59,7 +59,7 @@
             android:layout_marginTop="18dp"
             android:layout_marginStart="9dp"
             android:elevation="1dp"
-            android:background="@color/md_theme_errorContainer"
+            android:background="@color/md_theme_primaryFixed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/searchHeader"
             app:layout_constraintEnd_toEndOf="parent"
@@ -92,5 +92,7 @@
             app:layout_constraintTop_toBottomOf="@id/recipientSearch"
             android:elevation="4dp"
             android:layout_margin="18dp"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

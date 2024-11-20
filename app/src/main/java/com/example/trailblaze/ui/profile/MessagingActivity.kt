@@ -57,6 +57,16 @@ class MessagingActivity : Fragment() {
     ): View {
         val view = inflater.inflate(R.layout.fragment_messaging, container, false)
 
+        // Retrieve arguments
+        selectedFriendId = arguments?.getString("selectedFriendId")
+        val selectedFriendName = arguments?.getString("selectedFriendName")
+
+        if (selectedFriendId == null) {
+            Log.e("MessagingFragment", "Friend ID is null")
+        } else {
+            Log.d("MessagingFragment", "Chatting with Friend ID: $selectedFriendId, Name: $selectedFriendName")
+        }
+
         // Initialize views
         backButton = view.findViewById(R.id.backButton)
         attachImageButton = view.findViewById(R.id.attachImageButton)
@@ -73,7 +83,7 @@ class MessagingActivity : Fragment() {
 
 
         // Get selected friend ID (passed from previous screen via arguments)
-        selectedFriendId = arguments?.getString("selectedFriendId")
+      //  selectedFriendId = arguments?.getString("selectedFriendId")
 
         // Populate messages
         fetchMessages()
