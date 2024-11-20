@@ -43,6 +43,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 import com.example.trailblaze.watcherFeature.WatcherMemberList
+import java.text.SimpleDateFormat
 
 interface PhotoDeletionListener {
     fun onPhotoDeleted(deletedPhotoUrl: String)
@@ -444,7 +445,12 @@ interface PhotoDeletionListener {
             val userId = FirebaseAuth.getInstance().currentUser?.uid
             if (userId != null) {
                 val firestore = FirebaseFirestore.getInstance()
-                val photoData = hashMapOf("url" to photoUrl, "timestamp" to FieldValue.serverTimestamp())
+
+                val photoData = hashMapOf(
+                    "url" to photoUrl,
+                    "timestamp" to FieldValue.serverTimestamp(),
+                    "uploadDate" to FieldValue.serverTimestamp()
+                )
 
             firestore.collection("users")
                 .document(userId)

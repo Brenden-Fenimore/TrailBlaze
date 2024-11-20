@@ -192,7 +192,7 @@ class EditProfileFragment : Fragment() {
 
     private fun setupSeekBarListener() {
         seekBar.apply {
-            max = 50  // Maximum distance in km/miles
+            max = 100  // Updated to match XML layout max value
             progress = 10  // Default value
 
             setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -212,18 +212,18 @@ class EditProfileFragment : Fragment() {
     private fun updateSeekBarLabel(progress: Int) {
         val isMetric = sharedPreferences.getBoolean("isMetricUnits", true)
         val distance = if (isMetric) {
-            "$progress km"  // Metric (kilometers)
+            "${(progress * 1.60934).toInt()} km"  // Convert miles to km
         } else {
-            "${(progress * 0.621371).toInt()} miles"  // Imperial (miles)
+            "$progress miles"  // Direct miles value
         }
 
-        // Add zoom level reference
+        // Updated zoom level ranges for 100-mile scale
         val zoomLevel = when (progress) {
-            in 1..2 -> "Street level view"
-            in 3..5 -> "Neighborhood view"
-            in 6..10 -> "City view"
-            in 11..20 -> "Regional view"
-            in 21..35 -> "State view"
+            in 1..10 -> "Street level view"
+            in 11..25 -> "Neighborhood view"
+            in 26..50 -> "City view"
+            in 51..75 -> "Regional view"
+            in 76..90 -> "State view"
             else -> "Wide area view"
         }
 
@@ -346,6 +346,9 @@ class EditProfileFragment : Fragment() {
     private fun updateUserProfile() {
         val userId = auth.currentUser?.uid ?: return
 
+        if (!validateState()) {
+            return
+        }
         // Collect updated profile data from input fields
         val updatedUserData = mapOf(
             "username" to binding.editUsername.text.toString(),

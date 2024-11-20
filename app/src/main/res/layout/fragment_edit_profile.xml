@@ -444,6 +444,7 @@
                 android:layout_gravity="center"
                 android:layout_width="305dp"
                 android:layout_height="wrap_content"
+                android:max="100"
                 android:id="@+id/seekBar"/>
         <TextView
                 android:layout_gravity="center_horizontal"
