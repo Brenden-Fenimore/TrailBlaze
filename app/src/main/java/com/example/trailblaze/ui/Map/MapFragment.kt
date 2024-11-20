@@ -398,7 +398,7 @@ class MapFragment : Fragment(),
                                             .position(LatLng(lat, lon))
                                             .title(park.park.fullName)
                                     )
-                                    marker?.tag = park
+                                    marker?.tag = park.park
                                 }
                             }
                         }
