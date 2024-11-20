@@ -10,6 +10,7 @@ import com.example.trailblaze.databinding.ActivityMainBinding
 import com.example.trailblaze.login.LoginActivity
 import com.google.android.libraries.places.api.Places
 import com.google.firebase.firestore.FirebaseFirestore
+import com.example.trailblaze.BuildConfig
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,7 +22,6 @@ class MainActivity : AppCompatActivity() {
 
         // Hide the ActionBar
         supportActionBar?.hide()
-
         // Initialize Places API
         Places.initialize(applicationContext, BuildConfig.PLACES_API_KEY)
         // Check login status
@@ -48,5 +48,4 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-
 }
