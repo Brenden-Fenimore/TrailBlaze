@@ -68,13 +68,10 @@ class FriendsProfileActivity : AppCompatActivity() {
     private val photoUrls = mutableListOf<String>()
 
     private lateinit var favoritesRecyclerView: RecyclerView
-    private var favoriteParks: MutableList<Park> = mutableListOf()
 
     private lateinit var timeRecordsRecyclerView: RecyclerView
     private lateinit var timeRecordAdapter: TimeRecordAdapter
     private lateinit var favoritesAdapter: FavoritesAdapter
-
-    private val apiKey = PLACES_API_KEY
 
     // Define all possible badges
     private val allBadges = listOf(
