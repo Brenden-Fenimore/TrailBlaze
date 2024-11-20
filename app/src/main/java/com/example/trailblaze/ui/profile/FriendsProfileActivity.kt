@@ -102,11 +102,6 @@ class FriendsProfileActivity : AppCompatActivity() {
             fetchCurrentUserDifficulty()
         }
 
-        // Watcher Member Click Listener
-        binding.watcherMember.setOnClickListener{
-        setContentView(R.layout.activity_watcher_profile)
-        }
-
         // Initialize the RecyclerView for friends in common
         friendsInCommonList = mutableListOf()
         friendsInCommonAdapter = FriendAdapter(friendsInCommonList) { user ->
@@ -296,59 +291,93 @@ class FriendsProfileActivity : AppCompatActivity() {
         val currentUserRef = firestore.collection("users").document(currentUserId)
         val friendRef = firestore.collection("users").document(friendId)
 
+        // First check if the friend is a watcher member
+        friendRef.get().addOnSuccessListener { friendDoc ->
+            val isWatcherMember = friendDoc.getBoolean("watcherVisible") ?: false
+
+            // If not a watcher member, hide the favorite button regardless of friendship status
+            if (!isWatcherMember) {
+                binding.favoriteFriendBtn.visibility = View.GONE
+
+                // Continue checking friendship status only for add/remove friend buttons
+                checkBasicFriendshipStatus(currentUserId, friendId, currentUserRef, friendRef)
+            } else {
+                // If they are a watcher member, proceed with full friendship status check
+                currentUserRef.get()
+                    .addOnSuccessListener { currentUserDoc ->
+                        if (currentUserDoc != null && currentUserDoc.exists()) {
+                            val friendsList = currentUserDoc.get("friends") as? List<String> ?: emptyList()
+                            val favoriteFriendsList = currentUserDoc.get("favoriteFriends") as? List<String> ?: emptyList()
+
+                            // Check if the friend is already in the friends list
+                            if (friendsList.contains(friendId)) {
+                                binding.addFriendButton.visibility = View.GONE
+                                binding.favoriteFriendBtn.visibility = View.VISIBLE
+                                binding.removeFriendButton.visibility = View.VISIBLE
+
+                                // Check if the friend is in favorites
+                                if (favoriteFriendsList.contains(friendId)) {
+                                    binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled)
+                                } else {
+                                    binding.favoriteFriendBtn.setImageResource(R.drawable.favorite)
+                                }
+                            } else {
+                                // Check pending requests
+                                friendRef.get()
+                                    .addOnSuccessListener { friendDoc ->
+                                        if (friendDoc != null && friendDoc.exists()) {
+                                            val friendPendingRequests = friendDoc.get("pendingRequests") as? List<String> ?: emptyList()
+
+                                            if (friendPendingRequests.contains(currentUserId)) {
+                                                binding.addFriendButton.visibility = View.GONE
+                                                binding.favoriteFriendBtn.visibility = View.GONE
+                                                binding.removeFriendButton.visibility = View.GONE
+                                            } else {
+                                                binding.addFriendButton.visibility = View.VISIBLE
+                                                binding.favoriteFriendBtn.visibility = View.GONE
+                                                binding.removeFriendButton.visibility = View.GONE
+                                            }
+                                        }
+                                    }
+                            }
+
+                            // Set up click listener for the favorite button
+                            binding.favoriteFriendBtn.setOnClickListener {
+                                toggleWatcherStatus(currentUserId, friendId)
+                            }
+                        }
+                    }
+            }
+        }
+    }
+
+    // Helper function to check basic friendship status without watcher features
+    private fun checkBasicFriendshipStatus(currentUserId: String, friendId: String, currentUserRef: DocumentReference, friendRef: DocumentReference) {
         currentUserRef.get()
             .addOnSuccessListener { currentUserDoc ->
                 if (currentUserDoc != null && currentUserDoc.exists()) {
                     val friendsList = currentUserDoc.get("friends") as? List<String> ?: emptyList()
-                    val favoriteFriendsList = currentUserDoc.get("favoriteFriends") as? List<String> ?: emptyList()
 
-                    // Check if the friend is already in the friends list
                     if (friendsList.contains(friendId)) {
-                        binding.addFriendButton.visibility = View.GONE // Hide add friend button
-                        binding.favoriteFriendBtn.visibility = View.VISIBLE // Show favorite button
-                        binding.removeFriendButton.visibility = View.VISIBLE // Show unfriend button
-
-                        // Check if the friend is in favorites
-                        if (favoriteFriendsList.contains(friendId)) {
-                            binding.favoriteFriendBtn.setImageResource(R.drawable.favorite_filled) // Set filled icon
-                        } else {
-                            binding.favoriteFriendBtn.setImageResource(R.drawable.favorite) // Set outline icon
-                        }
+                        binding.addFriendButton.visibility = View.GONE
+                        binding.removeFriendButton.visibility = View.VISIBLE
                     } else {
-                        // Check friend's pendingRequests to see if there's a pending request from currentUserId
                         friendRef.get()
                             .addOnSuccessListener { friendDoc ->
                                 if (friendDoc != null && friendDoc.exists()) {
                                     val friendPendingRequests = friendDoc.get("pendingRequests") as? List<String> ?: emptyList()
 
                                     if (friendPendingRequests.contains(currentUserId)) {
-                                        // Friend request is pending
-                                        binding.addFriendButton.visibility = View.GONE // Hide add friend button
-                                        binding.favoriteFriendBtn.visibility = View.GONE // Hide favorite button
-                                        binding.removeFriendButton.visibility = View.GONE // Hide unfriend button
+                                        binding.addFriendButton.visibility = View.GONE
+                                        binding.removeFriendButton.visibility = View.GONE
                                     } else {
-                                        // No friend request pending
-                                        binding.addFriendButton.visibility = View.VISIBLE // Show add friend button
-                                        binding.favoriteFriendBtn.visibility = View.GONE // Hide favorite button
-                                        binding.removeFriendButton.visibility = View.GONE // Hide unfriend button
+                                        binding.addFriendButton.visibility = View.VISIBLE
+                                        binding.removeFriendButton.visibility = View.GONE
                                     }
-                                } else {
-                                    Log.e("FriendsProfileActivity", "Friend document does not exist")
                                 }
                             }
-                            .addOnFailureListener { exception ->
-                                Log.e("FriendsProfileActivity", "Error fetching friend document: ", exception)
-                            }
-                    }
-
-                    // Set up click listener for the favorite button
-                    binding.favoriteFriendBtn.setOnClickListener {
-                       toggleWatcherStatus(currentUserId, friendId)
                     }
                 }
-            }
-            .addOnFailureListener { exception ->
-                Log.e("FriendsProfileActivity", "Error fetching current user document: ", exception)
             }
     }
 
