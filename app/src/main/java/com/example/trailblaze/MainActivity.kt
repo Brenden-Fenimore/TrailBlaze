@@ -1,21 +1,15 @@
 package com.example.trailblaze
 
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.trailblaze.databinding.ActivityMainBinding
 import com.example.trailblaze.login.LoginActivity
 import com.google.android.libraries.places.api.Places
 import com.google.firebase.firestore.FirebaseFirestore
-import com.example.trailblaze.BuildConfig
-import android.Manifest
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         // Hide the ActionBar
         supportActionBar?.hide()
 
-        requestNotificationPermission()
         // Initialize Places API
         Places.initialize(applicationContext, BuildConfig.PLACES_API_KEY)
         // Check login status
@@ -56,19 +49,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun requestNotificationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.POST_NOTIFICATIONS
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
-                    123
-                )
-            }
-        }
-    }
 }

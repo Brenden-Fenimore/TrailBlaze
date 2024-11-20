@@ -14,9 +14,6 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.google.firebase.messaging.FirebaseMessaging
-import com.google.firebase.messaging.RemoteMessage
-import java.util.*
 
 
 data class Message(
@@ -125,34 +122,12 @@ class MessagingActivity : AppCompatActivity() {
         messagesRecyclerView.scrollToPosition(messagesList.size - 1)
         messageEditText.text.clear()
 
-        // Save to Firestore and send FCM notification
+        // Then save to Firestore
         firestore.collection("messages")
             .add(message)
-            .addOnSuccessListener {
-                // Send FCM notification
-                firestore.collection("users").document(selectedFriendId!!)
-                    .get()
-                    .addOnSuccessListener { document ->
-                        val recipientToken = document.getString("fcmToken")
-
-                        if (recipientToken != null) {
-                            // Create message payload
-                            val fcmMessage = RemoteMessage.Builder(recipientToken)
-                                .setMessageId(UUID.randomUUID().toString())
-                                .setData(mapOf(
-                                    "title" to "New Message",
-                                    "body" to messageText,
-                                    "type" to "chat"
-                                ))
-                                .build()
-
-                            // Send message using FCM
-                            FirebaseMessaging.getInstance().send(fcmMessage)
-                        }
-                    }
-            }
             .addOnFailureListener { exception ->
                 Log.e("MessagingActivity", "Failed to send message", exception)
+                // Optionally remove the message from the list if save fails
                 messagesList.remove(message)
                 messageAdapter.submitList(messagesList.toList())
             }
