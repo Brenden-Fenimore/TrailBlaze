@@ -17,6 +17,7 @@ import com.google.android.play.core.integrity.v
 import com.example.trailblaze.ui.profile.FriendAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.example.trailblaze.ui.profile.MessageActivity
 
 class MessageSearchActivity : AppCompatActivity() {
 
@@ -50,7 +51,7 @@ private lateinit var friendAdapter: FriendAdapter
 
         // Setup the adapter for the RecyclerView and provide an empty list initially
         friendAdapter = FriendAdapter(emptyList()) { user ->
-            openMessagingFragment(user.userId, user.username)
+            openMessageActivity(user.userId, user.username)
         }
 
         // Set the adapter to the RecyclerView
@@ -111,7 +112,7 @@ private lateinit var friendAdapter: FriendAdapter
     }
 
     private fun openMessageActivity(friendUserId: String, friendUsername: String) {
-        val intent = Intent(this, ::class.java).apply {
+        val intent = Intent(this, MessageActivity).apply {
             putExtra("friendId", friendUserId)
             putExtra("friendName", friendUsername)
         }
