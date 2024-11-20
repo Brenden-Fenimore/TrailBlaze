@@ -49,6 +49,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 import com.example.trailblaze.ui.profile.Friends
 
+
 class TimerActivity: AppCompatActivity() {
     private lateinit var firestore: FirebaseFirestore
     private lateinit var achievementManager: AchievementManager
@@ -65,13 +66,6 @@ class TimerActivity: AppCompatActivity() {
 
     // Property to hold the current user
     private var currentUser: User? = null
-
-    // Watcher List
-private val selectedWatchers = mutableListOf<AddFriend>()
-
-    // Initialize WatcherMemberViewModel
-
-   private val watcherMemberViewModel: WatcherMemberViewModel by viewModels ()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,7 +95,6 @@ private val selectedWatchers = mutableListOf<AddFriend>()
             }
         }
         activities = intent.getStringArrayExtra("PARK_ACTIVITIES") ?: arrayOf()
-
         partyMembers = intent.getStringArrayExtra("PARTY_MEMBERS") ?: arrayOf()
 
         // Log the activities to see what was pulled in
@@ -114,11 +107,6 @@ private val selectedWatchers = mutableListOf<AddFriend>()
 
         // Initialize AchievementManager
         achievementManager = AchievementManager(this)
-
-        // Get the park code from the intent
-        parkCode = intent.getStringExtra("PARK_CODE") ?: ""
-        parkNameTextView = findViewById(R.id.parkNameTextView)
-        fetchParkDetails(parkCode)
 
         Log.d("AttemptTrailActivity", "Received park code: $parkCode")
 
@@ -201,7 +189,7 @@ private val selectedWatchers = mutableListOf<AddFriend>()
 
         // Notify watchers button click listener
         notifyWatchersButton.setOnClickListener {
-          showWatcherSelectionDialog() // Start Watcher Selection Dialog
+            showAddWatcherDialog()
         }
 
         // Emergency button click listener
@@ -210,72 +198,7 @@ private val selectedWatchers = mutableListOf<AddFriend>()
         }
     }
 
-    private fun showWatcherSelectionDialog() {
-
- // call pullFavoriteFriends fun to ensure that list is current user's watcher members
-        pullFavoriteFriends { favoriteFriends ->
-     if(favoriteFriends.isEmpty()){
-
-         // Exit if list is empty
-         return@pullFavoriteFriends
-     }
-
-            val watcherNames = favoriteFriends.map { it.username }.toTypedArray()
-            val selectedItems = BooleanArray(watcherNames.size)
-
-          val dialog =  AlertDialog.Builder(this)
-                .setTitle("Select Watchers")
-                .setMultiChoiceItems(watcherNames, selectedItems) { _, index, isSelected ->
-                    val friend = favoriteFriends[index]
-                    if (isSelected) {
-                        watcherMemberViewModel.addWatcher(friend)
-                    } else {
-                        watcherMemberViewModel.removeWatcher(friend)
-                    }
-                }
-                .setPositiveButton("NOTIFY") { _, _ ->
-                    watcherMemberViewModel.selectedWatchers.value?.forEach { watcher ->
-                        sendNotificationToFriend(watcher.userId)
-                    }
-                }
-                .setNegativeButton("CANCEL") {dialogInterface, _ ->
-                    dialogInterface.dismiss()
-                }
-                .create()
-            dialog.show()
-        }
-    }
-
-private fun pullFavoriteFriends(onComplete: (List<Friends>) -> Unit) {
-    val userId = FirebaseAuth.getInstance().currentUser?.uid
-    if(userId != null){
-        firestore.collection("users").document(userId).get()
-            .addOnSuccessListener { document ->
-                if (document.exists()) {
-
-                    // fetch watcher's based on Ids
-                    val friendsIds = document.get("favoriteFriends") as? List<String> ?: emptyList()
-
-                    // load friends based on fetch
-                    loadWatcherData(friendsIds) { friendsList ->
-                        onComplete(friendsList)
-                    }
-                } else {
-                    // if empty return empty list
-                    onComplete(emptyList())
-                }
-            }
-
-        .addOnFailureListener{e ->
-            Log.e("Firestore", "Error fetching Watchers: ", e)
-            onComplete(emptyList())
-        }
-        }else{
-            onComplete(emptyList())
-        }
-}
-
-  private fun sendNotificationToFriend(friendId: String) {
+    private fun sendNotificationToFriend(friendId: String) {
         val currentUserId = FirebaseAuth.getInstance().currentUser?.uid ?: return
 
         // Reference to the current user's document in Firestore
@@ -371,12 +294,10 @@ private fun pullFavoriteFriends(onComplete: (List<Friends>) -> Unit) {
     }
 
     private fun saveTimeToFirestore(timeRecord: TimeRecord, elapsedTime: Long) {
-        // Use UserManager to get the current user
         val currentUser = UserManager.getCurrentUser()
         val userId = currentUser?.uid
 
         if (userId != null) {
-            // Reference to the user's document in Firestore
             val userDocRef = firestore.collection("users").document(userId)
 
             // Use the correct park name based on whether it's a Place or NPS park
@@ -406,19 +327,15 @@ private fun pullFavoriteFriends(onComplete: (List<Friends>) -> Unit) {
                 .addOnSuccessListener {
                     Log.d("TimerActivity", "Successfully saved time record to Firebase")
                     deletePartyMembers(userId)
-                    // Notify watchers
-                    // notifyWatchers(userId)
 
                     // Check achievements
                     achievementManager.checkAndGrantExplorerBadge(finalTimeRecord.timestamp)
                     achievementManager.checkAndGrantConquerorBadge()
-
                     achievementManager.checkAndGrantTrailBlazerBadge()
 
                     if (elapsedTime > 300_000) {
                         achievementManager.checkAndGrantLongDistanceBadge()
                     }
-                    // Check for Habitual Hiker badge
                     achievementManager.checkAndGrantHabitualBadge()
                     achievementManager.checkAndGrantWeekendBadge(finalTimeRecord.timestamp)
                     achievementManager.checkForDailyAdventurerBadge(userId)
@@ -523,36 +440,6 @@ private fun pullFavoriteFriends(onComplete: (List<Friends>) -> Unit) {
         }
     }
 
-private fun loadWatcherData(friendIds: List<String>, onComplete: (List<Friends>) -> Unit) {
-    val tasks = mutableListOf<Task<DocumentSnapshot>>()
-    val watcherList = mutableListOf<Friends>()
-
-    for (friendId in friendIds) {
-        tasks.add(firestore.collection("users").document(friendId).get().addOnSuccessListener { document ->
-            if (document.exists()) {
-                val username = document.getString("username") ?: "Unknown"
-                val profileImageUrl = document.getString("profileImageUrl")
-                val isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
-                val watcherVisible = document.getBoolean("isWatcherVisible") ?: false
-
-                // Add friend with required fields
-                watcherList.add(
-                    Friends(
-                        userId = friendId,
-                        username = username,
-                        profileImageUrl = profileImageUrl,
-                        isPrivateAccount = isPrivateAccount,
-                        watcherVisible = watcherVisible
-                    )
-                )
-            }
-        })
-    }
-    // invoke onComplete with watcher list
-    Tasks.whenAllSuccess<DocumentSnapshot>(tasks).addOnSuccessListener {
-       onComplete(watcherList)
-    }
-}
     private fun loadFriendsData(friendIds: List<String>, onComplete: (List<AddFriend>) -> Unit) {
         val tasks = mutableListOf<Task<DocumentSnapshot>>()
         val friendsList = mutableListOf<AddFriend>()
