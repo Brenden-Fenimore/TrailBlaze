@@ -607,6 +607,8 @@ class FriendsProfileActivity : AppCompatActivity() {
 
                                 // Fetch the details of common friends
                                 loadCommonFriendsData(commonFriendsIds)
+
+                                updateFriendsInCommonCounter(commonFriendsIds.size)
                             }
                         }
                 }
@@ -700,9 +702,16 @@ class FriendsProfileActivity : AppCompatActivity() {
         dialogBuilder.show()
     }
 
+    private fun updateFavoriteTrailsCount(count: Int) {
+        val favoriteTrailsTitle = findViewById<TextView>(R.id.favoriteTrailsHeader)
+        favoriteTrailsTitle.text = getString(R.string.userFavoriteTrails, count)
+    }
+
     private fun loadFavoriteParks() {
         firestore.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
+                val favoriteTrails = document.get("favoriteParks") as? List<String> ?: emptyList()
+                updateFavoriteTrailsCount(favoriteTrails.size)
                 if (document != null && document.exists()) {
                     val favoriteParksList = document.get("favoriteParks") as? List<String> ?: emptyList()
                     val locationItems = mutableListOf<LocationItem>()
@@ -813,6 +822,8 @@ class FriendsProfileActivity : AppCompatActivity() {
                     }
                 }
                 photosAdapter.updatePhotos(newPhotoUrls)
+
+                updatePhotosCount(newPhotoUrls.size)
             }
             .addOnFailureListener { e ->
                 Log.e("FriendsProfileActivity", "Error fetching photos", e)
@@ -822,6 +833,14 @@ class FriendsProfileActivity : AppCompatActivity() {
     private fun fetchTimeRecordsForFriend(friendId: String) {
         firestore.collection("users").document(friendId).get()
             .addOnSuccessListener { document ->
+
+                // Fetch the completed parks list from Firestore
+                val completedParksList = document.get("timeRecords") as? List<String> ?: emptyList()
+                // Log for debugging
+                Log.d("FriendsProfileActivity", "Completed Parks List: $completedParksList")
+                // Update the completed parks count
+                updateCompletedParksCount(completedParksList.size)
+
                 if (document != null && document.exists()) {
                     val timeRecordsData = document.get("timeRecords") as? List<Map<String, Any>>
                     val timeRecords = timeRecordsData?.map { record ->
@@ -981,4 +1000,27 @@ class FriendsProfileActivity : AppCompatActivity() {
             }, delay)
         }
     }
+
+    private fun updatePhotosCount(count: Int) {
+        val photosTitle = findViewById<TextView>(R.id.photosHeader)
+        photosTitle.text = getString(R.string.userPhotos, count)
+    }
+
+    private fun updateCompletedParksCount(count: Int) {
+        val completedParksTitle = findViewById<TextView>(R.id.completedParksHeader)
+        completedParksTitle?.text = getString(R.string.homepage_time_records, count)
+    }
+
+    private fun updateFriendsInCommonCounter(count: Int){
+        val counterTextView = findViewById<TextView>(R.id.friendsInCommonCounter)
+        counterTextView?.let{
+            if (count > 0) {
+                it.text = getString(R.string.friendsInCommon, count)
+                it.visibility = View.VISIBLE
+            } else {
+                it.visibility = View.GONE
+            }
+        }
+    }
+
 }

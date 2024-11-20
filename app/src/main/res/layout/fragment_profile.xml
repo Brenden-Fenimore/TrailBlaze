@@ -160,6 +160,7 @@
             android:orientation="vertical">
         <!-- Friends Section -->
         <TextView
+                android:id="@+id/yourFriendsTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/friends"
@@ -241,6 +242,7 @@
 
         <!-- Favorite Trails Section -->
         <TextView
+                android:id="@+id/favoriteTrailsHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/userFavoriteTrails"

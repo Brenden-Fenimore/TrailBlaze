@@ -68,6 +68,7 @@
         android:orientation="vertical">
     <!-- Favorite Trails Section -->
     <TextView
+            android:id="@+id/favoriteTrailsHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/userFavoriteTrails"
@@ -96,6 +97,7 @@
 
     <!-- Bucket List Trails Section -->
     <TextView
+            android:id="@+id/bucketListTrailsTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/bucketListTrails"
@@ -123,6 +125,7 @@
 
     <!-- Favorite Friends Section -->
     <TextView
+            android:id="@+id/favoriteFriendsTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/favoriteFriends"

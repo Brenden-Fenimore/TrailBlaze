@@ -7,8 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trailblaze.R
 import com.example.trailblaze.databinding.FragmentFavoritesBinding
 import com.example.trailblaze.nps.Park
 import com.example.trailblaze.settings.SettingsScreenActivity
@@ -108,7 +110,12 @@ class FavoritesFragment : Fragment() {
 
         // Access the Firestore database to get the user's document
         firestore.collection("users").document(userId).get()
+
             .addOnSuccessListener { document ->
+
+                val yourWatcherList = document.get("favoriteFriends") as? List<String> ?: emptyList()
+                updateYourWatchersCount(yourWatcherList.size)
+
                 // Check if the document exists and is not null
                 if (document != null && document.exists()) {
                     // Retrieve the list of favorite friend IDs from the document
@@ -162,6 +169,10 @@ class FavoritesFragment : Fragment() {
 
         firestore.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
+
+                val favoriteTrails = document.get("favoriteParks") as? List<String> ?: emptyList()
+                updateFavoriteTrailsCount(favoriteTrails.size)
+
                 if (document != null && document.exists()) {
                     val favoriteParksList = document.get("favoriteParks") as? List<String> ?: emptyList()
                     val locationItems = mutableListOf<LocationItem>()
@@ -249,6 +260,10 @@ class FavoritesFragment : Fragment() {
 
         firestore.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
+
+                val bucketList = document.get("bucketListParks") as? List<String> ?: emptyList()
+                updateBucketListTrailsCount(bucketList.size)
+
                 if (document != null && document.exists()) {
                     val bucketListParksList = document.get("bucketListParks") as? List<String> ?: emptyList()
                     val locationItems = mutableListOf<LocationItem>()
@@ -307,4 +322,20 @@ class FavoritesFragment : Fragment() {
             bucketListAdapter.updateData(items)
         }
     }
+
+    private fun updateFavoriteTrailsCount(count: Int) {
+        val favoriteTrailsTitle = view?.findViewById<TextView>(R.id.favoriteTrailsHeader)
+        favoriteTrailsTitle?.text = getString(R.string.userFavoriteTrails, count)
+    }
+
+    private fun updateBucketListTrailsCount(count: Int) {
+        val bucketListTrailsTitle = view?.findViewById<TextView>(R.id.bucketListTrailsTitle)
+        bucketListTrailsTitle?.text = getString(R.string.bucketListTrails, count)
+    }
+
+    private fun updateYourWatchersCount(count: Int) {
+        val yourWatcherTitle = view?.findViewById<TextView>(R.id.favoriteFriendsTitle)
+        yourWatcherTitle?.text = getString(R.string.favoriteFriends, count)
+    }
+
 }

@@ -329,6 +329,13 @@ class HomeFragment : Fragment() {
         firestore.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
                 if (document.exists()) {
+                    // Retrieve the completed parks list
+                    val completedParksList = document.get("timeRecords") as? List<String> ?: emptyList()
+                    // Log for debugging
+                    Log.d("HomeFragment", "Completed Parks List: $completedParksList")
+                    // Update the count dynamically
+                    updateCompletedParksCount(completedParksList.size)
+
                     val timeRecordsData = document.get("timeRecords") as? List<Map<String, Any>>
                     val timeRecords = timeRecordsData?.mapNotNull { record ->
                         TimeRecord(
@@ -343,8 +350,12 @@ class HomeFragment : Fragment() {
                         )
                     } ?: emptyList()
 
+                    // Update the adapter
                     timeRecordAdapter.updateData(timeRecords)
                 }
+            }
+            .addOnFailureListener { e ->
+                Log.e("HomeFragment", "Error fetching time records: ${e.message}")
             }
     }
 
@@ -426,6 +437,10 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun updateCompletedParksCount(count: Int) {
+        val completedParksTitle = view?.findViewById<TextView>(R.id.timeRecords)
+        completedParksTitle?.text = getString(R.string.homepage_time_records, count)
+    }
 
     override fun onDestroyView()
     {
