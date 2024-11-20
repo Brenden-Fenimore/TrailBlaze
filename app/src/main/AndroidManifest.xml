@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
-
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <application
             android:allowBackup="true"
             android:dataExtractionRules="@xml/data_extraction_rules"
@@ -31,9 +31,6 @@
                 android:exported="false"
                 android:label="@string/title_activity_inbox"
                 android:theme="@style/Theme.TrailBlaze.Fullscreen"/>
-        <activity
-                android:name=".watcherFeature.WatcherProfile"
-                android:exported="false"/>
         <activity
                 android:name=".ui.home.PendingNotificationActivity"
                 android:exported="true"/>
@@ -130,6 +127,14 @@
                     android:name="android.support.FILE_PROVIDER_PATHS"
                     android:resource="@xml/file_paths"/>
         </provider>
+
+        <service
+                android:name=".MyFirebaseMessagingService"
+                android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
         <meta-data
                 android:name="com.google.android.geo.API_KEY"

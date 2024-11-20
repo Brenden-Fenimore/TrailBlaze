@@ -92,6 +92,8 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation ("com.google.firebase:firebase-firestore-ktx:24.0.1")
     implementation("com.google.android.gms:play-services-auth:21.2.0")
+    implementation ("com.google.firebase:firebase-messaging-ktx:23.4.0")
+    implementation ("com.google.firebase:firebase-analytics-ktx:21.5.0")
 
     //for adding profile pics
     implementation ("com.google.firebase:firebase-storage-ktx")
