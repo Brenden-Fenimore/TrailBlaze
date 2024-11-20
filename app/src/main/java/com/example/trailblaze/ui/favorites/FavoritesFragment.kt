@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
 import com.example.trailblaze.databinding.FragmentFavoritesBinding
-import com.example.trailblaze.nps.Park
 import com.example.trailblaze.settings.SettingsScreenActivity
 import com.example.trailblaze.ui.MenuActivity
 import com.example.trailblaze.ui.parks.ParkDetailActivity
@@ -23,7 +22,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.nps.NPSResponse
-import com.example.trailblaze.nps.ParksAdapter
 import com.example.trailblaze.ui.Map.LocationItem
 import com.example.trailblaze.ui.profile.FavoritesAdapter
 import com.example.trailblaze.ui.profile.FriendAdapter

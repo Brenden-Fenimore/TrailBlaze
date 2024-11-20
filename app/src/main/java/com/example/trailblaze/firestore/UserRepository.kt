@@ -1,7 +1,6 @@
 package com.example.trailblaze.firestore
 
 import android.util.Log
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 // Class responsible for managing user-related data operations in Firestore

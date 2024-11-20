@@ -1,6 +1,6 @@
 package com.example.trailblaze.ui.Map
 
-import android.graphics.Bitmap
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +13,6 @@ import com.example.trailblaze.nps.Park
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FetchPhotoRequest
 import com.google.android.libraries.places.api.net.PlacesClient
-import com.google.android.libraries.places.api.net.kotlin.awaitFetchPhoto
 
 class MapBottomSheetAdapter(
     private var items: MutableList<LocationItem> = mutableListOf(),

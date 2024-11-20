@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trailblaze.R
 import com.example.trailblaze.login.LoginActivity
-import com.example.trailblaze.login.TermsActivity
 
 
 // Activity that represents the settings screen for the application

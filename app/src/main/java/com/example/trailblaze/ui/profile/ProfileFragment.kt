@@ -9,10 +9,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,8 +29,6 @@ import com.example.trailblaze.ui.MenuActivity
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.DocumentSnapshot
-import com.example.trailblaze.nps.Park
-import com.example.trailblaze.nps.ParksAdapter
 import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.ui.Map.LocationItem
 import com.example.trailblaze.ui.parks.ParkDetailActivity
@@ -48,7 +44,6 @@ import com.example.trailblaze.watcherFeature.WatcherMemberList
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FetchPlaceRequest
-import java.text.SimpleDateFormat
 
 interface PhotoDeletionListener {
     fun onPhotoDeleted(deletedPhotoUrl: String)
@@ -75,14 +70,11 @@ interface PhotoDeletionListener {
         private lateinit var favoritesRecyclerView: RecyclerView
         private lateinit var favoritesAdapter: FavoritesAdapter
 
-        private var favoriteParks: MutableList<Park> = mutableListOf()
-
         private val PICK_IMAGE_REQUEST = 1
         private var selectedImageUri: Uri? = null
 
         private val photoUrls = mutableListOf<String>()
         private lateinit var photosAdapter: PhotosAdapter
-
 
         // Define all possible badges
         private val allBadges = listOf(
@@ -525,6 +517,7 @@ interface PhotoDeletionListener {
             val friendsTitle = view?.findViewById<TextView>(R.id.yourFriendsTitle) ?: return
             friendsTitle.text = getString(R.string.friends, count)
         }
+
         //Function to set up Favorites RecyclerView for both parks and places
         private fun setupFavoritesRecyclerView() {
             favoritesAdapter = FavoritesAdapter(emptyList()) { item ->
@@ -550,6 +543,10 @@ interface PhotoDeletionListener {
 
             firestore.collection("users").document(userId).get()
                 .addOnSuccessListener { document ->
+
+                    val favoriteTrails = document.get("favoriteParks") as? List<String> ?: emptyList()
+                    updateFavoriteTrailsCount(favoriteTrails.size)
+
                     if (document != null && document.exists()) {
                         val favoriteParksList = document.get("favoriteParks") as? List<String> ?: emptyList()
                         val locationItems = mutableListOf<LocationItem>()
@@ -587,10 +584,6 @@ interface PhotoDeletionListener {
                             Place.Field.LOCATION
                         )
 
-        private fun updatePhotosCount(count: Int) {
-            val photosTitle = view?.findViewById<TextView>(R.id.userPhotosTextView) ?: return
-            photosTitle.text = getString(R.string.userPhotos, count)
-        }
                         placeIds.forEach { placeId ->
                             val request = FetchPlaceRequest.builder(placeId, placeFields).build()
                             context?.let { ctx ->
@@ -608,6 +601,16 @@ interface PhotoDeletionListener {
                         }
                     }
                 }
+        }
+
+        private fun updatePhotosCount(count: Int) {
+            val photosTitle = view?.findViewById<TextView>(R.id.userPhotosTextView) ?: return
+            photosTitle.text = getString(R.string.userPhotos, count)
+        }
+
+        private fun updateFavoriteTrailsCount(count: Int) {
+            val favoriteTrailsTitle = view?.findViewById<TextView>(R.id.favoriteTrailsHeader)
+            favoriteTrailsTitle?.text = getString(R.string.userFavoriteTrails, count)
         }
 
         private fun checkAndUpdateAdapter(loaded: Int, total: Int, items: List<LocationItem>) {

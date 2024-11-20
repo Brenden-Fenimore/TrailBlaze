@@ -1,7 +1,6 @@
 package com.example.trailblaze.ui.parks
 
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -9,7 +8,6 @@ import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.*
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,15 +37,8 @@ import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.example.trailblaze.BuildConfig.PLACES_API_KEY
-import com.example.trailblaze.watcherFeature.WatcherMemberViewModel
 import com.google.firebase.firestore.SetOptions
-import java.io.ByteArrayOutputStream
-import android.util.Base64
 import com.google.android.libraries.places.api.net.FetchResolvedPhotoUriRequest
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import com.example.trailblaze.ui.profile.Friends
 
 
 class TimerActivity: AppCompatActivity() {

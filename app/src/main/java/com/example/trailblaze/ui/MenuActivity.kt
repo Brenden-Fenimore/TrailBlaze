@@ -1,10 +1,8 @@
 package com.example.trailblaze.ui
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -21,7 +19,6 @@ import com.example.trailblaze.ui.achievements.AchievementManager
 import com.example.trailblaze.ui.achievements.AchievementsActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import nl.dionsegijn.konfetti.KonfettiView
 
 
 class MenuActivity : AppCompatActivity() {
