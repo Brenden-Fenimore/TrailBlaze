@@ -32,6 +32,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.example.trailblaze.nps.Park
 import com.example.trailblaze.nps.ParksAdapter
 import com.example.trailblaze.nps.RetrofitInstance
+import com.example.trailblaze.ui.Map.LocationItem
 import com.example.trailblaze.ui.parks.ParkDetailActivity
 import com.google.firebase.appcheck.internal.util.Logger.TAG
 import com.google.firebase.firestore.FieldValue
@@ -42,6 +43,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 import com.example.trailblaze.watcherFeature.WatcherMemberList
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import java.text.SimpleDateFormat
 
 interface PhotoDeletionListener {
@@ -67,7 +71,7 @@ interface PhotoDeletionListener {
         private lateinit var friendsList: MutableList<Friends>
 
         private lateinit var favoritesRecyclerView: RecyclerView
-        private lateinit var favoritesAdapter: ParksAdapter
+        private lateinit var favoritesAdapter: FavoritesAdapter
         private var favoriteParks: MutableList<Park> = mutableListOf()
 
         private val PICK_IMAGE_REQUEST = 1
@@ -126,11 +130,20 @@ interface PhotoDeletionListener {
             favoritesRecyclerView = binding.favoriteParksRecyclerView
             favoritesRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-            favoritesAdapter = ParksAdapter(emptyList()) { park ->
-                val intent = Intent(context, ParkDetailActivity::class.java).apply {
-                    putExtra("PARK_CODE", park.parkCode)
+            favoritesAdapter = FavoritesAdapter(emptyList()) { item ->
+                when (item) {
+                    is LocationItem.ParkItem -> {
+                        val intent = Intent(this.context, ParkDetailActivity::class.java)
+                        intent.putExtra("PARK_CODE", item.park.parkCode)
+                        startActivity(intent)
+                    }
+
+                    is LocationItem.PlaceItem -> {
+                        val intent = Intent(this.context, ParkDetailActivity::class.java)
+                        intent.putExtra("PLACE_ID", item.place.id)
+                        startActivity(intent)
+                    }
                 }
-                startActivity(intent)
             }
             favoritesRecyclerView.adapter = favoritesAdapter
 
@@ -368,44 +381,62 @@ interface PhotoDeletionListener {
                 }
         }
 
-        private fun fetchParksDetails(parkCodes: List<String>) {
-            val tasks = parkCodes.map { parkCode ->
-                RetrofitInstance.api.getParkDetails(parkCode)
-            }
+        private fun fetchParksDetails(favoriteParksList: List<String>) {
+                        val locationItems = mutableListOf<LocationItem>()
 
-            // Track the number of responses
-            var completedRequests = 0
+                        // Separate park codes and place IDs
+                        val parkCodes = favoriteParksList.filter { it.length < 10 }
+                        val placeIds = favoriteParksList.filter { it.length >= 10 }
 
-            tasks.forEach { call ->
-                call.enqueue(object : Callback<NPSResponse> {
-                    override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
-                        if (response.isSuccessful && response.body() != null) {
-                            val park = response.body()?.data?.firstOrNull()
-                            park?.let {
-                                favoriteParks.add(it) // Add the park to the list
-                            }
-                        }
-                        completedRequests++
-                        // Check if all requests are completed
-                        if (completedRequests == parkCodes.size) {
-                            updateParksRecyclerView(favoriteParks)
-                        }
-                    }
+                        // Counter to track when all items are loaded
+                        var totalLoaded = 0
+                        val totalItems = parkCodes.size + placeIds.size
 
-                    override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
-                        Log.e("FavoritesFragment", "Error fetching park details: ${t.message}")
-                        completedRequests++
-                        // Check if all requests are completed, even on failure
-                        if (completedRequests == parkCodes.size) {
-                            updateParksRecyclerView(favoriteParks)
+                        // Fetch parks
+                        parkCodes.forEach { parkCode ->
+                            RetrofitInstance.api.getParkDetails(parkCode).enqueue(object : Callback<NPSResponse> {
+                                override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
+                                    response.body()?.data?.firstOrNull()?.let { park ->
+                                        locationItems.add(LocationItem.ParkItem(park))
+                                    }
+                                    totalLoaded++
+                                    checkAndUpdateAdapter(totalLoaded, totalItems, locationItems)
+                                }
+
+                                override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
+                                    totalLoaded++
+                                    checkAndUpdateAdapter(totalLoaded, totalItems, locationItems)
+                                }
+                            })
                         }
-                    }
-                })
-            }
+
+                        // Fetch places
+                        val placeFields = listOf(
+                            Place.Field.ID,
+                            Place.Field.DISPLAY_NAME,
+                            Place.Field.PHOTO_METADATAS,
+                            Place.Field.LOCATION
+                        )
+
+                        placeIds.forEach { placeId ->
+                            val request = FetchPlaceRequest.builder(placeId, placeFields).build()
+                            Places.createClient(this.context).fetchPlace(request)
+                                .addOnSuccessListener { response ->
+                                    locationItems.add(LocationItem.PlaceItem(response.place))
+                                    totalLoaded++
+                                    checkAndUpdateAdapter(totalLoaded, totalItems, locationItems)
+                                }
+                                .addOnFailureListener {
+                                    totalLoaded++
+                                    checkAndUpdateAdapter(totalLoaded, totalItems, locationItems)
+                                }
+                        }
         }
 
-        private fun updateParksRecyclerView(parks: List<Park>) {
-            favoritesAdapter.updateData(parks) // Update the adapter with the fetched parks
+        private fun checkAndUpdateAdapter(loaded: Int, total: Int, items: List<LocationItem>) {
+            if (loaded == total) {
+                favoritesAdapter.updateData(items)
+            }
         }
 
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
