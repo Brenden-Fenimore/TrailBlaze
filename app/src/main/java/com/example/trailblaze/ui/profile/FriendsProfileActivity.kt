@@ -833,7 +833,9 @@ class FriendsProfileActivity : AppCompatActivity() {
             .addOnSuccessListener { document ->
 
                 // Fetch the completed parks list from Firestore
-                val completedParksList = document.get("completedParks") as? List<String> ?: emptyList()
+                val completedParksList = document.get("timeRecords") as? List<String> ?: emptyList()
+                // Log for debugging
+                Log.d("FriendsProfileActivity", "Completed Parks List: $completedParksList")
                 // Update the completed parks count
                 updateCompletedParksCount(completedParksList.size)
 

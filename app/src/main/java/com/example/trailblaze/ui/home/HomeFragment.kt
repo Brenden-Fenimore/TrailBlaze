@@ -330,11 +330,9 @@ class HomeFragment : Fragment() {
             .addOnSuccessListener { document ->
                 if (document.exists()) {
                     // Retrieve the completed parks list
-                    val completedParksList = document.get("completedParks") as? List<String> ?: emptyList()
-
+                    val completedParksList = document.get("timeRecords") as? List<String> ?: emptyList()
                     // Log for debugging
                     Log.d("HomeFragment", "Completed Parks List: $completedParksList")
-
                     // Update the count dynamically
                     updateCompletedParksCount(completedParksList.size)
 
