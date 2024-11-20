@@ -32,9 +32,9 @@ data class Message(
 
 class MessagingActivity : Fragment() {
 
-        // Initialize UI components
+    // Initialize UI components
 
-   // private lateinit var recipientSearch: AutoCompleteTextView
+    // private lateinit var recipientSearch: AutoCompleteTextView
     private lateinit var messageEditText: EditText
     private lateinit var sendMessageButton: Button
     private lateinit var attachImageButton: ImageButton
@@ -55,7 +55,7 @@ class MessagingActivity : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_messaging, container, false)
+        val view = inflater.inflate(R.layout.activity_message, container, false)
 
         // Retrieve arguments
         selectedFriendId = arguments?.getString("selectedFriendId")
@@ -71,10 +71,10 @@ class MessagingActivity : Fragment() {
         backButton = view.findViewById(R.id.backButton)
         attachImageButton = view.findViewById(R.id.attachImageButton)
         sendMessageButton = view.findViewById(R.id.sendMessageButton)
-        messageEditText = view.findViewById(R.id.messageEditText)
+        messageEditText = view.findViewById(R.id.messageInput)
         messagesRecyclerView = view.findViewById(R.id.messagesRecyclerView)
 
-            // Setup RecyclerView
+        // Setup RecyclerView
         messageAdapter = MessageAdapter{message ->
             // handle message click, e.g., show details or forward message
         }
@@ -83,7 +83,7 @@ class MessagingActivity : Fragment() {
 
 
         // Get selected friend ID (passed from previous screen via arguments)
-      //  selectedFriendId = arguments?.getString("selectedFriendId")
+        //  selectedFriendId = arguments?.getString("selectedFriendId")
 
         // Populate messages
         fetchMessages()
