@@ -605,6 +605,8 @@ class FriendsProfileActivity : AppCompatActivity() {
 
                                 // Fetch the details of common friends
                                 loadCommonFriendsData(commonFriendsIds)
+
+                                updateFriendsInCommonCounter(commonFriendsIds.size)
                             }
                         }
                 }
@@ -1003,6 +1005,18 @@ class FriendsProfileActivity : AppCompatActivity() {
     private fun updateCompletedParksCount(count: Int) {
         val completedParksTitle = findViewById<TextView>(R.id.completedParksHeader)
         completedParksTitle?.text = getString(R.string.homepage_time_records, count)
+    }
+
+    private fun updateFriendsInCommonCounter(count: Int){
+        val counterTextView = findViewById<TextView>(R.id.friendsInCommonCounter)
+        counterTextView?.let{
+            if (count > 0) {
+                it.text = getString(R.string.friendsInCommon, count)
+                it.visibility = View.VISIBLE
+            } else {
+                it.visibility = View.GONE
+            }
+        }
     }
 
 }

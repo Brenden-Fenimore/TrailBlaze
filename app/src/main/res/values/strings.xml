@@ -314,7 +314,7 @@
     </string-array>
 
     <string name="addAsTrusted">Add as trusted Contact</string>
-    <string name="friendsInCommon">Friends in Common</string>
+    <string name="friendsInCommon">Friends in Common (%1$d)</string>
     <string name="meetTrailMates">Meet TrailBlazers</string>
 
     <!-- Spinner options for terrain -->
