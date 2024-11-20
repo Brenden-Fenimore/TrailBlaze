@@ -15,7 +15,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
 import com.google.android.play.core.integrity.v
 import com.example.trailblaze.ui.profile.FriendAdapter
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 
 class MessageSearchActivity : AppCompatActivity() {
@@ -47,10 +50,11 @@ private lateinit var friendAdapter: FriendAdapter
 
         // Set the layout manager for the RecyclerView
         friendsRecyclerView.layoutManager = LinearLayoutManager(this)
+        friendsRecyclerView.isNestedScrollingEnabled = true
 
         // Setup the adapter for the RecyclerView and provide an empty list initially
-        friendAdapter = FriendAdapter(emptyList()) { user ->
-            openMessagingFragment(user.userId, user.username)
+        friendAdapter = FriendAdapter(emptyList()) { friend ->
+            openMessagingFragment(friend)
         }
 
         // Set the adapter to the RecyclerView
@@ -73,34 +77,48 @@ private lateinit var friendAdapter: FriendAdapter
 
 
         // Fetch users from Firestore after setting up RecyclerView
-        fetchFriends()
+        fetchUserFriends()
 
     }
 
-    private fun fetchFriends() {
-        val currentUserId = FirebaseAuth.getInstance().currentUser?.uid ?: return
-
-        firestore.collection("users")
-            .whereArrayContains("friends", currentUserId)
-            .get()
-            .addOnSuccessListener { documents ->
-                friendsList = documents.mapNotNull { document ->
-                    val userId = document.id
-                    val username = document.getString("username")
-                    val profileImageUrl = document.getString("profileImageUrl")
-                    val isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false
-
-                    if (username != null) {
-                        Friends(userId, username, profileImageUrl, isPrivateAccount, watcherVisible = true)
-                    } else {
-                        null
+    private fun fetchUserFriends() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+            firestore.collection("users").document(userId).get()
+                .addOnSuccessListener { document ->
+                    if (document.exists()) {
+                        val friendsIds = document.get("friends") as? List<String> ?: emptyList()
+                        loadFriendsData(friendsIds)
                     }
-                } as ArrayList<Friends>
-                friendAdapter.updateUserList(friendsList)
-            }
-            .addOnFailureListener { exception ->
-                Log.e("MessageSearchActivity", "Error fetching friends", exception)
-            }
+                }
+                .addOnFailureListener { e ->
+                    Log.e("Firestore", "Error fetching friends: ", e)
+                }
+        }
+    }
+    private fun loadFriendsData(friendIds: List<String>) {
+        val tasks = mutableListOf<Task<DocumentSnapshot>>()
+
+        for (friendId in friendIds) {
+            tasks.add(firestore.collection("users").document(friendId).get().addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val friend = Friends(
+                        userId  = friendId,
+                        username = document.getString("username") ?: "Unknown",
+                        profileImageUrl = document.getString("profileImageUrl"),
+                        isPrivateAccount = document.getBoolean("isPrivateAccount") ?: false,
+                        watcherVisible = document.getBoolean("watcherVisible") ?: false
+                    )
+                    friendsList.add(friend) // Add friend to the list
+                }
+            })
+        }
+
+        // Wait until all friend data is fetched
+        Tasks.whenAllSuccess<DocumentSnapshot>(tasks).addOnSuccessListener {
+            // Update the RecyclerView with the fetched friends
+            friendAdapter.updateUserList(friendsList)
+        }
     }
 
     private fun filterFriendsList(searchTerm: String) {
@@ -110,17 +128,12 @@ private lateinit var friendAdapter: FriendAdapter
         friendAdapter.updateUserList(filteredList)
     }
 
-    private fun openMessagingFragment(friendUserId: String, friendUsername: String) {
-        val messagingFragment = MessagingActivity().apply {
-            arguments = Bundle().apply {
-                putString("recipientId", friendUserId)
-                putString("recipientName", friendUsername)
-            }
+    private fun openMessagingFragment(friend: Friends) {
+        val intent = Intent(this, MessagingActivity::class.java).apply {
+            putExtra("selectedFriendId", friend.userId)
+            putExtra("selectedFriendName", friend.username)
+            putExtra("selectedFriendProfileImage", friend.profileImageUrl)
         }
-
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, messagingFragment) // Replace `fragmentContainer` with the correct container ID
-            .addToBackStack(null) // Optional: Add to back stack for navigation
-            .commit()
+        startActivity(intent)
     }
 }

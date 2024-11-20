@@ -20,6 +20,9 @@
             android:theme="@style/Theme.TrailBlaze"
             tools:targetApi="31">
         <activity
+                android:name=".ui.profile.MessagingActivity"
+                android:exported="false"/>
+        <activity
                 android:name=".ui.profile.MessageSearchActivity"
                 android:exported="false"/>
         <activity

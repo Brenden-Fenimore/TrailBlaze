@@ -17,8 +17,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import com.google.firestore.admin.v1.Index
 
 
 data class Message(
@@ -30,18 +33,15 @@ data class Message(
     val timestamp: Long = 0L)
 
 
-class MessagingActivity : Fragment() {
-
-        // Initialize UI components
-
-   // private lateinit var recipientSearch: AutoCompleteTextView
+class MessagingActivity : AppCompatActivity() {
     private lateinit var messageEditText: EditText
     private lateinit var sendMessageButton: Button
     private lateinit var attachImageButton: ImageButton
     private lateinit var messagesRecyclerView: RecyclerView
-    private lateinit var backButton: ImageButton
+    private lateinit var chevronLeft: ImageButton
     private lateinit var messageAdapter: MessageAdapter
-
+    private lateinit var friendNameTextView: TextView
+    private lateinit var friendProfileImage: ImageView
 
     // Firebase
     private val firestore = FirebaseFirestore.getInstance()
@@ -49,79 +49,52 @@ class MessagingActivity : Fragment() {
     private var selectedFriendId: String? = null
     private val messagesList = mutableListOf<Message>()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_messaging)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val view = inflater.inflate(R.layout.fragment_messaging, container, false)
+        friendProfileImage = findViewById(R.id.friendProfileImage)
+        // Get intent extras
+        selectedFriendId = intent.getStringExtra("selectedFriendId")
+        val selectedFriendName = intent.getStringExtra("selectedFriendName")
+        val selectedFriendProfileImage = intent.getStringExtra("selectedFriendProfileImage")
 
-        // Retrieve arguments
-        selectedFriendId = arguments?.getString("selectedFriendId")
-        val selectedFriendName = arguments?.getString("selectedFriendName")
-
-        if (selectedFriendId == null) {
-            Log.e("MessagingFragment", "Friend ID is null")
-        } else {
-            Log.d("MessagingFragment", "Chatting with Friend ID: $selectedFriendId, Name: $selectedFriendName")
-        }
+        Glide.with(this)
+            .load(selectedFriendProfileImage)
+            .circleCrop()
+            .into(friendProfileImage)
 
         // Initialize views
-        backButton = view.findViewById(R.id.backButton)
-        attachImageButton = view.findViewById(R.id.attachImageButton)
-        sendMessageButton = view.findViewById(R.id.sendMessageButton)
-        messageEditText = view.findViewById(R.id.messageEditText)
-        messagesRecyclerView = view.findViewById(R.id.messagesRecyclerView)
+        chevronLeft = findViewById(R.id.chevron_left)
+        attachImageButton = findViewById(R.id.attachImageButton)
+        sendMessageButton = findViewById(R.id.sendMessageButton)
+        messageEditText = findViewById(R.id.messageEditText)
+        messagesRecyclerView = findViewById(R.id.messagesRecyclerView)
+        friendNameTextView = findViewById(R.id.friendNameTextView)
 
-            // Setup RecyclerView
-        messageAdapter = MessageAdapter{message ->
-            // handle message click, e.g., show details or forward message
+        // Set friend name
+        friendNameTextView.text = selectedFriendName
+
+        // Setup RecyclerView
+        getCurrentUserProfileUrl { currentUserProfileUrl ->
+            messageAdapter = MessageAdapter(
+                currentUserProfileUrl = currentUserProfileUrl,
+                friendProfileUrl = selectedFriendProfileImage,
+                onMessageClick = { message ->
+                    // handle message click
+                }
+            )
+            messagesRecyclerView.layoutManager = LinearLayoutManager(this)
+            messagesRecyclerView.adapter = messageAdapter
+
+            // Fetch messages after adapter is ready
+            fetchMessages()
         }
-        messagesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        messagesRecyclerView.adapter = messageAdapter
-
-
-        // Get selected friend ID (passed from previous screen via arguments)
-      //  selectedFriendId = arguments?.getString("selectedFriendId")
-
-        // Populate messages
-        fetchMessages()
 
         // Set up button listeners
-        backButton.setOnClickListener { goBack() }
+        chevronLeft.setOnClickListener { finish() }
         attachImageButton.setOnClickListener { attachPhoto() }
         sendMessageButton.setOnClickListener { sendMessage() }
-
-        return view
-
-
-    }
-    private fun fetchMessages() {
-        if (currentUserId == null || selectedFriendId == null) {
-            Log.e("MessagingFragment", "User ID or Friend ID is null")
-            return
-        }
-
-        firestore.collection("messages")
-            .whereEqualTo("senderId", currentUserId)
-            .whereEqualTo("receiverId", selectedFriendId)
-            .get()
-            .addOnSuccessListener { documents ->
-                messagesList.clear()
-                for (document in documents) {
-                    val message = document.toObject(Message::class.java)
-                    messagesList.add(message)
-                }
-                messageAdapter.submitList(messagesList)
-            }
-            .addOnFailureListener { exception ->
-                Log.e("MessagingFragment", "Error loading messages", exception)
-            }
-    }
-
-    private fun goBack() {
-        requireActivity().onBackPressed()
     }
 
     private fun attachPhoto() {
@@ -134,12 +107,12 @@ class MessagingActivity : Fragment() {
     private fun sendMessage() {
         val messageText = messageEditText.text.toString().trim()
         if (messageText.isEmpty()) {
-            Toast.makeText(requireContext(), "Message cannot be empty", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Message cannot be empty", Toast.LENGTH_SHORT).show()
             return
         }
 
         if (currentUserId == null || selectedFriendId == null) {
-            Toast.makeText(requireContext(), "Unable to send message", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Unable to send message", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -148,24 +121,26 @@ class MessagingActivity : Fragment() {
             recipientId = selectedFriendId!!,
             text = messageText,
             timestamp = System.currentTimeMillis(),
-            imageUrl = null // For now, this is null
+            imageUrl = null
         )
 
-        // Save message to Firestore
+        // Add message to local list and update UI immediately
+        messagesList.add(message)
+        messageAdapter.submitList(messagesList.toList())
+        messagesRecyclerView.scrollToPosition(messagesList.size - 1)
+        messageEditText.text.clear()
+
+        // Then save to Firestore
         firestore.collection("messages")
             .add(message)
-            .addOnSuccessListener {
-                messageEditText.text.clear()
-                messagesList.add(message)
-                messageAdapter.notifyItemInserted(messagesList.size - 1)
-                messagesRecyclerView.scrollToPosition(messagesList.size - 1)
-            }
             .addOnFailureListener { exception ->
-                Log.e("MessagingFragment", "Failed to send message", exception)
+                Log.e("MessagingActivity", "Failed to send message", exception)
+                // Optionally remove the message from the list if save fails
+                messagesList.remove(message)
+                messageAdapter.submitList(messagesList.toList())
             }
     }
 
-    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE && resultCode == Activity.RESULT_OK) {
@@ -173,17 +148,55 @@ class MessagingActivity : Fragment() {
             if (imageUri != null) {
                 uploadImage(imageUri)
             } else {
-                Toast.makeText(requireContext(), "Failed to get image", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Failed to get image", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     private fun uploadImage(uri: Uri) {
-        // Logic to upload image to Firebase Storage and send the image message
-        Toast.makeText(requireContext(), "Uploading image... (not yet implemented)", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Uploading image... (not yet implemented)", Toast.LENGTH_SHORT).show()
     }
 
     companion object {
         private const val REQUEST_IMAGE = 100
+    }
+
+    private fun fetchMessages() {
+        if (currentUserId == null || selectedFriendId == null) {
+            Log.e("MessagingActivity", "User ID or Friend ID is null")
+            return
+        }
+
+        firestore.collection("messages")
+            .whereIn("senderId", listOf(currentUserId, selectedFriendId))
+            .whereIn("recipientId", listOf(currentUserId, selectedFriendId))
+            .orderBy("timestamp", Query.Direction.ASCENDING)
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    Log.e("MessagingActivity", "Error loading messages", error)
+                    return@addSnapshotListener
+                }
+
+                val newMessages = mutableListOf<Message>()
+                snapshot?.documents?.forEach { document ->
+                    document.toObject(Message::class.java)?.let { message ->
+                        newMessages.add(message)
+                    }
+                }
+                messagesList.clear()
+                messagesList.addAll(newMessages)
+                messageAdapter.submitList(messagesList.toList())
+                messagesRecyclerView.scrollToPosition(messagesList.size - 1)
+            }
+    }
+    private fun getCurrentUserProfileUrl(callback: (String?) -> Unit) {
+        currentUserId?.let { userId ->
+            firestore.collection("users").document(userId)
+                .get()
+                .addOnSuccessListener { document ->
+                    val profileUrl = document.getString("profileImageUrl")
+                    callback(profileUrl)
+                }
+        }
     }
 }

@@ -32,14 +32,12 @@
                 app:srcCompat="@drawable/message_icon"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_width="49dp"
+                android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="9dp"
-                android:layout_marginEnd="54dp"
+                android:layout_toStartOf="@id/editbutton"
+                android:layout_centerVertical="true"
                 android:background="@android:color/transparent"
-                android:tint="#CDEDA3"
-                />
+                android:tint="#CDEDA3" />
 
         <ImageButton
                 app:srcCompat="@drawable/edit2"

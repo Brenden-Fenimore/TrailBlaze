@@ -1,62 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-    <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="9dp"
-            android:elevation="4dp"
-            >
-
-    <ImageView
-        android:id="@+id/senderImageView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="9dp"
-        android:scaleType="centerCrop"
-        android:contentDescription="@string/senderImage"/>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:padding="8dp">
 
     <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-
-        <TextView
-                android:id="@+id/senderNameTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/senderName"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/amethysta"
-                android:padding="9dp"/>
-
-        <TextView
-            android:id="@+id/messageTextView"
+            android:id="@+id/messageContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/messages"
-            android:padding="9dp"
-            android:fontFamily="@font/amethysta"
-            />
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-        <TextView
-                android:id="@+id/timestampTextView"
+        <!-- Left Profile Image -->
+        <ImageView
+                android:id="@+id/leftProfileImage"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="8dp"
+                android:visibility="gone"/>
+
+        <!-- Message Content -->
+        <LinearLayout
+                android:id="@+id/messageContentContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:elevation="1dp"
-                android:fontFamily="@font/amethysta"
-                android:text="@string/timeTemplate"
-                android:textSize="12sp"
-        />
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:maxWidth="240dp">
 
+            <TextView
+                    android:id="@+id/messageTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+
+            <TextView
+                    android:id="@+id/timestampTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <!-- Right Profile Image -->
+        <ImageView
+                android:id="@+id/rightProfileImage"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="8dp"
+                android:visibility="gone"/>
     </LinearLayout>
-
-
-    </LinearLayout>
+</FrameLayout>
