@@ -33,6 +33,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.example.trailblaze.nps.Park
 import com.example.trailblaze.nps.ParksAdapter
 import com.example.trailblaze.nps.RetrofitInstance
+import com.example.trailblaze.ui.Map.LocationItem
 import com.example.trailblaze.ui.parks.ParkDetailActivity
 import com.google.firebase.appcheck.internal.util.Logger.TAG
 import com.google.firebase.firestore.FieldValue
@@ -43,6 +44,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 import com.example.trailblaze.watcherFeature.WatcherMemberList
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import java.text.SimpleDateFormat
 
 interface PhotoDeletionListener {
@@ -68,7 +72,8 @@ interface PhotoDeletionListener {
         private lateinit var friendsList: MutableList<Friends>
 
         private lateinit var favoritesRecyclerView: RecyclerView
-        private lateinit var favoritesAdapter: ParksAdapter
+        private lateinit var favoritesAdapter: FavoritesAdapter
+
         private var favoriteParks: MutableList<Park> = mutableListOf()
 
         private val PICK_IMAGE_REQUEST = 1
@@ -124,18 +129,11 @@ interface PhotoDeletionListener {
             binding.friendsRecyclerView.adapter = friendAdapter
 
 
+            // Initialize RecyclerView
             favoritesRecyclerView = binding.favoriteParksRecyclerView
             favoritesRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
-            favoritesAdapter = ParksAdapter(emptyList()) { park ->
-                val intent = Intent(context, ParkDetailActivity::class.java).apply {
-                    putExtra("PARK_CODE", park.parkCode)
-                }
-                startActivity(intent)
-            }
-            favoritesRecyclerView.adapter = favoritesAdapter
-
-            fetchFavoriteParks()
+            setupFavoritesRecyclerView()
+            loadFavoriteParks()
             fetchLeaderboard()
 
 
@@ -359,65 +357,6 @@ interface PhotoDeletionListener {
             dialogBuilder.show()
         }
 
-        private fun fetchFavoriteParks() {
-            val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
-            firestore.collection("users").document(userId).get()
-                .addOnSuccessListener { document ->
-                    if (document != null && document.exists()) {
-                        Log.d("FavoritesFragment", "User document retrieved successfully.")
-                        val favoriteParkCodes = document.get("favoriteParks") as? List<String> ?: emptyList()
-                        Log.d("FavoritesFragment", "Favorite park codes: $favoriteParkCodes")
-
-                        fetchParksDetails(favoriteParkCodes)
-                    } else {
-                        Log.d("FavoritesFragment", "User document does not exist or is null.")
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    Log.e("FavoritesFragment", "Failed to retrieve user document: ${exception.message}")
-                }
-        }
-
-        private fun fetchParksDetails(parkCodes: List<String>) {
-            val tasks = parkCodes.map { parkCode ->
-                RetrofitInstance.api.getParkDetails(parkCode)
-            }
-
-            // Track the number of responses
-            var completedRequests = 0
-
-            tasks.forEach { call ->
-                call.enqueue(object : Callback<NPSResponse> {
-                    override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
-                        if (response.isSuccessful && response.body() != null) {
-                            val park = response.body()?.data?.firstOrNull()
-                            park?.let {
-                                favoriteParks.add(it) // Add the park to the list
-                            }
-                        }
-                        completedRequests++
-                        // Check if all requests are completed
-                        if (completedRequests == parkCodes.size) {
-                            updateParksRecyclerView(favoriteParks)
-                        }
-                    }
-
-                    override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
-                        Log.e("FavoritesFragment", "Error fetching park details: ${t.message}")
-                        completedRequests++
-                        // Check if all requests are completed, even on failure
-                        if (completedRequests == parkCodes.size) {
-                            updateParksRecyclerView(favoriteParks)
-                        }
-                    }
-                })
-            }
-        }
-
-        private fun updateParksRecyclerView(parks: List<Park>) {
-            favoritesAdapter.updateData(parks) // Update the adapter with the fetched parks
-        }
-
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
             super.onActivityResult(requestCode, resultCode, data)
             if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
@@ -574,7 +513,92 @@ interface PhotoDeletionListener {
             }
         }
 
+        //Function to set up Favorites RecyclerView for both parks and places
+        private fun setupFavoritesRecyclerView() {
+            favoritesAdapter = FavoritesAdapter(emptyList()) { item ->
+                when (item) {
+                    is LocationItem.ParkItem -> {
+                        val intent = Intent(context, ParkDetailActivity::class.java)
+                        intent.putExtra("PARK_CODE", item.park.parkCode)
+                        startActivity(intent)
+                    }
+                    is LocationItem.PlaceItem -> {
+                        val intent = Intent(context, ParkDetailActivity::class.java)
+                        intent.putExtra("PLACE_ID", item.place.id)
+                        startActivity(intent)
+                    }
+                }
+            }
+            favoritesRecyclerView.adapter = favoritesAdapter
+        }
 
+        //fucntion to load both parks and or places
+        private fun loadFavoriteParks() {
+            val userId = auth.currentUser?.uid ?: return
+
+            firestore.collection("users").document(userId).get()
+                .addOnSuccessListener { document ->
+                    if (document != null && document.exists()) {
+                        val favoriteParksList = document.get("favoriteParks") as? List<String> ?: emptyList()
+                        val locationItems = mutableListOf<LocationItem>()
+
+                        // Separate park codes and place IDs
+                        val parkCodes = favoriteParksList.filter { it.length < 10 }
+                        val placeIds = favoriteParksList.filter { it.length >= 10 }
+
+                        var totalLoaded = 0
+                        val totalItems = parkCodes.size + placeIds.size
+
+                        // Fetch parks from NPS API
+                        parkCodes.forEach { parkCode ->
+                            RetrofitInstance.api.getParkDetails(parkCode).enqueue(object : Callback<NPSResponse> {
+                                override fun onResponse(call: Call<NPSResponse>, response: Response<NPSResponse>) {
+                                    response.body()?.data?.firstOrNull()?.let { park ->
+                                        locationItems.add(LocationItem.ParkItem(park))
+                                    }
+                                    totalLoaded++
+                                    checkAndUpdateAdapter(totalLoaded, totalItems, locationItems)
+                                }
+
+                                override fun onFailure(call: Call<NPSResponse>, t: Throwable) {
+                                    totalLoaded++
+                                    checkAndUpdateAdapter(totalLoaded, totalItems, locationItems)
+                                }
+                            })
+                        }
+
+                        // Fetch places from Google Places API
+                        val placeFields = listOf(
+                            Place.Field.ID,
+                            Place.Field.DISPLAY_NAME,
+                            Place.Field.PHOTO_METADATAS,
+                            Place.Field.LOCATION
+                        )
+
+                        placeIds.forEach { placeId ->
+                            val request = FetchPlaceRequest.builder(placeId, placeFields).build()
+                            context?.let { ctx ->
+                                Places.createClient(ctx).fetchPlace(request)
+                                    .addOnSuccessListener { response ->
+                                        locationItems.add(LocationItem.PlaceItem(response.place))
+                                        totalLoaded++
+                                        checkAndUpdateAdapter(totalLoaded, totalItems, locationItems)
+                                    }
+                                    .addOnFailureListener {
+                                        totalLoaded++
+                                        checkAndUpdateAdapter(totalLoaded, totalItems, locationItems)
+                                    }
+                            }
+                        }
+                    }
+                }
+        }
+
+        private fun checkAndUpdateAdapter(loaded: Int, total: Int, items: List<LocationItem>) {
+            if (loaded == total) {
+                favoritesAdapter.updateData(items)
+            }
+        }
 
         override fun onResume() {
             super.onResume()
