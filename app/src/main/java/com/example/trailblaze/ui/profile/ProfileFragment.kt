@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,8 +28,6 @@ import com.example.trailblaze.ui.MenuActivity
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.DocumentSnapshot
-import com.example.trailblaze.nps.Park
-import com.example.trailblaze.nps.ParksAdapter
 import com.example.trailblaze.nps.RetrofitInstance
 import com.example.trailblaze.ui.Map.LocationItem
 import com.example.trailblaze.ui.parks.ParkDetailActivity
@@ -46,7 +43,6 @@ import com.example.trailblaze.watcherFeature.WatcherMemberList
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FetchPlaceRequest
-import java.text.SimpleDateFormat
 
 interface PhotoDeletionListener {
     fun onPhotoDeleted(deletedPhotoUrl: String)
@@ -72,7 +68,6 @@ interface PhotoDeletionListener {
 
         private lateinit var favoritesRecyclerView: RecyclerView
         private lateinit var favoritesAdapter: FavoritesAdapter
-        private var favoriteParks: MutableList<Park> = mutableListOf()
 
         private val PICK_IMAGE_REQUEST = 1
         private var selectedImageUri: Uri? = null
