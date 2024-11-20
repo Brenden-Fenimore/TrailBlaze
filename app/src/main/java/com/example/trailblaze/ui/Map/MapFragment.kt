@@ -377,7 +377,6 @@ class MapFragment : Fragment(),
                         val longitude = firstPark.longitude?.toDoubleOrNull()
 
                         if (latitude != null && longitude != null) {
-                            val parkLocation = LatLng(latitude, longitude)
 
                             val distanceInMeters = userDistanceMeters()
 
@@ -385,7 +384,7 @@ class MapFragment : Fragment(),
                             val zoomLevel = getZoomLevelForDistance(distanceInMeters)
 
                             // Apply the zoom level
-                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(parkLocation, zoomLevel))
+                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(userLocation, zoomLevel))
 
                             // Add markers for parks
                             for (park in newLocationItems) {
