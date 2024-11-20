@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
 
-class MessageAdapter (private val onMessageClick: (Message) -> Unit) : RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
+class MessageAdapter (private val messages: MutableList<Message>,
+    private val onMessageClick: (Message) -> Unit) : RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
-    private val messages = mutableListOf<Message>()
+    //private val messages = mutableListOf<Message>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : MessageViewHolder{
         val view = LayoutInflater.from(parent.context)
@@ -22,16 +23,17 @@ class MessageAdapter (private val onMessageClick: (Message) -> Unit) : RecyclerV
 
 }
      override fun onBindViewHolder(holder: MessageViewHolder, position: Int){
-       holder.bind(messages[position])
-         holder.itemView.setOnClickListener { onMessageClick(messages[position]) }
+         val message = messages[position]
+       holder.bind(message)
+         holder.itemView.setOnClickListener { onMessageClick(message) }
      }
 
     override fun getItemCount() : Int = messages.size
 
     fun submitList(newMessages: List<Message>){
-        this.messages.clear()
-        this.messages.addAll(newMessages)
-        this.notifyDataSetChanged()
+        messages.clear()
+        messages.addAll(newMessages)
+        notifyDataSetChanged()
     }
 
 inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -41,7 +43,7 @@ inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
     private val timestampTextView: TextView = itemView.findViewById(R.id.timestampTextView)
 
     fun bind(message: Message) {
-       // senderNameTextView.text = message.senderName
+       //senderNameTextView.text = message.senderName
         messageTextView.text = message.toString()
         timestampTextView.text = formatTimestamp(message.timestamp)
     }
@@ -54,10 +56,6 @@ inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
 
 
 }
-    class MessageDiffCallback : DiffUtil.ItemCallback<Message>() {
-        override fun areItemsTheSame(oldItem: Message, newItem: Message)= oldItem.timestamp == newItem.timestamp
-        override fun areContentsTheSame(oldItem: Message, newItem: Message)= oldItem == newItem
-    }
 
 
 }

@@ -43,8 +43,8 @@ binding.backButton.setOnClickListener { onBackPressed() }
     }
 
     private fun setupRecyclerView() {
-        adapter = MessageAdapter { message ->
-            val intent = Intent(this, MessagingActivity::class.java).apply {
+        adapter = MessageAdapter(mutableListOf() ) { message ->
+            val intent = Intent(this, MessageActivity::class.java).apply {
                 putExtra("MESSAGE_ID", message.id)
             }
             startActivity(intent)

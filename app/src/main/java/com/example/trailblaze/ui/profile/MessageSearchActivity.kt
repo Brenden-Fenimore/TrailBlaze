@@ -4,20 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.AutoCompleteTextView
-import android.widget.EditText
 import android.widget.ImageButton
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
-import com.google.android.play.core.integrity.v
-import com.example.trailblaze.ui.profile.FriendAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.example.trailblaze.ui.profile.MessageActivity
+
 
 class MessageSearchActivity : AppCompatActivity() {
 
@@ -44,12 +38,12 @@ private lateinit var friendAdapter: FriendAdapter
         searchButton = findViewById(R.id.searchIcon)
         friendsRecyclerView = findViewById(R.id.searchFriendsRecycler)
 
-     //   searchInput.requestFocus()
+       searchInput.requestFocus()
 
         // Set the layout manager for the RecyclerView
         friendsRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Setup the adapter for the RecyclerView and provide an empty list initially
+        // Set up the adapter for the RecyclerView and provide an empty list initially
         friendAdapter = FriendAdapter(emptyList()) { user ->
             openMessageActivity(user.userId, user.username)
         }
@@ -112,7 +106,7 @@ private lateinit var friendAdapter: FriendAdapter
     }
 
     private fun openMessageActivity(friendUserId: String, friendUsername: String) {
-        val intent = Intent(this, MessageActivity).apply {
+        val intent = Intent(this, MessageActivity::class.java).apply {
             putExtra("friendId", friendUserId)
             putExtra("friendName", friendUsername)
         }
