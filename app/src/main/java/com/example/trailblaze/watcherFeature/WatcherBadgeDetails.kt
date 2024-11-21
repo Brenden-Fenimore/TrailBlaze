@@ -6,7 +6,7 @@ data class WatcherBadgeDetails(
 )
 
 object WatcherBadgeRepository{
-    val badgeDetails = listOf(
+    private val badgeDetails = listOf(
         WatcherBadgeDetails("Most Valuable Watcher", "Awarded to watchers who are consistently chosen as a watcher for a specific user."),
         WatcherBadgeDetails("Master Watcher", "An iconic presence in the TrailBlaze community, ensuring more than 150 safe adventures."),
         WatcherBadgeDetails("Night Owl Watcher", "Awarded to watchers who have watched 10 night adventures."),
