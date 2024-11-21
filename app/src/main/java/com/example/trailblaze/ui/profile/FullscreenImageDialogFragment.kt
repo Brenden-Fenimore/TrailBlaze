@@ -712,7 +712,7 @@ class FullscreenImageDialogFragment : DialogFragment() {
                 } else {
                     // Assume the first matching document contains the needed upload date
                     val document = querySnapshot.documents.firstOrNull()
-                    val uploadTimestamp = document?.getTimestamp("uploadDate")
+                    val uploadTimestamp = document?.getTimestamp("timestamp")
                     val uploadDate = uploadTimestamp?.toDate()
 
                     if (uploadDate != null) {

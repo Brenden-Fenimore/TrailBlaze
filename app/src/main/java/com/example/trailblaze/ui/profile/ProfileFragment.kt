@@ -385,7 +385,6 @@ interface PhotoDeletionListener {
                 val photoData = hashMapOf(
                     "url" to photoUrl,
                     "timestamp" to FieldValue.serverTimestamp(),
-                    "uploadDate" to FieldValue.serverTimestamp()
                 )
 
             firestore.collection("users")
