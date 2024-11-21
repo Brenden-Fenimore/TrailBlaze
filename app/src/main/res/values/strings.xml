@@ -451,6 +451,9 @@
     <string name="followupRate"> Follow-Up Rate</string>
     <string name="totalTrailsWatched">Total Trails Watched</string>
     <string name="averageResponseTime">Average Response Time</string>
+    <string name="watcherTitle">Watcher Title</string>
+    <string name="watcherIcon">Watcher Icon</string>
+    <string name="watcherBadgeTitle">Badge Title</string>
 
 
     <!-- Messaging Strings-->
