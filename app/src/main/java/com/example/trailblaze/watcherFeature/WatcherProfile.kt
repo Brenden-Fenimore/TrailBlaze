@@ -1,64 +1,36 @@
 package com.example.trailblaze.watcherFeature
 
-import android.content.Intent
+
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
-import com.example.trailblaze.MainActivity
 import com.example.trailblaze.R
-import com.example.trailblaze.databinding.ActivityInboxBinding
 import com.example.trailblaze.databinding.ActivityWatcherProfileBinding
-import com.example.trailblaze.firestore.ImageLoader
-import com.example.trailblaze.firestore.ImageLoader.loadProfilePicture
-import com.example.trailblaze.firestore.User
-import com.example.trailblaze.firestore.UserManager
 import com.example.trailblaze.firestore.UserRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
+
 
 class WatcherProfile : AppCompatActivity() {
 
     private lateinit var binding: ActivityWatcherProfileBinding
- //   private val binding get() = _binding!!
-
     private var firestore = FirebaseFirestore.getInstance()
-    private val storage = FirebaseStorage.getInstance()
     private lateinit var auth: FirebaseAuth
     private lateinit var userRepository: UserRepository
-    private lateinit var userManager: UserManager
-
-    private lateinit var watcherName: TextView
-    private lateinit var watcherProfilePicture: ImageView
     private lateinit var userId: String
-    private lateinit var chevronLeftButton: ImageButton
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityWatcherProfileBinding.inflate(layoutInflater)
+        binding= ActivityWatcherProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // Initialize firebase
         auth = FirebaseAuth.getInstance()
         userRepository = UserRepository(firestore)
         firestore = FirebaseFirestore.getInstance()
-        userManager = UserManager
 
-
-        // Initialize views
-        watcherName = findViewById(R.id.watcherName)
-        watcherProfilePicture = findViewById(R.id.watcherProfilePicture)
-//        chevronLeftButton = findViewById(R.id.chevron_left)
 
         // Back button listener
         binding.chevronLeft.setOnClickListener {
@@ -71,25 +43,38 @@ class WatcherProfile : AppCompatActivity() {
         if(userId.isNotEmpty()){
             loadUserProfile(userId)
         }
+
+        setupBadgeTouchListeners()
     }
+
+
     private fun loadUserProfile(userId: String) {
+
         // get user data from firestore
         firestore.collection("users").document(userId).get()
         .addOnSuccessListener { document->
             if(document.exists()){
+
                 // extract user data
                 val username = document.getString("username")?: "Unknown User"
                 val profileImageUrl = document.getString("profile_image")
+                val watcherRank = document.get("watcherRank").toString()
+                val totalTrailsWatched = document.get("total_trails_watched").toString()
+                val averageResponseTime = document.get("average_response_time").toString()
+                val followupRate = document.get("follow_uo_rate").toString()
 
-                // Set Username
-                watcherName.text = username
+                // Set user details
+                binding.watcherName.text = username
+                binding.watcherRank.text = watcherRank
+                binding.totalTrailsWatched.text = totalTrailsWatched
+                binding.averageResponseTime.text = averageResponseTime
+         //       binding.followupRate = document.get("follow_up_rate").toString()
 
                 // Load Profile Picture
                 profileImageUrl?.let {
-                    loadWatcherProfilePicture(it)
-                }?:run {
-                    watcherProfilePicture.setImageResource(R.drawable.account_circle)
-                }
+                    Glide.with(this).load(it).placeholder(R.drawable.account_circle)
+                        .into(binding.watcherProfilePicture)
+                }?: binding.watcherProfilePicture.setImageResource(R.drawable.account_circle)
 
             }
         }
@@ -97,10 +82,17 @@ class WatcherProfile : AppCompatActivity() {
     }
 
 
-    private fun loadWatcherProfilePicture(profileImageUrl: String){
-        val userId = auth.currentUser?.uid ?: return
-        userRepository.getUserProfileImage(userId) { imageUrl ->
-            ImageLoader.loadProfilePicture(this, binding.watcherProfilePicture, imageUrl)
+    private fun setupBadgeTouchListeners() {
+        val badgeContainers = listOf(
+            binding.watcherBadges,
+            binding.watcherBadges1,
+            binding.watcherBadges2,
+            binding.watcherBadges3
+        )
+
+        badgeContainers.forEach { watcherBadge ->
+            watcherBadge.setOnClickListener {}
         }
-        }
+    }
+
 }
