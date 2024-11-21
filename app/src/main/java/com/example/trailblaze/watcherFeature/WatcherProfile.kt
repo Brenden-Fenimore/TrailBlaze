@@ -103,18 +103,18 @@ class WatcherProfile : AppCompatActivity() {
     private fun loadCurrentUserData() {
         // Fetch the current user from UserManager
         lateinit var userManager: UserManager
-        lateinit var watcherName: String
+       // lateinit var watcherName: String
         val currentUser = userManager.getCurrentUser()
 
         if (currentUser != null) {
             // Set the watcherName in the TextView
             binding.watcherName.text = currentUser.username
 
-            // Load the user's badges
-            fetchWatcherBadges()
-
             // Load the user's profile picture
             loadProfilePicture()
+
+            // Load the user's badges
+            fetchWatcherBadges()
 
 
         } else {

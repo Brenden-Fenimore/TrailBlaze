@@ -29,7 +29,7 @@ class WatcherBadgeAdapter(
 
     // Override the onCreateViewHolder method to create a new ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatcherBadgeAdapter.WatcherBadgeViewHolder {
-        // Inflate the badge_item layout and create a View for the ViewHolder
+        // Inflate the watcher_badge_item layout and create a View for the ViewHolder
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_watcher_badge, parent, false)
 
         // Return a new instance of ViewHolder with the inflated view
