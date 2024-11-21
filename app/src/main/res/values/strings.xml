@@ -448,6 +448,10 @@
     <string name="notifyWatchers">Notify Watchers</string>
     <string name="watcherRank">Watcher Rank</string>
     <string name="setupWatcher">Setup Watcher</string>
+    <string name="followupRate"> Follow-Up Rate</string>
+    <string name="totalTrailsWatched">Total Trails Watched</string>
+    <string name="averageResponseTime">Average Response Time</string>
+
 
     <!-- Messaging Strings-->
 
