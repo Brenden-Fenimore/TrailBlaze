@@ -1,9 +1,9 @@
 package com.example.trailblaze.watcherFeature
 
 data class WatcherBadgeDetails(
-    val id: String,
-    val title: String,
-    val description: String,
+    val id: String = " ",
+    val title: String = " ",
+    val description: String  = " ",
 )
 
 object WatcherBadgeRepository{
