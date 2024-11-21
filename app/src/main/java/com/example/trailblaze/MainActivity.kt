@@ -1,7 +1,10 @@
 package com.example.trailblaze
 
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -11,14 +14,29 @@ import com.example.trailblaze.login.LoginActivity
 import com.google.android.libraries.places.api.Places
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.trailblaze.BuildConfig
+import com.google.firebase.auth.FirebaseAuth
+import android.Manifest
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var firestore: FirebaseFirestore
     private lateinit var binding: ActivityMainBinding
+    private lateinit var notificationHelper: NotificationHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Initialize notification helper
+        notificationHelper = NotificationHelper(this)
+
+        // Set up notifications when user is logged in
+        FirebaseAuth.getInstance().currentUser?.let { user ->
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                requestNotificationPermission(user.uid)
+            } else {
+                notificationHelper.setupFirestoreListeners(user.uid)
+            }
+        }
 
         // Hide the ActionBar
         supportActionBar?.hide()
@@ -46,6 +64,23 @@ class MainActivity : AppCompatActivity() {
             // Initialize Firestore
             firestore = FirebaseFirestore.getInstance()
 
+        }
+    }
+
+    private fun requestNotificationPermission(userId: String) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) !=
+                PackageManager.PERMISSION_GRANTED) {
+                registerForActivityResult(
+                    ActivityResultContracts.RequestPermission()
+                ) { isGranted ->
+                    if (isGranted) {
+                        notificationHelper.setupFirestoreListeners(userId)
+                    }
+                }.launch(Manifest.permission.POST_NOTIFICATIONS)
+            } else {
+                notificationHelper.setupFirestoreListeners(userId)
+            }
         }
     }
 }
