@@ -249,6 +249,7 @@ class AttemptTrailActivity : AppCompatActivity() {
             userAdapter.notifyItemInserted(userList.size - 1)
         }
     }
+
     private fun showAddUserDialog() {
         // Inflate the custom layout for adding a user
         val dialogView = layoutInflater.inflate(R.layout.dialog_add_user, null)
@@ -282,6 +283,7 @@ class AttemptTrailActivity : AppCompatActivity() {
 
         dialog.show()
     }
+
     private fun updatePartyMemberCount() {
         val partyMemberCountTextView: TextView = findViewById(R.id.party_member_count)
         partyMemberCountTextView.text = "(${userList.size})"  // Update the count in the format (N)

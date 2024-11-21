@@ -162,6 +162,7 @@ class HomeFragment : Fragment() {
         fetchTimeRecords()
         return root
     }
+
     override fun onResume() {
         super.onResume()
         // Refresh all counters and data when returning to the fragment

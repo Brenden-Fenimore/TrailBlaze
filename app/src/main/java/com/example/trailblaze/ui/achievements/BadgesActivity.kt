@@ -170,6 +170,7 @@ class BadgesActivity : AppCompatActivity() {
         }
     }
 
+    //function to add badges to the sassh
     private fun addBadgeToSash(drawableResId: Int, x: Float, y: Float) {
         // Get the resource name from the drawable resource ID
         val resourceName = resources.getResourceEntryName(drawableResId)
@@ -278,7 +279,6 @@ class BadgesActivity : AppCompatActivity() {
         }
     }
 
-
     //function to fetch sashed badges for current user
     private fun fetchSashedBadges() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
@@ -297,6 +297,7 @@ class BadgesActivity : AppCompatActivity() {
         }
     }
 
+    //function to display the sashed badges
     private fun displaySashedBadges(sashedBadges: List<Map<String, Any>>) {
         // Clear previous badges (ensure you're not duplicating badges)
         sash.removeAllViews()
@@ -360,6 +361,7 @@ class BadgesActivity : AppCompatActivity() {
         }
     }
 
+    //function to save the badges position to the firestore after it has been placed
     private fun saveBadgePositionToFirestore(badgeId: String, x: Float, y: Float) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {

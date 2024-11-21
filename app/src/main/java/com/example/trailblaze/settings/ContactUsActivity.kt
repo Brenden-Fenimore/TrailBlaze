@@ -30,6 +30,5 @@ class ContactUsActivity : AppCompatActivity() {
             finish()
         }
 
-        }
     }
-
+}

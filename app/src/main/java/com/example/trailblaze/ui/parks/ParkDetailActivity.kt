@@ -87,7 +87,7 @@ class ParkDetailActivity : AppCompatActivity() {
 
 
     private fun initializeViews() {
-// Initialize views
+        // Initialize views
         parkNameTextView = findViewById(R.id.parkNameTextView)
         parkDescriptionTextView = findViewById(R.id.parkDescriptionTextView)
         parkLatitudeTextView = findViewById(R.id.parkLatitudeTextView)
@@ -563,6 +563,7 @@ class ParkDetailActivity : AppCompatActivity() {
         parkWeatherInfoTextView.visibility = View.GONE
         parkActivitiesTextView.visibility = View.GONE
     }
+
     // Helper function to save bitmap as file and return URL
     private fun saveBitmapToFile(bitmap: Bitmap): String {
         val file = File(cacheDir, "place_photo_${System.currentTimeMillis()}.jpg")

@@ -15,7 +15,6 @@ class AchievementManager(context: Context) {
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance() // Firestore instance for database operations
 
     // Unlock an achievement
-    // Unlock an achievement
     fun unlockAchievement(achievementId: String, onComplete: (Boolean) -> Unit) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid // Get the current user's ID
         if (userId != null) {
@@ -710,7 +709,6 @@ class AchievementManager(context: Context) {
             }
         }
     }
-
 
     // Logic to grant a badge to the user
     private fun grantBadge(badgeId: String) {

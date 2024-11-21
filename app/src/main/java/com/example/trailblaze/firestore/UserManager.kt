@@ -22,7 +22,6 @@ object UserManager {
         currentUser = user // Assign the provided user to the currentUser variable
     }
 
-
     // Function to fetch user data from Firestore based on userId
     fun fetchUserData(userId: String, firestore: FirebaseFirestore, callback: (User?) -> Unit) {
 

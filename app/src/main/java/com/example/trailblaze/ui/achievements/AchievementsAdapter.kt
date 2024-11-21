@@ -87,7 +87,6 @@ class AchievementsAdapter(private val categories: List<AchievementCategory>) :
         }, 2000) // Dismiss after 2 seconds
     }
 
-
     override fun getItemCount(): Int {
         return categories.size
     }
