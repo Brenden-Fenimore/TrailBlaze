@@ -335,7 +335,7 @@
                             android:layout_width="130dp"
                             android:layout_height="match_parent"
                             android:layout_marginStart="1dp"
-                            android:src="@drawable/badge"
+                            android:src="@drawable/most_valuable_watcher"
                             android:layout_gravity="center"
                             android:contentDescription="@string/watcherBadge"
                             android:layout_marginTop="5dp"
