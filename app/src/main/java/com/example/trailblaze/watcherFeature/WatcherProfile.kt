@@ -139,7 +139,6 @@ class WatcherProfile : AppCompatActivity() {
                         // Retrieve the badges as a List<String>
                         val badges = document.get("badges") as? List<String> ?: emptyList()
                         Log.d("WatcherProfileActivity", "Fetched badges: $badges") // Log for debugging
-                       // updateBadgesList(badges)
                     }
                 }
                 .addOnFailureListener { e ->
