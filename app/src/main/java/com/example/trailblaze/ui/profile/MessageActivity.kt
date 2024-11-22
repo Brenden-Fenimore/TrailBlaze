@@ -59,7 +59,7 @@ class MessagingActivity : AppCompatActivity() {
             .into(friendProfileImage)
 
         // Initialize views
-        //chevronLeft = findViewById(R.id.chevron_left)
+        chevronLeft = findViewById(R.id.chevron_left)
         attachImageButton = findViewById(R.id.attachImageButton)
         sendMessageButton = findViewById(R.id.sendMessageButton)
         messageEditText = findViewById(R.id.messageEditText)
@@ -125,7 +125,7 @@ class MessagingActivity : AppCompatActivity() {
         messageEditText.text.clear()
 
         // Play the sound after adding the message locally
-      //  playMessageSentSound(this)
+        playMessageSentSound(this)
 
         // Then save to Firestore
         firestore.collection("messages")
@@ -187,7 +187,7 @@ class MessagingActivity : AppCompatActivity() {
                 messagesRecyclerView.scrollToPosition(messagesList.size - 1)
 
                 // Play the received sound
-              //  playMessageReceivedSound(this)
+                playMessageReceivedSound(this)
             }
     }
     private fun getCurrentUserProfileUrl(callback: (String?) -> Unit) {
