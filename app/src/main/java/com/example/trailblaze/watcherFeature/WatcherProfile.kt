@@ -8,12 +8,10 @@ import com.bumptech.glide.Glide
 import com.example.trailblaze.R
 import com.example.trailblaze.databinding.ActivityWatcherProfileBinding
 import com.example.trailblaze.firestore.ImageLoader
-import com.example.trailblaze.firestore.UserManager
 import com.example.trailblaze.firestore.UserRepository
-import com.example.trailblaze.ui.achievements.BadgesAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-
+import com.example.trailblaze.firestore.User
 
 
 class WatcherProfile : AppCompatActivity() {
@@ -24,6 +22,8 @@ class WatcherProfile : AppCompatActivity() {
     private lateinit var userRepository: UserRepository
     private lateinit var userId: String
 
+    // WatcherBadges Adapter
+    private lateinit var adapter: WatcherBadgeAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,7 +82,7 @@ class WatcherProfile : AppCompatActivity() {
                         .into(binding.watcherProfilePicture)
                 }?: binding.watcherProfilePicture.setImageResource(R.drawable.account_circle)
 
-                fetchWatcherBadges()
+                fetchWatcherDetails(userId)
 
             }
         }
@@ -103,27 +103,27 @@ class WatcherProfile : AppCompatActivity() {
         }
     }
 
-    private fun loadCurrentUserData() {
-        // Fetch the current user from UserManager
-        lateinit var userManager: UserManager
-       //  var watcherName: String
-        val currentUser = userManager.getCurrentUser()
-
-        if (currentUser != null) {
-            // Set the watcherName in the TextView
-            binding.watcherName.text = currentUser.username
-
-            // Load the user's profile picture
-            loadProfilePicture()
-
-            // Load the user's badges
-            fetchWatcherBadges()
-
-
-        } else {
-            binding.watcherName.text = "Not logged in"
-        }
-    }
+//    private fun loadCurrentUserData() {
+//        // Fetch the current user from UserManager
+//        lateinit var userManager: UserManager
+//       //  var watcherName: String
+//        val currentUser = userManager.getCurrentUser()
+//
+//        if (currentUser != null) {
+//            // Set the watcherName in the TextView
+//            binding.watcherName.text = currentUser.username
+//
+//            // Load the user's profile picture
+//            loadProfilePicture()
+//
+//            // Load the user's badges
+//            fetchWatcherDetails(userId)
+//
+//
+//        } else {
+//            binding.watcherName.text = "Not logged in"
+//        }
+//    }
 
     private fun loadProfilePicture() {
         val userId = auth.currentUser?.uid ?: return
@@ -132,23 +132,45 @@ class WatcherProfile : AppCompatActivity() {
         }
     }
 
-    private fun fetchWatcherBadges() {
-        // Fetching badges logic here
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
-        if (userId != null) {
-            firestore.collection("users").document(userId).get()
-                .addOnSuccessListener { document ->
-                    if (document.exists()) {
-                        // Retrieve the badges as a List<String>
-                        val watcherBadges = document.get("watcherBadges") as? List<String> ?: emptyList()
-                        Log.d("WatcherProfileActivity", "Fetched watcherBadges: $watcherBadges") // Log for debugging
-                    }
+//    private fun fetchWatcherBadges() {
+//        // Fetching badges logic here
+//        val userId = FirebaseAuth.getInstance().currentUser?.uid
+//        if (userId != null) {
+//            firestore.collection("users").document(userId).get()
+//                .addOnSuccessListener { document ->
+//                    if (document.exists()) {
+//                        // Retrieve the badges as a List<String>
+//                        val watcherBadges = document.get("watcherBadges") as? List<String> ?: emptyList()
+//                        Log.d("WatcherProfileActivity", "Fetched watcherBadges: $watcherBadges") // Log for debugging
+//                    }
+//                }
+//                .addOnFailureListener { e ->
+//                    Log.e("Firestore", "Error fetching badges: ", e)
+//                }
+//        }
+//
+//
+//    }
+
+    private fun fetchWatcherDetails(userId: String) {
+        val firestore = FirebaseFirestore.getInstance()
+        firestore.collection("users").document(userId)
+            .get()
+            .addOnSuccessListener { document ->
+                val user = document.toObject(User::class.java)
+                val watcherDetails = user?.watcherDetails
+
+                if (watcherDetails != null) {
+                    // Use watcherDetails to update the UI
+                    Log.d("WatcherDetails", "Rank: ${watcherDetails.rank}")
+                    Log.d("WatcherDetails", "Stats: ${watcherDetails.stats}")
+                    Log.d("WatcherDetails", "Awards: ${watcherDetails.awards}")
+                } else {
+                    Log.d("WatcherDetails", "No watcher details found for this user.")
                 }
-                .addOnFailureListener { e ->
-                    Log.e("Firestore", "Error fetching badges: ", e)
-                }
-        }
+            }
+            .addOnFailureListener { e ->
+                Log.e("WatcherDetails", "Error fetching watcher details", e)
+            }
     }
-
-
 }

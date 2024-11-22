@@ -1,6 +1,19 @@
 package com.example.trailblaze.firestore
 
 import com.example.trailblaze.nps.Park
+
+// Data class for watcher member details
+
+data class WatcherUser(
+    val rank: String = "Newbie",
+    val stats: Map<String, Int> = mapOf(
+        "totalTrailsWatched" to 0,
+        "messagesSent" to 0,
+        "averageResponseTime" to 0,
+        "followUpRate" to 0,
+    ),
+    val awards: List<String> = emptyList()
+)
 // Data class representing a user
 data class User(
     val uid: String = "",
@@ -27,6 +40,9 @@ data class User(
     val photosVisible: Boolean,
     val shareLocationVisible: Boolean,
     val watcherVisible: Boolean,
-    val photos: List<String> = emptyList()
+    val photos: List<String> = emptyList(),
 
+    // Watcher Member details
+
+    val watcherDetails: WatcherUser? = null
 )
