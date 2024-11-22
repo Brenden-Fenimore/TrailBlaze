@@ -192,6 +192,9 @@ class MessagingActivity : AppCompatActivity() {
                 messagesList.addAll(newMessages)
                 messageAdapter.submitList(messagesList.toList())
                 messagesRecyclerView.scrollToPosition(messagesList.size - 1)
+
+                // Play the received sound
+                playMessageReceivedSound(this)
             }
     }
     private fun getCurrentUserProfileUrl(callback: (String?) -> Unit) {
@@ -204,11 +207,21 @@ class MessagingActivity : AppCompatActivity() {
                 }
         }
     }
-    fun playMessageSentSound(context: Context) {
+
+    private fun playMessageSentSound(context: Context) {
         val mediaPlayer = MediaPlayer.create(context, R.raw.message_sent_sound)
         mediaPlayer.start()
 
             // Release resources when playback is done
+        mediaPlayer.setOnCompletionListener {
+            mediaPlayer.release()
+        }
+    }
+    private fun playMessageReceivedSound(context: Context) {
+        val mediaPlayer = MediaPlayer.create(context, R.raw.messsage_received_sound) // Ensure the file exists in res/raw/
+        mediaPlayer.start()
+
+        // Release resources when playback is done
         mediaPlayer.setOnCompletionListener {
             mediaPlayer.release()
         }
