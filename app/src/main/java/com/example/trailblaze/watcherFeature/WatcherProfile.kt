@@ -68,18 +68,21 @@ class WatcherProfile : AppCompatActivity() {
                 val averageResponseTime = document.get("average_response_time").toString()
                 val followupRate = document.get("follow_uo_rate").toString()
 
-                // Set user details
+                // Set TextViews
                 binding.watcherName.text = username
                 binding.watcherRank.text = watcherRank
                 binding.totalTrailsWatched.text = totalTrailsWatched
                 binding.averageResponseTime.text = averageResponseTime
-                //binding.followupRate = document.get("follow_up_rate").toString()
+                binding.followupRate.text = followupRate
+
 
                 // Load Profile Picture
                 profileImageUrl?.let {
                     Glide.with(this).load(it).placeholder(R.drawable.account_circle)
                         .into(binding.watcherProfilePicture)
                 }?: binding.watcherProfilePicture.setImageResource(R.drawable.account_circle)
+
+                fetchWatcherBadges()
 
             }
         }
@@ -103,7 +106,7 @@ class WatcherProfile : AppCompatActivity() {
     private fun loadCurrentUserData() {
         // Fetch the current user from UserManager
         lateinit var userManager: UserManager
-       // lateinit var watcherName: String
+       //  var watcherName: String
         val currentUser = userManager.getCurrentUser()
 
         if (currentUser != null) {
@@ -137,8 +140,8 @@ class WatcherProfile : AppCompatActivity() {
                 .addOnSuccessListener { document ->
                     if (document.exists()) {
                         // Retrieve the badges as a List<String>
-                        val badges = document.get("badges") as? List<String> ?: emptyList()
-                        Log.d("WatcherProfileActivity", "Fetched badges: $badges") // Log for debugging
+                        val watcherBadges = document.get("watcherBadges") as? List<String> ?: emptyList()
+                        Log.d("WatcherProfileActivity", "Fetched watcherBadges: $watcherBadges") // Log for debugging
                     }
                 }
                 .addOnFailureListener { e ->
