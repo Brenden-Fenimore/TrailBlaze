@@ -59,7 +59,7 @@ class MessagingActivity : AppCompatActivity() {
             .into(friendProfileImage)
 
         // Initialize views
-        chevronLeft = findViewById(R.id.chevron_left)
+        //chevronLeft = findViewById(R.id.chevron_left)
         attachImageButton = findViewById(R.id.attachImageButton)
         sendMessageButton = findViewById(R.id.sendMessageButton)
         messageEditText = findViewById(R.id.messageEditText)
@@ -125,7 +125,7 @@ class MessagingActivity : AppCompatActivity() {
         messageEditText.text.clear()
 
         // Play the sound after adding the message locally
-        playMessageSentSound(this)
+      //  playMessageSentSound(this)
 
         // Then save to Firestore
         firestore.collection("messages")
@@ -138,6 +138,7 @@ class MessagingActivity : AppCompatActivity() {
             }
     }
 
+    @Deprecated("This method has been deprecated in favor of using the Activity Result API\n      which brings increased type safety via an {@link ActivityResultContract} and the prebuilt\n      contracts for common intents available in\n      {@link androidx.activity.result.contract.ActivityResultContracts}, provides hooks for\n      testing, and allow receiving results in separate, testable classes independent from your\n      activity. Use\n      {@link #registerForActivityResult(ActivityResultContract, ActivityResultCallback)}\n      with the appropriate {@link ActivityResultContract} and handling the result in the\n      {@link ActivityResultCallback#onActivityResult(Object) callback}.")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE && resultCode == Activity.RESULT_OK) {
@@ -186,7 +187,7 @@ class MessagingActivity : AppCompatActivity() {
                 messagesRecyclerView.scrollToPosition(messagesList.size - 1)
 
                 // Play the received sound
-                playMessageReceivedSound(this)
+              //  playMessageReceivedSound(this)
             }
     }
     private fun getCurrentUserProfileUrl(callback: (String?) -> Unit) {
