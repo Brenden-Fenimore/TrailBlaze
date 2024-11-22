@@ -1,7 +1,9 @@
 package com.example.trailblaze.ui.profile
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -130,6 +132,9 @@ class MessagingActivity : AppCompatActivity() {
         messagesRecyclerView.scrollToPosition(messagesList.size - 1)
         messageEditText.text.clear()
 
+        // Play the sound after adding the message locally
+        playMessageSentSound(this)
+
         // Then save to Firestore
         firestore.collection("messages")
             .add(message)
@@ -197,6 +202,15 @@ class MessagingActivity : AppCompatActivity() {
                     val profileUrl = document.getString("profileImageUrl")
                     callback(profileUrl)
                 }
+        }
+    }
+    fun playMessageSentSound(context: Context) {
+        val mediaPlayer = MediaPlayer.create(context, R.raw.message_sent_sound)
+        mediaPlayer.start()
+
+            // Release resources when playback is done
+        mediaPlayer.setOnCompletionListener {
+            mediaPlayer.release()
         }
     }
 }
