@@ -7,23 +7,15 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.*
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trailblaze.R
-import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.google.firestore.admin.v1.Index
 
 
 data class Message(
@@ -218,7 +210,7 @@ class MessagingActivity : AppCompatActivity() {
         }
     }
     private fun playMessageReceivedSound(context: Context) {
-        val mediaPlayer = MediaPlayer.create(context, R.raw.messsage_received_sound) // Ensure the file exists in res/raw/
+        val mediaPlayer = MediaPlayer.create(context, R.raw.message_received_sound) // Ensure the file exists in res/raw/
         mediaPlayer.start()
 
         // Release resources when playback is done
