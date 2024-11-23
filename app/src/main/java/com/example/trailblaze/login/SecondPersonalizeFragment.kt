@@ -1,5 +1,6 @@
 package com.example.trailblaze.login
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
@@ -44,6 +45,11 @@ class SecondPersonalizeFragment : Fragment() {
             //navigate to ThirdFragment
             (activity as? PersonalizeActivity)?.loadFragment(ThirdPersonalizeFragment())
         }
+
+        sharedPreferences = requireActivity().getSharedPreferences(
+            "app_preferences",  // Your preference file name
+            Context.MODE_PRIVATE
+        )
         // Initialize views
         city = view.findViewById(R.id.etCity)
         state = view.findViewById(R.id.etState)
