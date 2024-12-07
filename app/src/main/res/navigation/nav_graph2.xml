@@ -7,7 +7,7 @@
 
     <fragment
             android:id="@+id/FirstFragment"
-            android:name="com.example.trailblaze.login.FirstPersonalizeFragment"
+            android:name="com.byteforce.trailblaze.login.FirstPersonalizeFragment"
             android:label="@string/first_fragment_label"
             tools:layout="@layout/fragment_first_personalize">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
             android:id="@+id/SecondFragment"
-            android:name="com.example.trailblaze.login.SecondPersonalizeFragment"
+            android:name="com.byteforce.trailblaze.login.SecondPersonalizeFragment"
             android:label="@string/second_fragment_label"
             tools:layout="@layout/fragment_second_personalize">
 

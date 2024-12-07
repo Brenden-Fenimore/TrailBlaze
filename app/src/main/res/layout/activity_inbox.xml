@@ -18,7 +18,7 @@
             app:layout_constraintEnd_toEndOf="parent">
 
         <!-- Custom Swish Background at the bottom layer -->
-        <com.example.trailblaze.view.SwishBackgroundView
+        <com.byteforce.trailblaze.view.SwishBackgroundView
                 android:layout_width="match_parent"
                 android:layout_height="100dp" />
 

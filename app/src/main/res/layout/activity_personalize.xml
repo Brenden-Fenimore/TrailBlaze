@@ -16,7 +16,7 @@
                 android:layout_height="100dp">
 
             <!-- Swish Background -->
-            <com.example.trailblaze.view.SwishBackgroundView
+            <com.byteforce.trailblaze.view.SwishBackgroundView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/swishBackgroundView"/>

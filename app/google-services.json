@@ -1,10 +1,30 @@
 {
   "project_info": {
     "project_number": "1017354103686",
+    "firebase_url": "https://trailblaze-48640-default-rtdb.firebaseio.com",
     "project_id": "trailblaze-48640",
     "storage_bucket": "trailblaze-48640.appspot.com"
   },
   "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1017354103686:android:a0b7625a244d81f07eda07",
+        "android_client_info": {
+          "package_name": "com.byteforce.trailblaze"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUWF7u2Ek-DOZjOS0bMxIWPLNrJjiqhQ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:1017354103686:android:16bf2db4495f7ab07eda07",

@@ -7,14 +7,14 @@ plugins {
 }
 
 android {
-    namespace = "com.example.trailblaze"
+    namespace = "com.byteforce.trailblaze"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.trailblaze"
+        applicationId = "com.byteforce.trailblaze"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
+        versionCode = 2
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

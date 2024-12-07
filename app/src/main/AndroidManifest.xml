@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
+          package="com.byteforce.trailblaze"
           tools:ignore="ExtraText">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -22,95 +22,95 @@
             android:theme="@style/Theme.TrailBlaze"
             tools:targetApi="31">
         <activity
-                android:name=".ui.profile.MessagingActivity"
+                android:name="com.byteforce.trailblaze.ui.profile.MessagingActivity"
                 android:exported="false"/>
         <activity
-                android:name=".ui.profile.MessageSearchActivity"
+                android:name="com.byteforce.trailblaze.ui.profile.MessageSearchActivity"
                 android:exported="false"/>
         <activity
-                android:name=".ui.profile.InboxActivity"
+                android:name="com.byteforce.trailblaze.ui.profile.InboxActivity"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:exported="false"
                 android:label="@string/title_activity_inbox"
                 android:theme="@style/Theme.TrailBlaze.Fullscreen"/>
         <activity
-                android:name=".ui.home.PendingNotificationActivity"
+                android:name="com.byteforce.trailblaze.ui.home.PendingNotificationActivity"
                 android:exported="true"/>
         <activity
-                android:name=".ui.parks.TimerActivity"
+                android:name="com.byteforce.trailblaze.ui.parks.TimerActivity"
                 android:exported="true"/>
         <activity
-                android:name=".ui.parks.AttemptTrailActivity"
+                android:name="com.byteforce.trailblaze.ui.parks.AttemptTrailActivity"
                 android:exported="true"/>
         <activity
-                android:name=".ui.profile.UserListActivity"
+                android:name="com.byteforce.trailblaze.ui.profile.UserListActivity"
                 android:exported="true"/>
         <activity
-                android:name=".ui.achievements.BadgesActivity"
+                android:name="com.byteforce.trailblaze.ui.achievements.BadgesActivity"
                 android:exported="true"/>
         <activity
-                android:name=".ui.parks.ParkDetailActivity"
+                android:name="com.byteforce.trailblaze.ui.parks.ParkDetailActivity"
                 android:exported="true"/>
         <activity
-                android:name=".ui.achievements.AchievementsActivity"
+                android:name="com.byteforce.trailblaze.ui.achievements.AchievementsActivity"
                 android:exported="false"/>
         <activity
-                android:name=".settings.SafetyActivity"
+                android:name="com.byteforce.trailblaze.settings.SafetyActivity"
                 android:exported="false"/>
         <activity
-                android:name=".ui.MenuActivity"
+                android:name="com.byteforce.trailblaze.ui.MenuActivity"
                 android:exported="false"/>
         <activity
-                android:name=".settings.AboutActivity"
+                android:name="com.byteforce.trailblaze.settings.AboutActivity"
                 android:exported="false"/>
         <activity
-                android:name=".settings.PrivacyAndSecurityActivity"
+                android:name="com.byteforce.trailblaze.settings.PrivacyAndSecurityActivity"
                 android:exported="false"/>
         <activity
-                android:name=".settings.AppearanceActivity"
+                android:name="com.byteforce.trailblaze.settings.AppearanceActivity"
                 android:exported="false"/>
         <activity
-                android:name=".settings.NotificationsActivity"
+                android:name="com.byteforce.trailblaze.settings.NotificationsActivity"
                 android:exported="false"
                 android:theme="@style/Theme.TrailBlaze"/>
         <activity
-                android:name=".settings.ContactUsActivity"
+                android:name="com.byteforce.trailblaze.settings.ContactUsActivity"
                 android:exported="false"
                 android:theme="@style/Theme.TrailBlaze"/>
         <activity
-                android:name=".settings.SupportScreenActivity"
+                android:name="com.byteforce.trailblaze.settings.SupportScreenActivity"
                 android:exported="false"
                 android:theme="@style/Theme.TrailBlaze"/>
         <activity
-                android:name=".ui.profile.FriendsProfileActivity"
+                android:name="com.byteforce.trailblaze.ui.profile.FriendsProfileActivity"
                 android:exported="false"/>
         <activity
-                android:name=".login.TermsActivity"
+                android:name="com.byteforce.trailblaze.login.TermsActivity"
                 android:exported="false"
                 android:label="@string/title_activity_terms"
                 android:theme="@style/Theme.TrailBlaze"/>
         <activity
-                android:name=".login.PersonalizeActivity"
+                android:name="com.byteforce.trailblaze.login.PersonalizeActivity"
                 android:exported="false"
                 android:theme="@style/Theme.TrailBlaze"/>
         <activity
-                android:name=".login.ForgotPasswordActivity"
+                android:name="com.byteforce.trailblaze.login.ForgotPasswordActivity"
                 android:exported="false"
                 android:theme="@style/Theme.TrailBlaze"/>
         <activity
-                android:name=".login.RegisterActivity"
+                android:name="com.byteforce.trailblaze.login.RegisterActivity"
                 android:exported="false"/>
         <activity
-                android:name=".login.LoginActivity"
+                android:name="com.byteforce.trailblaze.login.LoginActivity"
                 android:exported="true"
                 android:theme="@style/Theme.TrailBlaze"/>
         <activity
-                android:name=".settings.SettingsScreenActivity"
+                android:name="com.byteforce.trailblaze.settings.SettingsScreenActivity"
                 android:exported="false"
                 android:theme="@style/Theme.TrailBlaze"/>
-        <activity android:name=".ui.profile.FriendRequestActivity"/>
+        <activity android:name="com.byteforce.trailblaze.ui.profile.FriendRequestActivity"/>
         <activity
-                android:name=".MainActivity"
+                android:name="com.byteforce.trailblaze.MainActivity"
                 android:exported="true"
                 android:label="@string/app_name">
             <intent-filter>
@@ -134,9 +134,9 @@
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="${GOOGLE_MAPS_API_KEY}"/> <!-- Acceptable Use Activity -->
-        <activity android:name=".login.AcceptableActivity"/> <!-- Privacy Activity -->
-        <activity android:name=".login.PrivacyActivity"/> <!-- Watcher Member Activity -->
-        <activity android:name=".watcherFeature.WatcherMemberList"/>
+        <activity android:name="com.byteforce.trailblaze.login.AcceptableActivity"/> <!-- Privacy Activity -->
+        <activity android:name="com.byteforce.trailblaze.login.PrivacyActivity"/> <!-- Watcher Member Activity -->
+        <activity android:name="com.byteforce.trailblaze.watcherFeature.WatcherMemberList"/>
     </application>
 
 </manifest>

@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.profile.MessageSearchActivity">
+        tools:context="com.byteforce.trailblaze.ui.profile.MessageSearchActivity">
 
     <RelativeLayout
             android:id="@+id/navLayout"
@@ -16,7 +16,7 @@
             app:layout_constraintEnd_toEndOf="parent">
 
         <!-- Custom Swish Background at the bottom layer -->
-        <com.example.trailblaze.view.SwishBackgroundView
+        <com.byteforce.trailblaze.view.SwishBackgroundView
                 android:layout_width="match_parent"
                 android:layout_height="100dp" />
 
