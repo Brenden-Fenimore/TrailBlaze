@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.byteforce.trailblaze.R
 import com.byteforce.trailblaze.databinding.FragmentFavoritesBinding
 import com.byteforce.trailblaze.settings.SettingsScreenActivity
-import com.byteforce.trailblaze.ui.MenuActivity
 import com.byteforce.trailblaze.ui.parks.ParkDetailActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -23,6 +22,7 @@ import retrofit2.Response
 import com.byteforce.trailblaze.nps.RetrofitInstance
 import com.byteforce.trailblaze.nps.NPSResponse
 import com.byteforce.trailblaze.ui.Map.LocationItem
+import com.byteforce.trailblaze.ui.MenuActivity
 import com.byteforce.trailblaze.ui.profile.FavoritesAdapter
 import com.byteforce.trailblaze.ui.profile.FriendAdapter
 import com.byteforce.trailblaze.ui.profile.FriendsProfileActivity
