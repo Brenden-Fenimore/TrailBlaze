@@ -1,4 +1,4 @@
-package com.byteforce.trailblaze.settings
+package com.example.trailblaze.settings
 
 import android.os.Bundle
 import android.widget.Button
